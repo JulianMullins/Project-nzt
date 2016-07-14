@@ -1,19 +1,19 @@
 #Overview#
 
-Project NZT (final name to be determined) is a game centered around the scientifically-backed dual-n-back genre of brain games. Although there are various iterations of this idea currently in existence, their design aesthetic and user experience flow is poorly developed. With this version, we are aiming to gamify a powerful mind-training tool and make it as easy as possible for users to engage with and start seeing results.
+Project NZT (final name to be determined) is a game centered around the scientifically-backed *dual-n-back* genre of brain games. Although there are various iterations of this idea currently in existence, their design aesthetic and user experience flow is poorly developed. With this version, we are aiming to gamify a powerful mind-training tool and make it as easy as possible for users to engage with and start seeing results.
 
 Research has shown that the majority of so-called “brain training” games are ineffective at increasing IQ and ultimately end up increasing a user’s ability to play that certain game, rather than enhancing their overall intelligence (think sudoku, crosswords, etc.). However, various research efforts have demonstrated that dual-n-back games have the surprising ability to affect a player’s working memory and increase overall fluid intelligence (directly tied to IQ). With the right combination of simplicity in design and a gamified experience tied to the underlying science of dual-n-back brain-training, our application is at an exciting breakthrough point. Rather than pitching the product as a brain-training device, we will focus on the experience as a game first and foremost, with the IQ increases touted as a side-effect of continuous play.
 
 #Components#
 Our application will have the following elements:
-Primarily an app, but with a web version (we will probably begin by creating the web app, and then make ios and android compatible apps before launch)
-First-time optional tutorial to guide new users into the game and help them understand how to play. We will first present users with position-based play, then guide them through sound-based play before combining them both and then taking them to the main page.
-The main page will prominently feature an interactive game-mode selector so that the user can choose which mode they’d like to play (normal play presented first and other modes will remain locked until the user reaches a certain n level)
-Replay tutorial mode
-Register/login to keep track of statistics
-About
-Science (the scientific research and findings about the game)
-Settings
+*Primarily an app, but with a web version (we will probably begin by creating the web app, and then make ios and android compatible apps before launch)
+*First-time optional tutorial to guide new users into the game and help them understand how to play. We will first present users with position-based play, then guide them through sound-based play before combining them both and then taking them to the main page.
+*The main page will prominently feature an interactive game-mode selector so that the user can choose which mode they’d like to play (normal play presented first and other modes will remain locked until the user reaches a certain n level)
+*Replay tutorial mode
+*Register/login to keep track of statistics
+*About
+*Science (the scientific research and findings about the game)
+*Settings
 
 
 #Modes of Play#
