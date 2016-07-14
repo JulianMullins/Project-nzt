@@ -23,13 +23,13 @@ Normal play (position and sound)
 * Triple n-back which combines color, position and sound (advanced)
 
 #Additional Features/Comments#
-Users should be able to play either with keyboard shortcuts or by clicking on buttons in the application window (and of course by touch on mobile)
-Sounds should be a short list of distinct letters (C, H, K, L, Q, R, S, T) but we could also add in an audio numbers list (1-9 for example) or other sounds that could be changed in settings
-Develop an algorithm to generate a new semi-random array of positions/sounds/colors for each game played
-UI response on a user error, ie. when an incorrect position is clicked, the square should turn red and when the sound button is called at the incorrect time an auditory response should be triggered
-(long-term): multi-play mode between users: friends playing on a shared board to compete for highest score and/or fastest reaction time
-Users score would be based on the number of correct pairs matched over the course of the game. Certain score thresholds would be necessary for players to unlock more advanced levels (longer patterns, more variables to keep track of at once, etc)
-Statistics would show user playing history and scores/improvement over time
+* Users should be able to play either with keyboard shortcuts or by clicking on buttons in the application window (and of course by touch on mobile)
+* Sounds should be a short list of distinct letters (C, H, K, L, Q, R, S, T) but we could also add in an audio numbers list (1-9 for example) or other sounds that could be changed in settings
+* Develop an algorithm to generate a new semi-random array of positions/sounds/colors for each game played
+* UI response on a user error, ie. when an incorrect position is clicked, the square should turn red and when the sound button is called at the incorrect time an auditory response should be triggered
+* (long-term): multi-play mode between users: friends playing on a shared board to compete for highest score and/or fastest reaction time
+* Users score would be based on the number of correct pairs matched over the course of the game. Certain score thresholds would be necessary for players to unlock more advanced levels (longer patterns, more variables to keep track of at once, etc)
+* Statistics would show user playing history and scores/improvement over time
 
 #Technologies#
 We will be using Express.js for the routes and models while rendering the front-end design with React, in tandem with React Native for the mobile application.
