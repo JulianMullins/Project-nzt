@@ -6,21 +6,21 @@ Research has shown that the majority of so-called “brain training” games are
 
 #Components#
 Our application will have the following elements:
-*Primarily an app, but with a web version (we will probably begin by creating the web app, and then make ios and android compatible apps before launch)
-*First-time optional tutorial to guide new users into the game and help them understand how to play. We will first present users with position-based play, then guide them through sound-based play before combining them both and then taking them to the main page.
-*The main page will prominently feature an interactive game-mode selector so that the user can choose which mode they’d like to play (normal play presented first and other modes will remain locked until the user reaches a certain n level)
-*Replay tutorial mode
-*Register/login to keep track of statistics
-*About
-*Science (the scientific research and findings about the game)
-*Settings
+* Primarily an app, but with a web version (we will probably begin by creating the web app, and then make ios and android compatible apps before launch)
+* First-time optional tutorial to guide new users into the game and help them understand how to play. We will first present users with position-based play, then guide them through sound-based play before combining them both and then taking them to the main page.
+* The main page will prominently feature an interactive game-mode selector so that the user can choose which mode they’d like to play (normal play presented first and other modes will remain locked until the user reaches a certain n level)
+* Replay tutorial mode
+* Register/login to keep track of statistics
+* About
+* Science (the scientific research and findings about the game)
+* Settings
 
 
 #Modes of Play#
 Normal play (position and sound)
-Position-only (good for learning to play the game but is not as effective at increasing fluid intelligence)
-Position and color (when users don’t want to play with sound)
-Triple n-back which combines color, position and sound (advanced)
+* Position-only (good for learning to play the game but is not as effective at increasing fluid intelligence)
+* Position and color (when users don’t want to play with sound)
+* Triple n-back which combines color, position and sound (advanced)
 
 #Additional Features/Comments#
 Users should be able to play either with keyboard shortcuts or by clicking on buttons in the application window (and of course by touch on mobile)
