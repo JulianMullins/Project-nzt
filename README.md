@@ -30,6 +30,7 @@ Normal play (position and sound)
 * (long-term): multi-play mode between users: friends playing on a shared board to compete for highest score and/or fastest reaction time
 * Users score would be based on the number of correct pairs matched over the course of the game. Certain score thresholds would be necessary for players to unlock more advanced levels (longer patterns, more variables to keep track of at once, etc)
 * Statistics would show user playing history and scores/improvement over time
+*   Score = n*10 on success and ((n*10)/2) on failure
 
 #Technologies#
 We will be using Express.js for the routes and models while rendering the front-end design with React, in tandem with React Native for the mobile application.
