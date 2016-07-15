@@ -5,7 +5,7 @@
  */
 
 var app = require('../app');
-var debug = require('debug')('project-nzt:server');
+var debug = require('debug')('herd:server');
 var http = require('http');
 
 /**

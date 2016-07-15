@@ -11,78 +11,23 @@ var FacebookStrategy = require('passport-facebook');
 var MongoStore = require('connect-mongo')(session);
 var mongoose = require('mongoose');
 
-var routes = require('./routes/home');
-var auth = require('./routes/auth');
-var User = require('./models/user')
-
 var app = express();
+var server = require('http').Server(app);
+var io = require('socket.io')(server);
+//end of react stuff
 
-// view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs');
 
-// uncomment after placing your favicon in /public
-//app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
-app.use(logger('dev'));
+app.use(logger('combined'));
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(bodyParser.urlencoded({ extended: true }));
+//app.use(express.static(path.join(__dirname, 'public')));
+app.use('/bundle', express.static(path.join(__dirname, 'bundle')));
 
-//What Ruth put in
-var connect = process.env.MONGODB_URI
-mongoose.connect(connect);
-
-//Copied passport stuff
-app.use(session({
-    secret: process.env.SECRET,
-    // name: 'Catscoookie',
-    store: new MongoStore({ mongooseConnection: mongoose.connection }),
-    proxy: true,
-    resave: true,
-    saveUninitialized: true
-}));
-
-app.use(passport.initialize());
-app.use(passport.session());
-
-passport.serializeUser(function(user, done) {
-  done(null, user._id);
+app.get('/', function(req, res) {
+  res.render('index');
 });
-
-passport.deserializeUser(function(id, done) {
-  User.findById(id, function(err, user) {
-    done(err, user);
-  });
-});
-
-// passport strategy
-passport.use(new LocalStrategy(function(username, password, done) {
-    // Find the user with the given username
-    User.findOne({ username: username }, function (err, user) {
-      // if there's an error, finish trying to authenticate (auth failed)
-      if (err) {
-        console.error(err);
-        return done(err);
-      }
-      // if no user present, auth failed
-      if (!user) {
-        //console.log(user);
-        return done(null, false, { message: 'Incorrect username.' });
-      }
-      // if passwords do not match, auth failed
-      if (user.password !== password) {
-        return done(null, false, { message: 'Incorrect password.' });
-      }
-      // auth has has succeeded
-      return done(null, user);
-    });
-  }
-));
-
-
-app.use('/', auth(passport));
-app.use('/', routes);
 
 
 // catch 404 and forward to error handler
@@ -117,4 +62,10 @@ app.use(function(err, req, res, next) {
 });
 
 
-module.exports = app;
+
+// var port = process.env.PORT || 3000;
+// server.listen(port, function() {
+//   console.log('Started, listening on port ', port);
+// });
+
+module.exports = app
