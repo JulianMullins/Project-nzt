@@ -1,6 +1,6 @@
 {
   "scripts": {
-    "start": "concurrently -k 'nodemon ./bin/www' 'npm run watch'",
+    "start": "concurrent -k \"nodemon ./bin/www\" \"npm run watch\"",
     "watch": "watchify client/index.js -o bundle/bundle.js -t [ babelify --presets [ es2015 react ] ]"
   },
   "dependencies": {
