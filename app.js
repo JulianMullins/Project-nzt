@@ -9,27 +9,13 @@ var FacebookStrategy = require('passport-facebook');
 // var MongoStore = require('connect-mongo')(session);
 var mongoose = require('mongoose');
 
-var webpack = require('webpack');
-var webpackMiddleware = require("webpack-dev-middleware");
-var config = require('./webpack.config');
-
 var app = express();
 var server = require('http').Server(app);
 var io = require('socket.io')(server);
-
-var compiler = webpack(config);
-app.use(webpackMiddleware(compiler, {
-  publicPath: config.output.publicPath,
-  hot: true,
-  historyApiFallback: true
-}));
-app.use(require('webpack-hot-middleware')(compiler));
-
-app.use(express.static(path.join(__dirname, 'public')));
 //end of react stuff
 
-// app.set('views', path.join(__dirname, 'views'));
-// app.set('view engine', 'hbs');
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'hbs');
 
 app.use(logger('combined'));
 app.use(bodyParser.json());
@@ -38,7 +24,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use('/bundle', express.static(path.join(__dirname, 'bundle')));
 
 app.get('/', function(req, res) {
-  res.redirect('index.html');
+  res.render('index');
 });
 
 
@@ -75,7 +61,9 @@ app.use(function(err, req, res, next) {
 
 
 
-var port = process.env.PORT || 3000;
-server.listen(port, function() {
-  console.log('Started, listening on port ', port);
-});
+// var port = process.env.PORT || 3000;
+// server.listen(port, function() {
+//   console.log('Started, listening on port ', port);
+// });
+
+module.exports = app
