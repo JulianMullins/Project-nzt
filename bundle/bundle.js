@@ -7,24 +7,35 @@ var ReactDOM = require('react-dom');
 var Mainmenu = React.createClass({
   displayName: 'Mainmenu',
 
+  getInitialState: function getInitialState() {
+    return { overlay: true };
+  },
+  start: function start() {
+    this.setState({ overlay: false });
+  },
   render: function render() {
-    return React.createElement(
+    var overlay = this.state.overlay ? React.createElement(
       'div',
-      null,
+      { className: 'overlay' },
       React.createElement(
-        'div',
-        { className: 'overlay' },
+        'center',
+        null,
         React.createElement(
           'a',
-          { className: 'btn' },
+          { className: 'btn', href: '#', onClick: this.start },
           'Start'
         ),
         React.createElement(
           'a',
-          { className: 'btn' },
+          { className: 'btn', href: '#' },
           'Login'
         )
-      ),
+      )
+    ) : '';
+    return React.createElement(
+      'div',
+      null,
+      overlay,
       React.createElement(
         'center',
         null,
@@ -32,6 +43,60 @@ var Mainmenu = React.createClass({
           'h1',
           { id: 'title' },
           'Project NZT'
+        )
+      ),
+      React.createElement(
+        'div',
+        { className: 'menu' },
+        React.createElement(
+          'a',
+          { href: '#', className: 'menu-panel' },
+          React.createElement(
+            'h2',
+            null,
+            'normal'
+          ),
+          React.createElement(
+            'h3',
+            null,
+            '(position, sound)'
+          )
+        ),
+        React.createElement(
+          'a',
+          { href: '#', className: 'menu-panel' },
+          React.createElement(
+            'h2',
+            null,
+            'position-only'
+          )
+        )
+      ),
+      React.createElement(
+        'div',
+        { className: 'menu' },
+        React.createElement(
+          'a',
+          { href: '#', className: 'menu-panel' },
+          React.createElement(
+            'h2',
+            null,
+            'position & color'
+          )
+        ),
+        React.createElement(
+          'a',
+          { href: '#', className: 'menu-panel' },
+          React.createElement(
+            'h2',
+            null,
+            'advanced'
+          ),
+          React.createElement(
+            'h3',
+            null,
+            '(color, position, sound)'
+          )
         )
       )
     );
