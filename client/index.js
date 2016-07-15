@@ -46,5 +46,25 @@ var Mainmenu = React.createClass({
   }
 });
 
+var Game = React.createClass({
+	render: function() {
+		return (
+			<div className="container">
+				<div className="gameSquare"></div>
+				<div className="gameSquare"></div>
+				<div className="gameSquare"></div>
+				<div className="gameSquare"></div>
+				<div className="gameSquare"></div>
+				<div className="gameSquare"></div>
+				<div className="gameSquare"></div>
+				<div className="gameSquare"></div>
+				<div className="gameSquare"></div>
+			</div>
+		);
+	}
+});
+
+//ReactDOM.render(<Game />, document.getElementById('root'));
+
 ReactDOM.render(
   <Mainmenu/>, document.getElementById('root'));
