@@ -4,11 +4,10 @@
 }
 body {
   max-width: 790px;
-  height: 100vh;
   margin: 0 auto;
 }
 #root {
-  height: 100vh;
+  height: 90vh;
 }
 h1 {
   font-size: 7rem;
@@ -20,7 +19,7 @@ h3 {
   font-size: 1.4rem;
 }
 #title {
-  padding-top: 4rem;
+  padding: 2rem 0;
 }
 .overlay {
   position: absolute;
@@ -139,4 +138,19 @@ h3 {
   text-align: center;
   border: 1px solid white;
   color: white;
+}
+
+
+footer {
+  display: flex;
+  justify-content: center;
+}
+footer a {
+  text-decoration: none;
+  font-size: 2rem;
+  margin: 0 2rem;
+  color: gray;
+}
+footer a:hover {
+  color: #AAAAAA;
 }
