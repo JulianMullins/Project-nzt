@@ -2,6 +2,17 @@
   box-sizing: border-box;
   margin: 0;
 }
+
+body {
+  max-width: 790px;
+  height: 100vh;
+  margin: 0 auto;
+}
+
+#root {
+  height: 100vh;
+}
+
 h1 {
   font-size: 8rem;
 }
@@ -17,4 +28,45 @@ h1 {
 .btn {
   text-decoration: none;
   font-size: 5rem;
+}
+
+/* game page css */
+.gameContainer {
+  height: 100vh;
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.gameRow {
+  display: flex;
+  flex-direction: row;
+}
+
+.gameSquare {
+  display: inline-block;
+  background-color: gray;
+  width: 175px;
+  height: 175px;
+  margin: 3px;
+}
+
+.gameButtonsContainer {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+  width: 100%;
+  background-color: gray;
+  padding: 10px;
+}
+
+.gameButtonsContainer a {
+  margin: 0 25px;
+  padding: 10px;
+  width: 100px;
+  text-align: center;
+  border: 1px solid white;
+  color: white;
 }

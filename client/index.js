@@ -17,27 +17,33 @@ var Mainmenu = React.createClass({
   }
 });
 
-<<<<<<< HEAD
 var Game = React.createClass({
 	render: function() {
 		return (
-			<div className="container">
-				<div className="gameSquare"></div>
-				<div className="gameSquare"></div>
-				<div className="gameSquare"></div>
-				<div className="gameSquare"></div>
-				<div className="gameSquare"></div>
-				<div className="gameSquare"></div>
-				<div className="gameSquare"></div>
-				<div className="gameSquare"></div>
-				<div className="gameSquare"></div>
+			<div className="gameContainer">
+				<div className="gameRow">
+					<div id="square1" className="gameSquare"></div>
+					<div id="square2" className="gameSquare"></div>
+					<div id="square3" className="gameSquare"></div>
+				</div>
+				<div className="gameRow">
+					<div id="square4" className="gameSquare"></div>
+					<div id="square5" className="gameSquare"></div>
+					<div id="square6" className="gameSquare"></div>
+				</div>
+				<div className="gameRow">
+					<div id="square7" className="gameSquare"></div>
+					<div id="square8" className="gameSquare"></div>
+					<div id="square9" className="gameSquare"></div>
+				</div>
+				<div className="gameButtonsContainer">
+					<a>Sound</a>
+					<a>Both</a>
+					<a>Position</a>
+				</div>
 			</div>
 		);
 	}
 });
 
 ReactDOM.render(<Game />, document.getElementById('root'));
-=======
-ReactDOM.render(
-  <Mainmenu/>, document.getElementById('root'));
->>>>>>> refs/remotes/origin/master
