@@ -4,12 +4,10 @@
 }
 body {
   max-width: 790px;
-  height: 100vh;
   margin: 0 auto;
 }
-
 #root {
-  height: 100vh;
+  height: 90vh;
 }
 h1 {
   font-size: 7rem;
@@ -21,7 +19,7 @@ h3 {
   font-size: 1.4rem;
 }
 #title {
-  padding-top: 4rem;
+  padding: 2rem 0;
 }
 .overlay {
   position: absolute;
@@ -29,13 +27,48 @@ h3 {
   height: 100vh;
   top: 0;
   left: 0;
-  background-color: rgba(123, 123, 123, 0.7);
+  background-color: rgba(69, 69, 69, 0.9);
   z-index: 2;
 }
 .overlay center {
   margin-top: 17rem;
   display: flex;
   flex-direction: column;
+}
+#login form * {
+  margin: 2rem 0;
+}
+#login input {
+  border: none;
+  background-color: inherit;
+  border-bottom: 1px solid white;
+  padding: 1rem 0;
+  width: 20rem;
+  font-size: 1.5rem;
+  color: white;
+}
+#login input:focus {
+  outline: none;
+}
+#login button {
+  border: none;
+  background-color: #DDDDDD;
+  padding: 1rem;
+  width: 20rem;
+  font-size: 1.5rem;
+}
+#login button:hover {
+  background-color: #BBBBBB;
+}
+#login button:active {
+  background-color: #AAAAAA;
+  outline: none;
+}
+#login button:focus {
+  outline: none;
+}
+#login #back {
+  margin-top: 7rem;
 }
 .btn {
   text-decoration: none;
@@ -70,6 +103,7 @@ h3 {
 }
 
 /* game page css */
+
 .gameContainer {
   height: 100vh;
   display: flex;
@@ -78,12 +112,10 @@ h3 {
   justify-content: center;
   align-items: center;
 }
-
 .gameRow {
   display: flex;
   flex-direction: row;
 }
-
 .gameSquare {
   display: inline-block;
   background-color: #BFBFBF;
@@ -91,7 +123,6 @@ h3 {
   height: 175px;
   margin: 3px;
 }
-
 .gameButtonsContainer {
   display: flex;
   justify-content: center;
@@ -100,7 +131,6 @@ h3 {
   background-color: #BFBFBF;
   padding: 10px;
 }
-
 .gameButtonsContainer a {
   margin: 0 25px;
   padding: 10px;
@@ -112,16 +142,53 @@ h3 {
 }
 
 .gameButtonsContainer a:hover {
+  cursor: pointer;
+}
+
+.gameButtonsContainer a:active {
+  background-color: black;
 }
 
 .timerContainer {
   display: flex;
   width: 100%;
   justify-content: flex-end;
+  width: 50%;
+}
 
+.gameHeading {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
 }
 
 .gameTimer {
   color: #BFBFBF;
   font-size: 64px;
+}
+
+.gameScore {
+  flex-direction: row;
+  justify-content: flex-start;
+  color: #BFBFBF;
+  font-size: 64px;
+  width: 50%;
+}
+
+.scoreAlert {
+  font-size: 24px;
+}
+
+footer {
+  display: flex;
+  justify-content: center;
+}
+footer a {
+  text-decoration: none;
+  font-size: 2rem;
+  margin: 0 2rem;
+  color: gray;
+}
+footer a:hover {
+  color: #AAAAAA;
 }
