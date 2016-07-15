@@ -1,4 +1,5 @@
 var express = require('express');
+var session = require('express-session')
 var path = require('path');
 var favicon = require('serve-favicon');
 var logger = require('morgan');
@@ -6,7 +7,7 @@ var bodyParser = require('body-parser');
 var passport = require('passport');
 var LocalStrategy = require('passport-local');
 var FacebookStrategy = require('passport-facebook');
-// var MongoStore = require('connect-mongo')(session);
+var MongoStore = require('connect-mongo')(session);
 var mongoose = require('mongoose');
 
 var app = express();
@@ -85,8 +86,7 @@ passport.use(new LocalStrategy(function(username, password, done) {
 passport.use(new FacebookStrategy({
     clientID: process.env.FACEBOOK_clientID,
     clientSecret: process.env.FACEBOOK_clientSecret,
-    callbackURL: "http://localhost:3000/login/facebook/callback",
-    profileFields: ['id','email']
+    callbackURL: "http://localhost:3000/login/facebook/callback"
   },
   function(accessToken, refreshToken, profile, done) {
    // console.log(profile)

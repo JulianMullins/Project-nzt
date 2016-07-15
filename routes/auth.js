@@ -97,7 +97,7 @@ module.exports = function(passport) {
   });
 
   router.get('/login/facebook',
-  passport.authenticate('facebook', { scope:['email']}), function(req,res){});
+  passport.authenticate('facebook', { scope:['email','user_friends']}), function(req,res){});
 
   router.get('/login/facebook/callback',
   passport.authenticate('facebook',{
@@ -106,3 +106,4 @@ module.exports = function(passport) {
 
 
 }
+module.exports=router;
