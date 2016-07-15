@@ -47,35 +47,113 @@ var Mainmenu = React.createClass({
 });
 
 var Game = React.createClass({
+  getInitialState: function() {
+    return {
+     style: [standardStyle,standardStyle,standardStyle,standardStyle,standardStyle,standardStyle,standardStyle,standardStyle,standardStyle],
+     match: false
+    }   
+  },
+   test: function(){
+    var out=[];
+    setInterval(function(){
+    //start with forced match command
+    if(out.length===5){
+      (console.log('forced match'))
+      out.push(out[out.length-1])
+      this.state.style[out[out.length-1]]=newStyle;
+      this.setState({
+        style: this.state.style
+      })
+      console.log('match');
+      setTimeout(function(){
+        this.state.style[out[out.length-1]]=standardStyle;
+        this.setState({
+        style: this.state.style
+      })
+        out=[]
+    }.bind(this),500);
+  }
+  else{
+    console.log('not forced match')
+    out.push(parseInt(Math.random()*9));
+    console.log('game', out)
+    this.state.style[out[out.length-1]]=newStyle;
+    this.setState({
+      style: this.state.style
+    })
+    //pause for thinking/processing time
+  if(out.length>1){
+      if(out[out.length-1]===out[out.length-2]){
+        console.log('match');
+        setTimeout(function(){
+        this.state.style[out[out.length-1]]=standardStyle;
+        this.setState({
+          style: this.state.style
+         })
+        out=[];
+      }.bind(this),500)
+      }
+      else{
+        console.log('no match')
+        setTimeout(function(){
+        this.state.style[out[out.length-1]]=standardStyle;
+        this.setState({
+          style: this.state.style
+        })
+        }.bind(this),500);
+      }
+    };
+    if(out.length===1){ 
+      setTimeout(function(){
+        this.state.style[out[out.length-1]]=standardStyle;
+        this.setState({
+          style: this.state.style
+        })
+        }.bind(this),500);
+    }
+  }
+}.bind(this),3000)
+  },
 	render: function() {
 		return (
 			<div className="gameContainer">
 				<div className="gameRow">
-					<div id="square1" className="gameSquare"></div>
-					<div id="square2" className="gameSquare"></div>
-					<div id="square3" className="gameSquare"></div>
+					<div id="square1" className="gameSquare" style={this.state.style[0]}></div>
+					<div id="square2" className="gameSquare" style={this.state.style[1]}></div>
+					<div id="square3" className="gameSquare" style={this.state.style[2]}></div>
 				</div>
 				<div className="gameRow">
-					<div id="square4" className="gameSquare"></div>
-					<div id="square5" className="gameSquare"></div>
-					<div id="square6" className="gameSquare"></div>
+					<div id="square4" className="gameSquare" style={this.state.style[3]}></div>
+					<div id="square5" className="gameSquare" style={this.state.style[4]}></div>
+					<div id="square6" className="gameSquare" style={this.state.style[5]}></div>
 				</div>
 				<div className="gameRow">
-					<div id="square7" className="gameSquare"></div>
-					<div id="square8" className="gameSquare"></div>
-					<div id="square9" className="gameSquare"></div>
+					<div id="square7" className="gameSquare" style={this.state.style[6]}></div>
+					<div id="square8" className="gameSquare" style={this.state.style[7]}></div>
+					<div id="square9" className="gameSquare" style={this.state.style[8]}></div>
 				</div>
 				<div className="gameButtonsContainer">
 					<a>Sound</a>
 					<a>Both</a>
 					<a>Position</a>
 				</div>
+        <button onClick={this.test}>Start</button>
 			</div>
 		);
 	}
 });
 
-//ReactDOM.render(<Game />, document.getElementById('root'));
+///Taylor: style sheets for changing colors on timer
+var standardStyle={
+  backgroundColor: 'yellow'
+}
 
-ReactDOM.render(
-  <Mainmenu/>, document.getElementById('root'));
+var newStyle={
+  backgroundColor: 'blue'
+}
+
+
+ReactDOM.render(<Game />, document.getElementById('root'));
+
+// ReactDOM.render(
+//   <Mainmenu/>, document.getElementById('root'));
