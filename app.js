@@ -11,7 +11,7 @@ var FacebookStrategy = require('passport-facebook');
 var MongoStore = require('connect-mongo')(session);
 var mongoose = require('mongoose');
 
-var routes = require('./routes/index');
+var routes = require('./routes/home');
 var auth = require('./routes/auth');
 var User = require('./models/user')
 
@@ -30,12 +30,12 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 //What Ruth put in
-var connect = variables.MONGODB_URI
+var connect = process.env.MONGODB_URI
 mongoose.connect(connect);
 
 //Copied passport stuff
 app.use(session({
-    secret: variables.SECRET,
+    secret: process.env.SECRET,
     // name: 'Catscoookie',
     store: new MongoStore({ mongooseConnection: mongoose.connection }),
     proxy: true,
@@ -80,54 +80,6 @@ passport.use(new LocalStrategy(function(username, password, done) {
   }
 ));
 
-//Facebook stuff
-//
-// passport.use(new FacebookStrategy({
-//     clientID: process.env.FACEBOOK.clientID,
-//     clientSecret: process.env.FACEBOOK.clientSecret,
-//     callbackURL: "http://localhost:3000/login/facebook/callback",
-//     profileFields: ['id','email']
-//   },
-//   function(accessToken, refreshToken, profile, done) {
-//    // console.log(profile)
-//     User.findOne({$or:[{facebookId: profile.id},{email:profile.emails[0].value}] }, function (err, user) {
-//       // if there's an error, finish trying to authenticate (auth failed)
-//       //console.log(profile.emails[0].value)
-//
-//       if (err) {
-//         console.error(err);
-//         return done(err);
-//       }
-//       // if no user present, auth failed
-//       if (!user) {
-//         user = new User({
-//
-//         });
-//         user.save(function(err,tempUser){
-//           if(err){
-//             return done(err, null);
-//           }
-//           else{
-//             return done(null, tempUser);
-//           }
-//         });
-//       }
-//       else if(!user.facebookId){
-//         user.facebookId = profile.id
-//         //console.log("facebook id added")
-//         user.save(function(err){
-//           if(err){done(err)}
-//         })
-//         return done(null, user);
-//       }
-//       // auth has has succeeded
-//       else{
-//         //console.log("success")
-//         return done(null, user);
-//       }
-//     });
-//   }
-// ));
 
 app.use('/', auth(passport));
 app.use('/', routes);

@@ -33,3 +33,58 @@ Normal play (position and sound)
 
 #Technologies#
 We will be using Express.js for the routes and models while rendering the front-end design with React, in tandem with React Native for the mobile application.
+
+#Data Models, Routes, etc.
+Data Models/Routes/Views
+Data Models:
+User:
+High score
+Username
+Password
+Facebookid
+Preferred settings (remember previous settings)
+Game:
+Board (static model with brief animations?)
+Score
+Mode (relaxed, timed, or number of lives)
+N array (array of length n+1 to test if button press is valid/when there is a match)
+Type - sound/color/position
+userid
+
+Routes/Views
+login (get, post)
+facebook(passport - get/post)
+registration (get, post)
+how to play (get)
+settings (get,post)
+We’re still working on how settings will be displayed/set, so we might not have this view, depending
+how it works (background/scientific info) (get)
+game (get,post)
+
+Authentication:
+Regular/app-internal
+facebook (passport)
+Remember login credentials on phone app through React Native (AsyncStorage)
+
+#Timeline/prioritized features
+Timeline (grouped by priority level)
+Game board and basic functionality with react
+Create random generator/algorithms for position/sound
+Create models/routes
+First version gamepage design/graphics
+
+Home page/other views
+Different modes/settings
+Users/authentication
+About page/scientific background
+UI
+Keyboard shortcuts
+Scoring
+
+Mobile version
+Facebook integration (see friend’s progress, etc.)
+Tutorial
+Triple n-back and adjusting algorithm
+Statistics
+
+Multiplayer mode
