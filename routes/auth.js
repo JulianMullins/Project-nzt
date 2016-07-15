@@ -33,20 +33,16 @@ module.exports = function(passport) {
       });
     }
     var u = new User({
-      username: req.body.username,
-      email: req.body.email,
-      password: req.body.password,
-      wantsSpotify:true,
-      facebookId: null,
-      spotifyId:null
+      name: req.body.name,
+      email: req.body.username,
+      password: req.body.password
     });
     User.findOne({email:u.email},function(err,user){
       if(err){
         res.send(err)
         return;
       }
-      else if(user && !user.username){
-        user.username = u.username;
+      else if(user && !user.password){
         user.password = u.password;
         console.log(user);
         user.save(function(err, user) {
@@ -104,6 +100,6 @@ module.exports = function(passport) {
     successRedirect:'/',
     failureRedirect: '/login'} ));
 
+    return router;
 
 }
-module.exports=router;

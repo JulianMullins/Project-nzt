@@ -103,6 +103,7 @@ passport.use(new FacebookStrategy({
         user = new User({
           facebookId:profile.id,
           email:profile.emails[0].value,
+          name:profile.name,
           highScore:0
         });
         user.save(function(err,tempUser){
@@ -115,12 +116,15 @@ passport.use(new FacebookStrategy({
         });
       }
       else if(!user.facebookId){
-        user.facebookId = profile.id
+        user.facebookId = profile.id;
+        user.name = profile.name;
         //console.log("facebook id added")
         user.save(function(err){
           if(err){done(err)}
+          else{
+            return done(null, user);
+          }
         })
-        return done(null, user);
       }
       // auth has has succeeded
       else{
@@ -132,7 +136,7 @@ passport.use(new FacebookStrategy({
 ));
 
 app.use('/', auth(passport));
-app.use('/', routes);
+//app.use('/', routes);
 
 
 // catch 404 and forward to error handler

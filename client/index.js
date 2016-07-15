@@ -15,16 +15,32 @@ var MenuOverlay = React.createClass({
 })
 
 var LoginOverlay = React.createClass({
+  getInitialState: function(){
+    return{
+      username:null,
+      password:null
+    }
+  },
+  update(e){
+    if(e.target.name == 'username'){
+      this.setState({username:e.target.value})
+    }
+    else if(e.target.name == 'password'){
+      this.setState({password:e.target.value})
+    }
+  },
   render: function() {
     return (
       <div className="overlay" id="login">
         <center>
           <form>
-            <input type="text" placeholder="username"></input>
+            <input type="text" name="username" placeholder="email" value={this.state.username} onChange={this.update}></input>
             <br></br>
-            <input type="password" placeholder="password"></input>
+            <input type="password" name="password" placeholder="password" value={this.state.password} onChange={this.update}></input>
             <br></br>
             <button onClick={this.props.login}>Login</button>
+            <button onClick={this.props.register}>Register</button>
+            <button onClick={this.props.facebook}>Login with Facebook</button>
             <br></br>
             <button onClick={this.props.back} id="back">Back</button>
           </form>
@@ -51,6 +67,12 @@ var Mainmenu = React.createClass({
   },
   login: function() {
     this.setState({menu: false, login: true})
+  },
+  register:function(){
+
+  },
+  facebook:function(){
+
   },
   back: function() {
     this.setState({menu: true, login: false})
@@ -101,7 +123,7 @@ var Mainmenu = React.createClass({
       ? <MenuOverlay start={this.start} login={this.login}></MenuOverlay>
       : '';
     var login = this.state.login
-      ? <LoginOverlay login={this.start} back={this.back}></LoginOverlay>
+      ? <LoginOverlay login={this.start} register={this.register} facebook={this.facebook} back={this.back}></LoginOverlay>
       : '';
     return (
       <div>
@@ -381,7 +403,7 @@ var newStyle={
 }
 
 
-ReactDOM.render(<Game />, document.getElementById('root'));
+// ReactDOM.render(<Game />, document.getElementById('root'));
 
-// ReactDOM.render(
-//   <Mainmenu/>, document.getElementById('root'));
+ReactDOM.render(
+  <Mainmenu/>, document.getElementById('root'));
