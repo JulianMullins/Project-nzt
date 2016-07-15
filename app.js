@@ -14,6 +14,10 @@ var mongoose = require('mongoose');
 var app = express();
 var server = require('http').Server(app);
 var io = require('socket.io')(server);
+
+var routes = require('./routes/index');
+var auth = require('./routes/auth');
+var User = require('./models/User')
 //end of react stuff
 
 app.set('views', path.join(__dirname, 'views'));
@@ -80,9 +84,57 @@ passport.use(new LocalStrategy(function(username, password, done) {
   }
 ));
 
+passport.use(new FacebookStrategy({
+    clientID: process.env.FACEBOOK_clientID,
+    clientSecret: process.env.FACEBOOK_clientSecret,
+    callbackURL: "http://localhost:3000/login/facebook/callback",
+    profileFields: ['id','email']
+  },
+  function(accessToken, refreshToken, profile, done) {
+   // console.log(profile)
+    User.findOne({$or:[{facebookId: profile.id},{email:profile.emails[0].value}] }, function (err, user) {
+      // if there's an error, finish trying to authenticate (auth failed)
+      //console.log(profile.emails[0].value)
 
+      if (err) {
+        console.error(err);
+        return done(err);
+      }
+      // if no user present, auth failed
+      if (!user) {
+        user = new User({
+          facebookId:profile.id,
+          email:profile.emails[0].value,
+          highScore:0
+        });
+        user.save(function(err,tempUser){
+          if(err){
+            return done(err, null);
+          }
+          else{
+            return done(null, tempUser);
+          }
+        });
+      }
+      else if(!user.facebookId){
+        user.facebookId = profile.id
+        //console.log("facebook id added")
+        user.save(function(err){
+          if(err){done(err)}
+        })
+        return done(null, user);
+      }
+      // auth has has succeeded
+      else{
+        //console.log("success")
+        return done(null, user);
+      }
+    });
+  }
+));
 
-
+app.use('/', auth(passport));
+app.use('/', routes);
 
 
 // catch 404 and forward to error handler
