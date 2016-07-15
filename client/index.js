@@ -1,14 +1,23 @@
 var React = require('react');
 var ReactDOM = require('react-dom');
 
-var App = React.createClass({
+var Mainmenu = React.createClass({
   render: function() {
     return (
-      <h2>Hello React!</h2>
+      <div>
+        <div className="overlay">
+          <a className="btn">Start</a>
+          <a className="btn">Login</a>
+        </div>
+        <center>
+          <h1 id="title">Project NZT</h1>
+        </center>
+      </div>
     );
   }
 });
 
+<<<<<<< HEAD
 var Game = React.createClass({
 	render: function() {
 		return (
@@ -28,3 +37,7 @@ var Game = React.createClass({
 });
 
 ReactDOM.render(<Game />, document.getElementById('root'));
+=======
+ReactDOM.render(
+  <Mainmenu/>, document.getElementById('root'));
+>>>>>>> refs/remotes/origin/master
