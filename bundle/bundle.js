@@ -7,24 +7,35 @@ var ReactDOM = require('react-dom');
 var Mainmenu = React.createClass({
 	displayName: 'Mainmenu',
 
+	getInitialState: function getInitialState() {
+		return { overlay: true };
+	},
+	start: function start() {
+		this.setState({ overlay: false });
+	},
 	render: function render() {
-		return React.createElement(
+		var overlay = this.state.overlay ? React.createElement(
 			'div',
-			null,
+			{ className: 'overlay' },
 			React.createElement(
-				'div',
-				{ className: 'overlay' },
+				'center',
+				null,
 				React.createElement(
 					'a',
-					{ className: 'btn' },
+					{ className: 'btn', href: '#', onClick: this.start },
 					'Start'
 				),
 				React.createElement(
 					'a',
-					{ className: 'btn' },
+					{ className: 'btn', href: '#' },
 					'Login'
 				)
-			),
+			)
+		) : '';
+		return React.createElement(
+			'div',
+			null,
+			overlay,
 			React.createElement(
 				'center',
 				null,
@@ -33,6 +44,97 @@ var Mainmenu = React.createClass({
 					{ id: 'title' },
 					'Project NZT'
 				)
+			),
+			React.createElement(
+				'div',
+				{ className: 'menu' },
+				React.createElement(
+					'a',
+					{ href: '#', className: 'menu-panel' },
+					React.createElement(
+						'h2',
+						null,
+						'normal'
+					),
+					React.createElement(
+						'h3',
+						null,
+						'(position, sound)'
+					)
+				),
+				React.createElement(
+					'a',
+					{ href: '#', className: 'menu-panel' },
+					React.createElement(
+						'h2',
+						null,
+						'position-only'
+					)
+				)
+			),
+			React.createElement(
+				'div',
+				{ className: 'menu' },
+				React.createElement(
+					'a',
+					{ href: '#', className: 'menu-panel' },
+					React.createElement(
+						'h2',
+						null,
+						'position & color'
+					)
+				),
+				React.createElement(
+					'a',
+					{ href: '#', className: 'menu-panel' },
+					React.createElement(
+						'h2',
+						null,
+						'advanced'
+					),
+					React.createElement(
+						'h3',
+						null,
+						'(color, position, sound)'
+					)
+				)
+			)
+		);
+	}
+});
+
+var GameTimer = React.createClass({
+	displayName: 'GameTimer',
+
+	getInitialState: function getInitialState() {
+		return {
+			seconds: 120
+		};
+	},
+
+	componentDidMount: function componentDidMount() {
+		setTimeout(function () {
+			this.setState({ interval: setInterval(this.timerSecs, 1000) });
+		}.bind(this), 3000);
+	},
+	timerSecs: function timerSecs() {
+		this.setState({
+			seconds: this.state.seconds - 1
+		});
+		if (this.state.seconds === 0) {
+			clearInterval(this.state.interval);
+		}
+	},
+	render: function render() {
+		return React.createElement(
+			'div',
+			{ className: 'timerContainer' },
+			React.createElement(
+				'h1',
+				{ className: 'gameTimer' },
+				Math.floor(this.state.seconds / 60),
+				':',
+				("0" + this.state.seconds % 60).slice(-2)
 			)
 		);
 	}
@@ -42,13 +144,43 @@ var Game = React.createClass({
 	displayName: 'Game',
 
 	getInitialState: function getInitialState() {
-		return {};
+		return {
+			overlay: true,
+			initialTimer: 3 };
 	},
-
+	componentDidMount: function componentDidMount() {
+		setInterval(this.timer, 1000);
+	},
+	timer: function timer() {
+		this.setState({
+			initialTimer: this.state.initialTimer - 1
+		});
+		if (this.state.initialTimer <= 0) {
+			this.setState({
+				overlay: false
+			});
+		}
+	},
 	render: function render() {
+		var overlay = this.state.overlay ? React.createElement(
+			'div',
+			{ className: 'overlay' },
+			React.createElement(
+				'center',
+				null,
+				React.createElement(
+					'a',
+					{ className: 'btn', href: '#' },
+					this.state.initialTimer
+				)
+			)
+		) : '';
+
 		return React.createElement(
 			'div',
 			{ className: 'gameContainer' },
+			overlay,
+			React.createElement(GameTimer, null),
 			React.createElement(
 				'div',
 				{ className: 'gameRow' },
@@ -94,6 +226,9 @@ var Game = React.createClass({
 });
 
 ReactDOM.render(React.createElement(Game, null), document.getElementById('root'));
+
+// ReactDOM.render(
+//   <Mainmenu/>, document.getElementById('root'));
 
 },{"react":172,"react-dom":3}],2:[function(require,module,exports){
 // shim for using process in browser
