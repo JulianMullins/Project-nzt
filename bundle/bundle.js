@@ -5,18 +5,38 @@ var React = require('react');
 var ReactDOM = require('react-dom');
 
 var App = React.createClass({
-  displayName: 'App',
+	displayName: 'App',
 
-  render: function render() {
-    return React.createElement(
-      'h2',
-      null,
-      'Hello React!'
-    );
-  }
+	render: function render() {
+		return React.createElement(
+			'h2',
+			null,
+			'Hello React!'
+		);
+	}
 });
 
-ReactDOM.render(React.createElement(App, null), document.getElementById('root'));
+var Game = React.createClass({
+	displayName: 'Game',
+
+	render: function render() {
+		return React.createElement(
+			'div',
+			{ className: 'container' },
+			React.createElement('div', { className: 'gameSquare' }),
+			React.createElement('div', { className: 'gameSquare' }),
+			React.createElement('div', { className: 'gameSquare' }),
+			React.createElement('div', { className: 'gameSquare' }),
+			React.createElement('div', { className: 'gameSquare' }),
+			React.createElement('div', { className: 'gameSquare' }),
+			React.createElement('div', { className: 'gameSquare' }),
+			React.createElement('div', { className: 'gameSquare' }),
+			React.createElement('div', { className: 'gameSquare' })
+		);
+	}
+});
+
+ReactDOM.render(React.createElement(Game, null), document.getElementById('root'));
 
 },{"react":172,"react-dom":3}],2:[function(require,module,exports){
 // shim for using process in browser
