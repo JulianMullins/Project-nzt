@@ -110,7 +110,6 @@ var Mainmenu = React.createClass({
 });
 
 var Game = React.createClass({
-<<<<<<< HEAD
   getInitialState: function() {
     return {
      style: [standardStyle,standardStyle,standardStyle,standardStyle,standardStyle,standardStyle,standardStyle,standardStyle,standardStyle],
@@ -205,34 +204,6 @@ var Game = React.createClass({
 			</div>
 		);
 	}
-=======
-  render: function() {
-    return (
-      <div className="gameContainer">
-        <div className="gameRow">
-          <div id="square1" className="gameSquare"></div>
-          <div id="square2" className="gameSquare"></div>
-          <div id="square3" className="gameSquare"></div>
-        </div>
-        <div className="gameRow">
-          <div id="square4" className="gameSquare"></div>
-          <div id="square5" className="gameSquare"></div>
-          <div id="square6" className="gameSquare"></div>
-        </div>
-        <div className="gameRow">
-          <div id="square7" className="gameSquare"></div>
-          <div id="square8" className="gameSquare"></div>
-          <div id="square9" className="gameSquare"></div>
-        </div>
-        <div className="gameButtonsContainer">
-          <a>Sound</a>
-          <a>Both</a>
-          <a>Position</a>
-        </div>
-      </div>
-    );
-  }
->>>>>>> refs/remotes/origin/master
 });
 
 ///Taylor: style sheets for changing colors on timer
