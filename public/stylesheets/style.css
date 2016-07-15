@@ -142,18 +142,41 @@ h3 {
 }
 
 .gameButtonsContainer a:hover {
+  cursor: pointer;
+}
+
+.gameButtonsContainer a:active {
+  background-color: black;
 }
 
 .timerContainer {
   display: flex;
   width: 100%;
   justify-content: flex-end;
+  width: 50%;
+}
 
+.gameHeading {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
 }
 
 .gameTimer {
   color: #BFBFBF;
   font-size: 64px;
+}
+
+.gameScore {
+  flex-direction: row;
+  justify-content: flex-start;
+  color: #BFBFBF;
+  font-size: 64px;
+  width: 50%;
+}
+
+.scoreAlert {
+  font-size: 24px;
 }
 
 footer {

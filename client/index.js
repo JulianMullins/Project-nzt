@@ -161,67 +161,6 @@ var GameTimer = React.createClass({
 	}
 });
 
-// var Game = React.createClass({
-// 	getInitialState: function() {
-// 		return {
-// 			overlay: true,
-// 			initialTimer: 3, //seconds
-// 		}
-// 	},
-// 	componentDidMount: function() {
-// 		setInterval(this.timer, 1000);
-// 	},
-// 	timer: function() {
-// 		this.setState({
-// 			initialTimer: this.state.initialTimer-1
-// 		})
-// 		if(this.state.initialTimer <=0) {
-// 			this.setState({
-// 				overlay: false
-// 			})
-// 		}
-// 	},
-// 	render: function() {
-// 	var overlay = this.state.overlay ? (
-//       <div className="overlay">
-//         <center>
-//           <a className="btn" href="#">{this.state.initialTimer}</a>
-//         </center>
-//       </div>
-//     ) : '';
-
-// 		return (
-// 			<div className="gameContainer">
-// 			{overlay}
-// 			<GameTimer></GameTimer>
-// 				<div className="gameRow">
-// 					<div onClick={this.click} className="gameSquare"></div>
-// 					<div className="gameSquare"></div>
-// 					<div className="gameSquare"></div>
-// 				</div>
-// 				<div className="gameRow">
-// 					<div className="gameSquare"></div>
-// 					<div className="gameSquare"></div>
-// 					<div className="gameSquare"></div>
-// 				</div>
-// 				<div className="gameRow">
-// 					<div className="gameSquare"></div>
-// 					<div className="gameSquare"></div>
-// 					<div className="gameSquare"></div>
-// 				</div>
-// 				<div className="gameButtonsContainer">
-// 					<a>SOUND</a>
-// 					<a>BOTH</a>
-// 					<a>POSITION</a>
-// 				</div>
-// 			</div>
-// 		);
-// 	}
-// });
-
-// ReactDOM.render(<Game/>, document.getElementById('root'));
-
-
 var Game = React.createClass({
   getInitialState: function() {
     return {
@@ -229,9 +168,25 @@ var Game = React.createClass({
      match: false,
      score: 0,
      miss: false,
-     alert: " "
+     alert: " ",
+     overlay: true,
+     initialTimer: 3
     }   
   },
+	componentDidMount: function() {
+		setInterval(this.timer, 1000);
+	},
+	timer: function() {
+		this.setState({
+			initialTimer: this.state.initialTimer-1
+		})
+		if(this.state.initialTimer === 0) {
+			this.setState({
+				overlay: false
+			})
+		this.test();
+		}
+	},
    test: function(){
     var out=[];
     setInterval(function(){
@@ -337,26 +292,42 @@ match: function(){
   }
 },
   render: function() {
+   	var overlay = this.state.overlay ? (
+      <div className="overlay">
+        <center>
+          <a className="btn" href="#">{this.state.initialTimer}</a>
+        </center>
+      </div>
+    ) : '';
+
     return (
       <div className="gameContainer">
+      	{overlay}
+      	<div className="gameHeading">
+      		<div className="gameScore"><b>Score: {this.state.score}</b> <span className="scoreAlert">{this.state.alert}</span></div>
+      		<GameTimer></GameTimer>
+      	</div>
+
         <div className="gameRow">
-          <div id="square1" className="gameSquare" style={this.state.style[0]}></div>
-          <div id="square2" className="gameSquare" style={this.state.style[1]}></div>
-          <div id="square3" className="gameSquare" style={this.state.style[2]}></div>
+          <div className="gameSquare" style={this.state.style[0]}></div>
+          <div className="gameSquare" style={this.state.style[1]}></div>
+          <div className="gameSquare" style={this.state.style[2]}></div>
         </div>
         <div className="gameRow">
-          <div id="square4" className="gameSquare" style={this.state.style[3]}></div>
-          <div id="square5" className="gameSquare" style={this.state.style[4]}></div>
-          <div id="square6" className="gameSquare" style={this.state.style[5]}></div>
+          <div className="gameSquare" style={this.state.style[3]}></div>
+          <div className="gameSquare" style={this.state.style[4]}></div>
+          <div className="gameSquare" style={this.state.style[5]}></div>
         </div>
         <div className="gameRow">
-          <div id="square7" className="gameSquare" style={this.state.style[6]}></div>
-          <div id="square8" className="gameSquare" style={this.state.style[7]}></div>
-          <div id="square9" className="gameSquare" style={this.state.style[8]}></div>
+          <div className="gameSquare" style={this.state.style[6]}></div>
+          <div className="gameSquare" style={this.state.style[7]}></div>
+          <div className="gameSquare" style={this.state.style[8]}></div>
         </div>
-        <div><b>Score: {this.state.score}</b>   {this.state.alert}</div>
-        <button onClick={this.test}>Start</button>
-        <button onClick={this.match}>Match</button>
+        <div className="gameButtonsContainer">
+			<a>SOUND</a>
+			<a>BOTH</a>
+			<a onClick={this.match}>POSITION</a>
+		</div>
       </div>
     );
   }
@@ -364,7 +335,7 @@ match: function(){
 
 ///Taylor: style sheets for changing colors on timer
 var standardStyle={
-  backgroundColor: 'yellow'
+  backgroundColor: "#BFBFBF"
 }
 
 var newStyle={
