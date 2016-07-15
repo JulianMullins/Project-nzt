@@ -20,9 +20,9 @@ var LoginOverlay = React.createClass({
       <div className="overlay" id="login">
         <center>
           <form>
-            <input type="text" name="username" placeholder="username"></input>
+            <input type="text" placeholder="username"></input>
             <br></br>
-            <input type="password" name="password" placeholder="password"></input>
+            <input type="password" placeholder="password"></input>
             <br></br>
             <button onClick={this.props.login}>Login</button>
             <br></br>
@@ -56,16 +56,40 @@ var Mainmenu = React.createClass({
     this.setState({menu: true, login: false})
   },
   normalMode: function() {
-    this.setState({mode: {position: true, sound: true, color: false}}, this.goToGame);
+    this.setState({
+      mode: {
+        position: true,
+        sound: true,
+        color: false
+      }
+    }, this.goToGame);
   },
   posOnly: function() {
-    this.setState({mode: {position: true, sound: false, color: false}}, this.goToGame);
+    this.setState({
+      mode: {
+        position: true,
+        sound: false,
+        color: false
+      }
+    }, this.goToGame);
   },
   posAndColor: function() {
-    this.setState({mode: {position: true, sound: false, color: true}}, this.goToGame);
+    this.setState({
+      mode: {
+        position: true,
+        sound: false,
+        color: true
+      }
+    }, this.goToGame);
   },
   advanced: function() {
-    this.setState({mode: {position: true, sound: true, color: true}}, this.goToGame);
+    this.setState({
+      mode: {
+        position: true,
+        sound: true,
+        color: true
+      }
+    }, this.goToGame);
   },
   goToGame: function() {
     ReactDOM.render(
