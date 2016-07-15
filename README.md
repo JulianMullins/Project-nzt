@@ -1,19 +1,3 @@
-# Horizons React &amp; Express project template
-
-## Usage
-
-### `npm start`
-
-Start your application. This will start your server and start compiling JSX into
-plain JavaScript.
-
-Express main file is `app.js`.  React files are in `client/index.js`
-
-## ESLint
-
-An ESLint configuration file is included for you. If you install an Atom
-or Sublime Text plugin, it will automatically run.
-
 #Overview#
 
 Project NZT (final name to be determined) is a game centered around the scientifically-backed *dual-n-back* genre of brain games. Although there are various iterations of this idea currently in existence, their design aesthetic and user experience flow is poorly developed. With this version, we are aiming to gamify a powerful mind-training tool and make it as easy as possible for users to engage with and start seeing results.

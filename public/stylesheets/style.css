@@ -2,7 +2,6 @@
   box-sizing: border-box;
   margin: 0;
 }
-
 body {
   max-width: 790px;
   height: 100vh;
@@ -12,22 +11,62 @@ body {
 #root {
   height: 100vh;
 }
-
 h1 {
-  font-size: 8rem;
+  font-size: 7rem;
+}
+h2 {
+  font-size: 2rem;
+}
+h3 {
+  font-size: 1.4rem;
 }
 #title {
-  padding-top: 5rem;
+  padding-top: 4rem;
 }
 .overlay {
   position: absolute;
   width: 100vw;
   height: 100vh;
-  background-color: rgba(123, 123, 123, 0.85);
+  top: 0;
+  left: 0;
+  background-color: rgba(123, 123, 123, 0.7);
+  z-index: 2;
+}
+.overlay center {
+  margin-top: 17rem;
+  display: flex;
+  flex-direction: column;
 }
 .btn {
   text-decoration: none;
   font-size: 5rem;
+  color: white;
+  margin: 3rem auto;
+}
+.btn:hover {
+  text-decoration: none;
+  color: #EEEEEE;
+}
+.menu {
+  display: flex;
+  justify-content: space-around;
+}
+.menu-panel {
+  width: 40vw;
+  max-width: 20rem;
+  height: 15rem;
+  background-color: #BFBFBF;
+  color: white;
+  margin: 2rem 0;
+  display: inline-block;
+  text-decoration: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.menu-panel:hover {
+  background-color: #C4C4C4;
 }
 
 /* game page css */
