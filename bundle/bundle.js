@@ -41,6 +41,10 @@ var Mainmenu = React.createClass({
 var Game = React.createClass({
 	displayName: 'Game',
 
+	getInitialState: function getInitialState() {
+		return {};
+	},
+
 	render: function render() {
 		return React.createElement(
 			'div',
@@ -48,23 +52,23 @@ var Game = React.createClass({
 			React.createElement(
 				'div',
 				{ className: 'gameRow' },
-				React.createElement('div', { id: 'square1', className: 'gameSquare' }),
-				React.createElement('div', { id: 'square2', className: 'gameSquare' }),
-				React.createElement('div', { id: 'square3', className: 'gameSquare' })
+				React.createElement('div', { onClick: this.click, className: 'gameSquare' }),
+				React.createElement('div', { className: 'gameSquare' }),
+				React.createElement('div', { className: 'gameSquare' })
 			),
 			React.createElement(
 				'div',
 				{ className: 'gameRow' },
-				React.createElement('div', { id: 'square4', className: 'gameSquare' }),
-				React.createElement('div', { id: 'square5', className: 'gameSquare' }),
-				React.createElement('div', { id: 'square6', className: 'gameSquare' })
+				React.createElement('div', { className: 'gameSquare' }),
+				React.createElement('div', { className: 'gameSquare' }),
+				React.createElement('div', { className: 'gameSquare' })
 			),
 			React.createElement(
 				'div',
 				{ className: 'gameRow' },
-				React.createElement('div', { id: 'square7', className: 'gameSquare' }),
-				React.createElement('div', { id: 'square8', className: 'gameSquare' }),
-				React.createElement('div', { id: 'square9', className: 'gameSquare' })
+				React.createElement('div', { className: 'gameSquare' }),
+				React.createElement('div', { className: 'gameSquare' }),
+				React.createElement('div', { className: 'gameSquare' })
 			),
 			React.createElement(
 				'div',
@@ -72,17 +76,17 @@ var Game = React.createClass({
 				React.createElement(
 					'a',
 					null,
-					'Sound'
+					'SOUND'
 				),
 				React.createElement(
 					'a',
 					null,
-					'Both'
+					'BOTH'
 				),
 				React.createElement(
 					'a',
 					null,
-					'Position'
+					'POSITION'
 				)
 			)
 		);

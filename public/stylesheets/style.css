@@ -47,7 +47,7 @@ h1 {
 
 .gameSquare {
   display: inline-block;
-  background-color: gray;
+  background-color: #BFBFBF;
   width: 175px;
   height: 175px;
   margin: 3px;
@@ -58,15 +58,19 @@ h1 {
   justify-content: center;
   margin-top: 20px;
   width: 100%;
-  background-color: gray;
+  background-color: #BFBFBF;
   padding: 10px;
 }
 
 .gameButtonsContainer a {
   margin: 0 25px;
   padding: 10px;
-  width: 100px;
   text-align: center;
-  border: 1px solid white;
   color: white;
+  font-size: 24px;
+  font-weight: bold;
+  cursor: default;
+}
+
+.gameButtonsContainer a:hover {
 }
