@@ -9,20 +9,38 @@ var FacebookStrategy = require('passport-facebook');
 // var MongoStore = require('connect-mongo')(session);
 var mongoose = require('mongoose');
 
-var app = express();
+var webpack = require('webpack');
+var webpackMiddleware = require("webpack-dev-middleware");
+var config = require('./webpack.config');
 
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'hbs');
+var app = express();
+var server = require('http').Server(app);
+var io = require('socket.io')(server);
+
+var compiler = webpack(config);
+app.use(webpackMiddleware(compiler, {
+  publicPath: config.output.publicPath,
+  hot: true,
+  historyApiFallback: true
+}));
+app.use(require('webpack-hot-middleware')(compiler));
+
+app.use(express.static(path.join(__dirname, 'public')));
+//end of react stuff
+
+// app.set('views', path.join(__dirname, 'views'));
+// app.set('view engine', 'hbs');
 
 app.use(logger('combined'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(express.static(path.join(__dirname, 'public')));
+//app.use(express.static(path.join(__dirname, 'public')));
 app.use('/bundle', express.static(path.join(__dirname, 'bundle')));
 
 app.get('/', function(req, res) {
-  res.render('index');
+  res.redirect('index.html');
 });
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -56,4 +74,8 @@ app.use(function(err, req, res, next) {
 });
 
 
-module.exports = app;
+
+var port = process.env.PORT || 3000;
+server.listen(port, function() {
+  console.log('Started, listening on port ', port);
+});
