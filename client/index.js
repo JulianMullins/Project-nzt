@@ -9,4 +9,22 @@ var App = React.createClass({
   }
 });
 
-ReactDOM.render(<App />, document.getElementById('root'));
+var Game = React.createClass({
+	render: function() {
+		return (
+			<div className="container">
+				<div className="gameSquare"></div>
+				<div className="gameSquare"></div>
+				<div className="gameSquare"></div>
+				<div className="gameSquare"></div>
+				<div className="gameSquare"></div>
+				<div className="gameSquare"></div>
+				<div className="gameSquare"></div>
+				<div className="gameSquare"></div>
+				<div className="gameSquare"></div>
+			</div>
+		);
+	}
+});
+
+ReactDOM.render(<Game />, document.getElementById('root'));
