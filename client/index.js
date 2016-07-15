@@ -6,8 +6,8 @@ var MenuOverlay = React.createClass({
     return (
       <div className="overlay">
         <center>
-          <a className="btn" href="#" onClick={this.props.start}>Start</a>
-          <a className="btn" href="#" onClick={this.props.login}>Login</a>
+          <a className="btn" href="" onClick={this.props.start}>Start</a>
+          <a className="btn" href="" onClick={this.props.loginScreen}>Login</a>
         </center>
       </div>
     )
@@ -46,16 +46,24 @@ var Mainmenu = React.createClass({
       }
     }
   },
-  start: function() {
+  start: function(e) {
+    e.preventDefault();
     this.setState({menu: false, login: false});
   },
-  login: function() {
+  loginScreen: function(e) {
+    e.preventDefault();
     this.setState({menu: false, login: true})
   },
-  back: function() {
+  login: function(e) {
+    e.preventDefault();
+    this.setState({menu: false, login: false});
+  },
+  back: function(e) {
+    e.preventDefault();
     this.setState({menu: true, login: false})
   },
-  normalMode: function() {
+  normalMode: function(e) {
+    e.preventDefault();
     this.setState({
       mode: {
         position: true,
@@ -64,7 +72,8 @@ var Mainmenu = React.createClass({
       }
     }, this.goToGame);
   },
-  posOnly: function() {
+  posOnly: function(e) {
+    e.preventDefault();
     this.setState({
       mode: {
         position: true,
@@ -73,7 +82,8 @@ var Mainmenu = React.createClass({
       }
     }, this.goToGame);
   },
-  posAndColor: function() {
+  posAndColor: function(e) {
+    e.preventDefault();
     this.setState({
       mode: {
         position: true,
@@ -82,7 +92,8 @@ var Mainmenu = React.createClass({
       }
     }, this.goToGame);
   },
-  advanced: function() {
+  advanced: function(e) {
+    e.preventDefault();
     this.setState({
       mode: {
         position: true,
@@ -98,10 +109,10 @@ var Mainmenu = React.createClass({
   },
   render: function() {
     var menu = this.state.menu
-      ? <MenuOverlay start={this.start} login={this.login}></MenuOverlay>
+      ? <MenuOverlay start={this.start} loginScreen={this.loginScreen}></MenuOverlay>
       : '';
     var login = this.state.login
-      ? <LoginOverlay login={this.start} back={this.back}></LoginOverlay>
+      ? <LoginOverlay login={this.login} back={this.back}></LoginOverlay>
       : '';
     return (
       <div>
@@ -111,19 +122,19 @@ var Mainmenu = React.createClass({
           <h1 id="title">Project NZT</h1>
         </center>
         <div className="menu">
-          <a href="#" className="menu-panel" onClick={this.normalMode}>
+          <a href="" className="menu-panel" onClick={this.normalMode}>
             <h2>normal</h2>
             <h3>(position, sound)</h3>
           </a>
-          <a href="#" className="menu-panel" onClick={this.posOnly}>
+          <a href="" className="menu-panel" onClick={this.posOnly}>
             <h2>position-only</h2>
           </a>
         </div>
         <div className="menu">
-          <a href="#" className="menu-panel" onClick={this.posAndColor}>
+          <a href="" className="menu-panel" onClick={this.posAndColor}>
             <h2>position & color</h2>
           </a>
-          <a href="#" className="menu-panel" onClick={this.advanced}>
+          <a href="" className="menu-panel" onClick={this.advanced}>
             <h2>advanced</h2>
             <h3>(color, position, sound)</h3>
           </a>
