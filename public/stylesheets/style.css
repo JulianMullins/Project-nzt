@@ -31,12 +31,15 @@ h3 {
   z-index: 2;
 }
 .overlay center {
-  margin-top: 17rem;
+  margin-top: 30vh;
   display: flex;
   flex-direction: column;
 }
+#login center {
+  margin-top: 20vh;
+}
 #login form * {
-  margin: 2rem 0;
+  margin: 2vh 0;
 }
 #login input {
   border: none;
@@ -87,10 +90,10 @@ h3 {
 .menu-panel {
   width: 40vw;
   max-width: 20rem;
-  height: 15rem;
+  height: 25vh;
   background-color: #BFBFBF;
   color: white;
-  margin: 2rem 0;
+  margin: 3vh 0;
   display: inline-block;
   text-decoration: none;
   display: flex;
