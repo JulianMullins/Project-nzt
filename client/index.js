@@ -1,12 +1,21 @@
 var React = require('react');
 var ReactDOM = require('react-dom');
 
-var App = React.createClass({
+var Mainmenu = React.createClass({
   render: function() {
     return (
-      <h2>Hello React!</h2>
+      <div>
+        <div className="overlay">
+          <a className="btn">Start</a>
+          <a className="btn">Login</a>
+        </div>
+        <center>
+          <h1 id="title">Project NZT</h1>
+        </center>
+      </div>
     );
   }
 });
 
-ReactDOM.render(<App />, document.getElementById('root'));
+ReactDOM.render(
+  <Mainmenu/>, document.getElementById('root'));

@@ -22,7 +22,7 @@ app.set('view engine', 'hbs');
 app.use(logger('combined'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-//app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, 'public')));
 app.use('/bundle', express.static(path.join(__dirname, 'bundle')));
 
 app.get('/', function(req, res) {
