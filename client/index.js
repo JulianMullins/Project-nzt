@@ -120,7 +120,7 @@ var Game = React.createClass({
     var out=[];
     setInterval(function(){
     //start with forced match command
-    if(out.length===5){
+    if(out.length===12){
       (console.log('forced match'))
       out.push(out[out.length-1])
       this.state.style[out[out.length-1]]=newStyle;
