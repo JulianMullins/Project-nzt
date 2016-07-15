@@ -138,7 +138,7 @@ var Mainmenu = React.createClass({
 //     return {
 //      style: [standardStyle,standardStyle,standardStyle,standardStyle,standardStyle,standardStyle,standardStyle,standardStyle,standardStyle],
 //      match: false
-//     }   
+//     }
 //   },
 //    test: function(){
 //     var out=[];
@@ -190,7 +190,7 @@ var Mainmenu = React.createClass({
 //         }.bind(this),500);
 //       }
 //     };
-//     if(out.length===1){ 
+//     if(out.length===1){
 //       setTimeout(function(){
 //         this.state.style[out[out.length-1]]=standardStyle;
 //         this.setState({
@@ -237,7 +237,7 @@ var Game = React.createClass({
      score: 0,
      miss: false,
      alert: " "
-    }   
+    }
   },
    test: function(){
     var out=[];
@@ -245,8 +245,8 @@ var Game = React.createClass({
       if(!this.state.miss){
            console.log(this.state.alert)
            this.setState({
-           match: false, 
-           miss: false, 
+           match: false,
+           miss: false,
            alert: " "
       })
       }
@@ -265,7 +265,7 @@ var Game = React.createClass({
             alert: "Missed a match"
           })
         }
-      
+
      }
     //start with forced match command
     if(out.length===15){
@@ -297,7 +297,7 @@ var Game = React.createClass({
         this.state.style[out[out.length-1]]=standardStyle;
         this.setState({
           style: this.state.style,
-          match: true, 
+          match: true,
           miss: true
          })
         out=[];
@@ -312,7 +312,7 @@ var Game = React.createClass({
         }.bind(this),500);
       }
     };
-    if(out.length===1){ 
+    if(out.length===1){
       setTimeout(function(){
         this.state.style[out[out.length-1]]=standardStyle;
         this.setState({
@@ -326,8 +326,8 @@ var Game = React.createClass({
 match: function(){
   if(this.state.match){
     this.setState({
-      score: this.state.score+10, 
-      miss: false, 
+      score: this.state.score+10,
+      miss: false,
       alert: "Good job"
     })
   }
