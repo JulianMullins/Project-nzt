@@ -29,17 +29,31 @@ var LoginOverlay = React.createClass({
       this.setState({password:e.target.value})
     }
   },
+  ajaxLogin() {
+
+    $.ajax({
+      url:'http://localhost:3000/login',
+      method: 'POST'
+    })
+
+
+    succes: function() {
+      this.props.login()
+    }
+  }
   render: function() {
     return (
       <div className="overlay" id="login">
         <center>
-          <form>
+          <form onSubmit={this.ajaxLogin}>
             <input type="text" name="username" placeholder="email" value={this.state.username} onChange={this.update}></input>
             <br></br>
             <input type="password" name="password" placeholder="password" value={this.state.password} onChange={this.update}></input>
             <br></br>
             <button onClick={this.props.login}>Login</button>
+            <br></br>
             <button onClick={this.props.register}>Register</button>
+            <br></br>
             <button onClick={this.props.facebook}>Login with Facebook</button>
             <br></br>
             <button onClick={this.props.back} id="back">Back</button>
@@ -65,7 +79,8 @@ var Mainmenu = React.createClass({
   start: function() {
     this.setState({menu: false, login: false});
   },
-  login: function() {
+  login: function(e) {
+    e.preventDefault();
     this.setState({menu: false, login: true})
   },
   register:function(){
@@ -123,7 +138,7 @@ var Mainmenu = React.createClass({
       ? <MenuOverlay start={this.start} login={this.login}></MenuOverlay>
       : '';
     var login = this.state.login
-      ? <LoginOverlay login={this.start} register={this.register} facebook={this.facebook} back={this.back}></LoginOverlay>
+      ? <LoginOverlay login={this.login} register={this.register} facebook={this.facebook} back={this.back}></LoginOverlay>
       : '';
     return (
       <div>
