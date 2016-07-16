@@ -315,7 +315,7 @@ match: function(){
       <div className="gameContainer">
       	{overlay}
       	<div className="gameHeading">
-      		<div className="gameScore"><b>Score: {this.state.score}</b> <span className="scoreAlert">{this.state.alert}</span></div>
+      		<div className="gameScore"><b>Score: {this.state.score}</b></div>
       		<GameTimer></GameTimer>
       	</div>
 
@@ -334,6 +334,10 @@ match: function(){
           <div className="gameSquare" style={this.state.style[7]}></div>
           <div className="gameSquare" style={this.state.style[8]}></div>
         </div>
+        <div className="scoreAlert">
+          {this.state.alert}
+        </div>
+
         <div className="gameButtonsContainer">
 			<a>SOUND</a>
 			<a>BOTH</a>
@@ -354,7 +358,7 @@ var newStyle={
 }
 
 
-ReactDOM.render(<Game />, document.getElementById('root'));
+// ReactDOM.render(<Game />, document.getElementById('root'));
 
-// ReactDOM.render(
-//   <Mainmenu/>, document.getElementById('root'));
+ReactDOM.render(
+  <Mainmenu/>, document.getElementById('root'));

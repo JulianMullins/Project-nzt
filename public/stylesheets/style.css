@@ -8,6 +8,7 @@ body {
 }
 #root {
   height: 90vh;
+  margin-bottom: 50px;
 }
 h1 {
   font-size: 7rem;
@@ -179,7 +180,14 @@ h3 {
 }
 
 .scoreAlert {
-  font-size: 24px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #C11A16;
+  color: white;
+  height: 100px;
+  font-size: 36px;
+  margin: 10px auto;
 }
 
 footer {
