@@ -175,7 +175,6 @@ var Mainmenu = React.createClass({
   goToGame: function() {
     ReactDOM.render(
       <Game mode={this.state.mode}></Game>, document.getElementById('root'));
-    console.log(this.state.mode);
   },
   render: function() {
     var menu = this.state.menu
@@ -246,26 +245,6 @@ var GameTimer = React.createClass({
   }
 });
 
-var AlertPositive = React.createClass({
-  render: function() {
-    return (
-      <div className="scoreAlertPositive">
-        <h3>Positive message</h3>
-      </div>
-    )
-  }
-});
-
-var AlertNegative = React.createClass({
-  render: function() {
-    return (
-      <div className="scoreAlertNegative">
-        <h3>{this.props.alert}</h3>
-      </div>
-    )
-  }
-});
-
 var Game = React.createClass({
   getInitialState: function() {
     return {
@@ -285,7 +264,9 @@ var Game = React.createClass({
       miss: false,
       alert: " ",
       overlay: true,
-      initialTimer: 3
+      initialTimer: 3,
+      N: 1,
+      pressed: false
     }
   },
   componentDidMount: function() {
@@ -301,74 +282,82 @@ var Game = React.createClass({
     }
   },
   test: function() {
-    var out = [];
+    var queue = [];
+    var timeTilMatch = parseInt((Math.random() * 5) + 2 + this.state.N);
+
     setInterval(function() {
+      this.setState({pressed: false});
       if (!this.state.miss) {
         this.setState({match: false, miss: false, alert: " "});
       }
       if (this.state.miss) {
+        this.setState({miss: false, alert: "Missed a match"});
         if (this.state.score !== 0) {
           this.setState({
-            score: this.state.score - 5,
-            miss: false,
-            alert: "Missed a match"
+            score: this.state.score - 5
           });
-        } else {
-          this.setState({miss: false, alert: "Missed a match"});
         }
       }
 
-      //start with forced match command
-      if (out.length === 15) {
-        out.push(out[out.length - 1]);
-        this.state.style[out[out.length - 1]] = newStyle;
+      if (timeTilMatch > 0) {
+        // pick a non-matching next number while interval is not 0
+        var next = parseInt(Math.random() * 9);
+        while (next == queue[0]) {
+          next = parseInt(Math.random() * 9);
+        }
+
+        // resize array to N
+        queue.push(next);
+        if (queue.length > this.state.N) {
+          queue.splice(0, 1);
+        }
+
+        // set color for 800
+        this.state.style[next] = newStyle;
+        this.setState({style: this.state.style});
+        setTimeout(function() {
+          this.state.style[next] = standardStyle;
+          this.setState({style: this.state.style});
+        }.bind(this), 800);
+
+        // lower interval
+        timeTilMatch--;
+      } else {
+        // pick new interval
+        timeTilMatch = parseInt((Math.random() * 5) + 2);
+
+        // guaranteed match
+        var next = queue[0];
+        queue.push(next);
+        queue.splice(0, 1);
+
+        // set color for 800
+        this.state.style[next] = newStyle;
         this.setState({style: this.state.style, match: true, miss: true});
         setTimeout(function() {
-          this.state.style[out[out.length - 1]] = standardStyle;
+          this.state.style[next] = standardStyle;
           this.setState({style: this.state.style});
-          out = []
-        }.bind(this), 500);
-      } else {
-        out.push(parseInt(Math.random() * 9));
-        this.state.style[out[out.length - 1]] = newStyle;
-        this.setState({style: this.state.style});
-
-        //pause for thinking/processing time
-        if (out.length > 1) {
-          if (out[out.length - 1] === out[out.length - 2]) {
-            setTimeout(function() {
-              this.state.style[out[out.length - 1]] = standardStyle;
-              this.setState({style: this.state.style, match: true, miss: true});
-              out = [];
-            }.bind(this), 500);
-          } else {
-            setTimeout(function() {
-              this.state.style[out[out.length - 1]] = standardStyle;
-              this.setState({style: this.state.style});
-            }.bind(this), 500);
-          }
-        }
-        if (out.length === 1) {
-          setTimeout(function() {
-            this.state.style[out[out.length - 1]] = standardStyle;
-            this.setState({style: this.state.style});
-          }.bind(this), 500);
-        }
+        }.bind(this), 800);
       }
-    }.bind(this), 2000)
+    }.bind(this), 2000);
   },
   match: function() {
+    if (this.state.pressed) {
+      return;
+    }
     if (this.state.match) {
       this.setState({
         score: this.state.score + 10,
         miss: false,
-        alert: "Good job"
+        alert: "Good job",
+        pressed: true
       });
     } else {
       if (this.state.score !== 0) {
         this.setState({
           score: this.state.score - 5,
-          alert: "Not a match"
+          alert: "Not a match",
+          pressed: true
         });
       } else {
         this.setState({alert: "Not a match"});
@@ -385,17 +374,6 @@ var Game = React.createClass({
         </div>
       )
       : '';
-
-    var alertMessage;
-    if (this.state.alert === "Good job!") {
-      alertMessage = <AlertPositive/>;
-    } else if (this.state.alert === "Not a match" || this.state.alert === "Missed a match") {
-      alertMessage = <AlertNegative alert={this.state.alert}/>;
-    } else {
-      alertMessage = <div style={{
-        height: "120px"
-      }}></div>;
-    };
 
     return (
       <div className="gameContainer">
@@ -422,7 +400,9 @@ var Game = React.createClass({
           <div className="gameSquare" style={this.state.style[7]}></div>
           <div className="gameSquare" style={this.state.style[8]}></div>
         </div>
-        {alertMessage}
+        <div className="scoreAlert">
+          {this.state.alert}
+        </div>
 
         <div className="gameButtonsContainer">
           <a>SOUND</a>
