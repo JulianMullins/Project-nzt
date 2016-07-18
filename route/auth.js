@@ -37,9 +37,7 @@ module.exports = function(passport) {
       username: req.body.username,
       email: req.body.email,
       password: req.body.password,
-      wantsSpotify:true,
-      facebookId: null,
-      spotifyId:null
+      facebookId: null
     });
     User.findOne({email:u.email},function(err,user){
       if(err){
@@ -91,9 +89,22 @@ module.exports = function(passport) {
 		})
 	);
 
+  // facebook
+  router.get('/login/facebook',
+    passport.authenticate('facebook', { scope:['email','user_friends']}), function(req,res){});
+
+  router.get('/login/facebook/callback',
+    passport.authenticate('facebook',{failureRedirect: '/login'} ),
+    function(req, res) {
+      res.redirect('/')
+    });
+
+
   // GET Logout page
   router.get('/logout', function(req, res) {
     req.logout();
     res.redirect('/login');
   });
+
+  return router;
 }
