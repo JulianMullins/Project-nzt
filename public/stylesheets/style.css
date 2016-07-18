@@ -1,10 +1,26 @@
+/*@import 'https://fonts.googleapis.com/css?family=Abel';
+
+@font-face {
+    font-family: "Futura Std Light";
+    src: url("../fonts/FuturaStd-Light.otf");
+}*/
+
 * {
   box-sizing: border-box;
   margin: 0;
 }
+
+div {
+  display: block;
+}
+
 body {
   max-width: 790px;
-  margin: 0 auto;
+  font-family: 'Proxima Nova', sans-serif;
+  margin: 0;
+  padding: 0;
+  background: #faf8ef;
+  color: red;
 }
 #root {
   height: 90vh;
@@ -12,12 +28,15 @@ body {
 }
 h1 {
   font-size: 7rem;
+  font-weight: 700;
 }
 h2 {
   font-size: 2rem;
+  font-weight: 300;
 }
 h3 {
   font-size: 1.4rem;
+  font-weight: 100;
 }
 #title {
   padding: 2rem 0;
@@ -143,33 +162,27 @@ h3 {
   font-weight: bold;
   cursor: default;
 }
-
 .gameButtonsContainer a:hover {
   cursor: pointer;
 }
-
 .gameButtonsContainer a:active {
   background-color: black;
 }
-
 .timerContainer {
   display: flex;
   width: 100%;
   justify-content: flex-end;
   width: 50%;
 }
-
 .gameHeading {
   display: flex;
   flex-direction: row;
   width: 100%;
 }
-
 .gameTimer {
   color: #BFBFBF;
   font-size: 64px;
 }
-
 .gameScore {
   flex-direction: row;
   justify-content: flex-start;
@@ -177,7 +190,6 @@ h3 {
   font-size: 64px;
   width: 50%;
 }
-
 .scoreAlertNegative {
   display: flex;
   justify-content: center;
@@ -189,7 +201,6 @@ h3 {
   font-size: 36px;
   margin: 10px auto;
 }
-
 .scoreAlertPositive {
   display: flex;
   justify-content: center;
@@ -201,7 +212,6 @@ h3 {
   font-size: 36px;
   margin: 10px auto;
 }
-
 footer {
   display: flex;
   justify-content: center;
@@ -211,6 +221,7 @@ footer a {
   font-size: 2rem;
   margin: 0 2rem;
   color: gray;
+  font-weight: 100;
 }
 footer a:hover {
   color: #AAAAAA;
