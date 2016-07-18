@@ -8,9 +8,9 @@ var highScoreSchema = mongoose.Schema({
 	},
 	dateAchieved:Date,
 	score:Number,
-	nLevel:Number
+	nLevel:Number,
+	mode:String
 })
-
 
 
 module.exports = mongoose.model('HighScore',highScoreSchema)

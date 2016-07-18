@@ -11,8 +11,8 @@ var FacebookStrategy = require('passport-facebook');
 var MongoStore = require('connect-mongo')(session);
 var mongoose = require('mongoose');
 
-var routes = require('./route/index');
-var auth = require('./route/auth');
+var routes = require('./server/index');
+var auth = require('./server/auth');
 var User = require('./models/User')
 
 var app = express();
