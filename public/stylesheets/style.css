@@ -144,33 +144,27 @@ h3 {
   font-weight: bold;
   cursor: default;
 }
-
 .gameButtonsContainer a:hover {
   cursor: pointer;
 }
-
 .gameButtonsContainer a:active {
   background-color: black;
 }
-
 .timerContainer {
   display: flex;
   width: 100%;
   justify-content: flex-end;
   width: 50%;
 }
-
 .gameHeading {
   display: flex;
   flex-direction: row;
   width: 100%;
 }
-
 .gameTimer {
   color: #BFBFBF;
   font-size: 64px;
 }
-
 .gameScore {
   flex-direction: row;
   justify-content: flex-start;
@@ -178,7 +172,6 @@ h3 {
   font-size: 64px;
   width: 50%;
 }
-
 .scoreAlertNegative {
   display: flex;
   justify-content: center;
@@ -190,7 +183,6 @@ h3 {
   font-size: 36px;
   margin: 10px auto;
 }
-
 .scoreAlertPositive {
   display: flex;
   justify-content: center;
@@ -202,7 +194,6 @@ h3 {
   font-size: 36px;
   margin: 10px auto;
 }
-
 footer {
   display: flex;
   justify-content: center;
