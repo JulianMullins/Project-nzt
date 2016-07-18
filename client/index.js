@@ -29,9 +29,9 @@ var LoginOverlay = React.createClass({
             <br></br>
             <button onClick={this.props.facebook}>Login with Facebook</button>
             <br></br>
-            <button onClick={this.props.registerScreen}>Dont have an account yet?</button>
+            <button onClick={this.props.registerScreen}>Register</button>
             <br></br>
-            <button onClick={this.props.back} class="back">Back</button>
+            <button onClick={this.props.back} className="back">Back</button>
           </form>
         </center>
       </div>
@@ -55,7 +55,7 @@ var RegisterOverlay = React.createClass({
             <br></br>
             <button onClick={this.props.register}>Register</button>
             <br></br>
-            <button onClick={this.props.back} class="back">Already have an account?</button>
+            <button onClick={this.props.back} className="back">Already have an account?</button>
           </form>
         </center>
       </div>
@@ -89,7 +89,7 @@ var Mainmenu = React.createClass({
     this.setState({menu: false, login: false, register: false});
 
     //ajax post
-    fetch(url+'/login', {
+    fetch('/login', {
     	method: 'post',
     	body: JSON.stringify({
     		username: document.getElementById('username').value,
@@ -103,7 +103,7 @@ var Mainmenu = React.createClass({
     this.setState({menu: false, login: false, register: false});
 
     //ajax facebook get
-    fetch(url+'/login/facebook', {
+    fetch('/login/facebook', {
     	method: 'get'
     })
 
@@ -117,7 +117,7 @@ var Mainmenu = React.createClass({
     this.setState({menu: false, login: false, register: false});
 
     //ajax post
-    fetch(url+'/register', {
+    fetch('/register', {
     	method: 'post',
     	body: JSON.stringify({
     		username: document.getElementById('username').value,
