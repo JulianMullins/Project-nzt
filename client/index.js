@@ -28,7 +28,7 @@ var LoginOverlay = React.createClass({
             <br></br>
             <button onClick={this.props.registerScreen}>Don't have an account yet?</button>
             <br></br>
-            <button onClick={this.props.back} class="back">Back</button>
+            <button onClick={this.props.back} className="back">Back</button>
           </form>
         </center>
       </div>
@@ -50,7 +50,7 @@ var RegisterOverlay = React.createClass({
             <br></br>
             <button onClick={this.props.register}>Register</button>
             <br></br>
-            <button onClick={this.props.back} class="back">Already have an account?</button>
+            <button onClick={this.props.back} className="back">Already have an account?</button>
           </form>
         </center>
       </div>
