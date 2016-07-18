@@ -71,7 +71,7 @@ module.exports = function(passport) {
           }
         });
       }
-    })
+    }).then(function(user){console.log(user.username)})
   });
 
   // GET Login page
