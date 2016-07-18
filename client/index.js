@@ -311,65 +311,161 @@ var Game = React.createClass({
       this.test();
     }
   },
-  test: function() {
-    var queue = [];
-    var timeTilMatch = parseInt((Math.random() * 5) + 2 + this.state.N);
+  positionAndColor: function(){
+    var positionQueue = [];
+    var colorQueue = [];
+    var timeTilPositionMatch = parseInt((Math.random() * 5) + 2 + this.state.N);
+    var timeTilColorMatch = parseInt((Math.random() * 5) + 2 + this.state.N);
 
-    setInterval(function() {
-      this.setState({pressed: false});
-      if (!this.state.miss) {
-        this.setState({match: false, miss: false, alert: " "});
-      }
-      if (this.state.miss) {
-        this.setState({miss: false, alert: "Missed a match"});
-        if (this.state.score !== 0) {
-          this.setState({
-            score: this.state.score - 5
-          });
-        }
-      }
+  setInterval(function() {
+  this.setState({pressed: false});
+  if (!this.state.miss) {
+  this.setState({match: false, miss: false, alert: " "});
+  }
+  if (this.state.miss) {
+  this.setState({miss: false, alert: "Missed a match"});
+  if (this.state.score !== 0) {
+    this.setState({
+    score: this.state.score - 5
+    });
+  }
+  }
 
-      if (timeTilMatch > 0) {
-        // pick a non-matching next number while interval is not 0
-        var next = parseInt(Math.random() * 9);
-        while (next == queue[0]) {
-          next = parseInt(Math.random() * 9);
-        }
+//case 1: add both position and color match
+  if (timeTilPositionMatch > 0 && timeTilColorMatch > 0) {
+  console.log('no match')
+  // pick a non-matching next number while interval is not 0
+  var nextPosition = parseInt(Math.random() * 9);
+  while (nextPosition === positionQueue[0]) {
+    nextPosition = parseInt(Math.random() * 9);
+  }
 
-        // resize array to N
-        queue.push(next);
-        if (queue.length > this.state.N) {
-          queue.splice(0, 1);
-        }
+  // pick a non-matching next number while interval is not 0
+  var nextColor = parseInt(Math.random() * 9);
+  while (nextColor === colorQueue[0]) {
+    nextColor = parseInt(Math.random() * 9);
+  }
 
-        // set color for 800
-        this.state.style[next] = newStyle;
-        this.setState({style: this.state.style});
-        setTimeout(function() {
-          this.state.style[next] = standardStyle;
-          this.setState({style: this.state.style});
-        }.bind(this), 800);
+  // resize array to N: position
+  positionQueue.push(nextPosition);
+  if (positionQueue.length > this.state.N) {
+    positionQueue.splice(0, 1);
+  }
 
-        // lower interval
-        timeTilMatch--;
-      } else {
-        // pick new interval
-        timeTilMatch = parseInt((Math.random() * 5) + 2);
+  // resize array to N: color
+  colorQueue.push(nextColor);
+  if (colorQueue.length > this.state.N) {
+    colorQueue.splice(0, 1);
+  }
 
-        // guaranteed match
-        var next = queue[0];
-        queue.push(next);
-        queue.splice(0, 1);
+  // set color for 800
+  this.state.style[nextPosition] = newStyle[nextColor];
+  this.setState({style: this.state.style});
+  setTimeout(function() {
+    this.state.style[nextPosition] = standardStyle;
+    this.setState({style: this.state.style});
+  }.bind(this), 800);
 
-        // set color for 800
-        this.state.style[next] = newStyle;
-        this.setState({style: this.state.style, match: true, miss: true});
-        setTimeout(function() {
-          this.state.style[next] = standardStyle;
-          this.setState({style: this.state.style});
-        }.bind(this), 800);
-      }
-    }.bind(this), 2000);
+  // lower interval
+  timeTilPositionMatch--;
+  timeTilColorMatch--;
+  }
+
+  //case 2: was a position match but color still >0
+  else if (timeTilColorMatch > 0) {
+  console.log('position match')
+  //reset position portion
+  timeTilPositionMatch = parseInt((Math.random() * 5) + 2);
+
+  var nextPosition = positionQueue[0];
+  positionQueue.push(nextPosition);
+  positionQueue.splice(0, 1);
+
+  // pick a non-matching next number while interval is not 0
+  var nextColor = parseInt(Math.random() * 9);
+  while (nextColor == colorQueue[0]) {
+    nextColor = parseInt(Math.random() * 9);
+  }
+
+  // resize array to N: color
+  colorQueue.push(nextColor);
+  if (colorQueue.length > this.state.N) {
+    colorQueue.splice(0, 1);
+  }
+
+  // set color for 800
+  this.state.style[nextPosition] = newStyle[nextColor];
+  this.setState({style: this.state.style});
+  setTimeout(function() {
+    this.state.style[nextPosition] = standardStyle;
+    this.setState({style: this.state.style});
+  }.bind(this), 800);
+
+  // lower interval
+  timeTilPositionMatch--;
+  timeTilColorMatch--;
+  }
+
+  //case 3: color match but position still >o
+  else if (timeTilPositionMatch > 0) {
+  console.log('color match')
+
+  //reset position portion
+  timeTilColorMatch = parseInt((Math.random() * 5) + 2);
+
+  var nextColor = colorQueue[0];
+  colorQueue.push(nextColor);
+  colorQueue.splice(0, 1);
+
+  // pick a non-matching next number while interval is not 0
+  var nextPosition = parseInt(Math.random() * 9);
+  while (nextPosition === positionQueue[0]) {
+    nextPosition = parseInt(Math.random() * 9);
+  }
+
+  // resize array to N: color
+  positionQueue.push(nextPosition);
+  if (positionQueue.length > this.state.N) {
+    positionQueue.splice(0, 1);
+  }
+
+  // set color for 800
+  this.state.style[nextPosition] = newStyle[nextColor];
+  this.setState({style: this.state.style});
+  setTimeout(function() {
+    this.state.style[nextPosition] = standardStyle;
+    this.setState({style: this.state.style});
+  }.bind(this), 800);
+
+  // lower interval
+  timeTilPositionMatch--;
+  timeTilColorMatch--;
+  }
+   else {
+  // pick new interval
+  timeTilColorMatch = parseInt((Math.random() * 5) + 2);
+  timeTilPositionMatch = parseInt((Math.random() * 5) + 2);
+  console.log('double match')
+
+  // color match
+  var nextColor = colorQueue[0];
+  colorQueue.push(nextColor);
+  colorQueue.splice(0, 1);
+
+  //position match
+  var nextPosition = positionQueue[0];
+  positionQueue.push(nextPosition);
+  colorQueue.splice(0, 1);
+
+  // set color for 800
+  this.state.style[nextPosition] = newStyle[nextColor];
+  this.setState({style: this.state.style, match: true, miss: true});
+  setTimeout(function() {
+    this.state.style[nextPosition] = standardStyle;
+    this.setState({style: this.state.style});
+  }.bind(this), 800);
+  }
+}.bind(this), 2000);
   },
   match: function() {
     if (this.state.pressed) {
