@@ -1,5 +1,5 @@
 node_modules
 npm-debug.log
 .DS_Store
-bundle/bundle.js
+public/bundle.js
 process.env
