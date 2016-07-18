@@ -89,9 +89,22 @@ module.exports = function(passport) {
 		})
 	);
 
+  // facebook
+  router.get('/login/facebook',
+    passport.authenticate('facebook', { scope:['email','user_friends']}), function(req,res){});
+
+  router.get('/login/facebook/callback',
+    passport.authenticate('facebook',{failureRedirect: '/login'} ),
+    function(req, res) {
+      res.redirect('/')
+    });
+
+
   // GET Logout page
   router.get('/logout', function(req, res) {
     req.logout();
     res.redirect('/login');
   });
+
+  return router;
 }

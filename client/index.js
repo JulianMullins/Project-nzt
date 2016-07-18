@@ -31,7 +31,7 @@ var LoginOverlay = React.createClass({
             <br></br>
             <button onClick={this.props.registerScreen}>Dont have an account yet?</button>
             <br></br>
-            <button onClick={this.props.back} class="back">Back</button>
+            <button onClick={this.props.back} className="back">Back</button>
           </form>
         </center>
       </div>
@@ -55,7 +55,7 @@ var RegisterOverlay = React.createClass({
             <br></br>
             <button onClick={this.props.register}>Register</button>
             <br></br>
-            <button onClick={this.props.back} class="back">Already have an account?</button>
+            <button onClick={this.props.back} className="back">Already have an account?</button>
           </form>
         </center>
       </div>
@@ -103,7 +103,7 @@ var Mainmenu = React.createClass({
     this.setState({menu: false, login: false, register: false});
 
     //ajax facebook get
-    fetch(url+'/', {
+    fetch(url+'/login/facebook', {
     	method: 'get'
     })
 
@@ -122,7 +122,7 @@ var Mainmenu = React.createClass({
     	body: JSON.stringify({
     		username: document.getElementById('username').value,
         email: document.getElementById('email').value,
-    		password: document.getElementById('password').value
+    		password: document.getElementById('password').value,
         passwordConfirm: document.getElementById('passwordConfirm').value
     	})
     });
