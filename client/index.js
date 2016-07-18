@@ -1,5 +1,6 @@
 var React = require('react');
 var ReactDOM = require('react-dom');
+var url = process.env.url;
 
 var MenuOverlay = React.createClass({
   render: function() {
@@ -26,7 +27,9 @@ var LoginOverlay = React.createClass({
             <br></br>
             <button onClick={this.props.login}>Login</button>
             <br></br>
-            <button onClick={this.props.registerScreen}>Don't have an account yet?</button>
+            <button onClick={this.props.facebook}>Login with Facebook</button>
+            <br></br>
+            <button onClick={this.props.registerScreen}>Dont have an account yet?</button>
             <br></br>
             <button onClick={this.props.back} class="back">Back</button>
           </form>
@@ -42,11 +45,13 @@ var RegisterOverlay = React.createClass({
       <div className="overlay" id="login">
         <center>
           <form>
-            <input type="text" placeholder="username"></input>
+            <input type="text" placeholder="username" name="username" id="username"></input>
             <br></br>
-            <input type="password" placeholder="password"></input>
+            <input type="text" placeholder="email" name="email" id="email"></input>
+            <br />
+            <input type="password" placeholder="password" name="password" id="password"></input>
             <br></br>
-            <input type="password" placeholder="confirm password"></input>
+            <input type="password" placeholder="confirm password" name="passwordConfirm" id="passwordConfirm"></input>
             <br></br>
             <button onClick={this.props.register}>Register</button>
             <br></br>
@@ -82,6 +87,26 @@ var Mainmenu = React.createClass({
   login: function(e) {
     e.preventDefault();
     this.setState({menu: false, login: false, register: false});
+
+    //ajax post
+    fetch(url+'/login', {
+    	method: 'post',
+    	body: JSON.stringify({
+    		username: document.getElementById('username').value
+    		password: document.getElementById('password').value
+    	})
+    });
+
+  },
+  facebook: function(e) {
+    e.preventDefault();
+    this.setState({menu: false, login: false, register: false});
+
+    //ajax facebook get
+    fetch(url+'/', {
+    	method: 'get'
+    })
+
   },
   registerScreen: function(e) {
     e.preventDefault();
@@ -90,6 +115,18 @@ var Mainmenu = React.createClass({
   register: function(e) {
     e.preventDefault();
     this.setState({menu: false, login: false, register: false});
+
+    //ajax post
+    fetch(url+'/register', {
+    	method: 'post',
+    	body: JSON.stringify({
+    		username: document.getElementById('username').value
+        email: document.getElementById('email').value
+    		password: document.getElementById('password').value
+        passwordConfirm: document.getElementById('passwordConfirm').value
+    	})
+    });
+
   },
   back: function(e) {
     e.preventDefault();
@@ -145,7 +182,7 @@ var Mainmenu = React.createClass({
       ? <MenuOverlay start={this.start} loginScreen={this.loginScreen} registerScreen={this.registerScreen}></MenuOverlay>
       : '';
     var login = this.state.login
-      ? <LoginOverlay login={this.login} back={this.back} registerScreen={this.registerScreen}></LoginOverlay>
+      ? <LoginOverlay login={this.login} back={this.back} registerScreen={this.registerScreen} facebook={this.facebook}></LoginOverlay>
       : '';
     var register = this.state.register
       ? <RegisterOverlay register={this.register} back={this.loginScreen}></RegisterOverlay>

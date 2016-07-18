@@ -37,9 +37,7 @@ module.exports = function(passport) {
       username: req.body.username,
       email: req.body.email,
       password: req.body.password,
-      wantsSpotify:true,
-      facebookId: null,
-      spotifyId:null
+      facebookId: null
     });
     User.findOne({email:u.email},function(err,user){
       if(err){
