@@ -1,5 +1,6 @@
 var React = require('react');
 var ReactDOM = require('react-dom');
+var url = process.env.url
 
 var MenuOverlay = React.createClass({
   render: function() {
@@ -28,27 +29,15 @@ var LoginOverlay = React.createClass({
     else if(e.target.name == 'password'){
       this.setState({password:e.target.value})
     }
-  },
-  ajaxLogin() {
-
-    $.ajax({
-      url:'http://localhost:3000/login',
-      method: 'POST'
-    })
-
-
-    succes: function() {
-      this.props.login()
-    }
   }
   render: function() {
     return (
       <div className="overlay" id="login">
         <center>
           <form onSubmit={this.ajaxLogin}>
-            <input type="text" name="username" placeholder="email" value={this.state.username} onChange={this.update}></input>
+            <input type="text" name="username" id="username" placeholder="email" value={this.state.username} onChange={this.update}></input>
             <br></br>
-            <input type="password" name="password" placeholder="password" value={this.state.password} onChange={this.update}></input>
+            <input type="password" name="password" id="password" placeholder="password" value={this.state.password} onChange={this.update}></input>
             <br></br>
             <button onClick={this.props.login}>Login</button>
             <br></br>
@@ -80,30 +69,33 @@ var Mainmenu = React.createClass({
     e.preventDefault();
     this.setState({menu: false, login: false});
   },
-<<<<<<< HEAD
   login: function(e) {
     e.preventDefault();
     this.setState({menu: false, login: true})
+
   },
   register:function(){
-
+    e.preventDefault();
+    
   },
   facebook:function(){
 
   },
-  back: function() {
-=======
-  loginScreen: function(e) {
-    e.preventDefault();
-    this.setState({menu: false, login: true})
-  },
   login: function(e) {
     e.preventDefault();
     this.setState({menu: false, login: false});
+    fetch(url+'/login', {
+    	method: 'post',
+    	body: JSON.stringify({
+    		username: document.getElementById('username').value
+    		password: document.getElementById('password').value
+    	})
+    })..catch(function(err) {
+    	console.log("error logging in")
+    });
   },
   back: function(e) {
     e.preventDefault();
->>>>>>> refs/remotes/origin/master
     this.setState({menu: true, login: false})
   },
   normalMode: function(e) {
@@ -156,11 +148,7 @@ var Mainmenu = React.createClass({
       ? <MenuOverlay start={this.start} loginScreen={this.loginScreen}></MenuOverlay>
       : '';
     var login = this.state.login
-<<<<<<< HEAD
       ? <LoginOverlay login={this.login} register={this.register} facebook={this.facebook} back={this.back}></LoginOverlay>
-=======
-      ? <LoginOverlay login={this.login} back={this.back}></LoginOverlay>
->>>>>>> refs/remotes/origin/master
       : '';
     return (
       <div>
@@ -333,7 +321,7 @@ var Game = React.createClass({
      alert: " ",
      overlay: true,
      initialTimer: 3
-    }   
+    }
 >>>>>>> refs/remotes/origin/master
   },
 	componentDidMount: function() {
