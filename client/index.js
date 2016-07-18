@@ -227,186 +227,348 @@ var AlertNegative = React.createClass({
       </div>
     )
   }
-});
+}); 
+
 
 var Game = React.createClass({
-  getInitialState: function() {
+getInitialState: function() {
     return {
-      style: [
-        standardStyle,
-        standardStyle,
-        standardStyle,
-        standardStyle,
-        standardStyle,
-        standardStyle,
-        standardStyle,
-        standardStyle,
-        standardStyle
-      ],
-      match: false,
-      score: 0,
-      miss: false,
-      alert: " ",
-      overlay: true,
-      initialTimer: 3
-    }
-  },
+     style: [standardStyle,standardStyle,standardStyle,standardStyle,standardStyle,standardStyle,standardStyle,standardStyle,standardStyle],
+     positionMatch: false,
+     colorMatch: false,
+     score: 0,
+     miss: false,
+     pushed: false,
+     N: 1,
+     alert: " "
+    }   
+  }, 
   componentDidMount: function() {
     setInterval(this.timer, 1000);
   },
-  timer: function() {
+   position: function(){
+    var queue = [];
+    var timeTilMatch = parseInt((Math.random() * 5) + 2 + this.state.N);
+  setInterval(function() {
+  this.setState({pressed: false});
+  console.log(queue, timeTilMatch);
+  if (!this.state.miss) {
+  this.setState({match: false, miss: false, alert: " "});
+  }
+  if (this.state.miss) {
+  this.setState({miss: false, alert: "Missed a match"});
+  if (this.state.score !== 0) {
     this.setState({
-      initialTimer: this.state.initialTimer - 1
+    score: this.state.score - 5
     });
-    if (this.state.initialTimer === 0) {
-      this.setState({overlay: false});
-      this.test();
-    }
-  },
-  test: function() {
-    var out = [];
-    setInterval(function() {
-      if (!this.state.miss) {
-        this.setState({match: false, miss: false, alert: " "});
-      }
-      if (this.state.miss) {
-        if (this.state.score !== 0) {
-          this.setState({
-            score: this.state.score - 5,
-            miss: false,
-            alert: "Missed a match"
-          });
-        } else {
-          this.setState({miss: false, alert: "Missed a match"});
-        }
-      }
+  }
+  }
 
-      //start with forced match command
-      if (out.length === 15) {
-        out.push(out[out.length - 1]);
-        this.state.style[out[out.length - 1]] = newStyle;
-        this.setState({style: this.state.style, match: true, miss: true});
-        setTimeout(function() {
-          this.state.style[out[out.length - 1]] = standardStyle;
-          this.setState({style: this.state.style});
-          out = []
-        }.bind(this), 500);
-      } else {
-        out.push(parseInt(Math.random() * 9));
-        this.state.style[out[out.length - 1]] = newStyle;
-        this.setState({style: this.state.style});
+  if (timeTilMatch > 0) {
+  // pick a non-matching next number while interval is not 0
+  var next = parseInt(Math.random() * 9);
+  while (next == queue[0]) {
+    next = parseInt(Math.random() * 9);
+  }
+  console.log(next)
 
-        //pause for thinking/processing time
-        if (out.length > 1) {
-          if (out[out.length - 1] === out[out.length - 2]) {
-            setTimeout(function() {
-              this.state.style[out[out.length - 1]] = standardStyle;
-              this.setState({style: this.state.style, match: true, miss: true});
-              out = [];
-            }.bind(this), 500);
-          } else {
-            setTimeout(function() {
-              this.state.style[out[out.length - 1]] = standardStyle;
-              this.setState({style: this.state.style});
-            }.bind(this), 500);
-          }
-        }
-        if (out.length === 1) {
-          setTimeout(function() {
-            this.state.style[out[out.length - 1]] = standardStyle;
-            this.setState({style: this.state.style});
-          }.bind(this), 500);
-        }
-      }
-    }.bind(this), 2000)
+  // resize array to N
+  queue.push(next);
+  if (queue.length > this.state.N) {
+    queue.splice(0, 1);
+  }
+
+  // set color for 800
+  this.state.style[next] = newStyle;
+  this.setState({style: this.state.style});
+  setTimeout(function() {
+    this.state.style[next] = standardStyle;
+    this.setState({style: this.state.style});
+  }.bind(this), 800);
+
+  // lower interval
+  timeTilMatch--;
+  } else {
+  // pick new interval
+  timeTilMatch = parseInt((Math.random() * 5) + 2);
+
+  // guaranteed match
+  var next = queue[0];
+  queue.push(next);
+  queue.splice(0, 1);
+
+  // set color for 800
+  this.state.style[next] = newStyle;
+  this.setState({style: this.state.style, match: true, miss: true});
+  setTimeout(function() {
+    this.state.style[next] = standardStyle;
+    this.setState({style: this.state.style});
+  }.bind(this), 800);
+  }
+}.bind(this), 2000);
   },
-  match: function() {
-    if (this.state.match) {
+
+   positionAndColor: function(){
+    var positionQueue = [];
+    var colorQueue = [];
+    var timeTilPositionMatch = parseInt((Math.random() * 5) + 2 + this.state.N);
+    var timeTilColorMatch = parseInt((Math.random() * 5) + 2 + this.state.N);
+
+  setInterval(function() {
+  this.setState({pressed: false});
+  if (!this.state.miss) {
+  this.setState({match: false, miss: false, alert: " "});
+  }
+  if (this.state.miss) {
+  this.setState({miss: false, alert: "Missed a match"});
+  if (this.state.score !== 0) {
+    this.setState({
+    score: this.state.score - 5
+    });
+  }
+  }
+
+//case 1: add both position and color match
+  if (timeTilPositionMatch > 0 && timeTilColorMatch > 0) {
+  console.log('no match')
+  // pick a non-matching next number while interval is not 0
+  var nextPosition = parseInt(Math.random() * 9);
+  while (nextPosition === positionQueue[0]) {
+    nextPosition = parseInt(Math.random() * 9);
+  }
+
+  // pick a non-matching next number while interval is not 0
+  var nextColor = parseInt(Math.random() * 9);
+  while (nextColor === colorQueue[0]) {
+    nextColor = parseInt(Math.random() * 9);
+  }
+
+  // resize array to N: position
+  positionQueue.push(nextPosition);
+  if (positionQueue.length > this.state.N) {
+    positionQueue.splice(0, 1);
+  }
+
+  // resize array to N: color
+  colorQueue.push(nextColor);
+  if (colorQueue.length > this.state.N) {
+    colorQueue.splice(0, 1);
+  }
+
+  // set color for 800
+  this.state.style[nextPosition] = newStyle[nextColor];
+  this.setState({style: this.state.style});
+  setTimeout(function() {
+    this.state.style[nextPosition] = standardStyle;
+    this.setState({style: this.state.style});
+  }.bind(this), 800);
+
+  // lower interval
+  timeTilPositionMatch--;
+  timeTilColorMatch--;
+  }
+
+  //case 2: was a position match but color still >0
+  else if (timeTilColorMatch > 0) {
+  console.log('position match')
+  //reset position portion
+  timeTilPositionMatch = parseInt((Math.random() * 5) + 2);
+
+  var nextPosition = positionQueue[0];
+  positionQueue.push(nextPosition);
+  positionQueue.splice(0, 1);
+
+  // pick a non-matching next number while interval is not 0
+  var nextColor = parseInt(Math.random() * 9);
+  while (nextColor == colorQueue[0]) {
+    nextColor = parseInt(Math.random() * 9);
+  }
+
+  // resize array to N: color
+  colorQueue.push(nextColor);
+  if (colorQueue.length > this.state.N) {
+    colorQueue.splice(0, 1);
+  }
+
+  // set color for 800
+  this.state.style[nextPosition] = newStyle[nextColor];
+  this.setState({style: this.state.style});
+  setTimeout(function() {
+    this.state.style[nextPosition] = standardStyle;
+    this.setState({style: this.state.style});
+  }.bind(this), 800);
+
+  // lower interval
+  timeTilPositionMatch--;
+  timeTilColorMatch--;
+  }
+
+  //case 3: color match but position still >o
+  else if (timeTilPositionMatch > 0) {
+  console.log('color match')
+
+  //reset position portion
+  timeTilColorMatch = parseInt((Math.random() * 5) + 2);
+
+  var nextColor = colorQueue[0];
+  colorQueue.push(nextColor);
+  colorQueue.splice(0, 1);
+
+  // pick a non-matching next number while interval is not 0
+  var nextPosition = parseInt(Math.random() * 9);
+  while (nextPosition === positionQueue[0]) {
+    nextPosition = parseInt(Math.random() * 9);
+  }
+
+  // resize array to N: color
+  positionQueue.push(nextPosition);
+  if (positionQueue.length > this.state.N) {
+    positionQueue.splice(0, 1);
+  }
+
+  // set color for 800
+  this.state.style[nextPosition] = newStyle[nextColor];
+  this.setState({style: this.state.style});
+  setTimeout(function() {
+    this.state.style[nextPosition] = standardStyle;
+    this.setState({style: this.state.style});
+  }.bind(this), 800);
+
+  // lower interval
+  timeTilPositionMatch--;
+  timeTilColorMatch--;
+  }
+   else {
+  // pick new interval
+  timeTilColorMatch = parseInt((Math.random() * 5) + 2);
+  timeTilPositionMatch = parseInt((Math.random() * 5) + 2);
+  console.log('double match')
+
+  // color match
+  var nextColor = colorQueue[0];
+  colorQueue.push(nextColor);
+  colorQueue.splice(0, 1);
+
+  //position match
+  var nextPosition = positionQueue[0];
+  positionQueue.push(nextPosition);
+  colorQueue.splice(0, 1);
+
+  // set color for 800
+  this.state.style[nextPosition] = newStyle[nextColor];
+  this.setState({style: this.state.style, match: true, miss: true});
+  setTimeout(function() {
+    this.state.style[nextPosition] = standardStyle;
+    this.setState({style: this.state.style});
+  }.bind(this), 800);
+  }
+}.bind(this), 2000);
+  },
+positionMatch: function(){
+  if(this.state.positionMatch && !this.state.colorMatch){
+    this.setState({
+      score: this.state.score+10, 
+      miss: false, 
+      alert: "Good job"
+    })
+  }
+  else{
+    if(this.state.score!==0){
       this.setState({
-        score: this.state.score + 10,
-        miss: false,
-        alert: "Good job"
-      });
-    } else {
-      if (this.state.score !== 0) {
-        this.setState({
-          score: this.state.score - 5,
-          alert: "Not a match"
-        });
-      } else {
-        this.setState({alert: "Not a match"});
-      }
+      score: this.state.score-5,
+      alert: "Not a match"
+    })
     }
-  },
+    else{
+      this.setState({
+      alert: "Not a match"
+    })
+    }
+  }
+},
+colorMatch: function(){
+  if(this.state.colorMatch && !this.state.positionMatch){
+    this.setState({
+      score: this.state.score+10, 
+      miss: false, 
+      alert: "Good job"
+    })
+  }
+  else{
+    if(this.state.score!==0){
+      this.setState({
+      score: this.state.score-5,
+      alert: "Not a match"
+    })
+    }
+    else{
+      this.setState({
+      alert: "Not a match"
+    })
+    }
+  }
+},
+pairMatch: function(){
+  if(this.state.positionMatch && this.state.colorMatch){
+    this.setState({
+      score: this.state.score+10, 
+      miss: false, 
+      alert: "Good job"
+    })
+  }
+  else{
+    if(this.state.score!==0){
+      this.setState({
+      score: this.state.score-5,
+      alert: "Not a match"
+    })
+    }
+    else{
+      this.setState({
+      alert: "Not a match"
+    })
+    }
+  }
+},
   render: function() {
-    var overlay = this.state.overlay
-      ? (
-        <div className="overlay">
-          <center>
-            <a className="btn">{this.state.initialTimer}</a>
-          </center>
-        </div>
-      )
-      : '';
-
-    var alertMessage;
-    if (this.state.alert === "Good job!") {
-      alertMessage = <AlertPositive/>;
-    } else if (this.state.alert === "Not a match" || this.state.alert === "Missed a match") {
-      alertMessage = <AlertNegative alert={this.state.alert}/>;
-    } else {
-      alertMessage = <div style={{
-        height: "120px"
-      }}></div>;
-    };
-
     return (
       <div className="gameContainer">
-        {overlay}
-        <div className="gameHeading">
-          <div className="gameScore">
-            <b>Score: {this.state.score}</b>
-          </div>
-          <GameTimer></GameTimer>
-        </div>
-
         <div className="gameRow">
-          <div className="gameSquare" style={this.state.style[0]}></div>
-          <div className="gameSquare" style={this.state.style[1]}></div>
-          <div className="gameSquare" style={this.state.style[2]}></div>
+          <div id="square1" className="gameSquare" style={this.state.style[0]}></div>
+          <div id="square2" className="gameSquare" style={this.state.style[1]}></div>
+          <div id="square3" className="gameSquare" style={this.state.style[2]}></div>
         </div>
         <div className="gameRow">
-          <div className="gameSquare" style={this.state.style[3]}></div>
-          <div className="gameSquare" style={this.state.style[4]}></div>
-          <div className="gameSquare" style={this.state.style[5]}></div>
+          <div id="square4" className="gameSquare" style={this.state.style[3]}></div>
+          <div id="square5" className="gameSquare" style={this.state.style[4]}></div>
+          <div id="square6" className="gameSquare" style={this.state.style[5]}></div>
         </div>
         <div className="gameRow">
-          <div className="gameSquare" style={this.state.style[6]}></div>
-          <div className="gameSquare" style={this.state.style[7]}></div>
-          <div className="gameSquare" style={this.state.style[8]}></div>
+          <div id="square7" className="gameSquare" style={this.state.style[6]}></div>
+          <div id="square8" className="gameSquare" style={this.state.style[7]}></div>
+          <div id="square9" className="gameSquare" style={this.state.style[8]}></div>
         </div>
-        {alertMessage}
-
-        <div className="gameButtonsContainer">
-          <a>SOUND</a>
-          <a>BOTH</a>
-          <a onClick={this.match}>POSITION</a>
-        </div>
+        <div><b>Score: {this.state.score}</b>   {this.state.alert}</div>
+        <button onClick={this.position}>Start Position</button>
+        <button onClick={this.positionAndColor}>Start Position and Color</button>
+        <button onClick={this.positionMatch}>Position Match</button>
+        <button onClick={this.colorMatch}>Color Match</button>
+        <button onClick={this.pairMatch}>Pair Match</button>
       </div>
     );
   }
 });
 
-///Taylor: style sheets for changing colors on timer
-var standardStyle = {
-  backgroundColor: "#BFBFBF"
+//standard color
+var standardStyle={
+  backgroundColor: 'yellow', 
 }
 
-var newStyle = {
-  backgroundColor: 'blue'
-}
+//changing colors
+var newStyle=[{backgroundColor: '#DBFF33'},{backgroundColor: '#B15CCB'},{backgroundColor: '#5CCBAF'},{backgroundColor: '#5CCD93'},
+{backgroundColor: '#87CD5C'},{backgroundColor: '#D3A43F'},{backgroundColor: '#D3563F'},{backgroundColor: '#3F49D3'},{backgroundColor: '#C91A83'}]
 
-// ReactDOM.render(<Game />, document.getElementById('root'));
+ ReactDOM.render(<Game />, document.getElementById('root'));
 
-ReactDOM.render(
-  <Mainmenu/>, document.getElementById('root'));
+// ReactDOM.render(
+//   <Mainmenu/>, document.getElementById('root'));
