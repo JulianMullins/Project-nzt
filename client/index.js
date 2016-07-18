@@ -223,24 +223,24 @@ var Mainmenu = React.createClass({
         {menu}
         {login}
         {register}
-        <center>
+        <div className="heading">
           <h1 id="title">Project NZT</h1>
-        </center>
-        <div className="menu">
-          <a href="" className="menu-panel" onClick={this.normalMode}>
-            <h2>normal</h2>
-            <h3>(position, sound)</h3>
-          </a>
-          <a href="" className="menu-panel" onClick={this.posOnly}>
-            <h2>position-only</h2>
-          </a>
         </div>
         <div className="menu">
-          <a href="" className="menu-panel" onClick={this.posAndColor}>
-            <h2>position & color</h2>
+          <a href="" className="menu-panel" id="menu1" onClick={this.normalMode}>
+            <h2>Classic</h2>
+            <h3>(position, sound)</h3>
           </a>
-          <a href="" className="menu-panel" onClick={this.advanced}>
-            <h2>advanced</h2>
+          <a href="" className="menu-panel" id="menu2" onClick={this.posOnly}>
+            <h2>Relaxed</h2>
+            <h3>(position only)</h3>
+          </a>
+          <a href="" className="menu-panel" id="menu3" onClick={this.posAndColor}>
+            <h2>Silent</h2>
+            <h3>(position, color)</h3>
+          </a>
+          <a href="" className="menu-panel" id="menu4" onClick={this.advanced}>
+            <h2>Advanced</h2>
             <h3>(color, position, sound)</h3>
           </a>
         </div>
