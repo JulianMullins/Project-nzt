@@ -71,7 +71,7 @@ h3 {
 #login button:focus {
   outline: none;
 }
-#login #back {
+#login .back {
   margin-top: 7rem;
 }
 .btn {
