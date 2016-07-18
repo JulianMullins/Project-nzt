@@ -15,7 +15,7 @@ body {
   width: 100vw;
 }
 h1 {
-  font-size: 7rem;
+  font-size: 10rem;
   font-weight: 700;
 }
 h2 {
@@ -23,11 +23,16 @@ h2 {
   font-weight: 300;
 }
 h3 {
-  font-size: 1.4rem;
+  font-size: 1.3rem;
   font-weight: 100;
 }
 #title {
  /* padding: 2rem 0;*/
+}
+
+.heading > h3 {
+  color: #9ED7DB;
+  transform: translateY(-25px);
 }
 .overlay {
   position: absolute;
@@ -116,9 +121,12 @@ h3 {
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  transition-duration: .8s;
 }
 .menu-panel:hover {
   background-color: #C4C4C4;
+  transition-duration: .8s;
+  width: 40vw;
 }
 
 #menu1 {
