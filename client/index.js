@@ -6,8 +6,8 @@ var MenuOverlay = React.createClass({
     return (
       <div className="overlay">
         <center>
-          <a className="btn" href="#" onClick={this.props.start}>Start</a>
-          <a className="btn" href="#" onClick={this.props.login}>Login</a>
+          <a className="btn" href="" onClick={this.props.start}>Start</a>
+          <a className="btn" href="" onClick={this.props.loginScreen}>Login</a>
         </center>
       </div>
     )
@@ -76,9 +76,11 @@ var Mainmenu = React.createClass({
       }
     }
   },
-  start: function() {
+  start: function(e) {
+    e.preventDefault();
     this.setState({menu: false, login: false});
   },
+<<<<<<< HEAD
   login: function(e) {
     e.preventDefault();
     this.setState({menu: false, login: true})
@@ -90,9 +92,22 @@ var Mainmenu = React.createClass({
 
   },
   back: function() {
+=======
+  loginScreen: function(e) {
+    e.preventDefault();
+    this.setState({menu: false, login: true})
+  },
+  login: function(e) {
+    e.preventDefault();
+    this.setState({menu: false, login: false});
+  },
+  back: function(e) {
+    e.preventDefault();
+>>>>>>> refs/remotes/origin/master
     this.setState({menu: true, login: false})
   },
-  normalMode: function() {
+  normalMode: function(e) {
+    e.preventDefault();
     this.setState({
       mode: {
         position: true,
@@ -101,7 +116,8 @@ var Mainmenu = React.createClass({
       }
     }, this.goToGame);
   },
-  posOnly: function() {
+  posOnly: function(e) {
+    e.preventDefault();
     this.setState({
       mode: {
         position: true,
@@ -110,7 +126,8 @@ var Mainmenu = React.createClass({
       }
     }, this.goToGame);
   },
-  posAndColor: function() {
+  posAndColor: function(e) {
+    e.preventDefault();
     this.setState({
       mode: {
         position: true,
@@ -119,7 +136,8 @@ var Mainmenu = React.createClass({
       }
     }, this.goToGame);
   },
-  advanced: function() {
+  advanced: function(e) {
+    e.preventDefault();
     this.setState({
       mode: {
         position: true,
@@ -135,10 +153,14 @@ var Mainmenu = React.createClass({
   },
   render: function() {
     var menu = this.state.menu
-      ? <MenuOverlay start={this.start} login={this.login}></MenuOverlay>
+      ? <MenuOverlay start={this.start} loginScreen={this.loginScreen}></MenuOverlay>
       : '';
     var login = this.state.login
+<<<<<<< HEAD
       ? <LoginOverlay login={this.login} register={this.register} facebook={this.facebook} back={this.back}></LoginOverlay>
+=======
+      ? <LoginOverlay login={this.login} back={this.back}></LoginOverlay>
+>>>>>>> refs/remotes/origin/master
       : '';
     return (
       <div>
@@ -148,19 +170,19 @@ var Mainmenu = React.createClass({
           <h1 id="title">Project NZT</h1>
         </center>
         <div className="menu">
-          <a href="#" className="menu-panel" onClick={this.normalMode}>
+          <a href="" className="menu-panel" onClick={this.normalMode}>
             <h2>normal</h2>
             <h3>(position, sound)</h3>
           </a>
-          <a href="#" className="menu-panel" onClick={this.posOnly}>
+          <a href="" className="menu-panel" onClick={this.posOnly}>
             <h2>position-only</h2>
           </a>
         </div>
         <div className="menu">
-          <a href="#" className="menu-panel" onClick={this.posAndColor}>
+          <a href="" className="menu-panel" onClick={this.posAndColor}>
             <h2>position & color</h2>
           </a>
-          <a href="#" className="menu-panel" onClick={this.advanced}>
+          <a href="" className="menu-panel" onClick={this.advanced}>
             <h2>advanced</h2>
             <h3>(color, position, sound)</h3>
           </a>
@@ -170,6 +192,7 @@ var Mainmenu = React.createClass({
   }
 });
 
+<<<<<<< HEAD
 // var Game = React.createClass({
 //   getInitialState: function() {
 //     return {
@@ -266,6 +289,36 @@ var Mainmenu = React.createClass({
 // 		);
 // 	}
 // });
+=======
+
+var GameTimer = React.createClass({
+	getInitialState: function() {
+		return {
+			seconds: 120
+		}
+	},
+
+	componentDidMount: function() {
+		setTimeout(function() {this.setState({interval: setInterval(this.timerSecs, 1000)})}.bind(this), 3000);
+	},
+	timerSecs: function() {
+		this.setState({
+			seconds: this.state.seconds-1
+		})
+		if(this.state.seconds === 0) {
+			clearInterval(this.state.interval);
+		}
+	},
+	render: function() {
+		return (
+			<div className="timerContainer">
+				<h1 className="gameTimer">{Math.floor(this.state.seconds/60)}:{("0" + this.state.seconds % 60).slice(-2)}</h1>
+			</div>
+		)
+	}
+});
+
+>>>>>>> refs/remotes/origin/master
 var Game = React.createClass({
   getInitialState: function() {
     return {
@@ -273,14 +326,34 @@ var Game = React.createClass({
      match: false,
      score: 0,
      miss: false,
+<<<<<<< HEAD
      alert: " "
     }
+=======
+     alert: " ",
+     overlay: true,
+     initialTimer: 3
+    }   
+>>>>>>> refs/remotes/origin/master
   },
+	componentDidMount: function() {
+		setInterval(this.timer, 1000);
+	},
+	timer: function() {
+		this.setState({
+			initialTimer: this.state.initialTimer-1
+		})
+		if(this.state.initialTimer === 0) {
+			this.setState({
+				overlay: false
+			})
+		this.test();
+		}
+	},
    test: function(){
     var out=[];
     setInterval(function(){
       if(!this.state.miss){
-           console.log(this.state.alert)
            this.setState({
            match: false,
            miss: false,
@@ -288,7 +361,6 @@ var Game = React.createClass({
       })
       }
       if(this.state.miss){
-       console.log('miss')
        if(this.state.score!==0){
           this.setState({
          score: this.state.score-5,
@@ -358,7 +430,7 @@ var Game = React.createClass({
         }.bind(this),500);
     }
   }
-}.bind(this),3000)
+}.bind(this),2000)
   },
 match: function(){
   if(this.state.match){
@@ -383,26 +455,46 @@ match: function(){
   }
 },
   render: function() {
+   	var overlay = this.state.overlay ? (
+      <div className="overlay">
+        <center>
+          <a className="btn" href="#">{this.state.initialTimer}</a>
+        </center>
+      </div>
+    ) : '';
+
     return (
       <div className="gameContainer">
+      	{overlay}
+      	<div className="gameHeading">
+      		<div className="gameScore"><b>Score: {this.state.score}</b></div>
+      		<GameTimer></GameTimer>
+      	</div>
+
         <div className="gameRow">
-          <div id="square1" className="gameSquare" style={this.state.style[0]}></div>
-          <div id="square2" className="gameSquare" style={this.state.style[1]}></div>
-          <div id="square3" className="gameSquare" style={this.state.style[2]}></div>
+          <div className="gameSquare" style={this.state.style[0]}></div>
+          <div className="gameSquare" style={this.state.style[1]}></div>
+          <div className="gameSquare" style={this.state.style[2]}></div>
         </div>
         <div className="gameRow">
-          <div id="square4" className="gameSquare" style={this.state.style[3]}></div>
-          <div id="square5" className="gameSquare" style={this.state.style[4]}></div>
-          <div id="square6" className="gameSquare" style={this.state.style[5]}></div>
+          <div className="gameSquare" style={this.state.style[3]}></div>
+          <div className="gameSquare" style={this.state.style[4]}></div>
+          <div className="gameSquare" style={this.state.style[5]}></div>
         </div>
         <div className="gameRow">
-          <div id="square7" className="gameSquare" style={this.state.style[6]}></div>
-          <div id="square8" className="gameSquare" style={this.state.style[7]}></div>
-          <div id="square9" className="gameSquare" style={this.state.style[8]}></div>
+          <div className="gameSquare" style={this.state.style[6]}></div>
+          <div className="gameSquare" style={this.state.style[7]}></div>
+          <div className="gameSquare" style={this.state.style[8]}></div>
         </div>
-        <div><b>Score: {this.state.score}</b>   {this.state.alert}</div>
-        <button onClick={this.test}>Start</button>
-        <button onClick={this.match}>Match</button>
+        <div className="scoreAlert">
+          {this.state.alert}
+        </div>
+
+        <div className="gameButtonsContainer">
+			<a>SOUND</a>
+			<a>BOTH</a>
+			<a onClick={this.match}>POSITION</a>
+		</div>
       </div>
     );
   }
@@ -410,7 +502,7 @@ match: function(){
 
 ///Taylor: style sheets for changing colors on timer
 var standardStyle={
-  backgroundColor: 'yellow'
+  backgroundColor: "#BFBFBF"
 }
 
 var newStyle={
