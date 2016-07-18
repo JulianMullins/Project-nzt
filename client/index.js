@@ -46,6 +46,31 @@ var LoginOverlay = React.createClass({
             <button onClick={this.props.facebook}>Login with Facebook</button>
             <br></br>
             <button onClick={this.props.back} id="back">Back</button>
+            <button onClick={this.props.registerScreen}>Dont have an account yet?</button>
+            <br></br>
+            <button onClick={this.props.back} class="back">Back</button>
+          </form>
+        </center>
+      </div>
+    )
+  }
+});
+
+var RegisterOverlay = React.createClass({
+  render: function() {
+    return (
+      <div className="overlay" id="login">
+        <center>
+          <form>
+            <input type="text" placeholder="username"></input>
+            <br></br>
+            <input type="password" placeholder="password"></input>
+            <br></br>
+            <input type="password" placeholder="confirm password"></input>
+            <br></br>
+            <button onClick={this.props.register}>Register</button>
+            <br></br>
+            <button onClick={this.props.back} class="back">Already have an account?</button>
           </form>
         </center>
       </div>
@@ -58,6 +83,7 @@ var Mainmenu = React.createClass({
     return {
       menu: true,
       login: false,
+      register: false,
       mode: {
         position: true,
         sound: true,
@@ -67,7 +93,7 @@ var Mainmenu = React.createClass({
   },
   start: function(e) {
     e.preventDefault();
-    this.setState({menu: false, login: false});
+    this.setState({menu: false, login: false, register: false});
   },
   login: function(e) {
     e.preventDefault();
@@ -92,22 +118,19 @@ var Mainmenu = React.createClass({
   facebook:function(){
 
   },
-  login: function(e) {
+
+  registerScreen: function(e) {
     e.preventDefault();
-    this.setState({menu: false, login: false});
-    fetch(url+'/login', {
-    	method: 'post',
-    	body: JSON.stringify({
-    		username: document.getElementById('username').value
-    		password: document.getElementById('password').value
-    	})
-    })..catch(function(err) {
-    	console.log("error logging in")
-    });
+    this.setState({menu: false, login: false, register: true})
+  },
+  register: function(e) {
+    e.preventDefault();
+    this.setState({menu: false, login: false, register: false});
+
   },
   back: function(e) {
     e.preventDefault();
-    this.setState({menu: true, login: false})
+    this.setState({menu: true, login: false, register: false})
   },
   normalMode: function(e) {
     e.preventDefault();
@@ -156,15 +179,19 @@ var Mainmenu = React.createClass({
   },
   render: function() {
     var menu = this.state.menu
-      ? <MenuOverlay start={this.start} loginScreen={this.loginScreen}></MenuOverlay>
+      ? <MenuOverlay start={this.start} loginScreen={this.loginScreen} registerScreen={this.registerScreen}></MenuOverlay>
       : '';
     var login = this.state.login
-      ? <LoginOverlay login={this.login} register={this.register} facebook={this.facebook} back={this.back}></LoginOverlay>
+      ? <LoginOverlay login={this.login} back={this.back} registerScreen={this.registerScreen}></LoginOverlay>
+      : '';
+    var register = this.state.register
+      ? <RegisterOverlay register={this.register} back={this.loginScreen}></RegisterOverlay>
       : '';
     return (
       <div>
         {menu}
         {login}
+        {register}
         <center>
           <h1 id="title">Project NZT</h1>
         </center>
@@ -191,7 +218,7 @@ var Mainmenu = React.createClass({
   }
 });
 
-<<<<<<< HEAD
+
 // var Game = React.createClass({
 //   getInitialState: function() {
 //     return {
@@ -288,36 +315,55 @@ var Mainmenu = React.createClass({
 // 		);
 // 	}
 // });
-=======
 
 var GameTimer = React.createClass({
-	getInitialState: function() {
-		return {
-			seconds: 120
-		}
-	},
-
-	componentDidMount: function() {
-		setTimeout(function() {this.setState({interval: setInterval(this.timerSecs, 1000)})}.bind(this), 3000);
-	},
-	timerSecs: function() {
-		this.setState({
-			seconds: this.state.seconds-1
-		})
-		if(this.state.seconds === 0) {
-			clearInterval(this.state.interval);
-		}
-	},
-	render: function() {
-		return (
-			<div className="timerContainer">
-				<h1 className="gameTimer">{Math.floor(this.state.seconds/60)}:{("0" + this.state.seconds % 60).slice(-2)}</h1>
-			</div>
-		)
-	}
+  getInitialState: function() {
+    return {seconds: 120}
+  },
+  componentDidMount: function() {
+    setTimeout(function() {
+      this.setState({
+        interval: setInterval(this.timerSecs, 1000)
+      });
+    }.bind(this), 3000);
+  },
+  timerSecs: function() {
+    this.setState({
+      seconds: this.state.seconds - 1
+    });
+    if (this.state.seconds === 0) {
+      clearInterval(this.state.interval);
+    }
+  },
+  render: function() {
+    return (
+      <div className="timerContainer">
+        <h1 className="gameTimer">{Math.floor(this.state.seconds / 60)}:{("0" + this.state.seconds % 60).slice(-2)}</h1>
+      </div>
+    )
+  }
 });
 
->>>>>>> refs/remotes/origin/master
+var AlertPositive = React.createClass({
+  render: function() {
+    return (
+      <div className="scoreAlertPositive">
+        <h3>Positive message</h3>
+      </div>
+    )
+  }
+});
+
+var AlertNegative = React.createClass({
+  render: function() {
+    return (
+      <div className="scoreAlertNegative">
+        <h3>{this.props.alert}</h3>
+      </div>
+    )
+  }
+});
+
 var Game = React.createClass({
   getInitialState: function() {
     return {
@@ -325,15 +371,10 @@ var Game = React.createClass({
      match: false,
      score: 0,
      miss: false,
-<<<<<<< HEAD
-     alert: " "
-    }
-=======
      alert: " ",
      overlay: true,
      initialTimer: 3
     }
->>>>>>> refs/remotes/origin/master
   },
 	componentDidMount: function() {
 		setInterval(this.timer, 1000);
@@ -358,20 +399,52 @@ var Game = React.createClass({
            miss: false,
            alert: " "
       })
+      style: [
+        standardStyle,
+        standardStyle,
+        standardStyle,
+        standardStyle,
+        standardStyle,
+        standardStyle,
+        standardStyle,
+        standardStyle,
+        standardStyle
+      ],
+      match: false,
+      score: 0,
+      miss: false,
+      alert: " ",
+      overlay: true,
+      initialTimer: 3
+    }
+  },
+  componentDidMount: function() {
+    setInterval(this.timer, 1000);
+  },
+  timer: function() {
+    this.setState({
+      initialTimer: this.state.initialTimer - 1
+    });
+    if (this.state.initialTimer === 0) {
+      this.setState({overlay: false});
+      this.test();
+    }
+  },
+  test: function() {
+    var out = [];
+    setInterval(function() {
+      if (!this.state.miss) {
+        this.setState({match: false, miss: false, alert: " "});
       }
-      if(this.state.miss){
-       if(this.state.score!==0){
+      if (this.state.miss) {
+        if (this.state.score !== 0) {
           this.setState({
-         score: this.state.score-5,
-         miss: false,
-         alert: "Missed a match"
-       })
-       }
-        else{
-         this.setState({
+            score: this.state.score - 5,
             miss: false,
             alert: "Missed a match"
-          })
+          });
+        } else {
+          this.setState({miss: false, alert: "Missed a match"});
         }
 
      }
@@ -411,13 +484,43 @@ var Game = React.createClass({
         out=[];
       }.bind(this),500)
       }
-      else{
-        setTimeout(function(){
-        this.state.style[out[out.length-1]]=standardStyle;
-        this.setState({
-          style: this.state.style
-        })
-        }.bind(this),500);
+
+      //start with forced match command
+      if (out.length === 15) {
+        out.push(out[out.length - 1]);
+        this.state.style[out[out.length - 1]] = newStyle;
+        this.setState({style: this.state.style, match: true, miss: true});
+        setTimeout(function() {
+          this.state.style[out[out.length - 1]] = standardStyle;
+          this.setState({style: this.state.style});
+          out = []
+        }.bind(this), 500);
+      } else {
+        out.push(parseInt(Math.random() * 9));
+        this.state.style[out[out.length - 1]] = newStyle;
+        this.setState({style: this.state.style});
+
+        //pause for thinking/processing time
+        if (out.length > 1) {
+          if (out[out.length - 1] === out[out.length - 2]) {
+            setTimeout(function() {
+              this.state.style[out[out.length - 1]] = standardStyle;
+              this.setState({style: this.state.style, match: true, miss: true});
+              out = [];
+            }.bind(this), 500);
+          } else {
+            setTimeout(function() {
+              this.state.style[out[out.length - 1]] = standardStyle;
+              this.setState({style: this.state.style});
+            }.bind(this), 500);
+          }
+        }
+        if (out.length === 1) {
+          setTimeout(function() {
+            this.state.style[out[out.length - 1]] = standardStyle;
+            this.setState({style: this.state.style});
+          }.bind(this), 500);
+        }
       }
     };
     if(out.length===1){
@@ -447,28 +550,57 @@ match: function(){
     })
     }
     else{
+    }.bind(this), 2000)
+  },
+  match: function() {
+    if (this.state.match) {
       this.setState({
-      alert: "Not a match"
-    })
+        score: this.state.score + 10,
+        miss: false,
+        alert: "Good job"
+      });
+    } else {
+      if (this.state.score !== 0) {
+        this.setState({
+          score: this.state.score - 5,
+          alert: "Not a match"
+        });
+      } else {
+        this.setState({alert: "Not a match"});
+      }
     }
-  }
-},
+  },
   render: function() {
-   	var overlay = this.state.overlay ? (
-      <div className="overlay">
-        <center>
-          <a className="btn" href="#">{this.state.initialTimer}</a>
-        </center>
-      </div>
-    ) : '';
+    var overlay = this.state.overlay
+      ? (
+        <div className="overlay">
+          <center>
+            <a className="btn">{this.state.initialTimer}</a>
+          </center>
+        </div>
+      )
+      : '';
+
+    var alertMessage;
+    if (this.state.alert === "Good job!") {
+      alertMessage = <AlertPositive/>;
+    } else if (this.state.alert === "Not a match" || this.state.alert === "Missed a match") {
+      alertMessage = <AlertNegative alert={this.state.alert}/>;
+    } else {
+      alertMessage = <div style={{
+        height: "120px"
+      }}></div>;
+    };
 
     return (
       <div className="gameContainer">
-      	{overlay}
-      	<div className="gameHeading">
-      		<div className="gameScore"><b>Score: {this.state.score}</b></div>
-      		<GameTimer></GameTimer>
-      	</div>
+        {overlay}
+        <div className="gameHeading">
+          <div className="gameScore">
+            <b>Score: {this.state.score}</b>
+          </div>
+          <GameTimer></GameTimer>
+        </div>
 
         <div className="gameRow">
           <div className="gameSquare" style={this.state.style[0]}></div>
@@ -485,29 +617,26 @@ match: function(){
           <div className="gameSquare" style={this.state.style[7]}></div>
           <div className="gameSquare" style={this.state.style[8]}></div>
         </div>
-        <div className="scoreAlert">
-          {this.state.alert}
-        </div>
+        {alertMessage}
 
         <div className="gameButtonsContainer">
-			<a>SOUND</a>
-			<a>BOTH</a>
-			<a onClick={this.match}>POSITION</a>
-		</div>
+          <a>SOUND</a>
+          <a>BOTH</a>
+          <a onClick={this.match}>POSITION</a>
+        </div>
       </div>
     );
   }
 });
 
 ///Taylor: style sheets for changing colors on timer
-var standardStyle={
+var standardStyle = {
   backgroundColor: "#BFBFBF"
 }
 
-var newStyle={
+var newStyle = {
   backgroundColor: 'blue'
 }
-
 
 // ReactDOM.render(<Game />, document.getElementById('root'));
 
