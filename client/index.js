@@ -103,7 +103,7 @@ var Mainmenu = React.createClass({
     this.setState({menu: false, login: false, register: false});
 
     //ajax facebook get
-    fetch(url+'/', {
+    fetch(url+'/login/facebook', {
     	method: 'get'
     })
 
