@@ -20,7 +20,7 @@ body {
   margin: 0;
   padding: 0;
   background: #faf8ef;
-  color: #776e65;
+  color: red;
 }
 #root {
   height: 90vh;
