@@ -12,6 +12,7 @@ module.exports = function(passport) {
 
   // POST registration page
   var validateReq = function(userData) {
+    console.log(userData)
     if(userData.password !== userData.passwordConfirm){
       return false;
     }
@@ -26,12 +27,10 @@ module.exports = function(passport) {
     }
   };
 
-  router.post('/register', function(req, res) {
+  router.post('/register', function(req, res,next) {
     // validation step
     if (!validateReq(req.body)) {
-      return res.render('register', {
-        error: "Passwords don't match."
-      });
+      return next("user validation failed")
     }
     var u = new User({
       username: req.body.username,
@@ -41,8 +40,7 @@ module.exports = function(passport) {
     });
     User.findOne({email:u.email},function(err,user){
       if(err){
-        res.send(err)
-        return;
+        return next(err);
       }
       else if(user && !user.username){
         user.username = u.username;
@@ -50,11 +48,11 @@ module.exports = function(passport) {
         console.log(user);
         user.save(function(err, user) {
           if (err) {
-            res.status(500).redirect('/register');
+            return next(err);
           }
           else{
-          console.log(user);
-          res.redirect('/login');
+            console.log(user);
+            res.json({success:true});
           }
         })
       }
@@ -63,31 +61,45 @@ module.exports = function(passport) {
         u.save(function(err, user) {
           if (err) {
             console.log(err);
-            res.status(500).redirect('/register');
+            return next(err);
+            //res.status(500).redirect('/register');
           }
           else{
             console.log(user);
-            res.redirect('/login');
+            res.json({success:true});
           }
         });
       }
-    }).then(function(user){console.log(user.username)})
+    })
+    // .then(function(user){console.log(user.username)})
   });
 
   // GET Login page
-  router.get('/login', function(req, res) {
-    if(req.user){
-      res.redirect('/')
-    }
-    res.render('login');
-  });
+  // router.get('/login', function(req, res) {
+  //   if(req.user){
+  //     res.redirect('/')
+  //   }
+  //   res.render('login');
+  // });
 
   // POST Login page
-  router.post('/login', passport.authenticate('local', {
-		    failureRedirect: '/login',
-		    successRedirect: '/'
-		})
-	);
+  router.post('/login', function(req,res,next){
+    passport.authenticate('local',
+		    function(err,user){
+          console.log("FDSAFDS")
+          if(err){
+            return next(err);
+          }
+          else if(!user){
+            console.log("no user")
+            res.json({'loginSuccess':false})
+          }
+          else{
+            console.log("login success")
+            res.json({'loginSuccess':true})
+          }
+        })
+	});
 
   // facebook
   router.get('/login/facebook',
@@ -103,7 +115,7 @@ module.exports = function(passport) {
   // GET Logout page
   router.get('/logout', function(req, res) {
     req.logout();
-    res.redirect('/login');
+    res.json({'isLoggedIn':false})
   });
 
   return router;
