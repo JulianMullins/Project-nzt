@@ -15,7 +15,7 @@ div {
 }
 
 body {
-  max-width: 790px;
+  /*max-width: 790px;*/
   font-family: 'Proxima Nova', sans-serif;
   margin: 0;
   padding: 0;
@@ -23,8 +23,8 @@ body {
   color: red;
 }
 #root {
-  height: 90vh;
-  margin-bottom: 50px;
+  height: 100vh;
+  width: 100vw;
 }
 h1 {
   font-size: 7rem;
@@ -103,18 +103,24 @@ h3 {
   text-decoration: none;
   color: #EEEEEE;
 }
+
+.heading {
+  display: flex;
+  height: 30vh;
+  justify-content: center;
+  align-items: center;
+  background-color: #0B2137;
+  color: white;
+}
 .menu {
   display: flex;
-  justify-content: space-around;
+  justify-content: center;
 }
 .menu-panel {
-  width: 40vw;
-  max-width: 20rem;
-  height: 25vh;
+  width: 25vw;
+  height: 100%;
   background-color: #BFBFBF;
   color: white;
-  margin: 3vh 0;
-  display: inline-block;
   text-decoration: none;
   display: flex;
   justify-content: center;
@@ -123,6 +129,23 @@ h3 {
 }
 .menu-panel:hover {
   background-color: #C4C4C4;
+}
+
+#menu1 {
+  background-color: #9ED7DB;
+}
+
+#menu2 {
+  background-color: #EAB82D;
+}
+
+#menu3 {
+  background-color: #E14827;
+}
+
+#menu4 {
+  background-color: #ffffff;
+  color: black;
 }
 
 /* game page css */
