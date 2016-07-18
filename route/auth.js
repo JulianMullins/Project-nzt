@@ -105,4 +105,6 @@ module.exports = function(passport) {
     req.logout();
     res.redirect('/login');
   });
+
+  return router;
 }

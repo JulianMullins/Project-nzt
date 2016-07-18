@@ -92,7 +92,7 @@ var Mainmenu = React.createClass({
     fetch(url+'/login', {
     	method: 'post',
     	body: JSON.stringify({
-    		username: document.getElementById('username').value
+    		username: document.getElementById('username').value,
     		password: document.getElementById('password').value
     	})
     });
@@ -120,9 +120,9 @@ var Mainmenu = React.createClass({
     fetch(url+'/register', {
     	method: 'post',
     	body: JSON.stringify({
-    		username: document.getElementById('username').value
-        email: document.getElementById('email').value
-    		password: document.getElementById('password').value
+    		username: document.getElementById('username').value,
+        email: document.getElementById('email').value,
+    		password: document.getElementById('password').value,
         passwordConfirm: document.getElementById('passwordConfirm').value
     	})
     });
