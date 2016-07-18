@@ -172,6 +172,26 @@ var GameTimer = React.createClass({
 	}
 });
 
+var AlertPositive = React.createClass({
+  render: function() {
+    return  (
+      <div className="scoreAlertPositive">
+        <h3>Positive message</h3>
+      </div>
+    )
+  }
+});
+
+var AlertNegative = React.createClass({
+  render: function() {
+    return  (
+      <div className="scoreAlertNegative">
+        <h3>{this.props.alert}</h3>
+      </div>
+    )
+  }
+});
+
 var Game = React.createClass({
   getInitialState: function() {
     return {
@@ -285,7 +305,7 @@ match: function(){
     this.setState({
       score: this.state.score+10, 
       miss: false, 
-      alert: "Good job"
+      alert: "Good job!"
     })
   }
   else{
@@ -311,6 +331,16 @@ match: function(){
       </div>
     ) : '';
 
+    var alertMessage;
+    if(this.state.alert === "Good job!") {
+      alertMessage = <AlertPositive />;
+    } else if(this.state.alert === "Not a match" ||
+              this.state.alert === "Missed a match") {
+      alertMessage = <AlertNegative alert={this.state.alert} />;
+    } else {
+      alertMessage = <div style={{height: "120px"}}></div>;
+    };
+
     return (
       <div className="gameContainer">
       	{overlay}
@@ -334,9 +364,7 @@ match: function(){
           <div className="gameSquare" style={this.state.style[7]}></div>
           <div className="gameSquare" style={this.state.style[8]}></div>
         </div>
-        <div className="scoreAlert">
-          {this.state.alert}
-        </div>
+          {alertMessage}
 
         <div className="gameButtonsContainer">
 			<a>SOUND</a>
