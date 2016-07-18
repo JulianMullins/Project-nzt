@@ -73,10 +73,21 @@ var Mainmenu = React.createClass({
     e.preventDefault();
     this.setState({menu: false, login: true})
 
+    //ajax post
+    fetch(process.env.url+'/login', {
+    	method: 'post',
+    	body: JSON.stringify({
+    		username: document.getElementById('username').value
+    		password: document.getElementById('password').value
+    	})
+    }).catch(function(err) {
+    	console.log("error logging in")
+    });
+
   },
   register:function(){
     e.preventDefault();
-    
+
   },
   facebook:function(){
 
