@@ -21,13 +21,13 @@ var LoginOverlay = React.createClass({
       <div className="overlay" id="login">
         <center>
           <form>
-            <input type="text" placeholder="username"></input>
+            <input type="text" placeholder="username" name="username" id="username"></input>
             <br></br>
-            <input type="password" placeholder="password"></input>
+            <input type="password" placeholder="password" name="password" id="password"></input>
             <br></br>
             <button onClick={this.props.login}>Login</button>
             <br></br>
-            <button onClick={this.props.facebook}>Login with Facebook</button>
+            <a type="button" href="/login/facebook">Login with Facebook</a>
             <br></br>
             <button onClick={this.props.registerScreen}>Register</button>
             <br></br>
@@ -76,6 +76,18 @@ var Mainmenu = React.createClass({
       }
     }
   },
+  componentDidMount: function(){
+    fetch('/isLoggedIn',{
+      method:'get',
+      credentials: 'include'
+    }).then(function(response){
+        return response.json();
+    }).then(function(response){
+      if(response.loggedIn){
+        this.start({preventDefault:function(){}});
+      }
+    }.bind(this))
+  },
   start: function(e) {
     e.preventDefault();
     this.setState({menu: false, login: false, register: false});
@@ -86,23 +98,39 @@ var Mainmenu = React.createClass({
   },
   login: function(e) {
     e.preventDefault();
-    this.setState({menu: false, login: false, register: false});
 
     //ajax post
     fetch('/login', {
     	method: 'post',
+      credentials: 'include',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
     	body: JSON.stringify({
     		username: document.getElementById('username').value,
     		password: document.getElementById('password').value
     	})
-    });
+    }).then(function(response){
+        return response.json();
+    }).then(function(response){
+      if(response.loginSuccess){
+        this.setState({menu: false, login: false, register: false})
+      }
+      else if(!response.loginSuccess){
 
+      }
+    }.bind(this))
   },
+
+
   facebook: function(e) {
     e.preventDefault();
     this.setState({menu: false, login: false, register: false});
 
     //ajax facebook get
+
+
     fetch('/login/facebook', {
     	method: 'get'
     })
@@ -119,6 +147,10 @@ var Mainmenu = React.createClass({
     //ajax post
     fetch('/register', {
     	method: 'post',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
     	body: JSON.stringify({
     		username: document.getElementById('username').value,
         email: document.getElementById('email').value,

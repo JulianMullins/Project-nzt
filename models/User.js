@@ -7,7 +7,7 @@ var userSchema = mongoose.Schema({
 	email:String,
 	password: String,
 	facebookId: String,
-  highScore: Number,
+  highScores:Object,
   Settings:Object
 })
 

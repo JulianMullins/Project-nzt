@@ -11,8 +11,8 @@ var FacebookStrategy = require('passport-facebook');
 var MongoStore = require('connect-mongo')(session);
 var mongoose = require('mongoose');
 
-var routes = require('./route/index');
-var auth = require('./route/auth');
+var routes = require('./server/index');
+var auth = require('./server/auth');
 var User = require('./models/User')
 
 var app = express();
@@ -65,6 +65,7 @@ passport.use(new LocalStrategy(function(username, password, done) {
         console.error(err);
         return done(err);
       }
+      console.log(user)
       // if no user present, auth failed
       if (!user) {
         //console.log(user);
@@ -99,10 +100,11 @@ passport.use(new FacebookStrategy({
       }
       // if no user present, auth failed
       if (!user) {
+        console.log(profile)
         user = new User({
           facebookId:profile.id,
           email:profile.emails[0].value,
-          username:profile.name,
+          username:profile.first_name + ' '+profile.last_name,
           highScore:0
         });
         user.save(function(err,tempUser){
