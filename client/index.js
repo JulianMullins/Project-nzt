@@ -220,9 +220,6 @@ var Mainmenu = React.createClass({
       : '';
     return (
       <div>
-        {menu}
-        {login}
-        {register}
         <div className="heading">
           <h1 id="title">Reflex</h1>
           <h3>WE MAKE YOU FUCKING BETTER</h3>
