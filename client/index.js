@@ -697,7 +697,7 @@ var Silent = React.createClass({
           pressed: true
         });
       } else {
-        this.setState({alert: "Not a match"});
+        this.setState({alert: "Not a match", pressed: true});
       }
     }
   },
@@ -720,7 +720,7 @@ var Silent = React.createClass({
           pressed: true
         });
       } else {
-        this.setState({alert: "Not a match"});
+        this.setState({alert: "Not a match", pressed: true});
       }
     }
   },
@@ -743,7 +743,7 @@ var Silent = React.createClass({
           pressed: true
         });
       } else {
-        this.setState({alert: "Not a match"});
+        this.setState({alert: "Not a match", pressed: true});
       }
     }
   },
@@ -807,7 +807,9 @@ var Advanced = React.createClass({
         standardStyle,
         standardStyle
       ],
-      match: false,
+      colorMatch: false,
+      positionMatch: false,
+      soundMatch: false,
       score: 0,
       miss: false,
       alert: " ",
@@ -830,35 +832,39 @@ var Advanced = React.createClass({
     });
     if (this.state.initialTimer === 0) {
       this.setState({overlay: false});
-      this.tripleMatch();
+      this.playGame();
     }
   },
-  tripleMatch: function() {
+  playGame: function() {
     var positionQueue = [];
     var colorQueue = [];
     var soundQueue = [];
     var timeTilPositionMatch = parseInt((Math.random() * 5) + 2 + this.state.N);
     var timeTilColorMatch = parseInt((Math.random() * 5) + 2 + this.state.N);
     var timeTilSoundMatch = parseInt((Math.random() * 5) + 2 + this.state.N);
+
     setInterval(function() {
-      var audio = new Audio('./audio/1.wav');
-      audio.play()
-      this.setState({pressed: false});
-      if (!this.state.miss) {
-        this.setState({match: false, miss: false, alert: " "});
+      console.log(timeTilPositionMatch, timeTilColorMatch, timeTilSoundMatch);
+
+      if (!this.state.miss || this.state.pressed) {
+        this.setState({colorMatch: false, soundMatch: false, positionMatch: false, miss: false, alert: " "});
       }
       if (this.state.miss) {
-        this.setState({miss: false, alert: "Missed a match"});
+        this.setState({colorMatch: false, soundMatch: false, positionMatch: false, miss: false, alert: "Missed a match"});
         if (this.state.score !== 0) {
           this.setState({
             score: this.state.score - 5
           });
         }
       }
+
+      this.setState({pressed: false});
+
       //NOT GOING TO ACTUALLY LIGHT UP COLORS UNTIL ALL IF STATEMENTS HAVE ITERATED
       //case 1: position match
       if (timeTilPositionMatch === 0) {
         console.log('position match')
+        this.setState({positionMatch: true, miss: true})
         //reset position portion
         timeTilPositionMatch = parseInt((Math.random() * 5) + 2);
         //set up new position queue
@@ -870,6 +876,7 @@ var Advanced = React.createClass({
       //case 2: color match
       if (timeTilColorMatch === 0) {
         console.log('color match')
+        this.setState({colorMatch: true, miss: true})
         //reset position portion
         timeTilColorMatch = parseInt((Math.random() * 5) + 2);
         //set up new position queue
@@ -881,6 +888,7 @@ var Advanced = React.createClass({
       //case 3: sound match
       if (timeTilSoundMatch === 0) {
         console.log('sound match')
+        this.setState({soundMatch: true, miss: true})
         //reset position portion
         timeTilSoundMatch = parseInt((Math.random() * 5) + 2);
         //set up new position queue
@@ -902,7 +910,6 @@ var Advanced = React.createClass({
           positionQueue.splice(0, 1);
         }
       }
-
       //color:
       if (!cMatch) {
         var nextColor = parseInt(Math.random() * 9);
@@ -915,7 +922,6 @@ var Advanced = React.createClass({
           colorQueue.splice(0, 1);
         }
       }
-
       //sound:
       if (!sMatch) {
         var nextSound = parseInt(Math.random() * 9);
@@ -929,10 +935,10 @@ var Advanced = React.createClass({
         }
       }
 
-      // set color for 800
       this.state.style[nextPosition] = newStyle[nextColor];
-      //ADAM PLEASE LET ME KNOW HOW TO SET SOUND
-      this.setState({style: this.state.style, match: true, miss: true});
+      var audio = new Audio('./audio/' + (nextSound + 1) + '.wav');
+      audio.play();
+      this.setState({style: this.state.style, miss: true});
       setTimeout(function() {
         this.state.style[nextPosition] = standardStyle;
         this.setState({style: this.state.style});
@@ -945,11 +951,11 @@ var Advanced = React.createClass({
       }.bind(this), 800);
     }.bind(this), 2000);
   },
-  match: function() {
+  colorMatch: function() {
     if (this.state.pressed) {
       return;
     }
-    if (this.state.match) {
+    if (this.state.colorMatch && !this.state.positionMatch && !this.state.soundMatch) {
       this.setState({
         score: this.state.score + 10,
         miss: false,
@@ -964,7 +970,145 @@ var Advanced = React.createClass({
           pressed: true
         });
       } else {
-        this.setState({alert: "Not a match"});
+        this.setState({alert: "Not a match", pressed: true});
+      }
+    }
+  },
+  positionMatch: function() {
+    if (this.state.pressed) {
+      return;
+    }
+    if (!this.state.colorMatch && this.state.positionMatch && !this.state.soundMatch) {
+      this.setState({
+        score: this.state.score + 10,
+        miss: false,
+        alert: "Good job",
+        pressed: true
+      });
+    } else {
+      if (this.state.score !== 0) {
+        this.setState({
+          score: this.state.score - 5,
+          alert: "Not a match",
+          pressed: true
+        });
+      } else {
+        this.setState({alert: "Not a match", pressed: true});
+      }
+    }
+  },
+  soundMatch: function() {
+    if (this.state.pressed) {
+      return;
+    }
+    if (!this.state.colorMatch && !this.state.positionMatch && this.state.soundMatch) {
+      this.setState({
+        score: this.state.score + 10,
+        miss: false,
+        alert: "Good job",
+        pressed: true
+      });
+    } else {
+      if (this.state.score !== 0) {
+        this.setState({
+          score: this.state.score - 5,
+          alert: "Not a match",
+          pressed: true
+        });
+      } else {
+        this.setState({alert: "Not a match", pressed: true});
+      }
+    }
+  },
+  colorAndSoundMatch: function() {
+    if (this.state.pressed) {
+      return;
+    }
+    if (this.state.colorMatch && !this.state.positionMatch && this.state.soundMatch) {
+      this.setState({
+        score: this.state.score + 10,
+        miss: false,
+        alert: "Good job",
+        pressed: true
+      });
+    } else {
+      if (this.state.score !== 0) {
+        this.setState({
+          score: this.state.score - 5,
+          alert: "Not a match",
+          pressed: true
+        });
+      } else {
+        this.setState({alert: "Not a match", pressed: true});
+      }
+    }
+  },
+  colorAndPositionMatch: function() {
+    if (this.state.pressed) {
+      return;
+    }
+    if (this.state.colorMatch && this.state.positionMatch && !this.state.soundMatch) {
+      this.setState({
+        score: this.state.score + 10,
+        miss: false,
+        alert: "Good job",
+        pressed: true
+      });
+    } else {
+      if (this.state.score !== 0) {
+        this.setState({
+          score: this.state.score - 5,
+          alert: "Not a match",
+          pressed: true
+        });
+      } else {
+        this.setState({alert: "Not a match", pressed: true});
+      }
+    }
+  },
+  soundAndPositionMatch: function() {
+    if (this.state.pressed) {
+      return;
+    }
+    if (this.state.colorMatch && !this.state.positionMatch && !this.state.soundMatch) {
+      this.setState({
+        score: this.state.score + 10,
+        miss: false,
+        alert: "Good job",
+        pressed: true
+      });
+    } else {
+      if (this.state.score !== 0) {
+        this.setState({
+          score: this.state.score - 5,
+          alert: "Not a match",
+          pressed: true
+        });
+      } else {
+        this.setState({alert: "Not a match", pressed: true});
+      }
+    }
+  },
+  tripleMatch: function() {
+    if (this.state.pressed) {
+      return;
+    }
+    if (this.state.colorMatch && this.state.positionMatch && !this.state.soundMatch) {
+      this.setState({
+        score: this.state.score + 10,
+        miss: false,
+        alert: "Good job",
+        pressed: true
+      });
+    } else {
+      if (this.state.score !== 0) {
+        this.setState({
+          score: this.state.score - 5,
+          alert: "Not a match",
+          pressed: true
+        });
+      } else {
+        this.setState({alert: "Not a match", pressed: true});
       }
     }
   },
@@ -1005,9 +1149,13 @@ var Advanced = React.createClass({
           {this.state.alert}
         </div>
         <div className="gameButtonsContainer">
-          <a>SOUND</a>
-          <a>BOTH</a>
-          <a onClick={this.match}>POSITION</a>
+          <a onClick={this.soundMatch}>SOUND</a>
+          <a onClick={this.soundAndPositionMatch}>BOTH</a>
+          <a onClick={this.positionMatch}>POSITION</a>
+          <a onClick={this.tripleMatch}>ALL</a>
+          <a onClick={this.colorAndPositionMatch}>BOTH</a>
+          <a onClick={this.colorMatch}>COLOR</a>
+          <a onClick={this.colorAndSoundMatch}>SOUND AND COLOR</a>
         </div>
       </div>
     );
@@ -1043,8 +1191,8 @@ var newStyle = [
 
 
 ReactDOM.render(
-  <Silent/>, document.getElementById('root'));
+  <Advanced/>, document.getElementById('root'));
 
 
-ReactDOM.render(
-  <Mainmenu/>, document.getElementById('root'));
+// ReactDOM.render(
+//   <Mainmenu/>, document.getElementById('root'));
