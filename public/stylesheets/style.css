@@ -97,13 +97,42 @@ h3 {
   color: #EEEEEE;
 }
 
+.bt-menu-trigger span {
+  background-color: #01B6A7 !important;
+}
+
+.bt-menu-trigger span:before {
+  background-color: #01B6A7 !important;
+}
+
+.bt-menu-trigger span:after {
+  background-color: #01B6A7 !important;
+}
+
+.bt-menu-open .bt-menu-trigger span {
+  background-color: transparent !important;
+}
+
+.bt-menu ul li a:before {
+  color: #01B6A7 !important;
+}
+
+/*.bt-menu-open .bt-menu-trigger span:before {
+  background-color: white !important;
+}
+
+.bt-menu-open .bt-menu-trigger span:after {
+  background-color: white !important;
+}*/
+
 .heading {
   display: flex;
   height: 30vh;
   justify-content: center;
   align-items: center;
-  background-color: #01161e;
-  color: white;
+  /*background-color: #01161e;*/
+  background-image: url('../images/agsquare.png');
+  color: #01B6A7; /* #01B6A7 */
   flex-direction: column;
 }
 .menu {
