@@ -218,7 +218,6 @@
 //       <Game mode={this.state.mode}></Game>, document.getElementById('root'));
 //   },
 
-
 //   render: function() {
 //     var menu = this.state.menu
 //       ? <MenuOverlay start={this.start} loginScreen={this.loginScreen} registerScreen={this.registerScreen}></MenuOverlay>
@@ -257,3 +256,10 @@
 //     );
 //   }
 // });
+
+// module.exports = {
+//   MenuOverlay: MenuOverlay,
+//   LoginOverlay: LoginOverlay,
+//   RegisterOverlay:RegisterOverlay,
+//   Mainmenu: Mainmenu
+// }
