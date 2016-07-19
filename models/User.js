@@ -8,7 +8,8 @@ var userSchema = mongoose.Schema({
 	password: String,
 	facebookId: String,
   stats: Object,
-  settings: Object
+  settings: Object,
+	temp:Boolean
 })
 
 

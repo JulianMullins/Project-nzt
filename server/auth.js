@@ -39,7 +39,8 @@ module.exports = function(passport) {
       email: req.body.email,
       password: req.body.password,
       facebookId: null,
-      stats: userStats
+      stats: userStats,
+      temp:false
     });
     User.findOne({email:u.email},function(err,user){
       if(err){
@@ -112,6 +113,21 @@ module.exports = function(passport) {
     function(req, res) {
       res.redirect('/')
     });
+
+  //anon user
+  router.post('/startAnon',function(req,res,next){
+    var tempUserStats = new Stats();
+    tempUserStats.save();
+    var tempUser = new User({
+      stats:tempUserStats,
+      temp:true
+    })
+    tempUser.save(function(err,user){
+      if(err){
+        res.send(err)
+      }
+    })
+  })
 
 
   // GET Logout page

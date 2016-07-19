@@ -15,11 +15,13 @@ var modeMultiplier = {
 }
 
 var penaltyPoints = 5;
-var positivePoints =10;
+var positivePoints = 10;
+var leaderboardSize = 5;
 
 module.exports = {
   serverLeaderboard: serverLeaderboard._id,
   modeMultiplier:modeMultiplier,
   penalty:penaltyPoints,
-  positivePoints:positivePoints
+  positivePoints:positivePoints,
+  leaderboardSize:leaderboardSize
 }
