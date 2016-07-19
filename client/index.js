@@ -1153,7 +1153,7 @@ var Advanced = React.createClass({
         <div className="scoreAlert">
           {this.state.alert}
         </div>
-        <div className="gameButtonsContainer">
+        <div className="gameButtonsContainer advancedMode">
           <a onClick={this.soundMatch}>SOUND</a>
           <a onClick={this.soundAndPositionMatch}>BOTH</a>
           <a onClick={this.positionMatch}>POSITION</a>
