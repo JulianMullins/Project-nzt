@@ -42,9 +42,10 @@ var GameTimer = React.createClass({
     }
   },
   render: function() {
+    console.log("Style: ", this.props.timeStyle);
     return (
       <div className="timerContainer">
-        <h1 className="gameTimer">{Math.floor(this.state.seconds / 60)}:{("0" + this.state.seconds % 60).slice(-2)}</h1>
+        <h1 className="gameTimer" style={this.props.timeStyle}>{Math.floor(this.state.seconds / 60)}:{("0" + this.state.seconds % 60).slice(-2)}</h1>
       </div>
     )
   }
@@ -209,11 +210,12 @@ var Relaxed = React.createClass({
     return (
       <div className="gameContainer">
         {overlay}
+          <h2>Relaxed</h2>
         <div className="gameHeading">
-          <div className="gameScore">
+          <div className="gameScore relaxedScore">
             <b>Score: {this.state.score}</b>
           </div>
-          <GameTimer></GameTimer>
+          <GameTimer timeStyle={{'color': "#01B6A7"}}></GameTimer>
         </div>
         <div className="gameRow">
           <div className="gameSquare" style={this.state.style[0]}></div>
@@ -233,7 +235,7 @@ var Relaxed = React.createClass({
         <div className="scoreAlert">
           {this.state.alert}
         </div>
-        <div className="gameButtonsContainer">
+        <div className="gameButtonsContainer relaxedMode">
           <a onClick={this.posMatch}>POSITION</a>
         </div>
       </div>
@@ -465,11 +467,12 @@ var Classic = React.createClass({
     return (
       <div className="gameContainer">
         {overlay}
+        <h2>Classic</h2>
         <div className="gameHeading">
-          <div className="gameScore">
+          <div className="gameScore classicScore">
             <b>Score: {this.state.score}</b>
           </div>
-          <GameTimer></GameTimer>
+          <GameTimer timeStyle={{'color': "#F13542"}}></GameTimer>
         </div>
         <div className="gameRow">
           <div className="gameSquare" style={this.state.style[0]}></div>
@@ -489,7 +492,7 @@ var Classic = React.createClass({
         <div className="scoreAlert">
           {this.state.alert}
         </div>
-        <div className="gameButtonsContainer">
+        <div className="gameButtonsContainer classicMode">
           <a onClick={this.soundMatch}>SOUND</a>
           <a onClick={this.posAndSoundMatch}>BOTH</a>
           <a onClick={this.posMatch}>POSITION</a>
@@ -759,11 +762,12 @@ var Silent = React.createClass({
     //   : '';
     return (
       <div className="gameContainer">
+          <h2>Silent</h2>
         <div className="gameHeading">
-          <div className="gameScore">
+          <div className="gameScore silentScore">
             <b>Score: {this.state.score}</b>
           </div>
-          <GameTimer></GameTimer>
+          <GameTimer timeStyle={{'color': "#7CD9D2"}}></GameTimer>
         </div>
         <div className="gameRow">
           <div className="gameSquare" style={this.state.style[0]}></div>
@@ -1124,11 +1128,12 @@ var Advanced = React.createClass({
     //   : '';
     return (
       <div className="gameContainer">
+          <h2>Advanced</h2>
         <div className="gameHeading">
-          <div className="gameScore">
+          <div className="gameScore advancedScore">
             <b>Score: {this.state.score}</b>
           </div>
-          <GameTimer></GameTimer>
+          <GameTimer timeStyle={{'color': "#F1BA03"}}></GameTimer>
         </div>
         <div className="gameRow">
           <div className="gameSquare" style={this.state.style[0]}></div>
@@ -1148,7 +1153,7 @@ var Advanced = React.createClass({
         <div className="scoreAlert">
           {this.state.alert}
         </div>
-        <div className="gameButtonsContainer">
+        <div className="gameButtonsContainer advancedMode">
           <a onClick={this.soundMatch}>SOUND</a>
           <a onClick={this.soundAndPositionMatch}>BOTH</a>
           <a onClick={this.positionMatch}>POSITION</a>
@@ -1166,6 +1171,19 @@ var Advanced = React.createClass({
 var standardStyle = {
   backgroundColor: "#BFBFBF"
 }
+
+var relaxedStyle = {
+  backgroundColor: "#01B6A7"
+}
+
+var silentStyle = {
+  backgroundColor: "#7CD9D2"
+}
+
+var advancedStyle = {
+  backgroundColor: "#F1BA03"
+}
+
 
 var newStyle = [
   {
@@ -1192,7 +1210,6 @@ var newStyle = [
 
 ReactDOM.render(
   <Advanced/>, document.getElementById('root'));
-
 
 // ReactDOM.render(
 //   <Mainmenu/>, document.getElementById('root'));
