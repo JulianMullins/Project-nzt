@@ -1,10 +1,11 @@
 var React = require('react');
 var ReactDOM = require('react-dom');
 var url = process.env.url;
-//var MenuOverlay = require('./menu').MenuOverlay;
-//var LoginOverlay = require('./menu').LoginOverlay;
-//var RegisterOverlay = require('./menu').RegisterOverlay;
-//var Mainmenu = require('./menu').Mainmenu;
+var Levels = require('./levels').Levels;
+//var MenuOverlay = require('./menu/MenuOverlay');
+//var LoginOverlay = require('./menu/LoginOverlay');
+//var RegisterOverlay = require('./menu/RegisterOverlay');
+var Mainmenu = require('./menu').Mainmenu;
 
 
 var gameOver = function(score){
@@ -20,7 +21,6 @@ var gameOver = function(score){
       })
     })
 }
-
 
 var GameTimer = React.createClass({
   getInitialState: function() {
@@ -1206,7 +1206,6 @@ var newStyle = [
     backgroundColor: '#C91A83'
   }
 ]
-
 
 ReactDOM.render(
   <Advanced/>, document.getElementById('root'));

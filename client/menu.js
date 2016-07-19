@@ -1,6 +1,8 @@
 var React = require('react');
 var ReactDOM = require('react-dom');
 var url = process.env.url;
+var Levels = require('./levels');
+var ClassicLevels = Levels.ClassicLevels;
 
 var MenuOverlay = React.createClass({
   render: function() {
@@ -90,11 +92,6 @@ var Mainmenu = React.createClass({
       menu: true,
       login: false,
       register: false,
-      mode: {
-        position: true,
-        sound: true,
-        color: false
-      }
     }
   },
   componentDidMount: function() {
@@ -174,45 +171,25 @@ var Mainmenu = React.createClass({
   },
 
   //set mode
-  normalMode: function(e) {
+  classic: function(e) {
     e.preventDefault();
-    this.setState({
-      mode: {
-        position: true,
-        sound: true,
-        color: false
-      }
-    }, this.goToGame);
+    ReactDOM.render(
+      <ClassicLevels></ClassicLevels>, document.getElementById('root'));
   },
-  posOnly: function(e) {
+  relaxed: function(e) {
     e.preventDefault();
-    this.setState({
-      mode: {
-        position: true,
-        sound: false,
-        color: false
-      }
-    }, this.goToGame);
+    ReactDOM.render(
+      <RelaxedLevels></RelaxedLevels>, document.getElementById('root'));
   },
-  posAndColor: function(e) {
+  silent: function(e) {
     e.preventDefault();
-    this.setState({
-      mode: {
-        position: true,
-        sound: false,
-        color: true
-      }
-    }, this.goToGame);
+    ReactDOM.render(
+      <SilentLevels></SilentLevels>, document.getElementById('root'));
   },
   advanced: function(e) {
     e.preventDefault();
-    this.setState({
-      mode: {
-        position: true,
-        sound: true,
-        color: true
-      }
-    }, this.goToGame);
+    ReactDOM.render(
+      <AdvancedLevels></AdvancedLevels>, document.getElementById('root'));
   },
 
   //start game
@@ -238,15 +215,15 @@ var Mainmenu = React.createClass({
           <h3>WE MAKE YOU FUCKING BETTER</h3>
         </div>
         <div className="menu">
-          <a href="" className="menu-panel" id="menu1" onClick={this.normalMode}>
+          <a href="" className="menu-panel" id="menu1" onClick={this.classic}>
             <h2>Classic</h2>
             <h3>(position, sound)</h3>
           </a>
-          <a href="" className="menu-panel" id="menu2" onClick={this.posOnly}>
+          <a href="" className="menu-panel" id="menu2" onClick={this.relaxed}>
             <h2>Relaxed</h2>
             <h3>(position only)</h3>
           </a>
-          <a href="" className="menu-panel" id="menu3" onClick={this.posAndColor}>
+          <a href="" className="menu-panel" id="menu3" onClick={this.silent}>
             <h2>Silent</h2>
             <h3>(position, color)</h3>
           </a>
