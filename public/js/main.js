@@ -1,5 +1,5 @@
 $(document).ready(function () {
-	
+
 $(".bt-menu-trigger").on('click', function(){
   if($('#bt-menu').is('.bt-menu-open')){
       $("#root").css("margin", "30px 30px 30px 90px");

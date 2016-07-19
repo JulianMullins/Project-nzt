@@ -513,7 +513,7 @@ var Game = React.createClass({
   colorQueue.push(nextColor);
   colorQueue.splice(0, 1);
   }
- 
+
  //case 3: sound match
   if (timeTilSoundMatch===0) {
   console.log('sound match')
@@ -524,7 +524,7 @@ var Game = React.createClass({
   var nextSound = soundQueue[0];
   soundQueue.push(nextSound);
   soundQueue.splice(0, 1);
-  }  
+  }
 
   //after all cases checked, do color/sound effects
   console.log('board update')
@@ -576,8 +576,8 @@ var Game = React.createClass({
   }.bind(this), 800);
 
 }.bind(this), 2000);
-  },
-  };
+  // }
+},
   match: function() {
     if (this.state.pressed) {
       return;
