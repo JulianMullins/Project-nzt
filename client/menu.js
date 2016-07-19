@@ -2,7 +2,6 @@ var React = require('react');
 var ReactDOM = require('react-dom');
 var url = process.env.url;
 
-
 var MenuOverlay = React.createClass({
   render: function() {
     return (
@@ -49,7 +48,7 @@ var RegisterOverlay = React.createClass({
             <input type="text" placeholder="username" name="username" id="username"></input>
             <br></br>
             <input type="text" placeholder="email" name="email" id="email"></input>
-            <br />
+            <br/>
             <input type="password" placeholder="password" name="password" id="password"></input>
             <br></br>
             <input type="password" placeholder="confirm password" name="passwordConfirm" id="passwordConfirm"></input>
@@ -57,6 +56,25 @@ var RegisterOverlay = React.createClass({
             <button onClick={this.props.register}>Register</button>
             <br></br>
             <button onClick={this.props.back} className="back">Already have an account?</button>
+          </form>
+        </center>
+      </div>
+    )
+  }
+});
+
+var GameoverOverlay = React.createClass({
+  render: function() {
+    return (
+      <div className="overlay" id="gameover">
+        <center>
+          <form>
+            <h1>Game Over</h1>
+            <input type="text" placeholder="username" name="username" id="username"></input>
+            <br></br>
+            <button>Submit</button>
+            <br></br>
+            <button>Sign In</button>
           </form>
         </center>
       </div>
@@ -79,15 +97,15 @@ var Mainmenu = React.createClass({
       }
     }
   },
-  componentDidMount: function(){
-    fetch('/isLoggedIn',{
-      method:'get',
+  componentDidMount: function() {
+    fetch('/isLoggedIn', {
+      method: 'get',
       credentials: 'include'
-    }).then(function(response){
-        return response.json();
-    }).then(function(response){
-      if(response.loggedIn){
-        this.start({preventDefault:function(){}});
+    }).then(function(response) {
+      return response.json();
+    }).then(function(response) {
+      if (response.loggedIn) {
+        this.start({preventDefault: function() {}});
       }
     }.bind(this))
   },
@@ -106,28 +124,21 @@ var Mainmenu = React.createClass({
 
     //ajax post
     fetch('/login', {
-    	method: 'post',
+      method: 'post',
       credentials: 'include',
       headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json'
       },
-    	body: JSON.stringify({
-    		username: document.getElementById('username').value,
-    		password: document.getElementById('password').value
-    	})
-    }).then(function(response){
-        return response.json();
-    }).then(function(response){
-      if(response.success){
+      body: JSON.stringify({username: document.getElementById('username').value, password: document.getElementById('password').value})
+    }).then(function(response) {
+      return response.json();
+    }).then(function(response) {
+      if (response.success) {
         this.setState({menu: false, login: false, register: false})
-      }
-      else if(!response.success){
-
-      }
+      } else if (!response.success) {}
     }.bind(this))
   },
-
 
   facebook: function(e) {
     e.preventDefault();
@@ -135,10 +146,7 @@ var Mainmenu = React.createClass({
 
     //ajax facebook get
 
-
-    fetch('/login/facebook', {
-    	method: 'get'
-    })
+    fetch('/login/facebook', {method: 'get'})
 
   },
   registerScreen: function(e) {
@@ -151,17 +159,12 @@ var Mainmenu = React.createClass({
 
     //ajax post
     fetch('/register', {
-    	method: 'post',
+      method: 'post',
       headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json'
       },
-    	body: JSON.stringify({
-    		username: document.getElementById('username').value,
-        email: document.getElementById('email').value,
-    		password: document.getElementById('password').value,
-        passwordConfirm: document.getElementById('passwordConfirm').value
-    	})
+      body: JSON.stringify({username: document.getElementById('username').value, email: document.getElementById('email').value, password: document.getElementById('password').value, passwordConfirm: document.getElementById('passwordConfirm').value})
     });
 
   },
@@ -257,9 +260,10 @@ var Mainmenu = React.createClass({
   }
 });
 
+
 module.exports = {
   MenuOverlay: MenuOverlay,
   LoginOverlay: LoginOverlay,
-  RegisterOverlay:RegisterOverlay,
+  RegisterOverlay: RegisterOverlay,
   Mainmenu: Mainmenu
 }

@@ -7,20 +7,24 @@ var Game = require('../models/Game');
 
 var tempGame = null;
 
+router.get('/isLoggedIn',function(req,res,next){
+  res.json({'loggedIn': !!req.user})
+})
+
 router.post('/startGame/:mode/:nLevel',function(req,res,next){
   tempGame = new Game({
     user:req.user,
     mode:req.params.mode,
     score:0,
     nLevel:req.params.nLevel,
-    anonUser:req.user.temp
+    tempUser:req.user.temp
   })
   tempGame.save(function(err,game){
     if(err){
       res.send(err);
     }
     else{
-      res.json({gameId: game._id})
+      res.json({gameId: game._id,tempUser:tempUser})
     }
   })
 })
@@ -48,11 +52,11 @@ router.post('/gameOver',function(req,res,next){
   //make score
   var newScore = req.body.score;
   var newHighScore = new HighScore({
-    user:req.user._id,
+    user: req.user._id,
     dateAchieved: new Date(),
     score: req.body.score,
-    nLevel: req.body.nLevel,
-    mode:req.params.mode
+    nLevel: tempGame.nLevel,
+    mode: tempGame.mode
   })
 
   //check how scores compare on personal level;

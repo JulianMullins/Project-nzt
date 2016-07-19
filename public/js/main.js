@@ -14,17 +14,38 @@ $(".bt-menu-trigger").on('click', function(){
  });
 })
 
+// $(document).ready(function () {
+//
+// $(".bt-menu-trigger").on('click', function(){
+//   if($('#bt-menu').is('.bt-menu-open')){
+//       $("#root").css("margin", "30px 30px 30px 90px");
+//       $("#root").css("transition-duration", ".4s");
+//       // $('.map').css('margin', '');
+//     };
+//
+//   if($('#bt-menu').is('.bt-menu-close')){
+//       $('#root').css('margin', '');
+//       $("#root").css("transition-duration", ".2s");
+//     };
+//  });
+//
+
 // var iOS = !!navigator.platform && /iPad|iPhone|iPod/.test(navigator.platform);
 // var ff = navigator.userAgent.indexOf('Firefox') > 0;
 // var tap = ('ontouchstart' in window || navigator.msMaxTouchPoints) ? 'touchstart' : 'mousedown';
 // if (iOS) document.body.classList.add('iOS');
 
 // var fireworks = (function() {
-
 //   var getFontSize = function() {
 //     return parseFloat(getComputedStyle(document.documentElement).fontSize);
 //   }
-
+//
+// var fireworks = (function() {
+//
+//   var getFontSize = function() {
+//     return parseFloat(getComputedStyle(document.documentElement).fontSize);
+//   }
+//
 //   var canvas = document.querySelector('.fireworks');
 //   var ctx = canvas.getContext('2d');
 //   var numberOfParticules = 40;
@@ -32,19 +53,20 @@ $(".bt-menu-trigger").on('click', function(){
 //   var x = 0;
 //   var y = 0;
 //   var animations = [];
-
+//
 //   var setCanvasSize = function() {
 //     canvas.width = window.innerWidth;
 //     canvas.height = window.innerHeight;
 //   }
-
+//
 //   var updateCoords = function(e) {
 //     x = e.clientX || e.touches[0].clientX;
 //     y = e.clientY || e.touches[0].clientY;
 //   }
-
 //   var colors = ['#F13542', '#01B6A7', '#7CD9D2', '#F1BA03'];
-
+//
+//   var colors = ['#F13542', '#01B6A7', '#7CD9D2', '#F1BA03'];
+//
 //   var createCircle = function(x,y) {
 //     var p = {};
 //     p.x = x;
@@ -65,7 +87,7 @@ $(".bt-menu-trigger").on('click', function(){
 //     }
 //     return p;
 //   }
-
+//
 //   var createParticule = function(x,y) {
 //     var p = {};
 //     p.x = x;
@@ -80,7 +102,7 @@ $(".bt-menu-trigger").on('click', function(){
 //     }
 //     return p;
 //   }
-
+//
 //   var createParticles = function(x,y) {
 //     var particules = [];
 //     for (var i = 0; i < numberOfParticules; i++) {
@@ -89,12 +111,12 @@ $(".bt-menu-trigger").on('click', function(){
 //     }
 //     return particules;
 //   }
-
+//
 //   var removeAnimation = function(animation) {
 //     var index = animations.indexOf(animation);
 //     if (index > -1) animations.splice(index, 1);
 //   }
-
+//
 //   var animateParticules = function(x, y) {
 //     setCanvasSize();
 //     var particules = createParticles(x, y);
@@ -124,7 +146,7 @@ $(".bt-menu-trigger").on('click', function(){
 //     animations.push(particulesAnimation);
 //     animations.push(circleAnimation);
 //   }
-
+//
 //   var mainLoop = anime({
 //     duration: Infinity,
 //     update: function() {
@@ -136,12 +158,11 @@ $(".bt-menu-trigger").on('click', function(){
 //       });
 //     }
 //   });
-
+//
 //   document.addEventListener(tap, function(e) {
 //     updateCoords(e);
 //     animateParticules(x, y);
 //   }, false);
-
 //   window.addEventListener('resize', setCanvasSize, false);
 
 //   return {
@@ -149,6 +170,14 @@ $(".bt-menu-trigger").on('click', function(){
 //   }
 
 // })();
-
+//
+//   window.addEventListener('resize', setCanvasSize, false);
+//
+//   return {
+//     boom: animateParticules
+//   }
+//
+// })();
+//
 // document.addEventListener('DOMContentLoaded', logoAnimation, false);
 // });

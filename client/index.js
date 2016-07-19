@@ -1,10 +1,26 @@
 var React = require('react');
 var ReactDOM = require('react-dom');
 var url = process.env.url;
-//var MenuOverlay = require('./menu/MenuOverlay');
-//var LoginOverlay = require('./menu/LoginOverlay');
-//var RegisterOverlay = require('./menu/RegisterOverlay');
-//var Mainmenu = require('./menu/Mainmenu');
+//var MenuOverlay = require('./menu').MenuOverlay;
+//var LoginOverlay = require('./menu').LoginOverlay;
+//var RegisterOverlay = require('./menu').RegisterOverlay;
+//var Mainmenu = require('./menu').Mainmenu;
+
+
+var gameOver = function(score){
+  fetch('/gameOver', {
+      method: 'post',
+      credentials: 'include',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        score: score
+      })
+    })
+}
+
 
 var GameTimer = React.createClass({
   getInitialState: function() {
@@ -57,11 +73,27 @@ var Relaxed = React.createClass({
       initialTimer: 3,
       N: 1,
       pressed: false,
-      mode: this.props.mode
+      modeMultiplier: modeMultiplier[this.props.mode],
+      tempUser:true
     }
   },
   componentDidMount: function() {
     setInterval(this.timer, 1000);
+
+
+    fetch('/startGame/'+this.state.mode+'/'+this.state.N, {
+    	method: 'post'
+    }).then(function(response){
+        return response.json();
+    }).then(function(response){
+      if(!response.tempUser){
+        this.setState({
+          tempUser: false
+        })
+      }
+    })
+
+
     // fetch('/startGame/'+this.state.mode+'/'+this.state.N, {
     //  method: 'post'
     // });
@@ -78,8 +110,10 @@ var Relaxed = React.createClass({
   position: function() {
     var posQueue = [];
     var timeTilPosMatch = parseInt((Math.random() * 5) + 2 + this.state.N);
+    var timeKeeper = 0;
 
-    setInterval(function() {
+    var iterations = setInterval(function() {
+      timeKeeper += 1;
       if (!this.state.miss || this.state.pressed) {
         this.setState({posMatch: false, miss: false, alert: " "});
       }
@@ -133,6 +167,10 @@ var Relaxed = React.createClass({
           this.state.style[nextPos] = standardStyle;
           this.setState({style: this.state.style});
         }.bind(this), 800);
+      }
+      if (timekeeper === 60) {
+        console.log('over')
+        clearInterval(iterations);
       }
     }.bind(this), 2000);
   },
@@ -204,6 +242,7 @@ var Relaxed = React.createClass({
     );
   }
 })
+
 
 var Classic = React.createClass({
   getInitialState: function() {
@@ -477,7 +516,8 @@ var Silent = React.createClass({
         standardStyle,
         standardStyle
       ],
-      match: false,
+      positionMatch: false,
+      colorMatch: false,
       score: 0,
       miss: false,
       alert: " ",
@@ -510,22 +550,23 @@ var Silent = React.createClass({
     var timeTilColorMatch = parseInt((Math.random() * 5) + 2 + this.state.N);
     var timekeeper = 0;
     var iterations = setInterval(function() {
-      timekeeper++;
-      this.setState({pressed: false});
-      if (!this.state.miss) {
-        this.setState({match: false, miss: false, alert: " "});
+      timekeeper++
+      console.log(timekeeper)
+      if (!this.state.miss || this.state.pressed) {
+        this.setState({positionMatch: false, soundMatch: false, miss: false, alert: " "});
       }
       if (this.state.miss) {
-        this.setState({miss: false, alert: "Missed a match"});
+        this.setState({miss: false, alert: "Missed a match", positionMatch: false, soundMatch: false});
         if (this.state.score !== 0) {
           this.setState({
             score: this.state.score - 5
           });
         }
       }
+
+      this.setState({pressed: false, alert: " "});
       //case 1: add both position and color match
       if (timeTilPositionMatch > 0 && timeTilColorMatch > 0) {
-        console.log('no match')
         // pick a non-matching next number while interval is not 0
         var nextPosition = parseInt(Math.random() * 9);
         while (nextPosition === positionQueue[0]) {
@@ -555,8 +596,10 @@ var Silent = React.createClass({
         }.bind(this), 800);
         // lower interval
         timeTilPositionMatch--;
-        timeTilColorMatch//case 2: was a position match but color still >0--;
+        timeTilColorMatch--; //case 2: was a position match but color still >0
       } else if (timeTilColorMatch > 0) {
+        console.log('position match')
+        this.setState({positionMatch: true, miss: true})
         //reset position portion
         timeTilPositionMatch = parseInt((Math.random() * 5) + 2);
         var nextPosition = positionQueue[0];
@@ -581,9 +624,10 @@ var Silent = React.createClass({
         }.bind(this), 800);
         // lower interval
         timeTilPositionMatch--;
-        timeTilColorMatch//case 3: color match but position still >o--;
+        timeTilColorMatch--; //case 3: color match but position still >o
       } else if (timeTilPositionMatch > 0) {
         console.log('color match')
+        this.setState({colorMatch: true, miss: true})
         //reset position portion
         timeTilColorMatch = parseInt((Math.random() * 5) + 2);
         var nextColor = colorQueue[0];
@@ -611,9 +655,10 @@ var Silent = React.createClass({
         timeTilColorMatch--;
       } else {
         // pick new interval
+        console.log('double match')
         timeTilColorMatch = parseInt((Math.random() * 5) + 2);
         timeTilPositionMatch = parseInt((Math.random() * 5) + 2);
-        console.log('double match')
+        this.setState({colorMatch: true, positionMatch: true, miss: true})
         // color match
         var nextColor = colorQueue[0];
         colorQueue.push(nextColor);
@@ -630,17 +675,17 @@ var Silent = React.createClass({
           this.setState({style: this.state.style});
         }.bind(this), 800);
       }
-      if (timekeeper === 40) {
+      if (timekeeper === 60) {
         console.log('over')
-        clearInterval(timekeeper)
+        clearInterval(iterations);
       }
     }.bind(this), 2000);
   },
-  match: function() {
+  positionMatch: function() {
     if (this.state.pressed) {
       return;
     }
-    if (this.state.match) {
+    if (this.state.positionMatch && !this.state.colorMatch) {
       this.setState({
         score: this.state.score + 10,
         miss: false,
@@ -655,7 +700,53 @@ var Silent = React.createClass({
           pressed: true
         });
       } else {
-        this.setState({alert: "Not a match"});
+        this.setState({alert: "Not a match", pressed: true});
+      }
+    }
+  },
+  colorMatch: function() {
+    if (this.state.pressed) {
+      return;
+    }
+    if (this.state.colorMatch && !this.state.positionMatch) {
+      this.setState({
+        score: this.state.score + 10,
+        miss: false,
+        alert: "Good job",
+        pressed: true
+      });
+    } else {
+      if (this.state.score !== 0) {
+        this.setState({
+          score: this.state.score - 5,
+          alert: "Not a match",
+          pressed: true
+        });
+      } else {
+        this.setState({alert: "Not a match", pressed: true});
+      }
+    }
+  },
+  doubleMatch: function() {
+    if (this.state.pressed) {
+      return;
+    }
+    if (this.state.colorMatch && this.state.positionMatch) {
+      this.setState({
+        score: this.state.score + 10,
+        miss: false,
+        alert: "Good job",
+        pressed: true
+      });
+    } else {
+      if (this.state.score !== 0) {
+        this.setState({
+          score: this.state.score - 5,
+          alert: "Not a match",
+          pressed: true
+        });
+      } else {
+        this.setState({alert: "Not a match", pressed: true});
       }
     }
   },
@@ -669,7 +760,6 @@ var Silent = React.createClass({
     //     </div>
     //   )
     //   : '';
-    console.log('Silent');
     return (
       <div className="gameContainer">
           <h2>Silent</h2>
@@ -697,10 +787,10 @@ var Silent = React.createClass({
         <div className="scoreAlert">
           {this.state.alert}
         </div>
-        <div className="gameButtonsContainer silentMode">
-          <a>SOUND</a>
-          <a>BOTH</a>
-          <a onClick={this.match}>POSITION</a>
+        <div className="gameButtonsContainer">
+          <a onClick={this.positionMatch}>POSITION</a>
+          <a onClick={this.doubleMatch}>BOTH</a>
+          <a onClick={this.colorMatch}>COLOR</a>
         </div>
       </div>
     );
@@ -721,7 +811,9 @@ var Advanced = React.createClass({
         standardStyle,
         standardStyle
       ],
-      match: false,
+      colorMatch: false,
+      positionMatch: false,
+      soundMatch: false,
       score: 0,
       miss: false,
       alert: " ",
@@ -744,35 +836,39 @@ var Advanced = React.createClass({
     });
     if (this.state.initialTimer === 0) {
       this.setState({overlay: false});
-      this.tripleMatch();
+      this.playGame();
     }
   },
-  tripleMatch: function() {
+  playGame: function() {
     var positionQueue = [];
     var colorQueue = [];
     var soundQueue = [];
     var timeTilPositionMatch = parseInt((Math.random() * 5) + 2 + this.state.N);
     var timeTilColorMatch = parseInt((Math.random() * 5) + 2 + this.state.N);
     var timeTilSoundMatch = parseInt((Math.random() * 5) + 2 + this.state.N);
+
     setInterval(function() {
-      var audio = new Audio('./audio/1.wav');
-      audio.play()
-      this.setState({pressed: false});
-      if (!this.state.miss) {
-        this.setState({match: false, miss: false, alert: " "});
+      console.log(timeTilPositionMatch, timeTilColorMatch, timeTilSoundMatch);
+
+      if (!this.state.miss || this.state.pressed) {
+        this.setState({colorMatch: false, soundMatch: false, positionMatch: false, miss: false, alert: " "});
       }
       if (this.state.miss) {
-        this.setState({miss: false, alert: "Missed a match"});
+        this.setState({colorMatch: false, soundMatch: false, positionMatch: false, miss: false, alert: "Missed a match"});
         if (this.state.score !== 0) {
           this.setState({
             score: this.state.score - 5
           });
         }
       }
+
+      this.setState({pressed: false});
+
       //NOT GOING TO ACTUALLY LIGHT UP COLORS UNTIL ALL IF STATEMENTS HAVE ITERATED
       //case 1: position match
       if (timeTilPositionMatch === 0) {
         console.log('position match')
+        this.setState({positionMatch: true, miss: true})
         //reset position portion
         timeTilPositionMatch = parseInt((Math.random() * 5) + 2);
         //set up new position queue
@@ -784,6 +880,7 @@ var Advanced = React.createClass({
       //case 2: color match
       if (timeTilColorMatch === 0) {
         console.log('color match')
+        this.setState({colorMatch: true, miss: true})
         //reset position portion
         timeTilColorMatch = parseInt((Math.random() * 5) + 2);
         //set up new position queue
@@ -795,6 +892,7 @@ var Advanced = React.createClass({
       //case 3: sound match
       if (timeTilSoundMatch === 0) {
         console.log('sound match')
+        this.setState({soundMatch: true, miss: true})
         //reset position portion
         timeTilSoundMatch = parseInt((Math.random() * 5) + 2);
         //set up new position queue
@@ -816,7 +914,6 @@ var Advanced = React.createClass({
           positionQueue.splice(0, 1);
         }
       }
-
       //color:
       if (!cMatch) {
         var nextColor = parseInt(Math.random() * 9);
@@ -829,7 +926,6 @@ var Advanced = React.createClass({
           colorQueue.splice(0, 1);
         }
       }
-
       //sound:
       if (!sMatch) {
         var nextSound = parseInt(Math.random() * 9);
@@ -843,10 +939,10 @@ var Advanced = React.createClass({
         }
       }
 
-      // set color for 800
       this.state.style[nextPosition] = newStyle[nextColor];
-      //ADAM PLEASE LET ME KNOW HOW TO SET SOUND
-      this.setState({style: this.state.style, match: true, miss: true});
+      var audio = new Audio('./audio/' + (nextSound + 1) + '.wav');
+      audio.play();
+      this.setState({style: this.state.style, miss: true});
       setTimeout(function() {
         this.state.style[nextPosition] = standardStyle;
         this.setState({style: this.state.style});
@@ -859,11 +955,11 @@ var Advanced = React.createClass({
       }.bind(this), 800);
     }.bind(this), 2000);
   },
-  match: function() {
+  colorMatch: function() {
     if (this.state.pressed) {
       return;
     }
-    if (this.state.match) {
+    if (this.state.colorMatch && !this.state.positionMatch && !this.state.soundMatch) {
       this.setState({
         score: this.state.score + 10,
         miss: false,
@@ -878,7 +974,145 @@ var Advanced = React.createClass({
           pressed: true
         });
       } else {
-        this.setState({alert: "Not a match"});
+        this.setState({alert: "Not a match", pressed: true});
+      }
+    }
+  },
+  positionMatch: function() {
+    if (this.state.pressed) {
+      return;
+    }
+    if (!this.state.colorMatch && this.state.positionMatch && !this.state.soundMatch) {
+      this.setState({
+        score: this.state.score + 10,
+        miss: false,
+        alert: "Good job",
+        pressed: true
+      });
+    } else {
+      if (this.state.score !== 0) {
+        this.setState({
+          score: this.state.score - 5,
+          alert: "Not a match",
+          pressed: true
+        });
+      } else {
+        this.setState({alert: "Not a match", pressed: true});
+      }
+    }
+  },
+  soundMatch: function() {
+    if (this.state.pressed) {
+      return;
+    }
+    if (!this.state.colorMatch && !this.state.positionMatch && this.state.soundMatch) {
+      this.setState({
+        score: this.state.score + 10,
+        miss: false,
+        alert: "Good job",
+        pressed: true
+      });
+    } else {
+      if (this.state.score !== 0) {
+        this.setState({
+          score: this.state.score - 5,
+          alert: "Not a match",
+          pressed: true
+        });
+      } else {
+        this.setState({alert: "Not a match", pressed: true});
+      }
+    }
+  },
+  colorAndSoundMatch: function() {
+    if (this.state.pressed) {
+      return;
+    }
+    if (this.state.colorMatch && !this.state.positionMatch && this.state.soundMatch) {
+      this.setState({
+        score: this.state.score + 10,
+        miss: false,
+        alert: "Good job",
+        pressed: true
+      });
+    } else {
+      if (this.state.score !== 0) {
+        this.setState({
+          score: this.state.score - 5,
+          alert: "Not a match",
+          pressed: true
+        });
+      } else {
+        this.setState({alert: "Not a match", pressed: true});
+      }
+    }
+  },
+  colorAndPositionMatch: function() {
+    if (this.state.pressed) {
+      return;
+    }
+    if (this.state.colorMatch && this.state.positionMatch && !this.state.soundMatch) {
+      this.setState({
+        score: this.state.score + 10,
+        miss: false,
+        alert: "Good job",
+        pressed: true
+      });
+    } else {
+      if (this.state.score !== 0) {
+        this.setState({
+          score: this.state.score - 5,
+          alert: "Not a match",
+          pressed: true
+        });
+      } else {
+        this.setState({alert: "Not a match", pressed: true});
+      }
+    }
+  },
+  soundAndPositionMatch: function() {
+    if (this.state.pressed) {
+      return;
+    }
+    if (this.state.colorMatch && !this.state.positionMatch && !this.state.soundMatch) {
+      this.setState({
+        score: this.state.score + 10,
+        miss: false,
+        alert: "Good job",
+        pressed: true
+      });
+    } else {
+      if (this.state.score !== 0) {
+        this.setState({
+          score: this.state.score - 5,
+          alert: "Not a match",
+          pressed: true
+        });
+      } else {
+        this.setState({alert: "Not a match", pressed: true});
+      }
+    }
+  },
+  tripleMatch: function() {
+    if (this.state.pressed) {
+      return;
+    }
+    if (this.state.colorMatch && this.state.positionMatch && !this.state.soundMatch) {
+      this.setState({
+        score: this.state.score + 10,
+        miss: false,
+        alert: "Good job",
+        pressed: true
+      });
+    } else {
+      if (this.state.score !== 0) {
+        this.setState({
+          score: this.state.score - 5,
+          alert: "Not a match",
+          pressed: true
+        });
+      } else {
+        this.setState({alert: "Not a match", pressed: true});
       }
     }
   },
@@ -919,10 +1153,14 @@ var Advanced = React.createClass({
         <div className="scoreAlert">
           {this.state.alert}
         </div>
-        <div className="gameButtonsContainer advancedMode">
-          <a>SOUND</a>
-          <a>BOTH</a>
-          <a onClick={this.match}>POSITION</a>
+        <div className="gameButtonsContainer">
+          <a onClick={this.soundMatch}>SOUND</a>
+          <a onClick={this.soundAndPositionMatch}>BOTH</a>
+          <a onClick={this.positionMatch}>POSITION</a>
+          <a onClick={this.tripleMatch}>ALL</a>
+          <a onClick={this.colorAndPositionMatch}>BOTH</a>
+          <a onClick={this.colorMatch}>COLOR</a>
+          <a onClick={this.colorAndSoundMatch}>SOUND AND COLOR</a>
         </div>
       </div>
     );
@@ -968,6 +1206,7 @@ var newStyle = [
     backgroundColor: '#C91A83'
   }
 ]
+
 
 ReactDOM.render(
   <Advanced/>, document.getElementById('root'));
