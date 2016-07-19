@@ -186,6 +186,7 @@ h3 {
   height: 175px;
   margin: 3px;
 }
+
 .gameButtonsContainer {
   display: flex;
   justify-content: center;
@@ -219,8 +220,16 @@ h3 {
   flex-direction: row;
   width: 100%;
 }
+
+.gameContainer h2 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 48px;
+  color: #01B6A7;
+}
+
 .gameTimer {
-  color: #BFBFBF;
   font-size: 64px;
 }
 .gameScore {
@@ -252,19 +261,37 @@ h3 {
   font-size: 36px;
   margin: 10px auto;
 }
-footer {
-  display: flex;
-  justify-content: center;
+
+.classicMode {
+  background-color: #F13542;
 }
-footer a {
-  text-decoration: none;
-  font-size: 2rem;
-  margin: 0 2rem;
-  color: gray;
-  font-weight: 100;
+
+.relaxedMode {
+  background-color: #01B6A7;
 }
-footer a:hover {
-  color: #AAAAAA;
+
+.silentMode {
+  background-color: #7CD9D2;
+}
+
+.advancedMode {
+  background-color: #F1BA03;
+}
+
+.classicScore {
+  color: #F13542;
+}
+
+.relaxedScore {
+  color: #01B6A7;
+}
+
+.silentScore {
+  color: #7CD9D2;
+}
+
+.advancedScore {
+  color: #F1BA03;
 }
 
 .fireworks {
