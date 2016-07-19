@@ -63,9 +63,9 @@ var Game = React.createClass({
   componentDidMount: function() {
     setInterval(this.timer, 1000);
 
-    fetch('/startGame/'+this.state.mode+'/'+this.state.N, {
-    	method: 'post'
-    });
+    // fetch('/startGame/'+this.state.mode+'/'+this.state.N, {
+    // 	method: 'post'
+    // });
 
   },
   timer: function() {
@@ -74,17 +74,18 @@ var Game = React.createClass({
     });
     if (this.state.initialTimer === 0) {
       this.setState({overlay: false});
-      this.test();
+      //this.test();
     }
   },
   positionAndColor: function(){
-    console.log(this.state.style,'current style')
     var positionQueue = [];
     var colorQueue = [];
     var timeTilPositionMatch = parseInt((Math.random() * 5) + 2 + this.state.N);
     var timeTilColorMatch = parseInt((Math.random() * 5) + 2 + this.state.N);
+    var timekeeper=0;
 
-  setInterval(function() {
+  // var iterations = setInterval(function() {
+  //   timekeeper++
   this.setState({pressed: false});
   if (!this.state.miss) {
   this.setState({match: false, miss: false, alert: " "});
@@ -232,6 +233,10 @@ var Game = React.createClass({
     this.setState({style: this.state.style});
   }.bind(this), 800);
   }
+  // if(timekeeper===40){
+  //   console.log('over')
+  //   clearInterval(timekeeper)
+  // }
 }.bind(this), 2000);
   },
   tripleMatch: function(){
@@ -243,6 +248,10 @@ var Game = React.createClass({
     var timeTilSoundMatch = parseInt((Math.random() * 5) + 2 + this.state.N);
 
   setInterval(function() {
+    var audio = new Audio('../public/audio/1');  
+
+    console.log('audio')
+    audio.play()
   this.setState({pressed: false});
   if (!this.state.miss) {
   this.setState({match: false, miss: false, alert: " "});
@@ -255,7 +264,7 @@ var Game = React.createClass({
     });
   }
   }
-
+console.log(timeTilMatch,'time til color match')
 //NOT GOING TO ACTUALLY LIGHT UP COLORS UNTIL ALL IF STATEMENTS HAVE ITERATED
 //case 1: position match
   if (timeTilPositionMatch===0) {
@@ -301,6 +310,7 @@ var Game = React.createClass({
 
 // pick a non-matching next number while interval is not 0
 //position:
+if(!pMatch){
   var nextPosition = parseInt(Math.random() * 9);
   while (nextPosition == positionQueue[0]) {
     nextPosition = parseInt(Math.random() * 9);
@@ -311,7 +321,10 @@ var Game = React.createClass({
   if (positionQueue.length > this.state.N) {
     positionQueue.splice(0, 1);
   }
+}
+  
 //color:
+if(!cMatch){
   var nextColor = parseInt(Math.random() * 9);
   while (nextColor == colorQueue[0]) {
     nextColor = parseInt(Math.random() * 9);
@@ -322,8 +335,11 @@ var Game = React.createClass({
   if (colorQueue.length > this.state.N) {
     colorQueue.splice(0, 1);
   }
+}
+  
 
 //sound:
+if(!sMatch){
   var nextSound = parseInt(Math.random() * 9);
   while (nextSound == soundQueue[0]) {
     nextSound = parseInt(Math.random() * 9);
@@ -335,6 +351,8 @@ var Game = React.createClass({
     soundQueue.splice(0, 1);
   }
 
+}
+  
   // set color for 800
   this.state.style[nextPosition] = newStyle[nextColor];
   //ADAM PLEASE LET ME KNOW HOW TO SET SOUND
@@ -345,11 +363,13 @@ var Game = React.createClass({
      timeTilPositionMatch--;
   timeTilSoundMatch--;
   timeTilColorMatch--;
+    sMatch=false;
+    cMatch=false;
+    pMatch=false;
   }.bind(this), 800);
 
 
 }.bind(this), 2000);
-  // }
 },
   match: function() {
     if (this.state.pressed) {
