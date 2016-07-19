@@ -32,12 +32,14 @@ module.exports = function(passport) {
     if (!validateReq(req.body)) {
       return next("user validation failed")
     }
+    var userStats = new Stats();
+    userStats.save();
     var u = new User({
       username: req.body.username,
       email: req.body.email,
       password: req.body.password,
       facebookId: null,
-      highScore:null
+      stats: userStats
     });
     User.findOne({email:u.email},function(err,user){
       if(err){

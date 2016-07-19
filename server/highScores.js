@@ -33,8 +33,9 @@ var setLeaderboard = function(id,callback){
   })
 }
 
-router.post('/gameOver/:mode',function(req,res,next){
-  //check how scores compare on personal level;
+router.post('/gameOver',function(req,res,next){
+
+  //make score
   var newScore = req.body.score;
   var newHighScore = new HighScore({
     user:req.user._id,
@@ -44,6 +45,7 @@ router.post('/gameOver/:mode',function(req,res,next){
     mode:req.params.mode
   })
 
+  //check how scores compare on personal level;
   var myHighScores = user.stats.leaderboard.scores;
   if(myHighScores.length<process.env.leaderboardSize){
     myHighScores.push(newHighScore);
@@ -80,6 +82,12 @@ router.post('/gameOver/:mode',function(req,res,next){
   else{
     return myHighScores;
   }
+
+  //update stats
+  var stats = req.user.stats;
+  stats.totalPoints += newScore;
+  stats.progress = stats.progress.push([new Date(),stats.totalPoints]);
+
 
   return leaderboard;
 });
