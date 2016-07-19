@@ -467,6 +467,117 @@ var Game = React.createClass({
   }
 }.bind(this), 2000);
   },
+  tripleMatch: function(){
+    var positionQueue = [];
+    var colorQueue = [];
+    var soundQueue = [];
+    var timeTilPositionMatch = parseInt((Math.random() * 5) + 2 + this.state.N);
+    var timeTilColorMatch = parseInt((Math.random() * 5) + 2 + this.state.N);
+    var timeTilSoundMatch = parseInt((Math.random() * 5) + 2 + this.state.N);
+
+  setInterval(function() {
+  this.setState({pressed: false});
+  if (!this.state.miss) {
+  this.setState({match: false, miss: false, alert: " "});
+  }
+  if (this.state.miss) {
+  this.setState({miss: false, alert: "Missed a match"});
+  if (this.state.score !== 0) {
+    this.setState({
+    score: this.state.score - 5
+    });
+  }
+  }
+
+//NOT GOING TO ACTUALLY LIGHT UP COLORS UNTIL ALL IF STATEMENTS HAVE ITERATED
+//case 1: position match
+  if (timeTilPositionMatch===0) {
+  console.log('position match')
+  //reset position portion
+  timeTilPositionMatch = parseInt((Math.random() * 5) + 2);
+
+  //set up new position queue
+  var nextPosition = positionQueue[0];
+  positionQueue.push(nextPosition);
+  positionQueue.splice(0, 1);
+  }
+
+//case 2: color match
+  if (timeTilColorMatch===0) {
+  console.log('color match')
+  //reset position portion
+  timeTilColorMatch = parseInt((Math.random() * 5) + 2);
+
+  //set up new position queue
+  var nextColor = colorQueue[0];
+  colorQueue.push(nextColor);
+  colorQueue.splice(0, 1);
+  }
+ 
+ //case 3: sound match
+  if (timeTilSoundMatch===0) {
+  console.log('sound match')
+  //reset position portion
+  timeTilSoundMatch = parseInt((Math.random() * 5) + 2);
+
+  //set up new position queue
+  var nextSound = soundQueue[0];
+  soundQueue.push(nextSound);
+  soundQueue.splice(0, 1);
+  }  
+
+  //after all cases checked, do color/sound effects
+  console.log('board update')
+
+
+// pick a non-matching next number while interval is not 0
+//position:
+  var nextPosition = parseInt(Math.random() * 9);
+  while (nextPosition == positionQueue[0]) {
+    nextPosition = parseInt(Math.random() * 9);
+  }
+
+  // resize array to N: color
+  positionQueue.push(nextPosition);
+  if (positionQueue.length > this.state.N) {
+    positionQueue.splice(0, 1);
+  }
+//color:
+  var nextColor = parseInt(Math.random() * 9);
+  while (nextColor == colorQueue[0]) {
+    nextColor = parseInt(Math.random() * 9);
+  }
+
+  // resize array to N: color
+  colorQueue.push(nextColor);
+  if (colorQueue.length > this.state.N) {
+    colorQueue.splice(0, 1);
+  }
+
+//sound:
+  var nextSound = parseInt(Math.random() * 9);
+  while (nextSound == soundQueue[0]) {
+    nextSound = parseInt(Math.random() * 9);
+  }
+
+  // resize array to N: color
+  soundQueue.push(nextSound);
+  if (soundQueue.length > this.state.N) {
+    soundQueue.splice(0, 1);
+  }
+
+  // set color for 800
+  this.state.style[nextPosition] = newStyle[nextColor];
+  //ADAM PLEASE LET ME KNOW HOW TO SET SOUND
+  this.setState({style: this.state.style, match: true, miss: true});
+  setTimeout(function() {
+    this.state.style[nextPosition] = standardStyle;
+    this.setState({style: this.state.style});
+  }.bind(this), 800);
+
+}.bind(this), 2000);
+  },
+  };
   match: function() {
     if (this.state.pressed) {
       return;
@@ -548,6 +659,9 @@ var standardStyle = {
 var newStyle = {
   backgroundColor: 'blue'
 }
+
+///ADAM: fill in sound files here please (or wherever else you may have them, but this is how i'm linking them, just as an array of files )
+var sound =[1,2,3,4,5,6,7,8,9]
 
 // ReactDOM.render(<Game />, document.getElementById('root'));
 
