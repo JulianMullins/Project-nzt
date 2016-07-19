@@ -1,5 +1,3 @@
-<<<<<<< HEAD
-=======
 var React = require('react');
 var ReactDOM = require('react-dom');
 var url = process.env.url;
@@ -1198,4 +1196,3 @@ ReactDOM.render(
 
 // ReactDOM.render(
 //   <Mainmenu/>, document.getElementById('root'));
->>>>>>> refs/remotes/origin/master
