@@ -84,8 +84,9 @@ var Game = React.createClass({
     var timeTilColorMatch = parseInt((Math.random() * 5) + 2 + this.state.N);
     var timekeeper=0;
 
-  // var iterations = setInterval(function() {
-  //   timekeeper++
+  var iterations = setInterval(function() {
+    timekeeper++
+    console.log(timekeeper)
   this.setState({pressed: false});
   if (!this.state.miss) {
   this.setState({match: false, miss: false, alert: " "});
@@ -233,10 +234,10 @@ var Game = React.createClass({
     this.setState({style: this.state.style});
   }.bind(this), 800);
   }
-  // if(timekeeper===40){
-  //   console.log('over')
-  //   clearInterval(timekeeper)
-  // }
+  if(timekeeper===40){
+    console.log('over')
+    clearInterval(timekeeper)
+  }
 }.bind(this), 2000);
   },
   tripleMatch: function(){
