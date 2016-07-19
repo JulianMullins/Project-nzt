@@ -1,25 +1,12 @@
 var React = require('react');
 var ReactDOM = require('react-dom');
 var url = process.env.url;
-//var MenuOverlay = require('./menu').MenuOverlay;
-//var LoginOverlay = require('./menu').LoginOverlay;
-//var RegisterOverlay = require('./menu').RegisterOverlay;
-//var Mainmenu = require('./menu').Mainmenu;
+var MenuOverlay = require('./menuOverlay');
+var LoginOverlay = require('./loginOverlay');
+var RegisterOverlay = require('./registerOverlay');
+var Mainmenu = require('./Mainmenu');
+var GameOverOverlay = require('./GameOverOverlay');
 
-
-var gameOver = function(score){
-  fetch('/gameOver', {
-      method: 'post',
-      credentials: 'include',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        score: score
-      })
-    })
-}
 
 
 var GameTimer = React.createClass({
@@ -1043,8 +1030,10 @@ var newStyle = [
 
 
 ReactDOM.render(
-  <Silent/>, document.getElementById('root'));
-
-
-ReactDOM.render(
   <Mainmenu/>, document.getElementById('root'));
+
+// ReactDOM.render(
+//   <Silent/>, document.getElementById('root'));
+
+
+

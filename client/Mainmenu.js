@@ -2,85 +2,10 @@ var React = require('react');
 var ReactDOM = require('react-dom');
 var url = process.env.url;
 
-var MenuOverlay = React.createClass({
-  render: function() {
-    return (
-      <div className="overlay">
-        <center>
-          <a className="btn" href="" onClick={this.props.start}>Start</a>
-          <a className="btn" href="" onClick={this.props.loginScreen}>Login</a>
-        </center>
-      </div>
-    )
-  }
-})
+var MenuOverlay = require('./menuOverlay');
+var LoginOverlay = require('./loginOverlay');
+var RegisterOverlay = require('./registerOverlay');
 
-var LoginOverlay = React.createClass({
-  render: function() {
-    return (
-      <div className="overlay" id="login">
-        <center>
-          <form>
-            <input type="text" placeholder="username" name="username" id="username"></input>
-            <br></br>
-            <input type="password" placeholder="password" name="password" id="password"></input>
-            <br></br>
-            <button onClick={this.props.login}>Login</button>
-            <br></br>
-            <a type="button" href="/login/facebook">Login with Facebook</a>
-            <br></br>
-            <button onClick={this.props.registerScreen}>Register</button>
-            <br></br>
-            <button onClick={this.props.back} className="back">Back</button>
-          </form>
-        </center>
-      </div>
-    )
-  }
-});
-
-var RegisterOverlay = React.createClass({
-  render: function() {
-    return (
-      <div className="overlay" id="login">
-        <center>
-          <form>
-            <input type="text" placeholder="username" name="username" id="username"></input>
-            <br></br>
-            <input type="text" placeholder="email" name="email" id="email"></input>
-            <br/>
-            <input type="password" placeholder="password" name="password" id="password"></input>
-            <br></br>
-            <input type="password" placeholder="confirm password" name="passwordConfirm" id="passwordConfirm"></input>
-            <br></br>
-            <button onClick={this.props.register}>Register</button>
-            <br></br>
-            <button onClick={this.props.back} className="back">Already have an account?</button>
-          </form>
-        </center>
-      </div>
-    )
-  }
-});
-
-var GameoverOverlay = React.createClass({
-  render: function() {
-    return (
-      <div className="overlay" id="gameover">
-        <center>
-          <form>
-            <h1>Game Over</h1>
-            <input type="text" placeholder="username" name="username" id="username"></input>
-            <br></br>
-            <button>Submit</button>
-            <br></br>
-            <button>Sign In</button>
-          </form>
-        </center>
-      </div>
-    )
-  }
-});
 
 var Mainmenu = React.createClass({
 
@@ -120,6 +45,7 @@ var Mainmenu = React.createClass({
     this.setState({menu: false, login: true, register: false})
   },
   login: function(e) {
+    console.log("logging in")
     e.preventDefault();
 
     //ajax post
@@ -155,7 +81,6 @@ var Mainmenu = React.createClass({
   },
   register: function(e) {
     e.preventDefault();
-    this.setState({menu: false, login: false, register: false});
 
     //ajax post
     fetch('/register', {
@@ -164,8 +89,14 @@ var Mainmenu = React.createClass({
         'Accept': 'application/json',
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify({username: document.getElementById('username').value, email: document.getElementById('email').value, password: document.getElementById('password').value, passwordConfirm: document.getElementById('passwordConfirm').value})
+      body: JSON.stringify({
+        username: document.getElementById('username').value, 
+        email: document.getElementById('email').value, 
+        password: document.getElementById('password').value, 
+        passwordConfirm: document.getElementById('passwordConfirm').value})
     });
+
+    this.setState({menu: false, login: true, register: false});
 
   },
   back: function(e) {
@@ -233,6 +164,9 @@ var Mainmenu = React.createClass({
       : '';
     return (
       <div>
+       {menu}
+       {login}
+       {register}
         <div className="heading">
           <h1 id="title">Reflex</h1>
           <h3>WE MAKE YOU FUCKING BETTER</h3>
@@ -261,9 +195,4 @@ var Mainmenu = React.createClass({
 });
 
 
-module.exports = {
-  MenuOverlay: MenuOverlay,
-  LoginOverlay: LoginOverlay,
-  RegisterOverlay: RegisterOverlay,
-  Mainmenu: Mainmenu
-}
+module.exports = Mainmenu;
