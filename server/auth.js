@@ -36,7 +36,8 @@ module.exports = function(passport) {
       username: req.body.username,
       email: req.body.email,
       password: req.body.password,
-      facebookId: null
+      facebookId: null,
+      highScore:null
     });
     User.findOne({email:u.email},function(err,user){
       if(err){
@@ -52,7 +53,7 @@ module.exports = function(passport) {
           }
           else{
             console.log(user);
-            res.json({success:true});
+            res.json({success:true,isLoggedIn:true});
           }
         })
       }
@@ -86,17 +87,16 @@ module.exports = function(passport) {
   router.post('/login', function(req,res,next){
     passport.authenticate('local',
 		    function(err,user){
-          console.log("FDSAFDS")
           if(err){
             return next(err);
           }
           else if(!user){
             console.log("no user")
-            res.json({'loginSuccess':false})
+            res.json({success:false})
           }
           else{
             console.log("login success")
-            res.json({'loginSuccess':true})
+            res.json({success:true})
           }
         })
 	});
