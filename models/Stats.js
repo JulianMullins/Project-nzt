@@ -6,7 +6,9 @@ var statsSchema = mongoose.Schema({
 		type: mongoose.Schema.Types.ObjectId,
 		ref: 'User'
 	},
-	leaderboard:Object
+	leaderboard:Object,
+  totalPoints: Number,
+  progress:Array
 })
 
 

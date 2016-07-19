@@ -266,3 +266,12 @@ footer a {
 footer a:hover {
   color: #AAAAAA;
 }
+
+.fireworks {
+  position: absolute;
+	top: 0;
+	left: 0;
+  height: 30vh;
+  justify-content: center;
+  align-items: center;
+}

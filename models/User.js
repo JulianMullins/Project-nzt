@@ -9,8 +9,7 @@ var userSchema = mongoose.Schema({
 	facebookId: String,
   stats: Object,
   settings: Object,
-	cumulativeScore: Number,
-	games:Array
+	temp:Boolean
 })
 
 

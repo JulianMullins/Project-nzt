@@ -13,7 +13,8 @@ var mongoose = require('mongoose');
 
 var routes = require('./server/index');
 var auth = require('./server/auth');
-var User = require('./models/User')
+var User = require('./models/User');
+var Stats = require('./models/Stats')
 
 var app = express();
 var server = require('http').Server(app);
@@ -99,13 +100,16 @@ passport.use(new FacebookStrategy({
         return done(err);
       }
       // if no user present, auth failed
+      var userStats = new Stats();
+      userStats.save();
       if (!user) {
         console.log(profile)
         user = new User({
           facebookId:profile.id,
           email:profile._json.email,
           username:profile._json.first_name + ' '+profile._json.last_name,
-          highScore:null
+          stats:userStats,
+          temp:false
         });
         user.save(function(err,tempUser){
           if(err){
