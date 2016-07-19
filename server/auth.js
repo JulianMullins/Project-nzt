@@ -32,12 +32,15 @@ module.exports = function(passport) {
     if (!validateReq(req.body)) {
       return next("user validation failed")
     }
+    var userStats = new Stats();
+    userStats.save();
     var u = new User({
       username: req.body.username,
       email: req.body.email,
       password: req.body.password,
       facebookId: null,
-      highScore:null
+      stats: userStats,
+      temp:false
     });
     User.findOne({email:u.email},function(err,user){
       if(err){
@@ -110,6 +113,21 @@ module.exports = function(passport) {
     function(req, res) {
       res.redirect('/')
     });
+
+  //anon user
+  router.post('/startAnon',function(req,res,next){
+    var tempUserStats = new Stats();
+    tempUserStats.save();
+    var tempUser = new User({
+      stats:tempUserStats,
+      temp:true
+    })
+    tempUser.save(function(err,user){
+      if(err){
+        res.send(err)
+      }
+    })
+  })
 
 
   // GET Logout page

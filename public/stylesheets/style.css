@@ -31,8 +31,7 @@ h3 {
 }
 
 .heading > h3 {
-  color: #9ED7DB;
-  transform: translateY(-25px);
+  color: #7CD9D2;
 }
 .overlay {
   position: absolute;
@@ -117,21 +116,13 @@ h3 {
   color: #01B6A7 !important;
 }
 
-/*.bt-menu-open .bt-menu-trigger span:before {
-  background-color: white !important;
-}
-
-.bt-menu-open .bt-menu-trigger span:after {
-  background-color: white !important;
-}*/
-
 .heading {
   display: flex;
   height: 30vh;
   justify-content: center;
   align-items: center;
-  /*background-color: #01161e;*/
-  background-image: url('../images/agsquare.png');
+  background-color: white; /* #01161e /* 
+  /*background-image: url('../images/connect.png');*/
   color: #01B6A7; /* #01B6A7 */
   flex-direction: column;
 }
