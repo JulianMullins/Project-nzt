@@ -1,6 +1,10 @@
 var React = require('react');
 var ReactDOM = require('react-dom');
 var url = process.env.url;
+var MenuOverlay = require('./menu/MenuOverlay');
+var LoginOverlay = require('./menu/LoginOverlay');
+var RegisterOverlay = require('./menu/RegisterOverlay');
+var Mainmenu = require('./menu/Mainmenu');
 
 
 var GameTimer = React.createClass({
@@ -52,11 +56,17 @@ var Game = React.createClass({
       overlay: true,
       initialTimer: 3,
       N: 1,
-      pressed: false
+      pressed: false,
+      mode: this.props.mode
     }
   },
   componentDidMount: function() {
     setInterval(this.timer, 1000);
+
+    fetch('/startGame/'+this.state.mode+'/'+this.state.N, {
+    	method: 'post'
+    });
+
   },
   timer: function() {
     this.setState({

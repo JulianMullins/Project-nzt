@@ -2,7 +2,7 @@ var mongoose = require('mongoose')
 
 
 var leaderboardSchema = mongoose.Schema({
-	mode:String,
+	user:String,
 	scores: [{
 		type: mongoose.Schema.Types.ObjectId,
 		ref: 'HighScore'
