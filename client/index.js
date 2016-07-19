@@ -1,10 +1,10 @@
 var React = require('react');
 var ReactDOM = require('react-dom');
 var url = process.env.url;
-var MenuOverlay = require('./menu').MenuOverlay;
-var LoginOverlay = require('./menu').LoginOverlay;
-var RegisterOverlay = require('./menu').RegisterOverlay;
-var Mainmenu = require('./menu').Mainmenu;
+//var MenuOverlay = require('./menu/MenuOverlay');
+//var LoginOverlay = require('./menu/LoginOverlay');
+//var RegisterOverlay = require('./menu/RegisterOverlay');
+//var Mainmenu = require('./menu/Mainmenu');
 
 
 var GameTimer = React.createClass({
@@ -78,6 +78,7 @@ var Game = React.createClass({
     }
   },
   positionAndColor: function(){
+    console.log(this.state.style,'current style')
     var positionQueue = [];
     var colorQueue = [];
     var timeTilPositionMatch = parseInt((Math.random() * 5) + 2 + this.state.N);
@@ -92,7 +93,7 @@ var Game = React.createClass({
         this.setState({miss: false, alert: "Missed a match"});
         if (this.state.score !== 0) {
           this.setState({
-          score: this.state.score - 5
+            score: this.state.score - 5
           });
         }
       }
@@ -255,8 +256,9 @@ var Game = React.createClass({
         }
       }
 
-    //NOT GOING TO ACTUALLY LIGHT UP COLORS UNTIL ALL IF STATEMENTS HAVE ITERATED
-    //case 1: position match
+
+  //NOT GOING TO ACTUALLY LIGHT UP COLORS UNTIL ALL IF STATEMENTS HAVE ITERATED
+  //case 1: position match
     if (timeTilPositionMatch===0) {
       console.log('position match')
       //reset position portion
@@ -266,6 +268,8 @@ var Game = React.createClass({
       var nextPosition = positionQueue[0];
       positionQueue.push(nextPosition);
       positionQueue.splice(0, 1);
+
+      var pMatch=true;
     }
 
     //case 2: color match
@@ -278,6 +282,8 @@ var Game = React.createClass({
       var nextColor = colorQueue[0];
       colorQueue.push(nextColor);
       colorQueue.splice(0, 1);
+
+      var cMatch=true;
     }
 
    //case 3: sound match
@@ -290,14 +296,12 @@ var Game = React.createClass({
       var nextSound = soundQueue[0];
       soundQueue.push(nextSound);
       soundQueue.splice(0, 1);
+
+      var sMatch=true;
     }
 
-    //after all cases checked, do color/sound effects
-    console.log('board update')
-
-
-  // pick a non-matching next number while interval is not 0
-  //position:
+    // pick a non-matching next number while interval is not 0
+    //position:
     var nextPosition = parseInt(Math.random() * 9);
     while (nextPosition == positionQueue[0]) {
       nextPosition = parseInt(Math.random() * 9);
@@ -332,6 +336,7 @@ var Game = React.createClass({
       soundQueue.splice(0, 1);
     }
 
+
     // set color for 800
     this.state.style[nextPosition] = newStyle[nextColor];
     //ADAM PLEASE LET ME KNOW HOW TO SET SOUND
@@ -339,12 +344,16 @@ var Game = React.createClass({
     setTimeout(function() {
       this.state.style[nextPosition] = standardStyle;
       this.setState({style: this.state.style});
+       timeTilPositionMatch--;
+    timeTilSoundMatch--;
+    timeTilColorMatch--;
     }.bind(this), 800);
 
+
   }.bind(this), 2000);
-  // }
+    // }
 },
-  match: function() {
+match: function() {
     if (this.state.pressed) {
       return;
     }
@@ -368,19 +377,18 @@ var Game = React.createClass({
     }
   },
   render: function() {
-    var overlay = this.state.overlay
-      ? (
-        <div className="overlay">
-          <center>
-            <a className="btn">{this.state.initialTimer}</a>
-          </center>
-        </div>
-      )
-      : '';
+    // var overlay = this.state.overlay
+    //   ? (
+    //     <div className="overlay">
+    //       <center>
+    //         <a className="btn">{this.state.initialTimer}</a>
+    //       </center>
+    //     </div>
+    //   )
+    //   : '';
 
     return (
       <div className="gameContainer">
-        {overlay}
         <div className="gameHeading">
           <div className="gameScore">
             <b>Score: {this.state.score}</b>
@@ -407,6 +415,7 @@ var Game = React.createClass({
           {this.state.alert}
         </div>
         <button onClick={this.tripleMatch}>Triple Play</button>
+        <button onClick={this.positionAndColor}>Position and Color</button>
         <div className="gameButtonsContainer">
           <a>SOUND</a>
           <a>BOTH</a>
@@ -422,14 +431,13 @@ var standardStyle = {
   backgroundColor: "#BFBFBF"
 }
 
-var newStyle = {
-  backgroundColor: 'blue'
-}
+var newStyle=[{backgroundColor: '#DBFF33'},{backgroundColor: '#B15CCB'},{backgroundColor: '#5CCBAF'},{backgroundColor: '#5CCD93'},
+{backgroundColor: '#87CD5C'},{backgroundColor: '#D3A43F'},{backgroundColor: '#D3563F'},{backgroundColor: '#3F49D3'},{backgroundColor: '#C91A83'}]
 
 ///ADAM: fill in sound files here please (or wherever else you may have them, but this is how i'm linking them, just as an array of files )
 var sound =[1,2,3,4,5,6,7,8,9]
 
-// ReactDOM.render(<Game />, document.getElementById('root'));
+ ReactDOM.render(<Game />, document.getElementById('root'));
 
-ReactDOM.render(
-  <Mainmenu/>, document.getElementById('root'));
+// ReactDOM.render(
+//   <Mainmenu/>, document.getElementById('root'));
