@@ -396,7 +396,7 @@ var Game = React.createClass({
         <div className="scoreAlert">
           {this.state.alert}
         </div>
-
+        <button onClick={this.tripleMatch}>Triple Play</button>
         <div className="gameButtonsContainer">
           <a>SOUND</a>
           <a>BOTH</a>
