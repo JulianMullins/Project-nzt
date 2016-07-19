@@ -561,7 +561,7 @@ var Silent = React.createClass({
         }
       }
 
-      this.setState({pressed: false});
+      this.setState({pressed: false, alert: " "});
       //case 1: add both position and color match
       if (timeTilPositionMatch > 0 && timeTilColorMatch > 0) {
         // pick a non-matching next number while interval is not 0
