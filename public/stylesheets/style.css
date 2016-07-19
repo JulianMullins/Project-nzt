@@ -102,7 +102,7 @@ h3 {
   height: 30vh;
   justify-content: center;
   align-items: center;
-  background-color: #0B2137;
+  background-color: #01161e;
   color: white;
   flex-direction: column;
 }
@@ -130,19 +130,19 @@ h3 {
 }
 
 #menu1 {
-  background-color: #9ED7DB;
+  background-color: #124559;
 }
 
 #menu2 {
-  background-color: #EAB82D;
+  background-color: #598392;
 }
 
 #menu3 {
-  background-color: #E14827;
+  background-color: #aec3b0;
 }
 
 #menu4 {
-  background-color: #ffffff;
+  background-color: #eff6e0;
   color: black;
 }
 
