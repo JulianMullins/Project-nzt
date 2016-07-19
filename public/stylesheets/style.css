@@ -97,13 +97,42 @@ h3 {
   color: #EEEEEE;
 }
 
+.bt-menu-trigger span {
+  background-color: #01B6A7 !important;
+}
+
+.bt-menu-trigger span:before {
+  background-color: #01B6A7 !important;
+}
+
+.bt-menu-trigger span:after {
+  background-color: #01B6A7 !important;
+}
+
+.bt-menu-open .bt-menu-trigger span {
+  background-color: transparent !important;
+}
+
+.bt-menu ul li a:before {
+  color: #01B6A7 !important;
+}
+
+/*.bt-menu-open .bt-menu-trigger span:before {
+  background-color: white !important;
+}
+
+.bt-menu-open .bt-menu-trigger span:after {
+  background-color: white !important;
+}*/
+
 .heading {
   display: flex;
   height: 30vh;
   justify-content: center;
   align-items: center;
-  background-color: #01161e;
-  color: white;
+  /*background-color: #01161e;*/
+  background-image: url('../images/agsquare.png');
+  color: #01B6A7; /* #01B6A7 */
   flex-direction: column;
 }
 .menu {
@@ -130,20 +159,19 @@ h3 {
 }
 
 #menu1 {
-  background-color: #124559;
+  background-color: #F13542;
 }
 
 #menu2 {
-  background-color: #598392;
+  background-color: #01B6A7;
 }
 
 #menu3 {
-  background-color: #aec3b0;
+  background-color: #7CD9D2;
 }
 
 #menu4 {
-  background-color: #eff6e0;
-  color: black;
+  background-color: #F1BA03;
 }
 
 /* game page css */
@@ -246,4 +274,12 @@ footer a {
 }
 footer a:hover {
   color: #AAAAAA;
+}
+
+.fireworks {
+  position: absolute;
+	top: 0;
+	left: 0;
+  width: 100%;
+  height: 100%;
 }
