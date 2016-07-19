@@ -1,6 +1,9 @@
 var React = require('react');
 var ReactDOM = require('react-dom');
 var url = process.env.url;
+var modeMultiplier= require('../server/serverData').modeMultiplier;
+var penalty=require('../server/serverData').penalty;
+var positivePoints=require('../server/serverData').positivePoints;
 //var MenuOverlay = require('./menu/MenuOverlay');
 //var LoginOverlay = require('./menu/LoginOverlay');
 //var RegisterOverlay = require('./menu/RegisterOverlay');
@@ -57,7 +60,7 @@ var Game = React.createClass({
       initialTimer: 3,
       N: 1,
       pressed: false,
-      mode: this.props.mode
+      modeMultiplier: modeMultiplier[this.props.mode]
     }
   },
   componentDidMount: function() {
@@ -93,7 +96,7 @@ var Game = React.createClass({
         this.setState({miss: false, alert: "Missed a match"});
         if (this.state.score !== 0) {
           this.setState({
-            score: this.state.score - process.env.penalty
+            score: this.state.score - (modeMultiplier)*(this.state.N)*(penalty)
           });
         }
       }
@@ -251,7 +254,7 @@ var Game = React.createClass({
         this.setState({miss: false, alert: "Missed a match"});
         if (this.state.score !== 0) {
           this.setState({
-            score: this.state.score - process.env.penalty
+            score: this.state.score - (modeMultiplier)*(this.state.N)*penalty
           });
         }
       }
@@ -359,7 +362,7 @@ match: function() {
     }
     if (this.state.match) {
       this.setState({
-        score: this.state.score + process.env.positivePoints,
+        score: this.state.score + (modeMultiplier)*(this.state.N)*positivePoints,
         miss: false,
         alert: "Good job",
         pressed: true
@@ -367,7 +370,7 @@ match: function() {
     } else {
       if (this.state.score !== 0) {
         this.setState({
-          score: this.state.score - process.env.penalty,
+          score: this.state.score - (modeMultiplier)*(this.state.N)*penalty,
           alert: "Not a match",
           pressed: true
         });

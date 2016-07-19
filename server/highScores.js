@@ -1,7 +1,7 @@
 var HighScore = require('../models/HighScore');
 var User = require('../models/HighScore');
 var Leaderboard = require('../models/Leaderboard');
-var serverLeaderboardId = require('./serverData')
+var serverLeaderboardId = require('./serverData').serverLeaderboard;
 var express = require('express');
 var router = express.Router();
 
