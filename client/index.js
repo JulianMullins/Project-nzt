@@ -1,10 +1,26 @@
 var React = require('react');
 var ReactDOM = require('react-dom');
 var url = process.env.url;
-//var MenuOverlay = require('./menu/MenuOverlay');
-//var LoginOverlay = require('./menu/LoginOverlay');
-//var RegisterOverlay = require('./menu/RegisterOverlay');
-//var Mainmenu = require('./menu/Mainmenu');
+//var MenuOverlay = require('./menu').MenuOverlay;
+//var LoginOverlay = require('./menu').LoginOverlay;
+//var RegisterOverlay = require('./menu').RegisterOverlay;
+//var Mainmenu = require('./menu').Mainmenu;
+
+
+var gameOver = function(score){
+  fetch('/gameOver', {
+      method: 'post',
+      credentials: 'include',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        score: score
+      })
+    })
+}
+
 
 var GameTimer = React.createClass({
   getInitialState: function() {
@@ -56,11 +72,27 @@ var Relaxed = React.createClass({
       initialTimer: 3,
       N: 1,
       pressed: false,
-      mode: this.props.mode
+      modeMultiplier: modeMultiplier[this.props.mode],
+      tempUser:true
     }
   },
   componentDidMount: function() {
     setInterval(this.timer, 1000);
+
+
+    fetch('/startGame/'+this.state.mode+'/'+this.state.N, {
+    	method: 'post'
+    }).then(function(response){
+        return response.json();
+    }).then(function(response){
+      if(!response.tempUser){
+        this.setState({
+          tempUser: false
+        })
+      }
+    })
+
+
     // fetch('/startGame/'+this.state.mode+'/'+this.state.N, {
     //  method: 'post'
     // });
@@ -208,6 +240,7 @@ var Relaxed = React.createClass({
     );
   }
 })
+
 
 var Classic = React.createClass({
   getInitialState: function() {
@@ -1008,8 +1041,10 @@ var newStyle = [
   }
 ]
 
+
 ReactDOM.render(
   <Silent/>, document.getElementById('root'));
 
-// ReactDOM.render(
-//   <Mainmenu/>, document.getElementById('root'));
+
+ReactDOM.render(
+  <Mainmenu/>, document.getElementById('root'));
