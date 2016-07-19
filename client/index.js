@@ -93,7 +93,7 @@ var Game = React.createClass({
         this.setState({miss: false, alert: "Missed a match"});
         if (this.state.score !== 0) {
           this.setState({
-            score: this.state.score - 5
+            score: this.state.score - process.env.penalty
           });
         }
       }
@@ -251,7 +251,7 @@ var Game = React.createClass({
         this.setState({miss: false, alert: "Missed a match"});
         if (this.state.score !== 0) {
           this.setState({
-          score: this.state.score - 5
+            score: this.state.score - process.env.penalty
           });
         }
       }
@@ -359,7 +359,7 @@ match: function() {
     }
     if (this.state.match) {
       this.setState({
-        score: this.state.score + 10,
+        score: this.state.score + process.env.positivePoints,
         miss: false,
         alert: "Good job",
         pressed: true
@@ -367,7 +367,7 @@ match: function() {
     } else {
       if (this.state.score !== 0) {
         this.setState({
-          score: this.state.score - 5,
+          score: this.state.score - process.env.penalty,
           alert: "Not a match",
           pressed: true
         });
