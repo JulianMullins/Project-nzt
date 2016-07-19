@@ -4,11 +4,13 @@ var mongoose = require('mongoose')
 
 var userSchema = mongoose.Schema({
 	username: String,
-	email:String,
+	email: String,
 	password: String,
 	facebookId: String,
-  highScores:Object,
-  Settings:Object
+  highScores: Object,
+  settings: Object,
+	cumulativeScore: Number,
+	games:Array
 })
 
 

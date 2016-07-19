@@ -114,10 +114,10 @@ var Mainmenu = React.createClass({
     }).then(function(response){
         return response.json();
     }).then(function(response){
-      if(response.loginSuccess){
+      if(response.success){
         this.setState({menu: false, login: false, register: false})
       }
-      else if(!response.loginSuccess){
+      else if(!response.success){
 
       }
     }.bind(this))
