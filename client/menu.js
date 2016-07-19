@@ -257,8 +257,6 @@ var Mainmenu = React.createClass({
   }
 });
 
-  
-
 module.exports = {
   MenuOverlay: MenuOverlay,
   LoginOverlay: LoginOverlay,
