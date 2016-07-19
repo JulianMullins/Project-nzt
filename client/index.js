@@ -4,10 +4,10 @@ var url = process.env.url;
 var modeMultiplier= require('../server/serverData').modeMultiplier;
 var penalty=require('../server/serverData').penalty;
 var positivePoints=require('../server/serverData').positivePoints;
-//var MenuOverlay = require('./menu/MenuOverlay');
-//var LoginOverlay = require('./menu/LoginOverlay');
-//var RegisterOverlay = require('./menu/RegisterOverlay');
-//var Mainmenu = require('./menu/Mainmenu');
+var MenuOverlay = require('./menu').MenuOverlay;
+var LoginOverlay = require('./menu').LoginOverlay;
+var RegisterOverlay = require('./menu').RegisterOverlay;
+var Mainmenu = require('./menu').Mainmenu;
 
 
 var GameTimer = React.createClass({
