@@ -257,3 +257,10 @@ var Mainmenu = React.createClass({
     );
   }
 });
+
+module.exports = {
+  MenuOverlay: MenuOverlay,
+  LoginOverlay: LoginOverlay,
+  RegisterOverlay:RegisterOverlay,
+  Mainmenu: Mainmenu
+}
