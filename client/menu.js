@@ -80,16 +80,16 @@ var Mainmenu = React.createClass({
     }
   },
   componentDidMount: function(){
-    fetch('/isLoggedIn',{
-      method:'get',
-      credentials: 'include'
-    }).then(function(response){
-        return response.json();
-    }).then(function(response){
-      if(response.loggedIn){
-        this.start({preventDefault:function(){}});
-      }
-    }.bind(this))
+    // fetch('/isLoggedIn',{
+    //   method:'get',
+    //   credentials: 'include'
+    // }).then(function(response){
+    //     return response.json();
+    // }).then(function(response){
+    //   if(response.loggedIn){
+    //     this.start({preventDefault:function(){}});
+    //   }
+    // }.bind(this))
   },
 
   //functions related to login/registration/main menu
@@ -257,7 +257,7 @@ var Mainmenu = React.createClass({
   }
 });
 
-  
+
 
 module.exports = {
   MenuOverlay: MenuOverlay,

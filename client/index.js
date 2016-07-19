@@ -10,6 +10,22 @@ var RegisterOverlay = require('./menu').RegisterOverlay;
 var Mainmenu = require('./menu').Mainmenu;
 
 
+
+var gameOver = function(score){
+  fetch('/gameOver', {
+      method: 'post',
+      credentials: 'include',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        score: score 
+      })
+    })
+}
+
+
 var GameTimer = React.createClass({
   getInitialState: function() {
     return {seconds: 120}
@@ -60,7 +76,8 @@ var Game = React.createClass({
       initialTimer: 3,
       N: 1,
       pressed: false,
-      modeMultiplier: modeMultiplier[this.props.mode]
+      modeMultiplier: modeMultiplier[this.props.mode],
+      tempUser:true
     }
   },
   componentDidMount: function() {
@@ -68,7 +85,16 @@ var Game = React.createClass({
 
     fetch('/startGame/'+this.state.mode+'/'+this.state.N, {
     	method: 'post'
-    });
+    }).then(function(response){
+        return response.json();
+    }).then(function(response){
+      if(!response.tempUser){
+        this.setState({
+          tempUser: false
+        })
+      }
+    })
+
 
   },
   timer: function() {
@@ -440,7 +466,7 @@ var newStyle=[{backgroundColor: '#DBFF33'},{backgroundColor: '#B15CCB'},{backgro
 ///ADAM: fill in sound files here please (or wherever else you may have them, but this is how i'm linking them, just as an array of files )
 var sound =[1,2,3,4,5,6,7,8,9]
 
- ReactDOM.render(<Game />, document.getElementById('root'));
+ReactDOM.render(<Game />, document.getElementById('root'));
 
-// ReactDOM.render(
-//   <Mainmenu/>, document.getElementById('root'));
+ReactDOM.render(
+  <Mainmenu/>, document.getElementById('root'));
