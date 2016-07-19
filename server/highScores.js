@@ -1,26 +1,37 @@
 var HighScore = require('../models/HighScore');
 var User = require('../models/HighScore');
 var Leaderboard = require('../models/Leaderboard');
-var serverLeaderboards = require('./serverData')
+var serverLeaderboardId = require('./serverData')
 var express = require('express');
 var router = express.Router();
 
-router.get('/myHighScores/:mode',function(req,res,next){
-  return user.highScores[req.params.mode];
+router.get('/myHighScores',function(req,res,next){
+  return user.stats.leaderboard.scores;
 })
 
 //modes: classic,relaxed,silent,advanced
 
-router.get('/allHighScores/:mode',function(req,res,next){
-  Leaderboard.findOne({mode:req.params.mode},function(err,leaderboard){
+router.get('/allHighScores',function(req,res,next){
+  Leaderboard.findById(serverLeaderboardId,function(err,leaderboard){
     if(err){
-      return next(err);
+      res.send(err)
     }
     else{
       return leaderboard.scores;
     }
   })
 });
+
+var setLeaderboard = function(id,callback){
+  Leaderboard.findById(id,function(err,leaderboard){
+    if(err){
+      callback(err);
+    }
+    else{
+      callback(false,leaderboard);
+    }
+  })
+}
 
 router.post('/gameOver/:mode',function(req,res,next){
   //check how scores compare on personal level;
@@ -33,7 +44,7 @@ router.post('/gameOver/:mode',function(req,res,next){
     mode:req.params.mode
   })
 
-  var myHighScores = user.highScores[req.params.mode];
+  var myHighScores = user.stats.leaderboard.scores;
   if(myHighScores.length<process.env.leaderboardSize){
     myHighScores.push(newHighScore);
     myHighScores.sort();
@@ -48,7 +59,10 @@ router.post('/gameOver/:mode',function(req,res,next){
   }
 
   //check overall leaderboard
-  var leaderboard =serverLeaderboards[req.params.mode];
+  var leaderboard =null;
+  setLeaderboard(serverLeaderboardId,function(err,serverLeaderboard){
+    leaderboard = serverLeaderboard.scores;
+  })
   if(myHighScores[0] == newScore){
     if(leaderboard.size<process.env.leaderboardSize){
       leaderboard.push(newHighScore);

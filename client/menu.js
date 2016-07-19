@@ -65,6 +65,8 @@ var RegisterOverlay = React.createClass({
 });
 
 var Mainmenu = React.createClass({
+
+  //initial functions
   getInitialState: function() {
     return {
       menu: true,
@@ -89,6 +91,8 @@ var Mainmenu = React.createClass({
       }
     }.bind(this))
   },
+
+  //functions related to login/registration/main menu
   start: function(e) {
     e.preventDefault();
     this.setState({menu: false, login: false, register: false});
@@ -165,6 +169,8 @@ var Mainmenu = React.createClass({
     e.preventDefault();
     this.setState({menu: true, login: false, register: false})
   },
+
+  //set mode
   normalMode: function(e) {
     e.preventDefault();
     this.setState({
@@ -205,10 +211,14 @@ var Mainmenu = React.createClass({
       }
     }, this.goToGame);
   },
+
+  //start game
   goToGame: function() {
     ReactDOM.render(
       <Game mode={this.state.mode}></Game>, document.getElementById('root'));
   },
+
+
   render: function() {
     var menu = this.state.menu
       ? <MenuOverlay start={this.start} loginScreen={this.loginScreen} registerScreen={this.registerScreen}></MenuOverlay>
