@@ -10,7 +10,8 @@ var ClassicLevels = React.createClass({
       n: 7
     }
   },
-  classic: function(n){
+  classic: function(e){
+    e.preventDefault();
     // ReactDOM.render(
     //   <Classic level={n}></Classic>, document.getElementById('root'));
   },
@@ -28,9 +29,9 @@ var ClassicLevels = React.createClass({
     }
     var arr = [];
     for(var i=0; i<square-1; i++){
-      arr.push(<a href="" className={"levelSquare " + squareClass} onClick={this.classic(i+1)}></a>);
+      arr.push(<a href="" className={"levelSquare " + squareClass} onClick={this.classic}></a>);
     }
-    arr.push(<a href="" className={"levelSquareLast " + squareClass} onClick={this.classic(square)}></a>);
+    arr.push(<a href="" className={"levelSquareLast " + squareClass} onClick={this.classic}></a>);
 
     return(
     <div className="levelBox">

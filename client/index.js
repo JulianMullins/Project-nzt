@@ -1208,7 +1208,7 @@ var newStyle = [
 ]
 
 ReactDOM.render(
-  <Advanced/>, document.getElementById('root'));
+  <Silent/>, document.getElementById('root'));
 
 // ReactDOM.render(
 //   <Mainmenu/>, document.getElementById('root'));
