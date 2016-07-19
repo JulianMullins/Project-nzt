@@ -4,11 +4,7 @@ var HighScore = require('../models/HighScore');
 
 //modes: classic,relaxed,silent,advanced
 
-var serverLeaderboards={
-  classic: new Leaderboard({mode:'classic'}),
-  relaxed: new Leaderboard({mode:'relaxed'}),
-  silent: new Leaderboard({mode:'silent'}),
-  advanced: new Leaderboard({mode:'advanced'})
-}
+var serverLeaderboard=new Leaderboard();
+serverLeaderboard.save();
 
-module.exports = serverLeaderboards
+module.exports = serverLeaderboard._id
