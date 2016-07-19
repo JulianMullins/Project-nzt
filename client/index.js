@@ -267,6 +267,8 @@ var Game = React.createClass({
   var nextPosition = positionQueue[0];
   positionQueue.push(nextPosition);
   positionQueue.splice(0, 1);
+
+  var pMatch=true;
   }
 
 //case 2: color match
@@ -279,6 +281,8 @@ var Game = React.createClass({
   var nextColor = colorQueue[0];
   colorQueue.push(nextColor);
   colorQueue.splice(0, 1);
+
+  var cMatch=true;
   }
 
  //case 3: sound match
@@ -291,6 +295,8 @@ var Game = React.createClass({
   var nextSound = soundQueue[0];
   soundQueue.push(nextSound);
   soundQueue.splice(0, 1);
+
+  var sMatch=true;
   }
 
 // pick a non-matching next number while interval is not 0
@@ -331,15 +337,16 @@ var Game = React.createClass({
 
   // set color for 800
   this.state.style[nextPosition] = newStyle[nextColor];
-  timeTilPositionMatch--;
-  timeTilSoundMatch--;
-  timeTilColorMatch--;
   //ADAM PLEASE LET ME KNOW HOW TO SET SOUND
   this.setState({style: this.state.style, match: true, miss: true});
   setTimeout(function() {
     this.state.style[nextPosition] = standardStyle;
     this.setState({style: this.state.style});
+     timeTilPositionMatch--;
+  timeTilSoundMatch--;
+  timeTilColorMatch--;
   }.bind(this), 800);
+
 
 }.bind(this), 2000);
   // }
