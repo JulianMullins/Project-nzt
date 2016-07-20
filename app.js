@@ -10,9 +10,15 @@ var LocalStrategy = require('passport-local');
 var FacebookStrategy = require('passport-facebook');
 var MongoStore = require('connect-mongo')(session);
 var mongoose = require('mongoose');
+var bcrypt = require('bcryptjs');
 
 var routes = require('./server/index');
 var auth = require('./server/auth');
+var clientExpressFunctions = require('./server/clientExpressFunctions');
+var highScores = require('./server/highScores');
+var serverData = require('./server/serverData')
+
+
 var User = require('./models/User');
 var Stats = require('./models/Stats')
 
@@ -72,12 +78,17 @@ passport.use(new LocalStrategy(function(username, password, done) {
         //console.log(user);
         return done(null, false, { message: 'Incorrect username.' });
       }
-      // if passwords do not match, auth failed
-      if (user.password !== password) {
-        return done(null, false, { message: 'Incorrect password.' });
-      }
-      // auth has has succeeded
-      return done(null, user);
+      bcrypt.compare(password,user.password,function(err,res){
+        if(err){
+          return done(err)
+        }
+        else if(!res){
+          return done(null,false);
+        }
+        else{
+          return done(null,user)
+        }
+      })
     });
   }
 ));
@@ -139,6 +150,7 @@ passport.use(new FacebookStrategy({
 
 
 app.use('/', auth(passport));
+app.use('/',clientExpressFunctions);
 app.use('/', routes);
 
 

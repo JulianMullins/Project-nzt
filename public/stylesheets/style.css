@@ -8,7 +8,7 @@ body {
   margin: 0;
   padding: 0;
   background: #faf8ef;
-  color: red;
+  color:#7CD9D2;
 }
 #root {
   height: 100vh;
@@ -96,32 +96,12 @@ h3 {
   color: #EEEEEE;
 }
 
-.bt-menu-trigger span {
-  background-color: #01B6A7 !important;
-}
-
-.bt-menu-trigger span:before {
-  background-color: #01B6A7 !important;
-}
-
-.bt-menu-trigger span:after {
-  background-color: #01B6A7 !important;
-}
-
-.bt-menu-open .bt-menu-trigger span {
-  background-color: transparent !important;
-}
-
-.bt-menu ul li a:before {
-  color: #01B6A7 !important;
-}
-
 .heading {
   display: flex;
   height: 30vh;
   justify-content: center;
   align-items: center;
-  background-color: white; /* #01161e /* 
+  background-color: white; /* #01161e /*
   /*background-image: url('../images/connect.png');*/
   color: #01B6A7; /* #01B6A7 */
   flex-direction: column;
@@ -301,4 +281,112 @@ h3 {
   height: 30vh;
   justify-content: center;
   align-items: center;
+}
+
+/*levels*/
+#classic, #relax, #silent, #advanced{
+  font-size: 10rem;
+  font-weight: 700;
+  text-align: center;
+}
+
+#silent{
+  color: #7CD9D2;
+}
+
+#classic{
+  color: #F13542
+}
+
+#relaxed{
+  color: #01B6A7;
+}
+
+#advanced{
+  color: #F1BA03;
+}
+
+.levelBox{
+  text-align: center;
+}
+
+.levelBox > h1 {
+  font-size: 10rem;
+  font-weight: 700;
+  margin: 0;
+}
+
+h2 {
+  font-size: 2rem;
+  font-weight: 300;
+}
+h3 {
+  font-size: 1.3rem;
+  font-weight: 100;
+}
+
+#classic, #relax, #silent, #advanced{
+  font-size: 10rem;
+  font-weight: 700;
+  text-align: center;
+}
+
+#silent{
+  color: #7CD9D2;
+}
+
+#classic{
+  color: #F13542
+}
+
+#relaxed{
+  color: #01B6A7;
+}
+
+#advanced{
+  color: #F1BA03;
+}
+
+.grid {
+  height: 55vh;
+  width: 55vh;
+  min-width: 400px;
+  margin: 0 auto;
+  align-items: left;
+}
+
+.grid a{
+  display: inline-block;
+}
+
+.levelSquare, .levelSquareLast {
+  display: inline-block;
+  background-color: #BFBFBF;
+  float: left;
+}
+
+.grid1{
+  width: 99%;
+  height: 99%;
+  margin: .5%;
+}
+
+.grid4{
+  width: 48%;
+  height: 48%;
+  margin: calc(4% / 4);
+}
+
+.grid9{
+  width: 30%;
+  height: 30%;
+  margin: calc(10% / 6);
+}
+
+.levelSquare{
+  background-color: #BFBFBF;
+}
+
+.levelSquareLast{
+  background-color: #D6D6D6;
 }

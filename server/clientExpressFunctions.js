@@ -105,3 +105,5 @@ router.post('/gameOver',function(req,res,next){
 
   return leaderboard;
 });
+
+module.exports=router;
