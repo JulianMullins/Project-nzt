@@ -10,6 +10,11 @@ var GameOverOverlay = require('./gameOverOverlay');
 var Levels = require('./levels').Levels;
 var NavBar = require('./navBar');
 
+var RelaxedMode = require('./relaxedMode');
+var ClassicMode = require('./classicMode');
+var SilentMode = require('./silentMode');
+var AdvancedMode = require('./advancedMode');
+
 
 var gameOver = function(score){
   fetch('/gameOver', {
@@ -25,6 +30,7 @@ var gameOver = function(score){
     })
 }
 
+<<<<<<< HEAD
 var GameTimer = React.createClass({
   getInitialState: function() {
     return {seconds: 120}
@@ -1227,3 +1233,13 @@ ReactDOM.render(
 
 // ReactDOM.render(
 //   <Silent/>, document.getElementById('root'));
+=======
+// ReactDOM.render(
+//   <div>
+//       <Mainmenu/>
+//   </div>
+//   , document.getElementById('root'));
+
+ReactDOM.render(
+  <RelaxedMode/>, document.getElementById('root'));
+>>>>>>> refs/remotes/origin/master
