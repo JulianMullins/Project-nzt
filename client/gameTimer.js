@@ -20,7 +20,7 @@ var GameTimer = React.createClass({
     }
   },
   render: function() {
-    console.log("Style: ", this.props.timeStyle);
+   // console.log("Style: ", this.props.timeStyle);
     return (
       <div className="timerContainer">
         <h1 className="gameTimer" style={this.props.timeStyle}>{Math.floor(this.state.seconds / 60)}:{("0" + this.state.seconds % 60).slice(-2)}</h1>

@@ -30,13 +30,13 @@ var RelaxedMode = React.createClass({
   componentDidMount: function() {
     setInterval(this.timer, 1000);
 
-    fetch('/startGame/' + this.state.mode + '/' + this.state.N, {method: 'post'}).then(function(response) {
-      return response.json();
-    }).then(function(response) {
-      if (!response.tempUser) {
-        this.setState({tempUser: false})
-      }
-    })
+    // fetch('/startGame/' + this.state.mode + '/' + this.state.N, {method: 'post'}).then(function(response) {
+    //   return response.json();
+    // }).then(function(response) {
+    //   if (!response.tempUser) {
+    //     this.setState({tempUser: false})
+    //   }
+    // })
 
     // fetch('/startGame/'+this.state.mode+'/'+this.state.N, {
     //  method: 'post'
@@ -112,7 +112,7 @@ var RelaxedMode = React.createClass({
           this.setState({style: this.state.style});
         }.bind(this), 800);
       }
-      if (timekeeper === 60) {
+      if (timeKeeper === 60) {
         console.log('over')
         clearInterval(iterations);
       }
