@@ -218,43 +218,55 @@ var SilentMode = React.createClass({
     }
   },
   render: function() {
-    // var overlay = this.state.overlay
-    //   ? (
-    //     <div className="overlay">
-    //       <center>
-    //         <a className="btn">{this.state.initialTimer}</a>
-    //       </center>
-    //     </div>
-    //   )
-    //   : '';
+    var overlay = this.state.overlay
+      ? (
+        <div className="overlay">
+          <center>
+            <a className="btn">{this.state.initialTimer}</a>
+          </center>
+        </div>
+      )
+      : '';
+
+    var scoreAlert;
+    if (this.state.alert === "Good job") {
+      scoreAlert = <div className="scoreAlertPositive">
+                    {this.state.alert}
+                   </div>
+    } else if (this.state.alert === "Not a match" ||
+               this.state.alert === "Missed a match") {
+      scoreAlert = <div className="scoreAlertNegative">
+                    {this.state.alert}
+                   </div>
+    } else {
+      scoreAlert = <div></div>
+    }
+
     return (
-      <div className="gameContainer">
-        <h2>Silent</h2>
+      <div className="gameContainer silentContainer">
+        {overlay}
+        <h1>Silent</h1>
         <div className="gameHeading">
           <div className="gameScore silentScore">
-            <b>Score: {this.state.score}</b>
+            <h2>Score: {this.state.score}</h2>
           </div>
           <GameTimer timeStyle={{
             'color': "#7CD9D2"
           }}></GameTimer>
         </div>
-        <div className="gameRow">
+        <div className="gameBoard">
           <div className="gameSquare" style={this.state.style[0]}></div>
           <div className="gameSquare" style={this.state.style[1]}></div>
           <div className="gameSquare" style={this.state.style[2]}></div>
-        </div>
-        <div className="gameRow">
           <div className="gameSquare" style={this.state.style[3]}></div>
           <div className="gameSquare" style={this.state.style[4]}></div>
           <div className="gameSquare" style={this.state.style[5]}></div>
-        </div>
-        <div className="gameRow">
           <div className="gameSquare" style={this.state.style[6]}></div>
           <div className="gameSquare" style={this.state.style[7]}></div>
           <div className="gameSquare" style={this.state.style[8]}></div>
         </div>
         <div className="scoreAlert">
-          {this.state.alert}
+          {scoreAlert}
         </div>
         <div className="gameButtonsContainer silentMode">
           <a onClick={this.positionMatch}>POSITION</a>

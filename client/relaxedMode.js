@@ -171,7 +171,6 @@ var RelaxedMode = React.createClass({
       : '';
 
     var scoreAlert;
-
     if (this.state.alert === "Good job") {
       scoreAlert = <div className="scoreAlertPositive">
                     {this.state.alert}
@@ -201,13 +200,9 @@ var RelaxedMode = React.createClass({
             <div className="gameSquare" style={this.state.style[0]}></div>
             <div className="gameSquare" style={this.state.style[1]}></div>
             <div className="gameSquare" style={this.state.style[2]}></div>
-        
-        
             <div className="gameSquare" style={this.state.style[3]}></div>
             <div className="gameSquare" style={this.state.style[4]}></div>
             <div className="gameSquare" style={this.state.style[5]}></div>
-      
-    
             <div className="gameSquare" style={this.state.style[6]}></div>
             <div className="gameSquare" style={this.state.style[7]}></div>
             <div className="gameSquare" style={this.state.style[8]}></div>
