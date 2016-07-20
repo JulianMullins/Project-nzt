@@ -40,7 +40,7 @@ var App = React.createClass({
     return (
       <div>
         
-        <div>Other Content</div>
+
         {this.props.children}
       </div>
     )
@@ -50,9 +50,8 @@ var App = React.createClass({
 
 ReactDOM.render((
   <Router history={hashHistory}>
-    <Route path="/" component={App}>
-      <IndexRedirect to="/home" />
-      <Route path="home" component={Mainmenu} />
+    <Route path="/" component={App}/>
+      <Route path="" component={Home} />
       <Route path="login" component={Login}/>
       <Route path="register" component={Register}/>
       <Route path="gameOver" component={GameOver}/>
@@ -65,7 +64,6 @@ ReactDOM.render((
       <Route path="game/relaxed/:n" component={RelaxedGame}/>
       <Route path="game/silent/:n" component={SilentGame}/>
       <Route path="game/advanced/:n" component={AdvancedGame}/>
-    </Route>
   </Router>
   ), document.getElementById('root'),function(){console.log("rendered")});
 
