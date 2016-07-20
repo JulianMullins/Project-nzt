@@ -1,7 +1,6 @@
 var React = require('react');
 var ReactDOM = require('react-dom');
-
-
+import { Link } from 'react-router'
 
 
 var NavBar = React.createClass({
@@ -16,18 +15,20 @@ var NavBar = React.createClass({
 	render: function(){
 		return(
 			<div>
-				<nav id="bt-menu" className="bt-menu">
-				<a href="#" className="bt-menu-trigger"><span>Menu</span></a>
-				<ul>
-					<li><a href="#" className="fa fa-book">Learn More</a></li>
-					<li><a href="#" className="fa fa-cogs">Settings</a></li>
-					<li><a href="#" className="fa fa-trophy">Stats</a></li>
-					<li><a href="#" className="fa fa-info-circle">About</a></li>
-					<li><a onClick={this.logInOut} className="fa fa-sign-in">Login</a></li>
-				</ul>
+				<nav id="bt-menu" class="bt-menu">
+					<a href="#" class="bt-menu-trigger"><span>Menu</span></a>
+					<ul>
+						<li><Link to="/">Home</Link></li>
+						<li><Link to="/login">Login</Link></li>
+						<li><Link to="/leaderboard">Leaderboard</Link></li>
+						<li><Link to="/stats">Stats</Link></li>
+						<li><Link to="/science">The Science</Link></li>
+						<li><Link to="/contact">Contact</Link></li>
+					</ul>
+					<ul>
+						<li><Link to="/settings"><i class="fa fa-cog" style="font-size:55px; padding-top:10px" aria-hidden="true"></i></Link></li>
+					</ul>
 				</nav>
-				<script src="./js/classie.js"></script>
-				<script src="./js/borderMenu.js"></script>
 			</div>
 		)
 	}
