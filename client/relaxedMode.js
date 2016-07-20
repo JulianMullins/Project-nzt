@@ -187,7 +187,7 @@ var RelaxedMode = React.createClass({
     return (
       <div className="gameContainer relaxContainer">
         {overlay}
-        <h1>Relaxed</h1>
+        <h1 className="relaxedScore">Relaxed</h1>
         <div className="gameHeading">
           <div className="gameScore relaxedScore">
             <h2>Score: {this.state.score}</h2>
