@@ -32,7 +32,7 @@ var gameOver = function(score){
 
 ReactDOM.render(
   <div>
-      <Mainmenu/>
+      <LoginOverlay/>
   </div>
   , document.getElementById('root'));
 
