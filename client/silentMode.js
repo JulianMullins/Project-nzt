@@ -57,9 +57,9 @@ var SilentMode = React.createClass({
     var colorQueue = [];
     var timeTilPositionMatch = parseInt((Math.random() * 5) + 2 + this.state.N);
     var timeTilColorMatch = parseInt((Math.random() * 5) + 2 + this.state.N);
-    var timekeeper = 0;
+    var timeKeeper = 0;
     var iterations = setInterval(function() {
-      timekeeper++;
+      timeKeeper++;
     if (!this.state.miss || this.state.pressed) {
         this.setState({positionMatch: false, colorMatch: false, miss: false, alert: " "});
       }
@@ -131,7 +131,7 @@ var SilentMode = React.createClass({
         cMatch = false;
         pMatch = false;
       }.bind(this), 800);
-      if (timekeeper === 60) {
+      if (timeKeeper === 60) {
         gameScore=this.state.score;
         console.log(gameScore,'game score')
         console.log(reactionTimes, 'reaction times')

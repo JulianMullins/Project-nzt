@@ -30,11 +30,11 @@ var gameOver = function(score){
     })
 }
 
-// ReactDOM.render(
-//   <div>
-//       <Mainmenu/>
-//   </div>
-//   , document.getElementById('root'));
-
 ReactDOM.render(
-  <SilentMode/>, document.getElementById('root'));
+  <div>
+      <ClassicMode/>
+  </div>
+  , document.getElementById('root'));
+
+// ReactDOM.render(
+//   <SilentMode/>, document.getElementById('root'));
