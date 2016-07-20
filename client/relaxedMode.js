@@ -169,35 +169,51 @@ var RelaxedMode = React.createClass({
         </div>
       )
       : '';
+
+    var scoreAlert;
+
+    if (this.state.alert === "Good job") {
+      scoreAlert = <div className="scoreAlertPositive">
+                    {this.state.alert}
+                   </div>
+    } else if (this.state.alert === "Not a match" ||
+               this.state.alert === "Missed a match") {
+      scoreAlert = <div className="scoreAlertNegative">
+                    {this.state.alert}
+                   </div>
+    } else {
+      scoreAlert = <div></div>
+    }
+
     return (
-      <div className="gameContainer">
+      <div className="gameContainer relaxContainer">
         {overlay}
-        <h2>Relaxed</h2>
+        <h1>Relaxed</h1>
         <div className="gameHeading">
           <div className="gameScore relaxedScore">
-            <b>Score: {this.state.score}</b>
+            <h2>Score: {this.state.score}</h2>
           </div>
           <GameTimer timeStyle={{
             'color': "#01B6A7"
           }}></GameTimer>
         </div>
-        <div className="gameRow">
-          <div className="gameSquare" style={this.state.style[0]}></div>
-          <div className="gameSquare" style={this.state.style[1]}></div>
-          <div className="gameSquare" style={this.state.style[2]}></div>
-        </div>
-        <div className="gameRow">
-          <div className="gameSquare" style={this.state.style[3]}></div>
-          <div className="gameSquare" style={this.state.style[4]}></div>
-          <div className="gameSquare" style={this.state.style[5]}></div>
-        </div>
-        <div className="gameRow">
-          <div className="gameSquare" style={this.state.style[6]}></div>
-          <div className="gameSquare" style={this.state.style[7]}></div>
-          <div className="gameSquare" style={this.state.style[8]}></div>
-        </div>
+          <div className="gameBoard">
+            <div className="gameSquare" style={this.state.style[0]}></div>
+            <div className="gameSquare" style={this.state.style[1]}></div>
+            <div className="gameSquare" style={this.state.style[2]}></div>
+        
+        
+            <div className="gameSquare" style={this.state.style[3]}></div>
+            <div className="gameSquare" style={this.state.style[4]}></div>
+            <div className="gameSquare" style={this.state.style[5]}></div>
+      
+    
+            <div className="gameSquare" style={this.state.style[6]}></div>
+            <div className="gameSquare" style={this.state.style[7]}></div>
+            <div className="gameSquare" style={this.state.style[8]}></div>
+          </div>
         <div className="scoreAlert">
-          {this.state.alert}
+          {scoreAlert}
         </div>
         <div className="gameButtonsContainer relaxedMode">
           <a onClick={this.posMatch}>POSITION</a>
