@@ -1,0 +1,35 @@
+<svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 487.77 139.47">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #fbb040;
+      }
+
+      .cls-2 {
+        fill: #00b5a6;
+      }
+    </style>
+  </defs>
+  <title>CortexLogo4</title>
+  <g id="_Group_" data-name="&lt;Group&gt;">
+    <rect id="_Rectangle_" data-name="&lt;Rectangle&gt;" class="cls-1" width="42.98" height="42.98"/>
+    <rect id="_Rectangle_2" data-name="&lt;Rectangle&gt;" class="cls-1" x="47.8" width="42.98" height="42.98"/>
+    <rect id="_Rectangle_3" data-name="&lt;Rectangle&gt;" class="cls-1" x="95.61" width="42.98" height="42.98"/>
+    <rect id="_Rectangle_4" data-name="&lt;Rectangle&gt;" class="cls-1" y="48.24" width="42.98" height="42.98"/>
+    <rect id="_Rectangle_5" data-name="&lt;Rectangle&gt;" class="cls-2" x="47.8" y="48.24" width="42.98" height="42.98"/>
+    <rect id="_Rectangle_6" data-name="&lt;Rectangle&gt;" class="cls-1" x="95.61" y="48.24" width="42.98" height="42.98"/>
+    <g id="_Group_2" data-name="&lt;Group&gt;">
+      <rect id="_Rectangle_7" data-name="&lt;Rectangle&gt;" class="cls-1" y="96.49" width="42.98" height="42.98"/>
+      <rect id="_Rectangle_8" data-name="&lt;Rectangle&gt;" class="cls-1" x="47.8" y="96.49" width="42.98" height="42.98"/>
+      <rect id="_Rectangle_9" data-name="&lt;Rectangle&gt;" class="cls-1" x="95.61" y="96.49" width="42.98" height="42.98"/>
+    </g>
+  </g>
+  <g>
+    <path class="cls-2" d="M173.32,69.73c0-23.24,17.12-39.11,38.89-39.11,13.38,0,22.67,6.46,28.68,15L233,50A25.51,25.51,0,0,0,212.2,39c-16.55,0-29.14,12.7-29.14,30.72s12.58,30.72,29.14,30.72a25.22,25.22,0,0,0,20.75-11l8,4.42c-6.35,8.62-15.42,15-28.8,15C190.44,108.84,173.32,93,173.32,69.73Z"/>
+    <path class="cls-2" d="M247.45,79.84c0-15.88,10.44-28.7,27.11-28.7S301.67,64,301.67,79.84s-10.44,28.81-27.11,28.81S247.45,95.72,247.45,79.84Zm45.26,0c0-11.12-6.47-21.1-18.15-21.1s-18.26,10-18.26,21.1,6.58,21.21,18.26,21.21S292.71,91.07,292.71,79.84Z"/>
+    <path class="cls-2" d="M313.36,108.79V54h8.51v8.85c4.42-5.79,10.78-10,18.26-10V61.6a15,15,0,0,0-3.4-.34c-5.22,0-12.36,4.31-14.86,8.73v38.79Z"/>
+    <path class="cls-2" d="M354.39,95.84V60h-9.07V52.51h9.07v-15h8.51v15H374V60H362.9V94c0,4.08,1.81,7,5.56,7a8.21,8.21,0,0,0,5.79-2.27l2.5,6.35c-2.16,2-5.22,3.52-10.21,3.52C358.47,108.66,354.39,104,354.39,95.84Z"/>
+    <path class="cls-2" d="M379.21,80c0-15.88,11.34-28.7,27-28.7,16.56,0,26.32,12.93,26.32,29.38v2.16H388.17c.68,10.32,7.94,18.94,19.74,18.94a24,24,0,0,0,16.9-6.92l4.08,5.56c-5.45,5.44-12.82,8.39-21.78,8.39C390.89,108.84,379.21,97.16,379.21,80Zm26.88-21.67c-11.68,0-17.47,9.87-17.92,18.26h36C424,68.46,418.57,58.36,406.09,58.36Z"/>
+    <path class="cls-2" d="M477.9,108.79,461.45,86.33,445,108.79h-9.75l21-28.13L436.38,54h9.87l15.2,20.87L476.65,54h9.87L466.67,80.66l21.1,28.13Z"/>
+  </g>
+</svg>
