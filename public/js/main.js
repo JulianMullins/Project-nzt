@@ -2,7 +2,7 @@ $(document).ready(function () {
 
 $(".bt-menu-trigger").on('click', function(){
   if($('#bt-menu').is('.bt-menu-open')){
-      $("#root").css("margin", "30px 30px 30px 90px");
+      $("#root").css("margin", "0px 0px 50px 160px");
       $("#root").css("transition-duration", ".4s");
       // $('.map').css('margin', '');
     };

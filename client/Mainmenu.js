@@ -87,9 +87,9 @@ var Mainmenu = React.createClass({
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-        username: document.getElementById('username').value, 
-        email: document.getElementById('email').value, 
-        password: document.getElementById('password').value, 
+        username: document.getElementById('username').value,
+        email: document.getElementById('email').value,
+        password: document.getElementById('password').value,
         passwordConfirm: document.getElementById('passwordConfirm').value})
     });
 
@@ -145,7 +145,7 @@ var Mainmenu = React.createClass({
        {login}
        {register}
         <div className="heading">
-        <img src="../images/CortexLogo3.png" />
+          <img src="../images/CortexLogo4.svg" />
         </div>
         <div className="menu">
           <a href="" className="menu-panel" id="menu1" onClick={this.classic}>
