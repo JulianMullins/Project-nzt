@@ -4,7 +4,7 @@ var url = process.env.url;
 //var MenuOverlay = require('./menu').MenuOverlay;
 //var LoginOverlay = require('./menu').LoginOverlay;
 //var RegisterOverlay = require('./menu').RegisterOverlay;
-//var Mainmenu = require('./menu').Mainmenu;
+var Mainmenu = require('./menu').Mainmenu;
 
 
 var gameOver = function(score){
@@ -1208,8 +1208,8 @@ var newStyle = [
 ]
 
 
-ReactDOM.render(
-  <Advanced/>, document.getElementById('root'));
-
 // ReactDOM.render(
-//   <Mainmenu/>, document.getElementById('root'));
+//   <Advanced/>, document.getElementById('root'));
+
+ReactDOM.render(
+  <Mainmenu/>, document.getElementById('root'));

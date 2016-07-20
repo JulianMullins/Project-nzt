@@ -234,8 +234,7 @@ var Mainmenu = React.createClass({
     return (
       <div>
         <div className="heading">
-          <h1 id="title">Reflex</h1>
-          <h3>WE MAKE YOU FUCKING BETTER</h3>
+        <img src="../images/CortexLogo3.png" />
         </div>
         <div className="menu">
           <a href="" className="menu-panel" id="menu1" onClick={this.normalMode}>
