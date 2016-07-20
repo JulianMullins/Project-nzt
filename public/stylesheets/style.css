@@ -30,9 +30,13 @@ h3 {
  /* padding: 2rem 0;*/
 }
 
-.heading > h3 {
-  color: #7CD9D2;
+.heading > img {
+  width: 40vw;
+  min-width:300px;
 }
+
+
+
 .overlay {
   position: absolute;
   width: 100vw;
