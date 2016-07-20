@@ -1,6 +1,6 @@
 var React = require('react');
 var ReactDOM = require('react-dom');
-
+import { Link } from 'react-router'
 var loginOverlay = require('./loginOverlay');
 
 
@@ -62,7 +62,7 @@ var GameOverOverlay = React.createClass({
             <br></br>
             <button>Submit</button>
             <br></br>
-            <button>Sign In</button>
+            <button><Link to="/login">Sign In</Link></button>
           </form>
         </center>
       </div>
