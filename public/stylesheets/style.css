@@ -11,8 +11,11 @@ body {
   color:#7CD9D2;
 }
 #root {
+  display: flex;
   height: 100vh;
   width: 100vw;
+  justify-content: center;
+  align-items: center;
 }
 h1 {
   font-size: 10rem;
@@ -114,29 +117,51 @@ h3 {
 /* game page css */
 
 .gameContainer {
-  height: 100vh;
+  height: 90vh;
+  width: 640px;
   display: flex;
-  flex: 1;
   flex-direction: column;
   justify-content: center;
   align-items: center;
 }
-.gameRow {
+
+.relaxContainer {
+  background-color: rgba(1, 182, 167, 0.09);
+}
+
+.silentContainer {
+  background-color: rgba(124, 217, 210, 0.09);
+}
+
+.classicContainer {
+  background-color: rgba(1, 182, 167, 0.09); /* #F13542 */
+}
+
+.advancedContainer {
+  background-color: rgba(1, 182, 167, 0.09); /* #F1BA03 */
+}
+
+.gameBoard {
   display: flex;
-  flex-direction: row;
+  width: 90%;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+
 }
 .gameSquare {
   display: inline-block;
   background-color: #BFBFBF;
   width: 175px;
   height: 175px;
-  margin: 3px;
+  margin: 4px;
+/*  border: 3px solid #6D6E71;*/
 }
 
 .gameButtonsContainer {
   display: flex;
   justify-content: center;
-  width: 100%;
+  width: 95%;
   background-color: #BFBFBF;
   padding: 10px;
 }
@@ -164,15 +189,20 @@ h3 {
 .gameHeading {
   display: flex;
   flex-direction: row;
-  width: 100%;
+  width: 85%;
 }
 
-.gameContainer h2 {
+.gameContainer h1 {
   display: flex;
   justify-content: center;
   align-items: center;
   font-size: 48px;
   color: #01B6A7;
+}
+
+.gameContainer h2 {
+  font-size: 40px;
+  font-weight: normal;
 }
 
 .gameTimer {
@@ -185,27 +215,37 @@ h3 {
   font-size: 64px;
   width: 50%;
 }
-.scoreAlertNegative {
+
+.scoreAlert {
   display: flex;
-  justify-content: center;
+  height: 70px;
+  width: 95%;
+  margin: 10px 0;
   align-items: center;
+  justify-content: center;
+}
+
+.scoreAlertNegative {
   background-color: #C11A16;
   color: white;
-  height: 100px;
-  width: 100%;
-  font-size: 36px;
+  font-size: 28px;
   margin: 10px auto;
+  height: 70px;
+  width: 100%;
+  padding: 5px;
+  padding-top: 20px;
+  text-align: center;
 }
 .scoreAlertPositive {
-  display: flex;
-  justify-content: center;
-  align-items: center;
   background-color: green;
   color: white;
-  width: 100%;
-  height: 100px;
-  font-size: 36px;
+  font-size: 28px;
   margin: 10px auto;
+  height: 70px;
+  width: 100%;
+  padding: 5px;
+  padding-top: 20px;
+  text-align: center;
 }
 
 .classicMode {

@@ -32,9 +32,9 @@ var gameOver = function(score){
 
 ReactDOM.render(
   <div>
-      <LoginOverlay/>
+      <ClassicMode/>
   </div>
   , document.getElementById('root'));
 
 // ReactDOM.render(
-//   <RelaxedMode/>, document.getElementById('root'));
+//   <SilentMode/>, document.getElementById('root'));
