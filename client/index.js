@@ -30,6 +30,7 @@ var gameOver = function(score){
     })
 }
 
+<<<<<<< HEAD
 
 
 // ReactDOM.render(
@@ -40,3 +41,13 @@ var gameOver = function(score){
 
 ReactDOM.render(
   <SilentMode/>, document.getElementById('root'));
+=======
+ReactDOM.render(
+  <div>
+      <Mainmenu/>
+  </div>
+  , document.getElementById('root'));
+
+// ReactDOM.render(
+//   <RelaxedMode/>, document.getElementById('root'));
+>>>>>>> refs/remotes/origin/master
