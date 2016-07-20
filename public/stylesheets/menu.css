@@ -64,7 +64,7 @@
 	width: 100%;
 	height: 4px;
 	margin-top: -2px;
-	background-color: #fff;
+	background-color: #01B6A7;
 	font-size: 0px;
 	-webkit-touch-callout: none;
 	-webkit-user-select: none;
@@ -86,7 +86,7 @@
 	left: 0;
 	width: 100%;
 	height: 100%;
-	background: #fff;
+	background: #01B6A7;
 	content: '';
 	-webkit-transition: -webkit-transform 0.3s;
 	transition: transform 0.3s;
@@ -179,7 +179,7 @@
 }
 
 .bt-menu ul li a:before {
-	color: #E14827;
+	color: #01B6A7;
 	font-size: 48px;
 	-webkit-transition: color 0.2s;
 	transition: color 0.2s;

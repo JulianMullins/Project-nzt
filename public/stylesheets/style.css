@@ -96,26 +96,6 @@ h3 {
   color: #EEEEEE;
 }
 
-.bt-menu-trigger span {
-  background-color: #01B6A7 !important;
-}
-
-.bt-menu-trigger span:before {
-  background-color: #01B6A7 !important;
-}
-
-.bt-menu-trigger span:after {
-  background-color: #01B6A7 !important;
-}
-
-.bt-menu-open .bt-menu-trigger span {
-  background-color: transparent !important;
-}
-
-.bt-menu ul li a:before {
-  color: #01B6A7 !important;
-}
-
 .heading {
   display: flex;
   height: 30vh;
