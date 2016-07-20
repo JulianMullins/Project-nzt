@@ -125,7 +125,7 @@
 }
 
 .bt-menu ul:nth-of-type(2) {
-	right: 0;
+	left: 0;
 	bottom: 0;
 }
 
@@ -170,8 +170,8 @@
 
 /* Second menu */
 .bt-menu ul:nth-of-type(2) li {
-	width: 60px;
-	height: 50px;
+	width: 160px;
+	height: 80px;
 	line-height: 50px;
 	-webkit-transform: scale(0);
 	transform: scale(0);
@@ -224,10 +224,10 @@
 }
 
 .bt-menu ul:nth-of-type(2) li a {
-	color: transparent;
-	text-align: center;
-	font-size: 0px;
+	color: white;
+	text-align: left;
 	margin-top: 3px;
+	padding: 0 20px;
 }
 
 .bt-menu ul li a:before {

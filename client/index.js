@@ -18,7 +18,6 @@ var SilentMode = require('./Modes/silentMode');
 var AdvancedMode = require('./Modes/advancedMode');
 
 
-<<<<<<< HEAD
 ReactDOM.render((
   <Router history={hashHistory}>
     <Route path="/" component={NavBar}>
@@ -29,20 +28,6 @@ ReactDOM.render((
     </Route>
   </Router>
   ), document.getElementById('root'));
-=======
-var gameOver = function(score){
-  fetch('/gameOver', {
-      method: 'post',
-      credentials: 'include',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        score: score
-      })
-    })
-}
 
 ReactDOM.render(
   <div>
@@ -52,4 +37,13 @@ ReactDOM.render(
 
 // ReactDOM.render(
 //   <RelaxedMode/>, document.getElementById('root'));
->>>>>>> 774b5ae49f6130c2ed7ec9002a7fb65533062f36
+
+
+// ReactDOM.render(
+//   <div>
+//       <Mainmenu/>
+//   </div>
+//   , document.getElementById('root'));
+
+ReactDOM.render(
+  <RelaxedMode/>, document.getElementById('root'));
