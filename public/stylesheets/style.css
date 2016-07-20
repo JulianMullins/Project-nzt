@@ -123,6 +123,7 @@ h3 {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  margin-top: 20px;
 }
 
 .relaxContainer {
@@ -134,7 +135,7 @@ h3 {
 }
 
 .classicContainer {
-  background-color: rgba(1, 182, 167, 0.09); /* #F13542 */
+  background-color: rgba(241, 53, 66, 0.09);
 }
 
 .advancedContainer {
@@ -197,7 +198,6 @@ h3 {
   justify-content: center;
   align-items: center;
   font-size: 48px;
-  color: #01B6A7;
 }
 
 .gameContainer h2 {
