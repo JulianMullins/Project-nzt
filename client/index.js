@@ -842,6 +842,7 @@ var Advanced = React.createClass({
         this.setState({colorMatch: false, soundMatch: false, positionMatch: false, miss: false, alert: " "});
       }
       if (this.state.miss) {
+        console.log('missed')
         this.setState({colorMatch: false, soundMatch: false, positionMatch: false, miss: false, alert: "Missed a match"});
         if (this.state.score !== 0) {
           this.setState({
@@ -947,7 +948,7 @@ var Advanced = React.createClass({
     if (this.state.pressed) {
       return;
     }
-    if (this.state.colorMatch && !this.state.positionMatch && !this.state.soundMatch) {
+    else if (this.state.colorMatch && !this.state.positionMatch && !this.state.soundMatch) {
       this.setState({
         score: this.state.score + 10,
         miss: false,
@@ -959,10 +960,11 @@ var Advanced = React.createClass({
         this.setState({
           score: this.state.score - 5,
           alert: "Not a match",
-          pressed: true
+          pressed: true, 
+          miss: true
         });
       } else {
-        this.setState({alert: "Not a match", pressed: true});
+        this.setState({alert: "Not a match", pressed: true, miss: true});
       }
     }
   },
@@ -970,7 +972,7 @@ var Advanced = React.createClass({
     if (this.state.pressed) {
       return;
     }
-    if (!this.state.colorMatch && this.state.positionMatch && !this.state.soundMatch) {
+    else if (!this.state.colorMatch && this.state.positionMatch && !this.state.soundMatch) {
       this.setState({
         score: this.state.score + 10,
         miss: false,
@@ -982,10 +984,11 @@ var Advanced = React.createClass({
         this.setState({
           score: this.state.score - 5,
           alert: "Not a match",
-          pressed: true
+          pressed: true, 
+          miss: true
         });
       } else {
-        this.setState({alert: "Not a match", pressed: true});
+        this.setState({alert: "Not a match", pressed: true, miss: true});
       }
     }
   },
@@ -993,7 +996,7 @@ var Advanced = React.createClass({
     if (this.state.pressed) {
       return;
     }
-    if (!this.state.colorMatch && !this.state.positionMatch && this.state.soundMatch) {
+    else if (!this.state.colorMatch && !this.state.positionMatch && this.state.soundMatch) {
       this.setState({
         score: this.state.score + 10,
         miss: false,
@@ -1005,10 +1008,11 @@ var Advanced = React.createClass({
         this.setState({
           score: this.state.score - 5,
           alert: "Not a match",
-          pressed: true
+          pressed: true,
+          miss: true
         });
       } else {
-        this.setState({alert: "Not a match", pressed: true});
+        this.setState({alert: "Not a match", pressed: true, miss: true});
       }
     }
   },
@@ -1016,7 +1020,7 @@ var Advanced = React.createClass({
     if (this.state.pressed) {
       return;
     }
-    if (this.state.colorMatch && !this.state.positionMatch && this.state.soundMatch) {
+    else if (this.state.colorMatch && !this.state.positionMatch && this.state.soundMatch) {
       this.setState({
         score: this.state.score + 10,
         miss: false,
@@ -1028,10 +1032,11 @@ var Advanced = React.createClass({
         this.setState({
           score: this.state.score - 5,
           alert: "Not a match",
-          pressed: true
+          pressed: true,
+          miss: true
         });
       } else {
-        this.setState({alert: "Not a match", pressed: true});
+        this.setState({alert: "Not a match", pressed: true, miss: true});
       }
     }
   },
@@ -1039,7 +1044,7 @@ var Advanced = React.createClass({
     if (this.state.pressed) {
       return;
     }
-    if (this.state.colorMatch && this.state.positionMatch && !this.state.soundMatch) {
+    else if (this.state.colorMatch && this.state.positionMatch && !this.state.soundMatch) {
       this.setState({
         score: this.state.score + 10,
         miss: false,
@@ -1051,7 +1056,8 @@ var Advanced = React.createClass({
         this.setState({
           score: this.state.score - 5,
           alert: "Not a match",
-          pressed: true
+          pressed: true,
+          miss: true
         });
       } else {
         this.setState({alert: "Not a match", pressed: true});
@@ -1062,7 +1068,7 @@ var Advanced = React.createClass({
     if (this.state.pressed) {
       return;
     }
-    if (this.state.colorMatch && !this.state.positionMatch && !this.state.soundMatch) {
+    else if (this.state.colorMatch && !this.state.positionMatch && !this.state.soundMatch) {
       this.setState({
         score: this.state.score + 10,
         miss: false,
@@ -1074,10 +1080,11 @@ var Advanced = React.createClass({
         this.setState({
           score: this.state.score - 5,
           alert: "Not a match",
-          pressed: true
+          pressed: true,
+          miss: true
         });
       } else {
-        this.setState({alert: "Not a match", pressed: true});
+        this.setState({alert: "Not a match", pressed: true, miss: true});
       }
     }
   },
@@ -1085,7 +1092,7 @@ var Advanced = React.createClass({
     if (this.state.pressed) {
       return;
     }
-    if (this.state.colorMatch && this.state.positionMatch && !this.state.soundMatch) {
+    else if (this.state.colorMatch && this.state.positionMatch && !this.state.soundMatch) {
       this.setState({
         score: this.state.score + 10,
         miss: false,
@@ -1097,10 +1104,11 @@ var Advanced = React.createClass({
         this.setState({
           score: this.state.score - 5,
           alert: "Not a match",
-          pressed: true
+          pressed: true,
+          miss: true
         });
       } else {
-        this.setState({alert: "Not a match", pressed: true});
+        this.setState({alert: "Not a match", pressed: true, miss: true});
       }
     }
   },
@@ -1196,15 +1204,7 @@ var newStyle = [
 ]
 
 ReactDOM.render(
-  <Mainmenu/>, document.getElementById('root'));
+  <Advanced/>, document.getElementById('root'));
 
 // ReactDOM.render(
 //   <Silent/>, document.getElementById('root'));
-
-
-<<<<<<< HEAD
-
-=======
-// ReactDOM.render(
-//   <Mainmenu/>, document.getElementById('root'));
->>>>>>> 164022339b9c9432f18bdc38f793678c875a1f03
