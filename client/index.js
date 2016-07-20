@@ -32,7 +32,7 @@ var gameOver = function(score){
 
 ReactDOM.render(
   <div>
-      <Mainmenu/>
+      <ClassicMode/>
   </div>
   , document.getElementById('root'));
 

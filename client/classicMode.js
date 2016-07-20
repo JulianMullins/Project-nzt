@@ -1,6 +1,16 @@
 var React = require('react');
 var GameTimer = require('./gameTimer');
 
+//COLLECTION OF GLOBAL VARIABLES TO MAKE EVERYONES LIFE EASIER
+//create global variable for reaction counter
+var reactionStart
+//global variable for keeping reaction times
+//note: all reactin times for correct hits stored as array for stats (max,min,avg)
+var reactionTimes=[];
+//global variable for game score (saved once time runs out)
+var gameScore
+
+
 var ClassicMode = React.createClass({
   getInitialState: function() {
     return {
@@ -15,7 +25,7 @@ var ClassicMode = React.createClass({
         standardStyle,
         standardStyle
       ],
-      posMatch: false,
+      positionMatch: false,
       soundMatch: false,
       score: 0,
       miss: false,
@@ -45,15 +55,17 @@ var ClassicMode = React.createClass({
   positionAndSound: function() {
     var positionQueue = [];
     var soundQueue = [];
-    var timeTilPosMatch = parseInt((Math.random() * 5) + 2 + this.state.N);
+    var timeTilPositionMatch = parseInt((Math.random() * 5) + 2 + this.state.N);
     var timeTilSoundMatch = parseInt((Math.random() * 5) + 2 + this.state.N);
+    var timeKeeper = 0;
 
-    setInterval(function() {
-      if (!this.state.miss || this.state.pressed) {
-        this.setState({posMatch: false, soundMatch: false, miss: false, alert: " "});
+    var iterations = setInterval(function() {
+      timeKeeper++;
+    if (!this.state.miss || this.state.pressed) {
+        this.setState({positionMatch: false, soundMatch: false, miss: false, alert: " "});
       }
       if (this.state.miss) {
-        this.setState({miss: false, alert: "Missed a match"});
+        this.setState({positionMatch: false, soundMatch: false, miss: false, alert: "Missed a match"});
         if (this.state.score !== 0) {
           this.setState({
             score: this.state.score - 5
@@ -62,91 +74,81 @@ var ClassicMode = React.createClass({
       }
 
       this.setState({pressed: false});
-
-      console.log('pos: ', timeTilPosMatch, 'sound: ', timeTilSoundMatch);
-      // checking match for position
-      if (timeTilPosMatch > 0) {
-        // pick a non-matching next number while interval is not 0
-        var nextPos = parseInt(Math.random() * 9);
-        while (nextPos == positionQueue[0]) {
-          nextPos = parseInt(Math.random() * 9);
+      if (timeTilPositionMatch === 0) {
+        this.setState({positionMatch: true, miss: true})
+        //reset position portion
+        timeTilPositionMatch = parseInt((Math.random() * 5) + 2);
+        //set up new position queue
+        var nextPosition = positionQueue[0];
+        positionQueue.push(nextPosition);
+        positionQueue.splice(0, 1);
+        var pMatch = true;
+      }
+      //case 2: color match
+      if (timeTilSoundMatch === 0) {        
+        this.setState({soundMatch: true, miss: true})
+        //reset position portion
+        timeTilSoundMatch = parseInt((Math.random() * 5) + 2);
+        //set up new position queue
+        var nextSound = soundQueue[0];
+        soundQueue.push(nextSound);
+        soundQueue.splice(0, 1);
+        var sMatch = true;
+      }
+      // // pick a non-matching next number while interval is not 0
+      //position:
+      if (!pMatch) {
+        var nextPosition = parseInt(Math.random() * 9);
+        while (nextPosition == positionQueue[0]) {
+          nextPosition = parseInt(Math.random() * 9);
         }
-
-        // resize array to N
-        positionQueue.push(nextPos);
+        // resize array to N: color
+        positionQueue.push(nextPosition);
         if (positionQueue.length > this.state.N) {
           positionQueue.splice(0, 1);
         }
-
-        // set color for 800
-        this.state.style[nextPos] = newStyle[0];
-        this.setState({style: this.state.style});
-        setTimeout(function() {
-          this.state.style[nextPos] = standardStyle;
-          this.setState({style: this.state.style});
-        }.bind(this), 800);
-
-        // lower interval
-        timeTilPosMatch--;
-      } else {
-        // pick new interval
-        timeTilPosMatch = parseInt((Math.random() * 5) + 2);
-
-        // guaranteed match
-        var nextPos = positionQueue[0];
-        positionQueue.push(nextPos);
-        positionQueue.splice(0, 1);
-
-        // set color for 800
-        this.state.style[nextPos] = newStyle[0];
-        this.setState({style: this.state.style, posMatch: true, miss: true});
-        setTimeout(function() {
-          this.state.style[nextPos] = standardStyle;
-          this.setState({style: this.state.style});
-        }.bind(this), 800);
       }
-
-      // checking match for sound
-      if (timeTilSoundMatch > 0) {
-        // pick a non-matching next number while interval is not 0
+      //sound:
+      if (!sMatch) {
         var nextSound = parseInt(Math.random() * 9);
         while (nextSound == soundQueue[0]) {
           nextSound = parseInt(Math.random() * 9);
         }
-
-        // resize array to N
+        // resize array to N: color
         soundQueue.push(nextSound);
         if (soundQueue.length > this.state.N) {
           soundQueue.splice(0, 1);
         }
+      }
 
-        // set sound to play
-        var audio = new Audio('./audio/' + (nextSound + 1) + '.wav');
+      reactionStart=Date.now()
+       var audio = new Audio('./audio/' + (nextSound + 1) + '.wav');
         audio.play();
-
-        // lower interval
+        this.state.style[nextPosition] = newStyle[0];
+      this.setState({style: this.state.style});
+      setTimeout(function() {
+        this.state.style[nextPosition] = standardStyle;
+        this.setState({style: this.state.style});
+        timeTilPositionMatch--;
         timeTilSoundMatch--;
-      } else {
-        // pick new interval
-        timeTilSoundMatch = parseInt((Math.random() * 5) + 2);
-
-        // guaranteed match
-        var nextSound = soundQueue[0];
-        soundQueue.push(nextSound);
-        soundQueue.splice(0, 1);
-
-        // set sound to play
-        var audio = new Audio('./audio/' + (nextSound + 1) + '.wav');
-        audio.play();
-        this.setState({soundMatch: true, miss: true});
+        sMatch = false;
+        pMatch = false;
+      }.bind(this), 800);
+      if (timeKeeper === 60) {
+        gameScore=this.state.score;
+        console.log(gameScore,'game score')
+        console.log(reactionTimes, 'reaction times')
+        clearInterval(iterations);
       }
     }.bind(this), 2000);
   },
-  posMatch: function() {
+  positionMatch: function() {
     if (this.state.pressed) {
       return;
     }
-    if (this.state.posMatch) {
+    if (this.state.positionMatch) {
+       var reactionEnd=Date.now();
+      reactionTimes.push(reactionEnd-reactionStart);
       this.setState({
         score: this.state.score + 10,
         miss: false,
@@ -170,6 +172,8 @@ var ClassicMode = React.createClass({
       return;
     }
     if (this.state.soundMatch && !this.state.posMatch) {
+       var reactionEnd=Date.now();
+      reactionTimes.push(reactionEnd-reactionStart);
       this.setState({
         score: this.state.score + 10,
         miss: false,
@@ -188,11 +192,13 @@ var ClassicMode = React.createClass({
       }
     }
   },
-  posAndSoundMatch: function() {
+  positionAndSoundMatch: function() {
     if (this.state.pressed) {
       return;
     }
-    if (this.state.posMatch && this.state.soundMatch) {
+    if (this.state.positionMatch && this.state.soundMatch) {
+       var reactionEnd=Date.now();
+      reactionTimes.push(reactionEnd-reactionStart);
       this.setState({
         score: this.state.score + 10,
         miss: false,
@@ -253,8 +259,8 @@ var ClassicMode = React.createClass({
         </div>
         <div className="gameButtonsContainer classicMode">
           <a onClick={this.soundMatch}>SOUND</a>
-          <a onClick={this.posAndSoundMatch}>BOTH</a>
-          <a onClick={this.posMatch}>POSITION</a>
+          <a onClick={this.positionAndSoundMatch}>BOTH</a>
+          <a onClick={this.positionMatch}>POSITION</a>
         </div>
       </div>
     );
