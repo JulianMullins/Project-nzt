@@ -50,6 +50,9 @@ var AdvancedMode = React.createClass({
     var timeTilPositionMatch = parseInt((Math.random() * 5) + 2 + this.state.N);
     var timeTilColorMatch = parseInt((Math.random() * 5) + 2 + this.state.N);
     var timeTilSoundMatch = parseInt((Math.random() * 5) + 2 + this.state.N);
+     var timekeeper = 0;
+      timekeeper++;
+      //console.log(timekeeper)
 
     setInterval(function() {
       console.log(timeTilPositionMatch, timeTilColorMatch, timeTilSoundMatch);
@@ -58,6 +61,7 @@ var AdvancedMode = React.createClass({
         this.setState({colorMatch: false, soundMatch: false, positionMatch: false, miss: false, alert: " "});
       }
       if (this.state.miss) {
+        console.log('miss')
         this.setState({colorMatch: false, soundMatch: false, positionMatch: false, miss: false, alert: "Missed a match"});
         if (this.state.score !== 0) {
           this.setState({
@@ -66,7 +70,7 @@ var AdvancedMode = React.createClass({
         }
       }
 
-      this.setState({pressed: false});
+      this.setState({pressed: false, alert: " "});
 
       //NOT GOING TO ACTUALLY LIGHT UP COLORS UNTIL ALL IF STATEMENTS HAVE ITERATED
       //case 1: position match
@@ -146,7 +150,7 @@ var AdvancedMode = React.createClass({
       this.state.style[nextPosition] = newStyle[nextColor];
       var audio = new Audio('./audio/' + (nextSound + 1) + '.wav');
       audio.play();
-      this.setState({style: this.state.style, miss: true});
+      this.setState({style: this.state.style});
       setTimeout(function() {
         this.state.style[nextPosition] = standardStyle;
         this.setState({style: this.state.style});
@@ -157,6 +161,10 @@ var AdvancedMode = React.createClass({
         cMatch = false;
         pMatch = false;
       }.bind(this), 800);
+      if (timekeeper === 60) {
+        console.log('over')
+        clearInterval(iterations);
+      }
     }.bind(this), 2000);
   },
   colorMatch: function() {
