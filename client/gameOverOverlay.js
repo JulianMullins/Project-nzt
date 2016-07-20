@@ -3,8 +3,6 @@ var ReactDOM = require('react-dom');
 import { Link } from 'react-router'
 var loginOverlay = require('./loginOverlay');
 
-
-
 // ADAM - I need a function to pull up the login overlay when you click sign in
 
 
@@ -49,9 +47,6 @@ var GameOverOverlay = React.createClass({
         })
       })
   },
-  signIn: function(){
-    //fetch('/')
-  },
   render: function() {
     return (
       <div className="overlay" id="gameover">
@@ -60,7 +55,7 @@ var GameOverOverlay = React.createClass({
             <h1>Game Over</h1>
             <input type="text" placeholder="username" name="username" id="username" value={this.state.username}></input>
             <br></br>
-            <button>Submit</button>
+            <button><Link to="/leaderboard" onClick={this.gameOver}>Submit</Link></button>
             <br></br>
             <button><Link to="/login">Sign In</Link></button>
           </form>

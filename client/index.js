@@ -1,49 +1,69 @@
 var React = require('react');
 var ReactDOM = require('react-dom');
-var react-router = require('react-router');
+
 import { Router, Route, hashHistory } from 'react-router'
 var url = process.env.url;
 
 var MenuOverlay = require('./menuOverlay');
-var LoginOverlay = require('./loginOverlay');
-var RegisterOverlay = require('./registerOverlay');
-var Mainmenu = require('./Mainmenu');
-var GameOverOverlay = require('./gameOverOverlay');
-var Levels = require('./levels').Levels;
+var Login = require('./loginOverlay');
+var Register = require('./registerOverlay');
+var Home = require('./Mainmenu');
+var GameOver = require('./gameOverOverlay');
 var NavBar = require('./navBar');
+//Leaderboard
+//Stats
+//Science
+//Contact
+//Settings
 
-var RelaxedMode = require('./Modes/relaxedMode');
-var ClassicMode = require('./Modes/classicMode');
-var SilentMode = require('./Modes/silentMode');
-var AdvancedMode = require('./Modes/advancedMode');
+var RelaxedGame = require('./Modes/relaxedMode');
+var ClassicGame = require('./Modes/classicMode');
+var SilentGame = require('./Modes/silentMode');
+var AdvancedGame = require('./Modes/advancedMode');
+
+var ClassicLevels = require('./levels').ClassicLevels;
+var RelaxedLevels = require('./levels').RelaxedLevels;
+var SilentLevels =  require('./levels').SilentLevels;
+var AdvancedLevels = require('./levels').AdvancedLevels;
+import { Link } from 'react-router'
+/*
+      <Route path="/leaderboard" component={Leaderboard}/>
+      <Route path="/stats" component={Stats}/>
+      <Route path="/contact" component={Contact}/>
+      <Route path="/science" component={Science}/>
+      <Route path="/settings" component={Settings}/>
+      */
+
+var App = React.createClass({
+  render() {
+    return (
+      <div>
+        
+        <div>Other Content</div>
+        {this.props.children}
+      </div>
+    )
+  }
+});
 
 
 ReactDOM.render((
   <Router history={hashHistory}>
-    <Route path="/" component={NavBar}>
-      <Route path="/repos" component={Repos}/>
-      {/* add the new route */}
-      <Route path="/repos/:userName/:repoName" component={Repo}/>
-      <Route path="/about" component={About}/>
+    <Route path="/" component={App}>
+      <IndexRedirect to="/home" />
+      <Route path="home" component={Mainmenu} />
+      <Route path="login" component={Login}/>
+      <Route path="register" component={Register}/>
+      <Route path="gameOver" component={GameOver}/>
+      
+      <Route path="levels/classic" component={ClassicLevels}/>
+      <Route path="levels/relaxed" component={RelaxedLevels}/>
+      <Route path="levels/silent" component={SilentLevels}/>
+      <Route path="levels/advanced" component={AdvancedLevels}/>
+      <Route path="game/classic/:n" component={ClassicGame}/>
+      <Route path="game/relaxed/:n" component={RelaxedGame}/>
+      <Route path="game/silent/:n" component={SilentGame}/>
+      <Route path="game/advanced/:n" component={AdvancedGame}/>
     </Route>
   </Router>
-  ), document.getElementById('root'));
-
-ReactDOM.render(
-  <div>
-      <Mainmenu/>
-  </div>
-  , document.getElementById('root'));
-
-// ReactDOM.render(
-//   <RelaxedMode/>, document.getElementById('root'));
-
-
-// ReactDOM.render(
-//   <div>
-//       <Mainmenu/>
-//   </div>
-//   , document.getElementById('root'));
-
-ReactDOM.render(
-  <RelaxedMode/>, document.getElementById('root'));
+  ), document.getElementById('root'),function(){console.log("rendered")});
