@@ -858,7 +858,7 @@ var Advanced = React.createClass({
         }
       }
 
-      this.setState({pressed: false});
+      this.setState({pressed: false, alert: " "});
 
       //NOT GOING TO ACTUALLY LIGHT UP COLORS UNTIL ALL IF STATEMENTS HAVE ITERATED
       //case 1: position match
