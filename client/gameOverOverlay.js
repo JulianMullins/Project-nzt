@@ -1,6 +1,13 @@
 var React = require('react');
 var ReactDOM = require('react-dom');
 
+var loginOverlay = require('./loginOverlay');
+
+
+
+// ADAM - I need a function to pull up the login overlay when you click sign in
+
+
 
 var gameOver = function(score){
   fetch('/gameOver', {
