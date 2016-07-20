@@ -10,6 +10,21 @@ var GameOverOverlay = require('./gameOverOverlay');
 var Levels = require('./levels').Levels;
 var NavBar = require('./navBar');
 
+
+var gameOver = function(score){
+  fetch('/gameOver', {
+      method: 'post',
+      credentials: 'include',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        score: score
+      })
+    })
+}
+
 var GameTimer = React.createClass({
   getInitialState: function() {
     return {seconds: 120}
@@ -1204,4 +1219,3 @@ ReactDOM.render(
 
 // ReactDOM.render(
 //   <Silent/>, document.getElementById('root'));
-
