@@ -167,6 +167,18 @@ h3 {
   background-color: rgba(1, 182, 167, 0.09);
 }
 
+.silentContainer {
+  background-color: rgba(124, 217, 210, 0.09);
+}
+
+.classicContainer {
+  background-color: rgba(1, 182, 167, 0.09); /* #F13542 */
+}
+
+.advancedContainer {
+  background-color: rgba(1, 182, 167, 0.09); /* #F1BA03 */
+}
+
 .gameBoard {
   display: flex;
   width: 90%;
