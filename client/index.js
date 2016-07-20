@@ -30,7 +30,6 @@ var gameOver = function(score){
     })
 }
 
-<<<<<<< HEAD
 ReactDOM.render(
   <div>
       <Mainmenu/>
@@ -39,14 +38,3 @@ ReactDOM.render(
 
 // ReactDOM.render(
 //   <RelaxedMode/>, document.getElementById('root'));
-=======
-
-// ReactDOM.render(
-//   <div>
-//       <Mainmenu/>
-//   </div>
-//   , document.getElementById('root'));
-
-ReactDOM.render(
-  <RelaxedMode/>, document.getElementById('root'));
->>>>>>> refs/remotes/origin/tconcannon
