@@ -1,5 +1,7 @@
 var express = require('express');
 var router = express.Router();
+var bcrypt = require('bcryptjs');
+
 var User = require('../models/User');
 var Stats = require('../models/Stats');
 
@@ -30,61 +32,74 @@ module.exports = function(passport) {
 
   router.post('/register', function(req, res,next) {
     // validation step
+
     if (!validateReq(req.body)) {
       console.log("validation failed")
       return next("user validation failed")
     }
-    var userStats = new Stats();
-    userStats.save();
-    var u = {
-      username: req.body.username,
-      email: req.body.email,
-      password: req.body.password,
-      facebookId: null,
-      stats: userStats,
-      temp:false
-    };
-    User.findOne({email:u.email},function(err,user){
-      if(err){
-        return next(err);
-      }
-      else if(user && !user.password){
-        //user.username = u.username;
-        user.password = u.password;
-        console.log(user);
-        user.save(function(err, user) {
-          if (err) {
-            return next(err);
-          }
-          else{
-            console.log(user);
-            res.json({success:true});
-          }
-        })
-      }
-      else{
-        console.log(u)
-        user = new User({
-          username: u.username,
-          email: u.email,
-          password: u.password,
-          facebookId: u.facebookId,
-          stats: u.stats,
-          temp:u.temp
-        })
-        user.save(function(err, user) {
-          if (err) {
-            console.log(err);
-            return next(err);
-            //res.status(500).redirect('/register');
-          }
-          else{
-            console.log(user);
-            res.json({success:true});
-          }
+
+    bcrypt.genSalt(10, function(err, salt) {
+        bcrypt.hash(req.body.password, salt, function(err, hash) {
+            // Store hash in your password DB. 
+            var password = hash;
+           
+            var userStats = new Stats();
+            userStats.save();
+
+            var u = {
+              username: req.body.username,
+              email: req.body.email,
+              password: password,
+              facebookId: null,
+              stats: userStats,
+              temp:false
+            };
+            User.findOne({email:u.email},function(err,user){
+              if(err){
+                return next(err);
+              }
+              else if(user && !user.password){
+                //user.username = u.username;
+                user.password = u.password;
+                console.log(user);
+                user.save(function(err, user) {
+                  if (err) {
+                    return next(err);
+                  }
+                  else{
+                    console.log(user);
+                    res.json({success:true});
+                  }
+                })
+              }
+              else{
+                console.log(u)
+                user = new User({
+                  username: u.username,
+                  email: u.email,
+                  password: u.password,
+                  facebookId: u.facebookId,
+                  stats: u.stats,
+                  temp:u.temp
+                })
+                user.save(function(err, user) {
+                  if (err) {
+                    console.log(err);
+                    return next(err);
+                    //res.status(500).redirect('/register');
+                  }
+                  else{
+                    console.log(user);
+                    res.json({success:true});
+                  }
+                });
+              }
+            })
+
         });
-      }
-    })
+    });
+
+    
     // .then(function(user){console.log(user.username)})
   });
 
@@ -145,7 +160,8 @@ module.exports = function(passport) {
   // GET Logout page
   router.get('/logout', function(req, res) {
     req.logout();
-    res.json({'isLoggedIn':false});
+    res.redirect('/');
+    //res.json({'isLoggedIn':false});
   });
 
   return router;

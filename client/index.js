@@ -6,8 +6,9 @@ var MenuOverlay = require('./menuOverlay');
 var LoginOverlay = require('./loginOverlay');
 var RegisterOverlay = require('./registerOverlay');
 var Mainmenu = require('./Mainmenu');
-var GameOverOverlay = require('./GameOverOverlay');
+var GameOverOverlay = require('./gameOverOverlay');
 var Levels = require('./levels').Levels;
+var NavBar = require('./navBar');
 
 
 var GameTimer = React.createClass({
@@ -1195,16 +1196,14 @@ var newStyle = [
   }
 ]
 
+
 ReactDOM.render(
-  <Mainmenu/>, document.getElementById('root'));
+  <div>
+      <Mainmenu/>
+  </div>
+  , document.getElementById('root'));
 
 // ReactDOM.render(
 //   <Silent/>, document.getElementById('root'));
 
 
-<<<<<<< HEAD
-
-=======
-// ReactDOM.render(
-//   <Mainmenu/>, document.getElementById('root'));
->>>>>>> 164022339b9c9432f18bdc38f793678c875a1f03
