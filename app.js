@@ -10,10 +10,17 @@ var LocalStrategy = require('passport-local');
 var FacebookStrategy = require('passport-facebook');
 var MongoStore = require('connect-mongo')(session);
 var mongoose = require('mongoose');
+var bcrypt = require('bcryptjs');
 
-var routes = require('./route/index');
-var auth = require('./route/auth');
-var User = require('./models/User')
+var routes = require('./server/index');
+var auth = require('./server/auth');
+var clientExpressFunctions = require('./server/clientExpressFunctions');
+var highScores = require('./server/highScores');
+var serverData = require('./server/serverData')
+
+
+var User = require('./models/User');
+var Stats = require('./models/Stats')
 
 var app = express();
 var server = require('http').Server(app);
@@ -65,17 +72,23 @@ passport.use(new LocalStrategy(function(username, password, done) {
         console.error(err);
         return done(err);
       }
+      console.log(user)
       // if no user present, auth failed
       if (!user) {
         //console.log(user);
         return done(null, false, { message: 'Incorrect username.' });
       }
-      // if passwords do not match, auth failed
-      if (user.password !== password) {
-        return done(null, false, { message: 'Incorrect password.' });
-      }
-      // auth has has succeeded
-      return done(null, user);
+      bcrypt.compare(password,user.password,function(err,res){
+        if(err){
+          return done(err)
+        }
+        else if(!res){
+          return done(null,false);
+        }
+        else{
+          return done(null,user)
+        }
+      })
     });
   }
 ));
@@ -98,12 +111,16 @@ passport.use(new FacebookStrategy({
         return done(err);
       }
       // if no user present, auth failed
+      var userStats = new Stats();
+      userStats.save();
       if (!user) {
+        console.log(profile)
         user = new User({
           facebookId:profile.id,
-          email:profile.emails[0].value,
-          username:profile.name,
-          highScore:0
+          email:profile._json.email,
+          username:profile._json.first_name + ' '+profile._json.last_name,
+          stats:userStats,
+          temp:false
         });
         user.save(function(err,tempUser){
           if(err){
@@ -133,6 +150,7 @@ passport.use(new FacebookStrategy({
 
 
 app.use('/', auth(passport));
+app.use('/',clientExpressFunctions);
 app.use('/', routes);
 
 
