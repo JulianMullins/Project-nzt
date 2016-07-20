@@ -22,7 +22,7 @@ var LoginOverlay = React.createClass({
       <div className="register-log">
         <h1>New?</h1>
         <div className="pa">Register here.</div>
-        <h3>See your stats, track your progress, <br></br>track your progress, <br></br>and compare with your friends.</h3>
+        <h3>See your stats, <br></br>track your progress, <br></br>and compare with your friends.</h3>
         <center>
           <form>
             <button className="form-btn dx" onClick={this.props.registerScreen}>Register</button>
