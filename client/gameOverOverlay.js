@@ -22,9 +22,9 @@ var GameOverOverlay = React.createClass({
       username:null
     }
   },
-  update:function(){
+  update:function(e){
     this.setState({
-      username: "nn"
+      username: e.target.value
     })
   },
   gameOver: function(score){
@@ -42,13 +42,16 @@ var GameOverOverlay = React.createClass({
         })
       })
   },
+  signIn: function(){
+    //fetch('/')
+  },
   render: function() {
     return (
       <div className="overlay" id="gameover">
         <center>
           <form>
             <h1>Game Over</h1>
-            <input type="text" placeholder="username" name="username" id="username"></input>
+            <input type="text" placeholder="username" name="username" id="username" value={this.state.username}></input>
             <br></br>
             <button>Submit</button>
             <br></br>
