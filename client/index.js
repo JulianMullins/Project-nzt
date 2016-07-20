@@ -534,7 +534,8 @@ var Silent = React.createClass({
     var timeTilColorMatch = parseInt((Math.random() * 5) + 2 + this.state.N);
     var timekeeper = 0;
     var iterations = setInterval(function() {
-      timekeeper++ console.log(timekeeper)
+      timekeeper++;
+      console.log(timekeeper)
       if (!this.state.miss || this.state.pressed) {
         this.setState({positionMatch: false, soundMatch: false, miss: false, alert: " "});
       }
