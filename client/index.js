@@ -21,6 +21,7 @@ var ClassicGame = require('./Modes/classicMode');
 var SilentGame = require('./Modes/silentMode');
 var AdvancedGame = require('./Modes/advancedMode');
 
+
 var ClassicLevels = require('./levels').ClassicLevels;
 var RelaxedLevels = require('./levels').RelaxedLevels;
 var SilentLevels =  require('./levels').SilentLevels;
@@ -67,3 +68,5 @@ ReactDOM.render((
     </Route>
   </Router>
   ), document.getElementById('root'),function(){console.log("rendered")});
+
+

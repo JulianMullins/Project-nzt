@@ -35,21 +35,32 @@ var LoginOverlay = React.createClass({
   },
   render: function() {
     return (
-      <div className="overlay" id="login">
+      <div className="screen">
+      <div className="circle"></div>
+      <div className="login" id="login">
+        <h1>Welcome</h1>
+        <div className="pa">Login here.</div>
+        <form>
+          <input type="text" placeholder="Name or Email" name="username" id="username"></input>
+          <br></br>
+          <input type="password" placeholder="Password" name="password" id="password"></input>
+          <div className="buttongroup">
+            <button className="form-btn dx" onClick={this.login}><Link to="/">Login</Link></button>
+            <a type="button" className="fb" href="/login/facebook">Login with Facebook</a>
+          </div>
+        </form>
+      </div>
+      <div className="register-log">
+        <h1>New?</h1>
+        <div className="pa"><Link to="/register">Register here.</Link></div>
+        <h3>See your stats, track your progress, <br></br>track your progress, <br></br>and compare with your friends.</h3>
         <center>
           <form>
-            <input type="text" placeholder="username" name="username" id="username"></input>
-            <br></br>
-            <input type="password" placeholder="password" name="password" id="password"></input>
-            <br></br>
-            <button onClick={this.login}><Link to="/">Login</Link></button>
-            <br></br>
-            <a type="button" className="btn btn-default" href="/login/facebook">Login with Facebook</a>
-            <br></br>
-            <button><Link to="/register">Register</Link></button>
-            </form>
+            <button className="form-btn dx"><Link to="/register">Register</Link></button>
+          </form>
         </center>
       </div>
+    </div>
     )
   }
 });
