@@ -415,11 +415,11 @@ h3 {
   transition-duration: .8s;
 }
 .register-log {
-  width: 30vw;
+  width: 35vw;
   background-color: #7cd9d2;
 }
 .login {
-  width: 70vw;
+  width: 65vw;
   background-color: #008a7e;
   text-align: left;
 }
@@ -430,7 +430,7 @@ h3 {
 
 .login:hover{
   transition-duration: .8s;
-  width: 75vw;
+  width: 70vw;
 }
 
 #login input:focus {
