@@ -1,6 +1,15 @@
 var React = require('react');
 var GameTimer = require('./gameTimer');
 
+//COLLECTION OF GLOBAL VARIABLES TO MAKE EVERYONES LIFE EASIER
+//create global variable for reaction counter
+var reactionStart
+//global variable for keeping reaction times
+//note: all reactin times for correct hits stored as array for stats (max,min,avg)
+var reactionTimes=[];
+//global variable for game score (saved once time runs out)
+var gameScore
+
 var RelaxedMode = React.createClass({
   getInitialState: function() {
     return {
@@ -30,13 +39,13 @@ var RelaxedMode = React.createClass({
   componentDidMount: function() {
     setInterval(this.timer, 1000);
 
-    fetch('/startGame/' + this.state.mode + '/' + this.state.N, {method: 'post'}).then(function(response) {
-      return response.json();
-    }).then(function(response) {
-      if (!response.tempUser) {
-        this.setState({tempUser: false})
-      }
-    })
+    // fetch('/startGame/' + this.state.mode + '/' + this.state.N, {method: 'post'}).then(function(response) {
+    //   return response.json();
+    // }).then(function(response) {
+    //   if (!response.tempUser) {
+    //     this.setState({tempUser: false})
+    //   }
+    // })
 
     // fetch('/startGame/'+this.state.mode+'/'+this.state.N, {
     //  method: 'post'
@@ -71,6 +80,8 @@ var RelaxedMode = React.createClass({
       }
 
       this.setState({pressed: false});
+      //start reaction time counter with flash
+      reactionStart= Date.now()
 
       if (timeTilPosMatch > 0) {
         // pick a non-matching next number while interval is not 0
@@ -107,13 +118,17 @@ var RelaxedMode = React.createClass({
         // set color for 800
         this.state.style[nextPos] = newStyle[0];
         this.setState({style: this.state.style, posMatch: true, miss: true});
+        ///start reaction time as soon as blink starts
         setTimeout(function() {
           this.state.style[nextPos] = standardStyle;
           this.setState({style: this.state.style});
         }.bind(this), 800);
       }
-      if (timekeeper === 60) {
-        console.log('over')
+      if (timeKeeper === 60) {
+        //give gameScore variable the final score
+        gameScore=this.state.score;
+        console.log(gameScore,'game score')
+        console.log(reactionTimes,'reaction times')
         clearInterval(iterations);
       }
     }.bind(this), 2000);
@@ -123,6 +138,9 @@ var RelaxedMode = React.createClass({
       return;
     }
     if (this.state.posMatch) {
+      //if correct button pressed, use current time to find reaction time
+      var reactionStop= Date.now()
+     reactionTimes.push(reactionStop-reactionStart)
       this.setState({
         score: this.state.score + 10,
         miss: false,
