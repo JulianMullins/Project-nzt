@@ -9,7 +9,6 @@ var Mainmenu = require('./Mainmenu');
 var GameOverOverlay = require('./GameOverOverlay');
 var Levels = require('./levels').Levels;
 
-
 var GameTimer = React.createClass({
   getInitialState: function() {
     return {seconds: 120}
@@ -62,25 +61,19 @@ var Relaxed = React.createClass({
       N: 1,
       pressed: false,
       modeMultiplier: modeMultiplier[this.props.mode],
-      tempUser:true
+      tempUser: true
     }
   },
   componentDidMount: function() {
     setInterval(this.timer, 1000);
 
-
-    fetch('/startGame/'+this.state.mode+'/'+this.state.N, {
-    	method: 'post'
-    }).then(function(response){
-        return response.json();
-    }).then(function(response){
-      if(!response.tempUser){
-        this.setState({
-          tempUser: false
-        })
+    fetch('/startGame/' + this.state.mode + '/' + this.state.N, {method: 'post'}).then(function(response) {
+      return response.json();
+    }).then(function(response) {
+      if (!response.tempUser) {
+        this.setState({tempUser: false})
       }
     })
-
 
     // fetch('/startGame/'+this.state.mode+'/'+this.state.N, {
     //  method: 'post'
@@ -198,12 +191,14 @@ var Relaxed = React.createClass({
     return (
       <div className="gameContainer">
         {overlay}
-          <h2>Relaxed</h2>
+        <h2>Relaxed</h2>
         <div className="gameHeading">
           <div className="gameScore relaxedScore">
             <b>Score: {this.state.score}</b>
           </div>
-          <GameTimer timeStyle={{'color': "#01B6A7"}}></GameTimer>
+          <GameTimer timeStyle={{
+            'color': "#01B6A7"
+          }}></GameTimer>
         </div>
         <div className="gameRow">
           <div className="gameSquare" style={this.state.style[0]}></div>
@@ -230,7 +225,6 @@ var Relaxed = React.createClass({
     );
   }
 })
-
 
 var Classic = React.createClass({
   getInitialState: function() {
@@ -460,7 +454,9 @@ var Classic = React.createClass({
           <div className="gameScore classicScore">
             <b>Score: {this.state.score}</b>
           </div>
-          <GameTimer timeStyle={{'color': "#F13542"}}></GameTimer>
+          <GameTimer timeStyle={{
+            'color': "#F13542"
+          }}></GameTimer>
         </div>
         <div className="gameRow">
           <div className="gameSquare" style={this.state.style[0]}></div>
@@ -538,8 +534,7 @@ var Silent = React.createClass({
     var timeTilColorMatch = parseInt((Math.random() * 5) + 2 + this.state.N);
     var timekeeper = 0;
     var iterations = setInterval(function() {
-      timekeeper++
-      console.log(timekeeper)
+      timekeeper++ console.log(timekeeper)
       if (!this.state.miss || this.state.pressed) {
         this.setState({positionMatch: false, soundMatch: false, miss: false, alert: " "});
       }
@@ -750,12 +745,14 @@ var Silent = React.createClass({
     //   : '';
     return (
       <div className="gameContainer">
-          <h2>Silent</h2>
+        <h2>Silent</h2>
         <div className="gameHeading">
           <div className="gameScore silentScore">
             <b>Score: {this.state.score}</b>
           </div>
-          <GameTimer timeStyle={{'color': "#7CD9D2"}}></GameTimer>
+          <GameTimer timeStyle={{
+            'color': "#7CD9D2"
+          }}></GameTimer>
         </div>
         <div className="gameRow">
           <div className="gameSquare" style={this.state.style[0]}></div>
@@ -1116,12 +1113,14 @@ var Advanced = React.createClass({
     //   : '';
     return (
       <div className="gameContainer">
-          <h2>Advanced</h2>
+        <h2>Advanced</h2>
         <div className="gameHeading">
           <div className="gameScore advancedScore">
             <b>Score: {this.state.score}</b>
           </div>
-          <GameTimer timeStyle={{'color': "#F1BA03"}}></GameTimer>
+          <GameTimer timeStyle={{
+            'color': "#F1BA03"
+          }}></GameTimer>
         </div>
         <div className="gameRow">
           <div className="gameSquare" style={this.state.style[0]}></div>
@@ -1172,7 +1171,6 @@ var advancedStyle = {
   backgroundColor: "#F1BA03"
 }
 
-
 var newStyle = [
   {
     backgroundColor: '#DBFF33'
@@ -1200,11 +1198,3 @@ ReactDOM.render(
 
 // ReactDOM.render(
 //   <Silent/>, document.getElementById('root'));
-
-
-<<<<<<< HEAD
-
-=======
-// ReactDOM.render(
-//   <Mainmenu/>, document.getElementById('root'));
->>>>>>> 164022339b9c9432f18bdc38f793678c875a1f03
