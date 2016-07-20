@@ -13,6 +13,11 @@ var mongoose = require('mongoose');
 
 var routes = require('./server/index');
 var auth = require('./server/auth');
+var clientExpressFunctions = require('./server/clientExpressFunctions');
+var highScores = require('./server/highScores');
+var serverData = require('./server/serverData')
+
+
 var User = require('./models/User');
 var Stats = require('./models/Stats')
 
@@ -139,6 +144,7 @@ passport.use(new FacebookStrategy({
 
 
 app.use('/', auth(passport));
+app.use('/',clientExpressFunctions);
 app.use('/', routes);
 
 

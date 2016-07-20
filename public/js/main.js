@@ -1,3 +1,19 @@
+$(document).ready(function () {
+
+$(".bt-menu-trigger").on('click', function(){
+  if($('#bt-menu').is('.bt-menu-open')){
+      $("#root").css("margin", "30px 30px 30px 90px");
+      $("#root").css("transition-duration", ".4s");
+      // $('.map').css('margin', '');
+    };
+
+  if($('#bt-menu').is('.bt-menu-close')){
+      $('#root').css('margin', '');
+      $("#root").css("transition-duration", ".2s");
+    };
+ });
+})
+
 // $(document).ready(function () {
 //
 // $(".bt-menu-trigger").on('click', function(){
@@ -13,10 +29,16 @@
 //     };
 //  });
 //
+
 // var iOS = !!navigator.platform && /iPad|iPhone|iPod/.test(navigator.platform);
 // var ff = navigator.userAgent.indexOf('Firefox') > 0;
 // var tap = ('ontouchstart' in window || navigator.msMaxTouchPoints) ? 'touchstart' : 'mousedown';
 // if (iOS) document.body.classList.add('iOS');
+
+// var fireworks = (function() {
+//   var getFontSize = function() {
+//     return parseFloat(getComputedStyle(document.documentElement).fontSize);
+//   }
 //
 // var fireworks = (function() {
 //
@@ -41,6 +63,7 @@
 //     x = e.clientX || e.touches[0].clientX;
 //     y = e.clientY || e.touches[0].clientY;
 //   }
+//   var colors = ['#F13542', '#01B6A7', '#7CD9D2', '#F1BA03'];
 //
 //   var colors = ['#F13542', '#01B6A7', '#7CD9D2', '#F1BA03'];
 //
@@ -140,6 +163,13 @@
 //     updateCoords(e);
 //     animateParticules(x, y);
 //   }, false);
+//   window.addEventListener('resize', setCanvasSize, false);
+
+//   return {
+//     boom: animateParticules
+//   }
+
+// })();
 //
 //   window.addEventListener('resize', setCanvasSize, false);
 //
