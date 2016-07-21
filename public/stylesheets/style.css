@@ -54,44 +54,7 @@ h3 {
   display: flex;
   flex-direction: column;
 }
-#login center {
-  margin-top: 20vh;
-}
-#login form * {
-  margin: 2vh 0;
-}
-#login input {
-  border: none;
-  background-color: inherit;
-  border-bottom: 1px solid white;
-  padding: 1rem 0;
-  width: 20rem;
-  font-size: 1.5rem;
-  color: white;
-}
-#login input:focus {
-  outline: none;
-}
-#login button {
-  border: none;
-  background-color: #DDDDDD;
-  padding: 1rem;
-  width: 20rem;
-  font-size: 1.5rem;
-}
-#login button:hover {
-  background-color: #BBBBBB;
-}
-#login button:active {
-  background-color: #AAAAAA;
-  outline: none;
-}
-#login button:focus {
-  outline: none;
-}
-#login .back {
-  margin-top: 7rem;
-}
+
 .btn {
   text-decoration: none;
   font-size: 5rem;
@@ -108,9 +71,8 @@ h3 {
   height: 30vh;
   justify-content: center;
   align-items: center;
-  background-color: white; /* #01161e /*
-  /*background-image: url('../images/connect.png');*/
-  color: #01B6A7; /* #01B6A7 */
+  background-color: white;
+  color: #01B6A7;
   flex-direction: column;
 }
 .menu {
@@ -155,16 +117,29 @@ h3 {
 /* game page css */
 
 .gameContainer {
-  height: 90vh;
+  min-height: 90vh;
   width: 640px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  margin-top: 20px;
 }
 
 .relaxContainer {
   background-color: rgba(1, 182, 167, 0.09);
+}
+
+.silentContainer {
+  background-color: rgba(124, 217, 210, 0.09);
+}
+
+.classicContainer {
+  background-color: rgba(241, 53, 66, 0.09);
+}
+
+.advancedContainer {
+  background-color: rgba(241, 186, 3, 0.09);
 }
 
 .gameBoard {
@@ -181,7 +156,7 @@ h3 {
   width: 175px;
   height: 175px;
   margin: 4px;
-/*  border: 3px solid #6D6E71;*/
+  border: 2px solid rgba(109, 110, 113, 0.5);
 }
 
 .gameButtonsContainer {
@@ -216,6 +191,7 @@ h3 {
   display: flex;
   flex-direction: row;
   width: 85%;
+  margin-bottom: 10px;
 }
 
 .gameContainer h1 {
@@ -223,7 +199,6 @@ h3 {
   justify-content: center;
   align-items: center;
   font-size: 48px;
-  color: #01B6A7;
 }
 
 .gameContainer h2 {
@@ -252,26 +227,84 @@ h3 {
 }
 
 .scoreAlertNegative {
-  background-color: #C11A16;
-  color: white;
+  background-color: transparent;
+  color: transparent;
   font-size: 28px;
   margin: 10px auto;
   height: 70px;
-  width: 100%;
+  width: 50%;
   padding: 5px;
   padding-top: 20px;
   text-align: center;
+  -webkit-animation-name: negativeFadeIn;
+  -webkit-animation-duration: .4s;
+  -webkit-animation-name: negativeFadeOut;
+  -webkit-animation-duration: 1s;
+  animation-name: negativeFadeIn;
+  animation-duration: .4s;
+  animation-name: negativeFadeOut;
+  animation-duration: 1s;
 }
 .scoreAlertPositive {
-  background-color: green;
-  color: white;
+  background-color: transparent;
+  color: transparent;
   font-size: 28px;
   margin: 10px auto;
   height: 70px;
-  width: 100%;
+  width: 50%;
   padding: 5px;
   padding-top: 20px;
   text-align: center;
+  -webkit-animation-name: positiveFadeIn;
+  -webkit-animation-duration: .4s;
+  -webkit-animation-name: positiveFadeOut;
+  -webkit-animation-duration: 1s;
+  animation-name: positiveFadeIn;
+  animation-duration: .4s;
+  animation-name: positiveFadeOut;
+  animation-duration: 1s;
+}
+
+/* negative alert fade in and out */
+@keyframes negativeFadeIn {
+  from {background-color: transparent; color: transparent;}
+  to {background-color: rgba(255, 51, 51, 0.8); color: white;}
+}
+
+@keyframes negativeFadeOut {
+  from {background-color: rgba(255, 51, 51, 0.8); color: white;}
+  to {background-color: transparent; color: transparent;}
+}
+
+@-webkit-keyframes negativeFadeIn {
+  from {background-color: transparent; color: transparent;}
+  to {background-color: rgba(255, 51, 51, 0.8); color: white;}
+}
+
+@-webkit-keyframes negativeFadeOut {
+  from {background-color: rgba(255, 51, 51, 0.8); color: white;}
+  to {background-color: transparent; color: transparent;}
+}
+
+/* positive alert fade in and out */
+@keyframes positiveFadeIn {
+  from {background-color: transparent; color: transparent;}
+  to {background-color: rgba(0, 204, 153, 0.8); color: white}
+}
+
+@keyframes positiveFadeOut {
+  from {background-color:  rgba(0, 204, 153, 0.8); color: white;}
+  to {background-color: transparent; color: transparent;}
+}
+
+@-webkit-keyframes positiveFadeIn {
+  from {background-color: transparent; color: transparent;}
+  to {background-color: rgba(0, 204, 153, 0.8); color: white}
+}
+
+@-webkit-keyframes positiveFadeOut {
+  from {background-color:  rgba(0, 204, 153, 0.8); color: white;}
+  to {background-color: transparent; color: transparent;}
 }
 
 .classicMode {
@@ -421,4 +454,162 @@ h3 {
 
 .levelSquareLast{
   background-color: #D6D6D6;
+}
+
+/*loginpage*/
+.screen {
+  display: flex;
+  justify-content: center;
+  height: 100vh;
+}
+
+.login, .register-log {
+  height: 100%;
+  color: white;
+  text-decoration: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  transition-duration: .8s;
+}
+.register-log {
+  width: 35vw;
+  background-color: #7cd9d2;
+}
+.login {
+  width: 65vw;
+  background-color: #008a7e;
+  text-align: left;
+}
+.register-log:hover {
+  transition-duration: .8s;
+  width: 40vw;
+}
+
+.login:hover{
+  transition-duration: .8s;
+  width: 70vw;
+}
+
+#login input:focus {
+  outline: none;
+}
+
+.pa {
+  font-weight: 100;
+  font-size: 3em;
+  font-family: "proxima-nova",sans-serif;
+}
+
+.register-log > h3 {
+  font-weight: 300;
+  text-align: center;
+  margin: 1em 1em 0;
+}
+
+form {
+	text-align: center;
+	width: 50vw;
+	border-radius: 5px;
+	padding: 30px 20px 0 20px;
+	box-sizing: border-box;
+}
+
+input,
+button{
+	outline: none !important;
+}
+
+.buttongroup{
+  display:flex;
+  width: 50vw;
+  justify-content: flex-start;
+}
+
+.fb {
+	border: none;
+	background: #3b5998;
+	width: 20vw;
+	height: 60px;
+	font-size: 20px;
+	color: #fff;
+	text-transform: uppercase;
+  text-decoration: none;
+  padding: 20px;
+	cursor: pointer;
+	transition:all 0.3s linear;
+  margin: 2vw;
+}
+.fb:hover {
+	color: #3b5998;
+  background-color: white;
+}
+
+button.form-btn {
+	width: 50vw;
+	height: 60px;
+	bottom: 0;
+	border: 0;
+	font-size: 20px;
+	text-transform: uppercase;
+  margin: 2vw;
+}
+
+button.form-btn.sx {
+	left: 0;
+	background-color: rgba(255, 125, 0, 0.35);
+	color: #fff;
+	transition:all 0.3s linear;
+}
+
+button.form-btn.dx:hover {
+	background-color:rgba(255, 125, 0, 0.65);
+	color: #fff;
+}
+
+button.form-btn.dx {
+	right: 0;
+	background-color: #f1ba03;
+	color: #fff;
+  width: 20vw;
+}
+.register-log button.form-btn.dx {
+	background-color: #f13542;
+}
+
+input {
+	border: none;
+	border-bottom: 1px solid white;
+	color: white;
+	text-align: center;
+	font-size: 21px;
+	font-weight:100;
+	margin-bottom:25px;
+  background-color: transparent;
+  width: 50%;
+}
+
+::-webkit-input-placeholder {
+  color: white;
+	font-weight:100;
+  text-align: left;
+}
+
+:-moz-placeholder {
+  color: white;
+	font-weight:100;
+  text-align: left;
+}
+
+::-moz-placeholder {
+   color: white;
+	font-weight:100;
+  text-align: left;
+}
+
+:-ms-input-placeholder {
+   color: white;
+	font-weight:100;
+  text-align: left;
 }

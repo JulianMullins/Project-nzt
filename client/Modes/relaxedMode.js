@@ -1,12 +1,12 @@
 var React = require('react');
-var GameTimer = require('./Modes/gameTimer');
+var GameTimer = require('./gameTimer');
 
 //COLLECTION OF GLOBAL VARIABLES TO MAKE EVERYONES LIFE EASIER
 //create global variable for reaction counter
 var reactionStart
 //global variable for keeping reaction times
 //note: all reactin times for correct hits stored as array for stats (max,min,avg)
-var reactionTimes=[];
+var reactionTimes = [];
 //global variable for game score (saved once time runs out)
 var gameScore
 
@@ -24,20 +24,27 @@ var RelaxedMode = React.createClass({
         standardStyle,
         standardStyle
       ],
-      posMatch: false,
+      positionMatch: false,
       score: 0,
-      miss: false,
+      keepScore: false,
       alert: " ",
       overlay: true,
       initialTimer: 3,
       N: 1,
-      pressed: false,
+      posPressed: false,
       // modeMultiplier: modeMultiplier[this.props.mode],
       tempUser: true
     }
   },
   componentDidMount: function() {
     setInterval(this.timer, 1000);
+
+    window.onkeyup = function(e) {
+      console.log(e.keyCode);
+      if (e.keyCode == 38) {
+        this.posMatch();
+      }
+    }.bind(this);
 
     // fetch('/startGame/' + this.state.mode + '/' + this.state.N, {method: 'post'}).then(function(response) {
     //   return response.json();
@@ -55,9 +62,11 @@ var RelaxedMode = React.createClass({
     this.setState({
       initialTimer: this.state.initialTimer - 1
     });
+    if (this.state.initialTimer === 2) {
+      this.position();
+    }
     if (this.state.initialTimer === 0) {
       this.setState({overlay: false});
-      this.position();
     }
   },
   position: function() {
@@ -66,12 +75,23 @@ var RelaxedMode = React.createClass({
     var timeKeeper = 0;
 
     var iterations = setInterval(function() {
-      timeKeeper += 1;
-      if (!this.state.miss || this.state.pressed) {
-        this.setState({posMatch: false, miss: false, alert: " "});
-      }
-      if (this.state.miss) {
-        this.setState({miss: false, alert: "Missed a match"});
+      timeKeeper++;
+
+      console.log('pos:', timeTilPosMatch);
+      if (this.state.keepScore && !this.state.posMatch) {
+        this.setState({
+          alert: "Good job",
+          score: this.state.score + 10
+        });
+      } else if (!this.state.keepScore && this.state.posPressed) {
+        this.setState({alert: 'Not a match'});
+        if (this.state.score > 0) {
+          this.setState({
+            score: this.state.score - 5
+          });
+        }
+      } else if (this.state.keepScore && this.state.posMatch) {
+        this.setState({alert: "Missed a match"});
         if (this.state.score !== 0) {
           this.setState({
             score: this.state.score - 5
@@ -79,9 +99,14 @@ var RelaxedMode = React.createClass({
         }
       }
 
-      this.setState({pressed: false});
+      this.setState({pressed: false, keepScore: false, posMatch: false, posPressed: false});
+      setTimeout(function() {
+        this.setState({
+          alert: ' '
+        });
+      }.bind(this), 800);
       //start reaction time counter with flash
-      reactionStart= Date.now()
+      reactionStart = Date.now()
 
       if (timeTilPosMatch > 0) {
         // pick a non-matching next number while interval is not 0
@@ -97,7 +122,7 @@ var RelaxedMode = React.createClass({
         }
 
         // set color for 800
-        this.state.style[nextPos] = newStyle[0];
+        this.state.style[nextPos] = newStyle;
         this.setState({style: this.state.style});
         setTimeout(function() {
           this.state.style[nextPos] = standardStyle;
@@ -116,8 +141,8 @@ var RelaxedMode = React.createClass({
         posQueue.splice(0, 1);
 
         // set color for 800
-        this.state.style[nextPos] = newStyle[0];
-        this.setState({style: this.state.style, posMatch: true, miss: true});
+        this.state.style[nextPos] = newStyle;
+        this.setState({style: this.state.style, posMatch: true, keepScore: true});
         ///start reaction time as soon as blink starts
         setTimeout(function() {
           this.state.style[nextPos] = standardStyle;
@@ -133,9 +158,9 @@ var RelaxedMode = React.createClass({
       //RUTH THIS IS WHERE THE GAME ENDS///////////////////////////////////////////
       if (timeKeeper === 60) {
         //give gameScore variable the final score
-        gameScore=this.state.score;
-        console.log(gameScore,'game score')
-        console.log(reactionTimes,'reaction times')
+        gameScore = this.state.score;
+        console.log(gameScore, 'game score')
+        console.log(reactionTimes, 'reaction times')
         clearInterval(iterations);
       }
       ////////////////////////////////////////////////////////////////////////////////////
@@ -146,30 +171,18 @@ var RelaxedMode = React.createClass({
     }.bind(this), 2000);
   },
   posMatch: function() {
-    if (this.state.pressed) {
+    if (this.state.posPressed) {
       return;
     }
     if (this.state.posMatch) {
       //if correct button pressed, use current time to find reaction time
-      var reactionStop= Date.now()
-     reactionTimes.push(reactionStop-reactionStart)
-      this.setState({
-        score: this.state.score + 10,
-        miss: false,
-        alert: "Good job",
-        pressed: true
-      });
-    } else {
-      if (this.state.score !== 0) {
-        this.setState({
-          score: this.state.score - 5,
-          alert: "Not a match",
-          pressed: true
-        });
-      } else {
-        this.setState({alert: "Not a match"});
-      }
+      var reactionStop = Date.now()
+      reactionTimes.push(reactionStop - reactionStart)
     }
+    this.setState({
+      posPressed: true,
+      posMatch: !this.state.posMatch
+    })
   },
   render: function() {
     var overlay = this.state.overlay
@@ -185,16 +198,22 @@ var RelaxedMode = React.createClass({
     var scoreAlert;
     if (this.state.alert === "Good job") {
       scoreAlert = <div className="scoreAlertPositive">
-                    {this.state.alert}
-                   </div>
-    } else if (this.state.alert === "Not a match" ||
-               this.state.alert === "Missed a match") {
+        {this.state.alert}
+      </div>
+    } else if (this.state.alert === "Not a match" || this.state.alert === "Missed a match") {
       scoreAlert = <div className="scoreAlertNegative">
-                    {this.state.alert}
-                   </div>
+        {this.state.alert}
+      </div>
     } else {
       scoreAlert = <div></div>
     }
+
+    var posButtonStyle = this.state.posPressed
+      ? {
+        borderBottom: '5px solid white',
+        boxSizing: 'border-box'
+      }
+      : {};
 
     return (
       <div className="gameContainer relaxContainer">
@@ -208,22 +227,22 @@ var RelaxedMode = React.createClass({
             'color': "#01B6A7"
           }}></GameTimer>
         </div>
-          <div className="gameBoard">
-            <div className="gameSquare" style={this.state.style[0]}></div>
-            <div className="gameSquare" style={this.state.style[1]}></div>
-            <div className="gameSquare" style={this.state.style[2]}></div>
-            <div className="gameSquare" style={this.state.style[3]}></div>
-            <div className="gameSquare" style={this.state.style[4]}></div>
-            <div className="gameSquare" style={this.state.style[5]}></div>
-            <div className="gameSquare" style={this.state.style[6]}></div>
-            <div className="gameSquare" style={this.state.style[7]}></div>
-            <div className="gameSquare" style={this.state.style[8]}></div>
-          </div>
+        <div className="gameBoard">
+          <div className="gameSquare" style={this.state.style[0]}></div>
+          <div className="gameSquare" style={this.state.style[1]}></div>
+          <div className="gameSquare" style={this.state.style[2]}></div>
+          <div className="gameSquare" style={this.state.style[3]}></div>
+          <div className="gameSquare" style={this.state.style[4]}></div>
+          <div className="gameSquare" style={this.state.style[5]}></div>
+          <div className="gameSquare" style={this.state.style[6]}></div>
+          <div className="gameSquare" style={this.state.style[7]}></div>
+          <div className="gameSquare" style={this.state.style[8]}></div>
+        </div>
         <div className="scoreAlert">
           {scoreAlert}
         </div>
         <div className="gameButtonsContainer relaxedMode">
-          <a onClick={this.posMatch}>POSITION</a>
+          <a onClick={this.posMatch} style={posButtonStyle}>POSITION</a>
         </div>
       </div>
     );
@@ -232,6 +251,10 @@ var RelaxedMode = React.createClass({
 
 var standardStyle = {
   backgroundColor: "#BFBFBF"
+}
+
+var newStyle = {
+  backgroundColor: "#01B6A7"
 }
 
 module.exports = RelaxedMode

@@ -51,8 +51,9 @@ module.exports = function(passport) {
               email: req.body.email,
               password: password,
               facebookId: null,
-              stats: userStats,
-              temp:false
+              stats: userStats._id,
+              temp:false,
+              maxN:1
             };
             User.findOne({email:u.email},function(err,user){
               if(err){
@@ -111,8 +112,12 @@ module.exports = function(passport) {
   //   res.render('login');
   // });
 
+  router.get('/login/failure',function(req,res,next){
+    res.status(401).json({success:false})
+  })
+
   // POST Login page
-  router.post('/login', passport.authenticate('local'), function(req,res,next){
+  router.post('/login', passport.authenticate('local',{failureRedirect:'/login/failure'}), function(req,res,next){
     // passport.authenticate('local',
 		  //   function(err,user){
     //       if(err){
@@ -146,7 +151,8 @@ module.exports = function(passport) {
     var tempUserStats = new Stats();
     tempUserStats.save();
     var tempUser = new User({
-      stats:tempUserStats,
+      username:null,
+      stats:tempUserStats._id,
       temp:true
     })
     tempUser.save(function(err,user){
@@ -154,13 +160,25 @@ module.exports = function(passport) {
         res.send(err)
       }
     })
+
+    fetch('/login',{
+      method:'POST',
+      credentials: 'include',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          user:tempUser
+        })
+    })
+
   })
 
 
   // GET Logout page
   router.get('/logout', function(req, res) {
     req.logout();
-    res.redirect('/');
     //res.json({'isLoggedIn':false});
   });
 
