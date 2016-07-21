@@ -139,7 +139,7 @@ var ClassicMode = React.createClass({
       reactionStart = Date.now()
       var audio = new Audio('./audio/' + (nextSound + 1) + '.wav');
       audio.play();
-      this.state.style[nextPosition] = newStyle[0];
+      this.state.style[nextPosition] = newStyle;
       this.setState({style: this.state.style});
       setTimeout(function() {
         this.state.style[nextPosition] = standardStyle;
@@ -255,6 +255,10 @@ var ClassicMode = React.createClass({
 
 var standardStyle = {
   backgroundColor: "#BFBFBF"
+}
+
+var newStyle = {
+  color: "#F13542"
 }
 
 module.exports = ClassicMode

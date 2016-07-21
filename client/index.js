@@ -8,7 +8,6 @@ var Mainmenu = require('./Mainmenu');
 var GameOverOverlay = require('./gameOverOverlay');
 var ClassicLevels = require('./levels').ClassicLevels;
 var NavBar = require('./navBar');
-var Leaderboard = require('./leaderboard');
 
 var RelaxedMode = require('./relaxedMode');
 var ClassicMode = require('./classicMode');
@@ -34,4 +33,4 @@ var gameOver = function(score) {
 //   , document.getElementById('root'));
 
 ReactDOM.render(
-  <Leaderboard/>, document.getElementById('root'));
+  <RelaxedMode/>, document.getElementById('root'));

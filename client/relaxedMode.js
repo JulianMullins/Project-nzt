@@ -210,8 +210,7 @@ var RelaxedMode = React.createClass({
 
     var posButtonStyle = this.state.posPressed
       ? {
-        borderBottom: '5px solid white',
-        boxSizing: 'border-box'
+        backgroundColor: '#FF7001'
       }
       : {};
 
