@@ -1,6 +1,16 @@
 var React = require('react');
 var GameTimer = require('./gameTimer');
 
+//COLLECTION OF GLOBAL VARIABLES TO MAKE EVERYONES LIFE EASIER
+//create global variable for reaction counter
+var reactionStart;
+//global variable for keeping reaction times
+//note: all reactin times for correct hits stored as array for stats (max,min,avg)
+var reactionTimes = [];
+//global variable for game score (saved once time runs out)
+var gameScore;
+var reactionEnd=null;
+
 var AdvancedMode = React.createClass({
   getInitialState: function() {
     return {
@@ -53,9 +63,11 @@ var AdvancedMode = React.createClass({
     this.setState({
       initialTimer: this.state.initialTimer - 1
     });
+    if(this.state.initialTimer===2){
+      this.playGame();
+    }
     if (this.state.initialTimer === 0) {
       this.setState({overlay: false});
-      this.playGame();
     }
   },
   playGame: function() {
@@ -67,10 +79,8 @@ var AdvancedMode = React.createClass({
     var timeTilSoundMatch = parseInt((Math.random() * 5) + 2 + this.state.N);
      var timeKeeper = 0;
       //console.log(timekeeper)
-
     var iterations = setInterval(function() {
        timeKeeper++;
-
       if(!this.state.correct[0] && !this.state.correct[1] && !this.state.correct[2]){
         if(!this.state.colorMatch && !this.state.positionMatch && !this.state.soundMatch){
           //console.log('no matches')
@@ -79,6 +89,7 @@ var AdvancedMode = React.createClass({
             colorMatch: false, soundMatch: false, positionMatch: false,
             correct: [false,false,false]
           })
+           reactionEnd=null;
         }
         else{
           this.setState({
@@ -87,6 +98,7 @@ var AdvancedMode = React.createClass({
             correct: [false,false,false],
             alert: "Missed a match"
           })
+           reactionEnd=null;
           if (this.state.score !== 0) {
           this.setState({
             score: this.state.score - 5
@@ -95,7 +107,8 @@ var AdvancedMode = React.createClass({
         }
       }
       else if(this.state.correct[0]===this.state.colorMatch && this.state.correct[1]===this.state.soundMatch && this.state.correct[2]===this.state.positionMatch){
-        console.log('correct')
+        reactionTimes.push(reactionEnd-reactionStart);
+         reactionEnd=null;
         this.setState({ 
             soundPressed: noStyle, colorPressed: noStyle, positionPressed: noStyle, 
             colorMatch: false, soundMatch: false, positionMatch: false,
@@ -105,7 +118,7 @@ var AdvancedMode = React.createClass({
           })
       }
       else{
-        console.log('incorrect')
+        //console.log('incorrect')
         this.setState({
             soundPressed: noStyle, colorPressed: noStyle, positionPressed: noStyle,
             colorMatch: false, soundMatch: false, positionMatch: false, 
@@ -119,7 +132,6 @@ var AdvancedMode = React.createClass({
       }
 
       this.setState({ colorPressed: noStyle, soundPressed: noStyle, positionPressed: noStyle, alert: " "});
-
       //NOT GOING TO ACTUALLY LIGHT UP COLORS UNTIL ALL IF STATEMENTS HAVE ITERATED
       //case 1: position match
       if (timeTilPositionMatch === 0) {
@@ -195,6 +207,7 @@ var AdvancedMode = React.createClass({
         }
       }
 
+      reactionStart=Date.now()
       this.state.style[nextPosition] = newStyle[nextColor];
       var audio = new Audio('./audio/' + (nextSound + 1) + '.wav');
       audio.play();
@@ -210,12 +223,19 @@ var AdvancedMode = React.createClass({
         pMatch = false;
       }.bind(this), 800);
       if (timeKeeper === 60) {
-        console.log('over')
         clearInterval(iterations);
+          setTimeout(function(){
+          gameScore = this.state.score;
+          console.log(gameScore, 'game score')
+          console.log(reactionTimes, 'reaction times')
+        }.bind(this),2000)
       }
     }.bind(this), 2000);
   },
   colorMatch: function() {
+    if(!reactionEnd){
+        reactionEnd = Date.now();
+      }
       this.state.correct[0]=true;
       this.setState({
         colorPressed: pushStyle,
@@ -223,6 +243,9 @@ var AdvancedMode = React.createClass({
       });    
   },
   positionMatch: function() {
+    if(!reactionEnd){
+        reactionEnd = Date.now();
+      }
       this.state.correct[2]=true;
       this.setState({
         positionPressed: pushStyle,
@@ -230,6 +253,9 @@ var AdvancedMode = React.createClass({
       });
   },
   soundMatch: function() {
+    if(!reactionEnd){
+        reactionEnd = Date.now();
+      }
       this.state.correct[1]=true;
       this.setState({
         soundPressed: pushStyle,
@@ -266,21 +292,6 @@ var AdvancedMode = React.createClass({
     } else {
       scoreAlert = <div></div>
     }
-
-    // window.onkeyup= function(e){
-    //   if(e.which===37){
-    //     {this.soundMatch}
-    //     console.log('37')
-    //   }
-    //   if(e.which===38){
-    //     {this.positionMatch}
-    //     console.log('38')
-    //   }
-    //   if(e.which===39){
-    //     {this.soundMatch}
-    //     console.log('39')
-    //   }
-    // }
     return (
       <div className="gameContainer advancedContainer">
         {overlay}
@@ -326,24 +337,28 @@ var standardStyle = {
 
 var newStyle = [
   {
-    backgroundColor: '#DBFF33'
+    backgroundColor: '#00cc33' //green
   }, {
-    backgroundColor: '#B15CCB'
+    backgroundColor: '#000000' //black
   }, {
-    backgroundColor: '#5CCBAF'
+    backgroundColor: '#33ccff', //light blue
+    border: "5px solid #333366" //dark blue border
   }, {
-    backgroundColor: '#5CCD93'
+    backgroundColor: '#ffffff', //white
+    border: "5px solid black" //black border
   }, {
-    backgroundColor: '#87CD5C'
+    backgroundColor: '#ffff00' //yellow
   }, {
-    backgroundColor: '#D3A43F'
+    backgroundColor: '#ff6699' //light pink
   }, {
-    backgroundColor: '#D3563F'
+    backgroundColor: '#9933cc' //purple
   }, {
-    backgroundColor: '#3F49D3'
+    backgroundColor: "#cc9966", //light brown
+    border: "5px solid #663300" //dark brown border
   }, {
-    backgroundColor: '#C91A83'
+    backgroundColor: '#cc3333' //red
   }
 ]
+
 
 module.exports = AdvancedMode

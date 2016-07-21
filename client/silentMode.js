@@ -9,6 +9,7 @@ var reactionStart;
 var reactionTimes = [];
 //global variable for game score (saved once time runs out)
 var gameScore;
+var reactionEnd=null;
 
 var SilentMode = React.createClass({
   getInitialState: function() {
@@ -73,6 +74,8 @@ var SilentMode = React.createClass({
     var iterations = setInterval(function() {
       timeKeeper++;
       if (this.state.keepScore && !(this.state.colorMatch || this.state.positionMatch)) {
+        reactionTimes.push(reactionEnd-reactionStart);
+        reactionEnd=null;
         this.setState({
           score: this.state.score + 10,
           alert: 'Good job',
@@ -80,6 +83,7 @@ var SilentMode = React.createClass({
         });
       } else if (!this.state.keepScore && (this.state.posPressed || this.state.colorPressed)) {
         this.setState({alert: "Not a match"})
+        reactionEnd=null;
         if (this.state.score !== 0) {
           this.setState({
             score: this.state.score - 5,
@@ -88,6 +92,7 @@ var SilentMode = React.createClass({
         }
       } else if (this.state.colorMatch || this.state.positionMatch) {
         this.setState({alert: "Missed a match"});
+        reactionEnd=null;
         if (this.state.score !== 0) {
           this.setState({
             score: this.state.score - 5,
@@ -162,10 +167,12 @@ var SilentMode = React.createClass({
         pMatch = false;
       }.bind(this), 800);
       if (timeKeeper === 60) {
-        gameScore = this.state.score;
-        console.log(gameScore, 'game score')
-        console.log(reactionTimes, 'reaction times')
         clearInterval(iterations);
+          setTimeout(function(){
+          gameScore = this.state.score;
+          console.log(gameScore, 'game score')
+          console.log(reactionTimes, 'reaction times')
+        }.bind(this),2000)
       }
     }.bind(this), 2000);
   },
@@ -176,8 +183,9 @@ var SilentMode = React.createClass({
     }
     if (this.state.positionMatch) {
       //getting reaction time of correct match
-      var reactionEnd = Date.now();
-      reactionTimes.push(reactionEnd - reactionStart);
+      if(!reactionEnd){
+        reactionEnd = Date.now();
+      }
     }
     this.setState({positionMatch: !this.state.positionMatch, posPressed: true, posStyle: pushStyle});
   },
@@ -188,8 +196,9 @@ var SilentMode = React.createClass({
     }
     if (this.state.colorMatch) {
       //reaction time of correct match
-      var reactionEnd = Date.now();
-      reactionTimes.push(reactionEnd - reactionStart);
+      if(!reactionEnd){
+        reactionEnd = Date.now();
+      }
     }
     this.setState({colorMatch: !this.state.colorMatch, colorPressed: true, colorStyle: pushStyle});
   },

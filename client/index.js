@@ -37,4 +37,4 @@ var gameOver = function(score){
 //   , document.getElementById('root'));
 
 ReactDOM.render(
-  <SilentMode/>, document.getElementById('root'));
+  <AdvancedMode/>, document.getElementById('root'));
