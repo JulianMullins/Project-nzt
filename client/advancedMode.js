@@ -1,5 +1,5 @@
 var React = require('react');
-var GameTimer = require('./gameTimer');
+var GameTimer = require('./Modes/gameTimer');
 
 //COLLECTION OF GLOBAL VARIABLES TO MAKE EVERYONES LIFE EASIER
 //create global variable for reaction counter
@@ -113,7 +113,7 @@ var AdvancedMode = React.createClass({
             soundPressed: noStyle, colorPressed: noStyle, positionPressed: noStyle, 
             colorMatch: false, soundMatch: false, positionMatch: false,
             correct: [false,false,false],
-            alert: "Good job!",
+            alert: "Good job",
             score: this.state.score + 10
           })
       }
@@ -122,7 +122,8 @@ var AdvancedMode = React.createClass({
         this.setState({
             soundPressed: noStyle, colorPressed: noStyle, positionPressed: noStyle,
             colorMatch: false, soundMatch: false, positionMatch: false, 
-            correct: [false,false,false]
+            correct: [false,false,false],
+            alert: "Not a match"
           })
          if (this.state.score !== 0) {
           this.setState({
@@ -131,7 +132,11 @@ var AdvancedMode = React.createClass({
         }
       }
 
-      this.setState({ colorPressed: noStyle, soundPressed: noStyle, positionPressed: noStyle, alert: " "});
+      this.setState({ colorPressed: noStyle, soundPressed: noStyle, positionPressed: noStyle});
+      setTimeout(function() {
+        this.setState({alert: ' '});
+      }.bind(this), 800);
+
       //NOT GOING TO ACTUALLY LIGHT UP COLORS UNTIL ALL IF STATEMENTS HAVE ITERATED
       //case 1: position match
       if (timeTilPositionMatch === 0) {

@@ -1,5 +1,5 @@
 var React = require('react');
-var GameTimer = require('./gameTimer');
+var GameTimer = require('./Modes/gameTimer');
 
 //COLLECTION OF GLOBAL VARIABLES TO MAKE EVERYONES LIFE EASIER
 //create global variable for reaction counter

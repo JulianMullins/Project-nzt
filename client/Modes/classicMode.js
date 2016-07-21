@@ -1,5 +1,5 @@
 var React = require('react');
-var GameTimer = require('./Modes/gameTimer');
+var GameTimer = require('./gameTimer');
 
 //COLLECTION OF GLOBAL VARIABLES TO MAKE EVERYONES LIFE EASIER
 //create global variable for reaction counter
@@ -75,9 +75,15 @@ var ClassicMode = React.createClass({
 
     var iterations = setInterval(function() {
       timeKeeper++;
+<<<<<<< HEAD:client/classicMode.js
  if (this.state.keepScore && !(this.state.soundMatch || this.state.positionMatch)) {
       reactionTimes.push(reactionEnd-reactionStart);
       reactionEnd=null;
+=======
+
+      console.log(timeTilPositionMatch, timeTilSoundMatch);
+      if (this.state.keepScore && !(this.state.positionMatch || this.state.soundMatch)) {
+>>>>>>> origin/master:client/Modes/classicMode.js
         this.setState({
           score: this.state.score + 10,
           alert: 'Good job',
@@ -188,7 +194,14 @@ var ClassicMode = React.createClass({
         reactionEnd = Date.now();
       }
     }
+<<<<<<< HEAD:client/classicMode.js
     this.setState({positionMatch: !this.state.positionMatch, posPressed: true, posStyle: pushStyle});
+=======
+    this.setState({
+      positionMatch: !this.state.positionMatch,
+      posPressed: true
+    });
+>>>>>>> origin/master:client/Modes/classicMode.js
   },
   soundMatch: function() {
     if (this.state.pressed) {
@@ -199,7 +212,14 @@ var ClassicMode = React.createClass({
         reactionEnd = Date.now();
       }
     }
+<<<<<<< HEAD:client/classicMode.js
     this.setState({soundMatch: !this.state.soundMatch, soundPressed: true, soundStyle: pushStyle});
+=======
+    this.setState({
+      soundMatch: !this.state.soundMatch,
+      soundPressed: true
+    });
+>>>>>>> origin/master:client/Modes/classicMode.js
   },
   render: function() {
     var overlay = this.state.overlay
