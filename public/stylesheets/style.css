@@ -123,6 +123,7 @@ h3 {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  margin-top: 20px;
 }
 
 .relaxContainer {
@@ -134,7 +135,7 @@ h3 {
 }
 
 .classicContainer {
-  background-color: rgba(1, 182, 167, 0.09); /* #F13542 */
+  background-color: rgba(241, 53, 66, 0.09);
 }
 
 .advancedContainer {
@@ -155,7 +156,7 @@ h3 {
   width: 175px;
   height: 175px;
   margin: 4px;
-/*  border: 3px solid #6D6E71;*/
+  border: 2px solid rgba(109, 110, 113, 0.5);
 }
 
 .gameButtonsContainer {
@@ -190,6 +191,7 @@ h3 {
   display: flex;
   flex-direction: row;
   width: 85%;
+  margin-bottom: 10px;
 }
 
 .gameContainer h1 {
@@ -197,7 +199,6 @@ h3 {
   justify-content: center;
   align-items: center;
   font-size: 48px;
-  color: #01B6A7;
 }
 
 .gameContainer h2 {
@@ -415,11 +416,11 @@ h3 {
   transition-duration: .8s;
 }
 .register-log {
-  width: 30vw;
+  width: 35vw;
   background-color: #7cd9d2;
 }
 .login {
-  width: 70vw;
+  width: 65vw;
   background-color: #008a7e;
   text-align: left;
 }
@@ -430,7 +431,7 @@ h3 {
 
 .login:hover{
   transition-duration: .8s;
-  width: 75vw;
+  width: 70vw;
 }
 
 #login input:focus {
