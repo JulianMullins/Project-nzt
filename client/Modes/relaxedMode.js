@@ -1,5 +1,6 @@
 var React = require('react');
 var GameTimer = require('./gameTimer');
+var Game = require('../../models/Game');
 
 //COLLECTION OF GLOBAL VARIABLES TO MAKE EVERYONES LIFE EASIER
 //create global variable for reaction counter
@@ -163,6 +164,24 @@ var RelaxedMode = React.createClass({
         console.log(gameScore, 'game score')
         console.log(reactionTimes, 'reaction times')
         clearInterval(iterations);
+
+        Game.findById(this.state.gameId,function(err,game){
+          if(err){
+            console.log(err);
+          }
+          else if(!game) {
+            console.log("no game")
+          }
+          else{
+            game.setState({
+              score:gameScore,
+              reactionTimes:reactionTimes
+            })
+            this.props.history.push('/gameOver')
+          }
+        }.bind(this))
+
+
       }
       ////////////////////////////////////////////////////////////////////////////////////
       //////////////////////////////////////////////////////////////////////////////////

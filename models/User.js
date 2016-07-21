@@ -11,7 +11,11 @@ var userSchema = mongoose.Schema({
 		type: mongoose.Schema.Types.ObjectId,
 		ref: 'Stats'
 	},
-	temp:Boolean
+	temp:Boolean,
+	currentGame:{
+		type: mongoose.Schema.Types.ObjectId,
+		ref: 'Game'
+	}
 })
 
 

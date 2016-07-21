@@ -185,6 +185,28 @@ var SilentMode = React.createClass({
           gameScore = this.state.score;
           console.log(gameScore, 'game score')
           console.log(reactionTimes, 'reaction times')
+          
+
+          //GAME OVER
+          Game.findById(this.state.gameId,function(err,game){
+            if(err){
+              console.log(err);
+            }
+            else if(!game) {
+              console.log("no game")
+            }
+            else{
+              game.setState({
+                score:gameScore,
+                reactionTimes:reactionTimes
+              })
+              this.props.history.push('/gameOver')
+            }
+          }.bind(this))
+
+
+
+
         }.bind(this),2000)
       }
     }.bind(this), 2000);
