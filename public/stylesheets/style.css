@@ -117,7 +117,7 @@ h3 {
 /* game page css */
 
 .gameContainer {
-  height: 90vh;
+  min-height: 90vh;
   width: 640px;
   display: flex;
   flex-direction: column;
@@ -227,26 +227,84 @@ h3 {
 }
 
 .scoreAlertNegative {
-  background-color: #C11A16;
-  color: white;
+  background-color: transparent;
+  color: transparent;
   font-size: 28px;
   margin: 10px auto;
   height: 70px;
-  width: 100%;
+  width: 50%;
   padding: 5px;
   padding-top: 20px;
   text-align: center;
+  -webkit-animation-name: negativeFadeIn;
+  -webkit-animation-duration: .4s;
+  -webkit-animation-name: negativeFadeOut;
+  -webkit-animation-duration: 1s;
+  animation-name: negativeFadeIn;
+  animation-duration: .4s;
+  animation-name: negativeFadeOut;
+  animation-duration: 1s;
 }
 .scoreAlertPositive {
-  background-color: green;
-  color: white;
+  background-color: transparent;
+  color: transparent;
   font-size: 28px;
   margin: 10px auto;
   height: 70px;
-  width: 100%;
+  width: 50%;
   padding: 5px;
   padding-top: 20px;
   text-align: center;
+  -webkit-animation-name: positiveFadeIn;
+  -webkit-animation-duration: .4s;
+  -webkit-animation-name: positiveFadeOut;
+  -webkit-animation-duration: 1s;
+  animation-name: positiveFadeIn;
+  animation-duration: .4s;
+  animation-name: positiveFadeOut;
+  animation-duration: 1s;
+}
+
+/* negative alert fade in and out */
+@keyframes negativeFadeIn {
+  from {background-color: transparent; color: transparent;}
+  to {background-color: rgba(255, 51, 51, 0.8); color: white;}
+}
+
+@keyframes negativeFadeOut {
+  from {background-color: rgba(255, 51, 51, 0.8); color: white;}
+  to {background-color: transparent; color: transparent;}
+}
+
+@-webkit-keyframes negativeFadeIn {
+  from {background-color: transparent; color: transparent;}
+  to {background-color: rgba(255, 51, 51, 0.8); color: white;}
+}
+
+@-webkit-keyframes negativeFadeOut {
+  from {background-color: rgba(255, 51, 51, 0.8); color: white;}
+  to {background-color: transparent; color: transparent;}
+}
+
+/* positive alert fade in and out */
+@keyframes positiveFadeIn {
+  from {background-color: transparent; color: transparent;}
+  to {background-color: rgba(0, 204, 153, 0.8); color: white}
+}
+
+@keyframes positiveFadeOut {
+  from {background-color:  rgba(0, 204, 153, 0.8); color: white;}
+  to {background-color: transparent; color: transparent;}
+}
+
+@-webkit-keyframes positiveFadeIn {
+  from {background-color: transparent; color: transparent;}
+  to {background-color: rgba(0, 204, 153, 0.8); color: white}
+}
+
+@-webkit-keyframes positiveFadeOut {
+  from {background-color:  rgba(0, 204, 153, 0.8); color: white;}
+  to {background-color: transparent; color: transparent;}
 }
 
 .classicMode {
