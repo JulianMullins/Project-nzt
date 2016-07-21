@@ -42,6 +42,15 @@ var SilentMode = React.createClass({
     // fetch('/startGame/'+this.state.mode+'/'+this.state.N, {
     //  method: 'post'
     // });
+      <script>
+          {window.onkeyup = function(e) {
+            if (e.keyCode == 37) {
+              this.positionMatch();
+            }
+            if (e.keyCode == 39) {
+              this.colorMatch();
+            }
+          }.bind(this)}</script>   
   },
   timer: function() {
     this.setState({

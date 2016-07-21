@@ -1,18 +1,6 @@
 var React = require('react');
 var GameTimer = require('./gameTimer');
 
-
-//REPLACE MATCH BOOLEANS WITH ARRAY 
-//CHECK FOR MATCH AFTER THE END OF EACH ROUND
-//KEEP FLASHSING FOR AS LONG AS THE SQUARES DO AND THEN REMOVE
-//(TO KEEP CONISTENCY ON THE EYE)
-//ADJUST SCOREBOARD ACCORDINGLY 
-//ESSENTIALLY 2 STATES: MATCH OR MISS
-
-//!!!MAKE SURE TO KEEP CAREFUL TRACK OF THE ARRAY!!!
-
-
-
 var AdvancedMode = React.createClass({
   getInitialState: function() {
     return {
@@ -48,6 +36,18 @@ var AdvancedMode = React.createClass({
     // fetch('/startGame/'+this.state.mode+'/'+this.state.N, {
     //  method: 'post'
     // });
+    <script>
+          {window.onkeyup = function(e) {
+            if (e.keyCode == 37) {
+              this.soundMatch();
+            }
+            if (e.keyCode == 38) {
+              this.positionMatch();
+            }
+            if (e.keyCode == 39) {
+              this.colorMatch();
+            }
+          }.bind(this)}</script>
   },
   timer: function() {
     this.setState({
@@ -68,7 +68,7 @@ var AdvancedMode = React.createClass({
      var timeKeeper = 0;
       //console.log(timekeeper)
 
-    setInterval(function() {
+    var iterations = setInterval(function() {
        timeKeeper++;
 
       if(!this.state.correct[0] && !this.state.correct[1] && !this.state.correct[2]){
@@ -100,7 +100,8 @@ var AdvancedMode = React.createClass({
             soundPressed: noStyle, colorPressed: noStyle, positionPressed: noStyle, 
             colorMatch: false, soundMatch: false, positionMatch: false,
             correct: [false,false,false],
-            alert: "Good job!"
+            alert: "Good job!",
+            score: this.state.score + 10
           })
       }
       else{
@@ -122,7 +123,7 @@ var AdvancedMode = React.createClass({
       //NOT GOING TO ACTUALLY LIGHT UP COLORS UNTIL ALL IF STATEMENTS HAVE ITERATED
       //case 1: position match
       if (timeTilPositionMatch === 0) {
-        console.log('position match')
+        //console.log('position match')
         this.setState({positionMatch: true, miss: true})
         //reset position portion
         timeTilPositionMatch = parseInt((Math.random() * 5) + 2);
@@ -134,7 +135,7 @@ var AdvancedMode = React.createClass({
       }
       //case 2: color match
       if (timeTilColorMatch === 0) {
-        console.log('color match')
+        //console.log('color match')
         this.setState({colorMatch: true, miss: true})
         //reset position portion
         timeTilColorMatch = parseInt((Math.random() * 5) + 2);
@@ -146,7 +147,7 @@ var AdvancedMode = React.createClass({
       }
       //case 3: sound match
       if (timeTilSoundMatch === 0) {
-        console.log('sound match')
+       // console.log('sound match')
         this.setState({soundMatch: true, miss: true})
         //reset position portion
         timeTilSoundMatch = parseInt((Math.random() * 5) + 2);
@@ -196,7 +197,7 @@ var AdvancedMode = React.createClass({
 
       this.state.style[nextPosition] = newStyle[nextColor];
       var audio = new Audio('./audio/' + (nextSound + 1) + '.wav');
-      //audio.play();
+      audio.play();
       this.setState({style: this.state.style});
       setTimeout(function() {
         this.state.style[nextPosition] = standardStyle;
@@ -215,26 +216,32 @@ var AdvancedMode = React.createClass({
     }.bind(this), 2000);
   },
   colorMatch: function() {
-    this.state.correct[0]=true;
+      this.state.correct[0]=true;
       this.setState({
         colorPressed: pushStyle,
         correct: this.state.correct
-      });
+      });    
   },
   positionMatch: function() {
-    this.state.correct[2]=true;
+      this.state.correct[2]=true;
       this.setState({
         positionPressed: pushStyle,
         correct: this.state.correct
       });
   },
   soundMatch: function() {
-    this.state.correct[1]=true;
+      this.state.correct[1]=true;
       this.setState({
         soundPressed: pushStyle,
         correct: this.state.correct
       });
   },
+  handleKeyPress: function(event){
+    console.log('clicky')
+      if(event.key == 'Enter'){
+    console.log('enter press here! ')
+  }
+},
   render: function() {
     var overlay = this.state.overlay
       ? (
@@ -260,6 +267,20 @@ var AdvancedMode = React.createClass({
       scoreAlert = <div></div>
     }
 
+    // window.onkeyup= function(e){
+    //   if(e.which===37){
+    //     {this.soundMatch}
+    //     console.log('37')
+    //   }
+    //   if(e.which===38){
+    //     {this.positionMatch}
+    //     console.log('38')
+    //   }
+    //   if(e.which===39){
+    //     {this.soundMatch}
+    //     console.log('39')
+    //   }
+    // }
     return (
       <div className="gameContainer advancedContainer">
         {overlay}
@@ -286,10 +307,10 @@ var AdvancedMode = React.createClass({
         <div className="scoreAlert">
           {scoreAlert}
         </div>
-        <div className="gameButtonsContainer advancedMode">
-          <a style={this.state.soundPressed} onClick={this.soundMatch}>SOUND</a>
-          <a style={this.state.positionPressed} onClick={this.positionMatch}>POSITION</a>
-          <a style={this.state.colorPressed} onClick={this.colorMatch}>COLOR</a>
+        <div className="gameButtonsContainer advancedMode" onKeyPress={this.handleKeyPres}>
+          <a style={this.state.soundPressed} >SOUND</a>
+          <a style={this.state.positionPressed}>POSITION</a>
+          <a style={this.state.colorPressed}>COLOR</a>
         </div>
       </div>
     );
