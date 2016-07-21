@@ -10,6 +10,7 @@ var reactionTimes = [];
 //global variable for game score (saved once time runs out)
 var gameScore;
 var reactionEnd=null;
+var iterations
 
 var SilentMode = React.createClass({
   getInitialState: function() {
@@ -68,6 +69,9 @@ var SilentMode = React.createClass({
     //  method: 'post'
     // });
   },
+  componentWillUnmount: function(){
+    clearInterval(iterations)
+  },
   timer: function() {
     this.setState({
       initialTimer: this.state.initialTimer - 1
@@ -84,7 +88,7 @@ var SilentMode = React.createClass({
     var timeTilColorMatch = parseInt((Math.random() * 5) + 2 + this.state.N);
     var timeKeeper = 0;
 
-    var iterations = setInterval(function() {
+    iterations = setInterval(function() {
       timeKeeper++;
 
       console.log('pos:', timeTilPositionMatch, 'color:', timeTilColorMatch);
@@ -317,23 +321,26 @@ var standardStyle = {
 
 var newStyle = [
   {
-    backgroundColor: '#DBFF33'
+    backgroundColor: '#00cc33' //green
   }, {
-    backgroundColor: '#B15CCB'
+    backgroundColor: '#000000' //black
   }, {
-    backgroundColor: '#5CCBAF'
+    backgroundColor: '#33ccff', //light blue
+    border: "5px solid #333366" //dark blue border
   }, {
-    backgroundColor: '#5CCD93'
+    backgroundColor: '#ffffff', //white
+    border: "5px solid black" //black border
   }, {
-    backgroundColor: '#87CD5C'
+    backgroundColor: '#ffff00' //yellow
   }, {
-    backgroundColor: '#D3A43F'
+    backgroundColor: '#ff6699' //light pink
   }, {
-    backgroundColor: '#D3563F'
+    backgroundColor: '#9933cc' //purple
   }, {
-    backgroundColor: '#3F49D3'
+    backgroundColor: "#cc9966", //light brown
+    border: "5px solid #663300" //dark brown border
   }, {
-    backgroundColor: '#C91A83'
+    backgroundColor: '#cc3333' //red
   }
 ]
 
