@@ -36,6 +36,18 @@ var AdvancedMode = React.createClass({
     // fetch('/startGame/'+this.state.mode+'/'+this.state.N, {
     //  method: 'post'
     // });
+    <script>
+          {window.onkeyup = function(e) {
+            if (e.keyCode == 37) {
+              this.soundMatch();
+            }
+            if (e.keyCode == 38) {
+              this.positionMatch();
+            }
+            if (e.keyCode == 39) {
+              this.colorMatch();
+            }
+          }.bind(this)}</script>
   },
   timer: function() {
     this.setState({
@@ -203,38 +215,26 @@ var AdvancedMode = React.createClass({
       }
     }.bind(this), 2000);
   },
-  colorMatch: function(event) {
-    console.log('colorkey')
-    if(event.which===39){
+  colorMatch: function() {
       this.state.correct[0]=true;
       this.setState({
         colorPressed: pushStyle,
         correct: this.state.correct
-      });
-    }
-    
+      });    
   },
-  positionMatch: function(event) {
-    console.log('poskey')
-    if(event.which===38){
+  positionMatch: function() {
       this.state.correct[2]=true;
       this.setState({
         positionPressed: pushStyle,
         correct: this.state.correct
       });
-    }
-    
   },
-  soundMatch: function(event) {
-    console.log('soundkey')
-    if(event.which===37){
+  soundMatch: function() {
       this.state.correct[1]=true;
       this.setState({
         soundPressed: pushStyle,
         correct: this.state.correct
       });
-    }
-    
   },
   handleKeyPress: function(event){
     console.log('clicky')
