@@ -76,9 +76,11 @@ var SilentMode = React.createClass({
     this.setState({
       initialTimer: this.state.initialTimer - 1
     });
+    if(this.state.initialTimer===2){
+       this.positionAndColor();
+    }
     if (this.state.initialTimer === 0) {
       this.setState({overlay: false});
-      this.positionAndColor();
     }
   },
   positionAndColor: function() {
