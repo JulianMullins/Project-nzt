@@ -6,8 +6,8 @@ import { Link } from 'react-router'
 var NavBar = React.createClass({
 	getInitialState(){
 		return {
-			open:false,
-			loggedIn:false
+			open: false,
+			loggedIn: false
 		}
 	},
 	componentDidMount(){
@@ -23,9 +23,18 @@ var NavBar = React.createClass({
 	    }.bind(this))
 	},
 	click(e){
+		e.preventDefault();
 		this.setState({
 			open: !this.state.open
-		})
+		}, function() {
+			if (this.state.open) {
+				$("#root").css("margin", "0px 0px 50px 160px");
+	      $("#root").css("transition-duration", ".4s");
+			} else {
+				$('#root').css('margin', '');
+	      $("#root").css("transition-duration", ".2s");
+			}
+		}.bind(this));
 	},
 	render: function(){
 		var logInOutLink = this.state.loggedIn
@@ -37,7 +46,7 @@ var NavBar = React.createClass({
 		return(
 			<div>
 				<nav id="bt-menu" className={
-					this.state.open 
+					this.state.open
 						? 'bt-menu bt-menu-open'
 						: 'bt-menu bt-menu-close'
 				}>
@@ -53,9 +62,9 @@ var NavBar = React.createClass({
 					<ul>
 						<li><Link to="/settings"><i className="fa fa-cog"  aria-hidden="true"></i></Link></li>
 					</ul>
-					<div className='bt-overlay' />
+					<div className='bt-overlay' onClick={this.click}/>
 				</nav>
-			
+
 			</div>
 		)
 	}

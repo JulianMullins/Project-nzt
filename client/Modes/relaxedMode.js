@@ -9,6 +9,7 @@ var reactionStart
 var reactionTimes = [];
 //global variable for game score (saved once time runs out)
 var gameScore
+var iterations
 
 var RelaxedMode = React.createClass({
   getInitialState: function() {
@@ -58,6 +59,9 @@ var RelaxedMode = React.createClass({
       }
     }.bind(this);
   },
+  componentWillUnmount: function(){
+    clearInterval(iterations)
+  },
   timer: function() {
     this.setState({
       initialTimer: this.state.initialTimer - 1
@@ -74,7 +78,7 @@ var RelaxedMode = React.createClass({
     var timeTilPosMatch = parseInt((Math.random() * 5) + 2 + this.state.N);
     var timeKeeper = 0;
 
-    var iterations = setInterval(function() {
+    iterations = setInterval(function() {
       timeKeeper++;
 
       console.log('pos:', timeTilPosMatch);
@@ -210,8 +214,7 @@ var RelaxedMode = React.createClass({
 
     var posButtonStyle = this.state.posPressed
       ? {
-        borderBottom: '5px solid white',
-        boxSizing: 'border-box'
+        backgroundColor: '#FF7001'
       }
       : {};
 

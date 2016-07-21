@@ -10,6 +10,7 @@ var reactionTimes = [];
 //global variable for game score (saved once time runs out)
 var gameScore;
 var reactionEnd=null;
+var iterations
 
 var SilentMode = React.createClass({
   getInitialState: function() {
@@ -68,6 +69,9 @@ var SilentMode = React.createClass({
     //  method: 'post'
     // });
   },
+  componentWillUnmount: function(){
+    clearInterval(iterations)
+  },
   timer: function() {
     this.setState({
       initialTimer: this.state.initialTimer - 1
@@ -84,7 +88,7 @@ var SilentMode = React.createClass({
     var timeTilColorMatch = parseInt((Math.random() * 5) + 2 + this.state.N);
     var timeKeeper = 0;
 
-    var iterations = setInterval(function() {
+    iterations = setInterval(function() {
       timeKeeper++;
 
       console.log('pos:', timeTilPositionMatch, 'color:', timeTilColorMatch);
@@ -115,7 +119,7 @@ var SilentMode = React.createClass({
           });
         }
       }
-      this.setState({keepScore: false, positionMatch: false, colorMatch: false, posPressed: false, colorPressed: false, 
+      this.setState({keepScore: false, positionMatch: false, colorMatch: false, posPressed: false, colorPressed: false,
         posStyle: noStyle, colorStyle: noStyle});
       setTimeout(function() {
         this.setState({alert: ' '});
