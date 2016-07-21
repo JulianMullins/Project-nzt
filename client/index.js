@@ -1,7 +1,7 @@
 var React = require('react');
 var ReactDOM = require('react-dom');
 
-import {Router, Route, hashHistory} from 'react-router'
+import {Router, Route, hashHistory, Link} from 'react-router'
 var url = process.env.url;
 
 var MenuOverlay = require('./menuOverlay');
@@ -25,7 +25,6 @@ var ClassicLevels = require('./levels').ClassicLevels;
 var RelaxedLevels = require('./levels').RelaxedLevels;
 var SilentLevels = require('./levels').SilentLevels;
 var AdvancedLevels = require('./levels').AdvancedLevels;
-import {Link} from 'react-router'
 /*
       <Route path="/leaderboard" component={Leaderboard}/>
       <Route path="/stats" component={Stats}/>

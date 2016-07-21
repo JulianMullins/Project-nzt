@@ -1,162 +1,154 @@
 var React = require('react');
 var ReactDOM = require('react-dom');
 var url = process.env.url;
-import { Link } from 'react-router'
+import {Link} from 'react-router'
 
-
-var getSquareArr = function(square,mode){
+var getSquareArr = function(square, mode) {
   var squareClass = "";
-    if(square === 1){
-      squareClass="grid1";
-    }
-    else if(square<=4){
-      squareClass="grid4"
-    }
-    else{
-      squareClass="grid9"
-    }
-    var arr = [];
-    for(var i=1; i<square; i++){
-      var link = "/game/"+mode+"/"+i;
-      var sqClass = "levelSquare "+squareClass
-      arr.push(<Link to={link} className={sqClass} id={i} ></Link>);
-    }
-    var link = "/game/"+mode+"/"+i
-    var sqClass = "levelSquareLast "+squareClass
-    arr.push(<Link to={link} className={sqClass} id={i} ></Link>);
-    return arr;
+  if (square === 1) {
+    squareClass = "grid1";
+  } else if (square <= 4) {
+    squareClass = "grid4"
+  } else {
+    squareClass = "grid9"
+  }
+  var arr = [];
+  for (var i = 1; i < square; i++) {
+    var link = "/game/" + mode + "/" + i;
+    var sqClass = "levelSquare " + squareClass
+    arr.push(
+      <Link to={link} className={sqClass} key={i}></Link>
+    );
+  }
+  var link = "/game/" + mode + "/" + i
+  var sqClass = "levelSquareLast " + squareClass
+  arr.push(
+    <Link to={link} className={sqClass} key={i}></Link>
+  );
+  return arr;
 };
 
-var getMaxN = function(mode,cb){
+var getMaxN = function(mode, cb) {
 
   fetch('/getMaxN', {
-      method: 'get',
-      credentials: 'include'
-    }).then(function(response) {
-      return response.json();
-    }).then(function(response) {
-      return cb(response.maxN)
-    })
+    method: 'get',
+    credentials: 'include'
+  }).then(function(response) {
+    return response.json();
+  }).then(function(response) {
+    return cb(response.maxN)
+  })
 };
 
 var ClassicLevels = React.createClass({
-  getInitialState: function(){   
+  getInitialState: function() {
     return {
       //write function that will get current user's mode's level
       maxN: 1,
-      mode:'classic'
+      mode: 'classic'
     }
   },
-  setMaxN:function(){
-    getMaxN(this.state.mode,function(maxN){
-      this.setState({maxN:maxN})
+  setMaxN: function() {
+    getMaxN(this.state.mode, function(maxN) {
+      this.setState({maxN: maxN})
     }.bind(this))
   },
   render: function() {
     this.setMaxN();
     var square = this.state.n;
-    var squareArr = getSquareArr(square,this.state.mode)
-    
-    return(
-    <div className="levelBox">
-      <h1 id="classic">Classic</h1>
+    var squareArr = getSquareArr(square, this.state.mode)
+
+    return (
+      <div className="levelBox">
+        <h1 id="classic">Classic</h1>
         <div className="grid">
-          {squareArr.map(function(square){
+          {squareArr.map(function(square) {
             return square;
           })}
         </div>
         <h3>Highest: Level {this.state.maxN}</h3>
-    </div>
+      </div>
     );
   }
 });
 
 var RelaxedLevels = React.createClass({
-  getInitialState: function(){
-    return {
-      maxN:1,
-      mode:'relaxed'
-    }
+  getInitialState: function() {
+    return {maxN: 1, mode: 'relaxed'}
   },
-  setMaxN:function(){
-    getMaxN(this.state.mode,function(maxN){
-      this.setState({maxN:maxN})
+  setMaxN: function() {
+    getMaxN(this.state.mode, function(maxN) {
+      this.setState({maxN: maxN})
     }.bind(this))
   },
   render: function() {
     this.setMaxN();
     var square = this.state.n;
-    var squareArr = getSquareArr(square,this.state.mode)
+    var squareArr = getSquareArr(square, this.state.mode)
 
-    return(
-    <div>
-      <h1 id="relaxed">Relaxed</h1>
-      <div className="grid">
-          {squareArr.map(function(square){
+    return (
+      <div>
+        <h1 id="relaxed">Relaxed</h1>
+        <div className="grid">
+          {squareArr.map(function(square) {
             return square;
           })}
         </div>
         <h3>Highest: Level {this.state.maxN}</h3>
-    </div>
+      </div>
     );
   }
 });
 
 var SilentLevels = React.createClass({
-  getInitialState: function(){
-    return {
-      maxN:1,
-      mode:'silent'
-    }
+  getInitialState: function() {
+    return {maxN: 1, mode: 'silent'}
   },
-  setMaxN:function(){
-    getMaxN(this.state.mode,function(maxN){
-      this.setState({maxN:maxN})
+  setMaxN: function() {
+    getMaxN(this.state.mode, function(maxN) {
+      this.setState({maxN: maxN})
     }.bind(this))
   },
   render: function() {
     this.setMaxN();
     var square = this.state.n;
-    var squareArr = getSquareArr(square,this.state.mode)
+    var squareArr = getSquareArr(square, this.state.mode)
 
-    return(
+    return (
       <div>
         <h1 id="classic">Silent</h1>
         <div className="grid">
-            {squareArr.map(function(square){
-              return square;
-            })}
+          {squareArr.map(function(square) {
+            return square;
+          })}
         </div>
-         <h3>Highest: Level {this.state.maxN}</h3>
+        <h3>Highest: Level {this.state.maxN}</h3>
       </div>
     );
   }
 });
 
 var AdvancedLevels = React.createClass({
-  getInitialState: function(){
-    return {
-      maxN:1,
-      mode: 'advanced'
-    }
+  getInitialState: function() {
+    return {maxN: 1, mode: 'advanced'}
   },
-  setMaxN:function(){
-    getMaxN(this.state.mode,function(maxN){
-      this.setState({maxN:maxN})
+  setMaxN: function() {
+    getMaxN(this.state.mode, function(maxN) {
+      this.setState({maxN: maxN})
     }.bind(this))
   },
   render: function() {
     this.setMaxN();
     var square = this.state.n;
-    var squareArr = getSquareArr(square,this.state.mode)
+    var squareArr = getSquareArr(square, this.state.mode)
 
-    return(
+    return (
       <div class="levelBox">
         <h1 id="advanced">Advanced</h1>
         <div className="grid">
-            {squareArr.map(function(square){
-              return square;
-            })}
+          {squareArr.map(function(square) {
+            return square;
+          })}
         </div>
         <h3>Highest: Level {this.state.maxN}</h3>
       </div>
