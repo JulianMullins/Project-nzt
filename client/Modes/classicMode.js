@@ -188,14 +188,7 @@ var ClassicMode = React.createClass({
         reactionEnd = Date.now();
       }
     }
-<<<<<<< HEAD:client/classicMode.js
     this.setState({positionMatch: !this.state.positionMatch, posPressed: true, posStyle: pushStyle});
-=======
-    this.setState({
-      positionMatch: !this.state.positionMatch,
-      posPressed: true
-    });
->>>>>>> origin/master:client/Modes/classicMode.js
   },
   soundMatch: function() {
     if (this.state.pressed) {
@@ -206,14 +199,7 @@ var ClassicMode = React.createClass({
         reactionEnd = Date.now();
       }
     }
-<<<<<<< HEAD:client/classicMode.js
     this.setState({soundMatch: !this.state.soundMatch, soundPressed: true, soundStyle: pushStyle});
-=======
-    this.setState({
-      soundMatch: !this.state.soundMatch,
-      soundPressed: true
-    });
->>>>>>> origin/master:client/Modes/classicMode.js
   },
   render: function() {
     var overlay = this.state.overlay
