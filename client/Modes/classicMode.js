@@ -297,26 +297,7 @@ var standardStyle = {
 
 var newStyle = [
   {
-    backgroundColor: '#00cc33' //green
-  }, {
-    backgroundColor: '#000000' //black
-  }, {
-    backgroundColor: '#33ccff', //light blue
-    border: "5px solid #333366" //dark blue border
-  }, {
-    backgroundColor: '#ffffff', //white
-    border: "5px solid black" //black border
-  }, {
-    backgroundColor: '#ffff00' //yellow
-  }, {
-    backgroundColor: '#ff6699' //light pink
-  }, {
-    backgroundColor: '#9933cc' //purple
-  }, {
-    backgroundColor: "#cc9966", //light brown
-    border: "5px solid #663300" //dark brown border
-  }, {
-    backgroundColor: '#cc3333' //red
+    backgroundColor: "#F13542" //green
   }
 ]
 
