@@ -36,11 +36,17 @@ import { Link } from 'react-router'
       */
 
 var App = React.createClass({
+  componentDidMount(){
+    if(this.props.location.pathname==='/'){
+      this.props.history.push('/home')
+    }
+  },
   render() {
+    console.log(this.props)
     return (
       <div>
         
-
+        <NavBar />
         {this.props.children}
       </div>
     )
@@ -50,8 +56,8 @@ var App = React.createClass({
 
 ReactDOM.render((
   <Router history={hashHistory}>
-    <Route path="/" component={App}/>
-      <Route path="" component={Home} />
+    <Route path="/" component={App}>
+      <Route path="home" component={Mainmenu} />
       <Route path="login" component={Login}/>
       <Route path="register" component={Register}/>
       <Route path="gameOver" component={GameOver}/>
@@ -64,6 +70,7 @@ ReactDOM.render((
       <Route path="game/relaxed/:n" component={RelaxedGame}/>
       <Route path="game/silent/:n" component={SilentGame}/>
       <Route path="game/advanced/:n" component={AdvancedGame}/>
+    </Route>
   </Router>
   ), document.getElementById('root'),function(){console.log("rendered")});
 

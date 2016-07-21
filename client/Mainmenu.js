@@ -69,22 +69,22 @@ var Mainmenu = React.createClass({
           <img src="../images/CortexLogo4.svg" />
         </div>
         <div className="menu">
-          <a className="menu-panel" id="menu1" onClick={this.classic}><Link to="/levels/classic">
+          <a className="menu-panel" id="menu1" onClick={this.classic}>
             <h2>Classic</h2>
             <h3>(position, sound)</h3>
-          </Link></a>
-          <a className="menu-panel" id="menu2" onClick={this.relaxed}><Link to="/levels/relaxed">
+          </a>
+          <a className="menu-panel" id="menu2" onClick={this.relaxed}>
             <h2>Relaxed</h2>
             <h3>(position only)</h3>
-          </Link></a>
-          <a className="menu-panel" id="menu3" onClick={this.silent}><Link to="/levels/silent">
+          </a>
+          <a className="menu-panel" id="menu3" onClick={this.silent}>
             <h2>Silent</h2>
             <h3>(position, color)</h3>
-          </Link></a>
-          <a className="menu-panel" id="menu4" onClick={this.advanced}><Link to="/levels/advanced">
+          </a>
+          <a className="menu-panel" id="menu4" onClick={this.advanced}>
             <h2>Advanced</h2>
             <h3>(color, position, sound)</h3>
-          </Link></a>
+          </a>
         </div>
       </div>
     );

@@ -3,9 +3,22 @@ var ReactDOM = require('react-dom');
 import { Link } from 'react-router';
 
 var LoginOverlay = React.createClass({
+  getInitialState: function(){
+    return{
+      username:'',
+      password:''
+    }
+  },
+  update(e){
+    this.setState({
+      [e.target.name]: e.target.value    
+    })
+  },
   login: function(e) {
     console.log("logging in")
     e.preventDefault();
+    console.log(this.props)
+    
 
     //ajax post
     fetch('/login', {
@@ -15,18 +28,20 @@ var LoginOverlay = React.createClass({
         'Accept': 'application/json',
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify({username: document.getElementById('username').value, password: document.getElementById('password').value})
+      body: JSON.stringify({
+        username: this.state.username, 
+        password: this.state.password
+      })
     }).then(function(response) {
       return response.json();
     }).then(function(response) {
       if (response.success) {
-        this.setState({menu: false, login: false, register: false})
+        this.props.history.push('/home');
       } else if (!response.success) {}
     }.bind(this))
   },
   facebook: function(e) {
     e.preventDefault();
-    this.setState({menu: false, login: false, register: false});
 
     //ajax facebook get
 
@@ -41,11 +56,11 @@ var LoginOverlay = React.createClass({
         <h1>Welcome</h1>
         <div className="pa">Login here.</div>
         <form>
-          <input type="text" placeholder="Name or Email" name="username" id="username"></input>
+          <input type="text" placeholder="Name or Email" name="username" id="username" value={this.state.username} onChange={this.update}></input>
           <br></br>
-          <input type="password" placeholder="Password" name="password" id="password"></input>
+          <input type="password" placeholder="Password" name="password" id="password"  value={this.state.password} onChange={this.update}></input>
           <div className="buttongroup">
-            <button className="form-btn dx" onClick={this.login}><Link to="/">Login</Link></button>
+            <button className="form-btn dx" onClick={this.login}>Login</button>
             <a type="button" className="fb" href="/login/facebook">Login with Facebook</a>
           </div>
         </form>

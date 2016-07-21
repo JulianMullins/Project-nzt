@@ -4,6 +4,7 @@ var User = require('../models/User');
 var Leaderboard = require('../models/Leaderboard');
 var HighScore = require('../models/HighScore');
 var Game = require('../models/Game');
+var Stats = require('../models/Stats');
 
 //functions for save game
 var setLeaderboard = function(id,callback){
@@ -35,50 +36,73 @@ router.post('/gameOver',function(req,res,next){
   })
 
   //check how scores compare on personal level;
-  var myHighScores = user.stats.leaderboard.scores;
-  if(myHighScores.length<leaderboardSize){
-    myHighScores.push(newHighScore);
-    myHighScores.sort(sortScores);
-  }
-  else if(req.body.score>myHighScores[myHighScores.length-1].score){
-    myHighScores.pop();
-    myHighScores.push(newHighScore);
-    myHighScores.sort(sortScores);
-  }
-  else{
-    return myHighScores;
-  }
+  Stats.findById(req.user.stats,function(err,stats){
 
-  //check overall leaderboard
-  var leaderboard =null;
-  setLeaderboard(serverLeaderboardId,function(err,serverLeaderboard){
-    leaderboard = serverLeaderboard.scores;
+    Leaderboard.findById(stats.leaderboard)
+      .populate('scores')
+      .exec(function(err,leaderboard){
+
+        var myHighScore = leaderboard.scores;
+
+        if(myHighScores.length<leaderboardSize){
+          myHighScores.push(newHighScore);
+          myHighScores.sort(sortScores);
+          forEach (var score in myHighScores){
+            if(score===newHighScore){
+              score = newHighScore._id
+            }
+          }
+        }
+        else if(req.body.score>myHighScores[myHighScores.length-1].score){
+          myHighScores.pop();
+          myHighScores.push(newHighScore);
+          myHighScores.sort(sortScores);
+          forEach (var score in myHighScores){
+            if(score===newHighScore){
+              score = newHighScore._id
+            }
+          }
+        }
+
+        //check overall leaderboard
+        var leaderboard =null;
+        setLeaderboard(serverLeaderboardId,function(err,serverLeaderboard){
+          leaderboard = serverLeaderboard.scores;
+        })
+        if(myHighScores[0] == newScore){
+          if(leaderboard.size<leaderboardSize){
+            leaderboard.push(newHighScore);
+            leaderboard.sort(sortScores);
+            forEach (var score in myHighScores){
+              if(score===newHighScore){
+                score = newHighScore._id
+              }
+            }
+          }
+          else if(newScore>leaderboard[leaderboard.length-1].score){
+            leaderboard.pop();
+            leaderboard.push(newHighScore);
+            leaderboard.sort(sortScores);
+            forEach (var score in myHighScores){
+              if(score===newHighScore){
+                score = newHighScore._id
+              }
+            }
+          }
+
+        }
+
+        //update stats
+        stats.totalPoints += newScore;
+        stats.progress = stats.progress.push([newHighScore.dateAchieved,stats.totalPoints]);
+
+
+        return leaderboard;
+
+      })
+
   })
-  if(myHighScores[0] == newScore){
-    if(leaderboard.size<leaderboardSize){
-      leaderboard.push(newHighScore);
-      leaderboard.sort(sortScores);
-    }
-    else if(newScore>leaderboard[leaderboard.length-1].score){
-      leaderboard.pop();
-      leaderboard.push(newHighScore);
-      leaderboard.sort(sortScores);
-    }
-    else{
-      return myHighScores;
-    }
-  }
-  else{
-    return myHighScores;
-  }
-
-  //update stats
-  var stats = req.user.stats;
-  stats.totalPoints += newScore;
-  stats.progress = stats.progress.push([new Date(),stats.totalPoints]);
-
-
-  return leaderboard;
+  
 });
 
 

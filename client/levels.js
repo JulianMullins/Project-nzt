@@ -17,9 +17,9 @@ var getSquareArr = function(square,mode){
     }
     var arr = [];
     for(var i=0; i<square-1; i++){
-      arr.push(<Link className="levelSquare {squareClass}" id={i} to="/game/{mode}/{i}"></Link>);
+      arr.push(<Link to="/game/{mode}/{i}"><div className="levelSquare {squareClass}" id={i} /></Link>);
     }
-    arr.push(<Link className="levelSquareLast {squareClass}" id={i}  to="/game/{mode}/{i}"></Link>);
+    arr.push(<Link to="/game/{mode}/{i}"><div className="levelSquareLast {squareClass}" id={i} /></Link>);
     return arr;
 };
 
@@ -39,7 +39,7 @@ var ClassicLevels = React.createClass({
   getInitialState: function(){   
     return {
       //write function that will get current user's mode's level
-      maxN: 0,
+      maxN: 1,
       mode:'classic'
     }
   },
@@ -70,7 +70,7 @@ var ClassicLevels = React.createClass({
 var RelaxedLevels = React.createClass({
   getInitialState: function(){
     return {
-      maxN:0,
+      maxN:1,
       mode:'relaxed'
     }
   },
@@ -101,7 +101,7 @@ var RelaxedLevels = React.createClass({
 var SilentLevels = React.createClass({
   getInitialState: function(){
     return {
-      maxN:0,
+      maxN:1,
       mode:'silent'
     }
   },
@@ -132,7 +132,7 @@ var SilentLevels = React.createClass({
 var AdvancedLevels = React.createClass({
   getInitialState: function(){
     return {
-      maxN:0,
+      maxN:1,
       mode: 'advanced'
     }
   },

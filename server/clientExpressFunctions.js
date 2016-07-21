@@ -29,6 +29,15 @@ router.post('/startGame/:mode/:nLevel',function(req,res,next){
   })
 })
 
+router.get('/getMaxN',function(req,res,next){
+  return req.user.maxN;
+})
+
+router.get('/getUser',function(req,res,next){
+  return{
+    username:req.user.username,
+  }
+})
 
 
 

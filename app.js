@@ -119,8 +119,9 @@ passport.use(new FacebookStrategy({
           facebookId:profile.id,
           email:profile._json.email,
           username:profile._json.first_name + ' '+profile._json.last_name,
-          stats:userStats,
-          temp:false
+          stats:userStats._id,
+          temp:false,
+          maxN:1
         });
         user.save(function(err,tempUser){
           if(err){

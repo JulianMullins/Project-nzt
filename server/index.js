@@ -8,8 +8,5 @@ router.get('/', function(req, res, next) {
   res.render('index');
 });
 
-router.use('/#/',function(req,res,next){
-	res.redirect('/#/home')
-})
 
 module.exports = router;
