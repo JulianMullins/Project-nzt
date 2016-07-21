@@ -33,11 +33,23 @@ var RelaxedMode = React.createClass({
       N: 1,
       posPressed: false,
       // modeMultiplier: modeMultiplier[this.props.mode],
-      tempUser: true
+      tempUser: true,
+      gameId:null
     }
   },
   componentDidMount: function() {
     setInterval(this.timer, 1000);
+
+    fetch('/startGame/' + this.state.mode + '/' + this.state.N, {
+      method: 'post'
+    }).then(function(response) {
+      return response.json();
+    }).then(function(response) {
+      this.setState({
+        tempUser:response.tempUser,
+        gameId:response.gameId
+      })
+    }.bind(this))
 
     window.onkeyup = function(e) {
       console.log(e.keyCode);
@@ -46,17 +58,6 @@ var RelaxedMode = React.createClass({
       }
     }.bind(this);
 
-    // fetch('/startGame/' + this.state.mode + '/' + this.state.N, {method: 'post'}).then(function(response) {
-    //   return response.json();
-    // }).then(function(response) {
-    //   if (!response.tempUser) {
-    //     this.setState({tempUser: false})
-    //   }
-    // })
-
-    // fetch('/startGame/'+this.state.mode+'/'+this.state.N, {
-    //  method: 'post'
-    // });
   },
   timer: function() {
     this.setState({

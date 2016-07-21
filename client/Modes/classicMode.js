@@ -37,14 +37,24 @@ var ClassicMode = React.createClass({
       posStyle: noStyle,
       soundStyle: noStyle,
       keepScore: false,
-      tempuser: true
+      tempUser: true,
+      gameId:null
     }
   },
   componentDidMount: function() {
     setInterval(this.timer, 1000);
-    // fetch('/startGame/'+this.state.mode+'/'+this.state.N, {
-    //  method: 'post'
-    // });
+   
+    fetch('/startGame/' + this.state.mode + '/' + this.state.N, {
+      method: 'post'
+    }).then(function(response) {
+      return response.json();
+    }).then(function(response) {
+      this.setState({
+        tempUser:response.tempUser,
+        gameId:response.gameId
+      })
+    }.bind(this))
+   
       <script>
           {window.onkeyup = function(e) {
             if (e.keyCode == 37) {
