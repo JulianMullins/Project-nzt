@@ -10,6 +10,7 @@ var reactionTimes = [];
 //global variable for game score (saved once time runs out)
 var gameScore
 var reactionEnd=null;
+var iterations
 
 var ClassicMode = React.createClass({
   getInitialState: function() {
@@ -63,6 +64,9 @@ var ClassicMode = React.createClass({
     }
       }.bind(this)
   },
+  componentWillUnmount: function(){
+    clearInterval(iterations)
+  },
   timer: function() {
     this.setState({
       initialTimer: this.state.initialTimer - 1
@@ -81,7 +85,7 @@ var ClassicMode = React.createClass({
     var timeTilSoundMatch = parseInt((Math.random() * 5) + 2 + this.state.N);
     var timeKeeper = 0;
 
-    var iterations = setInterval(function() {
+    iterations = setInterval(function() {
       timeKeeper++;
  if (this.state.keepScore && !(this.state.soundMatch || this.state.positionMatch)) {
       reactionTimes.push(reactionEnd-reactionStart);
