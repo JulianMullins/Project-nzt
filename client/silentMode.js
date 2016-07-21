@@ -39,6 +39,16 @@ var SilentMode = React.createClass({
   },
   componentDidMount: function() {
     setInterval(this.timer, 1000);
+
+    window.onkeyup = function(e) {
+      console.log(e.keyCode);
+      if (e.keyCode == 37) {
+        this.positionMatch();
+      } else if (e.keyCode == 39) {
+        this.colorMatch();
+      }
+    }.bind(this);
+
     // fetch('/startGame/'+this.state.mode+'/'+this.state.N, {
     //  method: 'post'
     // });

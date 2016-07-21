@@ -32,7 +32,7 @@ var gameOver = function(score){
 
 ReactDOM.render(
   <div>
-      <RelaxedMode/>
+      <SilentMode/>
   </div>
   , document.getElementById('root'));
 

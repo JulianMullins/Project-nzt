@@ -39,6 +39,13 @@ var RelaxedMode = React.createClass({
   componentDidMount: function() {
     setInterval(this.timer, 1000);
 
+    window.onkeyup = function(e) {
+      console.log(e.keyCode);
+      if (e.keyCode == 38) {
+        this.posMatch();
+      }
+    }.bind(this);
+
     // fetch('/startGame/' + this.state.mode + '/' + this.state.N, {method: 'post'}).then(function(response) {
     //   return response.json();
     // }).then(function(response) {
