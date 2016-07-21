@@ -79,11 +79,11 @@ h3 {
   display: flex;
   justify-content: center;
   height: 70vh;
+  width: 100vw;
 }
 .menu-panel {
-  width: 25vw;
+  width: 25%;
   height: 100%;
-  background-color: #BFBFBF;
   color: white;
   text-decoration: none;
   display: flex;
@@ -93,7 +93,6 @@ h3 {
   transition-duration: .8s;
 }
 .menu-panel:hover {
-  background-color: #C4C4C4;
   transition-duration: .8s;
   width: 40vw;
 }

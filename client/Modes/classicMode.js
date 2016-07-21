@@ -31,7 +31,7 @@ var ClassicMode = React.createClass({
       alert: " ",
       overlay: true,
       initialTimer: 3,
-      N: 1,
+      N: this.props.params.n,
       posPressed: false,
       soundPressed: false,
       posStyle: noStyle,
@@ -171,7 +171,7 @@ var ClassicMode = React.createClass({
       }
 
       reactionStart = Date.now()
-      var audio = new Audio('./audio / ' + (nextSound + 1) + '.wav ');
+      var audio = new Audio('./audio/' + (nextSound + 1) + '.wav ');
       audio.play();
       this.state.style[nextPosition] = newStyle;
       this.setState({style: this.state.style});
@@ -295,6 +295,7 @@ var ClassicMode = React.createClass({
 });
 
 var noStyle = {}
+
 var pushStyle = {
   color: 'black'
 }
@@ -302,6 +303,7 @@ var pushStyle = {
 var standardStyle = {
   backgroundColor: "#BFBFBF"
 }
+
 var newStyle = {
   color: "#F13542"
 }
