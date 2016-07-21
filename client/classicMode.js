@@ -61,6 +61,7 @@ var ClassicMode = React.createClass({
 
     var iterations = setInterval(function() {
       timeKeeper++;
+
       console.log(timeTilPositionMatch, timeTilSoundMatch);
       if (this.state.keepScore && !(this.state.positionMatch || this.state.soundMatch)) {
         this.setState({
@@ -164,7 +165,10 @@ var ClassicMode = React.createClass({
       var reactionEnd = Date.now();
       reactionTimes.push(reactionEnd - reactionStart);
     }
-    this.setState({positionMatch: !this.state.positionMatch, posPressed: true});
+    this.setState({
+      positionMatch: !this.state.positionMatch,
+      posPressed: true
+    });
   },
   soundMatch: function() {
     if (this.state.pressed) {
@@ -174,7 +178,10 @@ var ClassicMode = React.createClass({
       var reactionEnd = Date.now();
       reactionTimes.push(reactionEnd - reactionStart);
     }
-    this.setState({soundMatch: !this.state.soundMatch, soundPressed: true});
+    this.setState({
+      soundMatch: !this.state.soundMatch,
+      soundPressed: true
+    });
   },
   render: function() {
     var overlay = this.state.overlay

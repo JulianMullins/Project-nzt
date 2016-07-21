@@ -61,6 +61,8 @@ var SilentMode = React.createClass({
 
     var iterations = setInterval(function() {
       timeKeeper++;
+
+      console.log('pos:', timeTilPositionMatch, 'color:', timeTilColorMatch);
       if (this.state.keepScore && !(this.state.colorMatch || this.state.positionMatch)) {
         this.setState({
           score: this.state.score + 10,
@@ -73,7 +75,7 @@ var SilentMode = React.createClass({
             score: this.state.score - 5
           });
         }
-      } else if (this.state.colorMatch || this.state.positionMatch) {
+      } else if (this.state.keepScore && (this.state.colorMatch || this.state.positionMatch)) {
         this.setState({alert: "Missed a match"});
         if (this.state.score !== 0) {
           this.setState({
@@ -85,8 +87,6 @@ var SilentMode = React.createClass({
       setTimeout(function() {
         this.setState({alert: ' '});
       }.bind(this), 800);
-
-      console.log('pos: ', timeTilPositionMatch, 'color: ', timeTilColorMatch);
 
       if (timeTilPositionMatch === 0) {
         this.setState({positionMatch: true, keepScore: true})
@@ -163,7 +163,10 @@ var SilentMode = React.createClass({
       var reactionEnd = Date.now();
       reactionTimes.push(reactionEnd - reactionStart);
     }
-    this.setState({positionMatch: !this.state.positionMatch, posPressed: true});
+    this.setState({
+      positionMatch: !this.state.positionMatch,
+      posPressed: true
+    });
   },
   colorMatch: function() {
     if (this.state.colorPressed) {
@@ -174,7 +177,10 @@ var SilentMode = React.createClass({
       var reactionEnd = Date.now();
       reactionTimes.push(reactionEnd - reactionStart);
     }
-    this.setState({colorMatch: !this.state.colorMatch, colorPressed: true});
+    this.setState({
+      colorMatch: !this.state.colorMatch,
+      colorPressed: true
+    });
   },
   render: function() {
     var overlay = this.state.overlay
