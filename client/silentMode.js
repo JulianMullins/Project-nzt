@@ -33,6 +33,8 @@ var SilentMode = React.createClass({
       N: 1,
       posPressed: false,
       colorPressed: false,
+      colorStyle: noStyle,
+      posStyle: noStyle,
       keepScore: false,
       tempuser: true
     }
@@ -73,24 +75,28 @@ var SilentMode = React.createClass({
       if (this.state.keepScore && !(this.state.colorMatch || this.state.positionMatch)) {
         this.setState({
           score: this.state.score + 10,
-          alert: 'Good job'
+          alert: 'Good job',
+          posStyle: noStyle, colorStyle: noStyle
         });
       } else if (!this.state.keepScore && (this.state.posPressed || this.state.colorPressed)) {
         this.setState({alert: "Not a match"})
         if (this.state.score !== 0) {
           this.setState({
-            score: this.state.score - 5
+            score: this.state.score - 5,
+            posStyle: noStyle, colorStyle: noStyle
           });
         }
       } else if (this.state.colorMatch || this.state.positionMatch) {
         this.setState({alert: "Missed a match"});
         if (this.state.score !== 0) {
           this.setState({
-            score: this.state.score - 5
+            score: this.state.score - 5,
+            posStyle: noStyle, colorStyle: noStyle
           });
         }
       }
-      this.setState({keepScore: false, positionMatch: false, colorMatch: false, posPressed: false, colorPressed: false});
+      this.setState({keepScore: false, positionMatch: false, colorMatch: false, posPressed: false, colorPressed: false, 
+        posStyle: noStyle, colorStyle: noStyle});
       setTimeout(function() {
         this.setState({alert: ' '});
       }.bind(this), 800);
@@ -164,6 +170,7 @@ var SilentMode = React.createClass({
     }.bind(this), 2000);
   },
   positionMatch: function() {
+    console.log('pos match')
     if (this.state.posPressed) {
       return;
     }
@@ -172,9 +179,10 @@ var SilentMode = React.createClass({
       var reactionEnd = Date.now();
       reactionTimes.push(reactionEnd - reactionStart);
     }
-    this.setState({positionMatch: !this.state.positionMatch, posPressed: true});
+    this.setState({positionMatch: !this.state.positionMatch, posPressed: true, posStyle: pushStyle});
   },
   colorMatch: function() {
+    console.log('color press')
     if (this.state.colorPressed) {
       return;
     }
@@ -183,7 +191,7 @@ var SilentMode = React.createClass({
       var reactionEnd = Date.now();
       reactionTimes.push(reactionEnd - reactionStart);
     }
-    this.setState({colorMatch: !this.state.colorMatch, colorPressed: true});
+    this.setState({colorMatch: !this.state.colorMatch, colorPressed: true, colorStyle: pushStyle});
   },
   render: function() {
     var overlay = this.state.overlay
@@ -247,13 +255,17 @@ var SilentMode = React.createClass({
           {scoreAlert}
         </div>
         <div className="gameButtonsContainer silentMode">
-          <a onClick={this.positionMatch} style={posButtonStyle}>POSITION</a>
-          <a onClick={this.colorMatch} style={colorButtonStyle}>COLOR</a>
+          <a onClick={this.positionMatch} style={this.state.posStyle}>POSITION</a>
+          <a onClick={this.colorMatch} style={this.state.colorStyle}>COLOR</a>
         </div>
       </div>
     );
   }
 });
+
+var noStyle={}
+var pushStyle={color: 'black'}
+
 
 var standardStyle = {
   backgroundColor: "#BFBFBF"
