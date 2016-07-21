@@ -75,15 +75,9 @@ var ClassicMode = React.createClass({
 
     var iterations = setInterval(function() {
       timeKeeper++;
-<<<<<<< HEAD:client/classicMode.js
  if (this.state.keepScore && !(this.state.soundMatch || this.state.positionMatch)) {
       reactionTimes.push(reactionEnd-reactionStart);
       reactionEnd=null;
-=======
-
-      console.log(timeTilPositionMatch, timeTilSoundMatch);
-      if (this.state.keepScore && !(this.state.positionMatch || this.state.soundMatch)) {
->>>>>>> origin/master:client/Modes/classicMode.js
         this.setState({
           score: this.state.score + 10,
           alert: 'Good job',

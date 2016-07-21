@@ -366,4 +366,4 @@ var newStyle = [
 ]
 
 
-module.exports = AdvancedMode
+//module.exports = AdvancedMode
