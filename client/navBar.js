@@ -7,14 +7,20 @@ var NavBar = React.createClass({
 	getInitialState(){
 		return {
 			open:false,
+			loggedIn:false
 		}
 	},
-	logInOut: function(){
-
-		fetch('/logout', {
-			method: 'get'
-		})
-
+	componentDidMount(){
+		fetch('/isLoggedIn',{method:'get'
+		}).then(function(response) {
+	      return response.json();
+	    }).then(function(response) {
+	      if (response.loggedIn) {
+	        this.setState({
+	        	loggedIn:true
+	        })
+	      }
+	    }.bind(this))
 	},
 	click(e){
 		this.setState({
@@ -22,7 +28,12 @@ var NavBar = React.createClass({
 		})
 	},
 	render: function(){
-		
+		var logInOutLink = this.state.loggedIn
+			? '/logout'
+			: '/login'
+		var logInOrOut = this.state.loggedIn
+			? 'Logout'
+			: 'Login';
 		return(
 			<div>
 				<nav id="bt-menu" className={
@@ -33,7 +44,7 @@ var NavBar = React.createClass({
 					<a className="bt-menu-trigger" onClick={this.click}><span>Menu</span></a>
 					<ul>
 						<li><Link to="/home">Home</Link></li>
-						<li><Link to="/login">Login</Link></li>
+						<li><Link to={logInOutLink}>{logInOrOut}</Link></li>
 						<li><Link to="/leaderboard">Leaderboard</Link></li>
 						<li><Link to="/stats">Stats</Link></li>
 						<li><Link to="/science">The Science</Link></li>
