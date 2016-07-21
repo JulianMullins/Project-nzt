@@ -239,26 +239,4 @@ var standardStyle = {
   backgroundColor: "#BFBFBF"
 }
 
-var newStyle = [
-  {
-    backgroundColor: '#DBFF33'
-  }, {
-    backgroundColor: '#B15CCB'
-  }, {
-    backgroundColor: '#5CCBAF'
-  }, {
-    backgroundColor: '#5CCD93'
-  }, {
-    backgroundColor: '#87CD5C'
-  }, {
-    backgroundColor: '#D3A43F'
-  }, {
-    backgroundColor: '#D3563F'
-  }, {
-    backgroundColor: '#3F49D3'
-  }, {
-    backgroundColor: '#C91A83'
-  }
-]
-
 module.exports = RelaxedMode

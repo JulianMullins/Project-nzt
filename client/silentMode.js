@@ -52,6 +52,15 @@ var SilentMode = React.createClass({
     // fetch('/startGame/'+this.state.mode+'/'+this.state.N, {
     //  method: 'post'
     // });
+      <script>
+          {window.onkeyup = function(e) {
+            if (e.keyCode == 37) {
+              this.positionMatch();
+            }
+            if (e.keyCode == 39) {
+              this.colorMatch();
+            }
+          }.bind(this)}</script>   
   },
   timer: function() {
     this.setState({
@@ -268,23 +277,26 @@ var standardStyle = {
 
 var newStyle = [
   {
-    backgroundColor: '#DBFF33'
+    backgroundColor: '#00cc33' //green
   }, {
-    backgroundColor: '#B15CCB'
+    backgroundColor: '#000000' //black
   }, {
-    backgroundColor: '#5CCBAF'
+    backgroundColor: '#33ccff', //light blue
+    border: "5px solid #333366" //dark blue border
   }, {
-    backgroundColor: '#5CCD93'
+    backgroundColor: '#ffffff', //white
+    border: "5px solid black" //black border
   }, {
-    backgroundColor: '#87CD5C'
+    backgroundColor: '#ffff00' //yellow
   }, {
-    backgroundColor: '#D3A43F'
+    backgroundColor: '#ff6699' //light pink
   }, {
-    backgroundColor: '#D3563F'
+    backgroundColor: '#9933cc' //purple
   }, {
-    backgroundColor: '#3F49D3'
+    backgroundColor: "#cc9966", //light brown
+    border: "5px solid #663300" //dark brown border
   }, {
-    backgroundColor: '#C91A83'
+    backgroundColor: '#cc3333' //red
   }
 ]
 
