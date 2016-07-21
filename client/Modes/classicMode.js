@@ -56,7 +56,7 @@ var ClassicMode = React.createClass({
     }.bind(this))
    
       <script>
-          {window.onkeyup = function(e) {
+         {window.onkeyup = function(e) {
             if (e.keyCode == 37) {
               this.positionMatch();
             }
