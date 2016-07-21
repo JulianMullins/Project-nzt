@@ -54,8 +54,6 @@ var ClassicMode = React.createClass({
         gameId:response.gameId
       })
     }.bind(this))
-   
-      <script>
          {window.onkeyup = function(e) {
             if (e.keyCode == 37) {
               this.positionMatch();
@@ -63,7 +61,7 @@ var ClassicMode = React.createClass({
             if (e.keyCode == 39) {
               this.soundMatch();
             }
-          }.bind(this)}</script>   
+          }.bind(this)}   
   },
   timer: function() {
     this.setState({
