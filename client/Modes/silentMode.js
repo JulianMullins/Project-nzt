@@ -37,11 +37,23 @@ var SilentMode = React.createClass({
       colorStyle: noStyle,
       posStyle: noStyle,
       keepScore: false,
-      tempuser: true
+      tempUser: true,
+      gameId:null
     }
   },
   componentDidMount: function() {
     setInterval(this.timer, 1000);
+
+    fetch('/startGame/' + this.state.mode + '/' + this.state.N, {
+      method: 'post'
+    }).then(function(response) {
+      return response.json();
+    }).then(function(response) {
+      this.setState({
+        tempUser:response.tempUser,
+        gameId:response.gameId
+      })
+    }.bind(this))
 
     window.onkeyup = function(e) {
       console.log(e.keyCode);

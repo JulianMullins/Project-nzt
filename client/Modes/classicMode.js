@@ -12,55 +12,59 @@ var gameScore
 var reactionEnd = null;
 
 var ClassicMode = React.createClass({
-    getInitialState: function() {
-      return {
-        style: [
-          standardStyle,
-          standardStyle,
-          standardStyle,
-          standardStyle,
-          standardStyle,
-          standardStyle,
-          standardStyle,
-          standardStyle,
-          standardStyle
-        ],
-        positionMatch: false,
-        soundMatch: false,
-        score: 0,
-        alert: " ",
-        overlay: true,
-        initialTimer: 3,
-        N: 1,
-        posPressed: false,
-        soundPressed: false,
-        posStyle: noStyle,
-        soundStyle: noStyle,
-        keepScore: false,
-        tempuser: true
-      }
-    },
-    componentDidMount: function() {
-      setInterval(this.timer, 1000);
-      // fetch('/startGame/'+this.state.mode+'/'+this.state.N, {
-      //  method: 'post'
-      // });
-      <script > {
-        window.onkeyup = function(e) {
-          if (e.keyCode == 37) {
-            this.positionMatch();
-          }
-          if (e.keyCode == 39) {
-            this.soundMatch();
-          }
-        }.bind(this)
-      } < /script>
+  getInitialState: function() {
+    return {
+      style: [
+        standardStyle,
+        standardStyle,
+        standardStyle,
+        standardStyle,
+        standardStyle,
+        standardStyle,
+        standardStyle,
+        standardStyle,
+        standardStyle
+      ],
+      positionMatch: false,
+      soundMatch: false,
+      score: 0,
+      alert: " ",
+      overlay: true,
+      initialTimer: 3,
+      N: 1,
+      posPressed: false,
+      soundPressed: false,
+      posStyle: noStyle,
+      soundStyle: noStyle,
+      keepScore: false,
+      tempUser: true,
+      gameId: null
+    }
+  },
+  componentDidMount: function() {
+    setInterval(this.timer, 1000);
+
+    fetch('/startGame/' + this.state.mode + '/' + this.state.N, {method: 'post'}).then(function(response) {
+      return response.json();
+    }).then(function(response) {
+      this.setState({tempUser: response.tempUser, gameId: response.gameId})
+    }.bind(this))
+    {
+      window.onkeyup = function(e) {
+        if (e.keyCode == 37) {
+          this.positionMatch();
+        }
+        if (e.keyCode == 39) {
+          this.soundMatch();
+        }
+      }.bind(this)
+    }
   },
   timer: function() {
     this.setState({
       initialTimer: this.state.initialTimer - 1
     });
-    if(this.state.initialTimer===2){
+    if (this.state.initialTimer === 2) {
       this.positionAndSound()
     }
     if (this.state.initialTimer === 0) {
@@ -77,34 +81,44 @@ var ClassicMode = React.createClass({
     var iterations = setInterval(function() {
       timeKeeper++;
       if (this.state.keepScore && !(this.state.soundMatch || this.state.positionMatch)) {
-        reactionTimes.push(reactionEnd-reactionStart);
-        reactionEnd=null;
+        reactionTimes.push(reactionEnd - reactionStart);
+        reactionEnd = null;
         this.setState({
           score: this.state.score + 10,
           alert: 'Good job',
-          posStyle: noStyle, colorStyle: noStyle
+          posStyle: noStyle,
+          colorStyle: noStyle
         });
       } else if (!this.state.keepScore && (this.state.posPressed || this.state.soundPressed)) {
         this.setState({alert: "Not a match"})
-        reactionEnd=null;
+        reactionEnd = null;
         if (this.state.score !== 0) {
           this.setState({
             score: this.state.score - 5,
-            posStyle: noStyle, soundStyle: noStyle
+            posStyle: noStyle,
+            soundStyle: noStyle
           });
         }
       } else if (this.state.soundMatch || this.state.positionMatch) {
         this.setState({alert: "Missed a match"});
-        reactionEnd=null;
+        reactionEnd = null;
         if (this.state.score !== 0) {
           this.setState({
             score: this.state.score - 5,
-            posStyle: noStyle, soundStyle: noStyle
+            posStyle: noStyle,
+            soundStyle: noStyle
           });
         }
       }
-      this.setState({keepScore: false, positionMatch: false, soundMatch: false, posPressed: false, soundPressed: false,
-        posStyle: noStyle, soundStyle: noStyle});
+      this.setState({
+        keepScore: false,
+        positionMatch: false,
+        soundMatch: false,
+        posPressed: false,
+        soundPressed: false,
+        posStyle: noStyle,
+        soundStyle: noStyle
+      });
       setTimeout(function() {
         this.setState({alert: ' '});
       }.bind(this), 800);
@@ -158,7 +172,7 @@ var ClassicMode = React.createClass({
 
       reactionStart = Date.now()
       var audio = new Audio('./audio / ' + (nextSound + 1) + '.wav ');
- audio.play();
+      audio.play();
       this.state.style[nextPosition] = newStyle;
       this.setState({style: this.state.style});
       setTimeout(function() {
@@ -178,9 +192,9 @@ var ClassicMode = React.createClass({
         }.bind(this), 2000)
 
       }
-    }.bind(this),
-    2000);},
-  positionMatch : function() {
+    }.bind(this), 2000);
+  },
+  positionMatch: function() {
     if (this.state.pressed) {
       return;
     }
@@ -195,7 +209,7 @@ var ClassicMode = React.createClass({
       posStyle: pushStyle
     });
   },
-  soundMatch : function() {
+  soundMatch: function() {
     if (this.state.pressed) {
       return;
     }
@@ -210,7 +224,7 @@ var ClassicMode = React.createClass({
       soundStyle: pushStyle
     });
   },
-  render : function() {
+  render: function() {
     var overlay = this.state.overlay
       ? (
         <div className="overlay">
