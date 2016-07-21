@@ -16,10 +16,14 @@ var getSquareArr = function(square,mode){
       squareClass="grid9"
     }
     var arr = [];
-    for(var i=0; i<square-1; i++){
-      arr.push(<Link to="/game/{mode}/{i}"><div className="levelSquare {squareClass}" id={i} /></Link>);
+    for(var i=1; i<square; i++){
+      var link = "/game/"+mode+"/"+i;
+      var sqClass = "levelSquare "+squareClass
+      arr.push(<Link to={link} className={sqClass} id={i} ></Link>);
     }
-    arr.push(<Link to="/game/{mode}/{i}"><div className="levelSquareLast {squareClass}" id={i} /></Link>);
+    var link = "/game/"+mode+"/"+i
+    var sqClass = "levelSquareLast "+squareClass
+    arr.push(<Link to={link} className={sqClass} id={i} ></Link>);
     return arr;
 };
 
@@ -51,7 +55,7 @@ var ClassicLevels = React.createClass({
   render: function() {
     this.setMaxN();
     var square = this.state.n;
-    var squareArr = getSquareClass(square,this.state.mode)
+    var squareArr = getSquareArr(square,this.state.mode)
     
     return(
     <div className="levelBox">
@@ -61,7 +65,7 @@ var ClassicLevels = React.createClass({
             return square;
           })}
         </div>
-        <h3>Highest: Level {square}</h3>
+        <h3>Highest: Level {this.state.maxN}</h3>
     </div>
     );
   }
@@ -82,7 +86,7 @@ var RelaxedLevels = React.createClass({
   render: function() {
     this.setMaxN();
     var square = this.state.n;
-    var squareArr = getSquareClass(square,this.state.mode)
+    var squareArr = getSquareArr(square,this.state.mode)
 
     return(
     <div>
@@ -92,7 +96,7 @@ var RelaxedLevels = React.createClass({
             return square;
           })}
         </div>
-        <h3>Highest: Level {square}</h3>
+        <h3>Highest: Level {this.state.maxN}</h3>
     </div>
     );
   }
@@ -113,7 +117,7 @@ var SilentLevels = React.createClass({
   render: function() {
     this.setMaxN();
     var square = this.state.n;
-    var squareArr = getSquareClass(square,this.state.mode)
+    var squareArr = getSquareArr(square,this.state.mode)
 
     return(
       <div>
@@ -123,7 +127,7 @@ var SilentLevels = React.createClass({
               return square;
             })}
         </div>
-         <h3>Highest: Level {square}</h3>
+         <h3>Highest: Level {this.state.maxN}</h3>
       </div>
     );
   }
@@ -144,7 +148,7 @@ var AdvancedLevels = React.createClass({
   render: function() {
     this.setMaxN();
     var square = this.state.n;
-    var squareArr = getSquareClass(square,this.state.mode)
+    var squareArr = getSquareArr(square,this.state.mode)
 
     return(
       <div class="levelBox">
@@ -154,7 +158,7 @@ var AdvancedLevels = React.createClass({
               return square;
             })}
         </div>
-        <h3>Highest: Level {square}</h3>
+        <h3>Highest: Level {this.state.maxN}</h3>
       </div>
     );
   }
