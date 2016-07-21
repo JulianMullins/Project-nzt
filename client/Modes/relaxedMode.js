@@ -51,12 +51,12 @@ var RelaxedMode = React.createClass({
       })
     }.bind(this))
 
-    // window.onkeyup = function(e) {
-    //   console.log(e.keyCode);
-    //   if (e.keyCode == 38) {
-    //     this.posMatch();
-    //   }
-    // }.bind(this);
+    window.onkeyup = function(e) {
+      console.log(e.keyCode);
+      if (e.keyCode == 38) {
+        this.posMatch();
+      }
+    }.bind(this);
   },
   timer: function() {
     this.setState({
