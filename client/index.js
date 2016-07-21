@@ -11,6 +11,7 @@ var Register = require('./registerOverlay');
 var Home = require('./Mainmenu');
 var GameOver = require('./gameOverOverlay');
 var NavBar = require('./navBar');
+
 //Leaderboard
 //Stats
 //Science
