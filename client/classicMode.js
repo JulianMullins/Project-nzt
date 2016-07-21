@@ -6,10 +6,9 @@ var GameTimer = require('./gameTimer');
 var reactionStart
 //global variable for keeping reaction times
 //note: all reactin times for correct hits stored as array for stats (max,min,avg)
-var reactionTimes=[];
+var reactionTimes = [];
 //global variable for game score (saved once time runs out)
 var gameScore
-
 
 var ClassicMode = React.createClass({
   getInitialState: function() {
@@ -28,13 +27,14 @@ var ClassicMode = React.createClass({
       positionMatch: false,
       soundMatch: false,
       score: 0,
-      miss: false,
       alert: " ",
       overlay: true,
       initialTimer: 3,
       N: 1,
-      pressed: false,
-      mode: this.props.mode
+      posPressed: false,
+      soundPressed: false,
+      keepScore: false,
+      tempuser: true
     }
   },
   componentDidMount: function() {
@@ -61,11 +61,21 @@ var ClassicMode = React.createClass({
 
     var iterations = setInterval(function() {
       timeKeeper++;
-    if (!this.state.miss || this.state.pressed) {
-        this.setState({positionMatch: false, soundMatch: false, miss: false, alert: " "});
-      }
-      if (this.state.miss) {
-        this.setState({positionMatch: false, soundMatch: false, miss: false, alert: "Missed a match"});
+      console.log(timeTilPositionMatch, timeTilSoundMatch);
+      if (this.state.keepScore && !(this.state.positionMatch || this.state.soundMatch)) {
+        this.setState({
+          score: this.state.score + 10,
+          alert: 'Good job'
+        })
+      } else if (!this.state.keepScore && (this.state.posPressed || this.state.soundPressed)) {
+        this.setState({alert: "Not a match"});
+        if (this.state.score !== 0) {
+          this.setState({
+            score: this.state.score - 5
+          });
+        }
+      } else if (this.state.soundMatch || this.state.positionMatch) {
+        this.setState({alert: "Missed a match"});
         if (this.state.score !== 0) {
           this.setState({
             score: this.state.score - 5
@@ -73,9 +83,13 @@ var ClassicMode = React.createClass({
         }
       }
 
-      this.setState({pressed: false});
+      this.setState({keepScore: false, positionMatch: false, soundMatch: false, posPressed: false, soundPressed: false});
+      setTimeout(function() {
+        this.setState({alert: ' '});
+      }.bind(this), 800);
+
       if (timeTilPositionMatch === 0) {
-        this.setState({positionMatch: true, miss: true})
+        this.setState({positionMatch: true, keepScore: true})
         //reset position portion
         timeTilPositionMatch = parseInt((Math.random() * 5) + 2);
         //set up new position queue
@@ -85,8 +99,8 @@ var ClassicMode = React.createClass({
         var pMatch = true;
       }
       //case 2: color match
-      if (timeTilSoundMatch === 0) {        
-        this.setState({soundMatch: true, miss: true})
+      if (timeTilSoundMatch === 0) {
+        this.setState({soundMatch: true, keepScore: true})
         //reset position portion
         timeTilSoundMatch = parseInt((Math.random() * 5) + 2);
         //set up new position queue
@@ -121,10 +135,10 @@ var ClassicMode = React.createClass({
         }
       }
 
-      reactionStart=Date.now()
-       var audio = new Audio('./audio/' + (nextSound + 1) + '.wav');
-        audio.play();
-        this.state.style[nextPosition] = newStyle[0];
+      reactionStart = Date.now()
+      var audio = new Audio('./audio/' + (nextSound + 1) + '.wav');
+      audio.play();
+      this.state.style[nextPosition] = newStyle[0];
       this.setState({style: this.state.style});
       setTimeout(function() {
         this.state.style[nextPosition] = standardStyle;
@@ -135,8 +149,8 @@ var ClassicMode = React.createClass({
         pMatch = false;
       }.bind(this), 800);
       if (timeKeeper === 60) {
-        gameScore=this.state.score;
-        console.log(gameScore,'game score')
+        gameScore = this.state.score;
+        console.log(gameScore, 'game score')
         console.log(reactionTimes, 'reaction times')
         clearInterval(iterations);
       }
@@ -147,75 +161,20 @@ var ClassicMode = React.createClass({
       return;
     }
     if (this.state.positionMatch) {
-       var reactionEnd=Date.now();
-      reactionTimes.push(reactionEnd-reactionStart);
-      this.setState({
-        score: this.state.score + 10,
-        miss: false,
-        alert: "Good job",
-        pressed: true
-      });
-    } else {
-      if (this.state.score !== 0) {
-        this.setState({
-          score: this.state.score - 5,
-          alert: "Not a match",
-          pressed: true
-        });
-      } else {
-        this.setState({alert: "Not a match"});
-      }
+      var reactionEnd = Date.now();
+      reactionTimes.push(reactionEnd - reactionStart);
     }
+    this.setState({positionMatch: !this.state.positionMatch, posPressed: true});
   },
   soundMatch: function() {
     if (this.state.pressed) {
       return;
     }
-    if (this.state.soundMatch && !this.state.posMatch) {
-       var reactionEnd=Date.now();
-      reactionTimes.push(reactionEnd-reactionStart);
-      this.setState({
-        score: this.state.score + 10,
-        miss: false,
-        alert: "Good job",
-        pressed: true
-      });
-    } else {
-      if (this.state.score !== 0) {
-        this.setState({
-          score: this.state.score - 5,
-          alert: "Not a match",
-          pressed: true
-        });
-      } else {
-        this.setState({alert: "Not a match"});
-      }
+    if (this.state.soundMatch) {
+      var reactionEnd = Date.now();
+      reactionTimes.push(reactionEnd - reactionStart);
     }
-  },
-  positionAndSoundMatch: function() {
-    if (this.state.pressed) {
-      return;
-    }
-    if (this.state.positionMatch && this.state.soundMatch) {
-       var reactionEnd=Date.now();
-      reactionTimes.push(reactionEnd-reactionStart);
-      this.setState({
-        score: this.state.score + 10,
-        miss: false,
-        alert: "Good job",
-        pressed: true
-      });
-    } else {
-      if (this.state.score !== 0) {
-        this.setState({
-          score: this.state.score - 5,
-          alert: "Not a match",
-          pressed: true
-        });
-      } else {
-        this.setState({alert: "Not a match"});
-      }
-    }
+    this.setState({soundMatch: !this.state.soundMatch, soundPressed: true});
   },
   render: function() {
     var overlay = this.state.overlay
@@ -231,16 +190,26 @@ var ClassicMode = React.createClass({
     var scoreAlert;
     if (this.state.alert === "Good job") {
       scoreAlert = <div className="scoreAlertPositive">
-                    {this.state.alert}
-                   </div>
-    } else if (this.state.alert === "Not a match" ||
-               this.state.alert === "Missed a match") {
+        {this.state.alert}
+      </div>
+    } else if (this.state.alert === "Not a match" || this.state.alert === "Missed a match") {
       scoreAlert = <div className="scoreAlertNegative">
-                    {this.state.alert}
-                   </div>
+        {this.state.alert}
+      </div>
     } else {
       scoreAlert = <div></div>
     }
+
+    var posButtonStyle = this.state.posPressed
+      ? {
+        backgroundColor: 'black'
+      }
+      : {};
+    var soundButtonStyle = this.state.soundPressed
+      ? {
+        backgroundColor: 'black'
+      }
+      : {};
 
     return (
       <div className="gameContainer classicContainer">
@@ -269,9 +238,8 @@ var ClassicMode = React.createClass({
           {scoreAlert}
         </div>
         <div className="gameButtonsContainer classicMode">
-          <a onClick={this.soundMatch}>SOUND</a>
-          <a onClick={this.positionAndSoundMatch}>BOTH</a>
-          <a onClick={this.positionMatch}>POSITION</a>
+          <a onClick={this.positionMatch} style={posButtonStyle}>POSITION</a>
+          <a onClick={this.soundMatch} style={soundButtonStyle}>SOUND</a>
         </div>
       </div>
     );
