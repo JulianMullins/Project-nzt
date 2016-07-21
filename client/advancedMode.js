@@ -1,6 +1,18 @@
 var React = require('react');
 var GameTimer = require('./gameTimer');
 
+
+//REPLACE MATCH BOOLEANS WITH ARRAY 
+//CHECK FOR MATCH AFTER THE END OF EACH ROUND
+//KEEP FLASHSING FOR AS LONG AS THE SQUARES DO AND THEN REMOVE
+//(TO KEEP CONISTENCY ON THE EYE)
+//ADJUST SCOREBOARD ACCORDINGLY 
+//ESSENTIALLY 2 STATES: MATCH OR MISS
+
+//!!!MAKE SURE TO KEEP CAREFUL TRACK OF THE ARRAY!!!
+
+
+
 var AdvancedMode = React.createClass({
   getInitialState: function() {
     return {
@@ -24,7 +36,11 @@ var AdvancedMode = React.createClass({
       overlay: true,
       initialTimer: 3,
       N: 1,
-      pressed: false,
+      colorPressed: noStyle,
+      soundPressed: noStyle,
+      positionPressed: noStyle,
+      //color, sound, popsistion
+      correct: [false, false,false],
       mode: this.props.mode
     }
   },
@@ -57,12 +73,30 @@ var AdvancedMode = React.createClass({
     setInterval(function() {
       console.log(timeTilPositionMatch, timeTilColorMatch, timeTilSoundMatch);
 
-      if (!this.state.miss || this.state.pressed) {
-        this.setState({colorMatch: false, soundMatch: false, positionMatch: false, miss: false, alert: " "});
+      if(!this.state.correct[0] && !this.state.correct[1] && !this.state.correct[2]){
+        if(!this.state.colorMatch && !this.state.positionMatch && !this.state.soundMatch){
+          console.log('no matches')
+        }
+        else{
+         console.log('missed match')
+        }
       }
+
+      // if (!this.state.miss || this.state.pressed) {
+      //   this.setState({soundPressed: noStyle, colorPressed: noStyle, positionPressed: noStyle, correct: [false, false, false],
+      //   colorMatch: false, soundMatch: false, positionMatch: false, miss: false, alert: " "});
+      // }
+      // if(this.state.correct[0]===this.state.colorMatch && this.state.correct[1]===this.state.soundMatch && this.state.correct[2]===this.state.positionMatch){
+      //   console.log('match')
+      // }
+      // else{
+      //   console.log('miss')
+      //   this.setState({miss: true})
+      // }
       if (this.state.miss) {
         console.log('miss')
-        this.setState({colorMatch: false, soundMatch: false, positionMatch: false, miss: false, alert: "Missed a match"});
+        this.setState({soundPressed: noStyle, colorPressed: noStyle, positionPressed: noStyle, correct: [false,false,false],
+        colorMatch: false, soundMatch: false, positionMatch: false, miss: false, alert: "Missed a match"});
         if (this.state.score !== 0) {
           this.setState({
             score: this.state.score - 5
@@ -70,7 +104,7 @@ var AdvancedMode = React.createClass({
         }
       }
 
-      this.setState({pressed: false, alert: " "});
+      this.setState({pressed: noStyle, alert: " "});
 
       //NOT GOING TO ACTUALLY LIGHT UP COLORS UNTIL ALL IF STATEMENTS HAVE ITERATED
       //case 1: position match
@@ -149,7 +183,7 @@ var AdvancedMode = React.createClass({
 
       this.state.style[nextPosition] = newStyle[nextColor];
       var audio = new Audio('./audio/' + (nextSound + 1) + '.wav');
-      audio.play();
+      //audio.play();
       this.setState({style: this.state.style});
       setTimeout(function() {
         this.state.style[nextPosition] = standardStyle;
@@ -168,163 +202,62 @@ var AdvancedMode = React.createClass({
     }.bind(this), 2000);
   },
   colorMatch: function() {
-    if (this.state.pressed) {
-      return;
-    }
     if (this.state.colorMatch && !this.state.positionMatch && !this.state.soundMatch) {
       this.setState({
         score: this.state.score + 10,
         miss: false,
         alert: "Good job",
-        pressed: true
+        colorPressed: pushStyle
       });
     } else {
       if (this.state.score !== 0) {
         this.setState({
           score: this.state.score - 5,
           alert: "Not a match",
-          pressed: true
+          colorPressed: pushStyle
         });
       } else {
-        this.setState({alert: "Not a match", pressed: true});
+        this.setState({alert: "Not a match", colorPressed: pushStyle});
       }
     }
   },
   positionMatch: function() {
-    if (this.state.pressed) {
-      return;
-    }
     if (!this.state.colorMatch && this.state.positionMatch && !this.state.soundMatch) {
       this.setState({
         score: this.state.score + 10,
         miss: false,
         alert: "Good job",
-        pressed: true
+        positionPressed: pushStyle
       });
     } else {
       if (this.state.score !== 0) {
         this.setState({
           score: this.state.score - 5,
           alert: "Not a match",
-          pressed: true
+          positionPressed: pushStyle
         });
       } else {
-        this.setState({alert: "Not a match", pressed: true});
+        this.setState({alert: "Not a match", positionPressed: pushStyle});
       }
     }
   },
   soundMatch: function() {
-    if (this.state.pressed) {
-      return;
-    }
     if (!this.state.colorMatch && !this.state.positionMatch && this.state.soundMatch) {
       this.setState({
         score: this.state.score + 10,
         miss: false,
         alert: "Good job",
-        pressed: true
+        soundPressed: pushStyle
       });
     } else {
       if (this.state.score !== 0) {
         this.setState({
           score: this.state.score - 5,
           alert: "Not a match",
-          pressed: true
+          soundPressed:pushStyle
         });
       } else {
-        this.setState({alert: "Not a match", pressed: true});
-      }
-    }
-  },
-  colorAndSoundMatch: function() {
-    if (this.state.pressed) {
-      return;
-    }
-    if (this.state.colorMatch && !this.state.positionMatch && this.state.soundMatch) {
-      this.setState({
-        score: this.state.score + 10,
-        miss: false,
-        alert: "Good job",
-        pressed: true
-      });
-    } else {
-      if (this.state.score !== 0) {
-        this.setState({
-          score: this.state.score - 5,
-          alert: "Not a match",
-          pressed: true
-        });
-      } else {
-        this.setState({alert: "Not a match", pressed: true});
-      }
-    }
-  },
-  colorAndPositionMatch: function() {
-    if (this.state.pressed) {
-      return;
-    }
-    if (this.state.colorMatch && this.state.positionMatch && !this.state.soundMatch) {
-      this.setState({
-        score: this.state.score + 10,
-        miss: false,
-        alert: "Good job",
-        pressed: true
-      });
-    } else {
-      if (this.state.score !== 0) {
-        this.setState({
-          score: this.state.score - 5,
-          alert: "Not a match",
-          pressed: true
-        });
-      } else {
-        this.setState({alert: "Not a match", pressed: true});
-      }
-    }
-  },
-  soundAndPositionMatch: function() {
-    if (this.state.pressed) {
-      return;
-    }
-    if (this.state.colorMatch && !this.state.positionMatch && !this.state.soundMatch) {
-      this.setState({
-        score: this.state.score + 10,
-        miss: false,
-        alert: "Good job",
-        pressed: true
-      });
-    } else {
-      if (this.state.score !== 0) {
-        this.setState({
-          score: this.state.score - 5,
-          alert: "Not a match",
-          pressed: true
-        });
-      } else {
-        this.setState({alert: "Not a match", pressed: true});
-      }
-    }
-  },
-  tripleMatch: function() {
-    if (this.state.pressed) {
-      return;
-    }
-    if (this.state.colorMatch && this.state.positionMatch && !this.state.soundMatch) {
-      this.setState({
-        score: this.state.score + 10,
-        miss: false,
-        alert: "Good job",
-        pressed: true
-      });
-    } else {
-      if (this.state.score !== 0) {
-        this.setState({
-          score: this.state.score - 5,
-          alert: "Not a match",
-          pressed: true
-        });
-      } else {
-        this.setState({alert: "Not a match", pressed: true});
+        this.setState({alert: "Not a match", soundPressed: pushStyle});
       }
     }
   },
@@ -380,19 +313,17 @@ var AdvancedMode = React.createClass({
           {scoreAlert}
         </div>
         <div className="gameButtonsContainer advancedMode">
-          <a onClick={this.soundMatch}>SOUND</a>
-          <a onClick={this.soundAndPositionMatch}>BOTH</a>
-          <a onClick={this.positionMatch}>POSITION</a>
-          <a onClick={this.tripleMatch}>ALL</a>
-          <a onClick={this.colorAndPositionMatch}>BOTH</a>
-          <a onClick={this.colorMatch}>COLOR</a>
-          <a onClick={this.colorAndSoundMatch}>SOUND AND COLOR</a>
+          <a style={this.state.soundPressed} onClick={this.soundMatch}>SOUND</a>
+          <a style={this.state.positionPressed} onClick={this.positionMatch}>POSITION</a>
+          <a style={this.state.colorPressed} onClick={this.colorMatch}>COLOR</a>
         </div>
       </div>
     );
   }
 });
 
+var noStyle={}
+var pushStyle={color: 'black'}
 
 var standardStyle = {
   backgroundColor: "#BFBFBF"
