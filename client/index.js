@@ -70,7 +70,7 @@ ReactDOM.render((
       <Route path="game/classic/:n" component={ClassicGame}/>
       <Route path="game/relaxed/:n" component={RelaxedGame}/>
       <Route path="game/silent/:n" component={SilentGame}/>
-      <Route path="game/advanced/:n" component={AdvancedGame}/>
+      <Route path="game/advanced/:n" component={AdvancedGame}/>9
     </Route>
   </Router>
   ), document.getElementById('root'),function(){console.log("rendered")});
