@@ -9,6 +9,7 @@ var reactionStart
 var reactionTimes = [];
 //global variable for game score (saved once time runs out)
 var gameScore
+var reactionEnd=null;
 
 var ClassicMode = React.createClass({
   getInitialState: function() {
@@ -33,23 +34,44 @@ var ClassicMode = React.createClass({
       N: 1,
       posPressed: false,
       soundPressed: false,
+      posStyle: noStyle,
+      soundStyle: noStyle,
       keepScore: false,
-      tempuser: true
+      tempUser: true,
+      gameId:null
     }
   },
   componentDidMount: function() {
     setInterval(this.timer, 1000);
-    // fetch('/startGame/'+this.state.mode+'/'+this.state.N, {
-    //  method: 'post'
-    // });
+   
+    fetch('/startGame/' + this.state.mode + '/' + this.state.N, {
+      method: 'post'
+    }).then(function(response) {
+      return response.json();
+    }).then(function(response) {
+      this.setState({
+        tempUser:response.tempUser,
+        gameId:response.gameId
+      })
+    }.bind(this))
+    window.onkeyup = function(e) {
+    if (e.keyCode == 37) {
+      this.positionMatch();
+    }
+    if (e.keyCode == 39) {
+      this.soundMatch();
+    }
+      }.bind(this)
   },
   timer: function() {
     this.setState({
       initialTimer: this.state.initialTimer - 1
     });
+    if(this.state.initialTimer===2){
+      this.positionAndSound()
+    }
     if (this.state.initialTimer === 0) {
       this.setState({overlay: false});
-      this.positionAndSound();
     }
   },
   positionAndSound: function() {
@@ -61,30 +83,35 @@ var ClassicMode = React.createClass({
 
     var iterations = setInterval(function() {
       timeKeeper++;
-
-      console.log(timeTilPositionMatch, timeTilSoundMatch);
-      if (this.state.keepScore && !(this.state.positionMatch || this.state.soundMatch)) {
+ if (this.state.keepScore && !(this.state.soundMatch || this.state.positionMatch)) {
+      reactionTimes.push(reactionEnd-reactionStart);
+      reactionEnd=null;
         this.setState({
           score: this.state.score + 10,
-          alert: 'Good job'
-        })
+          alert: 'Good job',
+          posStyle: noStyle, colorStyle: noStyle
+        });
       } else if (!this.state.keepScore && (this.state.posPressed || this.state.soundPressed)) {
-        this.setState({alert: "Not a match"});
+        this.setState({alert: "Not a match"})
+        reactionEnd=null;
         if (this.state.score !== 0) {
           this.setState({
-            score: this.state.score - 5
+            score: this.state.score - 5,
+            posStyle: noStyle, soundStyle: noStyle
           });
         }
       } else if (this.state.soundMatch || this.state.positionMatch) {
         this.setState({alert: "Missed a match"});
+        reactionEnd=null;
         if (this.state.score !== 0) {
           this.setState({
-            score: this.state.score - 5
+            score: this.state.score - 5,
+            posStyle: noStyle, soundStyle: noStyle
           });
         }
       }
-
-      this.setState({keepScore: false, positionMatch: false, soundMatch: false, posPressed: false, soundPressed: false});
+      this.setState({keepScore: false, positionMatch: false, soundMatch: false, posPressed: false, soundPressed: false, 
+        posStyle: noStyle, soundStyle: noStyle});
       setTimeout(function() {
         this.setState({alert: ' '});
       }.bind(this), 800);
@@ -150,10 +177,13 @@ var ClassicMode = React.createClass({
         pMatch = false;
       }.bind(this), 800);
       if (timeKeeper === 60) {
-        gameScore = this.state.score;
-        console.log(gameScore, 'game score')
-        console.log(reactionTimes, 'reaction times')
         clearInterval(iterations);
+        setTimeout(function(){
+          gameScore = this.state.score;
+          console.log(gameScore, 'game score')
+          console.log(reactionTimes, 'reaction times')
+        }.bind(this),2000)
+         
       }
     }.bind(this), 2000);
   },
@@ -162,26 +192,22 @@ var ClassicMode = React.createClass({
       return;
     }
     if (this.state.positionMatch) {
-      var reactionEnd = Date.now();
-      reactionTimes.push(reactionEnd - reactionStart);
+       if(!reactionEnd){
+        reactionEnd = Date.now();
+      }
     }
-    this.setState({
-      positionMatch: !this.state.positionMatch,
-      posPressed: true
-    });
+    this.setState({positionMatch: !this.state.positionMatch, posPressed: true, posStyle: pushStyle});
   },
   soundMatch: function() {
     if (this.state.pressed) {
       return;
     }
     if (this.state.soundMatch) {
-      var reactionEnd = Date.now();
-      reactionTimes.push(reactionEnd - reactionStart);
+       if(!reactionEnd){
+        reactionEnd = Date.now();
+      }
     }
-    this.setState({
-      soundMatch: !this.state.soundMatch,
-      soundPressed: true
-    });
+    this.setState({soundMatch: !this.state.soundMatch, soundPressed: true, soundStyle: pushStyle});
   },
   render: function() {
     var overlay = this.state.overlay
@@ -245,16 +271,50 @@ var ClassicMode = React.createClass({
           {scoreAlert}
         </div>
         <div className="gameButtonsContainer classicMode">
-          <a onClick={this.positionMatch} style={posButtonStyle}>POSITION</a>
-          <a onClick={this.soundMatch} style={soundButtonStyle}>SOUND</a>
+          <a style={this.state.posStyle}>POSITION</a>
+          <a style={this.state.soundStyle}>SOUND</a>
         </div>
       </div>
     );
   }
 })
 
+var noStyle={}
+var pushStyle={color: 'black'}
+
+
 var standardStyle = {
   backgroundColor: "#BFBFBF"
 }
+
+var standardStyle = {
+  backgroundColor: "#BFBFBF"
+}
+
+var newStyle = [
+  {
+    backgroundColor: '#00cc33' //green
+  }, {
+    backgroundColor: '#000000' //black
+  }, {
+    backgroundColor: '#33ccff', //light blue
+    border: "5px solid #333366" //dark blue border
+  }, {
+    backgroundColor: '#ffffff', //white
+    border: "5px solid black" //black border
+  }, {
+    backgroundColor: '#ffff00' //yellow
+  }, {
+    backgroundColor: '#ff6699' //light pink
+  }, {
+    backgroundColor: '#9933cc' //purple
+  }, {
+    backgroundColor: "#cc9966", //light brown
+    border: "5px solid #663300" //dark brown border
+  }, {
+    backgroundColor: '#cc3333' //red
+  }
+]
+
 
 module.exports = ClassicMode

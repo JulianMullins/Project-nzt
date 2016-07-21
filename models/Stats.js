@@ -10,8 +10,8 @@ var statsSchema = mongoose.Schema({
 		type: mongoose.Schema.Types.ObjectId,
 		ref: 'Leaderboard'
 	},
-  totalPoints: Number,
-  progress:Array
+	totalPoints: Number,
+	progress:Array
 })
 
 
