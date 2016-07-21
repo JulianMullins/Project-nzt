@@ -188,14 +188,7 @@ var SilentMode = React.createClass({
         reactionEnd = Date.now();
       }
     }
-<<<<<<< HEAD:client/silentMode.js
     this.setState({positionMatch: !this.state.positionMatch, posPressed: true, posStyle: pushStyle});
-=======
-    this.setState({
-      positionMatch: !this.state.positionMatch,
-      posPressed: true
-    });
->>>>>>> origin/master:client/Modes/silentMode.js
   },
   colorMatch: function() {
     console.log('color press')
@@ -208,14 +201,7 @@ var SilentMode = React.createClass({
         reactionEnd = Date.now();
       }
     }
-<<<<<<< HEAD:client/silentMode.js
     this.setState({colorMatch: !this.state.colorMatch, colorPressed: true, colorStyle: pushStyle});
-=======
-    this.setState({
-      colorMatch: !this.state.colorMatch,
-      colorPressed: true
-    });
->>>>>>> origin/master:client/Modes/silentMode.js
   },
   render: function() {
     var overlay = this.state.overlay
