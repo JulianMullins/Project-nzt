@@ -6,6 +6,7 @@ var url = process.env.url;
 
 var MenuOverlay = require('./menuOverlay');
 var Login = require('./loginOverlay');
+var Logout = require('./logout');
 var Register = require('./registerOverlay');
 var Home = require('./Mainmenu');
 var GameOver = require('./gameOverOverlay');
@@ -40,7 +41,6 @@ var App = React.createClass({
     }
   },
   render() {
-    console.log(this.props)
     return (
       <div>
 
@@ -55,6 +55,7 @@ ReactDOM.render((
     <Route path="/" component={App}>
       <Route path="home" component={Home}/>
       <Route path="login" component={Login}/>
+      <Route path="logout" component={Logout} />
       <Route path="register" component={Register}/>
       <Route path="gameOver" component={GameOver}/>
 

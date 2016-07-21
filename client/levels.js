@@ -29,13 +29,14 @@ var getSquareArr = function(square, mode) {
 };
 
 var getMaxN = function(mode, cb) {
-
+  console.log("getting max n")
   fetch('/getMaxN', {
     method: 'get',
     credentials: 'include'
   }).then(function(response) {
     return response.json();
   }).then(function(response) {
+    console.log(response.maxN)
     return cb(response.maxN)
   })
 };
@@ -48,14 +49,18 @@ var ClassicLevels = React.createClass({
       mode: 'classic'
     }
   },
+  componentDidMount() {
+    this.setMaxN();
+  },
   setMaxN: function() {
     getMaxN(this.state.mode, function(maxN) {
       this.setState({maxN: maxN})
+      console.log("maxN is " + this.state.maxN)
     }.bind(this))
   },
   render: function() {
-    this.setMaxN();
-    var square = this.state.n;
+
+    var square = this.state.maxN;
     var squareArr = getSquareArr(square, this.state.mode)
 
     return (
@@ -76,16 +81,17 @@ var RelaxedLevels = React.createClass({
   getInitialState: function() {
     return {maxN: 1, mode: 'relaxed'}
   },
+  componentDidMount() {
+    this.setMaxN();
+  },
   setMaxN: function() {
     getMaxN(this.state.mode, function(maxN) {
       this.setState({maxN: maxN})
     }.bind(this))
   },
   render: function() {
-    this.setMaxN();
-    var square = this.state.n;
+    var square = this.state.maxN;
     var squareArr = getSquareArr(square, this.state.mode)
-
     return (
       <div>
         <h1 id="relaxed">Relaxed</h1>
@@ -109,9 +115,11 @@ var SilentLevels = React.createClass({
       this.setState({maxN: maxN})
     }.bind(this))
   },
-  render: function() {
+  componentDidMount() {
     this.setMaxN();
-    var square = this.state.n;
+  },
+  render: function() {
+    var square = this.state.maxN;
     var squareArr = getSquareArr(square, this.state.mode)
 
     return (
@@ -137,9 +145,11 @@ var AdvancedLevels = React.createClass({
       this.setState({maxN: maxN})
     }.bind(this))
   },
-  render: function() {
+  componentDidMount() {
     this.setMaxN();
-    var square = this.state.n;
+  },
+  render: function() {
+    var square = this.state.maxN;
     var squareArr = getSquareArr(square, this.state.mode)
 
     return (
