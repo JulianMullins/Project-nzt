@@ -10,6 +10,7 @@ var reactionTimes = [];
 //global variable for game score (saved once time runs out)
 var gameScore;
 var reactionEnd=null;
+var iterations
 
 var AdvancedMode = React.createClass({
   getInitialState: function() {
@@ -68,6 +69,9 @@ var AdvancedMode = React.createClass({
             }
           }.bind(this)}
   },
+  componentWillUnmount: function(){
+    clearInterval(iterations)
+  },
   timer: function() {
     this.setState({
       initialTimer: this.state.initialTimer - 1
@@ -88,7 +92,7 @@ var AdvancedMode = React.createClass({
     var timeTilSoundMatch = parseInt((Math.random() * 5) + 2 + this.state.N);
      var timeKeeper = 0;
       //console.log(timekeeper)
-    var iterations = setInterval(function() {
+    iterations = setInterval(function() {
        timeKeeper++;
       if(!this.state.correct[0] && !this.state.correct[1] && !this.state.correct[2]){
         if(!this.state.colorMatch && !this.state.positionMatch && !this.state.soundMatch){

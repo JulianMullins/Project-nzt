@@ -8,8 +8,9 @@ var reactionStart
 //note: all reactin times for correct hits stored as array for stats (max,min,avg)
 var reactionTimes = [];
 //global variable for game score (saved once time runs out)
-var gameScore
-var reactionEnd = null;
+var gameScore;
+var reactionEnd=null;
+var iterations
 
 var ClassicMode = React.createClass({
   getInitialState: function() {
@@ -49,16 +50,17 @@ var ClassicMode = React.createClass({
     }).then(function(response) {
       this.setState({tempUser: response.tempUser, gameId: response.gameId})
     }.bind(this))
-    {
-      window.onkeyup = function(e) {
-        if (e.keyCode == 37) {
-          this.positionMatch();
-        }
-        if (e.keyCode == 39) {
-          this.soundMatch();
-        }
-      }.bind(this)
+    window.onkeyup = function(e) {
+    if (e.keyCode == 37) {
+      this.positionMatch();
     }
+    if (e.keyCode == 39) {
+      this.soundMatch();
+    }
+      }.bind(this)
+  },
+  componentWillUnmount: function(){
+    clearInterval(iterations)
   },
   timer: function() {
     this.setState({
@@ -78,7 +80,7 @@ var ClassicMode = React.createClass({
     var timeTilSoundMatch = parseInt((Math.random() * 5) + 2 + this.state.N);
     var timeKeeper = 0;
 
-    var iterations = setInterval(function() {
+    iterations = setInterval(function() {
       timeKeeper++;
       if (this.state.keepScore && !(this.state.soundMatch || this.state.positionMatch)) {
         reactionTimes.push(reactionEnd - reactionStart);
@@ -173,7 +175,7 @@ var ClassicMode = React.createClass({
       reactionStart = Date.now()
       var audio = new Audio('./audio/' + (nextSound + 1) + '.wav ');
       audio.play();
-      this.state.style[nextPosition] = newStyle;
+      this.state.style[nextPosition] = newStyle[0];
       this.setState({style: this.state.style});
       setTimeout(function() {
         this.state.style[nextPosition] = standardStyle;
@@ -304,8 +306,10 @@ var standardStyle = {
   backgroundColor: "#BFBFBF"
 }
 
-var newStyle = {
-  color: "#F13542"
-}
+var newStyle = [
+  {
+    backgroundColor: "#F13542" //green
+  }
+]
 
 module.exports = ClassicMode

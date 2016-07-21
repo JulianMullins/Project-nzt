@@ -1,7 +1,14 @@
 var React = require('react');
 var ReactDOM = require('react-dom');
 var url = process.env.url;
+
+var Levels = require('./levels');
+var ClassicLevels = Levels.ClassicLevels;
+var RelaxedLevels = Levels.RelaxedLevels;
+
+
 import { Link } from 'react-router'
+
 
 var MenuOverlay = require('./menuOverlay');
 var LoginOverlay = require('./loginOverlay');
