@@ -13,18 +13,21 @@ var getSquareArr = function(square, mode) {
     squareClass = "grid9"
   }
   var arr = [];
-  for (var i = 1; i < square; i++) {
+  for (var i = 1; i < square + 1; i++) {
     var link = "/game/" + mode + "/" + i;
-    var sqClass = "levelSquare " + squareClass
+    var sqClass = (i == square) ? "levelSquare " + squareClass : "levelSquareLast " + squareClass;
+    var colorStyle = {backgroundColor: '#F13542', opacity: 1 - (0.2 / square)*i};
+    if (mode == 'relaxed') {
+      colorStyle.backgroundColor = '#01B6A7';
+    } else if (mode == 'silent') {
+      colorStyle.backgroundColor = '#7CD9D2';
+    } else if (mode == 'advanced') {
+      colorStyle.backgroundColor = '#F1BA03';
+    }
     arr.push(
-      <Link to={link} className={sqClass} key={i}></Link>
+      <Link to={link} className={sqClass} key={i} style={colorStyle}></Link>
     );
   }
-  var link = "/game/" + mode + "/" + i
-  var sqClass = "levelSquareLast " + squareClass
-  arr.push(
-    <Link to={link} className={sqClass} key={i}></Link>
-  );
   return arr;
 };
 
@@ -43,11 +46,7 @@ var getMaxN = function(mode, cb) {
 
 var ClassicLevels = React.createClass({
   getInitialState: function() {
-    return {
-      //write function that will get current user's mode's level
-      maxN: 1,
-      mode: 'classic'
-    }
+    return {maxN: 7, mode: 'classic'}
   },
   componentDidMount() {
     this.setMaxN();
@@ -93,7 +92,7 @@ var RelaxedLevels = React.createClass({
     var square = this.state.maxN;
     var squareArr = getSquareArr(square, this.state.mode)
     return (
-      <div>
+      <div className="levelBox">
         <h1 id="relaxed">Relaxed</h1>
         <div className="grid">
           {squareArr.map(function(square) {
@@ -123,7 +122,7 @@ var SilentLevels = React.createClass({
     var squareArr = getSquareArr(square, this.state.mode)
 
     return (
-      <div>
+      <div className="levelBox">
         <h1 id="classic">Silent</h1>
         <div className="grid">
           {squareArr.map(function(square) {

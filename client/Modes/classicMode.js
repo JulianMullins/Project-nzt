@@ -278,18 +278,18 @@ var ClassicMode = React.createClass({
       </div>
     );
   }
-})
+});
 
 var noStyle = {}
 var pushStyle = {
-color: 'black'
+  color: 'black'
 }
 
 var standardStyle = {
-backgroundColor: "#BFBFBF"
+  backgroundColor: "#BFBFBF"
 }
 var newStyle = {
-color: "#F13542"
+  color: "#F13542"
 }
 
 module.exports = ClassicMode
