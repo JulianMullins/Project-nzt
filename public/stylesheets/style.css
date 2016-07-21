@@ -613,3 +613,30 @@ input {
 	font-weight:100;
   text-align: left;
 }
+
+.leaderboardPage {
+  display: flex;
+  flex-direction: row;
+  height: 100vh;
+  width: 100vw;
+}
+
+.userSide {
+  height: 100vh;
+  width: 50vw;
+  background-color: #7CD9D2;
+  padding-top: 10vh;
+}
+
+.boardSide {
+  height: 100vh;
+  width: 50vw;
+  background-color: #F1BA03;
+  padding-top: 10vh;
+}
+
+.lbHeader {
+  color: white;
+  font-size: 48px;
+  text-align: center;
+}

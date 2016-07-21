@@ -27,12 +27,6 @@ var gameOver = function(score) {
   })
 }
 
-// ReactDOM.render(
-//   <div>
-//       <AdvancedMode/>
-//   </div>
-//   , document.getElementById('root'));
-
 ReactDOM.render(
-  <Mainmenu/>, document.getElementById('root'));
+  <Leaderboard/>, document.getElementById('root'));
 
