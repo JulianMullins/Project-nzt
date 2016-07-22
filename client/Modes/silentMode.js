@@ -78,12 +78,20 @@ var SilentMode = React.createClass({
     this.setState({
       initialTimer: this.state.initialTimer - 1
     });
+<<<<<<< HEAD
+=======
+
+>>>>>>> refs/remotes/origin/master
     if (this.state.initialTimer === 2) {
       this.positionAndColor();
     }
     if (this.state.initialTimer === 0) {
       this.setState({overlay: false});
       clearInterval(timer);
+<<<<<<< HEAD
+=======
+
+>>>>>>> refs/remotes/origin/master
     }
   },
   positionAndColor: function() {
