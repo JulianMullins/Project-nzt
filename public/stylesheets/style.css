@@ -598,22 +598,22 @@ input {
 ::-webkit-input-placeholder {
   color: white;
   font-weight: 100;
-  text-align: left;
+  text-align: center;
 }
 :-moz-placeholder {
   color: white;
   font-weight: 100;
-  text-align: left;
+  text-align: center;
 }
 ::-moz-placeholder {
   color: white;
   font-weight: 100;
-  text-align: left;
+  text-align: center;
 }
 :-ms-input-placeholder {
   color: white;
   font-weight: 100;
-  text-align: left;
+  text-align: center;
 }
 .leaderboardPage {
   display: flex;
