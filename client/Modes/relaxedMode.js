@@ -51,7 +51,6 @@ var RelaxedMode = React.createClass({
     }.bind(this))
 
     window.onkeyup = function(e) {
-      console.log(e.keyCode);
       if (e.keyCode == 38) {
         this.posMatch();
       }
@@ -81,7 +80,6 @@ var RelaxedMode = React.createClass({
     iterations = setInterval(function() {
       timeKeeper++;
 
-      console.log('pos:', timeTilPosMatch);
       if (this.state.keepScore && !this.state.posMatch) {
         this.setState({
           alert: "Good job",
