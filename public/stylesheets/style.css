@@ -152,8 +152,8 @@ h3 {
 .gameSquare {
   display: inline-block;
   background-color: #BFBFBF;
-  width: 20vh;
-  height: 20vh;
+  width: 17vh;
+  height: 17vh;
   margin: .5vh;
   border: 2px solid rgba(109, 110, 113, 0.5);
 }
