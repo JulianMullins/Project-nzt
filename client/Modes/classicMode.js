@@ -278,7 +278,10 @@ var ClassicMode = React.createClass({
     return (
       <div className="gameContainer classicContainer">
         {overlay}
-        <h1 className="classic">Classic</h1>
+        <span className="gameTitle">
+          <h1 className="classic modeTitle">Classic</h1>
+          <h1 className="classic nTitle">(N={this.state.N})</h1>
+        </span>
         <div className="gameHeading">
           <div className="gameScore">
             <h2 className="classic">Score: {this.state.score}</h2>

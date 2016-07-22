@@ -33,7 +33,7 @@ var RelaxedMode = React.createClass({
       alert: " ",
       overlay: true,
       initialTimer: 3,
-      N: 1,
+      N: this.props.params.n,
       posPressed: false,
       posStyle: noStyle,
       // modeMultiplier: modeMultiplier[this.props.mode],
@@ -237,7 +237,10 @@ var RelaxedMode = React.createClass({
     return (
       <div className="gameContainer relaxContainer">
         {overlay}
-        <h1 className="relaxed">Relaxed</h1>
+        <span className="gameTitle">
+          <h1 className="relaxed modeTitle">Relaxed</h1>
+          <h1 className="relaxed nTitle">(N={this.state.N})</h1>
+        </span>
         <div className="gameHeading">
           <div className="gameScore relaxed">
             <h2>Score: {this.state.score}</h2>
@@ -260,7 +263,7 @@ var RelaxedMode = React.createClass({
         <div className="scoreAlert">
           {scoreAlert}
         </div>
-        <div className="gameButtonsContainer relaxedMode">
+        <div className="gameButtonsContainer relaxedBackground">
           <a onClick={this.posMatch} style={this.state.posStyle}>POSITION</a>
         </div>
       </div>

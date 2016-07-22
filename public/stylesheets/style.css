@@ -33,6 +33,11 @@ body {
   padding: 0;
   background: #faf8ef;
   color: #01B6A7;
+  background: url("../images/pattern.svg") no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
 }
 #root {
   display: flex;
@@ -90,7 +95,7 @@ h3 {
   height: 30vh;
   justify-content: center;
   align-items: center;
-  background-color: white;
+  /*background-color: white;*/
   color: #01B6A7;
   flex-direction: column;
 }
@@ -184,22 +189,37 @@ h3 {
   justify-content: flex-end;
   width: 50%;
 }
+
+.gameTitle {
+  display: flex;
+  flex-direction: row;
+  align-items: baseline;
+  justify-content: center;
+  width: 100%;
+}
+
+.modeTitle {
+  padding: 0 10px;
+  font-size: 50px;
+}
+
+.nTitle {
+  font-size: 20px !important;
+  font-weight: normal !important;
+}
+
 .gameHeading {
   display: flex;
   flex-direction: row;
   width: 85%;
   margin-bottom: 10px;
 }
-.gameContainer h1 {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 48px;
-}
+
 .gameContainer h2 {
   font-size: 40px;
   font-weight: normal;
 }
+
 .gameTimer {
   font-size: 64px;
 }
@@ -396,23 +416,27 @@ h3 {
   width: 48%;
   height: 48%;
   margin: calc(4% / 4);
+  font-size: 13vh;
 }
 .grid9 {
   width: 30%;
   height: 30%;
   margin: calc(10% / 6);
+  font-size: 7vh;
 }
 
 .grid16{
   width: 22%;
   height: 22%;
   margin: calc(12% / 8);
+  font-size: 5vh;
 }
 
 .grid25{
   width: 16%;
   height: 16%;
   margin: calc(20% / 10);
+  font-size: 4vh;
 }
 
 .levelSquareLast{
@@ -441,7 +465,9 @@ h3 {
   left: 0;
   text-align: center;
   /*color: white;*/
-  font-size:7vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 .front.face {
   z-index: 0;
@@ -598,22 +624,22 @@ input {
 ::-webkit-input-placeholder {
   color: white;
   font-weight: 100;
-  text-align: left;
+  text-align: center;
 }
 :-moz-placeholder {
   color: white;
   font-weight: 100;
-  text-align: left;
+  text-align: center;
 }
 ::-moz-placeholder {
   color: white;
   font-weight: 100;
-  text-align: left;
+  text-align: center;
 }
 :-ms-input-placeholder {
   color: white;
   font-weight: 100;
-  text-align: left;
+  text-align: center;
 }
 .leaderboardPage {
   display: flex;

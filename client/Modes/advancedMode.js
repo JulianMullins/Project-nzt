@@ -34,7 +34,7 @@ var AdvancedMode = React.createClass({
       alert: " ",
       overlay: true,
       initialTimer: 3,
-      N: 1,
+      N: this.props.params.n,
       colorPressed: noStyle,
       soundPressed: noStyle,
       positionPressed: noStyle,
@@ -154,7 +154,8 @@ var AdvancedMode = React.createClass({
           colorMatch: false,
           soundMatch: false,
           positionMatch: false,
-          correct: [false, false, false]
+          correct: [false, false, false],
+          alert: 'Not a match'
         })
         if (this.state.score !== 0) {
           this.setState({
@@ -163,7 +164,10 @@ var AdvancedMode = React.createClass({
         }
       }
 
-      this.setState({colorPressed: noStyle, soundPressed: noStyle, positionPressed: noStyle, alert: " "});
+      this.setState({colorPressed: noStyle, soundPressed: noStyle, positionPressed: noStyle});
+      setTimeout(function() {
+        this.setState({alert: ' '});
+      }.bind(this), 800);
       //NOT GOING TO ACTUALLY LIGHT UP COLORS UNTIL ALL IF STATEMENTS HAVE ITERATED
       //case 1: position match
       if (timeTilPositionMatch === 0) {
@@ -273,7 +277,7 @@ var AdvancedMode = React.createClass({
             },
             body: JSON.stringify({
               gameId:this.state.gameId,
-              score: gameScore, 
+              score: gameScore,
               reactionTimes: reactionTimes
             })
           }).then(function(response) {
@@ -336,10 +340,14 @@ var AdvancedMode = React.createClass({
     } else {
       scoreAlert = <div></div>
     }
+
     return (
       <div className="gameContainer advancedContainer">
         {overlay}
-        <h1 className="advanced">Advanced</h1>
+        <span className="gameTitle">
+          <h1 className="advanced modeTitle">Advanced</h1>
+          <h1 className="advanced nTitle">(N={this.state.N})</h1>
+        </span>
         <div className="gameHeading">
           <div className="gameScore">
             <h2 className="advanced">Score: {this.state.score}</h2>

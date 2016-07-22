@@ -210,6 +210,15 @@
 }
 
 .bt-menu ul:first-of-type li a {
+	color: #fff;
+	text-transform: uppercase;
+	letter-spacing: 1px;
+	font-size: 1em;
+	-webkit-transition: color 0.2s;
+	transition: color 0.2s;
+}
+
+.bt-menu ul:first-of-type li a a {
 	padding: 0 20px;
 	box-shadow: inset 0 1px rgba(0,0,0,0.2);
 	color: #fff;
@@ -220,7 +229,7 @@
 	transition: color 0.2s;
 }
 
-.bt-menu ul:first-of-type li:last-child a {
+.bt-menu ul:first-of-type li:last-child a a {
 	box-shadow: inset 0 1px rgba(0,0,0,0.2), inset 0 -1px rgba(0,0,0,0.2);
 }
 

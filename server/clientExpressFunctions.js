@@ -8,8 +8,17 @@ var Game = require('../models/Game');
 var tempGame = null;
 
 router.get('/isLoggedIn',function(req,res,next){
-  res.json({'loggedIn': req.user.temp})
-})
+  var isloggedin = false;
+  console.log(req.user)
+  if(req.user && !req.user.temp){
+    isloggedin = true;
+  }
+  console.log("logged in: "+isloggedin)
+  res.json({
+    'loggedIn': isloggedin
+    // 'username': req.user.username
+  })
+});
 
 router.post('/startGame/:mode/:nLevel',function(req,res,next){
   tempGame = new Game({
@@ -25,7 +34,7 @@ router.post('/startGame/:mode/:nLevel',function(req,res,next){
     }
     else{
       req.user.currentGame = game;
-      res.json({gameId: game._id,tempUser:tempUser})
+      res.json({'gameId': game._id,'tempUser':tempUser})
     }
   })
 })
@@ -44,7 +53,7 @@ router.get('/getScore',function(req,res,next){
       console.log(err)
     }
     else{
-      res.json({score:game.score})
+      res.json({'score':game.score})
     }
   })
 })
