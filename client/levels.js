@@ -115,7 +115,7 @@ var ClassicLevels = React.createClass({
 
 var RelaxedLevels = React.createClass({
   getInitialState: function() {
-    return {maxN: 3, mode: 'relaxed'}
+    return {maxN: 8, mode: 'relaxed'}
   },
   componentDidMount() {
     this.setMaxN();
@@ -144,7 +144,7 @@ var RelaxedLevels = React.createClass({
 
 var SilentLevels = React.createClass({
   getInitialState: function() {
-    return {maxN: 5, mode: 'silent'}
+    return {maxN: 13, mode: 'silent'}
   },
   setMaxN: function() {
     getMaxN(this.state.mode, function(maxN) {
@@ -174,7 +174,7 @@ var SilentLevels = React.createClass({
 
 var AdvancedLevels = React.createClass({
   getInitialState: function() {
-    return {maxN: 1, mode: 'advanced'}
+    return {maxN: 20, mode: 'advanced'}
   },
   setMaxN: function() {
     getMaxN(this.state.mode, function(maxN) {

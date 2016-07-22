@@ -39,19 +39,19 @@ var Mainmenu = React.createClass({
         <div className="menu">
           <a className="menu-panel classicBackground" onClick={this.classic}>
             <h2>Classic</h2>
-            <h3>(position, sound)</h3>
+            <h3>position, sound</h3>
           </a>
           <a className="menu-panel relaxedBackground" onClick={this.relaxed}>
             <h2>Relaxed</h2>
-            <h3>(position only)</h3>
+            <h3>position only</h3>
           </a>
           <a className="menu-panel silentBackground" onClick={this.silent}>
             <h2>Silent</h2>
-            <h3>(position, color)</h3>
+            <h3>position, color</h3>
           </a>
           <a className="menu-panel advancedBackground" onClick={this.advanced}>
             <h2>Advanced</h2>
-            <h3>(color, position, sound)</h3>
+            <h3>color, position, sound</h3>
           </a>
         </div>
       </div>

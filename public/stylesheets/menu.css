@@ -246,4 +246,5 @@
 .bt-menu ul li a:hover:before,
 .bt-menu ul li a:focus:before {
 	color: #01B6A7;
+	cursor: pointer;
 }

@@ -46,8 +46,8 @@ h1 {
   font-weight: 700;
 }
 h2 {
-  font-size: 2rem;
-  font-weight: 300;
+  font-size: calc(16px + 1.5vw);
+  font-weight: 500;
 }
 h3 {
   font-size: 1.3rem;
@@ -114,6 +114,12 @@ h3 {
 .menu-panel:hover {
   transition-duration: .8s;
   width: 40vw;
+}
+
+.menu-panel > h3 {
+  font-weight: 100;
+  color: rgba(255,255,255,.8);
+  text-align: center;
 }
 
 /* game page css */
@@ -361,10 +367,7 @@ h3 {
   font-weight: 700;
   margin: 0;
 }
-h2 {
-  font-size: 2rem;
-  font-weight: 300;
-}
+
 .levelBox > h3 {
   font-size: 1.3rem;
   font-weight: 100;
@@ -438,7 +441,7 @@ h2 {
   left: 0;
   text-align: center;
   /*color: white;*/
-  font-size:8vh;
+  font-size:7vh;
 }
 .front.face {
   z-index: 0;
@@ -452,8 +455,8 @@ h2 {
 .back.face {
   transform: translate3d(0, 0, -50px) rotate3d(0, 1, 0, 180deg);
 }
-/*loginpage*/
 
+/*loginpage*/
 .screen {
   display: flex;
   justify-content: center;
@@ -646,12 +649,26 @@ input {
   text-align: center;
 }
 
-.contactPage {
+/*contact page*/
+.cPage {
+  display: flex;
+  flex-direction: column;
   height: 100vh;
   width: 100vw;
+}
+
+.contactPage, .contactPage2 {
+  height: 50vh;
+  width: 100vw;
   background-color: #7CD9D2;
-  padding-top: 10vh;
+  padding: 10vh 30vw 0 30vw;
   transition-duration: .8s;
+}
+.contactPage{
+  background-color: #7CD9D2;
+}
+.contactPage2{
+  background-color: #008a7e;
 }
 
 .contactlines {
@@ -660,15 +677,14 @@ input {
   text-align: center;
   list-style: none;
   text-decoration: none;
+  margin: 50px auto;
+  height: 10vh;
 }
 .cHeader {
   color: white;
   font-size: 48px;
   text-align: center;
-}
-.cheader > h2{
-  font-weight: 100;
-  font-size: 20px;
+  margin-bottom: 10px;
 }
 
 .contactlines a {
@@ -677,4 +693,10 @@ input {
 }
 .contactlines a:hover{
   color:#f13542;
+}
+pl {
+  font-weight: 100;
+  font-size: 1em;
+  font-family: "proxima-nova", sans-serif;
+  color: white;
 }
