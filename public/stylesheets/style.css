@@ -137,19 +137,9 @@ h3 {
   justify-content: center;
   align-items: center;
   margin-top: 20px;
+  background-color: rgba(255, 255, 255, 0.5);
 }
-.relaxContainer {
-  background-color: rgba(1, 182, 167, 0.09);
-}
-.silentContainer {
-  background-color: rgba(124, 217, 210, 0.09);
-}
-.classicContainer {
-  background-color: rgba(241, 53, 66, 0.09);
-}
-.advancedContainer {
-  background-color: rgba(241, 186, 3, 0.09);
-}
+
 .gameBoard {
   display: flex;
   width: 90%;
@@ -204,7 +194,7 @@ h3 {
 }
 
 .nTitle {
-  font-size: 20px !important;
+  font-size: 24px !important;
   font-weight: normal !important;
 }
 
