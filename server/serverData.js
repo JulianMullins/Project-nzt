@@ -7,6 +7,7 @@ var HighScore = require('../models/HighScore');
 var serverLeaderboard=new Leaderboard();
 serverLeaderboard.save();
 
+
 var modeMultiplier = {
   classic: 1,
   relaxed: 1,
