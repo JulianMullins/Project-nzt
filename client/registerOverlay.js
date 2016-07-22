@@ -38,7 +38,6 @@ var RegisterOverlay = React.createClass({
             <input type="password" placeholder="confirm password" name="passwordConfirm" id="passwordConfirm"></input>
               <div className="buttongroup">
                 <button className="form-btn dx" onClick={this.register}><Link to="/">Register</Link></button>
-
                 <button className="form-btn dx2"><Link to="/login">Back to Login</Link></button>
               </div>
           </form>
