@@ -38,8 +38,6 @@ h3 {
   min-width:300px;
 }
 
-
-
 .overlay {
   position: absolute;
   width: 100vw;
@@ -372,6 +370,8 @@ h3 {
 
 .levelBox{
   text-align: center;
+  perspective: 5000px;
+  perspective-origin: 60%;
 }
 
 .levelBox > h1 {
@@ -384,9 +384,10 @@ h2 {
   font-size: 2rem;
   font-weight: 300;
 }
-h3 {
+.levelBox > h3 {
   font-size: 1.3rem;
   font-weight: 100;
+  color: grey;
 }
 
 #classic, #relax, #silent, #advanced{
@@ -425,7 +426,7 @@ h3 {
 
 .levelSquare, .levelSquareLast {
   display: inline-block;
-  background-color: #BFBFBF;
+  /*background-color: #BFBFBF;*/
   float: left;
 }
 
@@ -447,13 +448,59 @@ h3 {
   margin: calc(10% / 6);
 }
 
-.levelSquare{
-  background-color: #BFBFBF;
+.grid16{
+  width: 22%;
+  height: 22%;
+  margin: calc(12% / 8);
+}
+
+.grid25{
+  width: 16%;
+  height: 16%;
+  margin: calc(20% / 10);
 }
 
 .levelSquareLast{
-  background-color: #D6D6D6;
+  background-color: rgba(255,255,255,.5);
 }
+
+.levelSquare {
+  transform: rotate3d(0, 1, 0, 0deg);
+  transform-style: preserve-3d;
+  transform-origin: 50% 50% -25px;
+  transition: all 0.3s ease-out;
+}
+.levelSquare:hover {
+  transform: rotate3d(0, 1, 0, 30deg);
+}
+.levelSquare:active {
+  transform: rotate3d(0, 1, 0, 180deg);
+  transition-duration: 0.4s;
+}
+.face {
+  backface-visibility: hidden;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  text-align: center;
+  color: white;
+  font-size:8vh;
+}
+.front.face {
+  z-index: 0;
+}
+.side.face {
+  transform: translate3d(-100%, 0, 0) rotate3d(0, 1, 0, -90deg);
+  transform-origin: 100% 50%;
+  z-index: 0;
+  width: 50px;
+}
+.back.face {
+  transform: translate3d(0, 0, -50px) rotate3d(0, 1, 0, 180deg);
+}
+
 
 /*loginpage*/
 .screen {
@@ -501,6 +548,11 @@ h3 {
   font-family: "proxima-nova",sans-serif;
 }
 
+.pa a {
+  text-decoration: none;
+  color:white;
+}
+
 .register-log > h3 {
   font-weight: 300;
   text-align: center;
@@ -531,7 +583,7 @@ button{
 	background: #3b5998;
 	width: 20vw;
 	height: 60px;
-	font-size: 20px;
+  font-size:calc(12px + .5vw);
 	color: #fff;
 	text-transform: uppercase;
   text-decoration: none;
@@ -550,7 +602,7 @@ button.form-btn {
 	height: 60px;
 	bottom: 0;
 	border: 0;
-	font-size: 20px;
+  font-size:calc(12px + .5vw);
 	text-transform: uppercase;
   margin: 2vw;
 }
@@ -564,6 +616,7 @@ button.form-btn.sx {
 
 button.form-btn.dx:hover {
 	background-color:rgba(255, 125, 0, 0.65);
+  cursor:pointer;
 	color: #fff;
 }
 
@@ -575,6 +628,14 @@ button.form-btn.dx {
 }
 .register-log button.form-btn.dx {
 	background-color: #f13542;
+}
+.register-log button.form-btn.dx:hover {
+	background-color: rgba(203,14,27,0.65);
+  color: white;
+}
+.register-log button.form-btn.dx a {
+  text-decoration: none;
+  color: white;
 }
 
 input {
@@ -625,6 +686,11 @@ input {
   width: 50vw;
   background-color: #7CD9D2;
   padding-top: 10vh;
+  transition-duration: .8s;
+}
+.userSide:hover{
+  width: 60vw;
+  transition-duration: .8s;
 }
 
 .boardSide {
@@ -632,10 +698,48 @@ input {
   width: 50vw;
   background-color: #F1BA03;
   padding-top: 10vh;
+  transition-duration: .8s;
+}
+.boardSide:hover{
+  60vw;
+  transition-duration: .8s;
 }
 
 .lbHeader {
   color: white;
   font-size: 48px;
   text-align: center;
+}
+
+.contactPage {
+  height: 100vh;
+  width: 100vw;
+  background-color: #7CD9D2;
+  padding-top: 10vh;
+  transition-duration: .8s;
+}
+
+.contactlines {
+  color: white;
+  font-size: 24px;
+  text-align: center;
+  list-style: none;
+  text-decoration: none;
+}
+.cHeader {
+  color: white;
+  font-size: 48px;
+  text-align: center;
+}
+.cheader > h2{
+  font-weight: 100;
+  font-size: 20px;
+}
+
+.contactlines a {
+  text-decoration: none;
+  color: white;
+}
+.contactlines a:hover{
+  color:#f13542;
 }

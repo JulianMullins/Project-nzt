@@ -229,6 +229,7 @@
 	text-align: left;
 	margin-top: 3px;
 	padding: 0 20px;
+	font-size:50px;
 }
 
 .bt-menu ul li a:before {
@@ -239,6 +240,8 @@
 }
 
 .bt-menu ul:first-of-type li a:hover,
+.bt-menu ul:nth-of-type(2) li a:hover,
+.bt-menu ul:nth-of-type(2) li a:focus,
 .bt-menu ul:first-of-type li a:focus,
 .bt-menu ul li a:hover:before,
 .bt-menu ul li a:focus:before {
