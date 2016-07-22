@@ -66,13 +66,14 @@ var GameOverOverlay = React.createClass({
           alreadyLoggedIn:this.state.alreadyLoggedIn
         })
       })
+
   },
   render: function() {
     var loggedIn = this.state.alreadyLoggedIn
       ? <Link to="/leaderboard"><button onClick={this.gameOver}>To Leaderboard</button></Link>
       : <div><input type="text" placeholder="username" name="username" id="username" value={this.state.username}></input>
             <br></br>
-        <button><Link to="/login">Sign In</Link></button>
+        <button><Link to="/gameOver/login">Sign In</Link></button>
         <button><Link to="/leaderboard" onClick={this.gameOver}>Submit</Link></button></div>;
         
     return (

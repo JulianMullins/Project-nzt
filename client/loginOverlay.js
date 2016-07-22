@@ -4,7 +4,33 @@ import {Link} from 'react-router';
 
 var LoginOverlay = React.createClass({
   getInitialState: function() {
-    return {username: '', password: ''}
+    return {
+      username: '', 
+      password: '',
+      gameEnded:false,
+      games:null
+    }
+  },
+  componentDidMount(){
+    if(this.props.location.pathname =='/gameOver/login'){
+      
+      this.setState({
+        gameEnded:true
+      })
+
+      fetch('/getUser',{
+        method:'get'
+      }).then(function(response){
+          return response.json();
+      }).then(function(response){
+        if(response.games){
+          this.setState({
+            games:response.games
+          })
+        }
+      }.bind(this))
+    }
+    
   },
   update(e) {
     this.setState({
@@ -24,7 +50,14 @@ var LoginOverlay = React.createClass({
         'Accept': 'application/json',
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify({username: this.state.username, password: this.state.password})
+      body: JSON.stringify({
+        username: this.state.username, 
+        password: {
+          password:this.state.password,
+          user:null,
+          games:null
+        }
+      })
     }).then(function(response) {
       return response.json();
     }).then(function(response) {
@@ -40,13 +73,48 @@ var LoginOverlay = React.createClass({
 
     fetch('/login/facebook',{method:'get'
     }).then(function(response) {
+      console.log(response);
         return response.json();
       }).then(function(response) {
+        console.log(response);
         if (response.success) {
           this.props.history.push('/home');
         }
       }.bind(this))
 
+  },
+  gameEnded: function(){
+    fetch('/login', {
+      method: 'post',
+      credentials: 'include',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        username: this.state.username, 
+        password: {
+          password:this.state.password,
+          user:null,
+          games:this.state.games
+        }
+      })
+    }).then(function(response) {
+      return response.json();
+    }).then(function(response) {
+      if (response.success) {
+        this.props.history.push('/gameOver');
+      } else if (!response.success) {}
+    }.bind(this))
+  },
+  click(){
+    console.log("submitted")
+    if(this.state.gameEnded){
+      this.gameEnded();
+    }
+    else{
+      this.login();
+    }
   },
   render: function() {
     return (
@@ -60,7 +128,7 @@ var LoginOverlay = React.createClass({
             <br></br>
             <input type="password" placeholder="Password" name="password" id="password" value={this.state.password} onChange={this.update}></input>
             <div className="buttongroup">
-              <button className="form-btn dx" onClick={this.login}>Login</button>
+              <button type="submit" className="form-btn dx" onSubmit={this.click}>Login</button>
               <button className="form-btn fb" onClick={this.facebook}>Login with Facebook</button>
             </div>
           </form>

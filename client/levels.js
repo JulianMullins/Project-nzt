@@ -83,16 +83,19 @@ var getMaxN = function(mode, cb) {
 
 var ClassicLevels = React.createClass({
   getInitialState: function() {
-    return {maxN: 1, mode: 'classic'}
+    return {
+      maxN: 1, 
+      mode: 'classic'}
   },
   componentDidMount() {
     this.setMaxN();
   },
   setMaxN: function() {
     getMaxN(this.state.mode, function(maxN) {
-      this.setState({maxN: maxN})
-      console.log("maxN is " + this.state.maxN)
+      this.setState({maxN: maxN[this.state.mode]})
     }.bind(this))
+          console.log("maxN is " + this.state.maxN)
+
   },
   render: function() {
 
@@ -115,14 +118,16 @@ var ClassicLevels = React.createClass({
 
 var RelaxedLevels = React.createClass({
   getInitialState: function() {
-    return {maxN: 8, mode: 'relaxed'}
+    return {
+      maxN: 1, 
+      mode: 'relaxed'}
   },
   componentDidMount() {
     this.setMaxN();
   },
   setMaxN: function() {
     getMaxN(this.state.mode, function(maxN) {
-      this.setState({maxN: maxN})
+      this.setState({maxN: maxN[this.state.mode]})
     }.bind(this))
   },
   render: function() {
@@ -144,11 +149,12 @@ var RelaxedLevels = React.createClass({
 
 var SilentLevels = React.createClass({
   getInitialState: function() {
-    return {maxN: 13, mode: 'silent'}
+    return {maxN: 11, 
+      mode: 'silent'}
   },
   setMaxN: function() {
     getMaxN(this.state.mode, function(maxN) {
-      this.setState({maxN: maxN})
+      this.setState({maxN: maxN[this.state.mode]})
     }.bind(this))
   },
   componentDidMount() {
@@ -174,11 +180,12 @@ var SilentLevels = React.createClass({
 
 var AdvancedLevels = React.createClass({
   getInitialState: function() {
-    return {maxN: 20, mode: 'advanced'}
+    return {maxN: 1,
+     mode: 'advanced'}
   },
   setMaxN: function() {
     getMaxN(this.state.mode, function(maxN) {
-      this.setState({maxN: maxN})
+      this.setState({maxN: maxN[this.state.mode]})
     }.bind(this))
   },
   componentDidMount() {

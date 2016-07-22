@@ -21,30 +21,118 @@ router.get('/isLoggedIn',function(req,res,next){
 });
 
 router.post('/startGame/:mode/:nLevel',function(req,res,next){
-  tempGame = new Game({
-    user:req.user,
-    mode:req.params.mode,
-    score:0,
-    nLevel:req.params.nLevel,
-    tempUser:req.user.temp
-  })
-  tempGame.save(function(err,game){
-    if(err){
-      res.send(err);
+  console.log(req.user)
+  if(!req.user){
+      var tempUserStats = new Stats();
+      tempUserStats.save();
+      var tempUser = new User({
+        username:null,
+        stats:tempUserStats._id,
+        temp:true,
+        currentGame:[],
+        maxN:{
+            classic:1,
+            relaxed:1,
+            silent:1,
+            advanced:1
+          }
+      })
+      tempUser.save(function(err,user){
+        if(err){
+          res.send(err)
+        }
+      })
+
+      fetch('/login',{
+        method:'POST',
+        credentials: 'include',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          username:null,
+          password:{
+            password:null,
+            user: tempUser._id
+          }
+        })
+      }).then(function(response) {
+        return response.json();
+      }).then(function(response) {
+        if (response.success) {
+          
+          tempGame = new Game({
+            user:req.user,
+            mode:req.params.mode,
+            score:0,
+            nLevel:req.params.nLevel,
+            tempUser:req.user.temp
+          })
+          tempGame.save(function(err,game){
+            if(err){
+              res.send(err);
+            }
+            else{
+              req.user.currentGame.unshift(game);
+              res.json({gameId: game._id,tempUser:tempUser})
+            }
+          })
+
+        }
+      }.bind(this))
+  
     }
     else{
-      req.user.currentGame = game;
-      res.json({'gameId': game._id,'tempUser':tempUser})
+      tempGame = new Game({
+        user:req.user,
+        mode:req.params.mode,
+        score:0,
+        nLevel:req.params.nLevel,
+        tempUser:req.user.temp
+      })
+      tempGame.save(function(err,game){
+        if(err){
+          res.send(err);
+        }
+        else{
+          req.user.currentGame.unshift(game);
+          res.json({gameId: game._id,tempUser:tempUser})
+        }
+      })
     }
-  })
+});
+
+  //anon user
+router.get('/startAnon',function(req,res,next){
+  
+  
 })
 
+
 router.get('/getMaxN',function(req,res,next){
-  res.json({maxN:req.user.maxN})
+  var maxN={
+              classic:1,
+              relaxed:1,
+              silent:1,
+              advanced:1
+            };
+            console.log(req.user)
+  if(req.user){
+    maxN= req.user.maxN
+  }
+  res.json({maxN:maxN})
 })
 
 router.get('/getUser',function(req,res,next){
-  res.json({username:req.user.username})
+  var games = null;
+  if(req.user.currentGame){
+    games = req.user.currentGame
+  }
+  res.json({
+    username:req.user.username,
+    games:games
+  })
 })
 
 router.get('/getScore',function(req,res,next){
@@ -68,8 +156,8 @@ router.post('/gameEnd',function(req,res,next){
     }
     else{
       game.setState({
-        score:gameScore,
-        reactionTimes:reactionTimes
+        score:req.body.score,
+        reactionTimes:req.body.reactionTimes
       })
       res.json({success:true})
     }
