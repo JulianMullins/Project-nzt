@@ -284,7 +284,10 @@ var SilentMode = React.createClass({
     return (
       <div className="gameContainer silentContainer">
         {overlay}
-        <h1 className="silent">Silent</h1>
+        <span className="gameTitle">
+          <h1 className="silent modeTitle">Silent</h1>
+          <h1 className="silent nTitle">(N={this.state.N})</h1>
+        </span>
         <div className="gameHeading">
           <div className="gameScore silent">
             <h2>Score: {this.state.score}</h2>
