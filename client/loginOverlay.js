@@ -56,7 +56,7 @@ var LoginOverlay = React.createClass({
           <h1>Welcome</h1>
           <div className="pa">Login here.</div>
           <form>
-            <input type="text" placeholder="Name or Email" name="username" id="username" value={this.state.username} onChange={this.update}></input>
+            <input type="text" placeholder="Name or Email" name="username" id="username" value={this.state.username} onChange={this.update} autoFocus={focus}></input>
             <br></br>
             <input type="password" placeholder="Password" name="password" id="password" value={this.state.password} onChange={this.update}></input>
             <div className="buttongroup">

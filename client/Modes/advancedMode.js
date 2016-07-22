@@ -34,7 +34,7 @@ var AdvancedMode = React.createClass({
       alert: " ",
       overlay: true,
       initialTimer: 3,
-      N: 1,
+      N: this.props.params.n,
       colorPressed: noStyle,
       soundPressed: noStyle,
       positionPressed: noStyle,
