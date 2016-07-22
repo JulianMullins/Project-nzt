@@ -395,6 +395,7 @@ h3 {
 }
 .grid a {
   display: inline-block;
+  position: inline-block; /* Or absolute, inline-block, inline */
 }
 .levelSquare {
   display: inline-block;
@@ -443,7 +444,7 @@ h3 {
   transition: all 0.3s ease-out;
 }
 .levelSquare:hover {
-  transform: rotate3d(0, 1, 0, 30deg);
+  transform: rotate3d(0, 1, 0, 29.999deg);
 }
 .levelSquare:active {
   transform: rotate3d(0, 1, 0, 180deg);
@@ -466,7 +467,7 @@ h3 {
   z-index: 0;
 }
 .side.face {
-  transform: translate3d(-100%, 0, 0) rotate3d(0, 1, 0, -90deg);
+  transform: translate3d(-100%, 0, 0) rotate3d(0, 1, 0, -89.999deg);
   transform-origin: 100% 50%;
   z-index: 0;
   width: 50px;
@@ -770,11 +771,31 @@ input {
   padding: 3vh 30vw 0 30vw;
   background-color: #008a7e;
 }
-.contactPage, .contactPage2 a{
+.contactPage3, .contactPage4 {
+  height: 50vh;
+  width: 100vw;
+  background-color: #7CD9D2;
+  transition-duration: .8s;
+  text-align: center;
+  transition-duration: .8s;
+}
+.contactPage3{
+  background-color: #7CD9D2;
+  padding: 10vh 30vw 0 30vw;
+}
+.contactPage4{
+  padding: 3vh 30vw 0 30vw;
+  background-color: #008a7e;
+}
+.contactPage3:hover, .contactPage4:hover{
+  height: 55vh;
+  transition-duration: .8s;
+}
+.contactPage a, .contactPage2 a, .contactPage3 a, .contactPage4 a{
   text-decoration: none;
   color: #F1BA03;
 }
-.contactPage, .contactPage2 a:hover{
+.contactPage a:hover , .contactPage2 a:hover, .contactPage4 a:hover{
   color: silver;
 }
 .contactlines {
@@ -802,7 +823,7 @@ input {
 }
 pl {
   font-weight: 100;
-  font-size: 1em;
+  font-size: calc(12px + .5vw);
   font-family: "proxima-nova", sans-serif;
   color: white;
 }
