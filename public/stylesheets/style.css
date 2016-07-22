@@ -47,7 +47,7 @@ body {
   align-items: center;
 }
 h1 {
-  font-size: 10rem;
+  font-size:calc(16px + 10vw);
   font-weight: 700;
 }
 h2 {
@@ -473,6 +473,7 @@ h3 {
 }
 
 /*loginpage*/
+
 .screen {
   display: flex;
   justify-content: center;
@@ -553,7 +554,7 @@ input, button {
 	color: #fff;
 	text-transform: uppercase;
   text-decoration: none;
-  padding: 20px;
+  padding: 20px 0 20px;
   cursor: pointer;
   transition: all 0.3s linear;
   margin: 2vw;
@@ -663,6 +664,50 @@ input {
   color: white;
   font-size: 48px;
   text-align: center;
+}
+
+@media all and (max-width: 500px) {
+  .screen {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    width: 100vw;
+  }
+  .login, .register-log {
+    height: 50vh;
+    width: 100vw;
+    color: white;
+    text-decoration: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  }
+  .login:hover, .register-log:hover{
+    width: 100vw;
+  }
+  .login h1, .register-log h1{
+    font-size:calc(16px + 15vw);
+  }
+  form {
+    text-align: center;
+    width: 90vw;
+    border-radius: 5px;
+    padding: 30px 20px 0 20px;
+    box-sizing: border-box;
+  }
+  .register-log form{
+    width: 90vw;
+  }
+  .buttongroup {
+    display: flex;
+    width:100%;
+    justify-content: center;
+  }
+  .fb {
+    padding: 20px 0 20px;
+    font-size: calc(10px + .5vw)
+  }
 }
 
 /*contact page*/
