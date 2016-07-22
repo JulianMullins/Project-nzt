@@ -11,6 +11,9 @@ var GameTimer = React.createClass({
       });
     }.bind(this), 3000);
   },
+  componentWillUnmount: function() {
+    clearInterval(this.state.interval);
+  },
   timerSecs: function() {
     this.setState({
       seconds: this.state.seconds - 1
