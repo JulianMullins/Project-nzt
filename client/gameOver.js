@@ -74,7 +74,7 @@ var GameOverOverlay = React.createClass({
       ? <div></div>
       : <div className="gameOverPrompt">
           <p>It looks like you are not currently logged in. 
-          Sign in or sign up to save your progress, 
+          <Link to="/login">Sign in</Link> or <Link to="/register">sign up</Link> to save your progress, 
           view statistics and compete with friends!</p>  
         </div> 
 
