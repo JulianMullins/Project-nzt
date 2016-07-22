@@ -184,22 +184,37 @@ h3 {
   justify-content: flex-end;
   width: 50%;
 }
+
+.gameTitle {
+  display: flex;
+  flex-direction: row;
+  align-items: baseline;
+  justify-content: center;
+  width: 100%;
+}
+
+.modeTitle {
+  padding: 0 10px;
+  font-size: 50px;
+}
+
+.nTitle {
+  font-size: 20px !important;
+  font-weight: normal !important;
+}
+
 .gameHeading {
   display: flex;
   flex-direction: row;
   width: 85%;
   margin-bottom: 10px;
 }
-.gameContainer h1 {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 48px;
-}
+
 .gameContainer h2 {
   font-size: 40px;
   font-weight: normal;
 }
+
 .gameTimer {
   font-size: 64px;
 }

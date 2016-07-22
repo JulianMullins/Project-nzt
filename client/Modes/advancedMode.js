@@ -345,7 +345,10 @@ var AdvancedMode = React.createClass({
     return (
       <div className="gameContainer advancedContainer">
         {overlay}
-        <h1 className="advanced">Advanced</h1>
+        <span className="gameTitle">
+          <h1 className="advanced modeTitle">Advanced</h1>
+          <h1 className="advanced nTitle">(N={this.state.N})</h1>
+        </span>
         <div className="gameHeading">
           <div className="gameScore">
             <h2 className="advanced">Score: {this.state.score}</h2>
