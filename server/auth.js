@@ -144,7 +144,7 @@ module.exports = function(passport) {
   router.get('/login/facebook/callback',
     passport.authenticate('facebook',{failureRedirect: '/login'} ),
     function(req, res) {
-      res.redirect('/')
+      res.json({success:true})
     });
 
   //anon user

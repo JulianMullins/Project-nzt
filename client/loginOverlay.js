@@ -38,7 +38,14 @@ var LoginOverlay = React.createClass({
 
     //ajax facebook get
 
-    fetch('/login/facebook', {method: 'get'})
+    fetch('/login/facebook',{method:'get'
+    }).then(function(response) {
+        return response.json();
+      }).then(function(response) {
+        if (response.success) {
+          this.props.history.push('/home');
+        }
+      }.bind(this))
 
   },
   render: function() {
@@ -54,7 +61,7 @@ var LoginOverlay = React.createClass({
             <input type="password" placeholder="Password" name="password" id="password" value={this.state.password} onChange={this.update}></input>
             <div className="buttongroup">
               <button className="form-btn dx" onClick={this.login}>Login</button>
-              <a type="button" className="fb" href="/login/facebook">Login with Facebook</a>
+              <button className="form-btn fb" onClick={this.facebook}>Login with Facebook</button>
             </div>
           </form>
         </div>
