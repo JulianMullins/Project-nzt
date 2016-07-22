@@ -260,7 +260,35 @@ var AdvancedMode = React.createClass({
           gameScore = this.state.score;
           console.log(gameScore, 'game score')
           console.log(reactionTimes, 'reaction times')
-        }.bind(this), 2000)
+
+
+
+          //GAME OVER
+          fetch('/gameEnd',{
+            method:'post',
+            credentials: 'include',
+            headers: {
+              'Accept': 'application/json',
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+              gameId:this.state.gameId,
+              score: gameScore, 
+              reactionTimes: reactionTimes
+            })
+          }).then(function(response) {
+            return response.json();
+          }).then(function(response) {
+            if (response.success) {
+              this.props.history.push('/gameOver');
+            }
+          }.bind(this))
+
+
+
+
+        }.bind(this),2000)
+
       }
     }.bind(this), 2000);
   },

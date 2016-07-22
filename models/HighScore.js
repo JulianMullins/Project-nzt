@@ -10,7 +10,7 @@ var highScoreSchema = mongoose.Schema({
 	score:Number,
 	nLevel:Number,
 	mode:String,
-	reactionTimes: Array
+	reactionTimes:Array
 })
 
 

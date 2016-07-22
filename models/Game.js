@@ -6,10 +6,11 @@ var gameSchema = mongoose.Schema({
 		type: mongoose.Schema.Types.ObjectId,
 		ref: 'User'
 	},
-  	anonUser:Boolean,
+  	tempUser:Boolean,
 	mode:String,
 	score:Number,
-	nLevel:Number
+	nLevel:Number,
+	reactionTimes:Array
 })
 
 

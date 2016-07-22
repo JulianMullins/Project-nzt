@@ -1,6 +1,5 @@
 var Chart = require('chart.js');
-var User = require('../models/User');
-var Stats = require('../models/Stats');
+
 var _ = require('underscore');
 
 var express = require('express');

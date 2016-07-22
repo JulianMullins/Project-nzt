@@ -24,6 +24,7 @@ router.post('/startGame/:mode/:nLevel',function(req,res,next){
       res.send(err);
     }
     else{
+      req.user.currentGame = game;
       res.json({gameId: game._id,tempUser:tempUser})
     }
   })
@@ -35,9 +36,36 @@ router.get('/getMaxN',function(req,res,next){
 
 router.get('/getUser',function(req,res,next){
   res.json({username:req.user.username})
-
 })
 
+router.get('/getScore',function(req,res,next){
+  Game.findById(req.user.currentGame,function(err,game){
+    if(err){
+      console.log(err)
+    }
+    else{
+      res.json({score:game.score})
+    }
+  })
+})
+
+router.post('/gameEnd',function(req,res,next){
+  Game.findById(req.body.gameId,function(err,game){
+    if(err){
+      console.log(err);
+    }
+    else if(!game) {
+      console.log("no game")
+    }
+    else{
+      game.setState({
+        score:gameScore,
+        reactionTimes:reactionTimes
+      })
+      res.json({success:true})
+    }
+  })
+})
 
 
 module.exports=router;
