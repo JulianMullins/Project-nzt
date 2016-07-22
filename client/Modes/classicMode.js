@@ -276,7 +276,7 @@ var ClassicMode = React.createClass({
     }
 
     return (
-      <div className="gameContainer classicContainer">
+      <div className="gameContainer">
         {overlay}
         <span className="gameTitle">
           <h1 className="classic modeTitle">Classic</h1>
