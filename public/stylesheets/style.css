@@ -130,7 +130,7 @@ h3 {
 /* game page css */
 
 .gameContainer {
-  min-height: 90vh;
+  height: 90vh;
   width: 640px;
   min-width: 640px;
   display: flex;
