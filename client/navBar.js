@@ -67,9 +67,6 @@ var NavBar = React.createClass({
 						<li><Link to="/science"><a onClick={this.close}>The Science</a></Link></li>
 						<li><Link to="/contact"><a onClick={this.close}>Contact</a></Link></li>
 					</ul>
-					<ul>
-						<li><Link to="/settings"><i className="fa fa-cog"  aria-hidden="true"></i></Link></li>
-					</ul>
 					<div className='bt-overlay' onClick={this.click}/>
 				</nav>
 
@@ -77,6 +74,11 @@ var NavBar = React.createClass({
 		)
 	}
 });
+
+// second menu goes underneath </ul>
+// <ul>
+// 	<li><Link to="/settings"><i className="fa fa-cog"  aria-hidden="true"></i></Link></li>
+// </ul>
 
 
 module.exports = NavBar;
