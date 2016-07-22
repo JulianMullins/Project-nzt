@@ -9,7 +9,7 @@ var reactionStart;
 var reactionTimes = [];
 //global variable for game score (saved once time runs out)
 var gameScore;
-var reactionEnd=null;
+var reactionEnd = null;
 var iterations;
 var timer;
 
@@ -40,21 +40,16 @@ var SilentMode = React.createClass({
       posStyle: noStyle,
       keepScore: false,
       tempUser: true,
-      gameId:null
+      gameId: null
     }
   },
   componentDidMount: function() {
     timer = setInterval(this.timer, 1000);
 
-    fetch('/startGame/' + this.state.mode + '/' + this.state.N, {
-      method: 'post'
-    }).then(function(response) {
+    fetch('/startGame/' + this.state.mode + '/' + this.state.N, {method: 'post'}).then(function(response) {
       return response.json();
     }).then(function(response) {
-      this.setState({
-        tempUser:response.tempUser,
-        gameId:response.gameId
-      })
+      this.setState({tempUser: response.tempUser, gameId: response.gameId})
     }.bind(this))
 
     window.onkeyup = function(e) {
@@ -69,7 +64,7 @@ var SilentMode = React.createClass({
     //  method: 'post'
     // });
   },
-  componentWillUnmount: function(){
+  componentWillUnmount: function() {
     clearInterval(iterations);
     clearInterval(timer);
   },
@@ -96,34 +91,44 @@ var SilentMode = React.createClass({
       timeKeeper++;
 
       if (this.state.keepScore && !(this.state.colorMatch || this.state.positionMatch)) {
-        reactionTimes.push(reactionEnd-reactionStart);
-        reactionEnd=null;
+        reactionTimes.push(reactionEnd - reactionStart);
+        reactionEnd = null;
         this.setState({
           score: this.state.score + 10,
           alert: 'Good job',
-          posStyle: noStyle, colorStyle: noStyle
+          posStyle: noStyle,
+          colorStyle: noStyle
         });
       } else if (!this.state.keepScore && (this.state.posPressed || this.state.colorPressed)) {
         this.setState({alert: "Not a match"})
-        reactionEnd=null;
+        reactionEnd = null;
         if (this.state.score !== 0) {
           this.setState({
             score: this.state.score - 5,
-            posStyle: noStyle, colorStyle: noStyle
+            posStyle: noStyle,
+            colorStyle: noStyle
           });
         }
       } else if (this.state.keepScore && (this.state.colorMatch || this.state.positionMatch)) {
         this.setState({alert: "Missed a match"});
-        reactionEnd=null;
+        reactionEnd = null;
         if (this.state.score !== 0) {
           this.setState({
             score: this.state.score - 5,
-            posStyle: noStyle, colorStyle: noStyle
+            posStyle: noStyle,
+            colorStyle: noStyle
           });
         }
       }
-      this.setState({keepScore: false, positionMatch: false, colorMatch: false, posPressed: false, colorPressed: false,
-        posStyle: noStyle, colorStyle: noStyle});
+      this.setState({
+        keepScore: false,
+        positionMatch: false,
+        colorMatch: false,
+        posPressed: false,
+        colorPressed: false,
+        posStyle: noStyle,
+        colorStyle: noStyle
+      });
       setTimeout(function() {
         this.setState({alert: ' '});
       }.bind(this), 800);
@@ -188,25 +193,20 @@ var SilentMode = React.createClass({
       }.bind(this), 800);
       if (timeKeeper === 60) {
         clearInterval(iterations);
-          setTimeout(function(){
+        setTimeout(function() {
           gameScore = this.state.score;
           console.log(gameScore, 'game score')
           console.log(reactionTimes, 'reaction times')
-          
 
           //GAME OVER
-          fetch('/gameEnd',{
-            method:'post',
+          fetch('/gameEnd', {
+            method: 'post',
             credentials: 'include',
             headers: {
               'Accept': 'application/json',
               'Content-Type': 'application/json'
             },
-            body: JSON.stringify({
-              gameId:this.state.gameId,
-              score: gameScore, 
-              reactionTimes: reactionTimes
-            })
+            body: JSON.stringify({gameId: this.state.gameId, score: gameScore, reactionTimes: reactionTimes})
           }).then(function(response) {
             return response.json();
           }).then(function(response) {
@@ -215,10 +215,7 @@ var SilentMode = React.createClass({
             }
           }.bind(this))
 
-
-
-
-        }.bind(this),2000)
+        }.bind(this), 2000)
       }
     }.bind(this), 2000);
   },
@@ -228,11 +225,15 @@ var SilentMode = React.createClass({
     }
     if (this.state.positionMatch) {
       //getting reaction time of correct match
-      if(!reactionEnd){
+      if (!reactionEnd) {
         reactionEnd = Date.now();
       }
     }
-    this.setState({positionMatch: !this.state.positionMatch, posPressed: true, posStyle: pushStyle});
+    this.setState({
+      positionMatch: !this.state.positionMatch,
+      posPressed: true,
+      posStyle: pushStyle
+    });
   },
   colorMatch: function() {
     if (this.state.colorPressed) {
@@ -240,11 +241,15 @@ var SilentMode = React.createClass({
     }
     if (this.state.colorMatch) {
       //reaction time of correct match
-      if(!reactionEnd){
+      if (!reactionEnd) {
         reactionEnd = Date.now();
       }
     }
-    this.setState({colorMatch: !this.state.colorMatch, colorPressed: true, colorStyle: pushStyle});
+    this.setState({
+      colorMatch: !this.state.colorMatch,
+      colorPressed: true,
+      colorStyle: pushStyle
+    });
   },
   render: function() {
     var overlay = this.state.overlay
@@ -269,16 +274,38 @@ var SilentMode = React.createClass({
       : {};
 
     var scoreAlert;
+    var scoreUpdate;
     if (this.state.alert === "Good job") {
-      scoreAlert = <div className="scoreAlertPositive">
-        {this.state.alert}
-      </div>
+      scoreAlert = (
+        <div className="scoreAlertPositive">
+          {this.state.alert}
+        </div>
+      )
+      scoreUpdate = (
+        <h2 style={{
+          color: 'green'
+        }}>+10</h2>
+      )
     } else if (this.state.alert === "Not a match" || this.state.alert === "Missed a match") {
-      scoreAlert = <div className="scoreAlertNegative">
-        {this.state.alert}
-      </div>
+      scoreAlert = (
+        <div className="scoreAlertNegative">
+          {this.state.alert}
+        </div>
+      )
+      if (this.state.score > 0) {
+        scoreUpdate = (
+          <h2 style={{
+            color: 'red'
+          }}>-5</h2>
+        )
+      }
     } else {
-      scoreAlert = <div></div>
+      scoreAlert = (
+        <div></div>
+      )
+      scoreUpdate = (
+        <h2></h2>
+      )
     }
 
     return (
@@ -291,6 +318,7 @@ var SilentMode = React.createClass({
         <div className="gameHeading">
           <div className="gameScore silent">
             <h2>Score: {this.state.score}</h2>
+            {scoreUpdate}
           </div>
           <GameTimer timeStyle={{
             'color': "#7CD9D2"
@@ -319,9 +347,10 @@ var SilentMode = React.createClass({
   }
 });
 
-var noStyle={}
-var pushStyle={color: 'black'}
-
+var noStyle = {}
+var pushStyle = {
+  color: 'black'
+}
 
 var standardStyle = {
   backgroundColor: "#BFBFBF"
