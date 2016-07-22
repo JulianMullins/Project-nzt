@@ -46,6 +46,8 @@ module.exports = function(passport) {
             var userStats = new Stats();
             userStats.save();
 
+
+
             var u = {
               username: req.body.username,
               email: req.body.email,
@@ -53,8 +55,14 @@ module.exports = function(passport) {
               facebookId: null,
               stats: userStats._id,
               temp:false,
-              maxN:1
+              maxN:1,
+              currentGame:[]
             };
+
+            if(req.user){
+              u.currentGame=req.user.currentGame
+            }
+
             User.findOne({email:u.email},function(err,user){
               if(err){
                 return next(err);
@@ -62,6 +70,7 @@ module.exports = function(passport) {
               else if(user && !user.password){
                 //user.username = u.username;
                 user.password = u.password;
+                user.currentGame = u.currentGame.concat(user.currentGame)
                 console.log(user);
                 user.save(function(err, user) {
                   if (err) {
@@ -81,7 +90,14 @@ module.exports = function(passport) {
                   password: u.password,
                   facebookId: u.facebookId,
                   stats: u.stats,
-                  temp:u.temp
+                  temp:u.temp,
+                  maxN: {
+                    classic:1,
+                    relaxed:1,
+                    silent:1,
+                    advanced:1
+                  },
+                  currentGame:u.currentGame
                 })
                 user.save(function(err, user) {
                   if (err) {
@@ -117,7 +133,7 @@ module.exports = function(passport) {
   })
 
   // POST Login page
-  router.post('/login', passport.authenticate('local',{failureRedirect:'/login/failure'}), function(req,res,next){
+  router.post('/login', passport.authenticate('local'), function(req,res,next){
     // passport.authenticate('local',
 		  //   function(err,user){
     //       if(err){
@@ -142,39 +158,13 @@ module.exports = function(passport) {
     passport.authenticate('facebook', { scope:['email','user_friends']}), function(req,res){});
 
   router.get('/login/facebook/callback',
-    passport.authenticate('facebook',{failureRedirect: '/login'} ),
+    passport.authenticate('facebook',{failureRedirect: '/#/home'} ),
     function(req, res) {
-      res.redirect('/')
+
+      console.log("success")
+      res.json({success:true})
     });
 
-  //anon user
-  router.post('/startAnon',function(req,res,next){
-    var tempUserStats = new Stats();
-    tempUserStats.save();
-    var tempUser = new User({
-      username:null,
-      stats:tempUserStats._id,
-      temp:true
-    })
-    tempUser.save(function(err,user){
-      if(err){
-        res.send(err)
-      }
-    })
-
-    fetch('/login',{
-      method:'POST',
-      credentials: 'include',
-        headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-          user:tempUser
-        })
-    })
-
-  })
 
 
   // GET Logout page

@@ -66,13 +66,15 @@ var GameOverOverlay = React.createClass({
           alreadyLoggedIn:this.state.alreadyLoggedIn
         })
       })
+
   },
   render: function() {
     var loggedIn = this.state.alreadyLoggedIn
+
       ? <div></div>
       : <div className="gameOverPrompt">
           <p>It looks like you are not currently logged in. 
-          <Link to="/login">Sign in</Link> or <Link to="/register">sign up</Link> to save your progress, 
+          <Link to="/gameOver/login">Sign in</Link> or <Link to="/gameOver/register">sign up</Link> to save your progress, 
           view statistics and compete with friends!</p>  
         </div> 
 

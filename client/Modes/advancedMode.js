@@ -42,7 +42,7 @@ var AdvancedMode = React.createClass({
       correct: [
         false, false, false
       ],
-      mode: this.props.mode,
+      mode: 'advanced',
       tempUser: true,
       gameId: null
     }
@@ -50,11 +50,20 @@ var AdvancedMode = React.createClass({
   componentDidMount: function() {
     timer = setInterval(this.timer, 1000);
 
-    fetch('/startGame/' + this.state.mode + '/' + this.state.N, {method: 'post'}).then(function(response) {
+    fetch('/startGame/' + this.state.mode + '/' + this.state.N, {
+      method:'POST',
+      credentials: 'include',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      }
+    }).then(function(response) {
       return response.json();
     }).then(function(response) {
       this.setState({tempUser: response.tempUser, gameId: response.gameId})
     }.bind(this))
+    
+
     {
       window.onkeyup = function(e) {
         if (e.keyCode == 37) {

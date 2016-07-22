@@ -109,8 +109,8 @@ router.post('/gameOver',function(req,res,next){
       }
 
       else{
-        if(nLevel>user.maxN){
-          user.maxN = nLevel;
+        if(nLevel>user.maxN[newHighScore.mode]){
+          user.maxN[newHighScore.mode] = nLevel;
         }
 
         //check how scores compare on personal level;
