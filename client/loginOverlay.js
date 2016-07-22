@@ -45,7 +45,7 @@ var LoginOverlay = React.createClass({
     return (
       <div className="screen">
         <div className="login" id="login">
-          <h1>Welcome</h1>
+          <h1>Hey you!</h1>
           <div className="pa">Login here.</div>
           <form>
             <input type="text" placeholder="Name or Email" name="username" id="username" value={this.state.username} onChange={this.update} autoFocus={focus}></input>
@@ -62,9 +62,9 @@ var LoginOverlay = React.createClass({
           <div className="pa">
             <Link to="/register">Register here.</Link>
           </div>
-          <h3>See your stats, track your progress,
+          <h3>See your stats,
             <br></br>track your progress,
-            <br></br>and compare with your friends.</h3>
+            <br></br>and improve your IQ.</h3>
           <form>
             <div className="buttongroup">
               <button className="form-btn dx">

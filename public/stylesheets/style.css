@@ -589,6 +589,22 @@ button.form-btn.dx {
   color: #fff;
   width: 20vw;
 }
+button.form-btn.dx2:hover {
+	background-color:rgba(203,14,27,0.65);
+  cursor:pointer;
+	color: #fff;
+}
+button.form-btn.dx2 {
+  right: 0;
+  background-color: #f13542;
+  color: #fff;
+  width: 20vw;
+}
+button.form-btn.dx a, button.form-btn.dx2 a {
+  text-decoration: none;
+  color: white;
+}
+
 .register-log button.form-btn.dx {
   background-color: #f13542;
 }
@@ -599,6 +615,20 @@ button.form-btn.dx {
 .register-log button.form-btn.dx a {
   text-decoration: none;
   color: white;
+}
+
+/*register page*/
+.register {
+  height: 100%;
+  width: 100%;
+  background-color: #7cd9d2;
+  color: white;
+  text-decoration: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  transition-duration: .8s;
 }
 
 input {
@@ -640,24 +670,18 @@ input {
 }
 .userSide {
   height: 100vh;
-  width: 50vw;
+  width: 50%;
+  min-width: 0;
   background-color: #7CD9D2;
   padding-top: 10vh;
   transition-duration: .8s;
 }
-.userSide:hover{
-  width: 60vw;
-  transition-duration: .8s;
-}
 .boardSide {
   height: 100vh;
-  width: 50vw;
+  width: 50%;
+  min-width: 0;
   background-color: #F1BA03;
   padding-top: 10vh;
-  transition-duration: .8s;
-}
-.boardSide:hover{
-  60vw;
   transition-duration: .8s;
 }
 .lbHeader {
@@ -808,4 +832,25 @@ td{
 
 section{
   margin: 50px;
+}
+
+
+/* Game over screen */
+
+.gameOver {
+  display: flex;
+  width: 100vw;
+  height: 100vh;
+  background-color: #7CD9D2;
+  align-items: center;
+  flex-direction: column;
+  color: white;
+  text-align: center;
+}
+
+.gameOverActions {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  width: 100vw;
 }

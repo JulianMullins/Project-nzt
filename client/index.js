@@ -53,28 +53,30 @@ var App = React.createClass({
   }
 });
 
-ReactDOM.render((
-  <Router history={hashHistory}>
-    <Route path="/" component={App}>
-      <Route path="home" component={Home}/>
-      <Route path="login" component={Login}/>
-      <Route path="logout" component={Logout} />
-      <Route path="register" component={Register}/>
-      <Route path="gameOver" component={GameOver}/>
-      <Route path="leaderboard" component={Leaderboard}/>
-      <Route path="contact" component={Contact}/>
-      <Route path="science" component={Science}/>
+// ReactDOM.render((
+//   <Router history={hashHistory}>
+//     <Route path="/" component={App}>
+//       <Route path="home" component={Home}/>
+//       <Route path="login" component={Login}/>
+//       <Route path="logout" component={Logout} />
+//       <Route path="register" component={Register}/>
+//       <Route path="gameOver" component={GameOver}/>
+//       <Route path="leaderboard" component={Leaderboard}/>
+//       <Route path="contact" component={Contact}/>
+//       <Route path="science" component={Science}/>
 
-      <Route path="levels/classic" component={ClassicLevels}/>
-      <Route path="levels/relaxed" component={RelaxedLevels}/>
-      <Route path="levels/silent" component={SilentLevels}/>
-      <Route path="levels/advanced" component={AdvancedLevels}/>
-      <Route path="game/classic/:n" component={ClassicGame}/>
-      <Route path="game/relaxed/:n" component={RelaxedGame}/>
-      <Route path="game/silent/:n" component={SilentGame}/>
-      <Route path="game/advanced/:n" component={AdvancedGame}/>
-    </Route>
-  </Router>
-), document.getElementById('root'), function() {
-  console.log("rendered")
-});
+//       <Route path="levels/classic" component={ClassicLevels}/>
+//       <Route path="levels/relaxed" component={RelaxedLevels}/>
+//       <Route path="levels/silent" component={SilentLevels}/>
+//       <Route path="levels/advanced" component={AdvancedLevels}/>
+//       <Route path="game/classic/:n" component={ClassicGame}/>
+//       <Route path="game/relaxed/:n" component={RelaxedGame}/>
+//       <Route path="game/silent/:n" component={SilentGame}/>
+//       <Route path="game/advanced/:n" component={AdvancedGame}/>
+//     </Route>
+//   </Router>
+// ), document.getElementById('root'), function() {
+//   console.log("rendered")
+// });
+
+ReactDOM.render(<GameOver/>, document.getElementById('root'));
