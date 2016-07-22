@@ -67,9 +67,11 @@ var LoginOverlay = React.createClass({
             <br></br>and improve your IQ.</h3>
           <form>
             <div className="buttongroup">
-              <button className="form-btn dx">
-                <Link to="/register">Register</Link>
-              </button>
+              <Link to="/register">
+                <button className="form-btn dx">
+                  Register
+                </button>
+              </Link>
             </div>
           </form>
         </div>

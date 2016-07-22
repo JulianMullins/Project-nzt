@@ -44,7 +44,7 @@ var RelaxedMode = React.createClass({
   componentDidMount: function() {
     timer = setInterval(this.timer, 1000);
 
-    fetch('/startGame/' + this.state.mode + '/' + this.state.N, {method: 'post'}).then(function(response) {
+    fetch('/startGame/relaxed/' + this.state.N, {method: 'post'}).then(function(response) {
       return response.json();
     }).then(function(response) {
       this.setState({tempUser: response.tempUser, gameId: response.gameId})
@@ -222,16 +222,22 @@ var RelaxedMode = React.createClass({
       : '';
 
     var scoreAlert;
+    var scoreUpdate;
     if (this.state.alert === "Good job") {
-      scoreAlert = <div className="scoreAlertPositive">
+      scoreAlert = (<div className="scoreAlertPositive">
         {this.state.alert}
-      </div>
+      </div>)
+      scoreUpdate = (<h2 style={{color: 'green'}}>+10</h2>)
     } else if (this.state.alert === "Not a match" || this.state.alert === "Missed a match") {
       scoreAlert = <div className="scoreAlertNegative">
         {this.state.alert}
       </div>
+      if (this.state.score > 0) {
+        scoreUpdate = (<h2 style={{color: 'red'}}>-5</h2>)
+      }
     } else {
       scoreAlert = <div></div>
+      scoreUpdate = (<h2></h2>)
     }
 
     return (
@@ -244,6 +250,7 @@ var RelaxedMode = React.createClass({
         <div className="gameHeading">
           <div className="gameScore relaxed">
             <h2>Score: {this.state.score}</h2>
+            {scoreUpdate}
           </div>
           <GameTimer timeStyle={{
             'color': "#01B6A7"
