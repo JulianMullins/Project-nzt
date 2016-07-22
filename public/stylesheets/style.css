@@ -640,24 +640,18 @@ input {
 }
 .userSide {
   height: 100vh;
-  width: 50vw;
+  width: 50%;
+  min-width: 0;
   background-color: #7CD9D2;
   padding-top: 10vh;
   transition-duration: .8s;
 }
-.userSide:hover{
-  width: 60vw;
-  transition-duration: .8s;
-}
 .boardSide {
   height: 100vh;
-  width: 50vw;
+  width: 50%;
+  min-width: 0;
   background-color: #F1BA03;
   padding-top: 10vh;
-  transition-duration: .8s;
-}
-.boardSide:hover{
-  60vw;
   transition-duration: .8s;
 }
 .lbHeader {
