@@ -313,12 +313,6 @@ var AdvancedMode = React.createClass({
     this.state.correct[1] = true;
     this.setState({soundPressed: pushStyle, correct: this.state.correct});
   },
-  handleKeyPress: function(event) {
-    console.log('clicky')
-    if (event.key == 'Enter') {
-      console.log('enter press here! ')
-    }
-  },
   render: function() {
     var overlay = this.state.overlay
       ? (
