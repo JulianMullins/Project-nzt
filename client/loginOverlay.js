@@ -44,7 +44,6 @@ var LoginOverlay = React.createClass({
   render: function() {
     return (
       <div className="screen">
-        <div className="circle"></div>
         <div className="login" id="login">
           <h1>Welcome</h1>
           <div className="pa">Login here.</div>
