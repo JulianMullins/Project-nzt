@@ -131,6 +131,7 @@ module.exports = function(passport) {
     //       }
     //       else{
             console.log("login success")
+            console.log(req.user)
             res.json({success:true})
         //   }
         // })
@@ -179,6 +180,7 @@ module.exports = function(passport) {
   // GET Logout page
   router.get('/logout', function(req, res) {
     req.logout();
+    console.log("logged out")
     res.json({success:true});
   });
 
