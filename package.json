@@ -12,6 +12,7 @@
     "bcryptjs": "^2.3.0",
     "body-parser": "~1.13.2",
     "browserify": "^13.0.1",
+    "chart.js": "^2.2.0-rc.2",
     "connect-mongo": "^1.2.1",
     "cookie-parser": "^1.4.3",
     "express": "~4.13.1",

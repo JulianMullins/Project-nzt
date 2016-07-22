@@ -10,6 +10,8 @@ var reactionTimes = [];
 //global variable for game score (saved once time runs out)
 var gameScore;
 var reactionEnd=null;
+var iterations;
+var timer;
 
 var SilentMode = React.createClass({
   getInitialState: function() {
@@ -37,11 +39,23 @@ var SilentMode = React.createClass({
       colorStyle: noStyle,
       posStyle: noStyle,
       keepScore: false,
-      tempuser: true
+      tempUser: true,
+      gameId:null
     }
   },
   componentDidMount: function() {
-    setInterval(this.timer, 1000);
+    timer = setInterval(this.timer, 1000);
+
+    fetch('/startGame/' + this.state.mode + '/' + this.state.N, {
+      method: 'post'
+    }).then(function(response) {
+      return response.json();
+    }).then(function(response) {
+      this.setState({
+        tempUser:response.tempUser,
+        gameId:response.gameId
+      })
+    }.bind(this))
 
     window.onkeyup = function(e) {
       console.log(e.keyCode);
@@ -56,13 +70,28 @@ var SilentMode = React.createClass({
     //  method: 'post'
     // });
   },
+  componentWillUnmount: function(){
+    clearInterval(iterations);
+    clearInterval(timer);
+  },
   timer: function() {
     this.setState({
       initialTimer: this.state.initialTimer - 1
     });
+<<<<<<< HEAD
+    if(this.state.initialTimer===2){
+       this.positionAndColor();
+    }
     if (this.state.initialTimer === 0) {
       this.setState({overlay: false});
+=======
+    if (this.state.initialTimer === 2) {
       this.positionAndColor();
+    }
+    if (this.state.initialTimer === 0) {
+      this.setState({overlay: false});
+      clearInterval(timer);
+>>>>>>> origin/master
     }
   },
   positionAndColor: function() {
@@ -72,7 +101,7 @@ var SilentMode = React.createClass({
     var timeTilColorMatch = parseInt((Math.random() * 5) + 2 + this.state.N);
     var timeKeeper = 0;
 
-    var iterations = setInterval(function() {
+    iterations = setInterval(function() {
       timeKeeper++;
 
       console.log('pos:', timeTilPositionMatch, 'color:', timeTilColorMatch);
@@ -103,7 +132,7 @@ var SilentMode = React.createClass({
           });
         }
       }
-      this.setState({keepScore: false, positionMatch: false, colorMatch: false, posPressed: false, colorPressed: false, 
+      this.setState({keepScore: false, positionMatch: false, colorMatch: false, posPressed: false, colorPressed: false,
         posStyle: noStyle, colorStyle: noStyle});
       setTimeout(function() {
         this.setState({alert: ' '});
@@ -188,14 +217,7 @@ var SilentMode = React.createClass({
         reactionEnd = Date.now();
       }
     }
-<<<<<<< HEAD:client/silentMode.js
     this.setState({positionMatch: !this.state.positionMatch, posPressed: true, posStyle: pushStyle});
-=======
-    this.setState({
-      positionMatch: !this.state.positionMatch,
-      posPressed: true
-    });
->>>>>>> origin/master:client/Modes/silentMode.js
   },
   colorMatch: function() {
     console.log('color press')
@@ -208,14 +230,7 @@ var SilentMode = React.createClass({
         reactionEnd = Date.now();
       }
     }
-<<<<<<< HEAD:client/silentMode.js
     this.setState({colorMatch: !this.state.colorMatch, colorPressed: true, colorStyle: pushStyle});
-=======
-    this.setState({
-      colorMatch: !this.state.colorMatch,
-      colorPressed: true
-    });
->>>>>>> origin/master:client/Modes/silentMode.js
   },
   render: function() {
     var overlay = this.state.overlay
@@ -255,9 +270,9 @@ var SilentMode = React.createClass({
     return (
       <div className="gameContainer silentContainer">
         {overlay}
-        <h1 className="silentScore">Silent</h1>
+        <h1 className="silent">Silent</h1>
         <div className="gameHeading">
-          <div className="gameScore silentScore">
+          <div className="gameScore silent">
             <h2>Score: {this.state.score}</h2>
           </div>
           <GameTimer timeStyle={{
@@ -278,7 +293,7 @@ var SilentMode = React.createClass({
         <div className="scoreAlert">
           {scoreAlert}
         </div>
-        <div className="gameButtonsContainer silentMode">
+        <div className="gameButtonsContainer silentBackground">
           <a onClick={this.positionMatch} style={this.state.posStyle}>POSITION</a>
           <a onClick={this.colorMatch} style={this.state.colorStyle}>COLOR</a>
         </div>
@@ -297,23 +312,26 @@ var standardStyle = {
 
 var newStyle = [
   {
-    backgroundColor: '#DBFF33'
+    backgroundColor: '#00cc33' //green
   }, {
-    backgroundColor: '#B15CCB'
+    backgroundColor: '#000000' //black
   }, {
-    backgroundColor: '#5CCBAF'
+    backgroundColor: '#33ccff', //light blue
+    border: "5px solid #333366" //dark blue border
   }, {
-    backgroundColor: '#5CCD93'
+    backgroundColor: '#ffffff', //white
+    border: "5px solid black" //black border
   }, {
-    backgroundColor: '#87CD5C'
+    backgroundColor: '#ffff00' //yellow
   }, {
-    backgroundColor: '#D3A43F'
+    backgroundColor: '#ff6699' //light pink
   }, {
-    backgroundColor: '#D3563F'
+    backgroundColor: '#9933cc' //purple
   }, {
-    backgroundColor: '#3F49D3'
+    backgroundColor: "#cc9966", //light brown
+    border: "5px solid #663300" //dark brown border
   }, {
-    backgroundColor: '#C91A83'
+    backgroundColor: '#cc3333' //red
   }
 ]
 

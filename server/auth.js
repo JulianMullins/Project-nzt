@@ -179,7 +179,7 @@ module.exports = function(passport) {
   // GET Logout page
   router.get('/logout', function(req, res) {
     req.logout();
-    //res.json({'isLoggedIn':false});
+    res.json({success:true});
   });
 
   return router;

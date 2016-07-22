@@ -8,7 +8,7 @@ var Game = require('../models/Game');
 var tempGame = null;
 
 router.get('/isLoggedIn',function(req,res,next){
-  res.json({'loggedIn': !!req.user})
+  res.json({'loggedIn': req.user.temp})
 })
 
 router.post('/startGame/:mode/:nLevel',function(req,res,next){
@@ -30,13 +30,12 @@ router.post('/startGame/:mode/:nLevel',function(req,res,next){
 })
 
 router.get('/getMaxN',function(req,res,next){
-  return req.user.maxN;
+  res.json({maxN:req.user.maxN})
 })
 
 router.get('/getUser',function(req,res,next){
-  return{
-    username:req.user.username,
-  }
+  res.json({username:req.user.username})
+
 })
 
 
