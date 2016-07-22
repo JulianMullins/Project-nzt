@@ -132,6 +132,7 @@ h3 {
 .gameContainer {
   min-height: 90vh;
   width: 640px;
+  min-width: 640px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -142,7 +143,8 @@ h3 {
 
 .gameBoard {
   display: flex;
-  width: 90%;
+  width: 640px;
+  min-width: 640px;
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
@@ -150,9 +152,9 @@ h3 {
 .gameSquare {
   display: inline-block;
   background-color: #BFBFBF;
-  width: 175px;
-  height: 175px;
-  margin: 4px;
+  width: 20vh;
+  height: 20vh;
+  margin: .5vh;
   border: 2px solid rgba(109, 110, 113, 0.5);
 }
 .gameButtonsContainer {
@@ -160,6 +162,7 @@ h3 {
   justify-content: center;
   width: 95%;
   padding: 10px;
+  margin-bottom: 1vh;
 }
 .gameButtonsContainer a {
   margin: 0 25px;
