@@ -217,8 +217,9 @@ h3 {
   font-size: 64px;
 }
 .gameScore {
+  display: flex;
   flex-direction: row;
-  justify-content: flex-start;
+  justify-content: space-between;
   font-size: 64px;
   width: 50%;
 }
@@ -243,11 +244,11 @@ h3 {
   -webkit-animation-name: negativeFadeIn;
   -webkit-animation-duration: .4s;
   -webkit-animation-name: negativeFadeOut;
-  -webkit-animation-duration: 1s;
+  -webkit-animation-duration: .8s;
   animation-name: negativeFadeIn;
   animation-duration: .4s;
   animation-name: negativeFadeOut;
-  animation-duration: 1s;
+  animation-duration: .8s;
 }
 .scoreAlertPositive {
   background-color: transparent;
@@ -550,6 +551,10 @@ input, button {
   justify-content: center;
 }
 .fb {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 	border: none;
 	background: #3b5998;
 	width: 20vw;
