@@ -663,14 +663,26 @@ input {
   background-color: #7CD9D2;
   padding: 10vh 30vw 0 30vw;
   transition-duration: .8s;
+  text-align: center;
+  transition-duration: .8s;
 }
 .contactPage{
   background-color: #7CD9D2;
 }
+.contactPage:hover, .contactPage2:hover{
+  height: 55vh;
+  transition-duration: .8s;
+}
 .contactPage2{
   background-color: #008a7e;
 }
-
+.contactPage, .contactPage2 a{
+  text-decoration: none;
+  color: #F1BA03;
+}
+.contactPage, .contactPage2 a:hover{
+  color: silver;
+}
 .contactlines {
   color: white;
   font-size: 24px;
