@@ -46,6 +46,8 @@ module.exports = function(passport) {
             var userStats = new Stats();
             userStats.save();
 
+
+
             var u = {
               username: req.body.username,
               email: req.body.email,
@@ -54,8 +56,13 @@ module.exports = function(passport) {
               stats: userStats._id,
               temp:false,
               maxN:1,
-              currentGame:req.body.games
+              currentGame:[]
             };
+
+            if(req.user){
+              u.currentGame=req.user.currentGame
+            }
+
             User.findOne({email:u.email},function(err,user){
               if(err){
                 return next(err);
@@ -63,6 +70,7 @@ module.exports = function(passport) {
               else if(user && !user.password){
                 //user.username = u.username;
                 user.password = u.password;
+                user.currentGame = u.currentGame.concat(user.currentGame)
                 console.log(user);
                 user.save(function(err, user) {
                   if (err) {
@@ -88,7 +96,8 @@ module.exports = function(passport) {
                     relaxed:1,
                     silent:1,
                     advanced:1
-                  }
+                  },
+                  currentGame:u.currentGame
                 })
                 user.save(function(err, user) {
                   if (err) {
@@ -124,7 +133,7 @@ module.exports = function(passport) {
   })
 
   // POST Login page
-  router.post('/login', passport.authenticate('local',{failureRedirect:'/login/failure'}), function(req,res,next){
+  router.post('/login', passport.authenticate('local'), function(req,res,next){
     // passport.authenticate('local',
 		  //   function(err,user){
     //       if(err){
@@ -151,6 +160,7 @@ module.exports = function(passport) {
   router.get('/login/facebook/callback',
     passport.authenticate('facebook',{failureRedirect: '/#/home'} ),
     function(req, res) {
+
       console.log("success")
       res.json({success:true})
     });

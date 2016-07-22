@@ -66,48 +66,35 @@ passport.deserializeUser(function(id, done) {
 // passport strategy
 passport.use(new LocalStrategy(function(username, password, done) {
     // Find the user with the given username
-    var user = password.user;
-    var games = password.games;
-    password = password.password;
-    User.findById(user,function(err,user){
-        if(user){
-          User.findById(user,function(err,user){
-            if(err){
-              return done(err)
-            }
-            else{
-              return done(null,user)
-            }
-          })
+    
+    console.log("DFAFAD")
+    User.findOne({$or: [{username: username},{email:username}] }, function (err, user) {
+      // if there's an error, finish trying to authenticate (auth failed)
+      if (err) {
+        console.error(err);
+        return done(err);
+      }
+      console.log(user)
+      // if no user present, auth failed
+      if (!user) {
+        //console.log(user);
+        return done(null, false, { message: 'Incorrect username.' });
+      }
+      bcrypt.compare(password,user.password,function(err,res){
+        if(err){
+          return done(err)
+        }
+        else if(!res){
+          return done(null,false);
         }
         else{
-          User.findOne({$or: [{username: username},{email:username}] }, function (err, user) {
-            // if there's an error, finish trying to authenticate (auth failed)
-            if (err) {
-              console.error(err);
-              return done(err);
-            }
-            console.log(user)
-            // if no user present, auth failed
-            if (!user) {
-              //console.log(user);
-              return done(null, false, { message: 'Incorrect username.' });
-            }
-            bcrypt.compare(password,user.password,function(err,res){
-              if(err){
-                return done(err)
-              }
-              else if(!res){
-                return done(null,false);
-              }
-              else{
-                user.currentGame = games.concat(user.currentGame);
-                return done(null,user)
-              }
-            })
-          });
+          //user.currentGame = games.concat(user.currentGame);
+          return done(null,user)
         }
-      })  
+      })
+    });
+        
+        
   }
 ));
 

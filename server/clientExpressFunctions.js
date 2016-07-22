@@ -126,9 +126,11 @@ router.get('/getMaxN',function(req,res,next){
 
 router.get('/getUser',function(req,res,next){
   var games = null;
-  if(req.user.currentGame){
+  console.log("gonna check for games")
+  if(req.user && req.user.currentGame){
     games = req.user.currentGame
   }
+  console.log("gonna res.json now")
   res.json({
     username:req.user.username,
     games:games
@@ -155,10 +157,8 @@ router.post('/gameEnd',function(req,res,next){
       console.log("no game")
     }
     else{
-      game.setState({
-        score:req.body.score,
-        reactionTimes:req.body.reactionTimes
-      })
+      game.score = req.body.score;
+      game.reactionTimes=req.body.reactionTimes;
       res.json({success:true})
     }
   })
