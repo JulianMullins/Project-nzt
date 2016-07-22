@@ -99,8 +99,10 @@ var RegisterOverlay = React.createClass({
   },
   render: function() {
     return (
-      <div className="overlay" id="login">
-        <center>
+      <div className="screen">
+        <div className="register" id="login">
+          <h1>Welcome</h1>
+          <div className="pa">Create an account to get started.</div>
           <form>
             <input type="text" placeholder="username" name="username" id="username" value={this.state.username} onChange={this.update}></input>
             <br></br>
@@ -109,12 +111,12 @@ var RegisterOverlay = React.createClass({
             <input type="password" placeholder="password" name="password" id="password" value={this.state.password} onChange={this.update}></input>
             <br></br>
             <input type="password" placeholder="confirm password" name="passwordConfirm" id="passwordConfirm" value={this.state.passwordConfirm} onChange={this.update}></input>
-            <br></br>
-            <button onClick={this.click}><Link to="/">Register</Link></button>
-            <br></br>
-            <button><Link to="/login">Already have an account? Login here.</Link></button>
-            </form>
-        </center>
+            <div className="buttongroup">
+              <button className="form-btn dx" onClick={this.click}><Link to="/">Register</Link></button>
+              <button className="form-btn dx2"><Link to="/login">Back to Login</Link></button>
+            </div>
+          </form>
+        </div>
       </div>
     )
   }

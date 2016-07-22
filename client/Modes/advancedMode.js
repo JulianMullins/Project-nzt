@@ -351,7 +351,7 @@ var AdvancedMode = React.createClass({
     }
 
     return (
-      <div className="gameContainer advancedContainer">
+      <div className="gameContainer">
         {overlay}
         <span className="gameTitle">
           <h1 className="advanced modeTitle">Advanced</h1>

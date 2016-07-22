@@ -285,7 +285,7 @@ var SilentMode = React.createClass({
     }
 
     return (
-      <div className="gameContainer silentContainer">
+      <div className="gameContainer">
         {overlay}
         <span className="gameTitle">
           <h1 className="silent modeTitle">Silent</h1>

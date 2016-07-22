@@ -70,23 +70,38 @@ var GameOverOverlay = React.createClass({
   },
   render: function() {
     var loggedIn = this.state.alreadyLoggedIn
-      ? <Link to="/leaderboard"><button onClick={this.gameOver}>To Leaderboard</button></Link>
-      : <div><input type="text" placeholder="username" name="username" id="username" value={this.state.username}></input>
-            <br></br>
-        <button><Link to="/gameOver/login">Sign In</Link></button>
-        <button><Link to="/leaderboard" onClick={this.gameOver}>Submit</Link></button></div>;
-        
+
+      ? <div></div>
+      : <div className="gameOverPrompt">
+          <p>It looks like you are not currently logged in. 
+          Sign in or sign up to save your progress, 
+          view statistics and compete with friends!</p>  
+        </div> 
+
     return (
-      <div className="overlay" id="gameover">
-        <center>
-          <form>
-            <h1>Game Over</h1>
-            <h2>{score}</h2>
-           
-            <br></br>
-            {loggedIn}
-          </form>
-        </center>
+      <div className="gameOver" id="gameover">
+          <h1>Congrats!</h1>
+          <h2>Your score is {this.state.score}</h2>
+          <h1 className="gameOverInform">You have unlocked level 2</h1>
+
+          {loggedIn}
+
+          <div className="gameOverActions">
+            <Link to="/home">
+              <span className="fa fa-home fa-5x"></span>
+            </Link>
+            <h2 className="levelButton">next level</h2>
+            <div>
+              <Link to="/leaderboard">
+                <span className="lbCharts">
+                  <div className="lbChart1"></div>
+                  <div className="lbChart2"></div>
+                  <div className="lbChart3"></div>
+                </span>
+                <h2>view leaderboard</h2>
+              </Link>
+            </div>
+          </div>
       </div>
     )
   }

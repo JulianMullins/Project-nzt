@@ -243,7 +243,7 @@ var RelaxedMode = React.createClass({
     }
 
     return (
-      <div className="gameContainer relaxContainer">
+      <div className="gameContainer">
         {overlay}
         <span className="gameTitle">
           <h1 className="relaxed modeTitle">Relaxed</h1>
