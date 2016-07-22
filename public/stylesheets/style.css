@@ -8,7 +8,7 @@ body {
   margin: 0;
   padding: 0;
   background: #faf8ef;
-  color:#7CD9D2;
+  color:#01B6A7;
 }
 #root {
   display: flex;
@@ -425,7 +425,6 @@ h3 {
 
 .levelSquare, .levelSquareLast {
   display: inline-block;
-  background-color: #BFBFBF;
   float: left;
 }
 
@@ -445,14 +444,6 @@ h3 {
   width: 30%;
   height: 30%;
   margin: calc(10% / 6);
-}
-
-.levelSquare{
-  background-color: #BFBFBF;
-}
-
-.levelSquareLast{
-  background-color: #D6D6D6;
 }
 
 /*loginpage*/
