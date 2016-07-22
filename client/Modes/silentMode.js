@@ -58,7 +58,6 @@ var SilentMode = React.createClass({
     }.bind(this))
 
     window.onkeyup = function(e) {
-      console.log(e.keyCode);
       if (e.keyCode == 37) {
         this.positionMatch();
       } else if (e.keyCode == 39) {
@@ -78,14 +77,12 @@ var SilentMode = React.createClass({
     this.setState({
       initialTimer: this.state.initialTimer - 1
     });
-
     if (this.state.initialTimer === 2) {
       this.positionAndColor();
     }
     if (this.state.initialTimer === 0) {
       this.setState({overlay: false});
       clearInterval(timer);
-
     }
   },
   positionAndColor: function() {
@@ -98,7 +95,6 @@ var SilentMode = React.createClass({
     iterations = setInterval(function() {
       timeKeeper++;
 
-      console.log('pos:', timeTilPositionMatch, 'color:', timeTilColorMatch);
       if (this.state.keepScore && !(this.state.colorMatch || this.state.positionMatch)) {
         reactionTimes.push(reactionEnd-reactionStart);
         reactionEnd=null;
@@ -227,7 +223,6 @@ var SilentMode = React.createClass({
     }.bind(this), 2000);
   },
   positionMatch: function() {
-    console.log('pos match')
     if (this.state.posPressed) {
       return;
     }
@@ -240,7 +235,6 @@ var SilentMode = React.createClass({
     this.setState({positionMatch: !this.state.positionMatch, posPressed: true, posStyle: pushStyle});
   },
   colorMatch: function() {
-    console.log('color press')
     if (this.state.colorPressed) {
       return;
     }
@@ -290,7 +284,10 @@ var SilentMode = React.createClass({
     return (
       <div className="gameContainer silentContainer">
         {overlay}
-        <h1 className="silent">Silent</h1>
+        <span className="gameTitle">
+          <h1 className="silent modeTitle">Silent</h1>
+          <h1 className="silent nTitle">(N={this.state.N})</h1>
+        </span>
         <div className="gameHeading">
           <div className="gameScore silent">
             <h2>Score: {this.state.score}</h2>

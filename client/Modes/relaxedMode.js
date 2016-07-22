@@ -51,7 +51,6 @@ var RelaxedMode = React.createClass({
     }.bind(this))
 
     window.onkeyup = function(e) {
-      console.log(e.keyCode);
       if (e.keyCode == 38) {
         this.posMatch();
       }
@@ -81,7 +80,6 @@ var RelaxedMode = React.createClass({
     iterations = setInterval(function() {
       timeKeeper++;
 
-      console.log('pos:', timeTilPosMatch);
       if (this.state.keepScore && !this.state.posMatch) {
         this.setState({
           alert: "Good job",
@@ -239,7 +237,10 @@ var RelaxedMode = React.createClass({
     return (
       <div className="gameContainer relaxContainer">
         {overlay}
-        <h1 className="relaxed">Relaxed</h1>
+        <span className="gameTitle">
+          <h1 className="relaxed modeTitle">Relaxed</h1>
+          <h1 className="relaxed nTitle">(N={this.state.N})</h1>
+        </span>
         <div className="gameHeading">
           <div className="gameScore relaxed">
             <h2>Score: {this.state.score}</h2>
@@ -262,7 +263,7 @@ var RelaxedMode = React.createClass({
         <div className="scoreAlert">
           {scoreAlert}
         </div>
-        <div className="gameButtonsContainer relaxedMode">
+        <div className="gameButtonsContainer relaxedBackground">
           <a onClick={this.posMatch} style={this.state.posStyle}>POSITION</a>
         </div>
       </div>
