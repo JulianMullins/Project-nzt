@@ -130,8 +130,9 @@ h3 {
 /* game page css */
 
 .gameContainer {
-  min-height: 90vh;
+  height: 90vh;
   width: 640px;
+  min-width: 640px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -142,7 +143,8 @@ h3 {
 
 .gameBoard {
   display: flex;
-  width: 90%;
+  width: 640px;
+  min-width: 640px;
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
@@ -150,9 +152,9 @@ h3 {
 .gameSquare {
   display: inline-block;
   background-color: #BFBFBF;
-  width: 175px;
-  height: 175px;
-  margin: 4px;
+  width: 20vh;
+  height: 20vh;
+  margin: .5vh;
   border: 2px solid rgba(109, 110, 113, 0.5);
 }
 .gameButtonsContainer {
@@ -160,6 +162,7 @@ h3 {
   justify-content: center;
   width: 95%;
   padding: 10px;
+  margin-bottom: 1vh;
 }
 .gameButtonsContainer a {
   margin: 0 25px;
@@ -392,6 +395,7 @@ h3 {
 }
 .grid a {
   display: inline-block;
+  position: inline-block; /* Or absolute, inline-block, inline */
 }
 .levelSquare {
   display: inline-block;
@@ -440,7 +444,7 @@ h3 {
   transition: all 0.3s ease-out;
 }
 .levelSquare:hover {
-  transform: rotate3d(0, 1, 0, 30deg);
+  transform: rotate3d(0, 1, 0, 29.999deg);
 }
 .levelSquare:active {
   transform: rotate3d(0, 1, 0, 180deg);
@@ -463,7 +467,7 @@ h3 {
   z-index: 0;
 }
 .side.face {
-  transform: translate3d(-100%, 0, 0) rotate3d(0, 1, 0, -90deg);
+  transform: translate3d(-100%, 0, 0) rotate3d(0, 1, 0, -89.999deg);
   transform-origin: 100% 50%;
   z-index: 0;
   width: 50px;
@@ -589,6 +593,22 @@ button.form-btn.dx {
   color: #fff;
   width: 20vw;
 }
+button.form-btn.dx2:hover {
+	background-color:rgba(203,14,27,0.65);
+  cursor:pointer;
+	color: #fff;
+}
+button.form-btn.dx2 {
+  right: 0;
+  background-color: #f13542;
+  color: #fff;
+  width: 20vw;
+}
+button.form-btn.dx a, button.form-btn.dx2 a {
+  text-decoration: none;
+  color: white;
+}
+
 .register-log button.form-btn.dx {
   background-color: #f13542;
 }
@@ -599,6 +619,20 @@ button.form-btn.dx {
 .register-log button.form-btn.dx a {
   text-decoration: none;
   color: white;
+}
+
+/*register page*/
+.register {
+  height: 100%;
+  width: 100%;
+  background-color: #7cd9d2;
+  color: white;
+  text-decoration: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  transition-duration: .8s;
 }
 
 input {
@@ -640,24 +674,18 @@ input {
 }
 .userSide {
   height: 100vh;
-  width: 50vw;
+  width: 50%;
+  min-width: 0;
   background-color: #7CD9D2;
   padding-top: 10vh;
   transition-duration: .8s;
 }
-.userSide:hover{
-  width: 60vw;
-  transition-duration: .8s;
-}
 .boardSide {
   height: 100vh;
-  width: 50vw;
+  width: 50%;
+  min-width: 0;
   background-color: #F1BA03;
   padding-top: 10vh;
-  transition-duration: .8s;
-}
-.boardSide:hover{
-  60vw;
   transition-duration: .8s;
 }
 .lbHeader {
@@ -719,29 +747,55 @@ input {
 }
 
 .contactPage, .contactPage2 {
-  height: 50vh;
   width: 100vw;
   background-color: #7CD9D2;
-  padding: 10vh 30vw 0 30vw;
   transition-duration: .8s;
   text-align: center;
   transition-duration: .8s;
 }
 .contactPage{
   background-color: #7CD9D2;
+  padding: 10vh 30vw 0 30vw;
+  height: 85vh;
 }
 .contactPage:hover, .contactPage2:hover{
-  height: 55vh;
+  height: 85vh;
+  transition-duration: .8s;
+}
+.contactPage2:hover{
+  height: 18vh;
   transition-duration: .8s;
 }
 .contactPage2{
+  height: 15vh;
+  padding: 3vh 30vw 0 30vw;
   background-color: #008a7e;
 }
-.contactPage, .contactPage2 a{
+.contactPage3, .contactPage4 {
+  height: 50vh;
+  width: 100vw;
+  background-color: #7CD9D2;
+  transition-duration: .8s;
+  text-align: center;
+  transition-duration: .8s;
+}
+.contactPage3{
+  background-color: #7CD9D2;
+  padding: 10vh 30vw 0 30vw;
+}
+.contactPage4{
+  padding: 3vh 30vw 0 30vw;
+  background-color: #008a7e;
+}
+.contactPage3:hover, .contactPage4:hover{
+  height: 55vh;
+  transition-duration: .8s;
+}
+.contactPage a, .contactPage2 a, .contactPage3 a, .contactPage4 a{
   text-decoration: none;
   color: #F1BA03;
 }
-.contactPage, .contactPage2 a:hover{
+.contactPage a:hover , .contactPage2 a:hover, .contactPage4 a:hover{
   color: silver;
 }
 .contactlines {
@@ -769,7 +823,7 @@ input {
 }
 pl {
   font-weight: 100;
-  font-size: 1em;
+  font-size: calc(12px + .5vw);
   font-family: "proxima-nova", sans-serif;
   color: white;
 }
@@ -808,4 +862,25 @@ td{
 
 section{
   margin: 50px;
+}
+
+
+/* Game over screen */
+
+.gameOver {
+  display: flex;
+  width: 100vw;
+  height: 100vh;
+  background-color: #7CD9D2;
+  align-items: center;
+  flex-direction: column;
+  color: white;
+  text-align: center;
+}
+
+.gameOverActions {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  width: 100vw;
 }

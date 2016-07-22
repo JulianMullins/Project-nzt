@@ -24,22 +24,24 @@ var RegisterOverlay = React.createClass({
   },
   render: function() {
     return (
-      <div className="overlay" id="login">
-        <center>
+      <div className="screen">
+        <div className="register" id="login">
+          <h1>Welcome</h1>
+          <div className="pa">Create an account to get started.</div>
           <form>
-            <input type="text" placeholder="username" name="username" id="username"></input>
+            <input type="text" placeholder="username" name="username" id="username" autoFocus={focus}></input>
             <br></br>
             <input type="text" placeholder="email" name="email" id="email"></input>
-            <br/>
+            <br></br>
             <input type="password" placeholder="password" name="password" id="password"></input>
             <br></br>
             <input type="password" placeholder="confirm password" name="passwordConfirm" id="passwordConfirm"></input>
-            <br></br>
-            <button onClick={this.register}><Link to="/">Register</Link></button>
-            <br></br>
-            <button><Link to="/login">Already have an account? Login here.</Link></button>
-            </form>
-        </center>
+              <div className="buttongroup">
+                <button className="form-btn dx" onClick={this.register}><Link to="/">Register</Link></button>
+                <button className="form-btn dx2"><Link to="/login">Back to Login</Link></button>
+              </div>
+          </form>
+        </div>
       </div>
     )
   }
