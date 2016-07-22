@@ -16,8 +16,12 @@ var Mainmenu = React.createClass({
 
   //initial functions
   getInitialState: function() {
-    return {}
+    return {
+      username:null,
+      hasUsername:false
+    }
   },
+
   classic() {
     this.props.history.push('/levels/classic')
   },
@@ -31,10 +35,15 @@ var Mainmenu = React.createClass({
     this.props.history.push('/levels/advanced')
   },
   render: function() {
+    // var username = this.state.hasUsername
+    //   ? '<div>{this.state.username}</div>'
+    //   : '';
+
     return (
       <div>
         <div className="heading">
           <img src="../images/CortexLogo4.svg"/>
+
         </div>
         <div className="menu">
           <a className="menu-panel classicBackground" onClick={this.classic}>

@@ -4,7 +4,7 @@ import { Link } from 'react-router';
 
 var Logout = React.createClass({
 	componentDidMount(){
-
+		console.log("gonna logout")
 		fetch('/logout',{method:'get'
 		}).then(function(response) {
 	      return response.json();
@@ -14,7 +14,7 @@ var Logout = React.createClass({
 	      }
 	    }.bind(this))
 	},
-	render(){}
+	render(){return null;}
 })
 
 module.exports = Logout;
