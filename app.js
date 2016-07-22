@@ -66,6 +66,8 @@ passport.deserializeUser(function(id, done) {
 // passport strategy
 passport.use(new LocalStrategy(function(username, password, done) {
     // Find the user with the given username
+    
+    console.log("DFAFAD")
     User.findOne({$or: [{username: username},{email:username}] }, function (err, user) {
       // if there's an error, finish trying to authenticate (auth failed)
       if (err) {
@@ -86,10 +88,13 @@ passport.use(new LocalStrategy(function(username, password, done) {
           return done(null,false);
         }
         else{
+          //user.currentGame = games.concat(user.currentGame);
           return done(null,user)
         }
       })
     });
+        
+        
   }
 ));
 
@@ -121,7 +126,12 @@ passport.use(new FacebookStrategy({
           username:profile._json.first_name + ' '+profile._json.last_name,
           stats:userStats._id,
           temp:false,
-          maxN:1
+          maxN:{
+            classic:1,
+            relaxed:1,
+            silent:1,
+            advanced:1
+          }
         });
         user.save(function(err,tempUser){
           if(err){

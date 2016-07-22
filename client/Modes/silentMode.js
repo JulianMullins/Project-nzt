@@ -40,21 +40,24 @@ var SilentMode = React.createClass({
       posStyle: noStyle,
       keepScore: false,
       tempUser: true,
-      gameId:null
+      gameId:null,
+      mode:'silent'
     }
   },
   componentDidMount: function() {
     timer = setInterval(this.timer, 1000);
 
     fetch('/startGame/' + this.state.mode + '/' + this.state.N, {
-      method: 'post'
+      method:'POST',
+      credentials: 'include',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      }
     }).then(function(response) {
       return response.json();
     }).then(function(response) {
-      this.setState({
-        tempUser:response.tempUser,
-        gameId:response.gameId
-      })
+      this.setState({tempUser: response.tempUser, gameId: response.gameId})
     }.bind(this))
 
     window.onkeyup = function(e) {

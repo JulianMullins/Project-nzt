@@ -6,6 +6,7 @@ var url = process.env.url;
 
 var MenuOverlay = require('./menuOverlay');
 var Login = require('./loginOverlay');
+var FacebookLogin = require('./facebookLogin');
 var Logout = require('./logout');
 var Register = require('./registerOverlay');
 var Home = require('./Mainmenu');
@@ -14,6 +15,7 @@ var NavBar = require('./navBar');
 var Leaderboard = require('./leaderboard');
 var Contact = require('./contact');
 var Science = require('./science');
+
 
 //Stats
 //Science
@@ -47,7 +49,9 @@ var App = React.createClass({
     return (
       <div>
 
-        <NavBar/> {this.props.children}
+        <NavBar/> 
+        {this.props.children}
+
       </div>
     )
   }
@@ -57,8 +61,11 @@ ReactDOM.render((
   <Router history={hashHistory}>
     <Route path="/" component={App}>
       <Route path="home" component={Home}/>
+      <Route path="login/facebook" component={FacebookLogin}/>
+      <Route path="gameOver/login" component={Login}/>
+      <Route path="gameOver/register" component={Register}/>
       <Route path="login" component={Login}/>
-      <Route path="logout" component={Logout} />
+      <Route path="logout" component={Logout}/>
       <Route path="register" component={Register}/>
       <Route path="gameOver" component={GameOver}/>
       <Route path="leaderboard" component={Leaderboard}/>
