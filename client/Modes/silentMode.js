@@ -33,7 +33,7 @@ var SilentMode = React.createClass({
       alert: " ",
       overlay: true,
       initialTimer: 3,
-      N: 1,
+      N: this.props.params.n,
       posPressed: false,
       colorPressed: false,
       colorStyle: noStyle,
