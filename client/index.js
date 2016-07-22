@@ -9,10 +9,12 @@ var Login = require('./loginOverlay');
 var Logout = require('./logout');
 var Register = require('./registerOverlay');
 var Home = require('./Mainmenu');
-var GameOver = require('./gameOverOverlay');
+var GameOver = require('./gameOver');
 var NavBar = require('./navBar');
+var Leaderboard = require('./leaderboard');
+var Contact = require('./contact');
+var Science = require('./science');
 
-//Leaderboard
 //Stats
 //Science
 //Contact
@@ -59,6 +61,9 @@ ReactDOM.render((
       <Route path="logout" component={Logout} />
       <Route path="register" component={Register}/>
       <Route path="gameOver" component={GameOver}/>
+      <Route path="leaderboard" component={Leaderboard}/>
+      <Route path="contact" component={Contact}/>
+      <Route path="science" component={Science}/>
 
       <Route path="levels/classic" component={ClassicLevels}/>
       <Route path="levels/relaxed" component={RelaxedLevels}/>

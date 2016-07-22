@@ -3,14 +3,15 @@ var GameTimer = require('./gameTimer');
 
 //COLLECTION OF GLOBAL VARIABLES TO MAKE EVERYONES LIFE EASIER
 //create global variable for reaction counter
-var reactionStart
+var reactionStart;
 //global variable for keeping reaction times
 //note: all reactin times for correct hits stored as array for stats (max,min,avg)
 var reactionTimes = [];
 //global variable for game score (saved once time runs out)
 var gameScore;
-var reactionEnd=null;
-var iterations
+var reactionEnd = null;
+var iterations;
+var timer;
 
 var ClassicMode = React.createClass({
   getInitialState: function() {
@@ -43,7 +44,7 @@ var ClassicMode = React.createClass({
     }
   },
   componentDidMount: function() {
-    setInterval(this.timer, 1000);
+    timer = setInterval(this.timer, 1000);
 
     fetch('/startGame/' + this.state.mode + '/' + this.state.N, {method: 'post'}).then(function(response) {
       return response.json();
@@ -51,16 +52,17 @@ var ClassicMode = React.createClass({
       this.setState({tempUser: response.tempUser, gameId: response.gameId})
     }.bind(this))
     window.onkeyup = function(e) {
-    if (e.keyCode == 37) {
-      this.positionMatch();
-    }
-    if (e.keyCode == 39) {
-      this.soundMatch();
-    }
-      }.bind(this)
+      if (e.keyCode == 37) {
+        this.positionMatch();
+      }
+      if (e.keyCode == 39) {
+        this.soundMatch();
+      }
+    }.bind(this)
   },
-  componentWillUnmount: function(){
-    clearInterval(iterations)
+  componentWillUnmount: function() {
+    clearInterval(iterations);
+    clearInterval(timer);
   },
   timer: function() {
     this.setState({
@@ -71,6 +73,7 @@ var ClassicMode = React.createClass({
     }
     if (this.state.initialTimer === 0) {
       this.setState({overlay: false});
+      clearInterval(timer);
     }
   },
   positionAndSound: function() {
@@ -88,8 +91,6 @@ var ClassicMode = React.createClass({
         this.setState({
           score: this.state.score + 10,
           alert: 'Good job',
-          posStyle: noStyle,
-          colorStyle: noStyle
         });
       } else if (!this.state.keepScore && (this.state.posPressed || this.state.soundPressed)) {
         this.setState({alert: "Not a match"})
@@ -97,8 +98,6 @@ var ClassicMode = React.createClass({
         if (this.state.score !== 0) {
           this.setState({
             score: this.state.score - 5,
-            posStyle: noStyle,
-            soundStyle: noStyle
           });
         }
       } else if (this.state.soundMatch || this.state.positionMatch) {
@@ -107,8 +106,6 @@ var ClassicMode = React.createClass({
         if (this.state.score !== 0) {
           this.setState({
             score: this.state.score - 5,
-            posStyle: noStyle,
-            soundStyle: noStyle
           });
         }
       }
@@ -175,7 +172,7 @@ var ClassicMode = React.createClass({
       reactionStart = Date.now()
       var audio = new Audio('./audio/' + (nextSound + 1) + '.wav ');
       audio.play();
-      this.state.style[nextPosition] = newStyle[0];
+      this.state.style[nextPosition] = newStyle;
       this.setState({style: this.state.style});
       setTimeout(function() {
         this.state.style[nextPosition] = standardStyle;
@@ -250,24 +247,13 @@ var ClassicMode = React.createClass({
       scoreAlert = <div></div>
     }
 
-    var posButtonStyle = this.state.posPressed
-      ? {
-        backgroundColor: 'black'
-      }
-      : {};
-    var soundButtonStyle = this.state.soundPressed
-      ? {
-        backgroundColor: 'black'
-      }
-      : {};
-
     return (
       <div className="gameContainer classicContainer">
         {overlay}
-        <h1 className="classicScore">Classic</h1>
+        <h1 className="classic">Classic</h1>
         <div className="gameHeading">
           <div className="gameScore">
-            <h2 className="classicScore">Score: {this.state.score}</h2>
+            <h2 className="classic">Score: {this.state.score}</h2>
           </div>
           <GameTimer timeStyle={{
             'color': "#F13542"
@@ -287,9 +273,9 @@ var ClassicMode = React.createClass({
         <div className="scoreAlert">
           {scoreAlert}
         </div>
-        <div className="gameButtonsContainer classicMode">
-          <a style={this.state.posStyle}>POSITION</a>
-          <a style={this.state.soundStyle}>SOUND</a>
+        <div className="gameButtonsContainer classicBackground">
+          <a onClick={this.positionMatch} style={this.state.posStyle}>POSITION</a>
+          <a onClick={this.soundMatch} style={this.state.soundStyle}>SOUND</a>
         </div>
       </div>
     );
@@ -306,10 +292,8 @@ var standardStyle = {
   backgroundColor: "#BFBFBF"
 }
 
-var newStyle = [
-  {
-    backgroundColor: "#F13542" //green
-  }
-]
+var newStyle = {
+  backgroundColor: "#F13542"
+}
 
 module.exports = ClassicMode
