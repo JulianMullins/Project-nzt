@@ -76,16 +76,20 @@ var GameOverOverlay = React.createClass({
         <button><Link to="/leaderboard" onClick={this.gameOver}>Submit</Link></button></div>;
         
     return (
-      <div className="overlay" id="gameover">
-        <center>
+      <div className="gameOver" id="gameover">
+          <h1>Congrats!</h1>
+          <h2>Your score is {this.state.score}</h2>
+          <h1>You have unlocked level 2</h1>
+
           <form>
-            <h1>Game Over</h1>
-            <h2>{score}</h2>
-           
-            <br></br>
             {loggedIn}
           </form>
-        </center>
+
+          <div className="gameOverActions">
+            <h2>home</h2>
+            <h2>next level</h2>
+            <h2>view leaderboard</h2>
+          </div>
       </div>
     )
   }

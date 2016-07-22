@@ -833,3 +833,24 @@ td{
 section{
   margin: 50px;
 }
+
+
+/* Game over screen */
+
+.gameOver {
+  display: flex;
+  width: 100vw;
+  height: 100vh;
+  background-color: #7CD9D2;
+  align-items: center;
+  flex-direction: column;
+  color: white;
+  text-align: center;
+}
+
+.gameOverActions {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  width: 100vw;
+}
