@@ -551,6 +551,10 @@ input, button {
   justify-content: center;
 }
 .fb {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 	border: none;
 	background: #3b5998;
 	width: 20vw;
