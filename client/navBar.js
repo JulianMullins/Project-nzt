@@ -12,7 +12,8 @@ var NavBar = React.createClass({
 	},
 	componentDidMount: function(){
 		fetch('/isLoggedIn',{method:'get'
-		}).then(function(response) {
+		})
+		.then(function(response) {
 	      return response.json();
 	    }).then(function(response) {
 	      if (response.loggedIn) {
@@ -32,6 +33,16 @@ var NavBar = React.createClass({
 		this.setState({
 			open: false
 		});
+		console.log("navbar state changed--close")
+
+	},
+	closeLogInOut(e){
+		console.log(this.state);
+		this.setState({
+			open:false,
+			loggedIn:!this.state.loggedIn
+		})
+		console.log("navbar state changed")
 	},
 	render: function(){
 		var logInOutLink = this.state.loggedIn
@@ -49,12 +60,12 @@ var NavBar = React.createClass({
 				}>
 					<a className="bt-menu-trigger" onClick={this.click}><span>Menu</span></a>
 					<ul>
-						<li><Link to="/home" onClick={this.close}>Home</Link></li>
-						<li><Link to={logInOutLink} onClick={this.close}>{logInOrOut}</Link></li>
-						<li><Link to="/leaderboard" onClick={this.close}>Leaderboard</Link></li>
-						<li><Link to="/stats" onClick={this.close}>Stats</Link></li>
-						<li><Link to="/science" onClick={this.close}>The Science</Link></li>
-						<li><Link to="/contact" onClick={this.close}>Contact</Link></li>
+						<li><Link to="/home"><a onClick={this.close}>Home</a></Link></li>
+						<li><Link to={logInOutLink}><a onClick={this.closeLogInOut}>{logInOrOut}</a></Link></li>
+						<li><Link to="/leaderboard"><a onClick={this.close}>Leaderboard</a></Link></li>
+						<li><Link to="/stats"><a onClick={this.close}>Stats</a></Link></li>
+						<li><Link to="/science"><a onClick={this.close}>The Science</a></Link></li>
+						<li><Link to="/contact"><a onClick={this.close}>Contact</a></Link></li>
 					</ul>
 					<ul>
 						<li><Link to="/settings"><i className="fa fa-cog"  aria-hidden="true"></i></Link></li>
