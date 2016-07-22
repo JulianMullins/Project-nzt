@@ -411,23 +411,27 @@ h3 {
   width: 48%;
   height: 48%;
   margin: calc(4% / 4);
+  font-size: 13vh;
 }
 .grid9 {
   width: 30%;
   height: 30%;
   margin: calc(10% / 6);
+  font-size: 7vh;
 }
 
 .grid16{
   width: 22%;
   height: 22%;
   margin: calc(12% / 8);
+  font-size: 5vh;
 }
 
 .grid25{
   width: 16%;
   height: 16%;
   margin: calc(20% / 10);
+  font-size: 4vh;
 }
 
 .levelSquareLast{
@@ -456,7 +460,9 @@ h3 {
   left: 0;
   text-align: center;
   /*color: white;*/
-  font-size:7vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 .front.face {
   z-index: 0;
@@ -613,22 +619,22 @@ input {
 ::-webkit-input-placeholder {
   color: white;
   font-weight: 100;
-  text-align: left;
+  text-align: center;
 }
 :-moz-placeholder {
   color: white;
   font-weight: 100;
-  text-align: left;
+  text-align: center;
 }
 ::-moz-placeholder {
   color: white;
   font-weight: 100;
-  text-align: left;
+  text-align: center;
 }
 :-ms-input-placeholder {
   color: white;
   font-weight: 100;
-  text-align: left;
+  text-align: center;
 }
 .leaderboardPage {
   display: flex;
