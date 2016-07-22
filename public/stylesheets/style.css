@@ -437,7 +437,7 @@ h2 {
   top: 0;
   left: 0;
   text-align: center;
-  color: white;
+  /*color: white;*/
   font-size:8vh;
 }
 .front.face {
