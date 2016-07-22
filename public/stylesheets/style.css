@@ -746,22 +746,28 @@ input {
 }
 
 .contactPage, .contactPage2 {
-  height: 50vh;
   width: 100vw;
   background-color: #7CD9D2;
-  padding: 10vh 30vw 0 30vw;
   transition-duration: .8s;
   text-align: center;
   transition-duration: .8s;
 }
 .contactPage{
   background-color: #7CD9D2;
+  padding: 10vh 30vw 0 30vw;
+  height: 85vh;
 }
 .contactPage:hover, .contactPage2:hover{
-  height: 55vh;
+  height: 85vh;
+  transition-duration: .8s;
+}
+.contactPage2:hover{
+  height: 18vh;
   transition-duration: .8s;
 }
 .contactPage2{
+  height: 15vh;
+  padding: 3vh 30vw 0 30vw;
   background-color: #008a7e;
 }
 .contactPage, .contactPage2 a{
