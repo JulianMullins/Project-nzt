@@ -16,9 +16,7 @@ var getSquareArr = function(square, mode) {
   var arr = [];
   for (var i = 1; i < maxSquares + 1; i++) {
     var link = "/game/" + mode + "/" + i;
-    var sqClass = (i == square)
-      ? "levelSquare " + squareClass
-      : "levelSquareLast " + squareClass;
+    var sqClass = "levelSquare " + squareClass;
     if (i <= square) {
       var colorStyle = {
         backgroundColor: '#F13542',
@@ -86,7 +84,7 @@ var ClassicLevels = React.createClass({
 
     return (
       <div className="levelBox">
-        <h1 id="classic">Classic</h1>
+        <h1 id="classic" className="classic">Classic</h1>
         <div className="grid">
           {squareArr.map(function(square) {
             return square;
@@ -115,7 +113,7 @@ var RelaxedLevels = React.createClass({
     var squareArr = getSquareArr(square, this.state.mode)
     return (
       <div className="levelBox">
-        <h1 id="relaxed">Relaxed</h1>
+        <h1 id="relaxed" className="relaxed">Relaxed</h1>
         <div className="grid">
           {squareArr.map(function(square) {
             return square;
@@ -145,7 +143,7 @@ var SilentLevels = React.createClass({
 
     return (
       <div className="levelBox">
-        <h1 id="silent">Silent</h1>
+        <h1 id="silent" className="silent">Silent</h1>
         <div className="grid">
           {squareArr.map(function(square) {
             return square;
@@ -175,7 +173,7 @@ var AdvancedLevels = React.createClass({
 
     return (
       <div className="levelBox">
-        <h1 id="advanced">Advanced</h1>
+        <h1 id="advanced" className="advanced">Advanced</h1>
         <div className="grid">
           {squareArr.map(function(square) {
             return square;
