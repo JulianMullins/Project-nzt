@@ -10,7 +10,8 @@ var reactionTimes = [];
 //global variable for game score (saved once time runs out)
 var gameScore;
 var reactionEnd=null;
-var iterations
+var iterations;
+var timer;
 
 var SilentMode = React.createClass({
   getInitialState: function() {
@@ -43,7 +44,7 @@ var SilentMode = React.createClass({
     }
   },
   componentDidMount: function() {
-    setInterval(this.timer, 1000);
+    timer = setInterval(this.timer, 1000);
 
     fetch('/startGame/' + this.state.mode + '/' + this.state.N, {
       method: 'post'
@@ -70,15 +71,19 @@ var SilentMode = React.createClass({
     // });
   },
   componentWillUnmount: function(){
-    clearInterval(iterations)
+    clearInterval(iterations);
+    clearInterval(timer);
   },
   timer: function() {
     this.setState({
       initialTimer: this.state.initialTimer - 1
     });
+    if (this.state.initialTimer === 2) {
+      this.positionAndColor();
+    }
     if (this.state.initialTimer === 0) {
       this.setState({overlay: false});
-      this.positionAndColor();
+      clearInterval(timer);
     }
   },
   positionAndColor: function() {
@@ -257,9 +262,9 @@ var SilentMode = React.createClass({
     return (
       <div className="gameContainer silentContainer">
         {overlay}
-        <h1 className="silentScore">Silent</h1>
+        <h1 className="silent">Silent</h1>
         <div className="gameHeading">
-          <div className="gameScore silentScore">
+          <div className="gameScore silent">
             <h2>Score: {this.state.score}</h2>
           </div>
           <GameTimer timeStyle={{
@@ -280,7 +285,7 @@ var SilentMode = React.createClass({
         <div className="scoreAlert">
           {scoreAlert}
         </div>
-        <div className="gameButtonsContainer silentMode">
+        <div className="gameButtonsContainer silentBackground">
           <a onClick={this.positionMatch} style={this.state.posStyle}>POSITION</a>
           <a onClick={this.colorMatch} style={this.state.colorStyle}>COLOR</a>
         </div>

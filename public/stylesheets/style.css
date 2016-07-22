@@ -1,14 +1,38 @@
 div {
   display: block;
 }
-
+/*Our Colors*/
+.classic {
+  color: #F13542;
+}
+.relaxed {
+  color: #01B6A7;
+}
+.silent {
+  color: #7CD9D2;
+}
+.advanced {
+  color: #F1BA03;
+}
+.classicBackground {
+  background-color: #F13542;
+}
+.relaxedBackground {
+  background-color: #01B6A7;
+}
+.silentBackground {
+  background-color: #7CD9D2;
+}
+.advancedBackground {
+  background-color: #F1BA03;
+}
 body {
   /*max-width: 790px;*/
   font-family: 'Proxima Nova', sans-serif;
   margin: 0;
   padding: 0;
   background: #faf8ef;
-  color:#7CD9D2;
+  color: #01B6A7;
 }
 #root {
   display: flex;
@@ -30,16 +54,12 @@ h3 {
   font-weight: 100;
 }
 #title {
- /* padding: 2rem 0;*/
+  /* padding: 2rem 0;*/
 }
-
-.heading > img {
+.heading> img {
   width: 40vw;
-  min-width:300px;
+  min-width: 300px;
 }
-
-
-
 .overlay {
   position: absolute;
   width: 100vw;
@@ -54,7 +74,6 @@ h3 {
   display: flex;
   flex-direction: column;
 }
-
 .btn {
   text-decoration: none;
   font-size: 5rem;
@@ -65,7 +84,6 @@ h3 {
   text-decoration: none;
   color: #EEEEEE;
 }
-
 .heading {
   display: flex;
   height: 30vh;
@@ -97,22 +115,6 @@ h3 {
   width: 40vw;
 }
 
-#menu1 {
-  background-color: #F13542;
-}
-
-#menu2 {
-  background-color: #01B6A7;
-}
-
-#menu3 {
-  background-color: #7CD9D2;
-}
-
-#menu4 {
-  background-color: #F1BA03;
-}
-
 /* game page css */
 
 .gameContainer {
@@ -124,30 +126,24 @@ h3 {
   align-items: center;
   margin-top: 20px;
 }
-
 .relaxContainer {
   background-color: rgba(1, 182, 167, 0.09);
 }
-
 .silentContainer {
   background-color: rgba(124, 217, 210, 0.09);
 }
-
 .classicContainer {
   background-color: rgba(241, 53, 66, 0.09);
 }
-
 .advancedContainer {
   background-color: rgba(241, 186, 3, 0.09);
 }
-
 .gameBoard {
   display: flex;
   width: 90%;
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
-
 }
 .gameSquare {
   display: inline-block;
@@ -157,12 +153,10 @@ h3 {
   margin: 4px;
   border: 2px solid rgba(109, 110, 113, 0.5);
 }
-
 .gameButtonsContainer {
   display: flex;
   justify-content: center;
   width: 95%;
-  background-color: #BFBFBF;
   padding: 10px;
 }
 .gameButtonsContainer a {
@@ -177,9 +171,6 @@ h3 {
 .gameButtonsContainer a:hover {
   cursor: pointer;
 }
-.gameButtonsContainer a:active {
-  background-color: black;
-}
 .timerContainer {
   display: flex;
   width: 100%;
@@ -192,30 +183,25 @@ h3 {
   width: 85%;
   margin-bottom: 10px;
 }
-
 .gameContainer h1 {
   display: flex;
   justify-content: center;
   align-items: center;
   font-size: 48px;
 }
-
 .gameContainer h2 {
   font-size: 40px;
   font-weight: normal;
 }
-
 .gameTimer {
   font-size: 64px;
 }
 .gameScore {
   flex-direction: row;
   justify-content: flex-start;
-  color: #BFBFBF;
   font-size: 64px;
   width: 50%;
 }
-
 .scoreAlert {
   display: flex;
   height: 70px;
@@ -224,7 +210,6 @@ h3 {
   align-items: center;
   justify-content: center;
 }
-
 .scoreAlertNegative {
   background-color: transparent;
   color: transparent;
@@ -265,121 +250,114 @@ h3 {
 }
 
 /* negative alert fade in and out */
+
 @keyframes negativeFadeIn {
-  from {background-color: transparent; color: transparent;}
-  to {background-color: rgba(255, 51, 51, 0.8); color: white;}
+  from {
+    background-color: transparent;
+    color: transparent;
+  }
+  to {
+    background-color: rgba(255, 51, 51, 0.8);
+    color: white;
+  }
 }
-
 @keyframes negativeFadeOut {
-  from {background-color: rgba(255, 51, 51, 0.8); color: white;}
-  to {background-color: transparent; color: transparent;}
+  from {
+    background-color: rgba(255, 51, 51, 0.8);
+    color: white;
+  }
+  to {
+    background-color: transparent;
+    color: transparent;
+  }
 }
-
 @-webkit-keyframes negativeFadeIn {
-  from {background-color: transparent; color: transparent;}
-  to {background-color: rgba(255, 51, 51, 0.8); color: white;}
+  from {
+    background-color: transparent;
+    color: transparent;
+  }
+  to {
+    background-color: rgba(255, 51, 51, 0.8);
+    color: white;
+  }
 }
-
 @-webkit-keyframes negativeFadeOut {
-  from {background-color: rgba(255, 51, 51, 0.8); color: white;}
-  to {background-color: transparent; color: transparent;}
+  from {
+    background-color: rgba(255, 51, 51, 0.8);
+    color: white;
+  }
+  to {
+    background-color: transparent;
+    color: transparent;
+  }
 }
 
 /* positive alert fade in and out */
+
 @keyframes positiveFadeIn {
-  from {background-color: transparent; color: transparent;}
-  to {background-color: rgba(0, 204, 153, 0.8); color: white}
+  from {
+    background-color: transparent;
+    color: transparent;
+  }
+  to {
+    background-color: rgba(0, 204, 153, 0.8);
+    color: white
+  }
 }
-
 @keyframes positiveFadeOut {
-  from {background-color:  rgba(0, 204, 153, 0.8); color: white;}
-  to {background-color: transparent; color: transparent;}
+  from {
+    background-color: rgba(0, 204, 153, 0.8);
+    color: white;
+  }
+  to {
+    background-color: transparent;
+    color: transparent;
+  }
 }
-
 @-webkit-keyframes positiveFadeIn {
-  from {background-color: transparent; color: transparent;}
-  to {background-color: rgba(0, 204, 153, 0.8); color: white}
+  from {
+    background-color: transparent;
+    color: transparent;
+  }
+  to {
+    background-color: rgba(0, 204, 153, 0.8);
+    color: white
+  }
 }
-
 @-webkit-keyframes positiveFadeOut {
-  from {background-color:  rgba(0, 204, 153, 0.8); color: white;}
-  to {background-color: transparent; color: transparent;}
+  from {
+    background-color: rgba(0, 204, 153, 0.8);
+    color: white;
+  }
+  to {
+    background-color: transparent;
+    color: transparent;
+  }
 }
-
-.classicMode {
-  background-color: #F13542;
-}
-
-.relaxedMode {
-  background-color: #01B6A7;
-}
-
-.silentMode {
-  background-color: #7CD9D2;
-}
-
-.advancedMode {
-  background-color: #F1BA03;
-}
-
-.classicScore {
-  color: #F13542;
-}
-
-.relaxedScore {
-  color: #01B6A7;
-}
-
-.silentScore {
-  color: #7CD9D2;
-}
-
-.advancedScore {
-  color: #F1BA03;
-}
-
 .fireworks {
   position: absolute;
-	top: 0;
-	left: 0;
+  top: 0;
+  left: 0;
   height: 30vh;
   justify-content: center;
   align-items: center;
 }
 
 /*levels*/
-#classic, #relax, #silent, #advanced{
+
+#classic, #relax, #silent, #advanced {
   font-size: 10rem;
   font-weight: 700;
   text-align: center;
 }
-
-#silent{
-  color: #7CD9D2;
-}
-
-#classic{
-  color: #F13542
-}
-
-#relaxed{
-  color: #01B6A7;
-}
-
-#advanced{
-  color: #F1BA03;
-}
-
-.levelBox{
+.levelBox {
   text-align: center;
 }
-
-.levelBox > h1 {
+.levelBox> h1 {
   font-size: 10rem;
   font-weight: 700;
   margin: 0;
 }
-
 h2 {
   font-size: 2rem;
   font-weight: 300;
@@ -388,29 +366,6 @@ h3 {
   font-size: 1.3rem;
   font-weight: 100;
 }
-
-#classic, #relax, #silent, #advanced{
-  font-size: 10rem;
-  font-weight: 700;
-  text-align: center;
-}
-
-#silent{
-  color: #7CD9D2;
-}
-
-#classic{
-  color: #F13542
-}
-
-#relaxed{
-  color: #01B6A7;
-}
-
-#advanced{
-  color: #F1BA03;
-}
-
 .grid {
   height: 55vh;
   width: 55vh;
@@ -418,50 +373,37 @@ h3 {
   margin: 0 auto;
   align-items: left;
 }
-
-.grid a{
+.grid a {
   display: inline-block;
 }
-
-.levelSquare, .levelSquareLast {
+.levelSquare {
   display: inline-block;
-  background-color: #BFBFBF;
   float: left;
 }
-
-.grid1{
+/*.grid1 {
   width: 99%;
   height: 99%;
   margin: .5%;
-}
-
-.grid4{
+}*/
+.grid4 {
   width: 48%;
   height: 48%;
   margin: calc(4% / 4);
 }
-
-.grid9{
+.grid9 {
   width: 30%;
   height: 30%;
   margin: calc(10% / 6);
 }
 
-.levelSquare{
-  background-color: #BFBFBF;
-}
-
-.levelSquareLast{
-  background-color: #D6D6D6;
-}
-
 /*loginpage*/
+
 .screen {
   display: flex;
   justify-content: center;
   height: 100vh;
+  width: 100vw;
 }
-
 .login, .register-log {
   height: 100%;
   color: white;
@@ -473,167 +415,149 @@ h3 {
   transition-duration: .8s;
 }
 .register-log {
-  width: 35vw;
+  width: 35%;
   background-color: #7cd9d2;
 }
 .login {
-  width: 65vw;
+  width: 65%;
   background-color: #008a7e;
   text-align: left;
 }
 .register-log:hover {
   transition-duration: .8s;
-  width: 40vw;
+  width: 45%;
 }
-
-.login:hover{
+.login:hover {
   transition-duration: .8s;
-  width: 70vw;
+  width: 75%;
 }
-
 #login input:focus {
   outline: none;
 }
-
 .pa {
   font-weight: 100;
   font-size: 3em;
-  font-family: "proxima-nova",sans-serif;
+  font-family: "proxima-nova", sans-serif;
 }
-
-.register-log > h3 {
+.register-log> h3 {
   font-weight: 300;
   text-align: center;
   margin: 1em 1em 0;
 }
-
 form {
-	text-align: center;
-	width: 50vw;
-	border-radius: 5px;
-	padding: 30px 20px 0 20px;
-	box-sizing: border-box;
-}
-
-input,
-button{
-	outline: none !important;
-}
-
-.buttongroup{
-  display:flex;
+  text-align: center;
   width: 50vw;
-  justify-content: flex-start;
+  border-radius: 5px;
+  padding: 30px 20px 0 20px;
+  box-sizing: border-box;
 }
-
+.register-log form {
+  width: 100%;
+  display: flex;
+}
+input, button {
+  outline: none !important;
+}
+.buttongroup {
+  display: flex;
+  width: 50vw;
+  justify-content: center;
+}
 .fb {
-	border: none;
-	background: #3b5998;
-	width: 20vw;
-	height: 60px;
-	font-size: 20px;
-	color: #fff;
-	text-transform: uppercase;
+  border: none;
+  background: #3b5998;
+  width: 20vw;
+  height: 60px;
+  font-size: 20px;
+  color: #fff;
+  text-transform: uppercase;
   text-decoration: none;
   padding: 20px;
-	cursor: pointer;
-	transition:all 0.3s linear;
+  cursor: pointer;
+  transition: all 0.3s linear;
   margin: 2vw;
 }
 .fb:hover {
-	color: #3b5998;
+  color: #3b5998;
   background-color: white;
 }
-
 button.form-btn {
-	width: 50vw;
-	height: 60px;
-	bottom: 0;
-	border: 0;
-	font-size: 20px;
-	text-transform: uppercase;
+  width: 50vw;
+  height: 60px;
+  bottom: 0;
+  border: 0;
+  font-size: 20px;
+  text-transform: uppercase;
   margin: 2vw;
 }
-
 button.form-btn.sx {
-	left: 0;
-	background-color: rgba(255, 125, 0, 0.35);
-	color: #fff;
-	transition:all 0.3s linear;
+  left: 0;
+  background-color: rgba(255, 125, 0, 0.35);
+  color: #fff;
+  transition: all 0.3s linear;
 }
-
 button.form-btn.dx:hover {
-	background-color:rgba(255, 125, 0, 0.65);
-	color: #fff;
+  background-color: rgba(255, 125, 0, 0.65);
+  color: #fff;
 }
-
 button.form-btn.dx {
-	right: 0;
-	background-color: #f1ba03;
-	color: #fff;
+  right: 0;
+  background-color: #f1ba03;
+  color: #fff;
   width: 20vw;
 }
 .register-log button.form-btn.dx {
-	background-color: #f13542;
+  background-color: #f13542;
 }
-
 input {
-	border: none;
-	border-bottom: 1px solid white;
-	color: white;
-	text-align: center;
-	font-size: 21px;
-	font-weight:100;
-	margin-bottom:25px;
+  border: none;
+  border-bottom: 1px solid white;
+  color: white;
+  text-align: center;
+  font-size: 21px;
+  font-weight: 100;
+  margin-bottom: 25px;
   background-color: transparent;
   width: 50%;
 }
-
 ::-webkit-input-placeholder {
   color: white;
-	font-weight:100;
+  font-weight: 100;
   text-align: left;
 }
-
 :-moz-placeholder {
   color: white;
-	font-weight:100;
+  font-weight: 100;
   text-align: left;
 }
-
 ::-moz-placeholder {
-   color: white;
-	font-weight:100;
+  color: white;
+  font-weight: 100;
   text-align: left;
 }
-
 :-ms-input-placeholder {
-   color: white;
-	font-weight:100;
+  color: white;
+  font-weight: 100;
   text-align: left;
 }
-
 .leaderboardPage {
   display: flex;
   flex-direction: row;
   height: 100vh;
   width: 100vw;
 }
-
 .userSide {
   height: 100vh;
   width: 50vw;
   background-color: #7CD9D2;
   padding-top: 10vh;
 }
-
 .boardSide {
   height: 100vh;
   width: 50vw;
   background-color: #F1BA03;
   padding-top: 10vh;
 }
-
 .lbHeader {
   color: white;
   font-size: 48px;

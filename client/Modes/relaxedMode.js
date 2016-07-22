@@ -3,13 +3,14 @@ var GameTimer = require('./gameTimer');
 
 //COLLECTION OF GLOBAL VARIABLES TO MAKE EVERYONES LIFE EASIER
 //create global variable for reaction counter
-var reactionStart
+var reactionStart;
 //global variable for keeping reaction times
 //note: all reactin times for correct hits stored as array for stats (max,min,avg)
 var reactionTimes = [];
 //global variable for game score (saved once time runs out)
-var gameScore
-var iterations
+var gameScore;
+var iterations;
+var timer;
 
 var RelaxedMode = React.createClass({
   getInitialState: function() {
@@ -35,21 +36,16 @@ var RelaxedMode = React.createClass({
       posPressed: false,
       // modeMultiplier: modeMultiplier[this.props.mode],
       tempUser: true,
-      gameId:null
+      gameId: null
     }
   },
   componentDidMount: function() {
-    setInterval(this.timer, 1000);
+    timer = setInterval(this.timer, 1000);
 
-    fetch('/startGame/' + this.state.mode + '/' + this.state.N, {
-      method: 'post'
-    }).then(function(response) {
+    fetch('/startGame/' + this.state.mode + '/' + this.state.N, {method: 'post'}).then(function(response) {
       return response.json();
     }).then(function(response) {
-      this.setState({
-        tempUser:response.tempUser,
-        gameId:response.gameId
-      })
+      this.setState({tempUser: response.tempUser, gameId: response.gameId})
     }.bind(this))
 
     window.onkeyup = function(e) {
@@ -59,8 +55,9 @@ var RelaxedMode = React.createClass({
       }
     }.bind(this);
   },
-  componentWillUnmount: function(){
-    clearInterval(iterations)
+  componentWillUnmount: function() {
+    clearInterval(iterations);
+    clearInterval(timer);
   },
   timer: function() {
     this.setState({
@@ -71,6 +68,7 @@ var RelaxedMode = React.createClass({
     }
     if (this.state.initialTimer === 0) {
       this.setState({overlay: false});
+      clearInterval(timer);
     }
   },
   position: function() {
@@ -103,11 +101,9 @@ var RelaxedMode = React.createClass({
         }
       }
 
-      this.setState({pressed: false, keepScore: false, posMatch: false, posPressed: false});
+      this.setState({pressed: false, keepScore: false, posMatch: false, posPressed: false, posStyle: noStyle});
       setTimeout(function() {
-        this.setState({
-          alert: ' '
-        });
+        this.setState({alert: ' '});
       }.bind(this), 800);
       //start reaction time counter with flash
       reactionStart = Date.now()
@@ -185,7 +181,8 @@ var RelaxedMode = React.createClass({
     }
     this.setState({
       posPressed: true,
-      posMatch: !this.state.posMatch
+      posMatch: !this.state.posMatch,
+      posStyle: pushStyle
     })
   },
   render: function() {
@@ -212,18 +209,12 @@ var RelaxedMode = React.createClass({
       scoreAlert = <div></div>
     }
 
-    var posButtonStyle = this.state.posPressed
-      ? {
-        backgroundColor: '#FF7001'
-      }
-      : {};
-
     return (
       <div className="gameContainer relaxContainer">
         {overlay}
-        <h1 className="relaxedScore">Relaxed</h1>
+        <h1 className="relaxed">Relaxed</h1>
         <div className="gameHeading">
-          <div className="gameScore relaxedScore">
+          <div className="gameScore relaxed">
             <h2>Score: {this.state.score}</h2>
           </div>
           <GameTimer timeStyle={{
@@ -244,13 +235,19 @@ var RelaxedMode = React.createClass({
         <div className="scoreAlert">
           {scoreAlert}
         </div>
-        <div className="gameButtonsContainer relaxedMode">
-          <a onClick={this.posMatch} style={posButtonStyle}>POSITION</a>
+        <div className="gameButtonsContainer relaxedBackground">
+          <a onClick={this.posMatch} style={this.state.posStyle}>POSITION</a>
         </div>
       </div>
     );
   }
 })
+
+var noStyle = {};
+
+var pushStyle = {
+  color: 'black'
+}
 
 var standardStyle = {
   backgroundColor: "#BFBFBF"

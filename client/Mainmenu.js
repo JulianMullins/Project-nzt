@@ -6,53 +6,50 @@ var Levels = require('./levels');
 var ClassicLevels = Levels.ClassicLevels;
 var RelaxedLevels = Levels.RelaxedLevels;
 
-
-import { Link } from 'react-router'
-
+import {Link} from 'react-router'
 
 var MenuOverlay = require('./menuOverlay');
 var LoginOverlay = require('./loginOverlay');
 var RegisterOverlay = require('./registerOverlay');
 
-
 var Mainmenu = React.createClass({
 
   //initial functions
   getInitialState: function() {
-    return{}
+    return {}
   },
-  classic(){
+  classic() {
     this.props.history.push('/levels/classic')
   },
-  relaxed(){
+  relaxed() {
     this.props.history.push('/levels/relaxed')
   },
-  silent(){
+  silent() {
     this.props.history.push('/levels/silent')
   },
-  advanced(){
+  advanced() {
     this.props.history.push('/levels/advanced')
   },
   render: function() {
     return (
       <div>
         <div className="heading">
-          <img src="../images/CortexLogo4.svg" />
+          <img src="../images/CortexLogo4.svg"/>
         </div>
         <div className="menu">
-          <a className="menu-panel" id="menu1" onClick={this.classic}>
+          <a className="menu-panel classicBackground" onClick={this.classic}>
             <h2>Classic</h2>
             <h3>(position, sound)</h3>
           </a>
-          <a className="menu-panel" id="menu2" onClick={this.relaxed}>
+          <a className="menu-panel relaxedBackground" onClick={this.relaxed}>
             <h2>Relaxed</h2>
             <h3>(position only)</h3>
           </a>
-          <a className="menu-panel" id="menu3" onClick={this.silent}>
+          <a className="menu-panel silentBackground" onClick={this.silent}>
             <h2>Silent</h2>
             <h3>(position, color)</h3>
           </a>
-          <a className="menu-panel" id="menu4" onClick={this.advanced}>
+          <a className="menu-panel advancedBackground" onClick={this.advanced}>
             <h2>Advanced</h2>
             <h3>(color, position, sound)</h3>
           </a>
@@ -61,6 +58,5 @@ var Mainmenu = React.createClass({
     );
   }
 });
-
 
 module.exports = Mainmenu;
