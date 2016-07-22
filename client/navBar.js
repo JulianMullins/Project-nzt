@@ -4,13 +4,13 @@ import { Link } from 'react-router'
 
 
 var NavBar = React.createClass({
-	getInitialState(){
+	getInitialState: function(){
 		return {
-			open:false,
-			loggedIn:false
+			open: false,
+			loggedIn: false
 		}
 	},
-	componentDidMount(){
+	componentDidMount: function(){
 		fetch('/isLoggedIn',{method:'get'
 		}).then(function(response) {
 	      return response.json();
@@ -22,10 +22,16 @@ var NavBar = React.createClass({
 	      }
 	    }.bind(this))
 	},
-	click(e){
+	click: function(e){
+		e.preventDefault();
 		this.setState({
 			open: !this.state.open
-		})
+		});
+	},
+	close: function(e) {
+		this.setState({
+			open: false
+		});
 	},
 	render: function(){
 		var logInOutLink = this.state.loggedIn
@@ -37,25 +43,25 @@ var NavBar = React.createClass({
 		return(
 			<div>
 				<nav id="bt-menu" className={
-					this.state.open 
+					this.state.open
 						? 'bt-menu bt-menu-open'
 						: 'bt-menu bt-menu-close'
 				}>
 					<a className="bt-menu-trigger" onClick={this.click}><span>Menu</span></a>
 					<ul>
-						<li><Link to="/home">Home</Link></li>
-						<li><Link to={logInOutLink}>{logInOrOut}</Link></li>
-						<li><Link to="/leaderboard">Leaderboard</Link></li>
-						<li><Link to="/stats">Stats</Link></li>
-						<li><Link to="/science">The Science</Link></li>
-						<li><Link to="/contact">Contact</Link></li>
+						<li><Link to="/home" onClick={this.close}>Home</Link></li>
+						<li><Link to={logInOutLink} onClick={this.close}>{logInOrOut}</Link></li>
+						<li><Link to="/leaderboard" onClick={this.close}>Leaderboard</Link></li>
+						<li><Link to="/stats" onClick={this.close}>Stats</Link></li>
+						<li><Link to="/science" onClick={this.close}>The Science</Link></li>
+						<li><Link to="/contact" onClick={this.close}>Contact</Link></li>
 					</ul>
 					<ul>
 						<li><Link to="/settings"><i className="fa fa-cog"  aria-hidden="true"></i></Link></li>
 					</ul>
-					<div className='bt-overlay' />
+					<div className='bt-overlay' onClick={this.click}/>
 				</nav>
-			
+
 			</div>
 		)
 	}

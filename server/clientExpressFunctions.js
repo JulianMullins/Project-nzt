@@ -49,5 +49,23 @@ router.get('/getScore',function(req,res,next){
   })
 })
 
+router.post('/gameEnd',function(req,res,next){
+  Game.findById(req.body.gameId,function(err,game){
+    if(err){
+      console.log(err);
+    }
+    else if(!game) {
+      console.log("no game")
+    }
+    else{
+      game.setState({
+        score:gameScore,
+        reactionTimes:reactionTimes
+      })
+      res.json({success:true})
+    }
+  })
+})
+
 
 module.exports=router;

@@ -1,7 +1,7 @@
 var React = require('react');
 var ReactDOM = require('react-dom');
 
-import { Router, Route, hashHistory } from 'react-router'
+import {Router, Route, hashHistory, Link} from 'react-router'
 var url = process.env.url;
 
 var MenuOverlay = require('./menuOverlay');
@@ -9,10 +9,12 @@ var Login = require('./loginOverlay');
 var Logout = require('./logout');
 var Register = require('./registerOverlay');
 var Home = require('./Mainmenu');
-var GameOver = require('./gameOverOverlay');
+var GameOver = require('./gameOver');
 var NavBar = require('./navBar');
+var Leaderboard = require('./leaderboard');
+var Contact = require('./contact');
+var Science = require('./science');
 
-//Leaderboard
 //Stats
 //Science
 //Contact
@@ -23,12 +25,10 @@ var ClassicGame = require('./Modes/classicMode');
 var SilentGame = require('./Modes/silentMode');
 var AdvancedGame = require('./Modes/advancedMode');
 
-
 var ClassicLevels = require('./levels').ClassicLevels;
 var RelaxedLevels = require('./levels').RelaxedLevels;
-var SilentLevels =  require('./levels').SilentLevels;
+var SilentLevels = require('./levels').SilentLevels;
 var AdvancedLevels = require('./levels').AdvancedLevels;
-import { Link } from 'react-router'
 /*
       <Route path="/leaderboard" component={Leaderboard}/>
       <Route path="/stats" component={Stats}/>
@@ -38,32 +38,33 @@ import { Link } from 'react-router'
       */
 
 var App = React.createClass({
-  componentDidMount(){
-    if(this.props.location.pathname==='/'){
+  componentDidMount() {
+    if (this.props.location.pathname === '/') {
       this.props.history.push('/home')
     }
   },
   render() {
     return (
       <div>
-        
-        <NavBar />
-        {this.props.children}
+
+        <NavBar/> {this.props.children}
       </div>
     )
   }
 });
 
-
 ReactDOM.render((
   <Router history={hashHistory}>
     <Route path="/" component={App}>
-      <Route path="home" component={Home} />
+      <Route path="home" component={Home}/>
       <Route path="login" component={Login}/>
       <Route path="logout" component={Logout} />
       <Route path="register" component={Register}/>
       <Route path="gameOver" component={GameOver}/>
-      
+      <Route path="leaderboard" component={Leaderboard}/>
+      <Route path="contact" component={Contact}/>
+      <Route path="science" component={Science}/>
+
       <Route path="levels/classic" component={ClassicLevels}/>
       <Route path="levels/relaxed" component={RelaxedLevels}/>
       <Route path="levels/silent" component={SilentLevels}/>
@@ -71,7 +72,9 @@ ReactDOM.render((
       <Route path="game/classic/:n" component={ClassicGame}/>
       <Route path="game/relaxed/:n" component={RelaxedGame}/>
       <Route path="game/silent/:n" component={SilentGame}/>
-      <Route path="game/advanced/:n" component={AdvancedGame}/>9
+      <Route path="game/advanced/:n" component={AdvancedGame}/>
     </Route>
   </Router>
-  ), document.getElementById('root'),function(){console.log("rendered")});
+), document.getElementById('root'), function() {
+  console.log("rendered")
+});
