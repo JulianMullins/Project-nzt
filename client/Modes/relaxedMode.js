@@ -33,6 +33,7 @@ var RelaxedMode = React.createClass({
       initialTimer: 3,
       N: 1,
       posPressed: false,
+      posStyle: noStyle,
       // modeMultiplier: modeMultiplier[this.props.mode],
       tempUser: true,
       gameId:null
@@ -85,20 +86,23 @@ var RelaxedMode = React.createClass({
       if (this.state.keepScore && !this.state.posMatch) {
         this.setState({
           alert: "Good job",
-          score: this.state.score + 10
+          score: this.state.score + 10,
+          posStle: noStyle
         });
       } else if (!this.state.keepScore && this.state.posPressed) {
         this.setState({alert: 'Not a match'});
         if (this.state.score > 0) {
           this.setState({
-            score: this.state.score - 5
+            score: this.state.score - 5,
+            posStyle: noStyle
           });
         }
       } else if (this.state.keepScore && this.state.posMatch) {
         this.setState({alert: "Missed a match"});
         if (this.state.score !== 0) {
           this.setState({
-            score: this.state.score - 5
+            score: this.state.score - 5,
+            posStyle: noStyle
           });
         }
       }
@@ -185,7 +189,8 @@ var RelaxedMode = React.createClass({
     }
     this.setState({
       posPressed: true,
-      posMatch: !this.state.posMatch
+      posMatch: !this.state.posMatch,
+      posStyle: pushStyle
     })
   },
   render: function() {
@@ -245,12 +250,18 @@ var RelaxedMode = React.createClass({
           {scoreAlert}
         </div>
         <div className="gameButtonsContainer relaxedMode">
-          <a onClick={this.posMatch} style={posButtonStyle}>POSITION</a>
+          <a onClick={this.posMatch} style={this.state.posStyle}>POSITION</a>
         </div>
       </div>
     );
   }
 })
+
+var noStyle = {}
+
+var pushStyle = {
+  color: 'black'
+}
 
 var standardStyle = {
   backgroundColor: "#BFBFBF"
