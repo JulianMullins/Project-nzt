@@ -1,6 +1,6 @@
 {
   "scripts": {
-    "start": "concurrent -k \"node ./bin/www\" \"npm run watch\"",
+    "start": "node ./bin/www",
     "watch": "watchify client/index.js -o ./public/bundle.js -t [ babelify --presets [ es2015 react ] ]"
   },
   "dependencies": {
