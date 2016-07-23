@@ -214,7 +214,7 @@ var SilentMode = React.createClass({
             return response.json();
           }).then(function(response) {
             if (response.success) {
-              this.props.history.push('/gameOver');
+              this.props.history.push('/gameOver/'+this.state.mode+"/"+'/'+gameScore);
             }
           }.bind(this))
 

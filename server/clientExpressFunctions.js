@@ -124,6 +124,17 @@ router.get('/getMaxN',function(req,res,next){
   res.json({maxN:maxN})
 })
 
+
+router.get("/getGameData",function(req,res,next){
+  Game.findById(req.user.currentGame[0],function(err,game){
+    res.json({
+      score:game.score,
+      mode:game.mode,
+      nLevel:game.nLevel
+    })
+  })
+})
+
 router.get('/getUser',function(req,res,next){
   var games = null;
   console.log("gonna check for games")
