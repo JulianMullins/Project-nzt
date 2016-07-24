@@ -1,0 +1,77 @@
+/* Game over screen */
+
+.gameOver {
+  display: flex;
+  width: 100vw;
+  height: 100vh;
+  background-color: #7CD9D2;
+  align-items: center;
+  flex-direction: column;
+  color: white;
+  text-align: center;
+  padding-top: 10vh;
+}
+
+.gameOver h1 {
+  font-size: 96px;
+}
+
+.gameOver h2 {
+  font-size: 32px;
+}
+
+.gameOverPrompt {
+  width: 75vw;
+}
+
+.gameOverInform {
+  margin: 50px 0 25px 0;
+}
+
+.gameOver p {
+  font-size: 32px;
+}
+
+.gameOverActions {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  width: 100vw;
+  height: 30vh;
+  align-items: flex-end;
+  margin-bottom: 15px;
+}
+
+.levelButton {
+  background-color: #F13542;
+  padding: 15px;
+}
+
+.lbCharts {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-end;
+  justify-content: flex-end;
+  margin-bottom: 10px;
+}
+
+.lbChart1 {
+  background-color: white;
+  height: 5vh;
+  width: 5vh;
+  margin-right: 10px;
+}
+
+.lbChart2 {
+  background-color: white;
+  height: 10vh;
+  width: 5vh;
+  margin-right: 10px;
+}
+
+.lbChart3 {
+  background-color: white;
+  height: 15vh;
+  width: 5vh;
+  margin-right: 10px;
+}

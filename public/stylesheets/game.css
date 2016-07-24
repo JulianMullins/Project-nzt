@@ -1,0 +1,220 @@
+/* game page css */
+
+.gameContainer {
+  height: 90vh;
+  width: 640px;
+  min-width: 640px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+  background-color: rgba(255, 255, 255, 0.5);
+}
+
+.gameBoard {
+  display: flex;
+  width: 640px;
+  min-width: 640px;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+}
+.gameSquare {
+  display: inline-block;
+  background-color: #BFBFBF;
+  width: 17vh;
+  height: 17vh;
+  margin: .5vh;
+  border: 2px solid rgba(109, 110, 113, 0.5);
+}
+.gameButtonsContainer {
+  display: flex;
+  justify-content: center;
+  width: 95%;
+  padding: 10px;
+  margin-bottom: 1vh;
+}
+.gameButtonsContainer a {
+  margin: 0 25px;
+  padding: 10px;
+  text-align: center;
+  color: white;
+  font-size: 24px;
+  font-weight: bold;
+  cursor: default;
+}
+.gameButtonsContainer a:hover {
+  cursor: pointer;
+}
+.timerContainer {
+  display: flex;
+  width: 100%;
+  justify-content: flex-end;
+  width: 50%;
+}
+
+.gameTitle {
+  display: flex;
+  flex-direction: row;
+  align-items: baseline;
+  justify-content: center;
+  width: 100%;
+}
+
+.modeTitle {
+  padding: 0 10px;
+  font-size: 50px;
+}
+
+.nTitle {
+  font-size: 24px !important;
+  font-weight: normal !important;
+}
+
+.gameHeading {
+  display: flex;
+  flex-direction: row;
+  width: 85%;
+  margin-bottom: 10px;
+}
+
+.gameContainer h2 {
+  font-size: 40px;
+  font-weight: normal;
+}
+
+.gameTimer {
+  font-size: 64px;
+}
+.gameScore {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  font-size: 64px;
+  width: 50%;
+}
+.scoreAlert {
+  display: flex;
+  height: 70px;
+  width: 95%;
+  margin: 10px 0;
+  align-items: center;
+  justify-content: center;
+}
+.scoreAlertNegative {
+  background-color: transparent;
+  color: transparent;
+  font-size: 28px;
+  margin: 10px auto;
+  height: 70px;
+  width: 50%;
+  padding: 5px;
+  padding-top: 20px;
+  text-align: center;
+  -webkit-animation-name: negativeFadeOut;
+  -webkit-animation-duration: 2s;
+  animation-name: negativeFadeOut;
+  animation-duration: 2s;
+}
+.scoreAlertPositive {
+  background-color: transparent;
+  color: transparent;
+  font-size: 28px;
+  margin: 10px auto;
+  height: 70px;
+  width: 50%;
+  padding: 5px;
+  padding-top: 20px;
+  text-align: center;
+  -webkit-animation-name: positiveFadeOut;
+  -webkit-animation-duration: 2s;
+  animation-name: positiveFadeOut;
+  animation-duration: 2s;
+}
+
+/* negative alert fade in and out */
+
+@keyframes negativeFadeIn {
+  from {
+    background-color: transparent;
+    color: transparent;
+  }
+  to {
+    background-color: rgba(255, 51, 51, 0.8);
+    color: white;
+  }
+}
+@keyframes negativeFadeOut {
+  from {
+    background-color: rgba(255, 51, 51, 0.8);
+    color: white;
+  }
+  to {
+    background-color: transparent;
+    color: transparent;
+  }
+}
+@-webkit-keyframes negativeFadeIn {
+  from {
+    background-color: transparent;
+    color: transparent;
+  }
+  to {
+    background-color: rgba(255, 51, 51, 0.8);
+    color: white;
+  }
+}
+@-webkit-keyframes negativeFadeOut {
+  from {
+    background-color: rgba(255, 51, 51, 0.8);
+    color: white;
+  }
+  to {
+    background-color: transparent;
+    color: transparent;
+  }
+}
+
+/* positive alert fade in and out */
+
+@keyframes positiveFadeIn {
+  from {
+    background-color: transparent;
+    color: transparent;
+  }
+  to {
+    background-color: rgba(0, 204, 153, 0.8);
+    color: white
+  }
+}
+@keyframes positiveFadeOut {
+  from {
+    background-color: rgba(0, 204, 153, 0.8);
+    color: white;
+  }
+  to {
+    background-color: transparent;
+    color: transparent;
+  }
+}
+@-webkit-keyframes positiveFadeIn {
+  from {
+    background-color: transparent;
+    color: transparent;
+  }
+  to {
+    background-color: rgba(0, 204, 153, 0.8);
+    color: white
+  }
+}
+@-webkit-keyframes positiveFadeOut {
+  from {
+    background-color: rgba(0, 204, 153, 0.8);
+    color: white;
+  }
+  to {
+    background-color: transparent;
+    color: transparent;
+  }
+}
