@@ -1912,6 +1912,8 @@ module.exports = SilentMode;
 
 var _reactRouter = require('react-router');
 
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 var React = require('react');
 var ReactDOM = require('react-dom');
 
@@ -1922,53 +1924,41 @@ var Contact = React.createClass({
 	render: function render() {
 		return React.createElement(
 			'div',
-			{ className: 'cPage' },
+			{ className: 'contactPage' },
 			React.createElement(
 				'div',
-				{ className: 'contactPage3' },
+				{ className: 'contactTop' },
 				React.createElement(
 					'h1',
-					{ className: 'cHeader' },
+					null,
 					'Contact Us'
 				),
 				React.createElement(
-					'h3',
-					{ className: 'cHeader' },
-					'We\'d love to hear from you.'
+					'p',
+					null,
+					'We\'d love to hear from you'
 				),
 				React.createElement(
-					'div',
-					{ className: 'contactlines' },
-					React.createElement(
-						'li',
-						null,
-						React.createElement(
-							_reactRouter.Link,
-							{ to: 'https://github.com/JulianMullins/Project-nzt' },
-							'Github'
-						)
-					),
-					React.createElement(
-						'li',
-						null,
-						React.createElement(
-							'a',
-							{ href: 'https://cortexgame.typeform.com/to/xK1GK6', target: '_blank' },
-							'Feedback Form'
-						)
-					)
+					'a',
+					{ target: '_blank', href: 'https://github.com/JulianMullins/Project-nzt' },
+					'Github'
+				),
+				React.createElement(
+					'a',
+					_defineProperty({ target: '_blank', href: 'https://cortexgame.typeform.com/to/xK1GK6' }, 'target', '_blank'),
+					'Feedback Form'
 				)
 			),
 			React.createElement(
 				'div',
-				{ className: 'contactPage4' },
+				{ className: 'contactBottom' },
 				React.createElement(
 					'h1',
-					{ className: 'cHeader' },
-					'About'
+					null,
+					'About Us'
 				),
 				React.createElement(
-					'pl',
+					'p',
 					null,
 					'We\'re a team of college students from Horizons School of Technology who came together to create beautifully designed products that puts people\'s needs first. Cortex is the brain child of five people who want to improve the memories of people in a fun and easy way. Check out our work on Github and other projects!'
 				)
@@ -1978,6 +1968,26 @@ var Contact = React.createClass({
 });
 
 module.exports = Contact;
+
+// <div className="cPage">
+// 	<div className="contactPage3">
+// 		<h1 className="cHeader">Contact Us</h1>
+// 		<h3 className="cHeader">We&#39d love to hear from you.</h3>
+// 		<div className="contactlines">
+// <li><Link to="https://github.com/JulianMullins/Project-nzt">Github</Link></li>
+// <li><a href="https://cortexgame.typeform.com/to/xK1GK6" target="_blank">Feedback Form</a></li>
+// 		</div>
+// 	</div>
+
+// 	<div className="contactPage4">
+// 		<h1 className="cHeader">About</h1>
+// <p>We&#39re a team of college
+// students from Horizons School of Technology who came together to create
+// beautifully designed products that puts people&#39s needs first. Cortex is the
+// brain child of five people who want to improve the memories of people in a fun
+// and easy way. Check out our work on Github and other projects!</p>
+// 	</div>
+// </div>
 
 },{"react":252,"react-dom":20,"react-router":50}],9:[function(require,module,exports){
 'use strict';
@@ -3384,24 +3394,16 @@ var NavBar = React.createClass({
 						)
 					)
 				),
-				React.createElement(
-					'ul',
-					null,
-					React.createElement(
-						'li',
-						null,
-						React.createElement(
-							_reactRouter.Link,
-							{ to: '/settings' },
-							React.createElement('i', { className: 'fa fa-cog', 'aria-hidden': 'true' })
-						)
-					)
-				),
 				React.createElement('div', { className: 'bt-overlay', onClick: this.click })
 			)
 		);
 	}
 });
+
+// second menu goes underneath </ul>
+// <ul>
+// 	<li><Link to="/settings"><i className="fa fa-cog"  aria-hidden="true"></i></Link></li>
+// </ul>
 
 module.exports = NavBar;
 
