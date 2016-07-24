@@ -9,7 +9,7 @@
 .sciencePage p {
   font-weight: 100;
   font-size: calc(12px + .5vw);
-  font-family: "Proxima Nova", sans-serif;
+  font-family: "Proxima-Nova", sans-serif;
   color: white;
   padding-bottom: 25px;
   width: 75vw;
