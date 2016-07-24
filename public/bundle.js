@@ -1912,6 +1912,8 @@ module.exports = SilentMode;
 
 var _reactRouter = require('react-router');
 
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 var React = require('react');
 var ReactDOM = require('react-dom');
 
@@ -1922,53 +1924,41 @@ var Contact = React.createClass({
 	render: function render() {
 		return React.createElement(
 			'div',
-			{ className: 'cPage' },
+			{ className: 'contactPage' },
 			React.createElement(
 				'div',
-				{ className: 'contactPage3' },
+				{ className: 'contactTop' },
 				React.createElement(
 					'h1',
-					{ className: 'cHeader' },
+					null,
 					'Contact Us'
 				),
 				React.createElement(
-					'h3',
-					{ className: 'cHeader' },
-					'We\'d love to hear from you.'
+					'p',
+					null,
+					'We\'d love to hear from you'
 				),
 				React.createElement(
-					'div',
-					{ className: 'contactlines' },
-					React.createElement(
-						'li',
-						null,
-						React.createElement(
-							_reactRouter.Link,
-							{ to: 'https://github.com/JulianMullins/Project-nzt' },
-							'Github'
-						)
-					),
-					React.createElement(
-						'li',
-						null,
-						React.createElement(
-							'a',
-							{ href: 'https://cortexgame.typeform.com/to/xK1GK6', target: '_blank' },
-							'Feedback Form'
-						)
-					)
+					'a',
+					{ target: '_blank', href: 'https://github.com/JulianMullins/Project-nzt' },
+					'Github'
+				),
+				React.createElement(
+					'a',
+					_defineProperty({ target: '_blank', href: 'https://cortexgame.typeform.com/to/xK1GK6' }, 'target', '_blank'),
+					'Feedback Form'
 				)
 			),
 			React.createElement(
 				'div',
-				{ className: 'contactPage4' },
+				{ className: 'contactBottom' },
 				React.createElement(
 					'h1',
-					{ className: 'cHeader' },
-					'About'
+					null,
+					'About Us'
 				),
 				React.createElement(
-					'pl',
+					'p',
 					null,
 					'We\'re a team of college students from Horizons School of Technology who came together to create beautifully designed products that puts people\'s needs first. Cortex is the brain child of five people who want to improve the memories of people in a fun and easy way. Check out our work on Github and other projects!'
 				)
@@ -1978,6 +1968,26 @@ var Contact = React.createClass({
 });
 
 module.exports = Contact;
+
+// <div className="cPage">
+// 	<div className="contactPage3">
+// 		<h1 className="cHeader">Contact Us</h1>
+// 		<h3 className="cHeader">We&#39d love to hear from you.</h3>
+// 		<div className="contactlines">
+// <li><Link to="https://github.com/JulianMullins/Project-nzt">Github</Link></li>
+// <li><a href="https://cortexgame.typeform.com/to/xK1GK6" target="_blank">Feedback Form</a></li>
+// 		</div>
+// 	</div>
+
+// 	<div className="contactPage4">
+// 		<h1 className="cHeader">About</h1>
+// <p>We&#39re a team of college
+// students from Horizons School of Technology who came together to create
+// beautifully designed products that puts people&#39s needs first. Cortex is the
+// brain child of five people who want to improve the memories of people in a fun
+// and easy way. Check out our work on Github and other projects!</p>
+// 	</div>
+// </div>
 
 },{"react":252,"react-dom":20,"react-router":50}],9:[function(require,module,exports){
 'use strict';
@@ -3384,24 +3394,16 @@ var NavBar = React.createClass({
 						)
 					)
 				),
-				React.createElement(
-					'ul',
-					null,
-					React.createElement(
-						'li',
-						null,
-						React.createElement(
-							_reactRouter.Link,
-							{ to: '/settings' },
-							React.createElement('i', { className: 'fa fa-cog', 'aria-hidden': 'true' })
-						)
-					)
-				),
 				React.createElement('div', { className: 'bt-overlay', onClick: this.click })
 			)
 		);
 	}
 });
+
+// second menu goes underneath </ul>
+// <ul>
+// 	<li><Link to="/settings"><i className="fa fa-cog"  aria-hidden="true"></i></Link></li>
+// </ul>
 
 module.exports = NavBar;
 
@@ -3583,41 +3585,33 @@ var Science = React.createClass({
 	render: function render() {
 		return React.createElement(
 			'div',
-			{ className: 'cPage' },
+			{ className: 'sciencePage' },
 			React.createElement(
 				'div',
-				{ className: 'contactPage' },
+				{ className: 'scienceTop' },
 				React.createElement(
 					'h1',
-					{ className: 'cHeader' },
+					null,
 					'The Science'
 				),
 				React.createElement(
-					'pl',
+					'p',
 					null,
-					React.createElement(
-						'h3',
-						null,
-						'What is dual n-back?'
-					),
-					'N-back tests command a user to keep track of a continuously changing pattern n steps back. For example, n=1 means that a user should remember 1 step back to see if the next stimulus matches the previous, n=2 means keeping track of matching stimuli two steps back, and so on. The "dual" in dual n-back refers to the different types of stimulus that the user must keep track of, for example position (a visual input) and sound (an auditory input). Combining the two would therefore require a user to keep track of changing positions and sounds at different levels of pattern history. In cognitive studies, these tests have been shown to improve working memory and fluid intelligence (i.e. reasoning and problem-solving skills). In other words, playing these games can improve one\'s IQ! In a study presented in the Proceedings of the National Academy of Sciences of the United States of America, fluid intelligence increased significantly after just 19 days of n-back training, regardless of one\'s level of intelligence beforehand.',
-					React.createElement('br', null),
-					React.createElement('br', null),
-					React.createElement(
-						'h3',
-						null,
-						'What does Cortex do?'
-					),
-					'Most currently implementations of dual n-back training are poorly designed and tedious to play. Our mission is to make cognitive training less of a chore through an interactive and gamified experience. Users are able to choose their desired level of challenge through various modes that range from basic position play all the way to triple n-back with three different stimuli to keep track of. Through continuous play, users can unlock new n-levels and compete against players around the world for high scores and faster reaction times, all while watching their own progress improve over time. We believe that brain improvement works best when it\'s a fun experience. This is our mission at Cortex. '
+					'What is dual n-back? N-back tests command a user to keep track of a continuously changing pattern n steps back. For example, n=1 means that a user should remember 1 step back to see if the next stimulus matches the previous, n=2 means keeping track of matching stimuli two steps back, and so on. The "dual" in dual n-back refers to the different types of stimulus that the user must keep track of, for example position (a visual input) and sound (an auditory input). Combining the two would therefore require a user to keep track of changing positions and sounds at different levels of pattern history. In cognitive studies, these tests have been shown to improve working memory and fluid intelligence (i.e. reasoning and problem-solving skills). In other words, playing these games can improve one\'s IQ! In a study presented in the Proceedings of the National Academy of Sciences of the United States of America, fluid intelligence increased significantly after just 19 days of n-back training, regardless of one\'s level of intelligence beforehand.'
+				),
+				React.createElement(
+					'p',
+					null,
+					'What does Cortex do? Most currently implementations of dual n-back training are poorly designed and tedious to play. Our mission is to make cognitive training less of a chore through an interactive and gamified experience. Users are able to choose their desired level of challenge through various modes that range from basic position play all the way to triple n-back with three different stimuli to keep track of. Through continuous play, users can unlock new n-levels and compete against players around the world for high scores and faster reaction times, all while watching their own progress improve over time. We believe that brain improvement works best when it\'s a fun experience. This is our mission at Cortex.'
 				)
 			),
 			React.createElement(
 				'div',
-				{ className: 'contactPage2' },
+				{ className: 'scienceBottom' },
 				React.createElement(
 					'h1',
-					{ className: 'cHeader' },
-					'Learn More.'
+					null,
+					'Learn More'
 				),
 				React.createElement(
 					'a',
@@ -3630,6 +3624,39 @@ var Science = React.createClass({
 });
 
 module.exports = Science;
+
+// <div className="contactPage">
+// 	<h1 className="cHeader">The Sciences</h1>                     <pl>
+// <h3>What is dual n-back?</h3> N-back tests command a user to keep track of a
+// continuously changing pattern n steps back. For example, n=1 means that a user
+// should remember 1 step back to see if the next stimulus matches the previous,
+// n=2 means keeping track of matching stimuli two steps back, and so on. The
+// "dual" in dual n-back refers to the different types of stimulus that the user
+// must keep track of, for example position (a visual input) and sound (an
+// auditory input). Combining the two would therefore require a user to keep
+// track of changing positions and sounds at different levels of pattern history.
+// In cognitive studies, these tests have been shown to improve working memory
+// and fluid intelligence (i.e. reasoning and problem-solving skills). In other
+// words, playing these games can improve one&#39s IQ! In a study presented in the
+// Proceedings of the National Academy of Sciences of the United States of
+// America, fluid intelligence increased significantly after just 19 days of
+// n-back training, regardless of one&#39s level of intelligence beforehand.
+// 	<br></br> <br></br>
+
+// <h3>What does Cortex do?</h3>Most currently implementations of dual
+// n-back training are poorly designed and tedious to play. Our mission is to
+// make cognitive training less of a chore through an interactive and gamified
+// experience. Users are able to choose their desired level of challenge through
+// various modes that range from basic position play all the way to triple n-back
+// with three different stimuli to keep track of. Through continuous play, users
+// can unlock new n-levels and compete against players around the world for high
+// scores and faster reaction times, all while watching their own progress
+// improve over time. We believe that brain improvement works best when it&#39s a
+// fun experience. This is our mission at Cortex. </pl>             </div>
+// 	<div className="contactPage2"><h1 className="cHeader">Learn
+// 	More.</h1>                 <a href="http://www.gwern.net/DNB%20FAQ"
+// 	target="_blank">DUAL N-BACK FAQ</a>
+// </div>
 
 },{"react":252,"react-dom":20,"react-router":50}],20:[function(require,module,exports){
 'use strict';
