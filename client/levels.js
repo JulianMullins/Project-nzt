@@ -31,13 +31,13 @@ var getSquareArr = function(square, mode) {
         opacity: 1 - (0.4 / maxSquares) * i
       };
       var opacityStyle = {backgroundColor: '#F13542', opacity: .8 - (0.2 / square)*i};
-      if (mode == 'relaxed') {
+      if (mode === 'relaxed') {
         colorStyle.backgroundColor = '#01B6A7';
         opacityStyle.backgroundColor = '#01B6A7';
-      } else if (mode == 'silent') {
+      } else if (mode === 'silent') {
         colorStyle.backgroundColor = '#7CD9D2';
         opacityStyle.backgroundColor = '#7CD9D2';
-      } else if (mode == 'advanced') {
+      } else if (mode === 'advanced') {
         colorStyle.backgroundColor = '#F1BA03';
         opacityStyle.backgroundColor = '#F1BA03';
       }
@@ -84,7 +84,7 @@ var getMaxN = function(mode, cb) {
 var ClassicLevels = React.createClass({
   getInitialState: function() {
     return {
-      maxN: 1, 
+      maxN: 1,
       mode: 'classic'}
   },
   componentDidMount() {
@@ -119,7 +119,7 @@ var ClassicLevels = React.createClass({
 var RelaxedLevels = React.createClass({
   getInitialState: function() {
     return {
-      maxN: 1, 
+      maxN: 1,
       mode: 'relaxed'}
   },
   componentDidMount() {
@@ -149,7 +149,7 @@ var RelaxedLevels = React.createClass({
 
 var SilentLevels = React.createClass({
   getInitialState: function() {
-    return {maxN: 11, 
+    return {maxN: 1,
       mode: 'silent'}
   },
   setMaxN: function() {

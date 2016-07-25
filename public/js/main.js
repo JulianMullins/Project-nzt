@@ -16,16 +16,16 @@ $(document).ready(function() {
   // 1) Click anwyere in the window bellow
 // 2) Start pressing those keys
 
-  $(window).keydown(function(e) {
-  	key = (e.keyCode) ? e.keyCode : e.which;
-  	$('.key.k' + key).addClass('active');
-  	console.log(key);
-  });
-
-  $(window).keyup(function(e) {
-  	key = (e.keyCode) ? e.keyCode : e.which;
-  	$('.key.k' + key).removeClass('active');
-  });
+  // $(window).keydown(function(e) {
+  // 	key = (e.keyCode) ? e.keyCode : e.which;
+  // 	$('.key.k' + key).addClass('active');
+  // 	console.log(key);
+  // });
+  //
+  // $(window).keyup(function(e) {
+  // 	key = (e.keyCode) ? e.keyCode : e.which;
+  // 	$('.key.k' + key).removeClass('active');
+  // });
 })
 
 // $(document).ready(function () {
