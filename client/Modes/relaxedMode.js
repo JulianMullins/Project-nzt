@@ -38,15 +38,14 @@ var RelaxedMode = React.createClass({
       // modeMultiplier: modeMultiplier[this.props.mode],
       tempUser: true,
       gameId: null,
-      mode:'relaxed'
+      mode: 'relaxed'
     }
   },
   componentDidMount: function() {
     timer = setInterval(this.timer, 1000);
 
-
     fetch('/startGame/' + this.state.mode + '/' + this.state.N, {
-      method:'POST',
+      method: 'POST',
       credentials: 'include',
       headers: {
         'Accept': 'application/json',
@@ -58,16 +57,17 @@ var RelaxedMode = React.createClass({
     }).then(function(response) {
       this.setState({tempUser: response.tempUser, gameId: response.gameId})
     }.bind(this))
-
+  },
+  componentWillUnmount: function() {
+    clearInterval(iterations);
+    clearInterval(timer);
+  },
+  enableKeys: function() {
     window.onkeyup = function(e) {
       if (e.keyCode == 38) {
         this.posMatch();
       }
     }.bind(this);
-  },
-  componentWillUnmount: function() {
-    clearInterval(iterations);
-    clearInterval(timer);
   },
   timer: function() {
     this.setState({
@@ -77,6 +77,7 @@ var RelaxedMode = React.createClass({
       this.position();
     }
     if (this.state.initialTimer === 0) {
+      this.enableKeys();
       this.setState({overlay: false});
       clearInterval(timer);
     }
@@ -187,7 +188,7 @@ var RelaxedMode = React.createClass({
           return response.json();
         }).then(function(response) {
           //if (response.success) {
-            this.props.history.push('/gameOver/'+response.score);
+          this.props.history.push('/gameOver/' + response.score);
           //}
         }.bind(this))
 
@@ -220,18 +221,18 @@ var RelaxedMode = React.createClass({
         <div className="overlay">
           <center>
             <a className="btn">{this.state.initialTimer}</a>
-              <pl style={{margin: '0 0 20px'}}>Use the keys to press the buttons.</pl>
-                <div className="key-wrapper">
-                <ul className="row">
-                  <li className="key k38">↑</li>
-                </ul>
+            <h4>Use the keys to press the buttons.</h4>
+            <div className="key-wrapper">
+              <ul className="row">
+                <li className="key k38">↑</li>
+              </ul>
 
-                <ul className="row">
-                  <li className="key k37">←</li>
-                  <li className="key k40">↓</li>
-                  <li className="key k39">→</li>
-                </ul>
-              </div>
+              <ul className="row">
+                <li className="key k37">←</li>
+                <li className="key k40">↓</li>
+                <li className="key k39">→</li>
+              </ul>
+            </div>
           </center>
         </div>
       )

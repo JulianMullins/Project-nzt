@@ -8,7 +8,6 @@ var RelaxedLevels = Levels.RelaxedLevels;
 
 import {Link} from 'react-router'
 
-var MenuOverlay = require('./menuOverlay');
 var LoginOverlay = require('./loginOverlay');
 var RegisterOverlay = require('./registerOverlay');
 
@@ -38,7 +37,6 @@ var Mainmenu = React.createClass({
     // var username = this.state.hasUsername
     //   ? '<div>{this.state.username}</div>'
     //   : '';
-
     return (
       <div>
         <div className="heading">

@@ -40,13 +40,33 @@ var GameOverOverlay = React.createClass({
     return{
       username:null,
       alreadyLoggedIn:false,
-      score: this.props.params.score
+      score:0,
+      mode:null,
+      nLevel:1
     }
   },
+  componentDidMount(){
+      
+    fetch("/getGameData")
+      .then(function(response){
+        console.log(response)
+        return response.json();
+      }).then(function(response){
+        this.setState({
+          score:score,
+          mode:mode,
+          nLevel:nLevel
+        })
+      }.bind(this))
+
+
+  },
+
   // componentDidMount(){
   //     getUser().bind(this);
   //     getScore().bind(this);
   // },
+
   update:function(e){
     this.setState({
       username: e.target.value
@@ -67,6 +87,9 @@ var GameOverOverlay = React.createClass({
         })
       })
 
+  },
+  click(e){
+    this.props.history.push('/game/'+this.state.mode+'/'+(this.state.n+1))
   },
   render: function() {
     var loggedIn = this.state.alreadyLoggedIn
@@ -91,7 +114,7 @@ var GameOverOverlay = React.createClass({
               <span className="fa fa-home fa-5x"></span>
               <h2>home</h2>
             </Link>
-            <h2 className="levelButton">next level</h2>
+            <h2 className="levelButton" onClick={this.click}>next level</h2>
             <div>
               <Link to="/leaderboard">
                 <span className="lbChart">

@@ -1,32 +1,17 @@
-$(document).ready(function() {
-  $('.userSide').hover(function() {
-    $('.userSide').css('width', '100vw');
-    $('.boardSide').css('width', '0');
-  }, function() {
-    $('.userSide').css('width', '50vw');
-    $('.boardSide').css('width', '50vw');
-  });
-  $('.boardSide').hover(function() {
-    $('.userSide').css('width', '0');
-    $('.boardSide').css('width', '100vw');
-  }, function() {
-    $('.boardSide').css('width', '50vw');
-    $('.userSide').css('width', '50vw');
-  });
-  // 1) Click anwyere in the window bellow
+// 1) Click anwyere in the window bellow
 // 2) Start pressing those keys
 
-  $(window).keydown(function(e) {
-  	key = (e.keyCode) ? e.keyCode : e.which;
-  	$('.key.k' + key).addClass('active');
-  	console.log(key);
-  });
-
-  $(window).keyup(function(e) {
-  	key = (e.keyCode) ? e.keyCode : e.which;
-  	$('.key.k' + key).removeClass('active');
-  });
-})
+  // $(window).keydown(function(e) {
+  // 	key = (e.keyCode) ? e.keyCode : e.which;
+  // 	$('.key.k' + key).addClass('active');
+  // 	console.log(key);
+  // });
+  //
+  // $(window).keyup(function(e) {
+  // 	key = (e.keyCode) ? e.keyCode : e.which;
+  // 	$('.key.k' + key).removeClass('active');
+  // });
+// })
 
 // $(document).ready(function () {
 //

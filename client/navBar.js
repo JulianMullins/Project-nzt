@@ -1,30 +1,45 @@
 var React = require('react');
 var ReactDOM = require('react-dom');
-import { Link } from 'react-router'
+import { Link } from 'react-router';
+var axios = require('axios');
 
+
+var updateLoggedIn = function(callback){
+	var isUser = null;
+    axios({
+      url: '/isUser',
+      withCredentials: true
+    }).then(function(response){
+      if(response.data.isUser){
+        isUser = true;
+      }
+      else{
+        isUser = false;
+      }
+      callback(isUser);
+    })
+}
 
 var NavBar = React.createClass({
 	getInitialState: function(){
+		//console.log(this)
 		return {
 			open: false,
 			loggedIn: false
 		}
 	},
 	componentDidMount: function(){
-		fetch('/isLoggedIn',{method:'get'
-		})
-		.then(function(response) {
-	      return response.json();
-	    }).then(function(response) {
-	      if (response.loggedIn) {
-	        this.setState({
-	        	loggedIn:true
-	        })
-	      }
+	    var loggedIn = updateLoggedIn(function(isUser){
+	    	this.setState({loggedIn:isUser})
 	    }.bind(this))
+
+	    //console.log(this.state)
 	},
 	click: function(e){
 		e.preventDefault();
+		var loggedIn = updateLoggedIn(function(isUser){
+	    	this.setState({loggedIn:isUser})
+	    }.bind(this))
 		this.setState({
 			open: !this.state.open
 		});
@@ -37,12 +52,38 @@ var NavBar = React.createClass({
 
 	},
 	closeLogInOut(e){
-		console.log(this.state);
 		this.setState({
-			open:false,
-			loggedIn:!this.state.loggedIn
+			open:false
 		})
-		console.log("navbar state changed")
+		axios({
+	      url: '/isUser',
+	      withCredentials: true
+	    }).then(function(response){
+	      if(response.data.isUser!=this.state.loggedIn){
+	        this.setState({
+	        	loggedIn:response.data.isUser
+	        })
+	      }
+	    }.bind(this))
+
+	},
+	logInOut(e){
+		//console.log(this)
+		if(!this.state.loggedIn){
+			this.props.history.push('/login')
+		}
+		else{
+			axios({
+		      url: '/logout',
+		      withCredentials: true
+		    }).then(function(response){
+		    	if(response.data.success){
+		    		this.props.history.push('/home')
+		    	}
+		    }.bind(this))
+		}
+		
+	    this.closeLogInOut(e);
 	},
 	render: function(){
 		var logInOutLink = this.state.loggedIn
@@ -59,7 +100,7 @@ var NavBar = React.createClass({
 						: 'bt-menu bt-menu-close'
 				}>
 					<a className="bt-menu-trigger" onClick={this.click}><span>Menu</span></a>
-					<ul>
+					<ul style={this.state.open ? {pointerEvents: 'auto'} : {pointerEvents: 'none'}}>
 						<li><Link to="/home"><a onClick={this.close}>Home</a></Link></li>
 						<li><Link to={logInOutLink}><a onClick={this.closeLogInOut}>{logInOrOut}</a></Link></li>
 						<li><Link to="/leaderboard"><a onClick={this.close}>Leaderboard</a></Link></li>

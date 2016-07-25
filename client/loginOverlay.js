@@ -1,11 +1,13 @@
 var React = require('react');
 var ReactDOM = require('react-dom');
+
 import {Link} from 'react-router';
 
 var LoginOverlay = React.createClass({
   getInitialState: function() {
+    console.log(this)
     return {
-      username: '', 
+      username: '',
       password: '',
       games:null
       // gameEnded:false,
@@ -29,8 +31,8 @@ var LoginOverlay = React.createClass({
   //         console.log('state set')
   //       }
   //     }.bind(this))
-    
-    
+
+
   // },
   update(e) {
     this.setState({
@@ -52,7 +54,7 @@ var LoginOverlay = React.createClass({
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-        username: this.state.username, 
+        username: this.state.username,
         password: this.state.password
       })
     }).then(function(response) {
@@ -70,21 +72,28 @@ var LoginOverlay = React.createClass({
 
     //ajax facebook get
 
-    fetch('/login/facebook',{method:'get'
-    }).then(function(response) {
-      console.log(response);
-        return response.json();
-      }).then(function(response) {
-        console.log(response);
-        if (response.success) {
-          this.props.history.push('/home');
-        }
-      }.bind(this))
+    // fetch('/login/facebook',{method:'get'
+    // }).then(function(response) {
+    //   console.log(response);
+    //     return response.json();
+    //   }).then(function(response) {
+    //     console.log(response);
+    //     if (response.success) {
+    //       this.props.history.push('/home');
+    //     }
+    //   }.bind(this))
+
+    // axios({
+    //   url:'/login/facebook',
+    //   withCredentials:true
+    // })
 
   },
   render: function() {
     return (
       <div className="screen">
+                    
+
         <div className="login" id="login">
           <h1>Hey you!</h1>
           <div className="pa">Login here.</div>
@@ -94,8 +103,9 @@ var LoginOverlay = React.createClass({
             <input type="password" placeholder="Password" name="password" id="password" value={this.state.password} onChange={this.update}></input>
             <div className="buttongroup">
               <button className="form-btn dx" onClick={this.login}>Login</button>
-              <button className="form-btn fb" onClick={this.facebook}>Login with Facebook</button>
+              <a href="/login/facebook" >Login with Facebook</a>
             </div>
+            
           </form>
         </div>
         <div className="register-log">
