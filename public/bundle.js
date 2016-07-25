@@ -2684,10 +2684,23 @@ var ClassicLevels = React.createClass({
         })
       ),
       React.createElement(
-        'h3',
-        null,
-        'Highest: Level ',
-        this.state.maxN
+        'div',
+        { className: 'levelsFooter' },
+        React.createElement(
+          'h3',
+          { className: 'classic' },
+          'Highest: Level ',
+          this.state.maxN
+        ),
+        React.createElement(
+          _reactRouter.Link,
+          { to: '/home' },
+          React.createElement(
+            'h3',
+            { className: 'classicBackground returnBtn' },
+            '← Go Back'
+          )
+        )
       )
     );
   }
@@ -2729,10 +2742,23 @@ var RelaxedLevels = React.createClass({
         })
       ),
       React.createElement(
-        'h3',
-        null,
-        'Highest: Level ',
-        this.state.maxN
+        'div',
+        { className: 'levelsFooter' },
+        React.createElement(
+          'h3',
+          { className: 'relaxed' },
+          'Highest: Level ',
+          this.state.maxN
+        ),
+        React.createElement(
+          _reactRouter.Link,
+          { to: '/home' },
+          React.createElement(
+            'h3',
+            { className: 'relaxedBackground returnBtn' },
+            '← Go Back'
+          )
+        )
       )
     );
   }
@@ -2774,10 +2800,23 @@ var SilentLevels = React.createClass({
         })
       ),
       React.createElement(
-        'h3',
-        null,
-        'Highest: Level ',
-        this.state.maxN
+        'div',
+        { className: 'levelsFooter' },
+        React.createElement(
+          'h3',
+          { className: 'silent' },
+          'Highest: Level ',
+          this.state.maxN
+        ),
+        React.createElement(
+          _reactRouter.Link,
+          { to: '/home' },
+          React.createElement(
+            'h3',
+            { className: 'silentBackground returnBtn' },
+            '← Go Back'
+          )
+        )
       )
     );
   }
@@ -2819,10 +2858,23 @@ var AdvancedLevels = React.createClass({
         })
       ),
       React.createElement(
-        'h3',
-        null,
-        'Highest: Level ',
-        this.state.maxN
+        'div',
+        { className: 'levelsFooter' },
+        React.createElement(
+          'h3',
+          { className: 'advanced' },
+          'Highest: Level ',
+          this.state.maxN
+        ),
+        React.createElement(
+          _reactRouter.Link,
+          { to: '/home' },
+          React.createElement(
+            'h3',
+            { className: 'advancedBackground returnBtn' },
+            '← Go Back'
+          )
+        )
       )
     );
   }
