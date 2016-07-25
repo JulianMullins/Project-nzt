@@ -100,11 +100,12 @@ var NavBar = React.createClass({
 						: 'bt-menu bt-menu-close'
 				}>
 					<a className="bt-menu-trigger" onClick={this.click}><span>Menu</span></a>
-					<ul>
+					<ul style={this.state.open ? {pointerEvents: 'auto'} : {pointerEvents: 'none'}}>
 						<li><Link to="/home"><a onClick={this.close}>Home</a></Link></li>
 						<li><Link to={logInOutLink}><a onClick={this.closeLogInOut}>{logInOrOut}</a></Link></li>
 						<li><Link to="/leaderboard"><a onClick={this.close}>Leaderboard</a></Link></li>
 						<li><Link to="/stats"><a onClick={this.close}>Stats</a></Link></li>
+						<li><Link to="/tutorial"><a onClick={this.close}>Tutorial</a></Link></li>
 						<li><Link to="/science"><a onClick={this.close}>The Science</a></Link></li>
 						<li><Link to="/contact"><a onClick={this.close}>Contact</a></Link></li>
 					</ul>

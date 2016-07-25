@@ -37,7 +37,6 @@ var Mainmenu = React.createClass({
     // var username = this.state.hasUsername
     //   ? '<div>{this.state.username}</div>'
     //   : '';
-
     return (
       <div>
         <div className="heading">
