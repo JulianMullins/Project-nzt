@@ -14,7 +14,7 @@ var RegisterOverlay = React.createClass({
   },
   // componentDidMount(){
   //   if(this.props.location.pathname =='/gameOver/register'){
-      
+
   //     this.setState({
   //       gameEnded:true
   //     })
@@ -31,7 +31,7 @@ var RegisterOverlay = React.createClass({
   //       }
   //     }.bind(this))
   //   }
-    
+
   // },
   // click(e){
   //   e.preventDefault();

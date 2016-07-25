@@ -13,6 +13,7 @@ var Home = require('./Mainmenu');
 var GameOver = require('./gameOver');
 var NavBar = require('./navBar');
 var Leaderboard = require('./leaderboard');
+var Stats = require('./stats');
 var Contact = require('./contact');
 var Science = require('./science');
 var Stats = require('./stats')
@@ -50,10 +51,7 @@ var App = React.createClass({
   render() {
     return (
       <div>
-
-        <NavBar/>
-        {this.props.children}
-
+        <NavBar/> {this.props.children}
       </div>
     )
   }
