@@ -15,6 +15,8 @@ var NavBar = require('./navBar');
 var Leaderboard = require('./leaderboard');
 var Contact = require('./contact');
 var Science = require('./science');
+var Tutorial = require('./tutorial');
+
 
 
 //Stats
@@ -49,7 +51,7 @@ var App = React.createClass({
     return (
       <div>
 
-        <NavBar/> 
+        <NavBar/>
         {this.props.children}
 
       </div>
@@ -61,16 +63,20 @@ ReactDOM.render((
   <Router history={hashHistory}>
     <Route path="/" component={App}>
       <Route path="home" component={Home}/>
+
       <Route path="login/facebook" component={FacebookLogin}/>
       <Route path="gameOver/login" component={Login}/>
       <Route path="gameOver/register" component={Register}/>
       <Route path="login" component={Login}/>
       <Route path="logout" component={Logout}/>
+
       <Route path="register" component={Register}/>
       <Route path="gameOver" component={GameOver}/>
       <Route path="leaderboard" component={Leaderboard}/>
       <Route path="contact" component={Contact}/>
       <Route path="science" component={Science}/>
+
+      <Route path="tutorial" component={Tutorial}/>
 
       <Route path="levels/classic" component={ClassicLevels}/>
       <Route path="levels/relaxed" component={RelaxedLevels}/>
@@ -85,3 +91,5 @@ ReactDOM.render((
 ), document.getElementById('root'), function() {
   console.log("rendered")
 });
+
+// ReactDOM.render(<GameOver/>, document.getElementById('root'));
