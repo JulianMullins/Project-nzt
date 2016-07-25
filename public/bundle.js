@@ -558,43 +558,6 @@ var AdvancedMode = React.createClass({
           'a',
           { className: 'btn' },
           this.state.initialTimer
-        ),
-        React.createElement(
-          'pl',
-          { style: { margin: '0 0 20px' } },
-          'Use the keys to press the buttons.'
-        ),
-        React.createElement(
-          'div',
-          { className: 'key-wrapper' },
-          React.createElement(
-            'ul',
-            { className: 'row' },
-            React.createElement(
-              'li',
-              { className: 'key k38' },
-              '↑'
-            )
-          ),
-          React.createElement(
-            'ul',
-            { className: 'row' },
-            React.createElement(
-              'li',
-              { className: 'key k37' },
-              '←'
-            ),
-            React.createElement(
-              'li',
-              { className: 'key k40' },
-              '↓'
-            ),
-            React.createElement(
-              'li',
-              { className: 'key k39' },
-              '→'
-            )
-          )
         )
       )
     ) : '';
@@ -707,15 +670,6 @@ var AdvancedMode = React.createClass({
           'a',
           { onClick: this.colorMatch, style: this.state.colorPressed },
           'COLOR'
-        )
-      ),
-      React.createElement(
-        'div',
-        null,
-        React.createElement(
-          'a',
-          { href: '#', className: 'btn btn-default btn-circle' },
-          React.createElement('i', { className: 'fa fa-question' })
         )
       )
     );
@@ -1013,43 +967,6 @@ var ClassicMode = React.createClass({
           'a',
           { className: 'btn' },
           this.state.initialTimer
-        ),
-        React.createElement(
-          'pl',
-          { style: { margin: '0 0 20px' } },
-          'Use the keys to press the buttons.'
-        ),
-        React.createElement(
-          'div',
-          { className: 'key-wrapper' },
-          React.createElement(
-            'ul',
-            { className: 'row' },
-            React.createElement(
-              'li',
-              { className: 'key k38' },
-              '↑'
-            )
-          ),
-          React.createElement(
-            'ul',
-            { className: 'row' },
-            React.createElement(
-              'li',
-              { className: 'key k37' },
-              '←'
-            ),
-            React.createElement(
-              'li',
-              { className: 'key k40' },
-              '↓'
-            ),
-            React.createElement(
-              'li',
-              { className: 'key k39' },
-              '→'
-            )
-          )
         )
       )
     ) : '';
@@ -1390,7 +1307,7 @@ var RelaxedMode = React.createClass({
       ////////////////////////////////////////////////////////////////////////////////////////
       ////////////////////////////////////////////////////////////////////////////////////
       //RUTH THIS IS WHERE THE GAME ENDS///////////////////////////////////////////
-      if (timeKeeper === 2) {
+      if (timeKeeper === 60) {
         //give gameScore variable the final score
         gameScore = this.state.score;
         console.log(gameScore, 'game score');
@@ -1873,43 +1790,6 @@ var SilentMode = React.createClass({
           'a',
           { className: 'btn' },
           this.state.initialTimer
-        ),
-        React.createElement(
-          'pl',
-          { style: { margin: '0 0 20px' } },
-          'Use the keys to press the buttons.'
-        ),
-        React.createElement(
-          'div',
-          { className: 'key-wrapper' },
-          React.createElement(
-            'ul',
-            { className: 'row' },
-            React.createElement(
-              'li',
-              { className: 'key k38' },
-              '↑'
-            )
-          ),
-          React.createElement(
-            'ul',
-            { className: 'row' },
-            React.createElement(
-              'li',
-              { className: 'key k37' },
-              '←'
-            ),
-            React.createElement(
-              'li',
-              { className: 'key k40' },
-              '↓'
-            ),
-            React.createElement(
-              'li',
-              { className: 'key k39' },
-              '→'
-            )
-          )
         )
       )
     ) : '';
@@ -3523,19 +3403,6 @@ var NavBar = React.createClass({
 								'a',
 								{ onClick: this.close },
 								'Stats'
-							)
-						)
-					),
-					React.createElement(
-						'li',
-						null,
-						React.createElement(
-							_reactRouter.Link,
-							{ to: '/tutorial' },
-							React.createElement(
-								'a',
-								{ onClick: this.close },
-								'Tutorial'
 							)
 						)
 					),
