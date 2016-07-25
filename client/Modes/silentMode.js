@@ -40,15 +40,15 @@ var SilentMode = React.createClass({
       posStyle: noStyle,
       keepScore: false,
       tempUser: true,
-      gameId:null,
-      mode:'silent'
+      gameId: null,
+      mode: 'silent'
     }
   },
   componentDidMount: function() {
     timer = setInterval(this.timer, 1000);
 
     fetch('/startGame/' + this.state.mode + '/' + this.state.N, {
-      method:'POST',
+      method: 'POST',
       credentials: 'include',
       headers: {
         'Accept': 'application/json',
@@ -58,16 +58,7 @@ var SilentMode = React.createClass({
       return response.json();
     }).then(function(response) {
       this.setState({tempUser: response.tempUser, gameId: response.gameId})
-    }.bind(this))
-
-    window.onkeyup = function(e) {
-      if (e.keyCode == 37) {
-        this.positionMatch();
-      } else if (e.keyCode == 39) {
-        this.colorMatch();
-      }
-    }.bind(this);
-
+    }.bind(this));
     // fetch('/startGame/'+this.state.mode+'/'+this.state.N, {
     //  method: 'post'
     // });
@@ -75,6 +66,15 @@ var SilentMode = React.createClass({
   componentWillUnmount: function() {
     clearInterval(iterations);
     clearInterval(timer);
+  },
+  enableKeys: function() {
+    window.onkeyup = function(e) {
+      if (e.keyCode == 37) {
+        this.positionMatch();
+      } else if (e.keyCode == 39) {
+        this.colorMatch();
+      }
+    }.bind(this);
   },
   timer: function() {
     this.setState({
@@ -85,6 +85,7 @@ var SilentMode = React.createClass({
     }
     if (this.state.initialTimer === 0) {
       this.setState({overlay: false});
+      this.enableKeys();
       clearInterval(timer);
     }
   },
@@ -219,7 +220,7 @@ var SilentMode = React.createClass({
             return response.json();
           }).then(function(response) {
             if (response.success) {
-              this.props.history.push('/gameOver');
+              this.props.history.push('/gameOver/'+this.state.mode+"/"+'/'+gameScore);
             }
           }.bind(this))
 
@@ -265,18 +266,18 @@ var SilentMode = React.createClass({
         <div className="overlay">
           <center>
             <a className="btn">{this.state.initialTimer}</a>
-              <h4>Use the keys to press the buttons.</h4>
-                <div className="key-wrapper">
-                <ul className="row">
-                  <li className="key k38">↑</li>
-                </ul>
+            <h4>Use the keys to press the buttons.</h4>
+            <div className="key-wrapper">
+              <ul className="row">
+                <li className="key k38">↑</li>
+              </ul>
 
-                <ul className="row">
-                  <li className="key k37">←</li>
-                  <li className="key k40">↓</li>
-                  <li className="key k39">→</li>
-                </ul>
-              </div>
+              <ul className="row">
+                <li className="key k37">←</li>
+                <li className="key k40">↓</li>
+                <li className="key k39">→</li>
+              </ul>
+            </div>
           </center>
         </div>
       )
@@ -331,18 +332,20 @@ var SilentMode = React.createClass({
     return (
       <div className="gameContainer">
         {overlay}
-        <span className="gameTitle">
-          <h1 className="silent modeTitle">Silent</h1>
-          <h1 className="silent nTitle">(N={this.state.N})</h1>
-        </span>
-        <div className="gameHeading">
-          <div className="gameScore silent">
-            <h2>Score: {this.state.score}</h2>
-            {scoreUpdate}
+        <div className="gameFullHeader">
+          <span className="gameTitle">
+            <h1 className="silent modeTitle">Silent</h1>
+            <h1 className="silent nTitle">(N={this.state.N})</h1>
+          </span>
+          <div className="gameHeading">
+            <div className="gameScore silent">
+              <h2>Score: {this.state.score}</h2>
+              {scoreUpdate}
+            </div>
+            <GameTimer timeStyle={{
+              'color': "#7CD9D2"
+            }}></GameTimer>
           </div>
-          <GameTimer timeStyle={{
-            'color': "#7CD9D2"
-          }}></GameTimer>
         </div>
         <div className="gameBoard">
           <div className="gameSquare" style={this.state.style[0]}></div>
@@ -355,12 +358,14 @@ var SilentMode = React.createClass({
           <div className="gameSquare" style={this.state.style[7]}></div>
           <div className="gameSquare" style={this.state.style[8]}></div>
         </div>
-        <div className="scoreAlert">
-          {scoreAlert}
-        </div>
-        <div className="gameButtonsContainer silentBackground">
-          <a onClick={this.positionMatch} style={this.state.posStyle}>POSITION</a>
-          <a onClick={this.colorMatch} style={this.state.colorStyle}>COLOR</a>
+        <div className="gameFullFooter">
+          <div className="scoreAlert">
+            {scoreAlert}
+          </div>
+          <div className="gameButtonsContainer silentBackground">
+            <a onClick={this.positionMatch} style={this.state.posStyle}>POSITION</a>
+            <a onClick={this.colorMatch} style={this.state.colorStyle}>COLOR</a>
+          </div>
         </div>
       </div>
     );

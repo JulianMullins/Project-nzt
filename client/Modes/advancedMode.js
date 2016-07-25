@@ -51,7 +51,7 @@ var AdvancedMode = React.createClass({
     timer = setInterval(this.timer, 1000);
 
     fetch('/startGame/' + this.state.mode + '/' + this.state.N, {
-      method:'POST',
+      method: 'POST',
       credentials: 'include',
       headers: {
         'Accept': 'application/json',
@@ -62,25 +62,23 @@ var AdvancedMode = React.createClass({
     }).then(function(response) {
       this.setState({tempUser: response.tempUser, gameId: response.gameId})
     }.bind(this))
-
-
-    {
-      window.onkeyup = function(e) {
-        if (e.keyCode == 37) {
-          this.soundMatch();
-        }
-        if (e.keyCode == 38) {
-          this.positionMatch();
-        }
-        if (e.keyCode == 39) {
-          this.colorMatch();
-        }
-      }.bind(this)
-    }
   },
   componentWillUnmount: function() {
     clearInterval(iterations);
     clearInterval(timer);
+  },
+  enableKeys: function() {
+    window.onkeyup = function(e) {
+      if (e.keyCode == 37) {
+        this.soundMatch();
+      }
+      if (e.keyCode == 38) {
+        this.positionMatch();
+      }
+      if (e.keyCode == 39) {
+        this.colorMatch();
+      }
+    }.bind(this)
   },
   timer: function() {
     this.setState({
@@ -91,6 +89,7 @@ var AdvancedMode = React.createClass({
     }
     if (this.state.initialTimer === 0) {
       this.setState({overlay: false});
+      this.enableKeys();
       clearInterval(timer);
     }
   },
@@ -325,18 +324,18 @@ var AdvancedMode = React.createClass({
         <div className="overlay">
           <center>
             <a className="btn">{this.state.initialTimer}</a>
-              <h4>Use the keys to press the buttons.</h4>
-                <div className="key-wrapper">
-                <ul className="row">
-                  <li className="key k38">↑</li>
-                </ul>
+            <h4>Use the keys to press the buttons.</h4>
+            <div className="key-wrapper">
+              <ul className="row">
+                <li className="key k38">↑</li>
+              </ul>
 
-                <ul className="row">
-                  <li className="key k37">←</li>
-                  <li className="key k40">↓</li>
-                  <li className="key k39">→</li>
-                </ul>
-              </div>
+              <ul className="row">
+                <li className="key k37">←</li>
+                <li className="key k40">↓</li>
+                <li className="key k39">→</li>
+              </ul>
+            </div>
           </center>
         </div>
       )
@@ -380,18 +379,20 @@ var AdvancedMode = React.createClass({
     return (
       <div className="gameContainer">
         {overlay}
-        <span className="gameTitle">
-          <h1 className="advanced modeTitle">Advanced</h1>
-          <h1 className="advanced nTitle">(N={this.state.N})</h1>
-        </span>
-        <div className="gameHeading">
-          <div className="gameScore advanced">
-            <h2>Score: {this.state.score}</h2>
-            {scoreUpdate}
+        <div className="gameFullHeader">
+          <span className="gameTitle">
+            <h1 className="advanced modeTitle">Advanced</h1>
+            <h1 className="advanced nTitle">(N={this.state.N})</h1>
+          </span>
+          <div className="gameHeading">
+            <div className="gameScore advanced">
+              <h2>Score: {this.state.score}</h2>
+              {scoreUpdate}
+            </div>
+            <GameTimer timeStyle={{
+              'color': "#F1BA03"
+            }}></GameTimer>
           </div>
-          <GameTimer timeStyle={{
-            'color': "#F1BA03"
-          }}></GameTimer>
         </div>
         <div className="gameBoard">
           <div className="gameSquare" style={this.state.style[0]}></div>
@@ -404,16 +405,15 @@ var AdvancedMode = React.createClass({
           <div className="gameSquare" style={this.state.style[7]}></div>
           <div className="gameSquare" style={this.state.style[8]}></div>
         </div>
-        <div className="scoreAlert">
-          {scoreAlert}
-        </div>
-        <div className="gameButtonsContainer advancedBackground" onKeyPress={this.handleKeyPres}>
-          <a onClick={this.soundMatch} style={this.state.soundPressed}>SOUND</a>
-          <a onClick={this.positionMatch} style={this.state.positionPressed}>POSITION</a>
-          <a onClick={this.colorMatch} style={this.state.colorPressed}>COLOR</a>
-        </div>
-        <div>
-          <a href="#" className="btn btn-default btn-circle"><i className="fa fa-question"></i></a>
+        <div className="gameFullFooter">
+          <div className="scoreAlert">
+            {scoreAlert}
+          </div>
+          <div className="gameButtonsContainer advancedBackground" onKeyPress={this.handleKeyPres}>
+            <a onClick={this.soundMatch} style={this.state.soundPressed}>SOUND</a>
+            <a onClick={this.positionMatch} style={this.state.positionPressed}>POSITION</a>
+            <a onClick={this.colorMatch} style={this.state.colorPressed}>COLOR</a>
+          </div>
         </div>
       </div>
     );

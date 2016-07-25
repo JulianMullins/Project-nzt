@@ -41,14 +41,14 @@ var ClassicMode = React.createClass({
       keepScore: false,
       tempUser: true,
       gameId: null,
-      mode:'classic'
+      mode: 'classic'
     }
   },
   componentDidMount: function() {
     timer = setInterval(this.timer, 1000);
 
     fetch('/startGame/' + this.state.mode + '/' + this.state.N, {
-      method:'POST',
+      method: 'POST',
       credentials: 'include',
       headers: {
         'Accept': 'application/json',
@@ -59,8 +59,12 @@ var ClassicMode = React.createClass({
     }).then(function(response) {
       this.setState({tempUser: response.tempUser, gameId: response.gameId})
     }.bind(this))
-
-
+  },
+  componentWillUnmount: function() {
+    clearInterval(iterations);
+    clearInterval(timer);
+  },
+  enableKeys: function() {
     window.onkeyup = function(e) {
       if (e.keyCode == 37) {
         this.positionMatch();
@@ -69,10 +73,6 @@ var ClassicMode = React.createClass({
         this.soundMatch();
       }
     }.bind(this)
-  },
-  componentWillUnmount: function() {
-    clearInterval(iterations);
-    clearInterval(timer);
   },
   timer: function() {
     this.setState({
@@ -83,6 +83,7 @@ var ClassicMode = React.createClass({
     }
     if (this.state.initialTimer === 0) {
       this.setState({overlay: false});
+      this.enableKeys();
       clearInterval(timer);
     }
   },
@@ -258,15 +259,13 @@ var ClassicMode = React.createClass({
         <div className="overlay">
           <center>
             <a className="btn">{this.state.initialTimer}</a>
-            <h4 style={{margin: '0 0 20px'}}>Use the keys to press the buttons.</h4>
-              <div className="key-wrapper">
-              <ul className="row">
-                <li className="key k38">↑</li>
-              </ul>
+            <h4 style={{
+              margin: '0 0 20px'
+            }}>Use the keys to press the buttons.</h4>
+            <div className="key-wrapper">
 
               <ul className="row">
                 <li className="key k37">←</li>
-                <li className="key k40">↓</li>
                 <li className="key k39">→</li>
               </ul>
             </div>
@@ -313,18 +312,20 @@ var ClassicMode = React.createClass({
     return (
       <div className="gameContainer">
         {overlay}
-        <span className="gameTitle">
-          <h1 className="classic modeTitle">Classic</h1>
-          <h1 className="classic nTitle">(N={this.state.N})</h1>
-        </span>
-        <div className="gameHeading">
-          <div className="gameScore classic">
-            <h2>Score: {this.state.score}</h2>
-            {scoreUpdate}
+        <div className="gameFullHeader">
+          <span className="gameTitle">
+            <h1 className="classic modeTitle">Classic</h1>
+            <h1 className="classic nTitle">(N={this.state.N})</h1>
+          </span>
+          <div className="gameHeading">
+            <div className="gameScore classic">
+              <h2>Score: {this.state.score}</h2>
+              {scoreUpdate}
+            </div>
+            <GameTimer timeStyle={{
+              'color': "#F13542"
+            }}></GameTimer>
           </div>
-          <GameTimer timeStyle={{
-            'color': "#F13542"
-          }}></GameTimer>
         </div>
         <div className="gameBoard">
           <div className="gameSquare" style={this.state.style[0]}></div>
@@ -337,12 +338,14 @@ var ClassicMode = React.createClass({
           <div className="gameSquare" style={this.state.style[7]}></div>
           <div className="gameSquare" style={this.state.style[8]}></div>
         </div>
-        <div className="scoreAlert">
-          {scoreAlert}
-        </div>
-        <div className="gameButtonsContainer classicBackground">
-          <a onClick={this.positionMatch} style={this.state.posStyle}>POSITION</a>
-          <a onClick={this.soundMatch} style={this.state.soundStyle}>SOUND</a>
+        <div className="gameFullFooter">
+          <div className="scoreAlert">
+            {scoreAlert}
+          </div>
+          <div className="gameButtonsContainer classicBackground">
+            <a onClick={this.positionMatch} style={this.state.posStyle}>POSITION</a>
+            <a onClick={this.soundMatch} style={this.state.soundStyle}>SOUND</a>
+          </div>
         </div>
       </div>
     );
