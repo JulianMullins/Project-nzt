@@ -62,7 +62,7 @@ var AdvancedMode = React.createClass({
     }).then(function(response) {
       this.setState({tempUser: response.tempUser, gameId: response.gameId})
     }.bind(this))
-    
+
 
     {
       window.onkeyup = function(e) {
