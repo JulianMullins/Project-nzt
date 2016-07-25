@@ -11,7 +11,7 @@
   // 	key = (e.keyCode) ? e.keyCode : e.which;
   // 	$('.key.k' + key).removeClass('active');
   // });
-})
+// })
 
 // $(document).ready(function () {
 //
