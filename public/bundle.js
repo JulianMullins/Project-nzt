@@ -1446,6 +1446,43 @@ var RelaxedMode = React.createClass({
           'a',
           { className: 'btn' },
           this.state.initialTimer
+        ),
+        React.createElement(
+          'pl',
+          { style: { margin: '0 0 20px' } },
+          'Use the keys to press the buttons.'
+        ),
+        React.createElement(
+          'div',
+          { className: 'key-wrapper' },
+          React.createElement(
+            'ul',
+            { className: 'row' },
+            React.createElement(
+              'li',
+              { className: 'key k38' },
+              '↑'
+            )
+          ),
+          React.createElement(
+            'ul',
+            { className: 'row' },
+            React.createElement(
+              'li',
+              { className: 'key k37' },
+              '←'
+            ),
+            React.createElement(
+              'li',
+              { className: 'key k40' },
+              '↓'
+            ),
+            React.createElement(
+              'li',
+              { className: 'key k39' },
+              '→'
+            )
+          )
         )
       )
     ) : '';
