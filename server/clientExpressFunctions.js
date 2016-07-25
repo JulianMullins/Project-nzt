@@ -69,7 +69,7 @@ router.post('/startGame/:mode/:nLevel',function(req,res,next){
 
   //       }
   //     }.bind(this))
-  
+
   //   }
     // else{
       console.log(req.user);
@@ -86,8 +86,9 @@ router.post('/startGame/:mode/:nLevel',function(req,res,next){
         }
         else{
           req.user.currentGame.unshift(game);
+          req.user.save();
           console.log(req.user, "game posted")
-          res.json({gameId: game._id,tempUser:true})
+          res.json({gameId: game._id,tempUser:false})
         }
       })
     // }
@@ -157,21 +158,27 @@ router.get('/getUser',function(req,res,next){
     username:req.user.username
   })
 })
- 
+
+
 router.get('/getGame',function(req,res,next){
+  console.log(req.user)
   Game.findById(req.user.currentGame[0],function(err,game){
     if(err){
       console.log(err)
       res.json({success:false})
     }
     else{
+      console.log(game)
       res.json({game:game,success:true})
     }
   })
 })
 
 router.post('/gameEnd',function(req,res,next){
-  Game.findById(req.body.gameId,function(err,game){
+  console.log("game ended")
+  console.log(req.user)
+  console.log(req.body)
+  Game.findById(req.user.currentGame[0],function(err,game){
     if(err){
       console.log(err);
     }
@@ -181,6 +188,8 @@ router.post('/gameEnd',function(req,res,next){
     else{
       game.score = req.body.score;
       game.reactionTimes=req.body.reactionTimes;
+      game.save();
+      console.log("game ended successfully",game)
       res.json({success:true,score:req.body.score})
     }
   })

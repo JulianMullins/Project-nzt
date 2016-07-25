@@ -1,6 +1,8 @@
 var React = require('react');
 var ReactDOM = require('react-dom');
 var axios = require('axios');
+axios.defaults.baseURL = process.env.url;
+
 
 import { Link } from 'react-router'
 var loginOverlay = require('./loginOverlay');
@@ -32,17 +34,19 @@ var GameOverOverlay = React.createClass({
   },
   componentDidMount(){
       
-    axios.all([getUser(),getGame()])
-      .then(axios.spread(function(userData,gameData){
-        this.setState({
-          username:userData.data.username,
-          alreadyLoggedIn:userData.data.alreadyLoggedIn,
-          score:gameData.data.game.score,
-          mode:gameData.data.game.mode,
-          nLevel:gameData.data.game.nLevel
-        })
-        console.log("component mounted")
-      }.bind(this)))
+    // axios.all([getUser(),getGame()])
+    //   .then(axios.spread(function(userData,gameData){
+    //     this.setState({
+    //       username:userData.data.username,
+    //       alreadyLoggedIn:userData.data.alreadyLoggedIn,
+    //       score:gameData.data.game.score,
+    //       mode:gameData.data.game.mode,
+    //       nLevel:gameData.data.game.nLevel
+    //     })
+    //     console.log(userData,gameData)
+    //     console.log("component mounted")
+    //   }.bind(this)))
+    this.getData();
 
 
   },
@@ -96,7 +100,7 @@ var GameOverOverlay = React.createClass({
     this.props.history.push('/game/'+this.state.mode+'/'+(this.state.n+1))
   },
   render: function() {
-    this.getData();
+    // this.getData();
 
     var loggedIn = this.state.alreadyLoggedIn
 
