@@ -1,6 +1,8 @@
 var React = require('react');
 var GameTimer = require('./gameTimer');
 
+var axios = require('axios');
+
 //COLLECTION OF GLOBAL VARIABLES TO MAKE EVERYONES LIFE EASIER
 //create global variable for reaction counter
 var reactionStart;
@@ -14,6 +16,7 @@ var timer;
 
 var RelaxedMode = React.createClass({
   getInitialState: function() {
+    console.log("getting initial state")
     return {
       style: [
         standardStyle,
@@ -43,20 +46,18 @@ var RelaxedMode = React.createClass({
   },
   componentDidMount: function() {
     timer = setInterval(this.timer, 1000);
-
-    fetch('/startGame/' + this.state.mode + '/' + this.state.N, {
-      method: 'POST',
-      credentials: 'include',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      }
-    }).then(function(response) {
-
-      return response.json();
-    }).then(function(response) {
-      this.setState({tempUser: response.tempUser, gameId: response.gameId})
+    var thisUrl = '/startGame/'+this.state.mode+'/'+this.state.N;
+    axios.post('/startGame/'+this.state.mode+'/'+this.state.N)
+    .then(function(response){
+      console.log("start game posted",response)
+      this.setState({
+        tempUser:response.data.tempUser,
+        gameId: response.data.gameId
+      })
+      console.log("game posted")
     }.bind(this))
+    console.log("component mounted")
+
   },
   componentWillUnmount: function() {
     clearInterval(iterations);
@@ -176,21 +177,17 @@ var RelaxedMode = React.createClass({
         console.log(reactionTimes, 'reaction times')
         clearInterval(iterations);
 
-        fetch('/gameEnd', {
-          method: 'post',
-          credentials: 'include',
-          headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify({gameId: this.state.gameId, score: gameScore, reactionTimes: reactionTimes})
-        }).then(function(response) {
-          return response.json();
-        }).then(function(response) {
-          //if (response.success) {
-          this.props.history.push('/gameOver/' + response.score);
-          //}
+        axios.post('/gameEnd', {
+          gameId: this.state.gameId, 
+          score: gameScore, 
+          reactionTimes: reactionTimes
+        }).then(function(response){
+          console.log('end game posted')
+          if(response.data.success){
+            this.props.history.push('/gameOver');
+          }
         }.bind(this))
+
 
       }
       ////////////////////////////////////////////////////////////////////////////////////
@@ -276,18 +273,20 @@ var RelaxedMode = React.createClass({
     return (
       <div className="gameContainer">
         {overlay}
-        <span className="gameTitle">
-          <h1 className="relaxed modeTitle">Relaxed</h1>
-          <h1 className="relaxed nTitle">(N={this.state.N})</h1>
-        </span>
-        <div className="gameHeading">
-          <div className="gameScore relaxed">
-            <h2>Score: {this.state.score}</h2>
-            {scoreUpdate}
+        <div className="gameFullHeader">
+          <span className="gameTitle">
+            <h1 className="relaxed modeTitle">Relaxed</h1>
+            <h1 className="relaxed nTitle">(N={this.state.N})</h1>
+          </span>
+          <div className="gameHeading">
+            <div className="gameScore relaxed">
+              <h2>Score: {this.state.score}</h2>
+              {scoreUpdate}
+            </div>
+            <GameTimer timeStyle={{
+              'color': "#01B6A7"
+            }}></GameTimer>
           </div>
-          <GameTimer timeStyle={{
-            'color': "#01B6A7"
-          }}></GameTimer>
         </div>
         <div className="gameBoard">
           <div className="gameSquare" style={this.state.style[0]}></div>
@@ -300,11 +299,13 @@ var RelaxedMode = React.createClass({
           <div className="gameSquare" style={this.state.style[7]}></div>
           <div className="gameSquare" style={this.state.style[8]}></div>
         </div>
-        <div className="scoreAlert">
-          {scoreAlert}
-        </div>
-        <div className="gameButtonsContainer relaxedBackground">
-          <a onClick={this.posMatch} style={this.state.posStyle}>POSITION</a>
+        <div className="gameFullFooter">
+          <div className="scoreAlert">
+            {scoreAlert}
+          </div>
+          <div className="gameButtonsContainer relaxedBackground">
+            <a onClick={this.posMatch} style={this.state.posStyle}>POSITION</a>
+          </div>
         </div>
       </div>
     );

@@ -646,38 +646,42 @@ var AdvancedMode = React.createClass({
       { className: 'gameContainer' },
       overlay,
       React.createElement(
-        'span',
-        { className: 'gameTitle' },
-        React.createElement(
-          'h1',
-          { className: 'advanced modeTitle' },
-          'Advanced'
-        ),
-        React.createElement(
-          'h1',
-          { className: 'advanced nTitle' },
-          '(N=',
-          this.state.N,
-          ')'
-        )
-      ),
-      React.createElement(
         'div',
-        { className: 'gameHeading' },
+        { className: 'gameFullHeader' },
+        React.createElement(
+          'span',
+          { className: 'gameTitle' },
+          React.createElement(
+            'h1',
+            { className: 'advanced modeTitle' },
+            'Advanced'
+          ),
+          React.createElement(
+            'h1',
+            { className: 'advanced nTitle' },
+            '(N=',
+            this.state.N,
+            ')'
+          )
+        ),
         React.createElement(
           'div',
-          { className: 'gameScore advanced' },
+          { className: 'gameHeading' },
           React.createElement(
-            'h2',
-            null,
-            'Score: ',
-            this.state.score
+            'div',
+            { className: 'gameScore advanced' },
+            React.createElement(
+              'h2',
+              null,
+              'Score: ',
+              this.state.score
+            ),
+            scoreUpdate
           ),
-          scoreUpdate
-        ),
-        React.createElement(GameTimer, { timeStyle: {
-            'color': "#F1BA03"
-          } })
+          React.createElement(GameTimer, { timeStyle: {
+              'color': "#F1BA03"
+            } })
+        )
       ),
       React.createElement(
         'div',
@@ -694,35 +698,30 @@ var AdvancedMode = React.createClass({
       ),
       React.createElement(
         'div',
-        { className: 'scoreAlert' },
-        scoreAlert
-      ),
-      React.createElement(
-        'div',
-        { className: 'gameButtonsContainer advancedBackground', onKeyPress: this.handleKeyPres },
+        { className: 'gameFullFooter' },
         React.createElement(
-          'a',
-          { onClick: this.soundMatch, style: this.state.soundPressed },
-          'SOUND'
+          'div',
+          { className: 'scoreAlert' },
+          scoreAlert
         ),
         React.createElement(
-          'a',
-          { onClick: this.positionMatch, style: this.state.positionPressed },
-          'POSITION'
-        ),
-        React.createElement(
-          'a',
-          { onClick: this.colorMatch, style: this.state.colorPressed },
-          'COLOR'
-        )
-      ),
-      React.createElement(
-        'div',
-        null,
-        React.createElement(
-          'a',
-          { href: '#', className: 'btn btn-default btn-circle' },
-          React.createElement('i', { className: 'fa fa-question' })
+          'div',
+          { className: 'gameButtonsContainer advancedBackground', onKeyPress: this.handleKeyPres },
+          React.createElement(
+            'a',
+            { onClick: this.soundMatch, style: this.state.soundPressed },
+            'SOUND'
+          ),
+          React.createElement(
+            'a',
+            { onClick: this.positionMatch, style: this.state.positionPressed },
+            'POSITION'
+          ),
+          React.createElement(
+            'a',
+            { onClick: this.colorMatch, style: this.state.colorPressed },
+            'COLOR'
+          )
         )
       )
     );
@@ -1091,38 +1090,42 @@ var ClassicMode = React.createClass({
       { className: 'gameContainer' },
       overlay,
       React.createElement(
-        'span',
-        { className: 'gameTitle' },
-        React.createElement(
-          'h1',
-          { className: 'classic modeTitle' },
-          'Classic'
-        ),
-        React.createElement(
-          'h1',
-          { className: 'classic nTitle' },
-          '(N=',
-          this.state.N,
-          ')'
-        )
-      ),
-      React.createElement(
         'div',
-        { className: 'gameHeading' },
+        { className: 'gameFullHeader' },
+        React.createElement(
+          'span',
+          { className: 'gameTitle' },
+          React.createElement(
+            'h1',
+            { className: 'classic modeTitle' },
+            'Classic'
+          ),
+          React.createElement(
+            'h1',
+            { className: 'classic nTitle' },
+            '(N=',
+            this.state.N,
+            ')'
+          )
+        ),
         React.createElement(
           'div',
-          { className: 'gameScore classic' },
+          { className: 'gameHeading' },
           React.createElement(
-            'h2',
-            null,
-            'Score: ',
-            this.state.score
+            'div',
+            { className: 'gameScore classic' },
+            React.createElement(
+              'h2',
+              null,
+              'Score: ',
+              this.state.score
+            ),
+            scoreUpdate
           ),
-          scoreUpdate
-        ),
-        React.createElement(GameTimer, { timeStyle: {
-            'color': "#F13542"
-          } })
+          React.createElement(GameTimer, { timeStyle: {
+              'color': "#F13542"
+            } })
+        )
       ),
       React.createElement(
         'div',
@@ -1139,21 +1142,25 @@ var ClassicMode = React.createClass({
       ),
       React.createElement(
         'div',
-        { className: 'scoreAlert' },
-        scoreAlert
-      ),
-      React.createElement(
-        'div',
-        { className: 'gameButtonsContainer classicBackground' },
+        { className: 'gameFullFooter' },
         React.createElement(
-          'a',
-          { onClick: this.positionMatch, style: this.state.posStyle },
-          'POSITION'
+          'div',
+          { className: 'scoreAlert' },
+          scoreAlert
         ),
         React.createElement(
-          'a',
-          { onClick: this.soundMatch, style: this.state.soundStyle },
-          'SOUND'
+          'div',
+          { className: 'gameButtonsContainer classicBackground' },
+          React.createElement(
+            'a',
+            { onClick: this.positionMatch, style: this.state.posStyle },
+            'POSITION'
+          ),
+          React.createElement(
+            'a',
+            { onClick: this.soundMatch, style: this.state.soundStyle },
+            'SOUND'
+          )
         )
       )
     );
@@ -1229,6 +1236,8 @@ module.exports = GameTimer;
 var React = require('react');
 var GameTimer = require('./gameTimer');
 
+var axios = require('axios');
+
 //COLLECTION OF GLOBAL VARIABLES TO MAKE EVERYONES LIFE EASIER
 //create global variable for reaction counter
 var reactionStart;
@@ -1244,6 +1253,7 @@ var RelaxedMode = React.createClass({
   displayName: 'RelaxedMode',
 
   getInitialState: function getInitialState() {
+    console.log("getting initial state");
     return {
       style: [standardStyle, standardStyle, standardStyle, standardStyle, standardStyle, standardStyle, standardStyle, standardStyle, standardStyle],
       positionMatch: false,
@@ -1263,20 +1273,16 @@ var RelaxedMode = React.createClass({
   },
   componentDidMount: function componentDidMount() {
     _timer = setInterval(this.timer, 1000);
-
-    fetch('/startGame/' + this.state.mode + '/' + this.state.N, {
-      method: 'POST',
-      credentials: 'include',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      }
-    }).then(function (response) {
-
-      return response.json();
-    }).then(function (response) {
-      this.setState({ tempUser: response.tempUser, gameId: response.gameId });
+    var thisUrl = '/startGame/' + this.state.mode + '/' + this.state.N;
+    axios.post('/startGame/' + this.state.mode + '/' + this.state.N).then(function (response) {
+      console.log("start game posted", response);
+      this.setState({
+        tempUser: response.data.tempUser,
+        gameId: response.data.gameId
+      });
+      console.log("game posted");
     }.bind(this));
+    console.log("component mounted");
   },
   componentWillUnmount: function componentWillUnmount() {
     clearInterval(iterations);
@@ -1396,20 +1402,15 @@ var RelaxedMode = React.createClass({
         console.log(reactionTimes, 'reaction times');
         clearInterval(iterations);
 
-        fetch('/gameEnd', {
-          method: 'post',
-          credentials: 'include',
-          headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify({ gameId: this.state.gameId, score: gameScore, reactionTimes: reactionTimes })
+        axios.post('/gameEnd', {
+          gameId: this.state.gameId,
+          score: gameScore,
+          reactionTimes: reactionTimes
         }).then(function (response) {
-          return response.json();
-        }).then(function (response) {
-          //if (response.success) {
-          this.props.history.push('/gameOver/' + response.score);
-          //}
+          console.log('end game posted');
+          if (response.data.success) {
+            this.props.history.push('/gameOver');
+          }
         }.bind(this));
       }
       ////////////////////////////////////////////////////////////////////////////////////
@@ -1526,38 +1527,42 @@ var RelaxedMode = React.createClass({
       { className: 'gameContainer' },
       overlay,
       React.createElement(
-        'span',
-        { className: 'gameTitle' },
-        React.createElement(
-          'h1',
-          { className: 'relaxed modeTitle' },
-          'Relaxed'
-        ),
-        React.createElement(
-          'h1',
-          { className: 'relaxed nTitle' },
-          '(N=',
-          this.state.N,
-          ')'
-        )
-      ),
-      React.createElement(
         'div',
-        { className: 'gameHeading' },
+        { className: 'gameFullHeader' },
+        React.createElement(
+          'span',
+          { className: 'gameTitle' },
+          React.createElement(
+            'h1',
+            { className: 'relaxed modeTitle' },
+            'Relaxed'
+          ),
+          React.createElement(
+            'h1',
+            { className: 'relaxed nTitle' },
+            '(N=',
+            this.state.N,
+            ')'
+          )
+        ),
         React.createElement(
           'div',
-          { className: 'gameScore relaxed' },
+          { className: 'gameHeading' },
           React.createElement(
-            'h2',
-            null,
-            'Score: ',
-            this.state.score
+            'div',
+            { className: 'gameScore relaxed' },
+            React.createElement(
+              'h2',
+              null,
+              'Score: ',
+              this.state.score
+            ),
+            scoreUpdate
           ),
-          scoreUpdate
-        ),
-        React.createElement(GameTimer, { timeStyle: {
-            'color': "#01B6A7"
-          } })
+          React.createElement(GameTimer, { timeStyle: {
+              'color': "#01B6A7"
+            } })
+        )
       ),
       React.createElement(
         'div',
@@ -1574,16 +1579,20 @@ var RelaxedMode = React.createClass({
       ),
       React.createElement(
         'div',
-        { className: 'scoreAlert' },
-        scoreAlert
-      ),
-      React.createElement(
-        'div',
-        { className: 'gameButtonsContainer relaxedBackground' },
+        { className: 'gameFullFooter' },
         React.createElement(
-          'a',
-          { onClick: this.posMatch, style: this.state.posStyle },
-          'POSITION'
+          'div',
+          { className: 'scoreAlert' },
+          scoreAlert
+        ),
+        React.createElement(
+          'div',
+          { className: 'gameButtonsContainer relaxedBackground' },
+          React.createElement(
+            'a',
+            { onClick: this.posMatch, style: this.state.posStyle },
+            'POSITION'
+          )
         )
       )
     );
@@ -1606,7 +1615,7 @@ var newStyle = {
 
 module.exports = RelaxedMode;
 
-},{"./gameTimer":5,"react":273}],7:[function(require,module,exports){
+},{"./gameTimer":5,"axios":21,"react":273}],7:[function(require,module,exports){
 'use strict';
 
 var React = require('react');
@@ -1961,38 +1970,42 @@ var SilentMode = React.createClass({
       { className: 'gameContainer' },
       overlay,
       React.createElement(
-        'span',
-        { className: 'gameTitle' },
-        React.createElement(
-          'h1',
-          { className: 'silent modeTitle' },
-          'Silent'
-        ),
-        React.createElement(
-          'h1',
-          { className: 'silent nTitle' },
-          '(N=',
-          this.state.N,
-          ')'
-        )
-      ),
-      React.createElement(
         'div',
-        { className: 'gameHeading' },
+        { className: 'gameFullHeader' },
+        React.createElement(
+          'span',
+          { className: 'gameTitle' },
+          React.createElement(
+            'h1',
+            { className: 'silent modeTitle' },
+            'Silent'
+          ),
+          React.createElement(
+            'h1',
+            { className: 'silent nTitle' },
+            '(N=',
+            this.state.N,
+            ')'
+          )
+        ),
         React.createElement(
           'div',
-          { className: 'gameScore silent' },
+          { className: 'gameHeading' },
           React.createElement(
-            'h2',
-            null,
-            'Score: ',
-            this.state.score
+            'div',
+            { className: 'gameScore silent' },
+            React.createElement(
+              'h2',
+              null,
+              'Score: ',
+              this.state.score
+            ),
+            scoreUpdate
           ),
-          scoreUpdate
-        ),
-        React.createElement(GameTimer, { timeStyle: {
-            'color': "#7CD9D2"
-          } })
+          React.createElement(GameTimer, { timeStyle: {
+              'color': "#7CD9D2"
+            } })
+        )
       ),
       React.createElement(
         'div',
@@ -2009,21 +2022,25 @@ var SilentMode = React.createClass({
       ),
       React.createElement(
         'div',
-        { className: 'scoreAlert' },
-        scoreAlert
-      ),
-      React.createElement(
-        'div',
-        { className: 'gameButtonsContainer silentBackground' },
+        { className: 'gameFullFooter' },
         React.createElement(
-          'a',
-          { onClick: this.positionMatch, style: this.state.posStyle },
-          'POSITION'
+          'div',
+          { className: 'scoreAlert' },
+          scoreAlert
         ),
         React.createElement(
-          'a',
-          { onClick: this.colorMatch, style: this.state.colorStyle },
-          'COLOR'
+          'div',
+          { className: 'gameButtonsContainer silentBackground' },
+          React.createElement(
+            'a',
+            { onClick: this.positionMatch, style: this.state.posStyle },
+            'POSITION'
+          ),
+          React.createElement(
+            'a',
+            { onClick: this.colorMatch, style: this.state.colorStyle },
+            'COLOR'
+          )
         )
       )
     );
@@ -2200,6 +2217,7 @@ var GameOverOverlay = React.createClass({
   displayName: 'GameOverOverlay',
 
   getInitialState: function getInitialState() {
+
     return {
       username: null,
       alreadyLoggedIn: false,
@@ -2212,13 +2230,14 @@ var GameOverOverlay = React.createClass({
 
     axios.all([getUser(), getGame()]).then(axios.spread(function (userData, gameData) {
       this.setState({
-        username: userData.username,
-        alreadyLoggedIn: userData.alreadyLoggedIn,
-        score: gameData.game.score,
-        mode: gameData.game.mode,
-        nLevel: gameData.game.nLevel
+        username: userData.data.username,
+        alreadyLoggedIn: userData.data.alreadyLoggedIn,
+        score: gameData.data.game.score,
+        mode: gameData.data.game.mode,
+        nLevel: gameData.data.game.nLevel
       });
-    }));
+      console.log("component mounted");
+    }.bind(this)));
   },
 
 
@@ -2226,6 +2245,17 @@ var GameOverOverlay = React.createClass({
   //     getUser().bind(this);
   //     getScore().bind(this);
   // },
+  getData: function getData() {
+    axios.all([getUser(), getGame()]).then(axios.spread(function (userData, gameData) {
+      this.setState({
+        username: userData.data.username,
+        alreadyLoggedIn: userData.data.alreadyLoggedIn,
+        score: gameData.data.game.score,
+        mode: gameData.data.game.mode,
+        nLevel: gameData.data.game.nLevel
+      });
+    }.bind(this)));
+  },
 
   update: function update(e) {
     this.setState({
@@ -2244,7 +2274,6 @@ var GameOverOverlay = React.createClass({
   },
 
   gameOver: function gameOver() {
-
     axios.post({
       url: '/gameOver',
       headers: {
@@ -2262,6 +2291,8 @@ var GameOverOverlay = React.createClass({
   },
 
   render: function render() {
+    this.getData();
+
     var loggedIn = this.state.alreadyLoggedIn ? React.createElement('div', null) : React.createElement(
       'div',
       { className: 'gameOverPrompt' },
@@ -2568,6 +2599,7 @@ var getSquareArr = function getSquareArr(square, mode) {
   var arr = [];
   for (var i = 1; i < maxSquares + 1; i++) {
     var link = "/game/" + mode + "/" + i;
+    console.log(link);
     var sqClass = "levelSquare " + squareClass;
     if (i <= square) {
       var colorStyle = {

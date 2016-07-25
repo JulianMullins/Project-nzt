@@ -21,6 +21,7 @@ var getGame = function(){
 
 var GameOverOverlay = React.createClass({
   getInitialState:function(){  
+    
     return{
       username:null,
       alreadyLoggedIn:false,
@@ -34,13 +35,14 @@ var GameOverOverlay = React.createClass({
     axios.all([getUser(),getGame()])
       .then(axios.spread(function(userData,gameData){
         this.setState({
-          username:userData.username,
-          alreadyLoggedIn:userData.alreadyLoggedIn,
-          score:gameData.game.score,
-          mode:gameData.game.mode,
-          nLevel:gameData.game.nLevel
+          username:userData.data.username,
+          alreadyLoggedIn:userData.data.alreadyLoggedIn,
+          score:gameData.data.game.score,
+          mode:gameData.data.game.mode,
+          nLevel:gameData.data.game.nLevel
         })
-      }))
+        console.log("component mounted")
+      }.bind(this)))
 
 
   },
@@ -49,7 +51,18 @@ var GameOverOverlay = React.createClass({
   //     getUser().bind(this);
   //     getScore().bind(this);
   // },
-
+  getData(){
+    axios.all([getUser(),getGame()])
+      .then(axios.spread(function(userData,gameData){
+        this.setState({
+          username:userData.data.username,
+          alreadyLoggedIn:userData.data.alreadyLoggedIn,
+          score:gameData.data.game.score,
+          mode:gameData.data.game.mode,
+          nLevel:gameData.data.game.nLevel
+        })
+      }.bind(this)))
+  },
   update:function(e){
     this.setState({
       username: e.target.value
@@ -61,12 +74,11 @@ var GameOverOverlay = React.createClass({
       data:{
         score: this.state.score,
         mode: this.state.mode,
-        
+
       }
     })
   },
   gameOver: function(){
-
     axios.post({
       url:'/gameOver',
       headers:{
@@ -84,6 +96,8 @@ var GameOverOverlay = React.createClass({
     this.props.history.push('/game/'+this.state.mode+'/'+(this.state.n+1))
   },
   render: function() {
+    this.getData();
+
     var loggedIn = this.state.alreadyLoggedIn
 
       ? <div></div>

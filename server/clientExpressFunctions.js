@@ -8,72 +8,72 @@ var Game = require('../models/Game');
 var tempGame = null;
 
 
-
 router.post('/startGame/:mode/:nLevel',function(req,res,next){
-  console.log(req.user)
-  if(!req.user){
-      var tempUserStats = new Stats();
-      tempUserStats.save();
-      var tempUser = new User({
-        username:null,
-        stats:tempUserStats._id,
-        temp:true,
-        currentGame:[],
-        maxN:{
-            classic:1,
-            relaxed:1,
-            silent:1,
-            advanced:1
-          }
-      })
-      tempUser.save(function(err,user){
-        if(err){
-          console.log(err);
-        }
-      })
+  console.log("trying to post game");
+  // if(!req.user){
+  //     var tempUserStats = new Stats();
+  //     tempUserStats.save();
+  //     var tempUser = new User({
+  //       username:null,
+  //       stats:tempUserStats._id,
+  //       temp:true,
+  //       currentGame:[],
+  //       maxN:{
+  //           classic:1,
+  //           relaxed:1,
+  //           silent:1,
+  //           advanced:1
+  //         }
+  //     })
+  //     tempUser.save(function(err,user){
+  //       if(err){
+  //         console.log(err);
+  //       }
+  //     })
 
-      fetch('/login',{
-        method:'POST',
-        credentials: 'include',
-        headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-          username:null,
-          password:{
-            password:null,
-            user: tempUser._id
-          }
-        })
-      }).then(function(response) {
-        return response.json();
-      }).then(function(response) {
-        if (response.success) {
+  //     fetch('/login',{
+  //       method:'POST',
+  //       credentials: 'include',
+  //       headers: {
+  //         'Accept': 'application/json',
+  //         'Content-Type': 'application/json'
+  //       },
+  //       body: JSON.stringify({
+  //         username:null,
+  //         password:{
+  //           password:null,
+  //           user: tempUser._id
+  //         }
+  //       })
+  //     }).then(function(response) {
+  //       return response.json();
+  //     }).then(function(response) {
+  //       if (response.success) {
           
-          tempGame = new Game({
-            user:req.user,
-            mode:req.params.mode,
-            score:0,
-            nLevel:req.params.nLevel,
-            tempUser:req.user.temp
-          })
-          tempGame.save(function(err,game){
-            if(err){
-              console.log(err);
-            }
-            else{
-              req.user.currentGame.unshift(game);
-              res.json({gameId: game._id,tempUser:tempUser})
-            }
-          })
+  //         tempGame = new Game({
+  //           user:req.user,
+  //           mode:req.params.mode,
+  //           score:0,
+  //           nLevel:req.params.nLevel,
+  //           tempUser:req.user.temp
+  //         })
+  //         tempGame.save(function(err,game){
+  //           if(err){
+  //             console.log(err);
+  //           }
+  //           else{
+  //             req.user.currentGame.unshift(game);
+  //             res.json({gameId: game._id,tempUser:tempUser})
+  //           }
+  //         })
 
-        }
-      }.bind(this))
+  //       }
+  //     }.bind(this))
   
-    }
-    else{
-      tempGame = new Game({
+  //   }
+    // else{
+      console.log(req.user);
+    var tempGame = new Game({
         user:req.user,
         mode:req.params.mode,
         score:0,
@@ -86,10 +86,11 @@ router.post('/startGame/:mode/:nLevel',function(req,res,next){
         }
         else{
           req.user.currentGame.unshift(game);
-          res.json({gameId: game._id,tempUser:tempUser})
+          console.log(req.user, "game posted")
+          res.json({gameId: game._id,tempUser:true})
         }
       })
-    }
+    // }
 });
 
   
@@ -125,7 +126,7 @@ router.get('/getMaxN',function(req,res,next){
               silent:1,
               advanced:1
             };
-            console.log(req.user)
+            //console.log(req.user)
   if(req.user){
     maxN= req.user.maxN
   }

@@ -23,6 +23,7 @@ var getSquareArr = function(square, mode) {
   var arr = [];
   for (var i = 1; i < maxSquares + 1; i++) {
     var link = "/game/" + mode + "/" + i;
+    console.log(link)
     var sqClass = "levelSquare " + squareClass;
     if (i <= square) {
       var colorStyle = {
