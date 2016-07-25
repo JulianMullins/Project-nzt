@@ -558,6 +558,43 @@ var AdvancedMode = React.createClass({
           'a',
           { className: 'btn' },
           this.state.initialTimer
+        ),
+        React.createElement(
+          'pl',
+          { style: { margin: '0 0 20px' } },
+          'Use the keys to press the buttons.'
+        ),
+        React.createElement(
+          'div',
+          { className: 'key-wrapper' },
+          React.createElement(
+            'ul',
+            { className: 'row' },
+            React.createElement(
+              'li',
+              { className: 'key k38' },
+              '↑'
+            )
+          ),
+          React.createElement(
+            'ul',
+            { className: 'row' },
+            React.createElement(
+              'li',
+              { className: 'key k37' },
+              '←'
+            ),
+            React.createElement(
+              'li',
+              { className: 'key k40' },
+              '↓'
+            ),
+            React.createElement(
+              'li',
+              { className: 'key k39' },
+              '→'
+            )
+          )
         )
       )
     ) : '';
@@ -602,38 +639,42 @@ var AdvancedMode = React.createClass({
       { className: 'gameContainer' },
       overlay,
       React.createElement(
-        'span',
-        { className: 'gameTitle' },
-        React.createElement(
-          'h1',
-          { className: 'advanced modeTitle' },
-          'Advanced'
-        ),
-        React.createElement(
-          'h1',
-          { className: 'advanced nTitle' },
-          '(N=',
-          this.state.N,
-          ')'
-        )
-      ),
-      React.createElement(
         'div',
-        { className: 'gameHeading' },
+        { className: 'gameFullHeader' },
+        React.createElement(
+          'span',
+          { className: 'gameTitle' },
+          React.createElement(
+            'h1',
+            { className: 'advanced modeTitle' },
+            'Advanced'
+          ),
+          React.createElement(
+            'h1',
+            { className: 'advanced nTitle' },
+            '(N=',
+            this.state.N,
+            ')'
+          )
+        ),
         React.createElement(
           'div',
-          { className: 'gameScore advanced' },
+          { className: 'gameHeading' },
           React.createElement(
-            'h2',
-            null,
-            'Score: ',
-            this.state.score
+            'div',
+            { className: 'gameScore advanced' },
+            React.createElement(
+              'h2',
+              null,
+              'Score: ',
+              this.state.score
+            ),
+            scoreUpdate
           ),
-          scoreUpdate
-        ),
-        React.createElement(GameTimer, { timeStyle: {
-            'color': "#F1BA03"
-          } })
+          React.createElement(GameTimer, { timeStyle: {
+              'color': "#F1BA03"
+            } })
+        )
       ),
       React.createElement(
         'div',
@@ -650,26 +691,30 @@ var AdvancedMode = React.createClass({
       ),
       React.createElement(
         'div',
-        { className: 'scoreAlert' },
-        scoreAlert
-      ),
-      React.createElement(
-        'div',
-        { className: 'gameButtonsContainer advancedBackground', onKeyPress: this.handleKeyPres },
+        { className: 'gameFullFooter' },
         React.createElement(
-          'a',
-          { onClick: this.soundMatch, style: this.state.soundPressed },
-          'SOUND'
+          'div',
+          { className: 'scoreAlert' },
+          scoreAlert
         ),
         React.createElement(
-          'a',
-          { onClick: this.positionMatch, style: this.state.positionPressed },
-          'POSITION'
-        ),
-        React.createElement(
-          'a',
-          { onClick: this.colorMatch, style: this.state.colorPressed },
-          'COLOR'
+          'div',
+          { className: 'gameButtonsContainer advancedBackground', onKeyPress: this.handleKeyPres },
+          React.createElement(
+            'a',
+            { onClick: this.soundMatch, style: this.state.soundPressed },
+            'SOUND'
+          ),
+          React.createElement(
+            'a',
+            { onClick: this.positionMatch, style: this.state.positionPressed },
+            'POSITION'
+          ),
+          React.createElement(
+            'a',
+            { onClick: this.colorMatch, style: this.state.colorPressed },
+            'COLOR'
+          )
         )
       )
     );
@@ -967,6 +1012,43 @@ var ClassicMode = React.createClass({
           'a',
           { className: 'btn' },
           this.state.initialTimer
+        ),
+        React.createElement(
+          'pl',
+          { style: { margin: '0 0 20px' } },
+          'Use the keys to press the buttons.'
+        ),
+        React.createElement(
+          'div',
+          { className: 'key-wrapper' },
+          React.createElement(
+            'ul',
+            { className: 'row' },
+            React.createElement(
+              'li',
+              { className: 'key k38' },
+              '↑'
+            )
+          ),
+          React.createElement(
+            'ul',
+            { className: 'row' },
+            React.createElement(
+              'li',
+              { className: 'key k37' },
+              '←'
+            ),
+            React.createElement(
+              'li',
+              { className: 'key k40' },
+              '↓'
+            ),
+            React.createElement(
+              'li',
+              { className: 'key k39' },
+              '→'
+            )
+          )
         )
       )
     ) : '';
@@ -1011,38 +1093,42 @@ var ClassicMode = React.createClass({
       { className: 'gameContainer' },
       overlay,
       React.createElement(
-        'span',
-        { className: 'gameTitle' },
-        React.createElement(
-          'h1',
-          { className: 'classic modeTitle' },
-          'Classic'
-        ),
-        React.createElement(
-          'h1',
-          { className: 'classic nTitle' },
-          '(N=',
-          this.state.N,
-          ')'
-        )
-      ),
-      React.createElement(
         'div',
-        { className: 'gameHeading' },
+        { className: 'gameFullHeader' },
+        React.createElement(
+          'span',
+          { className: 'gameTitle' },
+          React.createElement(
+            'h1',
+            { className: 'classic modeTitle' },
+            'Classic'
+          ),
+          React.createElement(
+            'h1',
+            { className: 'classic nTitle' },
+            '(N=',
+            this.state.N,
+            ')'
+          )
+        ),
         React.createElement(
           'div',
-          { className: 'gameScore classic' },
+          { className: 'gameHeading' },
           React.createElement(
-            'h2',
-            null,
-            'Score: ',
-            this.state.score
+            'div',
+            { className: 'gameScore classic' },
+            React.createElement(
+              'h2',
+              null,
+              'Score: ',
+              this.state.score
+            ),
+            scoreUpdate
           ),
-          scoreUpdate
-        ),
-        React.createElement(GameTimer, { timeStyle: {
-            'color': "#F13542"
-          } })
+          React.createElement(GameTimer, { timeStyle: {
+              'color': "#F13542"
+            } })
+        )
       ),
       React.createElement(
         'div',
@@ -1059,21 +1145,25 @@ var ClassicMode = React.createClass({
       ),
       React.createElement(
         'div',
-        { className: 'scoreAlert' },
-        scoreAlert
-      ),
-      React.createElement(
-        'div',
-        { className: 'gameButtonsContainer classicBackground' },
+        { className: 'gameFullFooter' },
         React.createElement(
-          'a',
-          { onClick: this.positionMatch, style: this.state.posStyle },
-          'POSITION'
+          'div',
+          { className: 'scoreAlert' },
+          scoreAlert
         ),
         React.createElement(
-          'a',
-          { onClick: this.soundMatch, style: this.state.soundStyle },
-          'SOUND'
+          'div',
+          { className: 'gameButtonsContainer classicBackground' },
+          React.createElement(
+            'a',
+            { onClick: this.positionMatch, style: this.state.posStyle },
+            'POSITION'
+          ),
+          React.createElement(
+            'a',
+            { onClick: this.soundMatch, style: this.state.soundStyle },
+            'SOUND'
+          )
         )
       )
     );
@@ -1444,38 +1534,42 @@ var RelaxedMode = React.createClass({
       { className: 'gameContainer' },
       overlay,
       React.createElement(
-        'span',
-        { className: 'gameTitle' },
-        React.createElement(
-          'h1',
-          { className: 'relaxed modeTitle' },
-          'Relaxed'
-        ),
-        React.createElement(
-          'h1',
-          { className: 'relaxed nTitle' },
-          '(N=',
-          this.state.N,
-          ')'
-        )
-      ),
-      React.createElement(
         'div',
-        { className: 'gameHeading' },
+        { className: 'gameFullHeader' },
+        React.createElement(
+          'span',
+          { className: 'gameTitle' },
+          React.createElement(
+            'h1',
+            { className: 'relaxed modeTitle' },
+            'Relaxed'
+          ),
+          React.createElement(
+            'h1',
+            { className: 'relaxed nTitle' },
+            '(N=',
+            this.state.N,
+            ')'
+          )
+        ),
         React.createElement(
           'div',
-          { className: 'gameScore relaxed' },
+          { className: 'gameHeading' },
           React.createElement(
-            'h2',
-            null,
-            'Score: ',
-            this.state.score
+            'div',
+            { className: 'gameScore relaxed' },
+            React.createElement(
+              'h2',
+              null,
+              'Score: ',
+              this.state.score
+            ),
+            scoreUpdate
           ),
-          scoreUpdate
-        ),
-        React.createElement(GameTimer, { timeStyle: {
-            'color': "#01B6A7"
-          } })
+          React.createElement(GameTimer, { timeStyle: {
+              'color': "#01B6A7"
+            } })
+        )
       ),
       React.createElement(
         'div',
@@ -1492,16 +1586,20 @@ var RelaxedMode = React.createClass({
       ),
       React.createElement(
         'div',
-        { className: 'scoreAlert' },
-        scoreAlert
-      ),
-      React.createElement(
-        'div',
-        { className: 'gameButtonsContainer relaxedBackground' },
+        { className: 'gameFullFooter' },
         React.createElement(
-          'a',
-          { onClick: this.posMatch, style: this.state.posStyle },
-          'POSITION'
+          'div',
+          { className: 'scoreAlert' },
+          scoreAlert
+        ),
+        React.createElement(
+          'div',
+          { className: 'gameButtonsContainer relaxedBackground' },
+          React.createElement(
+            'a',
+            { onClick: this.posMatch, style: this.state.posStyle },
+            'POSITION'
+          )
         )
       )
     );
@@ -1790,6 +1888,43 @@ var SilentMode = React.createClass({
           'a',
           { className: 'btn' },
           this.state.initialTimer
+        ),
+        React.createElement(
+          'pl',
+          { style: { margin: '0 0 20px' } },
+          'Use the keys to press the buttons.'
+        ),
+        React.createElement(
+          'div',
+          { className: 'key-wrapper' },
+          React.createElement(
+            'ul',
+            { className: 'row' },
+            React.createElement(
+              'li',
+              { className: 'key k38' },
+              '↑'
+            )
+          ),
+          React.createElement(
+            'ul',
+            { className: 'row' },
+            React.createElement(
+              'li',
+              { className: 'key k37' },
+              '←'
+            ),
+            React.createElement(
+              'li',
+              { className: 'key k40' },
+              '↓'
+            ),
+            React.createElement(
+              'li',
+              { className: 'key k39' },
+              '→'
+            )
+          )
         )
       )
     ) : '';
@@ -1841,38 +1976,42 @@ var SilentMode = React.createClass({
       { className: 'gameContainer' },
       overlay,
       React.createElement(
-        'span',
-        { className: 'gameTitle' },
-        React.createElement(
-          'h1',
-          { className: 'silent modeTitle' },
-          'Silent'
-        ),
-        React.createElement(
-          'h1',
-          { className: 'silent nTitle' },
-          '(N=',
-          this.state.N,
-          ')'
-        )
-      ),
-      React.createElement(
         'div',
-        { className: 'gameHeading' },
+        { className: 'gameFullHeader' },
+        React.createElement(
+          'span',
+          { className: 'gameTitle' },
+          React.createElement(
+            'h1',
+            { className: 'silent modeTitle' },
+            'Silent'
+          ),
+          React.createElement(
+            'h1',
+            { className: 'silent nTitle' },
+            '(N=',
+            this.state.N,
+            ')'
+          )
+        ),
         React.createElement(
           'div',
-          { className: 'gameScore silent' },
+          { className: 'gameHeading' },
           React.createElement(
-            'h2',
-            null,
-            'Score: ',
-            this.state.score
+            'div',
+            { className: 'gameScore silent' },
+            React.createElement(
+              'h2',
+              null,
+              'Score: ',
+              this.state.score
+            ),
+            scoreUpdate
           ),
-          scoreUpdate
-        ),
-        React.createElement(GameTimer, { timeStyle: {
-            'color': "#7CD9D2"
-          } })
+          React.createElement(GameTimer, { timeStyle: {
+              'color': "#7CD9D2"
+            } })
+        )
       ),
       React.createElement(
         'div',
@@ -1889,21 +2028,25 @@ var SilentMode = React.createClass({
       ),
       React.createElement(
         'div',
-        { className: 'scoreAlert' },
-        scoreAlert
-      ),
-      React.createElement(
-        'div',
-        { className: 'gameButtonsContainer silentBackground' },
+        { className: 'gameFullFooter' },
         React.createElement(
-          'a',
-          { onClick: this.positionMatch, style: this.state.posStyle },
-          'POSITION'
+          'div',
+          { className: 'scoreAlert' },
+          scoreAlert
         ),
         React.createElement(
-          'a',
-          { onClick: this.colorMatch, style: this.state.colorStyle },
-          'COLOR'
+          'div',
+          { className: 'gameButtonsContainer silentBackground' },
+          React.createElement(
+            'a',
+            { onClick: this.positionMatch, style: this.state.posStyle },
+            'POSITION'
+          ),
+          React.createElement(
+            'a',
+            { onClick: this.colorMatch, style: this.state.colorStyle },
+            'COLOR'
+          )
         )
       )
     );

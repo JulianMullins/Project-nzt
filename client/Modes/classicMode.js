@@ -313,18 +313,20 @@ var ClassicMode = React.createClass({
     return (
       <div className="gameContainer">
         {overlay}
-        <span className="gameTitle">
-          <h1 className="classic modeTitle">Classic</h1>
-          <h1 className="classic nTitle">(N={this.state.N})</h1>
-        </span>
-        <div className="gameHeading">
-          <div className="gameScore classic">
-            <h2>Score: {this.state.score}</h2>
-            {scoreUpdate}
+        <div className="gameFullHeader">
+          <span className="gameTitle">
+            <h1 className="classic modeTitle">Classic</h1>
+            <h1 className="classic nTitle">(N={this.state.N})</h1>
+          </span>
+          <div className="gameHeading">
+            <div className="gameScore classic">
+              <h2>Score: {this.state.score}</h2>
+              {scoreUpdate}
+            </div>
+            <GameTimer timeStyle={{
+              'color': "#F13542"
+            }}></GameTimer>
           </div>
-          <GameTimer timeStyle={{
-            'color': "#F13542"
-          }}></GameTimer>
         </div>
         <div className="gameBoard">
           <div className="gameSquare" style={this.state.style[0]}></div>
@@ -337,12 +339,14 @@ var ClassicMode = React.createClass({
           <div className="gameSquare" style={this.state.style[7]}></div>
           <div className="gameSquare" style={this.state.style[8]}></div>
         </div>
-        <div className="scoreAlert">
-          {scoreAlert}
-        </div>
-        <div className="gameButtonsContainer classicBackground">
-          <a onClick={this.positionMatch} style={this.state.posStyle}>POSITION</a>
-          <a onClick={this.soundMatch} style={this.state.soundStyle}>SOUND</a>
+        <div className="gameFullFooter">
+          <div className="scoreAlert">
+            {scoreAlert}
+          </div>
+          <div className="gameButtonsContainer classicBackground">
+            <a onClick={this.positionMatch} style={this.state.posStyle}>POSITION</a>
+            <a onClick={this.soundMatch} style={this.state.soundStyle}>SOUND</a>
+          </div>
         </div>
       </div>
     );
