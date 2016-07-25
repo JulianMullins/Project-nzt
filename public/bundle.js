@@ -1287,9 +1287,9 @@ var RelaxedMode = React.createClass({
         }).then(function (response) {
           return response.json();
         }).then(function (response) {
-          //if (response.success) {
-          this.props.history.push('/gameOver/' + response.score);
-          //}
+          if (response.success) {
+            this.props.history.push('/gameOver');
+          }
         }.bind(this));
       }
       ////////////////////////////////////////////////////////////////////////////////////
@@ -1377,7 +1377,7 @@ var RelaxedMode = React.createClass({
       scoreUpdate = React.createElement(
         'h2',
         { style: {
-            color: '#01B6A7'
+            color: 'green'
           } },
         '+10'
       );
@@ -1391,7 +1391,7 @@ var RelaxedMode = React.createClass({
         scoreUpdate = React.createElement(
           'h2',
           { style: {
-              color: '#F13542'
+              color: 'red'
             } },
           '-5'
         );
@@ -2290,7 +2290,7 @@ ReactDOM.render(React.createElement(
     React.createElement(_reactRouter.Route, { path: 'login', component: Login }),
     React.createElement(_reactRouter.Route, { path: 'logout', component: Logout }),
     React.createElement(_reactRouter.Route, { path: 'register', component: Register }),
-    React.createElement(_reactRouter.Route, { path: 'gameOver(/:score)', component: GameOver }),
+    React.createElement(_reactRouter.Route, { path: 'gameOver', component: GameOver }),
     React.createElement(_reactRouter.Route, { path: 'leaderboard', component: Leaderboard }),
     React.createElement(_reactRouter.Route, { path: 'stats', component: Stats }),
     React.createElement(_reactRouter.Route, { path: 'contact', component: Contact }),
