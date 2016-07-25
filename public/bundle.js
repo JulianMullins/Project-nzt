@@ -3425,6 +3425,96 @@ var Tutorial = React.createClass({
         var key = e.keyCode ? e.keyCode : e.which;
         $('.key.k' + key).removeClass('active');
       });
+
+      $('.slider').each(function () {
+        var $this = $(this);
+        var $group = $this.find('.slide_group');
+        var $slides = $this.find('.slide');
+        var bulletArray = [];
+        var currentIndex = 0;
+        var timeout;
+
+        function move(newIndex) {
+          var animateLeft, slideLeft;
+
+          advance();
+
+          if ($group.is(':animated') || currentIndex === newIndex) {
+            return;
+          }
+
+          bulletArray[currentIndex].removeClass('activer');
+          bulletArray[newIndex].addClass('activer');
+
+          if (newIndex > currentIndex) {
+            slideLeft = '100%';
+            animateLeft = '-100%';
+          } else {
+            slideLeft = '-100%';
+            animateLeft = '100%';
+          }
+
+          $slides.eq(newIndex).css({
+            display: 'block',
+            left: slideLeft
+          });
+          $group.animate({
+            left: animateLeft
+          }, function () {
+            $slides.eq(currentIndex).css({
+              display: 'none'
+            });
+            $slides.eq(newIndex).css({
+              left: 0
+            });
+            $group.css({
+              left: 0
+            });
+            currentIndex = newIndex;
+          });
+        }
+
+        function advance() {
+          clearTimeout(timeout);
+          timeout = setTimeout(function () {
+            if (currentIndex < $slides.length - 1) {
+              move(currentIndex + 1);
+            } else {
+              move(0);
+            }
+          }, 20000);
+        }
+
+        $('.next_btn').on('click', function () {
+          if (currentIndex < $slides.length - 1) {
+            move(currentIndex + 1);
+          } else {
+            move(0);
+          }
+        });
+
+        $('.previous_btn').on('click', function () {
+          if (currentIndex !== 0) {
+            move(currentIndex - 1);
+          } else {
+            move(3);
+          }
+        });
+
+        $.each($slides, function (index) {
+          var $button = $('<a className="slide_btn">&bull;</a>');
+
+          if (index === currentIndex) {
+            $button.addClass('activer');
+          }
+          $button.on('click', function () {
+            move(index);
+          }).appendTo('.slide_buttons');
+          bulletArray.push($button);
+        });
+
+        advance();
+      });
     });
   },
   render: function render() {
@@ -3433,226 +3523,260 @@ var Tutorial = React.createClass({
       { className: 'tutorial' },
       React.createElement(
         'div',
-        { className: 'key-wrapper' },
+        { className: 'slider' },
         React.createElement(
-          'h4',
-          null,
-          'Click ',
+          'div',
+          { className: 'slide_viewer' },
           React.createElement(
-            'spanl',
-            null,
-            'here'
-          ),
-          ' to test your keys.'
-        ),
-        React.createElement(
-          'ul',
-          { className: 'row' },
-          React.createElement(
-            'li',
-            { className: 'key k38' },
-            '↑'
+            'div',
+            { className: 'slide_group' },
+            React.createElement(
+              'div',
+              { className: 'slide' },
+              React.createElement(
+                'div',
+                { className: 'key-wrapper' },
+                React.createElement(
+                  'h4',
+                  null,
+                  'Click ',
+                  React.createElement(
+                    'spanl',
+                    null,
+                    'here'
+                  ),
+                  ' to test your keys.'
+                ),
+                React.createElement(
+                  'ul',
+                  { className: 'row' },
+                  React.createElement(
+                    'li',
+                    { className: 'key k38' },
+                    '↑'
+                  )
+                ),
+                React.createElement(
+                  'ul',
+                  { className: 'row' },
+                  React.createElement(
+                    'li',
+                    { className: 'key k37' },
+                    '←'
+                  ),
+                  React.createElement(
+                    'li',
+                    { className: 'key k40' },
+                    '↓'
+                  ),
+                  React.createElement(
+                    'li',
+                    { className: 'key k39' },
+                    '→'
+                  )
+                ),
+                React.createElement(
+                  'h4',
+                  null,
+                  'Once pressed, you cannot undo it. For a double match, you need to press both keys.'
+                ),
+                React.createElement(
+                  'div',
+                  { className: 'rulemode' },
+                  React.createElement(
+                    'div',
+                    { className: 'rules2' },
+                    React.createElement(
+                      'h2',
+                      null,
+                      'RELAXED'
+                    ),
+                    React.createElement(
+                      'h4',
+                      null,
+                      'There is only one button: Position. This will be your ↑ key.'
+                    ),
+                    React.createElement(
+                      'ul',
+                      { className: 'row' },
+                      React.createElement(
+                        'li',
+                        { className: 'key k38' },
+                        'POSITION'
+                      )
+                    ),
+                    React.createElement(
+                      'ul',
+                      { className: 'row' },
+                      React.createElement(
+                        'li',
+                        { className: 'key k37' },
+                        '←'
+                      ),
+                      React.createElement(
+                        'li',
+                        { className: 'key k40' },
+                        '↓'
+                      ),
+                      React.createElement(
+                        'li',
+                        { className: 'key k39' },
+                        '→'
+                      )
+                    )
+                  ),
+                  React.createElement(
+                    'div',
+                    { className: 'rules2' },
+                    React.createElement(
+                      'h2',
+                      null,
+                      'CLASSIC'
+                    ),
+                    React.createElement(
+                      'h4',
+                      null,
+                      'There are two buttons: Position and Sound. This will be your ← and → keys.'
+                    ),
+                    React.createElement(
+                      'ul',
+                      { className: 'row' },
+                      React.createElement(
+                        'li',
+                        { className: 'key k38' },
+                        '↑'
+                      )
+                    ),
+                    React.createElement(
+                      'ul',
+                      { className: 'row' },
+                      React.createElement(
+                        'li',
+                        { className: 'key k37' },
+                        'POSITION'
+                      ),
+                      React.createElement(
+                        'li',
+                        { className: 'key k40' },
+                        '↓'
+                      ),
+                      React.createElement(
+                        'li',
+                        { className: 'key k39' },
+                        'SOUND'
+                      )
+                    )
+                  )
+                ),
+                React.createElement(
+                  'div',
+                  { className: 'rulemode2' },
+                  React.createElement(
+                    'div',
+                    { className: 'rules2' },
+                    React.createElement(
+                      'h2',
+                      null,
+                      'SILENT'
+                    ),
+                    React.createElement(
+                      'h4',
+                      null,
+                      'There are two buttons: Position and Color. This will be your ← and → keys.'
+                    ),
+                    React.createElement(
+                      'ul',
+                      { className: 'row' },
+                      React.createElement(
+                        'li',
+                        { className: 'key k38' },
+                        '↑'
+                      )
+                    ),
+                    React.createElement(
+                      'ul',
+                      { className: 'row' },
+                      React.createElement(
+                        'li',
+                        { className: 'key k37' },
+                        'POSITION'
+                      ),
+                      React.createElement(
+                        'li',
+                        { className: 'key k40' },
+                        '↓'
+                      ),
+                      React.createElement(
+                        'li',
+                        { className: 'key k39' },
+                        'COLOR'
+                      )
+                    )
+                  ),
+                  React.createElement(
+                    'div',
+                    { className: 'rules2' },
+                    React.createElement(
+                      'h2',
+                      null,
+                      'ADVANCED'
+                    ),
+                    React.createElement(
+                      'h4',
+                      null,
+                      'There are three buttons: Position Sound, and Color.'
+                    ),
+                    React.createElement(
+                      'ul',
+                      { className: 'row' },
+                      React.createElement(
+                        'li',
+                        { className: 'key k38' },
+                        'POSITION'
+                      )
+                    ),
+                    React.createElement(
+                      'ul',
+                      { className: 'row' },
+                      React.createElement(
+                        'li',
+                        { className: 'key k37' },
+                        'SOUND'
+                      ),
+                      React.createElement(
+                        'li',
+                        { className: 'key k40' },
+                        '↓'
+                      ),
+                      React.createElement(
+                        'li',
+                        { className: 'key k39' },
+                        'COLOR'
+                      )
+                    )
+                  )
+                )
+              )
+            ),
+            React.createElement('div', { className: 'slide' }),
+            React.createElement('div', { className: 'slide' }),
+            React.createElement('div', { className: 'slide' })
           )
-        ),
+        )
+      ),
+      React.createElement('div', { className: 'slide_buttons' }),
+      React.createElement(
+        'div',
+        { className: 'directional_nav' },
         React.createElement(
-          'ul',
-          { className: 'row' },
-          React.createElement(
-            'li',
-            { className: 'key k37' },
-            '←'
-          ),
-          React.createElement(
-            'li',
-            { className: 'key k40' },
-            '↓'
-          ),
-          React.createElement(
-            'li',
-            { className: 'key k39' },
-            '→'
-          )
-        ),
-        React.createElement(
-          'h4',
-          null,
-          'Once pressed, you cannot undo it. For a double match, you need to press both keys.'
+          'div',
+          { className: 'previous_btn', title: 'Previous' },
+          React.createElement('i', { className: 'fa fa-angle-left', 'aria-hidden': 'true' })
         ),
         React.createElement(
           'div',
-          { className: 'rulemode' },
-          React.createElement(
-            'div',
-            { className: 'rules2' },
-            React.createElement(
-              'h2',
-              null,
-              'RELAXED'
-            ),
-            React.createElement(
-              'h4',
-              null,
-              'There is only one button: Position. This will be your ↑ key.'
-            ),
-            React.createElement(
-              'ul',
-              { className: 'row' },
-              React.createElement(
-                'li',
-                { className: 'key k38' },
-                'POSITION'
-              )
-            ),
-            React.createElement(
-              'ul',
-              { className: 'row' },
-              React.createElement(
-                'li',
-                { className: 'key k37' },
-                '←'
-              ),
-              React.createElement(
-                'li',
-                { className: 'key k40' },
-                '↓'
-              ),
-              React.createElement(
-                'li',
-                { className: 'key k39' },
-                '→'
-              )
-            )
-          ),
-          React.createElement(
-            'div',
-            { className: 'rules2' },
-            React.createElement(
-              'h2',
-              null,
-              'CLASSIC'
-            ),
-            React.createElement(
-              'h4',
-              null,
-              'There are two buttons: Position and Sound. This will be your ← and → keys.'
-            ),
-            React.createElement(
-              'ul',
-              { className: 'row' },
-              React.createElement(
-                'li',
-                { className: 'key k38' },
-                '↑'
-              )
-            ),
-            React.createElement(
-              'ul',
-              { className: 'row' },
-              React.createElement(
-                'li',
-                { className: 'key k37' },
-                'POSITION'
-              ),
-              React.createElement(
-                'li',
-                { className: 'key k40' },
-                '↓'
-              ),
-              React.createElement(
-                'li',
-                { className: 'key k39' },
-                'SOUND'
-              )
-            )
-          )
-        ),
-        React.createElement(
-          'div',
-          { className: 'rulemode2' },
-          React.createElement(
-            'div',
-            { className: 'rules2' },
-            React.createElement(
-              'h2',
-              null,
-              'SILENT'
-            ),
-            React.createElement(
-              'h4',
-              null,
-              'There are two buttons: Position and Color. This will be your ← and → keys.'
-            ),
-            React.createElement(
-              'ul',
-              { className: 'row' },
-              React.createElement(
-                'li',
-                { className: 'key k38' },
-                '↑'
-              )
-            ),
-            React.createElement(
-              'ul',
-              { className: 'row' },
-              React.createElement(
-                'li',
-                { className: 'key k37' },
-                'POSITION'
-              ),
-              React.createElement(
-                'li',
-                { className: 'key k40' },
-                '↓'
-              ),
-              React.createElement(
-                'li',
-                { className: 'key k39' },
-                'COLOR'
-              )
-            )
-          ),
-          React.createElement(
-            'div',
-            { className: 'rules2' },
-            React.createElement(
-              'h2',
-              null,
-              'ADVANCED'
-            ),
-            React.createElement(
-              'h4',
-              null,
-              'There are three buttons: Position Sound, and Color.'
-            ),
-            React.createElement(
-              'ul',
-              { className: 'row' },
-              React.createElement(
-                'li',
-                { className: 'key k38' },
-                'POSITION'
-              )
-            ),
-            React.createElement(
-              'ul',
-              { className: 'row' },
-              React.createElement(
-                'li',
-                { className: 'key k37' },
-                'SOUND'
-              ),
-              React.createElement(
-                'li',
-                { className: 'key k40' },
-                '↓'
-              ),
-              React.createElement(
-                'li',
-                { className: 'key k39' },
-                'COLOR'
-              )
-            )
-          )
+          { className: 'next_btn', title: 'Next' },
+          React.createElement('i', { className: 'fa fa-angle-right', 'aria-hidden': 'true' })
         )
       )
     );
