@@ -28,6 +28,7 @@
     "react-chartjs": "^0.7.3",
     "react-dom": "^15.2.1",
     "react-router": "^2.6.0",
+    "reactable": "^0.13.2",
     "serve-favicon": "^2.3.0",
     "session": "^0.1.0",
     "socket.io": "^1.4.8"

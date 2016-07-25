@@ -41,14 +41,14 @@ var ClassicMode = React.createClass({
       keepScore: false,
       tempUser: true,
       gameId: null,
-      mode:'classic'
+      mode: 'classic'
     }
   },
   componentDidMount: function() {
     timer = setInterval(this.timer, 1000);
 
     fetch('/startGame/' + this.state.mode + '/' + this.state.N, {
-      method:'POST',
+      method: 'POST',
       credentials: 'include',
       headers: {
         'Accept': 'application/json',
@@ -59,8 +59,12 @@ var ClassicMode = React.createClass({
     }).then(function(response) {
       this.setState({tempUser: response.tempUser, gameId: response.gameId})
     }.bind(this))
-
-
+  },
+  componentWillUnmount: function() {
+    clearInterval(iterations);
+    clearInterval(timer);
+  },
+  enableKeys: function() {
     window.onkeyup = function(e) {
       if (e.keyCode == 37) {
         this.positionMatch();
@@ -69,10 +73,6 @@ var ClassicMode = React.createClass({
         this.soundMatch();
       }
     }.bind(this)
-  },
-  componentWillUnmount: function() {
-    clearInterval(iterations);
-    clearInterval(timer);
   },
   timer: function() {
     this.setState({
@@ -83,6 +83,7 @@ var ClassicMode = React.createClass({
     }
     if (this.state.initialTimer === 0) {
       this.setState({overlay: false});
+      this.enableKeys();
       clearInterval(timer);
     }
   },
@@ -258,15 +259,13 @@ var ClassicMode = React.createClass({
         <div className="overlay">
           <center>
             <a className="btn">{this.state.initialTimer}</a>
-            <h4 style={{margin: '0 0 20px'}}>Use the keys to press the buttons.</h4>
-              <div className="key-wrapper">
-              <ul className="row">
-                <li className="key k38">↑</li>
-              </ul>
+            <h4 style={{
+              margin: '0 0 20px'
+            }}>Use the keys to press the buttons.</h4>
+            <div className="key-wrapper">
 
               <ul className="row">
                 <li className="key k37">←</li>
-                <li className="key k40">↓</li>
                 <li className="key k39">→</li>
               </ul>
             </div>

@@ -38,12 +38,20 @@ componentDidMount: function(){
         <h2>RELAXED</h2>
 					<h4>There is only one button: Position. This will be your ↑ key.</h4>
           <ul className="row">
-            <li className="key k37">POSITION</li>
+            <li className="key k38">POSITION</li>
           </ul>
+					<ul className="row">
+						<li className="key k37">←</li>
+						<li className="key k40">↓</li>
+						<li className="key k39">→</li>
+						</ul>
 					</div>
 					<div className="rules2">
 						<h2>CLASSIC</h2>
           <h4>There are two buttons: Position and Sound. This will be your ← and → keys.</h4>
+						<ul className="row">
+							<li className="key k38">↑</li>
+						</ul>
             <ul className="row">
               <li className="key k37">POSITION</li>
               <li className="key k40">↓</li>
@@ -56,6 +64,9 @@ componentDidMount: function(){
 							<h2>SILENT</h2>
 							<h4>There are two buttons: Position and Color. This will be your ← and → keys.</h4>
               <ul className="row">
+								<li className="key k38">↑</li>
+							</ul>
+							<ul className="row">
                 <li className="key k37">POSITION</li>
                 <li className="key k40">↓</li>
                 <li className="key k39">COLOR</li>

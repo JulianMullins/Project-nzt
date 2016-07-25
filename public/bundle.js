@@ -1158,16 +1158,17 @@ var RelaxedMode = React.createClass({
     }).then(function (response) {
       this.setState({ tempUser: response.tempUser, gameId: response.gameId });
     }.bind(this));
-
+  },
+  componentWillUnmount: function componentWillUnmount() {
+    clearInterval(iterations);
+    clearInterval(_timer);
+  },
+  enableKeys: function enableKeys() {
     window.onkeyup = function (e) {
       if (e.keyCode == 38) {
         this.posMatch();
       }
     }.bind(this);
-  },
-  componentWillUnmount: function componentWillUnmount() {
-    clearInterval(iterations);
-    clearInterval(_timer);
   },
   timer: function timer() {
     this.setState({
@@ -1177,6 +1178,7 @@ var RelaxedMode = React.createClass({
       this.position();
     }
     if (this.state.initialTimer === 0) {
+      this.enableKeys();
       this.setState({ overlay: false });
       clearInterval(_timer);
     }
@@ -1541,15 +1543,6 @@ var SilentMode = React.createClass({
     }).then(function (response) {
       this.setState({ tempUser: response.tempUser, gameId: response.gameId });
     }.bind(this));
-
-    window.onkeyup = function (e) {
-      if (e.keyCode == 37) {
-        this.positionMatch();
-      } else if (e.keyCode == 39) {
-        this.colorMatch();
-      }
-    }.bind(this);
-
     // fetch('/startGame/'+this.state.mode+'/'+this.state.N, {
     //  method: 'post'
     // });
@@ -1557,6 +1550,15 @@ var SilentMode = React.createClass({
   componentWillUnmount: function componentWillUnmount() {
     clearInterval(iterations);
     clearInterval(_timer);
+  },
+  enableKeys: function enableKeys() {
+    window.onkeyup = function (e) {
+      if (e.keyCode == 37) {
+        this.positionMatch();
+      } else if (e.keyCode == 39) {
+        this.colorMatch();
+      }
+    }.bind(this);
   },
   timer: function timer() {
     this.setState({
@@ -1567,6 +1569,7 @@ var SilentMode = React.createClass({
     }
     if (this.state.initialTimer === 0) {
       this.setState({ overlay: false });
+      this.enableKeys();
       clearInterval(_timer);
     }
   },
@@ -3548,8 +3551,27 @@ var Tutorial = React.createClass({
               { className: 'row' },
               React.createElement(
                 'li',
-                { className: 'key k37' },
+                { className: 'key k38' },
                 'POSITION'
+              )
+            ),
+            React.createElement(
+              'ul',
+              { className: 'row' },
+              React.createElement(
+                'li',
+                { className: 'key k37' },
+                '←'
+              ),
+              React.createElement(
+                'li',
+                { className: 'key k40' },
+                '↓'
+              ),
+              React.createElement(
+                'li',
+                { className: 'key k39' },
+                '→'
               )
             )
           ),
@@ -3565,6 +3587,15 @@ var Tutorial = React.createClass({
               'h4',
               null,
               'There are two buttons: Position and Sound. This will be your ← and → keys.'
+            ),
+            React.createElement(
+              'ul',
+              { className: 'row' },
+              React.createElement(
+                'li',
+                { className: 'key k38' },
+                '↑'
+              )
             ),
             React.createElement(
               'ul',
@@ -3602,6 +3633,15 @@ var Tutorial = React.createClass({
               'h4',
               null,
               'There are two buttons: Position and Color. This will be your ← and → keys.'
+            ),
+            React.createElement(
+              'ul',
+              { className: 'row' },
+              React.createElement(
+                'li',
+                { className: 'key k38' },
+                '↑'
+              )
             ),
             React.createElement(
               'ul',
