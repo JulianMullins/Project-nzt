@@ -325,6 +325,18 @@ var AdvancedMode = React.createClass({
         <div className="overlay">
           <center>
             <a className="btn">{this.state.initialTimer}</a>
+              <pl style={{margin: '0 0 20px'}}>Use the keys to press the buttons.</pl>
+                <div className="key-wrapper">
+                <ul className="row">
+                  <li className="key k38">↑</li>
+                </ul>
+
+                <ul className="row">
+                  <li className="key k37">←</li>
+                  <li className="key k40">↓</li>
+                  <li className="key k39">→</li>
+                </ul>
+              </div>
           </center>
         </div>
       )
@@ -399,6 +411,9 @@ var AdvancedMode = React.createClass({
           <a onClick={this.soundMatch} style={this.state.soundPressed}>SOUND</a>
           <a onClick={this.positionMatch} style={this.state.positionPressed}>POSITION</a>
           <a onClick={this.colorMatch} style={this.state.colorPressed}>COLOR</a>
+        </div>
+        <div>
+          <a href="#" className="btn btn-default btn-circle"><i className="fa fa-question"></i></a>
         </div>
       </div>
     );
