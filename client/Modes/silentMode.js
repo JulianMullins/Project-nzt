@@ -332,18 +332,20 @@ var SilentMode = React.createClass({
     return (
       <div className="gameContainer">
         {overlay}
-        <span className="gameTitle">
-          <h1 className="silent modeTitle">Silent</h1>
-          <h1 className="silent nTitle">(N={this.state.N})</h1>
-        </span>
-        <div className="gameHeading">
-          <div className="gameScore silent">
-            <h2>Score: {this.state.score}</h2>
-            {scoreUpdate}
+        <div className="gameFullHeader">
+          <span className="gameTitle">
+            <h1 className="silent modeTitle">Silent</h1>
+            <h1 className="silent nTitle">(N={this.state.N})</h1>
+          </span>
+          <div className="gameHeading">
+            <div className="gameScore silent">
+              <h2>Score: {this.state.score}</h2>
+              {scoreUpdate}
+            </div>
+            <GameTimer timeStyle={{
+              'color': "#7CD9D2"
+            }}></GameTimer>
           </div>
-          <GameTimer timeStyle={{
-            'color': "#7CD9D2"
-          }}></GameTimer>
         </div>
         <div className="gameBoard">
           <div className="gameSquare" style={this.state.style[0]}></div>
@@ -356,12 +358,14 @@ var SilentMode = React.createClass({
           <div className="gameSquare" style={this.state.style[7]}></div>
           <div className="gameSquare" style={this.state.style[8]}></div>
         </div>
-        <div className="scoreAlert">
-          {scoreAlert}
-        </div>
-        <div className="gameButtonsContainer silentBackground">
-          <a onClick={this.positionMatch} style={this.state.posStyle}>POSITION</a>
-          <a onClick={this.colorMatch} style={this.state.colorStyle}>COLOR</a>
+        <div className="gameFullFooter">
+          <div className="scoreAlert">
+            {scoreAlert}
+          </div>
+          <div className="gameButtonsContainer silentBackground">
+            <a onClick={this.positionMatch} style={this.state.posStyle}>POSITION</a>
+            <a onClick={this.colorMatch} style={this.state.colorStyle}>COLOR</a>
+          </div>
         </div>
       </div>
     );
