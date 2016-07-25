@@ -18,4 +18,34 @@ var statsSchema = mongoose.Schema({
 })
 
 
+statsSchema.statics.combineStats=function(stats2){
+	Stats.findById(stats2,function(err,stats2){
+		if(err){
+			console.log(err);
+		}
+		else{
+			this.totalPoints+=stats2.totalPoints;
+			this.progress = this.progress.concat(stats2.progress);
+			Leaderboard.findById(this.leaderboard,function(err,leaderboard1){
+				if(err){
+				  return err;
+				}
+				else{
+				  Leaderboard.findById(stats2.leaderboard,function(err,leaderboard2){
+				    if(err){
+				      return err;
+				    }
+				    else{
+				      leaderboard1.mergeScoresArrays(leaderboard2.scores)
+				    }
+				  })
+				}
+			})
+		}
+		
+	})
+
+}
+
+
 module.exports = mongoose.model('Stats',statsSchema)
