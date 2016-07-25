@@ -15,6 +15,7 @@ var NavBar = require('./navBar');
 var Leaderboard = require('./leaderboard');
 var Contact = require('./contact');
 var Science = require('./science');
+var Stats = require('./stats')
 
 
 //Stats
