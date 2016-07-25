@@ -164,5 +164,10 @@ router.post('/gameEnd',function(req,res,next){
   })
 })
 
+///TAYLOR'S SAD ATTEMPT AT PUSHING DATA INTO STATS GRAPHS
+router.get('/stats', function(req,res,next){
+  console.log('workds')
+})
+
 
 module.exports=router;
