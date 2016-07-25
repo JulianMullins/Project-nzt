@@ -21,7 +21,7 @@
 }
 
 .scienceTop {
-  background-color: #F1BA03;
+  background-color: #008a7e;
   height: 80vh;
   padding: 0vw 5vw 0vw 10vw;
   transition-duration: .8s;
@@ -50,6 +50,7 @@
 }
 
 .scienceBottom h1 {
+  padding-top: 2vh;
   padding-bottom: 15px;
 }
 
