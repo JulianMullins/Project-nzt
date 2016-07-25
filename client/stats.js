@@ -29,9 +29,22 @@ var data = {labels: ["January", "February", "March", "April", "May", "June", "Ju
         }
     ]}
 
-var LineChart = require("react-chartjs").Line;
+// fetch('/taylorsStats',{method:'get'
+//     }).then(function(response) {
+//       console.log(response);
+//         return response.json();
+//       }).then(function(response) {
+//         console.log(response);
+//         if (response.success) {
+//           console.log('this works')
+//         }
+//      })
+
 
 var MyComponent = React.createClass({
+    componentDidMount: function(){
+//fetch call
+    },
   render: function() {
     return <LineChart data={data} width="600" height="250"/>
   }

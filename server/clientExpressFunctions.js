@@ -165,4 +165,8 @@ router.post('/gameEnd',function(req,res,next){
   res.json({score:req.body.score})
 })
 
+router.get('/stats',function(req, res, user){
+  console.log('stats cick')
+})
+
 module.exports=router;

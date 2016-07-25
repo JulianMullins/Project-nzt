@@ -2290,7 +2290,7 @@ ReactDOM.render(React.createElement(
     React.createElement(_reactRouter.Route, { path: 'login', component: Login }),
     React.createElement(_reactRouter.Route, { path: 'logout', component: Logout }),
     React.createElement(_reactRouter.Route, { path: 'register', component: Register }),
-    React.createElement(_reactRouter.Route, { path: 'gameOver', component: GameOver }),
+    React.createElement(_reactRouter.Route, { path: 'gameOver(/:score)', component: GameOver }),
     React.createElement(_reactRouter.Route, { path: 'leaderboard', component: Leaderboard }),
     React.createElement(_reactRouter.Route, { path: 'stats', component: Stats }),
     React.createElement(_reactRouter.Route, { path: 'contact', component: Contact }),
@@ -3749,11 +3749,24 @@ var data = { labels: ["January", "February", "March", "April", "May", "June", "J
         spanGaps: false
     }] };
 
-var LineChart = require("react-chartjs").Line;
+// fetch('/taylorsStats',{method:'get'
+//     }).then(function(response) {
+//       console.log(response);
+//         return response.json();
+//       }).then(function(response) {
+//         console.log(response);
+//         if (response.success) {
+//           console.log('this works')
+//         }
+//      })
+
 
 var MyComponent = React.createClass({
     displayName: 'MyComponent',
 
+    componentDidMount: function componentDidMount() {
+        //fetch call
+    },
     render: function render() {
         return React.createElement(LineChart, { data: data, width: '600', height: '250' });
     }
