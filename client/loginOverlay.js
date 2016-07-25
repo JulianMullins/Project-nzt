@@ -4,16 +4,43 @@ import {Link} from 'react-router';
 
 var LoginOverlay = React.createClass({
   getInitialState: function() {
-    return {username: '', password: ''}
+    return {
+      username: '', 
+      password: '',
+      games:null
+      // gameEnded:false,
+      // games:null
+    }
   },
+  // componentDidMount(){
+
+  //     fetch('/getUser',{
+  //       method:'get'
+  //     }).then(function(response){
+  //         console.log("about to response.json")
+  //         return response.json();
+  //     }).then(function(response){
+  //       console.log('responded')
+  //       if(response.games){
+  //         console.log('about to set state')
+  //         this.setState({
+  //           games:response.games
+  //         })
+  //         console.log('state set')
+  //       }
+  //     }.bind(this))
+    
+    
+  // },
   update(e) {
     this.setState({
       [e.target.name]: e.target.value
     })
   },
   login: function(e) {
-    console.log("logging in")
     e.preventDefault();
+
+    console.log("logging in")
     console.log(this.props)
 
     //ajax post
@@ -24,10 +51,15 @@ var LoginOverlay = React.createClass({
         'Accept': 'application/json',
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify({username: this.state.username, password: this.state.password})
+      body: JSON.stringify({
+        username: this.state.username, 
+        password: this.state.password
+      })
     }).then(function(response) {
+      console.log("response")
       return response.json();
     }).then(function(response) {
+      console.log("response")
       if (response.success) {
         this.props.history.push('/home');
       } else if (!response.success) {}
@@ -38,7 +70,16 @@ var LoginOverlay = React.createClass({
 
     //ajax facebook get
 
-    fetch('/login/facebook', {method: 'get'})
+    fetch('/login/facebook',{method:'get'
+    }).then(function(response) {
+      console.log(response);
+        return response.json();
+      }).then(function(response) {
+        console.log(response);
+        if (response.success) {
+          this.props.history.push('/home');
+        }
+      }.bind(this))
 
   },
   render: function() {
@@ -53,7 +94,7 @@ var LoginOverlay = React.createClass({
             <input type="password" placeholder="Password" name="password" id="password" value={this.state.password} onChange={this.update}></input>
             <div className="buttongroup">
               <button className="form-btn dx" onClick={this.login}>Login</button>
-              <a type="button" className="fb" href="/login/facebook">Login with Facebook</a>
+              <button className="form-btn fb" onClick={this.facebook}>Login with Facebook</button>
             </div>
           </form>
         </div>
@@ -67,9 +108,11 @@ var LoginOverlay = React.createClass({
             <br></br>and improve your IQ.</h3>
           <form>
             <div className="buttongroup">
-              <button className="form-btn dx">
-                <Link to="/register">Register</Link>
-              </button>
+              <Link to="/register">
+                <button className="form-btn dx">
+                  Register
+                </button>
+              </Link>
             </div>
           </form>
         </div>

@@ -42,7 +42,7 @@ var AdvancedMode = React.createClass({
       correct: [
         false, false, false
       ],
-      mode: this.props.mode,
+      mode: 'advanced',
       tempUser: true,
       gameId: null
     }
@@ -50,11 +50,20 @@ var AdvancedMode = React.createClass({
   componentDidMount: function() {
     timer = setInterval(this.timer, 1000);
 
-    fetch('/startGame/' + this.state.mode + '/' + this.state.N, {method: 'post'}).then(function(response) {
+    fetch('/startGame/' + this.state.mode + '/' + this.state.N, {
+      method:'POST',
+      credentials: 'include',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      }
+    }).then(function(response) {
       return response.json();
     }).then(function(response) {
       this.setState({tempUser: response.tempUser, gameId: response.gameId})
     }.bind(this))
+    
+
     {
       window.onkeyup = function(e) {
         if (e.keyCode == 37) {
@@ -154,7 +163,9 @@ var AdvancedMode = React.createClass({
           colorMatch: false,
           soundMatch: false,
           positionMatch: false,
-          correct: [false, false, false],
+          correct: [
+            false, false, false
+          ],
           alert: 'Not a match'
         })
         if (this.state.score !== 0) {
@@ -265,21 +276,15 @@ var AdvancedMode = React.createClass({
           console.log(gameScore, 'game score')
           console.log(reactionTimes, 'reaction times')
 
-
-
           //GAME OVER
-          fetch('/gameEnd',{
-            method:'post',
+          fetch('/gameEnd', {
+            method: 'post',
             credentials: 'include',
             headers: {
               'Accept': 'application/json',
               'Content-Type': 'application/json'
             },
-            body: JSON.stringify({
-              gameId:this.state.gameId,
-              score: gameScore,
-              reactionTimes: reactionTimes
-            })
+            body: JSON.stringify({gameId: this.state.gameId, score: gameScore, reactionTimes: reactionTimes})
           }).then(function(response) {
             return response.json();
           }).then(function(response) {
@@ -288,10 +293,7 @@ var AdvancedMode = React.createClass({
             }
           }.bind(this))
 
-
-
-
-        }.bind(this),2000)
+        }.bind(this), 2000)
 
       }
     }.bind(this), 2000);
@@ -329,16 +331,38 @@ var AdvancedMode = React.createClass({
       : '';
 
     var scoreAlert;
+    var scoreUpdate;
     if (this.state.alert === "Good job") {
-      scoreAlert = <div className="scoreAlertPositive">
-        {this.state.alert}
-      </div>
+      scoreAlert = (
+        <div className="scoreAlertPositive">
+          {this.state.alert}
+        </div>
+      )
+      scoreUpdate = (
+        <h2 style={{
+          color: 'green'
+        }}>+10</h2>
+      )
     } else if (this.state.alert === "Not a match" || this.state.alert === "Missed a match") {
-      scoreAlert = <div className="scoreAlertNegative">
-        {this.state.alert}
-      </div>
+      scoreAlert = (
+        <div className="scoreAlertNegative">
+          {this.state.alert}
+        </div>
+      )
+      if (this.state.score > 0) {
+        scoreUpdate = (
+          <h2 style={{
+            color: 'red'
+          }}>-5</h2>
+        )
+      }
     } else {
-      scoreAlert = <div></div>
+      scoreAlert = (
+        <div></div>
+      )
+      scoreUpdate = (
+        <h2></h2>
+      )
     }
 
     return (
@@ -349,8 +373,9 @@ var AdvancedMode = React.createClass({
           <h1 className="advanced nTitle">(N={this.state.N})</h1>
         </span>
         <div className="gameHeading">
-          <div className="gameScore">
-            <h2 className="advanced">Score: {this.state.score}</h2>
+          <div className="gameScore advanced">
+            <h2>Score: {this.state.score}</h2>
+            {scoreUpdate}
           </div>
           <GameTimer timeStyle={{
             'color': "#F1BA03"

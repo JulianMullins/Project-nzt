@@ -1,0 +1,65 @@
+/* science page */
+.sciencePage {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  width: 100vw;
+}
+
+.sciencePage p {
+  font-weight: 100;
+  font-size: calc(12px + .5vw);
+  font-family: "Proxima-Nova", sans-serif;
+  color: white;
+  padding-bottom: 25px;
+  width: 75vw;
+}
+
+.sciencePage h1 {
+  color: white;
+  font-size: 48px;
+}
+
+.scienceTop {
+  background-color: #F1BA03;
+  height: 80vh;
+  padding: 0vw 5vw 0vw 10vw;
+  transition-duration: .8s;
+}
+
+.scienceTop h1 {
+  padding-top: 6vh;
+  padding-bottom: 25px;
+}
+
+.scienceTop:hover {
+  height: 85vh;
+  transition-duration: .8s;
+}
+
+.scienceBottom {
+  height: 20vh;
+  background-color: #F13542;
+  transition-duration: .8s;
+  text-align: center;
+}
+
+.scienceBottom:hover {
+  height: 30vh;
+  transition-duration: .8s;
+}
+
+.scienceBottom h1 {
+  padding-bottom: 15px;
+}
+
+.scienceBottom a {
+  text-decoration: none;
+  color: white;
+  transition-duration: .5s;
+}
+
+.scienceBottom a:hover {
+  color: #7CD9D2;
+  transition-duration: .5s;
+}

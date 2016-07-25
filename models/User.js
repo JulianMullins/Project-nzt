@@ -6,16 +6,21 @@ var userSchema = mongoose.Schema({
 	email: String,
 	password: String,
 	facebookId: String,
-	maxN:Number,
+	maxN:{
+		classic:Number,
+		relaxed:Number,
+		silent:Number,
+		advanced:Number
+	},
 	stats:{
 		type: mongoose.Schema.Types.ObjectId,
 		ref: 'Stats'
 	},
 	temp:Boolean,
-	currentGame:{
+	currentGame:[{
 		type: mongoose.Schema.Types.ObjectId,
 		ref: 'Game'
-	}
+	}]
 })
 
 

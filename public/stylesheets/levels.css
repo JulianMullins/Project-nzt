@@ -1,0 +1,112 @@
+/*levels*/
+
+#classic, #relax, #silent, #advanced {
+  font-size: 10rem;
+  font-weight: 700;
+  text-align: center;
+}
+.levelBox {
+  text-align: center;
+  perspective: 5000px;
+  perspective-origin: 60%;
+}
+.levelBox> h1 {
+  font-size: 10rem;
+  font-weight: 700;
+  margin: 0;
+}
+
+.levelBox > h3 {
+  font-size: 1.3rem;
+  font-weight: 100;
+  color: gray;
+}
+.grid {
+  height: 55vh;
+  width: 55vh;
+  min-width: 400px;
+  margin: 0 auto;
+  align-items: left;
+}
+.grid a {
+  display: inline-block;
+  position: inline-block; /* Or absolute, inline-block, inline */
+}
+.levelSquare {
+  display: inline-block;
+  float: left;
+}
+/*.grid1 {
+  width: 99%;
+  height: 99%;
+  margin: .5%;
+}*/
+.grid4 {
+  width: 48%;
+  height: 48%;
+  margin: calc(4% / 4);
+  font-size: 13vh;
+}
+.grid9 {
+  width: 30%;
+  height: 30%;
+  margin: calc(10% / 6);
+  font-size: 7vh;
+}
+
+.grid16{
+  width: 22%;
+  height: 22%;
+  margin: calc(12% / 8);
+  font-size: 5vh;
+}
+
+.grid25{
+  width: 16%;
+  height: 16%;
+  margin: calc(20% / 10);
+  font-size: 4vh;
+}
+
+.levelSquareLast{
+  background-color: rgba(255,255,255,.5);
+}
+
+.levelSquare {
+  transform: rotate3d(0, 1, 0, 0deg);
+  transform-style: preserve-3d;
+  transform-origin: 50% 50% -25px;
+  transition: all 0.3s ease-out;
+}
+.levelSquare:hover {
+  transform: rotate3d(0, 1, 0, 29.999deg);
+}
+.levelSquare:active {
+  transform: rotate3d(0, 1, 0, 180deg);
+  transition-duration: 0.4s;
+}
+.face {
+  backface-visibility: hidden;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  text-align: center;
+  /*color: white;*/
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.front.face {
+  z-index: 0;
+}
+.side.face {
+  transform: translate3d(-100%, 0, 0) rotate3d(0, 1, 0, -89.999deg);
+  transform-origin: 100% 50%;
+  z-index: 0;
+  width: 50px;
+}
+.back.face {
+  transform: translate3d(0, 0, -50px) rotate3d(0, 1, 0, 180deg);
+}

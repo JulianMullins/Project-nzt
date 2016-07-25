@@ -6,6 +6,7 @@ var url = process.env.url;
 
 var MenuOverlay = require('./menuOverlay');
 var Login = require('./loginOverlay');
+var FacebookLogin = require('./facebookLogin');
 var Logout = require('./logout');
 var Register = require('./registerOverlay');
 var Home = require('./Mainmenu');
@@ -14,6 +15,7 @@ var NavBar = require('./navBar');
 var Leaderboard = require('./leaderboard');
 var Contact = require('./contact');
 var Science = require('./science');
+
 
 //Stats
 //Science
@@ -47,36 +49,39 @@ var App = React.createClass({
     return (
       <div>
 
-        <NavBar/> {this.props.children}
+        <NavBar/> 
+        {this.props.children}
+
       </div>
     )
   }
 });
 
-// ReactDOM.render((
-//   <Router history={hashHistory}>
-//     <Route path="/" component={App}>
-//       <Route path="home" component={Home}/>
-//       <Route path="login" component={Login}/>
-//       <Route path="logout" component={Logout} />
-//       <Route path="register" component={Register}/>
-//       <Route path="gameOver" component={GameOver}/>
-//       <Route path="leaderboard" component={Leaderboard}/>
-//       <Route path="contact" component={Contact}/>
-//       <Route path="science" component={Science}/>
+ReactDOM.render((
+  <Router history={hashHistory}>
+    <Route path="/" component={App}>
+      <Route path="home" component={Home}/>
+      <Route path="login/facebook" component={FacebookLogin}/>
+      <Route path="gameOver/login" component={Login}/>
+      <Route path="gameOver/register" component={Register}/>
+      <Route path="login" component={Login}/>
+      <Route path="logout" component={Logout}/>
+      <Route path="register" component={Register}/>
+      <Route path="gameOver" component={GameOver}/>
+      <Route path="leaderboard" component={Leaderboard}/>
+      <Route path="contact" component={Contact}/>
+      <Route path="science" component={Science}/>
 
-//       <Route path="levels/classic" component={ClassicLevels}/>
-//       <Route path="levels/relaxed" component={RelaxedLevels}/>
-//       <Route path="levels/silent" component={SilentLevels}/>
-//       <Route path="levels/advanced" component={AdvancedLevels}/>
-//       <Route path="game/classic/:n" component={ClassicGame}/>
-//       <Route path="game/relaxed/:n" component={RelaxedGame}/>
-//       <Route path="game/silent/:n" component={SilentGame}/>
-//       <Route path="game/advanced/:n" component={AdvancedGame}/>
-//     </Route>
-//   </Router>
-// ), document.getElementById('root'), function() {
-//   console.log("rendered")
-// });
-
-ReactDOM.render(<GameOver/>, document.getElementById('root'));
+      <Route path="levels/classic" component={ClassicLevels}/>
+      <Route path="levels/relaxed" component={RelaxedLevels}/>
+      <Route path="levels/silent" component={SilentLevels}/>
+      <Route path="levels/advanced" component={AdvancedLevels}/>
+      <Route path="game/classic/:n" component={ClassicGame}/>
+      <Route path="game/relaxed/:n" component={RelaxedGame}/>
+      <Route path="game/silent/:n" component={SilentGame}/>
+      <Route path="game/advanced/:n" component={AdvancedGame}/>
+    </Route>
+  </Router>
+), document.getElementById('root'), function() {
+  console.log("rendered")
+});
