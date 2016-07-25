@@ -33,14 +33,19 @@ var MyComponent = React.createClass({
     componentDidMount: function(){
 //fetch call
 
-fetch('/getstats',{method:'get'
-    }).then(function(response) {
-      console.log(response);
-        return response.json();
-      }).then(function(response) {
-          console.log(response.stats)
-        }
-     )
+fetch('/getstats',{method:'get'})
+.then(function(response){
+    console.log(response, '38')
+})
+    // .then(function(response) {
+    //   console.log(response, '38');
+    //     return response.json();
+    //   })
+    // .then(function(responseJson) {
+    //     console.log('41')
+    //       console.log(responseJson.stats)
+    //     }
+    //  )
 
     },
   render: function() {

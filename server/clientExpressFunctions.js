@@ -4,6 +4,7 @@ var User = require('../models/User');
 var Leaderboard = require('../models/Leaderboard');
 var HighScore = require('../models/HighScore');
 var Game = require('../models/Game');
+var Stats = require('../models/Stats')
 
 var tempGame = null;
 
@@ -165,8 +166,26 @@ router.post('/gameEnd',function(req,res,next){
   res.json({score:req.body.score})
 })
 
-router.get('/stats',function(req, res, user){
-  console.log('stats cick')
+router.get('/getstats',function(req, res, user){
+  console.log(req.user.stats,'170')
+  Stats.findById(req.user.stats, function(err,stats){
+    if(err){
+      console.log(err)
+    }
+    else{
+      res.json({stats: stats})
+    }
+  })
+//  .populate()
+  // .exec(function(err, stats){
+  //   if(err){
+  //     console.log(err)
+  //   }
+  //   else{
+  //     console.log('176')
+  //     res.json({stats: stats})
+  //   }
+  // })
 })
 
 module.exports=router;

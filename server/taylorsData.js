@@ -15,15 +15,15 @@ var tempGame = null;
 // })
 
 //TAYLOR'S SAD ATTEMPT AT PUSHING DATA INTO STATS GRAPHS
-app.get('/taylorsStats', function(req,res,next){
-  console.log('workds')
-  if(err){
-  	res.send(err)
-  }
-  else{
-  	 res.json({gameId: game._id,tempUser:tempUser})
-  }
-})
+// app.get('/taylorsStats', function(req,res,next){
+//   console.log('workds')
+//   if(err){
+//   	res.send(err)
+//   }
+//   else{
+//   	 res.json({gameId: game._id,tempUser:tempUser})
+//   }
+// })
 
 
 module.exports=app;
