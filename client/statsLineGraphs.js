@@ -6,104 +6,35 @@ var LineChart = require("react-chartjs").Line;
 var data = {labels: ["January", "February", "March", "April", "May", "June", "July"],
     datasets: [
         {
-            label: "My First dataset",
-            fill: false,
-            lineTension: 0.1,
-            backgroundColor: "rgba(75,192,192,0.4)",
-            borderColor: "rgba(75,192,192,1)",
-            borderCapStyle: 'butt',
-            borderDash: [],
-            borderDashOffset: 0.0,
-            borderJoinStyle: 'miter',
-            pointBorderColor: "rgba(75,192,192,1)",
-            pointBackgroundColor: "#fff",
-            pointBorderWidth: 1,
-            pointHoverRadius: 5,
-            pointHoverBackgroundColor: "rgba(75,192,192,1)",
-            pointHoverBorderColor: "rgba(220,220,220,1)",
-            pointHoverBorderWidth: 2,
-            pointRadius: 1,
-            pointHitRadius: 10,
             data: [65, 59, 80, 81, 56, 55, 40],
-            spanGaps: false,
+            backgroundColor: 'rgba(255, 99, 132, 0.2)'
+        },
+         {
+            data: [75, 59, 90, 21, 56, 35, 90]
         }
-    ]}
+    ]};
+
+var options= scales: {
+            yAxes: [{
+                stacked: true
+            }]
+        };
 
 var MyComponent = React.createClass({
     componentDidMount: function(){
 //fetch call
 
-fetch('/getstats',{method:'get'})
+fetch('/getstats', {method: 'GET'})
 .then(function(response){
     console.log(response, '38')
+    })
+.then(function(responseJson){
+    console.log(responseJson,'41')
 })
-    // .then(function(response) {
-    //   console.log(response, '38');
-    //     return response.json();
-    //   })
-    // .then(function(responseJson) {
-    //     console.log('41')
-    //       console.log(responseJson.stats)
-    //     }
-    //  )
-
     },
   render: function() {
-    return <LineChart data={data} width="600" height="250"/>
+    return <LineChart data={data} options={options} width="600" height="250"/>
   }
 });
 
 module.exports = MyComponent
-// var Reactable = require('reactable');
-// var Table = Reactable.Table;
-
-// var Stats = React.createClass({
-//   render: function() {
-//     var data = [
-//       {
-//         mode: 'Advanced',
-//         score: 2000,
-//         level: 16
-//       }, {
-//         mode: 'Classic',
-//         score: 1980,
-//         level: 19
-//       }, {
-//         mode: 'Advanced',
-//         score: 1760,
-//         level: 6
-//       }, {
-//         mode: 'Relaxed',
-//         score: 1580,
-//         level: 19
-//       }, {
-//         mode: 'Silent',
-//         score: 70,
-//         level: 2
-//       }
-//     ];
-//     return (
-//       <div className="leaderboardPage">
-//         <div className="userSide">
-//           <h1 className="lbHeader">Statistics</h1>
-//           <section>
-//             <Table columns={[
-//               {
-//                 key: 'mode',
-//                 label: 'Mode'
-//               }, {
-//                 key: 'score',
-//                 label: 'Score'
-//               }, {
-//                 key: 'level',
-//                 label: 'Level'
-//               }
-//             ]} data={data} itemsPerPage={10} pageButtonLimit={5} sortable={true} filterable={['mode', 'username']}/>
-//           </section>
-//         </div>
-//       </div>
-//     )
-//   }
-// });
-
-//module.exports = Stats
