@@ -7,18 +7,7 @@ var Game = require('../models/Game');
 
 var tempGame = null;
 
-router.get('/isLoggedIn',function(req,res,next){
-  var isloggedin = false;
-  console.log(req.user)
-  if(req.user && !req.user.temp){
-    isloggedin = true;
-  }
-  console.log("logged in: "+isloggedin)
-  res.json({
-    'loggedIn': isloggedin
-    // 'username': req.user.username
-  })
-});
+
 
 router.post('/startGame/:mode/:nLevel',function(req,res,next){
   console.log(req.user)
@@ -113,7 +102,20 @@ router.get('/isUser',function(req,res,next){
     res.json({isUser:false})
   }
   
-})
+});
+
+router.get('/isLoggedIn',function(req,res,next){
+  var isloggedin = false;
+  console.log(req.user)
+  if(req.user && !req.user.temp){
+    isloggedin = true;
+  }
+  console.log("logged in: "+isloggedin)
+  res.json({
+    'loggedIn': isloggedin
+    // 'username': req.user.username
+  })
+});
 
 
 router.get('/getMaxN',function(req,res,next){
@@ -143,43 +145,44 @@ router.get("/getGameData",function(req,res,next){
 
 router.get('/getUser',function(req,res,next){
   var games = null;
-  console.log("gonna check for games")
+  var isUser = false;
   if(req.user && req.user.currentGame){
     games = req.user.currentGame
+    isUser=true
   }
-  console.log("gonna res.json now")
   res.json({
-    username:req.user.username,
-    games:games
+    alreadyLoggedIn: !!req.user,
+    isUser: isUser,
+    username:req.user.username
   })
 })
  
-router.get('/getScore',function(req,res,next){
-  Game.findById(req.user.currentGame,function(err,game){
+router.get('/getGame',function(req,res,next){
+  Game.findById(req.user.currentGame[0],function(err,game){
     if(err){
       console.log(err)
+      res.json({success:false})
     }
     else{
-      res.json({'score':game.score})
+      res.json({game:game,success:true})
     }
   })
 })
 
 router.post('/gameEnd',function(req,res,next){
-  // Game.findById(req.body.gameId,function(err,game){
-  //   if(err){
-  //     console.log(err);
-  //   }
-  //   else if(!game) {
-  //     console.log("no game")
-  //   }
-  //   else{
-  //     game.score = req.body.score;
-  //     game.reactionTimes=req.body.reactionTimes;
-  //     res.json({success:true})
-  //   }
-  // })
-  res.json({score:req.body.score})
+  Game.findById(req.body.gameId,function(err,game){
+    if(err){
+      console.log(err);
+    }
+    else if(!game) {
+      console.log("no game")
+    }
+    else{
+      game.score = req.body.score;
+      game.reactionTimes=req.body.reactionTimes;
+      res.json({success:true,score:req.body.score})
+    }
+  })
 })
 
 

@@ -1,6 +1,7 @@
 var React = require('react');
 var ReactDOM = require('react-dom');
 var url = process.env.url;
+var axios = require('axios')
 
 var Levels = require('./levels');
 var ClassicLevels = Levels.ClassicLevels;
@@ -20,7 +21,15 @@ var Mainmenu = React.createClass({
       hasUsername:false
     }
   },
-
+  componentDidMount(){
+    axios.get('/getUser')
+      .then(function(response){
+        this.setState({
+          hasUsername:response.data.isUser,
+          username:response.data.username
+        })
+      }.bind(this))
+  },
   classic() {
     this.props.history.push('/levels/classic')
   },
@@ -41,7 +50,7 @@ var Mainmenu = React.createClass({
       <div>
         <div className="heading">
           <img src="../images/CortexLogo4.svg"/>
-
+          {this.state.username}
         </div>
         <div className="menu">
           <a className="menu-panel classicBackground" onClick={this.classic}>

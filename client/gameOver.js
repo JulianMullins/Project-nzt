@@ -1,37 +1,21 @@
 var React = require('react');
 var ReactDOM = require('react-dom');
+var axios = require('axios');
+
 import { Link } from 'react-router'
 var loginOverlay = require('./loginOverlay');
 
 
 
 var getUser = function(){
-  fetch('/getUser',{
-      method:'get'
-    }).then(function(response){
-        return response.json();
-    }).then(function(response){
-      if(response.username){
-        this.setState({
-          username:response.username,
-          alreadyLoggedIn:true
-        })
-      }
-    })
+  
+  return axios.get('/getUser')
+  
 }
 
-var getScore = function(){
-  fetch('/getScore',{
-    method:'get'
-  }).then(function(response){
-    return response.json();
-  }).then(function(response){
-    if(response.score){
-      this.setState({
-        score:response.score
-      })
-    }
-  })
+var getGame = function(){
+
+  return axios.get('/getGame')
   
 }
 
@@ -47,17 +31,16 @@ var GameOverOverlay = React.createClass({
   },
   componentDidMount(){
       
-    fetch("/getGameData")
-      .then(function(response){
-        console.log(response)
-        return response.json();
-      }).then(function(response){
+    axios.all([getUser(),getGame()])
+      .then(axios.spread(function(userData,gameData){
         this.setState({
-          score:score,
-          mode:mode,
-          nLevel:nLevel
+          username:userData.username,
+          alreadyLoggedIn:userData.alreadyLoggedIn,
+          score:gameData.game.score,
+          mode:gameData.game.mode,
+          nLevel:gameData.game.nLevel
         })
-      }.bind(this))
+      }))
 
 
   },
@@ -72,20 +55,29 @@ var GameOverOverlay = React.createClass({
       username: e.target.value
     })
   },
-  gameOver: function(score){
+  tempSaveData(){
+    axios.post({
+      url:'/tempSaveData',
+      data:{
+        score: this.state.score,
+        mode: this.state.mode,
+        
+      }
+    })
+  },
+  gameOver: function(){
 
-    fetch('/gameOver', {
-        method: 'post',
-        credentials: 'include',
-        headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-          inputUsername:this.state.username,
-          alreadyLoggedIn:this.state.alreadyLoggedIn
-        })
-      })
+    axios.post({
+      url:'/gameOver',
+      headers:{
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      data: {
+        inputUsername:this.state.username,
+        alreadyLoggedIn:this.state.alreadyLoggedIn
+      }
+    })
 
   },
   click(e){
@@ -111,16 +103,20 @@ var GameOverOverlay = React.createClass({
 
           <div className="gameOverActions">
             <Link to="/home">
+              <a onClick={this.gameOver}>
               <span className="fa fa-home fa-5x"></span>
               <h2>home</h2>
+              </a>
             </Link>
             <h2 className="levelButton" onClick={this.click}>next level</h2>
             <div>
               <Link to="/leaderboard">
+              <a onClick={this.gameOver}>
                 <span className="lbChart">
                   <span className="fa fa-signal fa-5x"></span>
                   <h2>leaderboard</h2>
                 </span>
+              </a>
               </Link>
             </div>
           </div>
