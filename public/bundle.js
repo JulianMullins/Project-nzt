@@ -1307,7 +1307,7 @@ var RelaxedMode = React.createClass({
       ////////////////////////////////////////////////////////////////////////////////////////
       ////////////////////////////////////////////////////////////////////////////////////
       //RUTH THIS IS WHERE THE GAME ENDS///////////////////////////////////////////
-      if (timeKeeper === 60) {
+      if (timeKeeper === 2) {
         //give gameScore variable the final score
         gameScore = this.state.score;
         console.log(gameScore, 'game score');
@@ -1325,9 +1325,9 @@ var RelaxedMode = React.createClass({
         }).then(function (response) {
           return response.json();
         }).then(function (response) {
-          if (response.success) {
-            this.props.history.push('/gameOver');
-          }
+          //if (response.success) {
+          this.props.history.push('/gameOver/' + response.score);
+          //}
         }.bind(this));
       }
       ////////////////////////////////////////////////////////////////////////////////////
@@ -1378,7 +1378,7 @@ var RelaxedMode = React.createClass({
       scoreUpdate = React.createElement(
         'h2',
         { style: {
-            color: 'green'
+            color: '#01B6A7'
           } },
         '+10'
       );
@@ -1392,7 +1392,7 @@ var RelaxedMode = React.createClass({
         scoreUpdate = React.createElement(
           'h2',
           { style: {
-              color: 'red'
+              color: '#F13542'
             } },
           '-5'
         );
@@ -2250,7 +2250,7 @@ ReactDOM.render(React.createElement(
     React.createElement(_reactRouter.Route, { path: 'login', component: Login }),
     React.createElement(_reactRouter.Route, { path: 'logout', component: Logout }),
     React.createElement(_reactRouter.Route, { path: 'register', component: Register }),
-    React.createElement(_reactRouter.Route, { path: 'gameOver', component: GameOver }),
+    React.createElement(_reactRouter.Route, { path: 'gameOver(/:score)', component: GameOver }),
     React.createElement(_reactRouter.Route, { path: 'leaderboard', component: Leaderboard }),
     React.createElement(_reactRouter.Route, { path: 'contact', component: Contact }),
     React.createElement(_reactRouter.Route, { path: 'science', component: Science }),
