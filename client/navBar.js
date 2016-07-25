@@ -64,6 +64,7 @@ var NavBar = React.createClass({
 						<li><Link to={logInOutLink}><a onClick={this.closeLogInOut}>{logInOrOut}</a></Link></li>
 						<li><Link to="/leaderboard"><a onClick={this.close}>Leaderboard</a></Link></li>
 						<li><Link to="/stats"><a onClick={this.close}>Stats</a></Link></li>
+						<li><Link to="/tutorial"><a onClick={this.close}>Tutorial</a></Link></li>
 						<li><Link to="/science"><a onClick={this.close}>The Science</a></Link></li>
 						<li><Link to="/contact"><a onClick={this.close}>Contact</a></Link></li>
 					</ul>

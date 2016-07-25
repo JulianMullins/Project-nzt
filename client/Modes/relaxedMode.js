@@ -186,9 +186,9 @@ var RelaxedMode = React.createClass({
         }).then(function(response) {
           return response.json();
         }).then(function(response) {
-          if (response.success) {
-            this.props.history.push('/gameOver');
-          }
+          //if (response.success) {
+            this.props.history.push('/gameOver/'+response.score);
+          //}
         }.bind(this))
 
       }
@@ -220,6 +220,18 @@ var RelaxedMode = React.createClass({
         <div className="overlay">
           <center>
             <a className="btn">{this.state.initialTimer}</a>
+              <pl style={{margin: '0 0 20px'}}>Use the keys to press the buttons.</pl>
+                <div className="key-wrapper">
+                <ul className="row">
+                  <li className="key k38">↑</li>
+                </ul>
+
+                <ul className="row">
+                  <li className="key k37">←</li>
+                  <li className="key k40">↓</li>
+                  <li className="key k39">→</li>
+                </ul>
+              </div>
           </center>
         </div>
       )
@@ -235,7 +247,7 @@ var RelaxedMode = React.createClass({
       )
       scoreUpdate = (
         <h2 style={{
-          color: 'green'
+          color: '#01B6A7'
         }}>+10</h2>
       )
     } else if (this.state.alert === "Not a match" || this.state.alert === "Missed a match") {
@@ -247,7 +259,7 @@ var RelaxedMode = React.createClass({
       if (this.state.score > 0) {
         scoreUpdate = (
           <h2 style={{
-            color: 'red'
+            color: '#F13542'
           }}>-5</h2>
         )
       }
