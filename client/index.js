@@ -1,17 +1,20 @@
 var React = require('react');
 var ReactDOM = require('react-dom');
 
-import {Router, Route, hashHistory, Link} from 'react-router'
+import {Router, Route, hashHistory, Link} from 'react-router';
+import { IndexRoute, IndexRedirect } from 'react-router';
+var axios = require('axios');
 var url = process.env.url;
 
-var MenuOverlay = require('./menuOverlay');
+var Home = require('./Mainmenu');
+var NavBar = require('./navBar');
+
 var Login = require('./loginOverlay');
 var FacebookLogin = require('./facebookLogin');
 var Logout = require('./logout');
 var Register = require('./registerOverlay');
-var Home = require('./Mainmenu');
+
 var GameOver = require('./gameOver');
-var NavBar = require('./navBar');
 var Leaderboard = require('./leaderboard');
 var Contact = require('./contact');
 var Science = require('./science');
@@ -31,25 +34,36 @@ var ClassicLevels = require('./levels').ClassicLevels;
 var RelaxedLevels = require('./levels').RelaxedLevels;
 var SilentLevels = require('./levels').SilentLevels;
 var AdvancedLevels = require('./levels').AdvancedLevels;
-/*
-      <Route path="/leaderboard" component={Leaderboard}/>
-      <Route path="/stats" component={Stats}/>
-      <Route path="/contact" component={Contact}/>
-      <Route path="/science" component={Science}/>
-      <Route path="/settings" component={Settings}/>
-      */
+
 
 var App = React.createClass({
-  componentDidMount() {
-    if (this.props.location.pathname === '/') {
-      this.props.history.push('/home')
+  getInitialState(){
+    // var isUser = null;
+    // axios({
+    //   url: '/isUser',
+    //   withCredentials: true
+    // }).then(function(response){
+    //   if(response.data.isUser){
+    //     isUser = true;
+    //   }
+    //   else{
+    //     isUser = false;
+    //   }
+    // }.bind(this))
+    return{
+      
     }
   },
+  componentDidMount() {
+    
+    console.log("app mounted")
+  },
   render() {
+    //<NavBar isUser = {this.state.isUser} />
+    console.log(this) 
     return (
       <div>
-
-        <NavBar/> 
+        <NavBar />
         {this.props.children}
 
       </div>
@@ -60,7 +74,8 @@ var App = React.createClass({
 ReactDOM.render((
   <Router history={hashHistory}>
     <Route path="/" component={App}>
-      <Route path="home" component={Home}/>
+      <IndexRedirect to='/home'/>
+      <Route path="home" component={Home} />
       <Route path="login/facebook" component={FacebookLogin}/>
       <Route path="gameOver/login" component={Login}/>
       <Route path="gameOver/register" component={Register}/>
@@ -80,6 +95,7 @@ ReactDOM.render((
       <Route path="game/relaxed/:n" component={RelaxedGame}/>
       <Route path="game/silent/:n" component={SilentGame}/>
       <Route path="game/advanced/:n" component={AdvancedGame}/>
+
     </Route>
   </Router>
 ), document.getElementById('root'), function() {

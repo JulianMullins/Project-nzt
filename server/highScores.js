@@ -15,7 +15,7 @@ router.get('/myHighScores',function(req,res,next){
 router.get('/allHighScores',function(req,res,next){
   Leaderboard.findById(serverLeaderboardId,function(err,leaderboard){
     if(err){
-      res.send(err)
+      console.log(err)
     }
     else{
       return leaderboard.scores;

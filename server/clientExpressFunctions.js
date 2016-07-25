@@ -39,7 +39,7 @@ router.post('/startGame/:mode/:nLevel',function(req,res,next){
       })
       tempUser.save(function(err,user){
         if(err){
-          res.send(err)
+          console.log(err);
         }
       })
 
@@ -71,7 +71,7 @@ router.post('/startGame/:mode/:nLevel',function(req,res,next){
           })
           tempGame.save(function(err,game){
             if(err){
-              res.send(err);
+              console.log(err);
             }
             else{
               req.user.currentGame.unshift(game);
@@ -93,7 +93,7 @@ router.post('/startGame/:mode/:nLevel',function(req,res,next){
       })
       tempGame.save(function(err,game){
         if(err){
-          res.send(err);
+          console.log(err);
         }
         else{
           req.user.currentGame.unshift(game);
@@ -103,9 +103,15 @@ router.post('/startGame/:mode/:nLevel',function(req,res,next){
     }
 });
 
-  //anon user
-router.get('/startAnon',function(req,res,next){
   
+router.get('/isUser',function(req,res,next){
+  console.log(req.user)
+  if(req.user){
+    res.json({isUser:true})
+  }
+  else{
+    res.json({isUser:false})
+  }
   
 })
 
@@ -147,7 +153,7 @@ router.get('/getUser',function(req,res,next){
     games:games
   })
 })
-
+ 
 router.get('/getScore',function(req,res,next){
   Game.findById(req.user.currentGame,function(err,game){
     if(err){
