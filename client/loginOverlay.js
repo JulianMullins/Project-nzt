@@ -5,7 +5,7 @@ import {Link} from 'react-router';
 var LoginOverlay = React.createClass({
   getInitialState: function() {
     return {
-      username: '', 
+      username: '',
       password: '',
       games:null
       // gameEnded:false,
@@ -29,8 +29,8 @@ var LoginOverlay = React.createClass({
   //         console.log('state set')
   //       }
   //     }.bind(this))
-    
-    
+
+
   // },
   update(e) {
     this.setState({
@@ -52,7 +52,7 @@ var LoginOverlay = React.createClass({
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-        username: this.state.username, 
+        username: this.state.username,
         password: this.state.password
       })
     }).then(function(response) {

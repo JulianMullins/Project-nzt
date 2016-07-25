@@ -258,7 +258,7 @@ var ClassicMode = React.createClass({
         <div className="overlay">
           <center>
             <a className="btn">{this.state.initialTimer}</a>
-            <pl style={{margin: '0 0 20px'}}>Use the keys to press the buttons.</pl>
+            <h4 style={{margin: '0 0 20px'}}>Use the keys to press the buttons.</h4>
               <div className="key-wrapper">
               <ul className="row">
                 <li className="key k38">↑</li>
