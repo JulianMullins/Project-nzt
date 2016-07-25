@@ -12,6 +12,17 @@
   padding-top: 10vh;
 }
 
+.gameOver a {
+  color: white;
+  text-decoration: none;
+  transition-duration: .5s;
+}
+
+.gameOver a:hover {
+  color: #F13542;
+  transition-duration: .5s;
+}
+
 .gameOver h1 {
   font-size: 96px;
 }
@@ -21,7 +32,12 @@
 }
 
 .gameOverPrompt {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   width: 75vw;
+  padding: 15px;
+  border: 1px solid white;
 }
 
 .gameOverInform {
@@ -43,35 +59,25 @@
 }
 
 .levelButton {
-  background-color: #F13542;
-  padding: 15px;
+  background-color: transparent;
+  color: white;
+  padding: 15px 25px;
+  border: 1px solid white;
+  transition-duration: .5s;
+  cursor: pointer;
 }
 
-.lbCharts {
+.levelButton:hover {
+  background-color: #F13542;
+  color: white;
+  border-color: #F13542;
+  transition-duration: .5s;
+}
+
+.lbChart {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   align-items: flex-end;
   justify-content: flex-end;
   margin-bottom: 10px;
-}
-
-.lbChart1 {
-  background-color: white;
-  height: 5vh;
-  width: 5vh;
-  margin-right: 10px;
-}
-
-.lbChart2 {
-  background-color: white;
-  height: 10vh;
-  width: 5vh;
-  margin-right: 10px;
-}
-
-.lbChart3 {
-  background-color: white;
-  height: 15vh;
-  width: 5vh;
-  margin-right: 10px;
 }
