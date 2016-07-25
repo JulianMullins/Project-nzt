@@ -2184,14 +2184,13 @@ var GameOverOverlay = React.createClass({
     return {
       username: null,
       alreadyLoggedIn: false,
-      score: null
+      score: this.props.params.score
     };
   },
-  componentDidMount: function componentDidMount() {
-    getUser().bind(this);
-    getScore().bind(this);
-  },
-
+  // componentDidMount(){
+  //     getUser().bind(this);
+  //     getScore().bind(this);
+  // },
   update: function update(e) {
     this.setState({
       username: e.target.value
@@ -2223,7 +2222,7 @@ var GameOverOverlay = React.createClass({
         React.createElement(
           _reactRouter.Link,
           { to: '/gameOver/login' },
-          'Sign in'
+          ' Sign in'
         ),
         ' or ',
         React.createElement(
@@ -2251,7 +2250,7 @@ var GameOverOverlay = React.createClass({
       ),
       React.createElement(
         'h1',
-        { className: 'gameOverInform' },
+        { className: 'gameOverInform classic' },
         'You have unlocked level 2'
       ),
       loggedIn,
@@ -2261,7 +2260,12 @@ var GameOverOverlay = React.createClass({
         React.createElement(
           _reactRouter.Link,
           { to: '/home' },
-          React.createElement('span', { className: 'fa fa-home fa-5x' })
+          React.createElement('span', { className: 'fa fa-home fa-5x' }),
+          React.createElement(
+            'h2',
+            null,
+            'home'
+          )
         ),
         React.createElement(
           'h2',
@@ -2276,15 +2280,13 @@ var GameOverOverlay = React.createClass({
             { to: '/leaderboard' },
             React.createElement(
               'span',
-              { className: 'lbCharts' },
-              React.createElement('div', { className: 'lbChart1' }),
-              React.createElement('div', { className: 'lbChart2' }),
-              React.createElement('div', { className: 'lbChart3' })
-            ),
-            React.createElement(
-              'h2',
-              null,
-              'view leaderboard'
+              { className: 'lbChart' },
+              React.createElement('span', { className: 'fa fa-signal fa-5x' }),
+              React.createElement(
+                'h2',
+                null,
+                'leaderboard'
+              )
             )
           )
         )

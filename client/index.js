@@ -71,7 +71,7 @@ ReactDOM.render((
       <Route path="logout" component={Logout}/>
 
       <Route path="register" component={Register}/>
-      <Route path="gameOver" component={GameOver}/>
+      <Route path="gameOver(/:score)" component={GameOver}/>
       <Route path="leaderboard" component={Leaderboard}/>
       <Route path="contact" component={Contact}/>
       <Route path="science" component={Science}/>

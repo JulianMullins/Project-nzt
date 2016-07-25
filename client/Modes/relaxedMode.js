@@ -168,7 +168,7 @@ var RelaxedMode = React.createClass({
       ////////////////////////////////////////////////////////////////////////////////////////
       ////////////////////////////////////////////////////////////////////////////////////
       //RUTH THIS IS WHERE THE GAME ENDS///////////////////////////////////////////
-      if (timeKeeper === 60) {
+      if (timeKeeper === 2) {
         //give gameScore variable the final score
         gameScore = this.state.score;
         console.log(gameScore, 'game score')
@@ -186,9 +186,9 @@ var RelaxedMode = React.createClass({
         }).then(function(response) {
           return response.json();
         }).then(function(response) {
-          if (response.success) {
-            this.props.history.push('/gameOver');
-          }
+          //if (response.success) {
+            this.props.history.push('/gameOver/'+response.score);
+          //}
         }.bind(this))
 
       }
@@ -247,7 +247,7 @@ var RelaxedMode = React.createClass({
       )
       scoreUpdate = (
         <h2 style={{
-          color: 'green'
+          color: '#01B6A7'
         }}>+10</h2>
       )
     } else if (this.state.alert === "Not a match" || this.state.alert === "Missed a match") {
@@ -259,7 +259,7 @@ var RelaxedMode = React.createClass({
       if (this.state.score > 0) {
         scoreUpdate = (
           <h2 style={{
-            color: 'red'
+            color: '#F13542'
           }}>-5</h2>
         )
       }
