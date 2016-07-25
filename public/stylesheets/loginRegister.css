@@ -192,33 +192,6 @@ input {
   font-weight: 100;
   text-align: center;
 }
-.leaderboardPage {
-  display: flex;
-  flex-direction: row;
-  height: 100vh;
-  width: 100vw;
-}
-.userSide {
-  height: 100vh;
-  width: 50%;
-  min-width: 0;
-  background-color: #7CD9D2;
-  padding-top: 10vh;
-  transition-duration: .8s;
-}
-.boardSide {
-  height: 100vh;
-  width: 50%;
-  min-width: 0;
-  background-color: #F1BA03;
-  padding-top: 10vh;
-  transition-duration: .8s;
-}
-.lbHeader {
-  color: white;
-  font-size: 48px;
-  text-align: center;
-}
 
 @media all and (max-width: 500px) {
   .screen {

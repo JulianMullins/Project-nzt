@@ -40,13 +40,13 @@ var GameOverOverlay = React.createClass({
     return{
       username:null,
       alreadyLoggedIn:false,
-      score: null
+      score: this.props.params.score
     }
   },
-  componentDidMount(){
-      getUser().bind(this);
-      getScore().bind(this);
-  },
+  // componentDidMount(){
+  //     getUser().bind(this);
+  //     getScore().bind(this);
+  // },
   update:function(e){
     this.setState({
       username: e.target.value
@@ -74,7 +74,7 @@ var GameOverOverlay = React.createClass({
       ? <div></div>
       : <div className="gameOverPrompt">
           <p>It looks like you are not currently logged in. 
-          <Link to="/gameOver/login">Sign in</Link> or <Link to="/gameOver/register">sign up</Link> to save your progress, 
+          <Link to="/gameOver/login"> Sign in</Link> or <Link to="/gameOver/register">sign up</Link> to save your progress, 
           view statistics and compete with friends!</p>  
         </div> 
 
@@ -82,23 +82,22 @@ var GameOverOverlay = React.createClass({
       <div className="gameOver" id="gameover">
           <h1>Congrats!</h1>
           <h2>Your score is {this.state.score}</h2>
-          <h1 className="gameOverInform">You have unlocked level 2</h1>
+          <h1 className="gameOverInform classic">You have unlocked level 2</h1>
 
           {loggedIn}
 
           <div className="gameOverActions">
             <Link to="/home">
               <span className="fa fa-home fa-5x"></span>
+              <h2>home</h2>
             </Link>
             <h2 className="levelButton">next level</h2>
             <div>
               <Link to="/leaderboard">
-                <span className="lbCharts">
-                  <div className="lbChart1"></div>
-                  <div className="lbChart2"></div>
-                  <div className="lbChart3"></div>
+                <span className="lbChart">
+                  <span className="fa fa-signal fa-5x"></span>
+                  <h2>leaderboard</h2>
                 </span>
-                <h2>view leaderboard</h2>
               </Link>
             </div>
           </div>
