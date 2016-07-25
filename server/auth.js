@@ -148,29 +148,32 @@ module.exports = function(passport) {
     //       else{
             console.log("login success")
             console.log(req.user)
-            res.json({success:true})
+            res.json({success:true,user:req.user})
         //   }
         // })
 	});
 
   // facebook
   router.get('/login/facebook',
-    passport.authenticate('facebook', { scope:['email','user_friends']}), function(req,res){});
+    passport.authenticate('facebook', { scope:['email','user_friends']}), function(req,res){
+      console.log("getting /login/facebook")
+    });
 
   router.get('/login/facebook/callback',
-    passport.authenticate('facebook',{failureRedirect: '/#/home'} ),
+    passport.authenticate('facebook',{failureRedirect: '/#/login'} ),
     function(req, res) {
 
-      console.log("success")
-      res.json({success:true})
+      console.log("success",req.user)
+      res.redirect('/#/home');
     });
 
 
 
   // GET Logout page
   router.get('/logout', function(req, res) {
+    
     req.logout();
-    console.log("logged out")
+    console.log(req.user, "logged out")
     res.json({success:true});
   });
 
