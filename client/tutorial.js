@@ -38,7 +38,7 @@ componentDidMount: function(){
         <h2>RELAXED</h2>
 					<h4>There is only one button: Position. This will be your ↑ key.</h4>
           <ul className="row">
-            <li className="key k37">POSITION</li>
+            <li className="key k38">POSITION</li>
           </ul>
 					</div>
 					<div className="rules2">
