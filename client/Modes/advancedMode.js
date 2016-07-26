@@ -282,9 +282,6 @@ var AdvancedMode = React.createClass({
               reactionTimes: reactionTimes
           }).then(function(response){
             console.log('end game posted')
-            // if(response.data.success){
-            //   this.props.history.push('/gameOver');
-            // }
               this.props.history.push('/gameOver');
           }.bind(this))
       }.bind(this),2000);

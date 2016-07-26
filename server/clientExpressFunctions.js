@@ -10,6 +10,8 @@ var modeMultiplier = serverData.modeMultiplier;
 var penalty = serverData.penalty;
 var positivePoints = serverData.positivePoints;
 
+var Stats = require('../models/Stats')
+
 var tempGame = null;
 
 
@@ -205,5 +207,21 @@ router.post('/gameEnd',function(req,res,next){
     }
   })
 })
+
+router.get('/taco',function(req, res, next){
+
+ return res.json({stats: [123]})
+  console.log("lolololololololol")
+  // console.log(req.user.stats,'170')
+  Stats.findById(req.user.stats, function(err,stats){
+    if(err){
+      console.log(err)
+    }
+    else{
+      res.json({stats: [123]})
+    }
+  })
+})
+
 
 module.exports=router;
