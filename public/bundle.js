@@ -1,0 +1,1 @@
+console.error("SyntaxError: C:/Users/tayco/OneDrive/Documents/GitHub/Project-nzt/client/Modes/classicMode.js: Unexpected token (234:4) while parsing file: C:\\Users\\tayco\\OneDrive\\Documents\\GitHub\\Project-nzt\\client\\Modes\\classicMode.js");
