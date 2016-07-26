@@ -55,7 +55,10 @@ var AdvancedMode = React.createClass({
       console.log("start game posted",response)
       this.setState({
         tempUser:response.data.tempUser,
-        gameId: response.data.gameId
+        gameId: response.data.gameId,
+        modeMultiplier:response.data.modeMultiplier,
+        penalty:response.data.penalty,
+        positivePoints:response.data.positivePoints
       })
       console.log("game posted")
     }.bind(this))
@@ -131,7 +134,7 @@ var AdvancedMode = React.createClass({
           reactionEnd = null;
           if (this.state.score !== 0) {
             this.setState({
-              score: this.state.score - 5
+              score: this.state.score - this.state.penalty
             });
           }
         }
@@ -149,7 +152,7 @@ var AdvancedMode = React.createClass({
             false, false, false
           ],
           alert: "Good job!",
-          score: this.state.score + 10
+          score: this.state.score + this.state.positivePoints
         })
       } else {
         //console.log('incorrect')
@@ -167,7 +170,7 @@ var AdvancedMode = React.createClass({
         })
         if (this.state.score !== 0) {
           this.setState({
-            score: this.state.score - 5
+            score: this.state.score - this.state.penalty
           });
         }
       }
@@ -272,17 +275,6 @@ var AdvancedMode = React.createClass({
           gameScore = this.state.score;
           console.log(gameScore, 'game score')
           console.log(reactionTimes, 'reaction times')
-
-//////////////////////
-///////////////////////
-//////////////////////
-          //GAME OVER
-          //if (timeKeeper === 6) {
-          //give gameScore variable the final score
-          // gameScore = this.state.score;
-          // console.log(gameScore, 'game score')
-          // console.log(reactionTimes, 'reaction times')
-          // clearInterval(iterations);
           console.log(this.state)
           axios.post('/gameEnd',{
               gameId: this.state.gameId, 
@@ -295,16 +287,8 @@ var AdvancedMode = React.createClass({
             // }
               this.props.history.push('/gameOver');
           }.bind(this))
-
-
-      
-
-/////////////////
-//////////////////
-///////////////////
-        //}.bind(this), 2000)
-
-      }
+      }.bind(this),2000);
+    }
     }.bind(this), 2000);
   },
   colorMatch: function() {

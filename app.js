@@ -138,19 +138,19 @@ passport.use(new FacebookStrategy({
       if (!user) {
         console.log('no user')
         var currentGame=[];
-        var userStats = new Stats({})._id;
+        var userStats = null;
         if(req.user){
           userStats = req.user.stats;
           currentGame = req.user.currentGame;
+          User.findById(req.user._id).remove();
         }
-        userStats.save(function(err,userStats){
           console.log(profile)
           console.log(userStats)
           user = new User({
             facebookId:profile.id,
             email:profile._json.email,
             username:profile._json.first_name + ' '+profile._json.last_name,
-            stats:userStats,
+            stats:null,
             temp:false,
             maxN:{
               classic:1,
@@ -160,7 +160,7 @@ passport.use(new FacebookStrategy({
             },
             currentGame:currentGame
           });
-          
+          user.stats = new Stats({user:user._id});
           user.save(function(err,tempUser){
             if(err){
               return done(err, null);
@@ -169,9 +169,10 @@ passport.use(new FacebookStrategy({
               return done(null, tempUser);
             }
           });
-        });
-       
-      }
+        }
+      });
+     
+    
 
       if(req.user && user){
         console.log("req.user and user", user, user.stats)
@@ -205,8 +206,8 @@ passport.use(new FacebookStrategy({
         console.log("returning done user")
         return done(null, user);
       }
-    });
-  }
+    }
+
 ));
 
 

@@ -93,7 +93,7 @@ router.post('/gameOver',function(req,res,next){
     
 
       //make score
-      var tempGame = user.currentGame
+      var tempGame = user.currentGame[0];
 
       var newHighScore = new HighScore({
         user: user._id,

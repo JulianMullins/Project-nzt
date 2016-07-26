@@ -23,14 +23,14 @@ var getGame = function(){
 
 var GameOverOverlay = React.createClass({
   getInitialState:function(){  
-    
     return{
-      username:null,
-      alreadyLoggedIn:false,
-      score:0,
-      mode:null,
-      nLevel:1
-    }
+          username:null,
+          alreadyLoggedIn:false,
+          score:0,
+          mode:null,
+          nLevel:1,
+          renderLogin: <div></div>
+        }
   },
   componentDidMount(){
       
@@ -66,6 +66,9 @@ var GameOverOverlay = React.createClass({
           nLevel:gameData.data.game.nLevel
         })
       }.bind(this)))
+      .then(function(){
+        this.renderLogin()
+      }.bind(this))
   },
   update:function(e){
     this.setState({
@@ -97,19 +100,30 @@ var GameOverOverlay = React.createClass({
 
   },
   click(e){
-    this.props.history.push('/game/'+this.state.mode+'/'+(this.state.n+1))
+    this.props.history.push('/game/'+this.state.mode+'/'+(this.state.nLevel+1))
+  },
+  renderLogin(){
+    if(!this.state.alreadyLoggedIn){
+      this.setState({
+        renderLogin: <div className="gameOverPrompt">
+          <p>It looks like you are not currently logged in. 
+          <Link to="/gameOver/login"> Sign in</Link> or <Link to="/gameOver/register">sign up</Link> to save your progress, 
+          view statistics and compete with friends!</p>  
+        </div>
+      })
+    }
   },
   render: function() {
     // this.getData();
 
-    var loggedIn = this.state.alreadyLoggedIn
+    // var loggedIn = this.state.alreadyLoggedIn
 
-      ? <div></div>
-      : <div className="gameOverPrompt">
-          <p>It looks like you are not currently logged in. 
-          <Link to="/gameOver/login"> Sign in</Link> or <Link to="/gameOver/register">sign up</Link> to save your progress, 
-          view statistics and compete with friends!</p>  
-        </div> 
+    //   ? <div></div>
+    //   : <div className="gameOverPrompt">
+    //       <p>It looks like you are not currently logged in. 
+    //       <Link to="/gameOver/login"> Sign in</Link> or <Link to="/gameOver/register">sign up</Link> to save your progress, 
+    //       view statistics and compete with friends!</p>  
+    //     </div> 
 
     return (
       <div className="gameOver" id="gameover">
@@ -117,7 +131,7 @@ var GameOverOverlay = React.createClass({
           <h2>Your score is {this.state.score}</h2>
           <h1 className="gameOverInform classic">You have unlocked level 2</h1>
 
-          {loggedIn}
+          {this.state.renderLogin}
 
           <div className="gameOverActions">
             <Link to="/home">

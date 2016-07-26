@@ -168,13 +168,13 @@ module.exports = function(passport) {
     });
 
 
-
   // GET Logout page
   router.get('/logout', function(req, res) {
-    
+    console.log(req.user, "before logged out")
     req.logout();
     console.log(req.user, "logged out")
     res.json({success:true});
+    console.log(req.user)
   });
 
   return router;
