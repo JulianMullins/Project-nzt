@@ -100,6 +100,7 @@ passport.use(new LocalStrategy({
           if(req.user){
             user.currentGame = req.user.currentGame;
             user.stats.combineStats(req.user.stats);
+            User.findById(req.user._id).remove();
           }
           //user.currentGame = games.concat(user.currentGame);
           return done(null,user)
