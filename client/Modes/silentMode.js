@@ -1,5 +1,6 @@
 var React = require('react');
 var GameTimer = require('./gameTimer');
+var SilentStartOverlay = require('./gameStartOverlay').SilentStartOverlay;
 
 //COLLECTION OF GLOBAL VARIABLES TO MAKE EVERYONES LIFE EASIER
 //create global variable for reaction counter
@@ -11,7 +12,6 @@ var reactionTimes = [];
 var gameScore;
 var reactionEnd = null;
 var iterations;
-var timer;
 
 var SilentMode = React.createClass({
   getInitialState: function() {
@@ -32,7 +32,6 @@ var SilentMode = React.createClass({
       score: 0,
       alert: " ",
       overlay: true,
-      initialTimer: 3,
       N: this.props.params.n,
       posPressed: false,
       colorPressed: false,
@@ -45,8 +44,6 @@ var SilentMode = React.createClass({
     }
   },
   componentDidMount: function() {
-    timer = setInterval(this.timer, 1000);
-
     fetch('/startGame/' + this.state.mode + '/' + this.state.N, {
       method: 'POST',
       credentials: 'include',
@@ -65,7 +62,6 @@ var SilentMode = React.createClass({
   },
   componentWillUnmount: function() {
     clearInterval(iterations);
-    clearInterval(timer);
   },
   enableKeys: function() {
     window.onkeyup = function(e) {
@@ -76,18 +72,10 @@ var SilentMode = React.createClass({
       }
     }.bind(this);
   },
-  timer: function() {
-    this.setState({
-      initialTimer: this.state.initialTimer - 1
-    });
-    if (this.state.initialTimer === 2) {
-      this.positionAndColor();
-    }
-    if (this.state.initialTimer === 0) {
+  startGame: function() {
       this.setState({overlay: false});
+      this.positionAndColor();
       this.enableKeys();
-      clearInterval(timer);
-    }
   },
   positionAndColor: function() {
     var positionQueue = [];
@@ -263,23 +251,7 @@ var SilentMode = React.createClass({
   render: function() {
     var overlay = this.state.overlay
       ? (
-        <div className="overlay">
-          <center>
-            <a className="btn">{this.state.initialTimer}</a>
-            <h4>Use the keys to press the buttons.</h4>
-            <div className="key-wrapper">
-              <ul className="row">
-                <li className="key k38">↑</li>
-              </ul>
-
-              <ul className="row">
-                <li className="key k37">←</li>
-                <li className="key k40">↓</li>
-                <li className="key k39">→</li>
-              </ul>
-            </div>
-          </center>
-        </div>
+        <SilentStartOverlay click={this.startGame}/>
       )
       : '';
 
@@ -329,6 +301,10 @@ var SilentMode = React.createClass({
       )
     }
 
+    var gameTimer = this.state.overlay
+    ? ""
+    : (<GameTimer timeStyle={{'color': "#7CD9D2"}}></GameTimer>);
+
     return (
       <div className="gameContainer">
         {overlay}
@@ -342,9 +318,7 @@ var SilentMode = React.createClass({
               <h2>Score: {this.state.score}</h2>
               {scoreUpdate}
             </div>
-            <GameTimer timeStyle={{
-              'color': "#7CD9D2"
-            }}></GameTimer>
+            {gameTimer}
           </div>
         </div>
         <div className="gameBoard">
