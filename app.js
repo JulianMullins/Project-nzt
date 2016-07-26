@@ -100,6 +100,9 @@ passport.use(new LocalStrategy({
           if(req.user){
             user.currentGame = req.user.currentGame;
             user.stats.combineStats(req.user.stats);
+            user.combineMaxN(req.user.maxN);
+            user.save();
+            //User.findById(req.user._id).remove();
           }
           //user.currentGame = games.concat(user.currentGame);
           return done(null,user)
@@ -127,65 +130,31 @@ passport.use(new FacebookStrategy({
       .exec(function (err, user) {
       // if there's an error, finish trying to authenticate (auth failed)
       //console.log(profile.emails[0].value)
+        
+
+        var email = profile._json.email;
+        var username = profile._json.first_name + ' '+profile._json.last_name;
+
 
       if (err) {
         console.error(err);
         return done(err);
       }
 
-
-      if (!user) {
-        console.log('no user')
-        var currentGame=[];
-        var userStats = new Stats({})._id;
-        if(req.user){
-          userStats = req.user.stats;
-          currentGame = req.user.currentGame;
-        }
-        userStats.save(function(err,userStats){
-          console.log(profile)
-          console.log(userStats)
-          user = new User({
-            facebookId:profile.id,
-            email:profile._json.email,
-            username:profile._json.first_name + ' '+profile._json.last_name,
-            stats:userStats,
-            temp:false,
-            maxN:{
-              classic:1,
-              relaxed:1,
-              silent:1,
-              advanced:1
-            },
-            currentGame:currentGame
-          });
-          
-          user.save(function(err,tempUser){
-            if(err){
-              return done(err, null);
-            }
-            else{
-              return done(null, tempUser);
-            }
-          });
-        });
-       
+      else if (!user) {
+        console.log('no user');
+        var user = registerFacebookUser(profile.id,email,username,req.user);
+        user.save(function(err,user){
+          return done(null,user)
+        })
       }
-
-      if(req.user && user){
+      
+    
+      else if(req.user){
         console.log("req.user and user", user, user.stats)
         user.currentGame = req.user.currentGame;
-        if(user.stats){
-          console.log("user stats exist "+user.stats)
-          user.stats.combineStats(req.user.stats);
-        }
-        else{
-          console.log('no stats')
-          user.stats = req.user.stats
-          console.log(user.stats)
-        }
+        user.stats.combineStats(req.user.stats);
         user.save();
-
       }
 
 
@@ -205,20 +174,45 @@ passport.use(new FacebookStrategy({
         return done(null, user);
       }
     });
-  }
-));
+}));
 
 
 
-// var updateLeaderboard = function(leaderboardId,newData){
-//   Leaderboard.findById(leaderboardId)
-//     .populate('scores')
-//     .exec(function(err,leaderboard){
-//       leaderboard.scores = leaderboard.scores.concat(newData);
+var registerFacebookUser = function(facebookId,email,username,currentUser){
+    
+    var user = new User({
+      facebookId:facebookId,
+      email:email,
+      username:username,
+      stats:null,
+      temp:false,
+      maxN:{
+        classic:1,
+        relaxed:1,
+        silent:1,
+        advanced:1
+      },
+      currentGame:[]
+    });
 
-//     })
-// }
-
+    if(currentUser){
+      user.stats = currentUser.stats;
+      user.currentGame = currentUser.currentGame;
+      user.maxN = currentUser.maxN;
+      //User.findById(currentUser._id).remove();
+    }
+    else{
+      var leaderboard = new Leaderboard({user:user._id});
+      leaderboard.save();
+      var newStats = new Stats({
+        user:user._id,
+        leaderboard: leaderboard._id
+      })._id;
+      newStats.save();
+    }
+    
+    return user;
+}
 
 
 

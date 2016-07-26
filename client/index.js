@@ -61,7 +61,6 @@ var App = React.createClass({
     console.log("app mounted")
   },
   render() {
-    console.log(this) 
     return (
       <div>
 
