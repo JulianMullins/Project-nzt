@@ -161,14 +161,19 @@ router.get("/getGameData",function(req,res,next){
 router.get('/getUser',function(req,res,next){
   var games = null;
   var isUser = false;
+  var username=null;
+  var name=null;
   if(req.user && req.user.currentGame){
     games = req.user.currentGame
     isUser=true
+    username=req.user.username,
+    name=req.user.name
   }
   res.json({
     alreadyLoggedIn: !!req.user,
     isUser: isUser,
-    username:req.user.username
+    username:username,
+    name:name
   })
 })
 

@@ -17,7 +17,7 @@ var Mainmenu = React.createClass({
   //initial functions
   getInitialState: function() {
     return {
-      username:null,
+      name:null,
       hasUsername:false
     }
   },
@@ -26,7 +26,7 @@ var Mainmenu = React.createClass({
       .then(function(response){
         this.setState({
           hasUsername:response.data.isUser,
-          username:response.data.username
+          name:response.data.name
         })
       }.bind(this))
   },
@@ -50,7 +50,7 @@ var Mainmenu = React.createClass({
       <div>
         <div className="heading">
           <img src="../images/CortexLogo4.svg"/>
-          {this.state.username}
+          {this.state.name}
         </div>
         <div className="menu">
           <a className="menu-panel classicBackground" onClick={this.classic}>

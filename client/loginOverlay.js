@@ -1,5 +1,6 @@
 var React = require('react');
 var ReactDOM = require('react-dom');
+var axios = require('axios');
 
 import {Link} from 'react-router';
 
@@ -39,31 +40,27 @@ var LoginOverlay = React.createClass({
     })
   },
   login: function(e) {
-    e.preventDefault();
+    //e.preventDefault();
 
     console.log("logging in")
     console.log(this.props)
 
     //ajax post
-    fetch('/login', {
-      method: 'post',
-      credentials: 'include',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
+    axios.post('/login', {
+     //withCredentials:true,
+      // headers: {
+      //   'Accept': 'application/json',
+      //   'Content-Type': 'application/json'
+      // },
+      
         username: this.state.username,
         password: this.state.password
-      })
+      
     }).then(function(response) {
       console.log("response")
-      return response.json();
-    }).then(function(response) {
-      console.log("response")
-      if (response.success) {
+      if (response.data.success) {
         this.props.history.push('/home');
-      } else if (!response.success) {}
+      } 
     }.bind(this))
   },
   facebook: function(e) {
@@ -101,7 +98,7 @@ var LoginOverlay = React.createClass({
             <br></br>
             <input type="password" placeholder="Password" name="password" id="password" value={this.state.password} onChange={this.update}></input>
             <div className="buttongroup">
-              <button className="form-btn dx" onClick={this.login}>Login</button>
+              <Link to="/home" type="button" className="form-btn dx" onClick={this.login}>Login</Link>
               <a href="/login/facebook" >Login with Facebook</a>
             </div>
             

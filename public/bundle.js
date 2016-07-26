@@ -144,7 +144,7 @@ var Mainmenu = React.createClass({
   //initial functions
   getInitialState: function getInitialState() {
     return {
-      username: null,
+      name: null,
       hasUsername: false
     };
   },
@@ -152,7 +152,7 @@ var Mainmenu = React.createClass({
     axios.get('/getUser').then(function (response) {
       this.setState({
         hasUsername: response.data.isUser,
-        username: response.data.username
+        name: response.data.name
       });
     }.bind(this));
   },
@@ -180,7 +180,7 @@ var Mainmenu = React.createClass({
         'div',
         { className: 'heading' },
         React.createElement('img', { src: '../images/CortexLogo4.svg' }),
-        this.state.username
+        this.state.name
       ),
       React.createElement(
         'div',
@@ -2924,6 +2924,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 var React = require('react');
 var ReactDOM = require('react-dom');
+var axios = require('axios');
 
 var LoginOverlay = React.createClass({
   displayName: 'LoginOverlay',
@@ -2961,31 +2962,27 @@ var LoginOverlay = React.createClass({
   },
 
   login: function login(e) {
-    e.preventDefault();
+    //e.preventDefault();
 
     console.log("logging in");
     console.log(this.props);
 
     //ajax post
-    fetch('/login', {
-      method: 'post',
-      credentials: 'include',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        username: this.state.username,
-        password: this.state.password
-      })
+    axios.post('/login', {
+      //withCredentials:true,
+      // headers: {
+      //   'Accept': 'application/json',
+      //   'Content-Type': 'application/json'
+      // },
+
+      username: this.state.username,
+      password: this.state.password
+
     }).then(function (response) {
       console.log("response");
-      return response.json();
-    }).then(function (response) {
-      console.log("response");
-      if (response.success) {
+      if (response.data.success) {
         this.props.history.push('/home');
-      } else if (!response.success) {}
+      }
     }.bind(this));
   },
   facebook: function facebook(e) {
@@ -3036,8 +3033,8 @@ var LoginOverlay = React.createClass({
             'div',
             { className: 'buttongroup' },
             React.createElement(
-              'button',
-              { className: 'form-btn dx', onClick: this.login },
+              _reactRouter.Link,
+              { to: '/home', type: 'button', className: 'form-btn dx', onClick: this.login },
               'Login'
             ),
             React.createElement(
@@ -3098,7 +3095,7 @@ var LoginOverlay = React.createClass({
 
 module.exports = LoginOverlay;
 
-},{"react":273,"react-dom":93,"react-router":123}],15:[function(require,module,exports){
+},{"axios":21,"react":273,"react-dom":93,"react-router":123}],15:[function(require,module,exports){
 'use strict';
 
 var _reactRouter = require('react-router');
@@ -3362,6 +3359,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 var React = require('react');
 var ReactDOM = require('react-dom');
+var axios = require('axios');
 
 
 var RegisterOverlay = React.createClass({
@@ -3371,8 +3369,8 @@ var RegisterOverlay = React.createClass({
       username: '',
       email: '',
       password: '',
-      passwordConfirm: ''
-
+      passwordConfirm: '',
+      name: ''
     };
   },
 
@@ -3436,24 +3434,34 @@ var RegisterOverlay = React.createClass({
     e.preventDefault();
     //ajax post
     console.log(this);
-    fetch('/register', {
-      method: 'post',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        username: this.state.username,
-        email: this.state.email,
-        password: this.state.password,
-        passwordConfirm: this.state.passwordConfirm })
+    axios.post('/register', {
+      // headers: {
+      //   'Accept': 'application/json',
+      //   'Content-Type': 'application/json'
+      // },
+      // withCredentials:true,
+      // data: {
+      username: this.state.username,
+      name: this.state.name,
+      email: this.state.email,
+      password: this.state.password,
+      passwordConfirm: this.state.passwordConfirm
+      // }
     }).then(function (response) {
-      return response.json();
-    }).then(function (response) {
-      if (response.success) {
+      console.log(response);
+      if (response.data.success) {
         console.log("registration successful");
-        console.log(this);
-        this.props.history.push('/login');
+        //this.props.history.push('/login')
+
+        axios.post('/login', {
+          username: this.state.username,
+          password: this.state.password
+        }).then(function (response) {
+          console.log(response);
+          if (response.data.success) {
+            this.props.history.push('/home');
+          }
+        }.bind(this));
       } else {
         this.props.history.push('/register');
       }
@@ -3479,6 +3487,8 @@ var RegisterOverlay = React.createClass({
         React.createElement(
           'form',
           null,
+          React.createElement('input', { type: 'text', placeholder: 'name', name: 'name', id: 'name', value: this.state.name, onChange: this.update }),
+          React.createElement('br', null),
           React.createElement('input', { type: 'text', placeholder: 'username', name: 'username', id: 'username', value: this.state.username, onChange: this.update }),
           React.createElement('br', null),
           React.createElement('input', { type: 'text', placeholder: 'email', name: 'email', id: 'email', value: this.state.email, onChange: this.update }),
@@ -3516,7 +3526,7 @@ var RegisterOverlay = React.createClass({
 
 module.exports = RegisterOverlay;
 
-},{"react":273,"react-dom":93,"react-router":123}],18:[function(require,module,exports){
+},{"axios":21,"react":273,"react-dom":93,"react-router":123}],18:[function(require,module,exports){
 'use strict';
 
 var _reactRouter = require('react-router');

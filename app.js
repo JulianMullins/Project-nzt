@@ -70,13 +70,14 @@ passport.deserializeUser(function(id, done) {
   });
 });
 
+
 // passport strategy
 passport.use(new LocalStrategy({
   passReqToCallback:true
   },
-  function(req,username, password, done) {
+  function(req, username, password, done) {
     // Find the user with the given username
-    
+    console.log("PASSPORT DATA: ", username,password,req.body)
     User.findOne({$or: [{username: username},{email:username}] }, function (err, user) {
       // if there's an error, finish trying to authenticate (auth failed)
       if (err) {
@@ -94,7 +95,7 @@ passport.use(new LocalStrategy({
           return done(err)
         }
         else if(!res){
-          return done(null,false);
+          return done(null,null);
         }
         else{
           if(req.user){
@@ -142,18 +143,24 @@ passport.use(new FacebookStrategy({
       }
 
       else if (!user) {
-        console.log('no user');
-        var user = registerFacebookUser(profile.id,email,username,req.user);
-        user.save(function(err,user){
-          return done(null,user)
+
+        req.user.update({
+          facebookId:profile.id,
+          email:email,
+          username:username,
+          temp:false
         })
+        var user = req.user;
+        req.logout();
+        return done(null,user);
       }
       
-    
+  
       else if(req.user){
         console.log("req.user and user", user, user.stats)
         user.currentGame = req.user.currentGame;
         user.stats.combineStats(req.user.stats);
+        user.combineMaxN(req.user.maxN);
         user.save();
       }
 
@@ -178,43 +185,42 @@ passport.use(new FacebookStrategy({
 
 
 
-var registerFacebookUser = function(facebookId,email,username,currentUser){
+// var registerFacebookUser = function(facebookId,email,username,currentUser){
     
-    var user = new User({
-      facebookId:facebookId,
-      email:email,
-      username:username,
-      stats:null,
-      temp:false,
-      maxN:{
-        classic:1,
-        relaxed:1,
-        silent:1,
-        advanced:1
-      },
-      currentGame:[]
-    });
+//     var user = new User({
+//       facebookId:facebookId,
+//       email:email,
+//       name:username,
+//       stats:null,
+//       temp:false,
+//       maxN:{
+//         classic:1,
+//         relaxed:1,
+//         silent:1,
+//         advanced:1
+//       },
+//       currentGame:[]
+//     });
 
-    if(currentUser){
-      user.stats = currentUser.stats;
-      user.currentGame = currentUser.currentGame;
-      user.maxN = currentUser.maxN;
-      //User.findById(currentUser._id).remove();
-    }
-    else{
-      var leaderboard = new Leaderboard({user:user._id});
-      leaderboard.save();
-      var newStats = new Stats({
-        user:user._id,
-        leaderboard: leaderboard._id
-      });
-      newStats.save();
-      user.stats = newStats._id;
-    }
+//     if(currentUser){
+//       user.stats = currentUser.stats;
+//       user.currentGame = currentUser.currentGame;
+//       user.maxN = currentUser.maxN;
+//       //User.findById(currentUser._id).remove();
+//     }
+//     else{
+//       var leaderboard = new Leaderboard({user:user._id});
+//       leaderboard.save();
+//       var newStats = new Stats({
+//         user:user._id,
+//         leaderboard: leaderboard._id
+//       });
+//       newStats.save();
+//       user.stats = newStats._id;
+//     }
     
-    return user;
-}
-
+//     return user;
+// }
 
 
 app.use('/', auth(passport));
