@@ -1,12 +1,3 @@
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-console.error("SyntaxError: C:/Users/tayco/OneDrive/Documents/GitHub/Project-nzt/client/Modes/classicMode.js: Unexpected token (234:4) while parsing file: C:\\Users\\tayco\\OneDrive\\Documents\\GitHub\\Project-nzt\\client\\Modes\\classicMode.js");
-=======
->>>>>>> master
-=======
->>>>>>> refs/remotes/origin/master
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
 (function (process){
 'use strict';
@@ -5245,7 +5236,7 @@ function drainQueue() {
     if (draining) {
         return;
     }
-    var timeout = cachedSetTimeout(cleanUpNextTick);
+    var timeout = cachedSetTimeout.call(null, cleanUpNextTick);
     draining = true;
 
     var len = queue.length;
@@ -5262,7 +5253,7 @@ function drainQueue() {
     }
     currentQueue = null;
     draining = false;
-    cachedClearTimeout(timeout);
+    cachedClearTimeout.call(null, timeout);
 }
 
 process.nextTick = function (fun) {
@@ -5274,7 +5265,7 @@ process.nextTick = function (fun) {
     }
     queue.push(new Item(fun, args));
     if (queue.length === 1 && !draining) {
-        cachedSetTimeout(drainQueue, 0);
+        cachedSetTimeout.call(null, drainQueue, 0);
     }
 };
 
@@ -32522,13 +32513,3 @@ function isUnsafe(obj) {
 ;
 
 },{}]},{},[10]);
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-console.error("SyntaxError: C:/Users/tayco/OneDrive/Documents/GitHub/Project-nzt/client/Modes/classicMode.js: Unexpected token (234:4) while parsing file: C:\\Users\\tayco\\OneDrive\\Documents\\GitHub\\Project-nzt\\client\\Modes\\classicMode.js");
->>>>>>> refs/remotes/origin/master
-=======
->>>>>>> refs/remotes/origin/tconcannon
->>>>>>> master
-=======
->>>>>>> refs/remotes/origin/master
