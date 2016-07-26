@@ -23,6 +23,7 @@ var getSquareArr = function(square, mode) {
   var arr = [];
   for (var i = 1; i < maxSquares + 1; i++) {
     var link = "/game/" + mode + "/" + i;
+    console.log(link)
     var sqClass = "levelSquare " + squareClass;
     if (i <= square) {
       var colorStyle = {
@@ -110,7 +111,10 @@ var ClassicLevels = React.createClass({
             return square;
           })}
         </div>
-        <h3>Highest: Level {this.state.maxN}</h3>
+        <div className="levelsFooter">
+          <h3 className="classic">Highest: Level {this.state.maxN}</h3>
+          <Link to="/home"><h3 className="classicBackground returnBtn">&larr; Go Back</h3></Link>
+        </div>
       </div>
     );
   }
@@ -141,7 +145,10 @@ var RelaxedLevels = React.createClass({
             return square;
           })}
         </div>
-        <h3>Highest: Level {this.state.maxN}</h3>
+        <div className="levelsFooter">
+          <h3 className="relaxed">Highest: Level {this.state.maxN}</h3>
+          <Link to="/home"><h3 className="relaxedBackground returnBtn">&larr; Go Back</h3></Link>
+        </div>
       </div>
     );
   }
@@ -172,7 +179,10 @@ var SilentLevels = React.createClass({
             return square;
           })}
         </div>
-        <h3>Highest: Level {this.state.maxN}</h3>
+        <div className="levelsFooter">
+          <h3 className="silent">Highest: Level {this.state.maxN}</h3>
+          <Link to="/home"><h3 className="silentBackground returnBtn">&larr; Go Back</h3></Link>
+        </div>
       </div>
     );
   }
@@ -203,7 +213,10 @@ var AdvancedLevels = React.createClass({
             return square;
           })}
         </div>
-        <h3>Highest: Level {this.state.maxN}</h3>
+        <div className="levelsFooter">
+          <h3 className="advanced">Highest: Level {this.state.maxN}</h3>
+          <Link to="/home"><h3 className="advancedBackground returnBtn">&larr; Go Back</h3></Link>
+        </div>
       </div>
     );
   }
