@@ -1,5 +1,6 @@
 var React = require('react');
 var GameTimer = require('./gameTimer');
+var RelaxedStartOverlay = require('./gameStartOverlay').RelaxedStartOverlay;
 
 //COLLECTION OF GLOBAL VARIABLES TO MAKE EVERYONES LIFE EASIER
 //create global variable for reaction counter
@@ -10,7 +11,6 @@ var reactionTimes = [];
 //global variable for game score (saved once time runs out)
 var gameScore;
 var iterations;
-var timer;
 
 var RelaxedMode = React.createClass({
   getInitialState: function() {
@@ -42,8 +42,6 @@ var RelaxedMode = React.createClass({
     }
   },
   componentDidMount: function() {
-    timer = setInterval(this.timer, 1000);
-
     fetch('/startGame/' + this.state.mode + '/' + this.state.N, {
       method: 'POST',
       credentials: 'include',
@@ -60,7 +58,6 @@ var RelaxedMode = React.createClass({
   },
   componentWillUnmount: function() {
     clearInterval(iterations);
-    clearInterval(timer);
   },
   enableKeys: function() {
     window.onkeyup = function(e) {
@@ -69,18 +66,10 @@ var RelaxedMode = React.createClass({
       }
     }.bind(this);
   },
-  timer: function() {
-    this.setState({
-      initialTimer: this.state.initialTimer - 1
-    });
-    if (this.state.initialTimer === 2) {
-      this.position();
-    }
-    if (this.state.initialTimer === 0) {
-      this.enableKeys();
+  startGame: function() {
       this.setState({overlay: false});
-      clearInterval(timer);
-    }
+      this.position();
+      this.enableKeys();
   },
   position: function() {
     var posQueue = [];
@@ -218,23 +207,7 @@ var RelaxedMode = React.createClass({
   render: function() {
     var overlay = this.state.overlay
       ? (
-        <div className="overlay">
-          <center>
-            <a className="btn">{this.state.initialTimer}</a>
-            <h4>Use the keys to press the buttons.</h4>
-            <div className="key-wrapper">
-              <ul className="row">
-                <li className="key k38">↑</li>
-              </ul>
-
-              <ul className="row">
-                <li className="key k37">←</li>
-                <li className="key k40">↓</li>
-                <li className="key k39">→</li>
-              </ul>
-            </div>
-          </center>
-        </div>
+        <RelaxedStartOverlay click={this.startGame}/>
       )
       : '';
 
@@ -273,6 +246,10 @@ var RelaxedMode = React.createClass({
       )
     }
 
+     var gameTimer = this.state.overlay
+    ? ""
+    : (<GameTimer timeStyle={{'color': "#01B6A7"}}></GameTimer>);
+
     return (
       <div className="gameContainer">
         {overlay}
@@ -286,9 +263,7 @@ var RelaxedMode = React.createClass({
               <h2>Score: {this.state.score}</h2>
               {scoreUpdate}
             </div>
-            <GameTimer timeStyle={{
-              'color': "#01B6A7"
-            }}></GameTimer>
+            {gameTimer}
           </div>
         </div>
         <div className="gameBoard">
