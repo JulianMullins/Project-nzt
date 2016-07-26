@@ -231,7 +231,6 @@ ul.row {
   text-align: center;
   align-items: baseline;
   justify-content: center;
-  height: 10%;
 }
 .rulemode2{
   margin-top: 10%;
@@ -243,7 +242,7 @@ ul.row {
   flex-direction: column;
   margin: 0 10px 0 10px;
   padding: 0 10px 0 10px;
-  height: 260px;
+  /*height: 260px;*/
   width: 50vw;
 }
 
