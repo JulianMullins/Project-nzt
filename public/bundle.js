@@ -1,9 +1,12 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 console.error("SyntaxError: C:/Users/tayco/OneDrive/Documents/GitHub/Project-nzt/client/Modes/classicMode.js: Unexpected token (234:4) while parsing file: C:\\Users\\tayco\\OneDrive\\Documents\\GitHub\\Project-nzt\\client\\Modes\\classicMode.js");
 =======
 >>>>>>> master
+=======
+>>>>>>> refs/remotes/origin/master
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
 (function (process){
 'use strict';
@@ -401,9 +404,6 @@ var AdvancedMode = React.createClass({
             reactionTimes: reactionTimes
           }).then(function (response) {
             console.log('end game posted');
-            // if(response.data.success){
-            //   this.props.history.push('/gameOver');
-            // }
             this.props.history.push('/gameOver');
           }.bind(this));
         }.bind(this), 2000);
@@ -1689,31 +1689,6 @@ var SilentMode = React.createClass({
           gameScore = this.state.score;
           console.log(gameScore, 'game score');
           console.log(reactionTimes, 'reaction times');
-
-          //////////////////////
-          ///////////////////////
-          //////////////////////
-          //GAME OVER
-          // fetch('/gameEnd', {
-          //   method: 'post',
-          //   credentials: 'include',
-          //   headers: {
-          //     'Accept': 'application/json',
-          //     'Content-Type': 'application/json'
-          //   },
-          //   body: JSON.stringify({gameId: this.state.gameId, score: gameScore, reactionTimes: reactionTimes})
-          // }).then(function(response) {
-          //   return response.json();
-          // }).then(function(response) {
-          //   if (response.success) {
-          //     this.props.history.push('/gameOver/'+this.state.mode+"/"+'/'+gameScore);
-          //   }
-          //if (timeKeeper === 6) {
-          //give gameScore variable the final score
-          // gameScore = this.state.score;
-          // console.log(gameScore, 'game score')
-          // console.log(reactionTimes, 'reaction times')
-          // clearInterval(iterations);
           console.log(this.state);
           axios.post('/gameEnd', {
             gameId: this.state.gameId,
@@ -1721,19 +1696,10 @@ var SilentMode = React.createClass({
             reactionTimes: reactionTimes
           }).then(function (response) {
             console.log('end game posted');
-            // if(response.data.success){
-            //   this.props.history.push('/gameOver');
-            // }
             this.props.history.push('/gameOver');
           }.bind(this));
         }.bind(this), 2000);
       }
-
-      /////////////////
-      //////////////////
-      ///////////////////
-
-      //}.bind(this), 2000)
     }.bind(this), 2000);
   },
   positionMatch: function positionMatch() {
@@ -3500,7 +3466,7 @@ module.exports = Science;
 // </div>
 
 },{"react":275,"react-dom":43,"react-router":73}],18:[function(require,module,exports){
-"use strict";
+'use strict';
 
 // first of course react!
 var React = require('react');
@@ -3510,58 +3476,64 @@ var React = require('react');
 //var LineChart = require('react-d3-basic').LineChart;
 
 //get funciton, res.json()
-//use req.user
-var chartData = { labels: ["January", "February", "March", "April", "May", "June", "July"],
-    datasets: [{
-        score: 123
-    }, {
-        score: 145
-    }, {
-        score: 125
-    }, {
-        score: 245
-    }, {
-        score: 341
-    }] };
+// //use req.user
+// var chartData = {labels: ["January", "February", "March", "April", "May", "June", "July"],
+//     datasets: [
+//         {
+//             score: 123      
+//         },
+//          {
+//             score: 145
+//         },
+//         {
+//             score: 125
+//         },
+//         {
+//             score: 245
+//         },
+//         {
+//             score: 341
+//         }
+//     ]};
 
-var width = 700,
-    height = 300,
-    margins = { left: 100, right: 100, top: 50, bottom: 50 },
-    title = "User sample",
-
-// chart series,
-// field: is what field your data want to be selected
-// name: the name of the field that display in legend
-// color: what color is the line
-chartSeries = [{
-    field: 'BMI',
-    name: 'BMI',
-    color: '#ff7f0e'
-}],
-
-// your x accessor
-x = function x(d) {
-    return d.index;
-};
+// var width = 700,
+//     height = 300,
+//     margins = {left: 100, right: 100, top: 50, bottom: 50},
+//     title = "User sample",
+//     // chart series,
+//     // field: is what field your data want to be selected
+//     // name: the name of the field that display in legend
+//     // color: what color is the line
+//     chartSeries = [
+//       {
+//         field: 'BMI',
+//         name: 'BMI',
+//         color: '#ff7f0e'
+//       }
+//     ],
+//     // your x accessor
+//     x = function(d) {
+//       return d.index;
+//     }
 
 var MyComponent = React.createClass({
-    displayName: "MyComponent",
+    displayName: 'MyComponent',
 
     componentDidMount: function componentDidMount() {
         //fetch call
 
-        fetch('/getstats', { method: 'GET' }).then(function (response) {
+        fetch('/taco', { method: 'GET' }).then(function (response) {
             console.log(response, '38');
             return response.json();
         }).then(function (responseJson) {
-            console.log(responseJson.stats, '41');
+            console.log(responseJson, '41');
         });
     },
     render: function render() {
         return React.createElement(
-            "div",
+            'div',
             null,
-            "TEST"
+            'TEST'
         );
         // return <Chart
         //   title={title}
@@ -32551,9 +32523,12 @@ function isUnsafe(obj) {
 
 },{}]},{},[10]);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 console.error("SyntaxError: C:/Users/tayco/OneDrive/Documents/GitHub/Project-nzt/client/Modes/classicMode.js: Unexpected token (234:4) while parsing file: C:\\Users\\tayco\\OneDrive\\Documents\\GitHub\\Project-nzt\\client\\Modes\\classicMode.js");
 >>>>>>> refs/remotes/origin/master
 =======
 >>>>>>> refs/remotes/origin/tconcannon
 >>>>>>> master
+=======
+>>>>>>> refs/remotes/origin/master
