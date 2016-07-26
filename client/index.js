@@ -16,9 +16,9 @@ var Register = require('./registerOverlay');
 
 var GameOver = require('./gameOver');
 var Leaderboard = require('./leaderboard');
-var Stats = require('./stats');
 var Contact = require('./contact');
 var Science = require('./science');
+var Stats = require('./statsLineGraphs')
 var Tutorial = require('./tutorial');
 
 
@@ -61,8 +61,6 @@ var App = React.createClass({
     console.log("app mounted")
   },
   render() {
-    //<NavBar isUser = {this.state.isUser} />
-    console.log(this) 
     return (
       <div>
 
@@ -88,7 +86,7 @@ ReactDOM.render((
       <Route path="logout" component={Logout}/>
 
       <Route path="register" component={Register}/>
-      <Route path="gameOver(/:score)" component={GameOver}/>
+      <Route path="gameOver" component={GameOver}/>
       <Route path="leaderboard" component={Leaderboard}/>
       <Route path="stats" component={Stats}/>
       <Route path="contact" component={Contact}/>

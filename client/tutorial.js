@@ -114,6 +114,23 @@ componentDidMount: function(){
 				<div className="slider">
   <div className="slide_viewer">
     <div className="slide_group">
+			<div className="slide">
+				<div className="rulemode2">
+					<div className="rules2">
+						<h2>Welcome to Cortex!</h2>
+				<h4>Cortex is a <spanl>scientifically supported</spanl> game for exercising your working memory and increasing fluid-intelligence (directly tied to IQ). While the game can be tricky to grasp at first and increases in difficulty rather quickly, we have tried to make this game as fun and as easy to learn as possible. We hope that you’ll enjoy playing this game and that the cognitive benefits will simply follow along as you progress.</h4>
+					<h3>Let’s get started!</h3>
+			</div>
+			</div>
+			</div>
+			<div className="slide">
+				<div className="rulemode2">
+					<div className="rules2">
+				<h4>Cortex is based on the n-back genre of brain training games, which requires players to keep track of various changes happening on-screen.</h4>
+				</div>
+			</div>
+				<img src="./images/pattern.gif" alt="Mountain View"></img>
+	</div>
       <div className="slide">
 	      <div className="key-wrapper">
         <h4>Click <spanl>here</spanl> to test your keys.</h4>
@@ -130,7 +147,7 @@ componentDidMount: function(){
         <div className="rulemode">
 					<div className="rules2">
         <h2>RELAXED</h2>
-					<h4>There is only one button: Position. This will be your ↑ key.</h4>
+					<h3>Keep track of changing position. <br></br>(mono n-back)</h3>
           <ul className="row">
             <li className="key k38">POSITION</li>
           </ul>
@@ -142,7 +159,7 @@ componentDidMount: function(){
 					</div>
 					<div className="rules2">
 						<h2>CLASSIC</h2>
-          <h4>There are two buttons: Position and Sound. This will be your ← and → keys.</h4>
+          <h3>Keep track of position and sounds. <br></br> (dual n-back)</h3>
 						<ul className="row">
 							<li className="key k38">↑</li>
 						</ul>
@@ -153,10 +170,10 @@ componentDidMount: function(){
             </ul>
 					</div>
 				</div>
-				<div className="rulemode2">
+				<div className="rulemode">
             <div className="rules2">
 							<h2>SILENT</h2>
-							<h4>There are two buttons: Position and Color. This will be your ← and → keys.</h4>
+							<h3>Keep track of both position and colors. <br></br>(dual n-back)</h3>
               <ul className="row">
 								<li className="key k38">↑</li>
 							</ul>
@@ -168,7 +185,7 @@ componentDidMount: function(){
 						</div>
 						<div className="rules2">
 							<h2>ADVANCED</h2>
-              <h4>There are three buttons: Position Sound, and Color.</h4>
+              <h3>Keep track of position, color and sound <br></br>(triple n-back)</h3>
                 <ul className="row">
                   <li className="key k38">POSITION</li>
                 </ul>
@@ -182,8 +199,23 @@ componentDidMount: function(){
       </div>
 		</div>
 				<div className="slide">
-				</div>
-				<div className="slide">
+					<div className="rulemode3">
+						<div className="rules2">
+<h4>The n in n-back refers to the number of positions back that you have to keep track of. For example, at n=2, you would have to make matches based on the state of the board two steps back.
+	<br></br>
+	<br></br>
+	<br></br>
+
+If this seems like a daunting task, don’t worry! This game is designed to be a challenge and advancing up in level can be difficult. If you are new to the game or still unsure of how it works, we recommend starting out in relaxed mode first and then moving on once you are comfortable with the gameplay.
+<br></br>
+	<br></br>
+	<br></br>
+
+However, once you get familiar with the game mechanics, it is always recommended to continue pushing up in n-level once you have unlocked the next one. You will experience the greatest mental effects by continuously challenging yourself!
+</h4>
+						</div>
+					</div>
+						<img src="./images/pattern.gif" alt="Mountain View"></img>
 				</div>
 				<div className="slide">
 				</div>

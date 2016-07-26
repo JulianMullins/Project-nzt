@@ -44,18 +44,19 @@ var SilentMode = React.createClass({
     }
   },
   componentDidMount: function() {
-    fetch('/startGame/' + this.state.mode + '/' + this.state.N, {
-      method: 'POST',
-      credentials: 'include',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      }
-    }).then(function(response) {
-      return response.json();
-    }).then(function(response) {
-      this.setState({tempUser: response.tempUser, gameId: response.gameId})
-    }.bind(this));
+    axios.post('/startGame/'+this.state.mode+'/'+this.state.N)
+    .then(function(response){
+      console.log("start game posted",response)
+      this.setState({
+        tempUser:response.data.tempUser,
+        gameId: response.data.gameId,
+        modeMultiplier:response.data.modeMultiplier,
+        penalty:response.data.penalty,
+        positivePoints:response.data.positivePoints
+      })
+      console.log("game posted")
+    }.bind(this))
+    console.log("component mounted")
     // fetch('/startGame/'+this.state.mode+'/'+this.state.N, {
     //  method: 'post'
     // });
@@ -91,7 +92,7 @@ var SilentMode = React.createClass({
         reactionTimes.push(reactionEnd - reactionStart);
         reactionEnd = null;
         this.setState({
-          score: this.state.score + 10,
+          score: this.state.score + this.state.positivePoints,
           alert: 'Good job',
           posStyle: noStyle,
           colorStyle: noStyle
@@ -101,7 +102,7 @@ var SilentMode = React.createClass({
         reactionEnd = null;
         if (this.state.score !== 0) {
           this.setState({
-            score: this.state.score - 5,
+            score: this.state.score - this.state.penalty,
             posStyle: noStyle,
             colorStyle: noStyle
           });
@@ -111,7 +112,7 @@ var SilentMode = React.createClass({
         reactionEnd = null;
         if (this.state.score !== 0) {
           this.setState({
-            score: this.state.score - 5,
+            score: this.state.score - this.state.penalty,
             posStyle: noStyle,
             colorStyle: noStyle
           });
@@ -194,26 +195,18 @@ var SilentMode = React.createClass({
           gameScore = this.state.score;
           console.log(gameScore, 'game score')
           console.log(reactionTimes, 'reaction times')
-
-          //GAME OVER
-          fetch('/gameEnd', {
-            method: 'post',
-            credentials: 'include',
-            headers: {
-              'Accept': 'application/json',
-              'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({gameId: this.state.gameId, score: gameScore, reactionTimes: reactionTimes})
-          }).then(function(response) {
-            return response.json();
-          }).then(function(response) {
-            if (response.success) {
-              this.props.history.push('/gameOver/'+this.state.mode+"/"+'/'+gameScore);
-            }
+          console.log(this.state)
+          axios.post('/gameEnd',{
+              gameId: this.state.gameId, 
+              score: gameScore, 
+              reactionTimes: reactionTimes
+          }).then(function(response){
+            console.log('end game posted')
+              this.props.history.push('/gameOver');
           }.bind(this))
-
-        }.bind(this), 2000)
-      }
+      
+    }.bind(this),2000);
+  }   
     }.bind(this), 2000);
   },
   positionMatch: function() {
