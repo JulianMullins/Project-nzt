@@ -204,10 +204,11 @@ var registerFacebookUser = function(facebookId,email,username,currentUser){
     else{
       var leaderboard = new Leaderboard({user:user._id});
       leaderboard.save();
-      user.stats = new Stats({
+      var newStats = new Stats({
         user:user._id,
         leaderboard: leaderboard._id
-      });
+      })._id;
+      newStats.save();
     }
     
     return user;
