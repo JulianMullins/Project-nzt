@@ -2922,7 +2922,7 @@ var LoginOverlay = React.createClass({
             ),
             React.createElement(
               'a',
-              { href: '/login/facebook' },
+              { className: 'fb', href: '/login/facebook' },
               'Login with Facebook'
             )
           )
