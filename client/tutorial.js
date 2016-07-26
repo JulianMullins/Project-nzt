@@ -147,7 +147,7 @@ componentDidMount: function(){
         <div className="rulemode">
 					<div className="rules2">
         <h2>RELAXED</h2>
-					<h4>There is only one button: Position. This will be your ↑ key.</h4>
+					<h3>Keep track of changing position. <br></br>(mono n-back)</h3>
           <ul className="row">
             <li className="key k38">POSITION</li>
           </ul>
@@ -159,7 +159,7 @@ componentDidMount: function(){
 					</div>
 					<div className="rules2">
 						<h2>CLASSIC</h2>
-          <h4>There are two buttons: Position and Sound. This will be your ← and → keys.</h4>
+          <h3>Keep track of position and sounds. <br></br> (dual n-back)</h3>
 						<ul className="row">
 							<li className="key k38">↑</li>
 						</ul>
@@ -173,7 +173,7 @@ componentDidMount: function(){
 				<div className="rulemode">
             <div className="rules2">
 							<h2>SILENT</h2>
-							<h4>There are two buttons: Position and Color. This will be your ← and → keys.</h4>
+							<h3>Keep track of both position and colors. <br></br>(dual n-back)</h3>
               <ul className="row">
 								<li className="key k38">↑</li>
 							</ul>
@@ -185,7 +185,7 @@ componentDidMount: function(){
 						</div>
 						<div className="rules2">
 							<h2>ADVANCED</h2>
-              <h4>There are three buttons: Position Sound, and Color.</h4>
+              <h3>Keep track of position, color and sound <br></br>(triple n-back)</h3>
                 <ul className="row">
                   <li className="key k38">POSITION</li>
                 </ul>
@@ -199,6 +199,23 @@ componentDidMount: function(){
       </div>
 		</div>
 				<div className="slide">
+					<div className="rulemode3">
+						<div className="rules2">
+<h4>The n in n-back refers to the number of positions back that you have to keep track of. For example, at n=2, you would have to make matches based on the state of the board two steps back.
+	<br></br>
+	<br></br>
+	<br></br>
+
+If this seems like a daunting task, don’t worry! This game is designed to be a challenge and advancing up in level can be difficult. If you are new to the game or still unsure of how it works, we recommend starting out in relaxed mode first and then moving on once you are comfortable with the gameplay.
+<br></br>
+	<br></br>
+	<br></br>
+
+However, once you get familiar with the game mechanics, it is always recommended to continue pushing up in n-level once you have unlocked the next one. You will experience the greatest mental effects by continuously challenging yourself!
+</h4>
+						</div>
+					</div>
+						<img src="./images/pattern.gif" alt="Mountain View"></img>
 				</div>
 				<div className="slide">
 				</div>

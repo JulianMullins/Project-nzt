@@ -1,5 +1,6 @@
 var React = require('react');
 var GameTimer = require('./gameTimer');
+var ClassicStartOverlay = require('./gameStartOverlay').ClassicStartOverlay;
 
 //COLLECTION OF GLOBAL VARIABLES TO MAKE EVERYONES LIFE EASIER
 //create global variable for reaction counter
@@ -11,7 +12,6 @@ var reactionTimes = [];
 var gameScore;
 var reactionEnd = null;
 var iterations;
-var timer;
 
 var ClassicMode = React.createClass({
   getInitialState: function() {
@@ -32,7 +32,6 @@ var ClassicMode = React.createClass({
       score: 0,
       alert: " ",
       overlay: true,
-      initialTimer: 3,
       N: this.props.params.n,
       posPressed: false,
       soundPressed: false,
@@ -45,8 +44,6 @@ var ClassicMode = React.createClass({
     }
   },
   componentDidMount: function() {
-    timer = setInterval(this.timer, 1000);
-
     axios.post('/startGame/'+this.state.mode+'/'+this.state.N)
     .then(function(response){
       console.log("start game posted",response)
@@ -63,7 +60,6 @@ var ClassicMode = React.createClass({
   },
   componentWillUnmount: function() {
     clearInterval(iterations);
-    clearInterval(timer);
   },
   enableKeys: function() {
     window.onkeyup = function(e) {
@@ -75,18 +71,10 @@ var ClassicMode = React.createClass({
       }
     }.bind(this)
   },
-  timer: function() {
-    this.setState({
-      initialTimer: this.state.initialTimer - 1
-    });
-    if (this.state.initialTimer === 2) {
-      this.positionAndSound()
-    }
-    if (this.state.initialTimer === 0) {
+  startGame: function() {
       this.setState({overlay: false});
+      this.positionAndSound();
       this.enableKeys();
-      clearInterval(timer);
-    }
   },
   positionAndSound: function() {
     var positionQueue = [];
@@ -256,21 +244,7 @@ var ClassicMode = React.createClass({
   render: function() {
     var overlay = this.state.overlay
       ? (
-        <div className="overlay">
-          <center>
-            <a className="btn">{this.state.initialTimer}</a>
-            <h4 style={{
-              margin: '0 0 20px'
-            }}>Use the keys to press the buttons.</h4>
-            <div className="key-wrapper">
-
-              <ul className="row">
-                <li className="key k37">←</li>
-                <li className="key k39">→</li>
-              </ul>
-            </div>
-          </center>
-        </div>
+        <ClassicStartOverlay click={this.startGame}/>
       )
       : '';
 
@@ -309,6 +283,11 @@ var ClassicMode = React.createClass({
       )
     }
 
+    var gameTimer = this.state.overlay
+    ? ""
+    : (<GameTimer timeStyle={{'color': "#F13542"}}></GameTimer>);
+
+
     return (
       <div className="gameContainer">
         {overlay}
@@ -322,9 +301,7 @@ var ClassicMode = React.createClass({
               <h2>Score: {this.state.score}</h2>
               {scoreUpdate}
             </div>
-            <GameTimer timeStyle={{
-              'color': "#F13542"
-            }}></GameTimer>
+            {gameTimer}
           </div>
         </div>
         <div className="gameBoard">

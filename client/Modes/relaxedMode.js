@@ -1,5 +1,6 @@
 var React = require('react');
 var GameTimer = require('./gameTimer');
+var RelaxedStartOverlay = require('./gameStartOverlay').RelaxedStartOverlay;
 
 var axios = require('axios');
 axios.defaults.baseURL = process.env.url;
@@ -13,7 +14,6 @@ var reactionTimes = [];
 //global variable for game score (saved once time runs out)
 var gameScore;
 var iterations;
-var timer;
 
 var RelaxedMode = React.createClass({
   getInitialState: function() {
@@ -43,31 +43,21 @@ var RelaxedMode = React.createClass({
       tempUser: true,
       gameId: null,
       mode: 'relaxed',
-      modeMultiplier:1,
-      penalty:0,
-      positivePoints:0
+      modeMultiplier: 1,
+      penalty: 0,
+      positivePoints: 0
     }
   },
   componentDidMount: function() {
-    timer = setInterval(this.timer, 1000);
-
-    axios.post('/startGame/'+this.state.mode+'/'+this.state.N)
-    .then(function(response){
-      console.log("start game posted",response)
-      this.setState({
-        tempUser:response.data.tempUser,
-        gameId: response.data.gameId,
-        modeMultiplier:response.data.modeMultiplier,
-        penalty:response.data.penalty,
-        positivePoints:response.data.positivePoints
-      });
+    axios.post('/startGame/' + this.state.mode + '/' + this.state.N).then(function(response) {
+      console.log("start game posted", response)
+      this.setState({tempUser: response.data.tempUser, gameId: response.data.gameId, modeMultiplier: response.data.modeMultiplier, penalty: response.data.penalty, positivePoints: response.data.positivePoints});
       console.log("game posted")
     }.bind(this))
     console.log("component mounted")
   },
   componentWillUnmount: function() {
     clearInterval(iterations);
-    clearInterval(timer);
   },
   enableKeys: function() {
     window.onkeyup = function(e) {
@@ -76,18 +66,10 @@ var RelaxedMode = React.createClass({
       }
     }.bind(this);
   },
-  timer: function() {
-    this.setState({
-      initialTimer: this.state.initialTimer - 1
-    });
-    if (this.state.initialTimer === 2) {
-      this.position();
-    }
-    if (this.state.initialTimer === 0) {
-      this.enableKeys();
-      this.setState({overlay: false});
-      clearInterval(timer);
-    }
+  startGame: function() {
+    this.setState({overlay: false});
+    this.position();
+    this.enableKeys();
   },
   position: function() {
     var posQueue = [];
@@ -220,25 +202,7 @@ var RelaxedMode = React.createClass({
   },
   render: function() {
     var overlay = this.state.overlay
-      ? (
-        <div className="overlay">
-          <center>
-            <a className="btn">{this.state.initialTimer}</a>
-            <h4>Use the keys to press the buttons.</h4>
-            <div className="key-wrapper">
-              <ul className="row">
-                <li className="key k38">↑</li>
-              </ul>
-
-              <ul className="row">
-                <li className="key k37">←</li>
-                <li className="key k40">↓</li>
-                <li className="key k39">→</li>
-              </ul>
-            </div>
-          </center>
-        </div>
-      )
+      ? (<RelaxedStartOverlay click={this.startGame}/>)
       : '';
 
     var scoreAlert;
@@ -276,6 +240,14 @@ var RelaxedMode = React.createClass({
       )
     }
 
+    var gameTimer = this.state.overlay
+      ? ""
+      : (
+        <GameTimer timeStyle={{
+          'color': "#01B6A7"
+        }}></GameTimer>
+      );
+
     return (
       <div className="gameContainer">
         {overlay}
@@ -289,9 +261,7 @@ var RelaxedMode = React.createClass({
               <h2>Score: {this.state.score}</h2>
               {scoreUpdate}
             </div>
-            <GameTimer timeStyle={{
-              'color': "#01B6A7"
-            }}></GameTimer>
+            {gameTimer}
           </div>
         </div>
         <div className="gameBoard">

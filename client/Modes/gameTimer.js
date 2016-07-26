@@ -6,10 +6,9 @@ var GameTimer = React.createClass({
     return {seconds: 120, once: false}
   },
   componentDidMount: function() {
-    console.log('timer mounted')
-    setTimeout(function() {
-      interval = setInterval(this.timerSecs, 1000)
-    }.bind(this), 3000);
+    this.setState({
+        interval: setInterval(this.timerSecs, 1000)
+      });
   },
   componentWillUnmount: function() {
     setTimeout(function() {
@@ -20,9 +19,6 @@ var GameTimer = React.createClass({
     this.setState({
       seconds: this.state.seconds - 1
     });
-    if (this.state.seconds === 0) {
-      clearInterval(interval);
-    }
   },
   render: function() {
     // console.log("Style: ", this.props.timeStyle);

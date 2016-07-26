@@ -207,8 +207,9 @@ var registerFacebookUser = function(facebookId,email,username,currentUser){
       var newStats = new Stats({
         user:user._id,
         leaderboard: leaderboard._id
-      })._id;
+      });
       newStats.save();
+      user.stats = newStats._id;
     }
     
     return user;

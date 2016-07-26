@@ -91,7 +91,7 @@ var LoginOverlay = React.createClass({
   render: function() {
     return (
       <div className="screen">
-                    
+
 
         <div className="login" id="login">
           <h1>Hey you!</h1>
@@ -102,9 +102,9 @@ var LoginOverlay = React.createClass({
             <input type="password" placeholder="Password" name="password" id="password" value={this.state.password} onChange={this.update}></input>
             <div className="buttongroup">
               <button className="form-btn dx" onClick={this.login}>Login</button>
-              <a href="/login/facebook" >Login with Facebook</a>
+              <a className="fb" href="/login/facebook" >Login with Facebook</a>
             </div>
-            
+
           </form>
         </div>
         <div className="register-log">
