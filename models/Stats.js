@@ -39,13 +39,16 @@ statsSchema.statics.combineStats=function(stats2){
 				      leaderboard1.mergeScoresArrays(leaderboard2.scores)
 
 				    }
-				  }).remove();
+				  })
+				  //.remove();
 				}
+				this.save();
 			})
 		}
-		
-	}).remove();
-
+		this.save();
+	})
+	//.remove();
+	this.save();
 }
 
 
