@@ -43,22 +43,15 @@ var RelaxedMode = React.createClass({
       tempUser: true,
       gameId: null,
       mode: 'relaxed',
-      modeMultiplier:1,
-      penalty:0,
-      positivePoints:0
+      modeMultiplier: 1,
+      penalty: 0,
+      positivePoints: 0
     }
   },
-  componentDidMount: function() {    
-    axios.post('/startGame/'+this.state.mode+'/'+this.state.N)
-    .then(function(response){
-      console.log("start game posted",response)
-      this.setState({
-        tempUser:response.data.tempUser,
-        gameId: response.data.gameId,
-        modeMultiplier:response.data.modeMultiplier,
-        penalty:response.data.penalty,
-        positivePoints:response.data.positivePoints
-      })
+  componentDidMount: function() {
+    axios.post('/startGame/' + this.state.mode + '/' + this.state.N).then(function(response) {
+      console.log("start game posted", response)
+      this.setState({tempUser: response.data.tempUser, gameId: response.data.gameId, modeMultiplier: response.data.modeMultiplier, penalty: response.data.penalty, positivePoints: response.data.positivePoints});
       console.log("game posted")
     }.bind(this))
     console.log("component mounted")
@@ -74,17 +67,17 @@ var RelaxedMode = React.createClass({
     }.bind(this);
   },
   startGame: function() {
-      this.setState({overlay: false});
-      this.position();
-      this.enableKeys();
+    this.setState({overlay: false});
+    this.position();
+    this.enableKeys();
   },
   position: function() {
     var posQueue = [];
     var timeTilPosMatch = parseInt((Math.random() * 5) + 2 + this.state.N);
-    var timeKeeper = 0;
+    var timeKeeper = 60;
 
     iterations = setInterval(function() {
-      timeKeeper++;
+      timeKeeper--;
 
       if (this.state.keepScore && !this.state.posMatch) {
         this.setState({
@@ -165,25 +158,24 @@ var RelaxedMode = React.createClass({
       ////////////////////////////////////////////////////////////////////////////////////////
       ////////////////////////////////////////////////////////////////////////////////////
       //RUTH THIS IS WHERE THE GAME ENDS///////////////////////////////////////////
-      if (timeKeeper === 6) {
+      if (timeKeeper === 0) {
         //give gameScore variable the final score
         gameScore = this.state.score;
         console.log(gameScore, 'game score')
         console.log(reactionTimes, 'reaction times')
         clearInterval(iterations);
         console.log(this.state)
-        axios.post('/gameEnd',{
-            gameId: this.state.gameId, 
-            score: gameScore, 
-            reactionTimes: reactionTimes
-        }).then(function(response){
+        axios.post('/gameEnd', {
+          gameId: this.state.gameId,
+          score: gameScore,
+          reactionTimes: reactionTimes
+        }).then(function(response) {
           console.log('end game posted')
           // if(response.data.success){
           //   this.props.history.push('/gameOver');
           // }
-            this.props.history.push('/gameOver');
+          this.props.history.push('/gameOver');
         }.bind(this))
-
 
       }
       ////////////////////////////////////////////////////////////////////////////////////
@@ -210,9 +202,7 @@ var RelaxedMode = React.createClass({
   },
   render: function() {
     var overlay = this.state.overlay
-      ? (
-        <RelaxedStartOverlay click={this.startGame}/>
-      )
+      ? (<RelaxedStartOverlay click={this.startGame}/>)
       : '';
 
     var scoreAlert;
@@ -250,9 +240,13 @@ var RelaxedMode = React.createClass({
       )
     }
 
-     var gameTimer = this.state.overlay
-    ? ""
-    : (<GameTimer timeStyle={{'color': "#01B6A7"}}></GameTimer>);
+    var gameTimer = this.state.overlay
+      ? ""
+      : (
+        <GameTimer timeStyle={{
+          'color': "#01B6A7"
+        }}></GameTimer>
+      );
 
     return (
       <div className="gameContainer">
@@ -297,7 +291,8 @@ var RelaxedMode = React.createClass({
 var noStyle = {}
 
 var pushStyle = {
-  color: 'black'
+  color: 'rgba(0, 0, 0, .65)',
+  boxShadow: '0 0'
 }
 
 var standardStyle = {

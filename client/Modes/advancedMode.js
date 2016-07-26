@@ -1,6 +1,10 @@
 var React = require('react');
 var GameTimer = require('./gameTimer');
+<<<<<<< HEAD
+var axios = require('axios');
+=======
 var AdvancedStartOverlay = require('./gameStartOverlay').AdvancedStartOverlay;
+>>>>>>> master
 
 //COLLECTION OF GLOBAL VARIABLES TO MAKE EVERYONES LIFE EASIER
 //create global variable for reaction counter
@@ -266,8 +270,8 @@ var AdvancedMode = React.createClass({
           console.log(reactionTimes, 'reaction times')
           console.log(this.state)
           axios.post('/gameEnd',{
-              gameId: this.state.gameId, 
-              score: gameScore, 
+              gameId: this.state.gameId,
+              score: gameScore,
               reactionTimes: reactionTimes
           }).then(function(response){
             console.log('end game posted')
@@ -307,7 +311,7 @@ var AdvancedMode = React.createClass({
 
     var scoreAlert;
     var scoreUpdate;
-    if (this.state.alert === "Good job") {
+    if (this.state.alert === "Good job!") {
       scoreAlert = (
         <div className="scoreAlertPositive">
           {this.state.alert}
