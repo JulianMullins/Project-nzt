@@ -47,18 +47,16 @@ var ClassicMode = React.createClass({
   componentDidMount: function() {
     timer = setInterval(this.timer, 1000);
 
-    fetch('/startGame/' + this.state.mode + '/' + this.state.N, {
-      method: 'POST',
-      credentials: 'include',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      }
-    }).then(function(response) {
-      return response.json();
-    }).then(function(response) {
-      this.setState({tempUser: response.tempUser, gameId: response.gameId})
+    axios.post('/startGame/'+this.state.mode+'/'+this.state.N)
+    .then(function(response){
+      console.log("start game posted",response)
+      this.setState({
+        tempUser:response.data.tempUser,
+        gameId: response.data.gameId
+      })
+      console.log("game posted")
     }.bind(this))
+    console.log("component mounted")
   },
   componentWillUnmount: function() {
     clearInterval(iterations);
@@ -95,8 +93,8 @@ var ClassicMode = React.createClass({
     var timeKeeper = 0;
 
     iterations = setInterval(function() {
-      timeKeeper++;
-      if (this.state.keepScore && !(this.state.soundMatch || this.state.positionMatch)) {
+        timeKeeper++;    
+        if (this.state.keepScore && !(this.state.soundMatch || this.state.positionMatch)) {
         reactionTimes.push(reactionEnd - reactionStart);
         reactionEnd = null;
         this.setState({
@@ -120,7 +118,7 @@ var ClassicMode = React.createClass({
           });
         }
       }
-      this.setState({
+        this.setState({
         keepScore: false,
         positionMatch: false,
         soundMatch: false,
@@ -133,17 +131,19 @@ var ClassicMode = React.createClass({
         this.setState({alert: ' '});
       }.bind(this), 800);
 
+
       if (timeTilPositionMatch === 0) {
         this.setState({positionMatch: true, keepScore: true})
         //reset position portion
         timeTilPositionMatch = parseInt((Math.random() * 5) + 2);
         //set up new position queue
         var nextPosition = positionQueue[0];
-        positionQueue.push(nextPosition);
+       positionQueue.push(nextPosition);
         positionQueue.splice(0, 1);
         var pMatch = true;
       }
-      //case 2: color match
+
+            //case 2: color match
       if (timeTilSoundMatch === 0) {
         this.setState({soundMatch: true, keepScore: true})
         //reset position portion
@@ -154,6 +154,8 @@ var ClassicMode = React.createClass({
         soundQueue.splice(0, 1);
         var sMatch = true;
       }
+      
+      
       // // pick a non-matching next number while interval is not 0
       //position:
       if (!pMatch) {
@@ -167,6 +169,8 @@ var ClassicMode = React.createClass({
           positionQueue.splice(0, 1);
         }
       }
+
+
       //sound:
       if (!sMatch) {
         var nextSound = parseInt(Math.random() * 9);
@@ -179,8 +183,7 @@ var ClassicMode = React.createClass({
           soundQueue.splice(0, 1);
         }
       }
-
-      reactionStart = Date.now()
+            reactionStart = Date.now()
       var audio = new Audio('./audio/' + (nextSound + 1) + '.wav ');
       audio.play();
       this.state.style[nextPosition] = newStyle;
@@ -189,40 +192,34 @@ var ClassicMode = React.createClass({
         this.state.style[nextPosition] = standardStyle;
         this.setState({style: this.state.style});
         timeTilPositionMatch--;
-        timeTilSoundMatch--;
-        sMatch = false;
+       timeTilSoundMatch--;
+      sMatch = false;
         pMatch = false;
       }.bind(this), 800);
-      if (timeKeeper === 60) {
-        clearInterval(iterations);
+     if (timeKeeper === 60) {
+          clearInterval(iterations);
         setTimeout(function() {
           gameScore = this.state.score;
           console.log(gameScore, 'game score')
-          console.log(reactionTimes, 'reaction times')
-
-          //GAME OVER
-
-          fetch('/gameEnd', {
-            method: 'post',
-            credentials: 'include',
-            headers: {
-              'Accept': 'application/json',
-              'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({gameId: this.state.gameId, score: gameScore, reactionTimes: reactionTimes})
-          }).then(function(response) {
-            return response.json();
-          }).then(function(response) {
-            if (response.success) {
+           console.log(reactionTimes, 'reaction times')
+           console.log(this.state)
+        axios.post('/gameEnd',{
+               gameId: this.state.gameId, 
+             score: gameScore, 
+            reactionTimes: reactionTimes
+          }).then(function(response){
+            console.log('end game posted')
               this.props.history.push('/gameOver');
-            }
           }.bind(this))
 
         }.bind(this), 2000)
-
       }
-    }.bind(this), 2000);
+
+      }.bind(this),2000) 
   },
+      //}
+    //}.bind(this), 2000);
+  //},
   positionMatch: function() {
     if (this.state.pressed) {
       return;

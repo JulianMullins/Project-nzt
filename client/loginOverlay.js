@@ -9,9 +9,8 @@ var LoginOverlay = React.createClass({
     return {
       username: '',
       password: '',
+      gameEnded:false,
       games:null
-      // gameEnded:false,
-      // games:null
     }
   },
   // componentDidMount(){

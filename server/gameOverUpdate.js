@@ -1,5 +1,6 @@
 var express = require('express');
 var router = express.Router();
+
 var User = require('../models/User');
 var Leaderboard = require('../models/Leaderboard');
 var HighScore = require('../models/HighScore');

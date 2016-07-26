@@ -50,18 +50,16 @@ var AdvancedMode = React.createClass({
   componentDidMount: function() {
     timer = setInterval(this.timer, 1000);
 
-    fetch('/startGame/' + this.state.mode + '/' + this.state.N, {
-      method: 'POST',
-      credentials: 'include',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      }
-    }).then(function(response) {
-      return response.json();
-    }).then(function(response) {
-      this.setState({tempUser: response.tempUser, gameId: response.gameId})
+    axios.post('/startGame/'+this.state.mode+'/'+this.state.N)
+    .then(function(response){
+      console.log("start game posted",response)
+      this.setState({
+        tempUser:response.data.tempUser,
+        gameId: response.data.gameId
+      })
+      console.log("game posted")
     }.bind(this))
+    console.log("component mounted")
   },
   componentWillUnmount: function() {
     clearInterval(iterations);
@@ -274,27 +272,20 @@ var AdvancedMode = React.createClass({
           gameScore = this.state.score;
           console.log(gameScore, 'game score')
           console.log(reactionTimes, 'reaction times')
-
-          //GAME OVER
-          fetch('/gameEnd', {
-            method: 'post',
-            credentials: 'include',
-            headers: {
-              'Accept': 'application/json',
-              'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({gameId: this.state.gameId, score: gameScore, reactionTimes: reactionTimes})
-          }).then(function(response) {
-            return response.json();
-          }).then(function(response) {
-            if (response.success) {
+          console.log(this.state)
+          axios.post('/gameEnd',{
+              gameId: this.state.gameId, 
+              score: gameScore, 
+              reactionTimes: reactionTimes
+          }).then(function(response){
+            console.log('end game posted')
+            // if(response.data.success){
+            //   this.props.history.push('/gameOver');
+            // }
               this.props.history.push('/gameOver');
-            }
           }.bind(this))
-
-        }.bind(this), 2000)
-
-      }
+      }.bind(this),2000);
+    }
     }.bind(this), 2000);
   },
   colorMatch: function() {
