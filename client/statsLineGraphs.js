@@ -1,24 +1,50 @@
+// first of course react!
 var React = require('react');
-var Chart = require('chart.js')
-var LineChart = require("react-chartjs").Line;
+// require `react-d3-core` for Chart component, which help us build a blank svg and chart title.
+var Chart = require('react-d3-core').Chart;
+// require `react-d3-basic` for Line chart component.
+var LineChart = require('react-d3-basic').LineChart;
+
 //get funciton, res.json()
 //use req.user
-var data = {labels: ["January", "February", "March", "April", "May", "June", "July"],
+var chartData = {labels: ["January", "February", "March", "April", "May", "June", "July"],
     datasets: [
         {
-            data: [65, 59, 80, 81, 56, 55, 40],
-            backgroundColor: 'rgba(255, 99, 132, 0.2)'
+            score: 123      
         },
          {
-            data: [75, 59, 90, 21, 56, 35, 90]
+            score: 145
+        },
+        {
+            score: 125
+        },
+        {
+            score: 245
+        },
+        {
+            score: 341
         }
     ]};
 
-var options= scales: {
-            yAxes: [{
-                stacked: true
-            }]
-        };
+var width = 700,
+    height = 300,
+    margins = {left: 100, right: 100, top: 50, bottom: 50},
+    title = "User sample",
+    // chart series,
+    // field: is what field your data want to be selected
+    // name: the name of the field that display in legend
+    // color: what color is the line
+    chartSeries = [
+      {
+        field: 'BMI',
+        name: 'BMI',
+        color: '#ff7f0e'
+      }
+    ],
+    // your x accessor
+    x = function(d) {
+      return d.index;
+    }
 
 var MyComponent = React.createClass({
     componentDidMount: function(){
@@ -33,7 +59,22 @@ fetch('/getstats', {method: 'GET'})
 })
     },
   render: function() {
-    return <LineChart data={data} options={options} width="600" height="250"/>
+    return <Chart
+      title={title}
+      width={width}
+      height={height}
+      margins= {margins}
+      >
+      <LineChart
+        margins= {margins}
+        title={title}
+        data={chartData}
+        width={width}
+        height={height}
+        chartSeries={chartSeries}
+        x={x}
+      />
+    </Chart>
   }
 });
 
