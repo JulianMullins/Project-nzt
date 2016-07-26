@@ -209,22 +209,20 @@ var SilentMode = React.createClass({
 ///////////////////////
 //////////////////////
           //GAME OVER
-<<<<<<< HEAD
-          fetch('/gameEnd', {
-            method: 'post',
-            credentials: 'include',
-            headers: {
-              'Accept': 'application/json',
-              'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({gameId: this.state.gameId, score: gameScore, reactionTimes: reactionTimes})
-          }).then(function(response) {
-            return response.json();
-          }).then(function(response) {
-            if (response.success) {
-              this.props.history.push('/gameOver/'+this.state.mode+"/"+'/'+gameScore);
-            }
-=======
+          // fetch('/gameEnd', {
+          //   method: 'post',
+          //   credentials: 'include',
+          //   headers: {
+          //     'Accept': 'application/json',
+          //     'Content-Type': 'application/json'
+          //   },
+          //   body: JSON.stringify({gameId: this.state.gameId, score: gameScore, reactionTimes: reactionTimes})
+          // }).then(function(response) {
+          //   return response.json();
+          // }).then(function(response) {
+          //   if (response.success) {
+          //     this.props.history.push('/gameOver/'+this.state.mode+"/"+'/'+gameScore);
+          //   }
           //if (timeKeeper === 6) {
           //give gameScore variable the final score
           // gameScore = this.state.score;
@@ -242,10 +240,10 @@ var SilentMode = React.createClass({
             //   this.props.history.push('/gameOver');
             // }
               this.props.history.push('/gameOver');
->>>>>>> refs/remotes/origin/master
           }.bind(this))
       
-
+    }.bind(this),2000);
+  }
       
 
 /////////////////

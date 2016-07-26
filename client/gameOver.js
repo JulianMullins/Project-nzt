@@ -34,19 +34,6 @@ var GameOverOverlay = React.createClass({
   },
   componentDidMount(){
       
-<<<<<<< HEAD
-    fetch("/getGameData")
-      .then(function(response){
-        console.log(response)
-        return response.json();
-      }).then(function(response){
-        this.setState({
-          score:score,
-          mode:mode,
-          nLevel:nLevel
-        })
-      }.bind(this))
-=======
     // axios.all([getUser(),getGame()])
     //   .then(axios.spread(function(userData,gameData){
     //     this.setState({
@@ -60,7 +47,6 @@ var GameOverOverlay = React.createClass({
     //     console.log("component mounted")
     //   }.bind(this)))
     this.getData();
->>>>>>> refs/remotes/origin/master
 
 
   },
@@ -69,9 +55,6 @@ var GameOverOverlay = React.createClass({
   //     getUser().bind(this);
   //     getScore().bind(this);
   // },
-<<<<<<< HEAD
-
-=======
   getData(){
     axios.all([getUser(),getGame()])
       .then(axios.spread(function(userData,gameData){
@@ -84,7 +67,6 @@ var GameOverOverlay = React.createClass({
         })
       }.bind(this)))
   },
->>>>>>> refs/remotes/origin/master
   update:function(e){
     this.setState({
       username: e.target.value
