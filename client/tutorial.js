@@ -114,6 +114,23 @@ componentDidMount: function(){
 				<div className="slider">
   <div className="slide_viewer">
     <div className="slide_group">
+			<div className="slide">
+				<div className="rulemode2">
+					<div className="rules2">
+						<h2>Welcome to Cortex!</h2>
+				<h4>Cortex is a <spanl>scientifically supported</spanl> game for exercising your working memory and increasing fluid-intelligence (directly tied to IQ). While the game can be tricky to grasp at first and increases in difficulty rather quickly, we have tried to make this game as fun and as easy to learn as possible. We hope that you’ll enjoy playing this game and that the cognitive benefits will simply follow along as you progress.</h4>
+					<h3>Let’s get started!</h3>
+			</div>
+			</div>
+			</div>
+			<div className="slide">
+				<div className="rulemode2">
+					<div className="rules2">
+				<h4>Cortex is based on the n-back genre of brain training games, which requires players to keep track of various changes happening on-screen.</h4>
+				</div>
+			</div>
+				<img src="./images/pattern.gif" alt="Mountain View"></img>
+	</div>
       <div className="slide">
 	      <div className="key-wrapper">
         <h4>Click <spanl>here</spanl> to test your keys.</h4>
@@ -153,7 +170,7 @@ componentDidMount: function(){
             </ul>
 					</div>
 				</div>
-				<div className="rulemode2">
+				<div className="rulemode">
             <div className="rules2">
 							<h2>SILENT</h2>
 							<h4>There are two buttons: Position and Color. This will be your ← and → keys.</h4>
@@ -181,8 +198,6 @@ componentDidMount: function(){
           </div>
       </div>
 		</div>
-				<div className="slide">
-				</div>
 				<div className="slide">
 				</div>
 				<div className="slide">

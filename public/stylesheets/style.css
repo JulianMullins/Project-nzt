@@ -231,6 +231,11 @@ ul.row {
   text-align: center;
   align-items: baseline;
   justify-content: center;
+  height: 10%;
+}
+.rulemode2{
+  margin-top: 10%;
+  padding: 0 30% 0 30%;
 }
 
 .rules2{
@@ -239,5 +244,9 @@ ul.row {
   margin: 0 10px 0 10px;
   padding: 0 10px 0 10px;
   height: 260px;
-  width: 300px;
+  width: 50vw;
+}
+
+.slide > img{
+  width: 30vw;
 }
