@@ -1,6 +1,9 @@
 var React = require('react');
 var GameTimer = require('./gameTimer');
 
+var axios = require('axios');
+axios.defaults.baseURL = process.env.url;
+
 //COLLECTION OF GLOBAL VARIABLES TO MAKE EVERYONES LIFE EASIER
 //create global variable for reaction counter
 var reactionStart;
@@ -14,6 +17,7 @@ var timer;
 
 var RelaxedMode = React.createClass({
   getInitialState: function() {
+    console.log("getting initial state")
     return {
       style: [
         standardStyle,
@@ -43,20 +47,17 @@ var RelaxedMode = React.createClass({
   },
   componentDidMount: function() {
     timer = setInterval(this.timer, 1000);
-
-    fetch('/startGame/' + this.state.mode + '/' + this.state.N, {
-      method: 'POST',
-      credentials: 'include',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      }
-    }).then(function(response) {
-
-      return response.json();
-    }).then(function(response) {
-      this.setState({tempUser: response.tempUser, gameId: response.gameId})
+    
+    axios.post('/startGame/'+this.state.mode+'/'+this.state.N)
+    .then(function(response){
+      console.log("start game posted",response)
+      this.setState({
+        tempUser:response.data.tempUser,
+        gameId: response.data.gameId
+      })
+      console.log("game posted")
     }.bind(this))
+    console.log("component mounted")
   },
   componentWillUnmount: function() {
     clearInterval(iterations);
@@ -169,28 +170,25 @@ var RelaxedMode = React.createClass({
       ////////////////////////////////////////////////////////////////////////////////////////
       ////////////////////////////////////////////////////////////////////////////////////
       //RUTH THIS IS WHERE THE GAME ENDS///////////////////////////////////////////
-      if (timeKeeper === 60) {
+      if (timeKeeper === 6) {
         //give gameScore variable the final score
         gameScore = this.state.score;
         console.log(gameScore, 'game score')
         console.log(reactionTimes, 'reaction times')
         clearInterval(iterations);
-
-        fetch('/gameEnd', {
-          method: 'post',
-          credentials: 'include',
-          headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify({gameId: this.state.gameId, score: gameScore, reactionTimes: reactionTimes})
-        }).then(function(response) {
-          return response.json();
-        }).then(function(response) {
-          //if (response.success) {
-          this.props.history.push('/gameOver/' + response.score);
-          //}
+        console.log(this.state)
+        axios.post('/gameEnd',{
+            gameId: this.state.gameId, 
+            score: gameScore, 
+            reactionTimes: reactionTimes
+        }).then(function(response){
+          console.log('end game posted')
+          // if(response.data.success){
+          //   this.props.history.push('/gameOver');
+          // }
+            this.props.history.push('/gameOver');
         }.bind(this))
+
 
       }
       ////////////////////////////////////////////////////////////////////////////////////
