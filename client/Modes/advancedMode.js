@@ -1,10 +1,7 @@
 var React = require('react');
 var GameTimer = require('./gameTimer');
-<<<<<<< HEAD
 var axios = require('axios');
-=======
 var AdvancedStartOverlay = require('./gameStartOverlay').AdvancedStartOverlay;
->>>>>>> master
 
 //COLLECTION OF GLOBAL VARIABLES TO MAKE EVERYONES LIFE EASIER
 //create global variable for reaction counter
