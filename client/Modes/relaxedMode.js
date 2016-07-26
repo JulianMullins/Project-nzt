@@ -47,7 +47,7 @@ var RelaxedMode = React.createClass({
   },
   componentDidMount: function() {
     timer = setInterval(this.timer, 1000);
-    
+
     axios.post('/startGame/'+this.state.mode+'/'+this.state.N)
     .then(function(response){
       console.log("start game posted",response)
@@ -178,8 +178,8 @@ var RelaxedMode = React.createClass({
         clearInterval(iterations);
         console.log(this.state)
         axios.post('/gameEnd',{
-            gameId: this.state.gameId, 
-            score: gameScore, 
+            gameId: this.state.gameId,
+            score: gameScore,
             reactionTimes: reactionTimes
         }).then(function(response){
           console.log('end game posted')
