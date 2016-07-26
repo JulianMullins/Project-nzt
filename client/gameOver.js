@@ -99,6 +99,9 @@ var GameOverOverlay = React.createClass({
   click(e){
     this.props.history.push('/game/'+this.state.mode+'/'+(this.state.n+1))
   },
+  click(e){
+    this.props.history.push('/game/'+this.state.mode+'/'+(this.state.n+1))
+  },
   render: function() {
     // this.getData();
 
