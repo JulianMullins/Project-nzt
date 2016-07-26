@@ -272,17 +272,6 @@ var AdvancedMode = React.createClass({
           gameScore = this.state.score;
           console.log(gameScore, 'game score')
           console.log(reactionTimes, 'reaction times')
-
-//////////////////////
-///////////////////////
-//////////////////////
-          //GAME OVER
-          //if (timeKeeper === 6) {
-          //give gameScore variable the final score
-          // gameScore = this.state.score;
-          // console.log(gameScore, 'game score')
-          // console.log(reactionTimes, 'reaction times')
-          // clearInterval(iterations);
           console.log(this.state)
           axios.post('/gameEnd',{
               gameId: this.state.gameId, 
@@ -295,16 +284,8 @@ var AdvancedMode = React.createClass({
             // }
               this.props.history.push('/gameOver');
           }.bind(this))
-
-
-      
-
-/////////////////
-//////////////////
-///////////////////
-        //}.bind(this), 2000)
-
-      }
+      }.bind(this),2000);
+    }
     }.bind(this), 2000);
   },
   colorMatch: function() {
