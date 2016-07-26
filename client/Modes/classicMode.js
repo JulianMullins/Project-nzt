@@ -52,7 +52,10 @@ var ClassicMode = React.createClass({
       console.log("start game posted",response)
       this.setState({
         tempUser:response.data.tempUser,
-        gameId: response.data.gameId
+        gameId: response.data.gameId,
+        modeMultiplier:response.data.modeMultiplier,
+        penalty:response.data.penalty,
+        positivePoints:response.data.positivePoints
       })
       console.log("game posted")
     }.bind(this))
@@ -98,7 +101,7 @@ var ClassicMode = React.createClass({
         reactionTimes.push(reactionEnd - reactionStart);
         reactionEnd = null;
         this.setState({
-          score: this.state.score + 10,
+          score: this.state.score + this.state.positivePoints,
           alert: 'Good job'
         });
       } else if (!this.state.keepScore && (this.state.posPressed || this.state.soundPressed)) {
@@ -106,7 +109,7 @@ var ClassicMode = React.createClass({
         reactionEnd = null;
         if (this.state.score !== 0) {
           this.setState({
-            score: this.state.score - 5
+            score: this.state.score - this.state.penalty
           });
         }
       } else if (this.state.soundMatch || this.state.positionMatch) {
@@ -114,7 +117,7 @@ var ClassicMode = React.createClass({
         reactionEnd = null;
         if (this.state.score !== 0) {
           this.setState({
-            score: this.state.score - 5
+            score: this.state.score - this.state.penalty
           });
         }
       }

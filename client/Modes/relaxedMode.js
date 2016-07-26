@@ -42,7 +42,10 @@ var RelaxedMode = React.createClass({
       // modeMultiplier: modeMultiplier[this.props.mode],
       tempUser: true,
       gameId: null,
-      mode: 'relaxed'
+      mode: 'relaxed',
+      modeMultiplier:1,
+      penalty:0,
+      positivePoints:0
     }
   },
   componentDidMount: function() {
@@ -53,7 +56,10 @@ var RelaxedMode = React.createClass({
       console.log("start game posted",response)
       this.setState({
         tempUser:response.data.tempUser,
-        gameId: response.data.gameId
+        gameId: response.data.gameId,
+        modeMultiplier:response.data.modeMultiplier,
+        penalty:response.data.penalty,
+        positivePoints:response.data.positivePoints
       })
       console.log("game posted")
     }.bind(this))
@@ -94,14 +100,14 @@ var RelaxedMode = React.createClass({
       if (this.state.keepScore && !this.state.posMatch) {
         this.setState({
           alert: "Good job",
-          score: this.state.score + 10,
+          score: this.state.score + this.state.positivePoints,
           posStle: noStyle
         });
       } else if (!this.state.keepScore && this.state.posPressed) {
         this.setState({alert: 'Not a match'});
         if (this.state.score > 0) {
           this.setState({
-            score: this.state.score - 5,
+            score: this.state.score - this.state.penalty,
             posStyle: noStyle
           });
         }
@@ -109,7 +115,7 @@ var RelaxedMode = React.createClass({
         this.setState({alert: "Missed a match"});
         if (this.state.score !== 0) {
           this.setState({
-            score: this.state.score - 5,
+            score: this.state.score - this.state.penalty,
             posStyle: noStyle
           });
         }
