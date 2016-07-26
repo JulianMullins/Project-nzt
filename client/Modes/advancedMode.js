@@ -1,6 +1,11 @@
 var React = require('react');
 var GameTimer = require('./gameTimer');
 
+var axios = require('axios');
+
+var AdvancedStartOverlay = require('./gameStartOverlay').AdvancedStartOverlay;
+
+
 //COLLECTION OF GLOBAL VARIABLES TO MAKE EVERYONES LIFE EASIER
 //create global variable for reaction counter
 var reactionStart;
@@ -11,7 +16,6 @@ var reactionTimes = [];
 var gameScore;
 var reactionEnd = null;
 var iterations;
-var timer;
 
 var AdvancedMode = React.createClass({
   getInitialState: function() {
@@ -48,8 +52,6 @@ var AdvancedMode = React.createClass({
     }
   },
   componentDidMount: function() {
-    timer = setInterval(this.timer, 1000);
-
     axios.post('/startGame/'+this.state.mode+'/'+this.state.N)
     .then(function(response){
       console.log("start game posted",response)
@@ -66,7 +68,6 @@ var AdvancedMode = React.createClass({
   },
   componentWillUnmount: function() {
     clearInterval(iterations);
-    clearInterval(timer);
   },
   enableKeys: function() {
     window.onkeyup = function(e) {
@@ -81,18 +82,10 @@ var AdvancedMode = React.createClass({
       }
     }.bind(this)
   },
-  timer: function() {
-    this.setState({
-      initialTimer: this.state.initialTimer - 1
-    });
-    if (this.state.initialTimer === 2) {
-      this.playGame();
-    }
-    if (this.state.initialTimer === 0) {
+  startGame: function() {
       this.setState({overlay: false});
+      this.playGame();
       this.enableKeys();
-      clearInterval(timer);
-    }
   },
   playGame: function() {
     var positionQueue = [];
@@ -277,8 +270,8 @@ var AdvancedMode = React.createClass({
           console.log(reactionTimes, 'reaction times')
           console.log(this.state)
           axios.post('/gameEnd',{
-              gameId: this.state.gameId, 
-              score: gameScore, 
+              gameId: this.state.gameId,
+              score: gameScore,
               reactionTimes: reactionTimes
           }).then(function(response){
             console.log('end game posted')
@@ -312,29 +305,13 @@ var AdvancedMode = React.createClass({
   render: function() {
     var overlay = this.state.overlay
       ? (
-        <div className="overlay">
-          <center>
-            <a className="btn">{this.state.initialTimer}</a>
-            <h4>Use the keys to press the buttons.</h4>
-            <div className="key-wrapper">
-              <ul className="row">
-                <li className="key k38">↑</li>
-              </ul>
-
-              <ul className="row">
-                <li className="key k37">←</li>
-                <li className="key k40">↓</li>
-                <li className="key k39">→</li>
-              </ul>
-            </div>
-          </center>
-        </div>
+        <AdvancedStartOverlay click={this.startGame}/>
       )
       : '';
 
     var scoreAlert;
     var scoreUpdate;
-    if (this.state.alert === "Good job") {
+    if (this.state.alert === "Good job!") {
       scoreAlert = (
         <div className="scoreAlertPositive">
           {this.state.alert}
@@ -367,6 +344,10 @@ var AdvancedMode = React.createClass({
       )
     }
 
+    var gameTimer = this.state.overlay
+    ? ""
+    : (<GameTimer timeStyle={{'color': "#F1BA03"}}></GameTimer>);
+
     return (
       <div className="gameContainer">
         {overlay}
@@ -380,9 +361,7 @@ var AdvancedMode = React.createClass({
               <h2>Score: {this.state.score}</h2>
               {scoreUpdate}
             </div>
-            <GameTimer timeStyle={{
-              'color': "#F1BA03"
-            }}></GameTimer>
+            {gameTimer}
           </div>
         </div>
         <div className="gameBoard">

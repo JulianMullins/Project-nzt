@@ -127,10 +127,8 @@ module.exports = function(passport) {
                   })
                 }
               })
-
            });
         });
-
 
 
       }

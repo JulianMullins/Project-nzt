@@ -57,7 +57,7 @@ var LoginOverlay = React.createClass({
         password: this.state.password
       
     }).then(function(response) {
-      console.log("response")
+      console.log(response)
       if (response.data.success) {
         this.props.history.push('/home');
       } 
@@ -88,7 +88,7 @@ var LoginOverlay = React.createClass({
   render: function() {
     return (
       <div className="screen">
-                    
+
 
         <div className="login" id="login">
           <h1>Hey you!</h1>
@@ -98,10 +98,11 @@ var LoginOverlay = React.createClass({
             <br></br>
             <input type="password" placeholder="Password" name="password" id="password" value={this.state.password} onChange={this.update}></input>
             <div className="buttongroup">
-              <Link to="/home" type="button" className="form-btn dx" onClick={this.login}>Login</Link>
-              <a href="/login/facebook" >Login with Facebook</a>
+
+              <Link to="/home"><button className="form-btn dx" onClick={this.login}>Login</button></Link>
+              <a className="fb" href="/login/facebook" >Login with Facebook</a>
             </div>
-            
+
           </form>
         </div>
         <div className="register-log">
