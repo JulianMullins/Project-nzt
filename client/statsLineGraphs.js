@@ -1,9 +1,9 @@
 // first of course react!
 var React = require('react');
 // require `react-d3-core` for Chart component, which help us build a blank svg and chart title.
-var Chart = require('react-d3-core').Chart;
+//var Chart = require('react-d3-core').Chart;
 // require `react-d3-basic` for Line chart component.
-var LineChart = require('react-d3-basic').LineChart;
+//var LineChart = require('react-d3-basic').LineChart;
 
 //get funciton, res.json()
 //use req.user
@@ -53,28 +53,30 @@ var MyComponent = React.createClass({
 fetch('/getstats', {method: 'GET'})
 .then(function(response){
     console.log(response, '38')
+    return response.json()
     })
 .then(function(responseJson){
-    console.log(responseJson,'41')
+    console.log(responseJson.stats,'41')
 })
     },
   render: function() {
-    return <Chart
-      title={title}
-      width={width}
-      height={height}
-      margins= {margins}
-      >
-      <LineChart
-        margins= {margins}
-        title={title}
-        data={chartData}
-        width={width}
-        height={height}
-        chartSeries={chartSeries}
-        x={x}
-      />
-    </Chart>
+    return <div>TEST</div>
+    // return <Chart
+    //   title={title}
+    //   width={width}
+    //   height={height}
+    //   margins= {margins}
+    //   >
+    //   <LineChart
+    //     margins= {margins}
+    //     title={title}
+    //     data={chartData}
+    //     width={width}
+    //     height={height}
+    //    // chartSeries={chartSeries}
+    //     x={x}
+    //   />
+   // </Chart>
   }
 });
 
