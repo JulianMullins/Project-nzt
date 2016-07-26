@@ -128,6 +128,7 @@ var _reactRouter = require('react-router');
 var React = require('react');
 var ReactDOM = require('react-dom');
 var url = process.env.url;
+var axios = require('axios');
 
 var Levels = require('./levels');
 var ClassicLevels = Levels.ClassicLevels;
@@ -147,7 +148,14 @@ var Mainmenu = React.createClass({
       hasUsername: false
     };
   },
-
+  componentDidMount: function componentDidMount() {
+    axios.get('/getUser').then(function (response) {
+      this.setState({
+        hasUsername: response.data.isUser,
+        username: response.data.username
+      });
+    }.bind(this));
+  },
   classic: function classic() {
     this.props.history.push('/levels/classic');
   },
@@ -171,7 +179,8 @@ var Mainmenu = React.createClass({
       React.createElement(
         'div',
         { className: 'heading' },
-        React.createElement('img', { src: '../images/CortexLogo4.svg' })
+        React.createElement('img', { src: '../images/CortexLogo4.svg' }),
+        this.state.username
       ),
       React.createElement(
         'div',
@@ -240,7 +249,7 @@ var Mainmenu = React.createClass({
 module.exports = Mainmenu;
 
 }).call(this,require('_process'))
-},{"./levels":14,"./loginOverlay":15,"./registerOverlay":18,"_process":1,"react":276,"react-dom":44,"react-router":74}],3:[function(require,module,exports){
+},{"./levels":14,"./loginOverlay":15,"./registerOverlay":18,"_process":1,"axios":22,"react":276,"react-dom":44,"react-router":74}],3:[function(require,module,exports){
 'use strict';
 
 var React = require('react');
@@ -283,18 +292,18 @@ var AdvancedMode = React.createClass({
     };
   },
   componentDidMount: function componentDidMount() {
-    fetch('/startGame/' + this.state.mode + '/' + this.state.N, {
-      method: 'POST',
-      credentials: 'include',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      }
-    }).then(function (response) {
-      return response.json();
-    }).then(function (response) {
-      this.setState({ tempUser: response.tempUser, gameId: response.gameId });
+    axios.post('/startGame/' + this.state.mode + '/' + this.state.N).then(function (response) {
+      console.log("start game posted", response);
+      this.setState({
+        tempUser: response.data.tempUser,
+        gameId: response.data.gameId,
+        modeMultiplier: response.data.modeMultiplier,
+        penalty: response.data.penalty,
+        positivePoints: response.data.positivePoints
+      });
+      console.log("game posted");
     }.bind(this));
+    console.log("component mounted");
   },
   componentWillUnmount: function componentWillUnmount() {
     clearInterval(iterations);
@@ -355,7 +364,7 @@ var AdvancedMode = React.createClass({
           reactionEnd = null;
           if (this.state.score !== 0) {
             this.setState({
-              score: this.state.score - 5
+              score: this.state.score - this.state.penalty
             });
           }
         }
@@ -371,7 +380,7 @@ var AdvancedMode = React.createClass({
           positionMatch: false,
           correct: [false, false, false],
           alert: "Good job!",
-          score: this.state.score + 10
+          score: this.state.score + this.state.positivePoints
         });
       } else {
         //console.log('incorrect')
@@ -387,7 +396,7 @@ var AdvancedMode = React.createClass({
         });
         if (this.state.score !== 0) {
           this.setState({
-            score: this.state.score - 5
+            score: this.state.score - this.state.penalty
           });
         }
       }
@@ -492,22 +501,14 @@ var AdvancedMode = React.createClass({
           gameScore = this.state.score;
           console.log(gameScore, 'game score');
           console.log(reactionTimes, 'reaction times');
-
-          //GAME OVER
-          fetch('/gameEnd', {
-            method: 'post',
-            credentials: 'include',
-            headers: {
-              'Accept': 'application/json',
-              'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ gameId: this.state.gameId, score: gameScore, reactionTimes: reactionTimes })
+          console.log(this.state);
+          axios.post('/gameEnd', {
+            gameId: this.state.gameId,
+            score: gameScore,
+            reactionTimes: reactionTimes
           }).then(function (response) {
-            return response.json();
-          }).then(function (response) {
-            if (response.success) {
-              this.props.history.push('/gameOver');
-            }
+            console.log('end game posted');
+            this.props.history.push('/gameOver');
           }.bind(this));
         }.bind(this), 2000);
       }
@@ -734,18 +735,18 @@ var ClassicMode = React.createClass({
     };
   },
   componentDidMount: function componentDidMount() {
-    fetch('/startGame/' + this.state.mode + '/' + this.state.N, {
-      method: 'POST',
-      credentials: 'include',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      }
-    }).then(function (response) {
-      return response.json();
-    }).then(function (response) {
-      this.setState({ tempUser: response.tempUser, gameId: response.gameId });
+    axios.post('/startGame/' + this.state.mode + '/' + this.state.N).then(function (response) {
+      console.log("start game posted", response);
+      this.setState({
+        tempUser: response.data.tempUser,
+        gameId: response.data.gameId,
+        modeMultiplier: response.data.modeMultiplier,
+        penalty: response.data.penalty,
+        positivePoints: response.data.positivePoints
+      });
+      console.log("game posted");
     }.bind(this));
+    console.log("component mounted");
   },
   componentWillUnmount: function componentWillUnmount() {
     clearInterval(iterations);
@@ -778,7 +779,7 @@ var ClassicMode = React.createClass({
         reactionTimes.push(reactionEnd - reactionStart);
         reactionEnd = null;
         this.setState({
-          score: this.state.score + 10,
+          score: this.state.score + this.state.positivePoints,
           alert: 'Good job'
         });
       } else if (!this.state.keepScore && (this.state.posPressed || this.state.soundPressed)) {
@@ -786,7 +787,7 @@ var ClassicMode = React.createClass({
         reactionEnd = null;
         if (this.state.score !== 0) {
           this.setState({
-            score: this.state.score - 5
+            score: this.state.score - this.state.penalty
           });
         }
       } else if (this.state.soundMatch || this.state.positionMatch) {
@@ -794,7 +795,7 @@ var ClassicMode = React.createClass({
         reactionEnd = null;
         if (this.state.score !== 0) {
           this.setState({
-            score: this.state.score - 5
+            score: this.state.score - this.state.penalty
           });
         }
       }
@@ -821,6 +822,7 @@ var ClassicMode = React.createClass({
         positionQueue.splice(0, 1);
         var pMatch = true;
       }
+
       //case 2: color match
       if (timeTilSoundMatch === 0) {
         this.setState({ soundMatch: true, keepScore: true });
@@ -832,6 +834,7 @@ var ClassicMode = React.createClass({
         soundQueue.splice(0, 1);
         var sMatch = true;
       }
+
       // // pick a non-matching next number while interval is not 0
       //position:
       if (!pMatch) {
@@ -845,6 +848,7 @@ var ClassicMode = React.createClass({
           positionQueue.splice(0, 1);
         }
       }
+
       //sound:
       if (!sMatch) {
         var nextSound = parseInt(Math.random() * 9);
@@ -857,7 +861,6 @@ var ClassicMode = React.createClass({
           soundQueue.splice(0, 1);
         }
       }
-
       reactionStart = Date.now();
       var audio = new Audio('./audio/' + (nextSound + 1) + '.wav ');
       audio.play();
@@ -877,28 +880,22 @@ var ClassicMode = React.createClass({
           gameScore = this.state.score;
           console.log(gameScore, 'game score');
           console.log(reactionTimes, 'reaction times');
-
-          //GAME OVER
-
-          fetch('/gameEnd', {
-            method: 'post',
-            credentials: 'include',
-            headers: {
-              'Accept': 'application/json',
-              'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ gameId: this.state.gameId, score: gameScore, reactionTimes: reactionTimes })
+          console.log(this.state);
+          axios.post('/gameEnd', {
+            gameId: this.state.gameId,
+            score: gameScore,
+            reactionTimes: reactionTimes
           }).then(function (response) {
-            return response.json();
-          }).then(function (response) {
-            if (response.success) {
-              this.props.history.push('/gameOver');
-            }
+            console.log('end game posted');
+            this.props.history.push('/gameOver');
           }.bind(this));
         }.bind(this), 2000);
       }
     }.bind(this), 2000);
   },
+  //}
+  //}.bind(this), 2000);
+  //},
   positionMatch: function positionMatch() {
     if (this.state.pressed) {
       return;
@@ -1427,11 +1424,15 @@ var GameTimer = React.createClass({
 module.exports = GameTimer;
 
 },{"react":276}],7:[function(require,module,exports){
+(function (process){
 'use strict';
 
 var React = require('react');
 var GameTimer = require('./gameTimer');
 var RelaxedStartOverlay = require('./gameStartOverlay').RelaxedStartOverlay;
+
+var axios = require('axios');
+axios.defaults.baseURL = process.env.url;
 
 //COLLECTION OF GLOBAL VARIABLES TO MAKE EVERYONES LIFE EASIER
 //create global variable for reaction counter
@@ -1447,6 +1448,7 @@ var RelaxedMode = React.createClass({
   displayName: 'RelaxedMode',
 
   getInitialState: function getInitialState() {
+    console.log("getting initial state");
     return {
       style: [standardStyle, standardStyle, standardStyle, standardStyle, standardStyle, standardStyle, standardStyle, standardStyle, standardStyle],
       positionMatch: false,
@@ -1461,23 +1463,25 @@ var RelaxedMode = React.createClass({
       // modeMultiplier: modeMultiplier[this.props.mode],
       tempUser: true,
       gameId: null,
-      mode: 'relaxed'
+      mode: 'relaxed',
+      modeMultiplier: 1,
+      penalty: 0,
+      positivePoints: 0
     };
   },
   componentDidMount: function componentDidMount() {
-    fetch('/startGame/' + this.state.mode + '/' + this.state.N, {
-      method: 'POST',
-      credentials: 'include',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      }
-    }).then(function (response) {
-
-      return response.json();
-    }).then(function (response) {
-      this.setState({ tempUser: response.tempUser, gameId: response.gameId });
+    axios.post('/startGame/' + this.state.mode + '/' + this.state.N).then(function (response) {
+      console.log("start game posted", response);
+      this.setState({
+        tempUser: response.data.tempUser,
+        gameId: response.data.gameId,
+        modeMultiplier: response.data.modeMultiplier,
+        penalty: response.data.penalty,
+        positivePoints: response.data.positivePoints
+      });
+      console.log("game posted");
     }.bind(this));
+    console.log("component mounted");
   },
   componentWillUnmount: function componentWillUnmount() {
     clearInterval(iterations);
@@ -1505,14 +1509,14 @@ var RelaxedMode = React.createClass({
       if (this.state.keepScore && !this.state.posMatch) {
         this.setState({
           alert: "Good job",
-          score: this.state.score + 10,
+          score: this.state.score + this.state.positivePoints,
           posStle: noStyle
         });
       } else if (!this.state.keepScore && this.state.posPressed) {
         this.setState({ alert: 'Not a match' });
         if (this.state.score > 0) {
           this.setState({
-            score: this.state.score - 5,
+            score: this.state.score - this.state.penalty,
             posStyle: noStyle
           });
         }
@@ -1520,7 +1524,7 @@ var RelaxedMode = React.createClass({
         this.setState({ alert: "Missed a match" });
         if (this.state.score !== 0) {
           this.setState({
-            score: this.state.score - 5,
+            score: this.state.score - this.state.penalty,
             posStyle: noStyle
           });
         }
@@ -1581,27 +1585,23 @@ var RelaxedMode = React.createClass({
       ////////////////////////////////////////////////////////////////////////////////////////
       ////////////////////////////////////////////////////////////////////////////////////
       //RUTH THIS IS WHERE THE GAME ENDS///////////////////////////////////////////
-      if (timeKeeper === 60) {
+      if (timeKeeper === 6) {
         //give gameScore variable the final score
         gameScore = this.state.score;
         console.log(gameScore, 'game score');
         console.log(reactionTimes, 'reaction times');
         clearInterval(iterations);
-
-        fetch('/gameEnd', {
-          method: 'post',
-          credentials: 'include',
-          headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify({ gameId: this.state.gameId, score: gameScore, reactionTimes: reactionTimes })
+        console.log(this.state);
+        axios.post('/gameEnd', {
+          gameId: this.state.gameId,
+          score: gameScore,
+          reactionTimes: reactionTimes
         }).then(function (response) {
-          return response.json();
-        }).then(function (response) {
-          //if (response.success) {
-          this.props.history.push('/gameOver/' + response.score);
-          //}
+          console.log('end game posted');
+          // if(response.data.success){
+          //   this.props.history.push('/gameOver');
+          // }
+          this.props.history.push('/gameOver');
         }.bind(this));
       }
       ////////////////////////////////////////////////////////////////////////////////////
@@ -1757,7 +1757,8 @@ var newStyle = {
 
 module.exports = RelaxedMode;
 
-},{"./gameStartOverlay":5,"./gameTimer":6,"react":276}],8:[function(require,module,exports){
+}).call(this,require('_process'))
+},{"./gameStartOverlay":5,"./gameTimer":6,"_process":1,"axios":22,"react":276}],8:[function(require,module,exports){
 'use strict';
 
 var React = require('react');
@@ -1798,18 +1799,18 @@ var SilentMode = React.createClass({
     };
   },
   componentDidMount: function componentDidMount() {
-    fetch('/startGame/' + this.state.mode + '/' + this.state.N, {
-      method: 'POST',
-      credentials: 'include',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      }
-    }).then(function (response) {
-      return response.json();
-    }).then(function (response) {
-      this.setState({ tempUser: response.tempUser, gameId: response.gameId });
+    axios.post('/startGame/' + this.state.mode + '/' + this.state.N).then(function (response) {
+      console.log("start game posted", response);
+      this.setState({
+        tempUser: response.data.tempUser,
+        gameId: response.data.gameId,
+        modeMultiplier: response.data.modeMultiplier,
+        penalty: response.data.penalty,
+        positivePoints: response.data.positivePoints
+      });
+      console.log("game posted");
     }.bind(this));
+    console.log("component mounted");
     // fetch('/startGame/'+this.state.mode+'/'+this.state.N, {
     //  method: 'post'
     // });
@@ -1845,7 +1846,7 @@ var SilentMode = React.createClass({
         reactionTimes.push(reactionEnd - reactionStart);
         reactionEnd = null;
         this.setState({
-          score: this.state.score + 10,
+          score: this.state.score + this.state.positivePoints,
           alert: 'Good job',
           posStyle: noStyle,
           colorStyle: noStyle
@@ -1855,7 +1856,7 @@ var SilentMode = React.createClass({
         reactionEnd = null;
         if (this.state.score !== 0) {
           this.setState({
-            score: this.state.score - 5,
+            score: this.state.score - this.state.penalty,
             posStyle: noStyle,
             colorStyle: noStyle
           });
@@ -1865,7 +1866,7 @@ var SilentMode = React.createClass({
         reactionEnd = null;
         if (this.state.score !== 0) {
           this.setState({
-            score: this.state.score - 5,
+            score: this.state.score - this.state.penalty,
             posStyle: noStyle,
             colorStyle: noStyle
           });
@@ -1948,22 +1949,14 @@ var SilentMode = React.createClass({
           gameScore = this.state.score;
           console.log(gameScore, 'game score');
           console.log(reactionTimes, 'reaction times');
-
-          //GAME OVER
-          fetch('/gameEnd', {
-            method: 'post',
-            credentials: 'include',
-            headers: {
-              'Accept': 'application/json',
-              'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ gameId: this.state.gameId, score: gameScore, reactionTimes: reactionTimes })
+          console.log(this.state);
+          axios.post('/gameEnd', {
+            gameId: this.state.gameId,
+            score: gameScore,
+            reactionTimes: reactionTimes
           }).then(function (response) {
-            return response.json();
-          }).then(function (response) {
-            if (response.success) {
-              this.props.history.push('/gameOver/' + this.state.mode + "/" + '/' + gameScore);
-            }
+            console.log('end game posted');
+            this.props.history.push('/gameOver');
           }.bind(this));
         }.bind(this), 2000);
       }
@@ -2274,42 +2267,26 @@ var FacebookLogin = React.createClass({
 module.exports = FacebookLogin;
 
 },{"react":276,"react-dom":44,"react-router":74}],11:[function(require,module,exports){
+(function (process){
 'use strict';
 
 var _reactRouter = require('react-router');
 
 var React = require('react');
 var ReactDOM = require('react-dom');
+var axios = require('axios');
+axios.defaults.baseURL = process.env.url;
 
 var loginOverlay = require('./loginOverlay');
 
 var getUser = function getUser() {
-  fetch('/getUser', {
-    method: 'get'
-  }).then(function (response) {
-    return response.json();
-  }).then(function (response) {
-    if (response.username) {
-      this.setState({
-        username: response.username,
-        alreadyLoggedIn: true
-      });
-    }
-  });
+
+  return axios.get('/getUser');
 };
 
-var getScore = function getScore() {
-  fetch('/getScore', {
-    method: 'get'
-  }).then(function (response) {
-    return response.json();
-  }).then(function (response) {
-    if (response.score) {
-      this.setState({
-        score: response.score
-      });
-    }
-  });
+var getGame = function getGame() {
+
+  return axios.get('/getGame');
 };
 
 var GameOverOverlay = React.createClass({
@@ -2321,21 +2298,25 @@ var GameOverOverlay = React.createClass({
       alreadyLoggedIn: false,
       score: 0,
       mode: null,
-      nLevel: 1
+      nLevel: 1,
+      renderLogin: React.createElement('div', null)
     };
   },
   componentDidMount: function componentDidMount() {
 
-    fetch("/getGameData").then(function (response) {
-      console.log(response);
-      return response.json();
-    }).then(function (response) {
-      this.setState({
-        score: score,
-        mode: mode,
-        nLevel: nLevel
-      });
-    }.bind(this));
+    // axios.all([getUser(),getGame()])
+    //   .then(axios.spread(function(userData,gameData){
+    //     this.setState({
+    //       username:userData.data.username,
+    //       alreadyLoggedIn:userData.data.alreadyLoggedIn,
+    //       score:gameData.data.game.score,
+    //       mode:gameData.data.game.mode,
+    //       nLevel:gameData.data.game.nLevel
+    //     })
+    //     console.log(userData,gameData)
+    //     console.log("component mounted")
+    //   }.bind(this)))
+    this.getData();
   },
 
 
@@ -2343,53 +2324,91 @@ var GameOverOverlay = React.createClass({
   //     getUser().bind(this);
   //     getScore().bind(this);
   // },
+  getData: function getData() {
+    axios.all([getUser(), getGame()]).then(axios.spread(function (userData, gameData) {
+      this.setState({
+        username: userData.data.username,
+        alreadyLoggedIn: userData.data.alreadyLoggedIn,
+        score: gameData.data.game.score,
+        mode: gameData.data.game.mode,
+        nLevel: gameData.data.game.nLevel
+      });
+    }.bind(this))).then(function () {
+      this.renderLogin();
+    }.bind(this));
+  },
 
   update: function update(e) {
     this.setState({
       username: e.target.value
     });
   },
-  gameOver: function gameOver(score) {
+  tempSaveData: function tempSaveData() {
+    axios.post({
+      url: '/tempSaveData',
+      data: {
+        score: this.state.score,
+        mode: this.state.mode
 
-    fetch('/gameOver', {
-      method: 'post',
-      credentials: 'include',
+      }
+    });
+  },
+
+  gameOver: function gameOver() {
+    axios.post({
+      url: '/gameOver',
       headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify({
+      data: {
         inputUsername: this.state.username,
         alreadyLoggedIn: this.state.alreadyLoggedIn
-      })
+      }
     });
   },
   click: function click(e) {
-    this.props.history.push('/game/' + this.state.mode + '/' + (this.state.n + 1));
+    this.props.history.push('/game/' + this.state.mode + '/' + (this.state.nLevel + 1));
+  },
+  renderLogin: function renderLogin() {
+    if (!this.state.alreadyLoggedIn) {
+      this.setState({
+        renderLogin: React.createElement(
+          'div',
+          { className: 'gameOverPrompt' },
+          React.createElement(
+            'p',
+            null,
+            'It looks like you are not currently logged in.',
+            React.createElement(
+              _reactRouter.Link,
+              { to: '/gameOver/login' },
+              ' Sign in'
+            ),
+            ' or ',
+            React.createElement(
+              _reactRouter.Link,
+              { to: '/gameOver/register' },
+              'sign up'
+            ),
+            ' to save your progress, view statistics and compete with friends!'
+          )
+        )
+      });
+    }
   },
 
   render: function render() {
-    var loggedIn = this.state.alreadyLoggedIn ? React.createElement('div', null) : React.createElement(
-      'div',
-      { className: 'gameOverPrompt' },
-      React.createElement(
-        'p',
-        null,
-        'It looks like you are not currently logged in.',
-        React.createElement(
-          _reactRouter.Link,
-          { to: '/gameOver/login' },
-          ' Sign in'
-        ),
-        ' or ',
-        React.createElement(
-          _reactRouter.Link,
-          { to: '/gameOver/register' },
-          'sign up'
-        ),
-        ' to save your progress, view statistics and compete with friends!'
-      )
-    );
+    // this.getData();
+
+    // var loggedIn = this.state.alreadyLoggedIn
+
+    //   ? <div></div>
+    //   : <div className="gameOverPrompt">
+    //       <p>It looks like you are not currently logged in. 
+    //       <Link to="/gameOver/login"> Sign in</Link> or <Link to="/gameOver/register">sign up</Link> to save your progress, 
+    //       view statistics and compete with friends!</p>  
+    //     </div> 
 
     return React.createElement(
       'div',
@@ -2410,18 +2429,22 @@ var GameOverOverlay = React.createClass({
         { className: 'gameOverInform classic' },
         'You have unlocked level 2'
       ),
-      loggedIn,
+      this.state.renderLogin,
       React.createElement(
         'div',
         { className: 'gameOverActions' },
         React.createElement(
           _reactRouter.Link,
           { to: '/home' },
-          React.createElement('span', { className: 'fa fa-home fa-5x' }),
           React.createElement(
-            'h2',
-            null,
-            'home'
+            'a',
+            { onClick: this.gameOver },
+            React.createElement('span', { className: 'fa fa-home fa-5x' }),
+            React.createElement(
+              'h2',
+              null,
+              'home'
+            )
           )
         ),
         React.createElement(
@@ -2436,13 +2459,17 @@ var GameOverOverlay = React.createClass({
             _reactRouter.Link,
             { to: '/leaderboard' },
             React.createElement(
-              'span',
-              { className: 'lbChart' },
-              React.createElement('span', { className: 'fa fa-signal fa-5x' }),
+              'a',
+              { onClick: this.gameOver },
               React.createElement(
-                'h2',
-                null,
-                'leaderboard'
+                'span',
+                { className: 'lbChart' },
+                React.createElement('span', { className: 'fa fa-signal fa-5x' }),
+                React.createElement(
+                  'h2',
+                  null,
+                  'leaderboard'
+                )
               )
             )
           )
@@ -2454,7 +2481,8 @@ var GameOverOverlay = React.createClass({
 
 module.exports = GameOverOverlay;
 
-},{"./loginOverlay":15,"react":276,"react-dom":44,"react-router":74}],12:[function(require,module,exports){
+}).call(this,require('_process'))
+},{"./loginOverlay":15,"_process":1,"axios":22,"react":276,"react-dom":44,"react-router":74}],12:[function(require,module,exports){
 (function (process){
 'use strict';
 
@@ -2476,9 +2504,9 @@ var Register = require('./registerOverlay');
 
 var GameOver = require('./gameOver');
 var Leaderboard = require('./leaderboard');
-var Stats = require('./stats');
 var Contact = require('./contact');
 var Science = require('./science');
+var Stats = require('./statsLineGraphs');
 var Tutorial = require('./tutorial');
 
 //Stats
@@ -2518,8 +2546,6 @@ var App = React.createClass({
     console.log("app mounted");
   },
   render: function render() {
-    //<NavBar isUser = {this.state.isUser} />
-    console.log(this);
     return React.createElement(
       'div',
       null,
@@ -2543,7 +2569,7 @@ ReactDOM.render(React.createElement(
     React.createElement(_reactRouter.Route, { path: 'login', component: Login }),
     React.createElement(_reactRouter.Route, { path: 'logout', component: Logout }),
     React.createElement(_reactRouter.Route, { path: 'register', component: Register }),
-    React.createElement(_reactRouter.Route, { path: 'gameOver(/:score)', component: GameOver }),
+    React.createElement(_reactRouter.Route, { path: 'gameOver', component: GameOver }),
     React.createElement(_reactRouter.Route, { path: 'leaderboard', component: Leaderboard }),
     React.createElement(_reactRouter.Route, { path: 'stats', component: Stats }),
     React.createElement(_reactRouter.Route, { path: 'contact', component: Contact }),
@@ -2565,7 +2591,7 @@ ReactDOM.render(React.createElement(
 // ReactDOM.render(<GameOver/>, document.getElementById('root'));
 
 }).call(this,require('_process'))
-},{"./Mainmenu":2,"./Modes/advancedMode":3,"./Modes/classicMode":4,"./Modes/relaxedMode":7,"./Modes/silentMode":8,"./contact":9,"./facebookLogin":10,"./gameOver":11,"./leaderboard":13,"./levels":14,"./loginOverlay":15,"./logout":16,"./navBar":17,"./registerOverlay":18,"./science":19,"./stats":20,"./tutorial":21,"_process":1,"axios":22,"react":276,"react-dom":44,"react-router":74}],13:[function(require,module,exports){
+},{"./Mainmenu":2,"./Modes/advancedMode":3,"./Modes/classicMode":4,"./Modes/relaxedMode":7,"./Modes/silentMode":8,"./contact":9,"./facebookLogin":10,"./gameOver":11,"./leaderboard":13,"./levels":14,"./loginOverlay":15,"./logout":16,"./navBar":17,"./registerOverlay":18,"./science":19,"./statsLineGraphs":20,"./tutorial":21,"_process":1,"axios":22,"react":276,"react-dom":44,"react-router":74}],13:[function(require,module,exports){
 'use strict';
 
 var React = require('react');
@@ -2667,6 +2693,7 @@ var getSquareArr = function getSquareArr(square, mode) {
   var arr = [];
   for (var i = 1; i < maxSquares + 1; i++) {
     var link = "/game/" + mode + "/" + i;
+    console.log(link);
     var sqClass = "levelSquare " + squareClass;
     if (i <= square) {
       var colorStyle = {
@@ -2990,9 +3017,8 @@ var LoginOverlay = React.createClass({
     return {
       username: '',
       password: '',
+      gameEnded: false,
       games: null
-      // gameEnded:false,
-      // games:null
     };
   },
   // componentDidMount(){
@@ -3100,7 +3126,7 @@ var LoginOverlay = React.createClass({
             ),
             React.createElement(
               'a',
-              { href: '/login/facebook' },
+              { className: 'fb', href: '/login/facebook' },
               'Login with Facebook'
             )
           )
@@ -3265,6 +3291,7 @@ var NavBar = React.createClass({
 		}.bind(this));
 	},
 	logInOut: function logInOut(e) {
+
 		//console.log(this)
 		if (!this.state.loggedIn) {
 			this.props.history.push('/login');
@@ -3273,7 +3300,9 @@ var NavBar = React.createClass({
 				url: '/logout',
 				withCredentials: true
 			}).then(function (response) {
+				console.log(response);
 				if (response.data.success) {
+					console.log("logged out success");
 					this.props.history.push('/home');
 				}
 			}.bind(this));
@@ -3662,68 +3691,95 @@ module.exports = Science;
 },{"react":276,"react-dom":44,"react-router":74}],20:[function(require,module,exports){
 'use strict';
 
+// first of course react!
 var React = require('react');
-var Reactable = require('reactable');
-var Table = Reactable.Table;
+// require `react-d3-core` for Chart component, which help us build a blank svg and chart title.
+//var Chart = require('react-d3-core').Chart;
+// require `react-d3-basic` for Line chart component.
+//var LineChart = require('react-d3-basic').LineChart;
 
-var Stats = React.createClass({
-  displayName: 'Stats',
+//get funciton, res.json()
+// //use req.user
+// var chartData = {labels: ["January", "February", "March", "April", "May", "June", "July"],
+//     datasets: [
+//         {
+//             score: 123      
+//         },
+//          {
+//             score: 145
+//         },
+//         {
+//             score: 125
+//         },
+//         {
+//             score: 245
+//         },
+//         {
+//             score: 341
+//         }
+//     ]};
 
-  render: function render() {
-    var data = [{
-      mode: 'Advanced',
-      score: 2000,
-      level: 16
-    }, {
-      mode: 'Classic',
-      score: 1980,
-      level: 19
-    }, {
-      mode: 'Advanced',
-      score: 1760,
-      level: 6
-    }, {
-      mode: 'Relaxed',
-      score: 1580,
-      level: 19
-    }, {
-      mode: 'Silent',
-      score: 70,
-      level: 2
-    }];
-    return React.createElement(
-      'div',
-      { className: 'leaderboardPage' },
-      React.createElement(
-        'div',
-        { className: 'userSide' },
-        React.createElement(
-          'h1',
-          { className: 'lbHeader' },
-          'Statistics'
-        ),
-        React.createElement(
-          'section',
-          null,
-          React.createElement(Table, { columns: [{
-              key: 'mode',
-              label: 'Mode'
-            }, {
-              key: 'score',
-              label: 'Score'
-            }, {
-              key: 'level',
-              label: 'Level'
-            }], data: data, itemsPerPage: 10, pageButtonLimit: 5, sortable: true, filterable: ['mode', 'username'] })
-        )
-      )
-    );
-  }
+// var width = 700,
+//     height = 300,
+//     margins = {left: 100, right: 100, top: 50, bottom: 50},
+//     title = "User sample",
+//     // chart series,
+//     // field: is what field your data want to be selected
+//     // name: the name of the field that display in legend
+//     // color: what color is the line
+//     chartSeries = [
+//       {
+//         field: 'BMI',
+//         name: 'BMI',
+//         color: '#ff7f0e'
+//       }
+//     ],
+//     // your x accessor
+//     x = function(d) {
+//       return d.index;
+//     }
+
+var MyComponent = React.createClass({
+    displayName: 'MyComponent',
+
+    componentDidMount: function componentDidMount() {
+        //fetch call
+
+        fetch('/taco', { method: 'GET' }).then(function (response) {
+            console.log(response, '38');
+            return response.json();
+        }).then(function (responseJson) {
+            console.log(responseJson, '41');
+        });
+    },
+    render: function render() {
+        return React.createElement(
+            'div',
+            null,
+            'TEST'
+        );
+        // return <Chart
+        //   title={title}
+        //   width={width}
+        //   height={height}
+        //   margins= {margins}
+        //   >
+        //   <LineChart
+        //     margins= {margins}
+        //     title={title}
+        //     data={chartData}
+        //     width={width}
+        //     height={height}
+        //    // chartSeries={chartSeries}
+        //     x={x}
+        //   />
+        // </Chart>
+    }
 });
 
-module.exports = Stats;
+module.exports = MyComponent;
 
-},{"react":276,"reactable":277}],21:[function(require,module,exports){
+},{"react":276}],21:[function(require,module,exports){
 'use strict';
 
 var _reactRouter = require('react-router');
@@ -3858,6 +3914,57 @@ var Tutorial = React.createClass({
               { className: 'slide' },
               React.createElement(
                 'div',
+                { className: 'rulemode2' },
+                React.createElement(
+                  'div',
+                  { className: 'rules2' },
+                  React.createElement(
+                    'h2',
+                    null,
+                    'Welcome to Cortex!'
+                  ),
+                  React.createElement(
+                    'h4',
+                    null,
+                    'Cortex is a ',
+                    React.createElement(
+                      'spanl',
+                      null,
+                      'scientifically supported'
+                    ),
+                    ' game for exercising your working memory and increasing fluid-intelligence (directly tied to IQ). While the game can be tricky to grasp at first and increases in difficulty rather quickly, we have tried to make this game as fun and as easy to learn as possible. We hope that you’ll enjoy playing this game and that the cognitive benefits will simply follow along as you progress.'
+                  ),
+                  React.createElement(
+                    'h3',
+                    null,
+                    'Let’s get started!'
+                  )
+                )
+              )
+            ),
+            React.createElement(
+              'div',
+              { className: 'slide' },
+              React.createElement(
+                'div',
+                { className: 'rulemode2' },
+                React.createElement(
+                  'div',
+                  { className: 'rules2' },
+                  React.createElement(
+                    'h4',
+                    null,
+                    'Cortex is based on the n-back genre of brain training games, which requires players to keep track of various changes happening on-screen.'
+                  )
+                )
+              ),
+              React.createElement('img', { src: './images/pattern.gif', alt: 'Mountain View' })
+            ),
+            React.createElement(
+              'div',
+              { className: 'slide' },
+              React.createElement(
+                'div',
                 { className: 'key-wrapper' },
                 React.createElement(
                   'h4',
@@ -3915,9 +4022,11 @@ var Tutorial = React.createClass({
                       'RELAXED'
                     ),
                     React.createElement(
-                      'h4',
+                      'h3',
                       null,
-                      'There is only one button: Position. This will be your ↑ key.'
+                      'Keep track of changing position. ',
+                      React.createElement('br', null),
+                      '(mono n-back)'
                     ),
                     React.createElement(
                       'ul',
@@ -3957,9 +4066,11 @@ var Tutorial = React.createClass({
                       'CLASSIC'
                     ),
                     React.createElement(
-                      'h4',
+                      'h3',
                       null,
-                      'There are two buttons: Position and Sound. This will be your ← and → keys.'
+                      'Keep track of position and sounds. ',
+                      React.createElement('br', null),
+                      ' (dual n-back)'
                     ),
                     React.createElement(
                       'ul',
@@ -3993,7 +4104,7 @@ var Tutorial = React.createClass({
                 ),
                 React.createElement(
                   'div',
-                  { className: 'rulemode2' },
+                  { className: 'rulemode' },
                   React.createElement(
                     'div',
                     { className: 'rules2' },
@@ -4003,9 +4114,11 @@ var Tutorial = React.createClass({
                       'SILENT'
                     ),
                     React.createElement(
-                      'h4',
+                      'h3',
                       null,
-                      'There are two buttons: Position and Color. This will be your ← and → keys.'
+                      'Keep track of both position and colors. ',
+                      React.createElement('br', null),
+                      '(dual n-back)'
                     ),
                     React.createElement(
                       'ul',
@@ -4045,9 +4158,11 @@ var Tutorial = React.createClass({
                       'ADVANCED'
                     ),
                     React.createElement(
-                      'h4',
+                      'h3',
                       null,
-                      'There are three buttons: Position Sound, and Color.'
+                      'Keep track of position, color and sound ',
+                      React.createElement('br', null),
+                      '(triple n-back)'
                     ),
                     React.createElement(
                       'ul',
@@ -4081,8 +4196,32 @@ var Tutorial = React.createClass({
                 )
               )
             ),
-            React.createElement('div', { className: 'slide' }),
-            React.createElement('div', { className: 'slide' }),
+            React.createElement(
+              'div',
+              { className: 'slide' },
+              React.createElement(
+                'div',
+                { className: 'rulemode3' },
+                React.createElement(
+                  'div',
+                  { className: 'rules2' },
+                  React.createElement(
+                    'h4',
+                    null,
+                    'The n in n-back refers to the number of positions back that you have to keep track of. For example, at n=2, you would have to make matches based on the state of the board two steps back.',
+                    React.createElement('br', null),
+                    React.createElement('br', null),
+                    React.createElement('br', null),
+                    'If this seems like a daunting task, don’t worry! This game is designed to be a challenge and advancing up in level can be difficult. If you are new to the game or still unsure of how it works, we recommend starting out in relaxed mode first and then moving on once you are comfortable with the gameplay.',
+                    React.createElement('br', null),
+                    React.createElement('br', null),
+                    React.createElement('br', null),
+                    'However, once you get familiar with the game mechanics, it is always recommended to continue pushing up in n-level once you have unlocked the next one. You will experience the greatest mental effects by continuously challenging yourself!'
+                  )
+                )
+              ),
+              React.createElement('img', { src: './images/pattern.gif', alt: 'Mountain View' })
+            ),
             React.createElement('div', { className: 'slide' })
           )
         )
