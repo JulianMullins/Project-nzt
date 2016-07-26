@@ -57,6 +57,7 @@ h2 {
 h3 {
   font-size: 1.3rem;
   font-weight: 100;
+  margin-bottom: 5px;
 }
 #title {
   /* padding: 2rem 0;*/
@@ -224,7 +225,7 @@ ul.row {
 			  	transition: 0s;
 }
 
-.rulemode, .rulemode2 {
+.rulemode, .rulemode2, .rulemode3 {
   display: flex;
   flex-direction: row;
   padding: 0 10% 0 10%;
@@ -234,6 +235,10 @@ ul.row {
 }
 .rulemode2{
   margin-top: 10%;
+  padding: 0 30% 0 30%;
+}
+.rulemode3{
+  margin-top: 5%;
   padding: 0 30% 0 30%;
 }
 
@@ -247,5 +252,5 @@ ul.row {
 }
 
 .slide > img{
-  width: 30vw;
+  width: 25vw;
 }
