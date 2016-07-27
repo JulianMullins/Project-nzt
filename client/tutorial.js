@@ -73,7 +73,7 @@ componentDidMount: function(){
       } else {
         move(0);
       }
-    }, 20000);
+    }, 2000000);
   }
 
   $('.next_btn').on('click', function() {
@@ -111,128 +111,136 @@ componentDidMount: function(){
 	render: function() {
 		return (
       <div className="tutorial">
-				<div className="slider">
-  <div className="slide_viewer">
-    <div className="slide_group">
-			<div className="slide">
-				<div className="rulemode2">
-					<div className="rules2">
-						<h2>Welcome to Cortex!</h2>
-				<h4>Cortex is a <spanl>scientifically supported</spanl> game for exercising your working memory and increasing fluid-intelligence (directly tied to IQ). While the game can be tricky to grasp at first and increases in difficulty rather quickly, we have tried to make this game as fun and as easy to learn as possible. We hope that you’ll enjoy playing this game and that the cognitive benefits will simply follow along as you progress.</h4>
-					<h3>Let’s get started!</h3>
-			</div>
-			</div>
-			</div>
-			<div className="slide">
-				<div className="rulemode2">
-					<div className="rules2">
-				<h4>Cortex is based on the n-back genre of brain training games, which requires players to keep track of various changes happening on-screen.</h4>
-				</div>
-			</div>
-				<img src="./images/pattern.gif" alt="Mountain View"></img>
-	</div>
-      <div className="slide">
-	      <div className="key-wrapper">
-        <h4>Click <spanl>here</spanl> to test your keys.</h4>
-        <ul className="row">
-          <li className="key k38">↑</li>
-        </ul>
+        <div className="slider">
+          <div className="slide_viewer">
+            <div className="slide_group">
 
-        <ul className="row">
-          <li className="key k37">←</li>
-          <li className="key k40">↓</li>
-          <li className="key k39">→</li>
-        </ul>
-        <h4>Once pressed, you cannot undo it. For a double match, you need to press both keys.</h4>
-        <div className="rulemode">
-					<div className="rules2">
-        <h2>RELAXED</h2>
-					<h3>Keep track of changing position. <br></br>(mono n-back)</h3>
-          <ul className="row">
-            <li className="key k38">POSITION</li>
-          </ul>
-					<ul className="row">
-						<li className="key k37">←</li>
-						<li className="key k40">↓</li>
-						<li className="key k39">→</li>
-						</ul>
-					</div>
-					<div className="rules2">
-						<h2>CLASSIC</h2>
-          <h3>Keep track of position and sounds. <br></br> (dual n-back)</h3>
-						<ul className="row">
-							<li className="key k38">↑</li>
-						</ul>
-            <ul className="row">
-              <li className="key k37">POSITION</li>
-              <li className="key k40">↓</li>
-              <li className="key k39">SOUND</li>
-            </ul>
-					</div>
-				</div>
-				<div className="rulemode">
-            <div className="rules2">
-							<h2>SILENT</h2>
-							<h3>Keep track of both position and colors. <br></br>(dual n-back)</h3>
-              <ul className="row">
-								<li className="key k38">↑</li>
-							</ul>
-							<ul className="row">
-                <li className="key k37">POSITION</li>
-                <li className="key k40">↓</li>
-                <li className="key k39">COLOR</li>
-              </ul>
-						</div>
-						<div className="rules2">
-							<h2>ADVANCED</h2>
-              <h3>Keep track of position, color and sound <br></br>(triple n-back)</h3>
-                <ul className="row">
-                  <li className="key k38">POSITION</li>
-                </ul>
-                <ul className="row">
-                  <li className="key k37">SOUND</li>
-                  <li className="key k40">↓</li>
-                  <li className="key k39">COLOR</li>
-                </ul>
-						</div>
+              <div className="slide">
+                <div className="rulemode2">
+                  <div className="rules2">
+                    <h2>Welcome to Cortex!</h2>
+                    <p>Cortex is a <spanl>scientifically supported</spanl> game for exercising your working memory
+                    and increasing fluid-intelligence (directly tied to IQ). While the game can be tricky to grasp 
+                    at first and increases in difficulty rather quickly, we have tried to make this game as fun and 
+                    as easy to learn as possible. We hope that you’ll enjoy playing this game and that the cognitive 
+                    benefits will simply follow along as you progress.</p>
+                    <h3>Let’s get started!</h3>
+                  </div> {/* rules2 */}
+                </div> {/* rulemodel2 */}
+              </div> {/* slide */}
+
+              <div className="slide">
+                <div className="rulemode2">
+                  <div className="rules2">
+                  <h2>Dual n-back</h2>
+                    <p>Cortex is based on the n-back genre of brain training games, which requires players to keep 
+                  track of various changes happening on-screen.</p>
+                  </div>
+                </div> {/* rulemode2 */}
+                  <img src="./images/pattern.gif" alt="Mountain View"></img>
+              </div> {/* slide */}
+
+              <div className="slide">
+                <div className="key-wrapper">
+                <h2>Key Tips</h2>
+                <h3>Once a button is pressed, you cannot undo the action.</h3>
+                <h3>For a double match, you need to press both keys.</h3>
+                  <div className="rulemode">
+                    <div className="rules2">
+                      <h2>RELAXED</h2>
+                      <h3>Keep track of changing position. <br></br>(mono n-back)</h3>
+                      <ul className="row">
+                        <li className="key keyRelaxed k38">POSITION</li>
+                      </ul>
+                      <ul className="row">
+                        <li className="key keyRelaxed k37">←</li>
+                        <li className="key keyRelaxed k40">↓</li>
+                        <li className="key keyRelaxed k39">→</li>
+                      </ul>
+                      </div>
+                      <div className="rules2">
+                      <h2>CLASSIC</h2>
+                      <h3>Keep track of position and sounds. <br></br> (dual n-back)</h3>
+                      <ul className="row">
+                        <li className="key keyClassic k38">↑</li>
+                      </ul>
+                      <ul className="row">
+                        <li className="key keyClassic k37">POSITION</li>
+                        <li className="key keyClassic k40">↓</li>
+                        <li className="key keyClassic k39">SOUND</li>
+                      </ul>
+                    </div> {/* rules2 */}
+                  </div> {/* rulemode */}
+
+                  <div className="rulemode">
+                    <div className="rules2">
+                      <h2>SILENT</h2>
+                      <h3>Keep track of both position and colors. <br></br>(dual n-back)</h3>
+                      <ul className="row">
+                        <li className="key keySilent k38">↑</li>
+                      </ul>
+                      <ul className="row">
+                        <li className="key keySilent k37">POSITION</li>
+                        <li className="key keySilent k40">↓</li>
+                        <li className="key keySilent k39">COLOR</li>
+                      </ul>
+                      </div>
+                      <div className="rules2">
+                      <h2>ADVANCED</h2>
+                      <h3>Keep track of position, color and sound <br></br>(triple n-back)</h3>
+                      <ul className="row">
+                        <li className="key keyAdvanced k38">POSITION</li>
+                      </ul>
+                      <ul className="row">
+                        <li className="key keyAdvanced k37">SOUND</li>
+                        <li className="key keyAdvanced k40">↓</li>
+                        <li className="key keyAdvanced k39">COLOR</li>
+                      </ul>
+                    </div> {/* rules2 */}
+                  </div> {/* rulemode */}
+                </div> {/* key-wrapper */}
+              </div> {/* slide */}
+
+              <div className="slide">
+                <div className="rulemode3">
+                  <div className="rules2">
+                  <h2>The n-back part</h2>
+                    <p>The n in n-back refers to the number of positions back that you have to keep track of. 
+                    For example, at n=2, you would have to make matches based on the state of the board two steps back. </p>
+                  </div> {/* rules2 */}
+                </div> {/* rulemode3 */}
+                <img src="./images/pattern.gif" alt="Gameplay Pattern"></img>
+              </div> {/* slide */}
+
+              <div className="slide">
+                <div className="rulemode2">
+                  <div className="rules2">
+                  <h2>Expectations</h2>
+                    <p>If this seems like a daunting task, don’t worry! This game is designed to be a challenge and advancing 
+                    up in level can be difficult. If you are new to the game or still unsure of how it works, we recommend 
+                    starting out in relaxed mode first and then moving on once you are comfortable with the gameplay. </p>
+
+                    <p>However, once you get familiar with the game mechanics, it is always recommended to continue pushing 
+                    up in n-level once you have unlocked the next one. You will experience the greatest mental benefits by 
+                    continuously challenging yourself! </p>
+                  </div>
+                </div> {/* rulemode2 */}
+              </div> {/* slide */}
+
+            </div> {/* slide_group */}
+          </div> {/* slide_viewer */}
+        </div> {/* slider */}
+        
+        <div className="slide_buttons">
+        </div> {/* slide_buttons */}
+
+        <div className="directional_nav">
+          <div className="previous_btn" title="Previous"><i className="fa fa-angle-left" aria-hidden="true"></i>
           </div>
-      </div>
-		</div>
-				<div className="slide">
-					<div className="rulemode3">
-						<div className="rules2">
-<h4>The n in n-back refers to the number of positions back that you have to keep track of. For example, at n=2, you would have to make matches based on the state of the board two steps back.
-	<br></br>
-	<br></br>
-	<br></br>
-
-If this seems like a daunting task, don’t worry! This game is designed to be a challenge and advancing up in level can be difficult. If you are new to the game or still unsure of how it works, we recommend starting out in relaxed mode first and then moving on once you are comfortable with the gameplay.
-<br></br>
-	<br></br>
-	<br></br>
-
-However, once you get familiar with the game mechanics, it is always recommended to continue pushing up in n-level once you have unlocked the next one. You will experience the greatest mental effects by continuously challenging yourself!
-</h4>
-						</div>
-					</div>
-						<img src="./images/pattern.gif" alt="Mountain View"></img>
-				</div>
-				<div className="slide">
-				</div>
-		</div>
-		</div>
-		</div>
-
-		<div className="slide_buttons">
-		</div>
-
-		<div className="directional_nav">
-		<div className="previous_btn" title="Previous"><i className="fa fa-angle-left" aria-hidden="true"></i>
-		</div>
-		<div className="next_btn" title="Next"><i className="fa fa-angle-right" aria-hidden="true"></i>
-		</div>
-		</div>
-    </div>
+          <div className="next_btn" title="Next"><i className="fa fa-angle-right" aria-hidden="true"></i>
+          </div>
+        </div> {/* directional_nav */}
+      </div> //tutorial
     )
 	}
 });

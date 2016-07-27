@@ -81,7 +81,7 @@
 
 .previous_btn {
   bottom: 0;
-  left: 100px;
+  left: 0px;
   margin: auto;
   position: absolute;
   top: 0;
@@ -91,14 +91,14 @@
   bottom: 0;
   margin: auto;
   position: absolute;
-  right: 100px;
+  right: 0px;
   top: 0;
 }
 
 .previous_btn, .next_btn {
   cursor: pointer;
   height: 65px;
-  opacity: 0.5;
+  opacity: 0.4;
   font-size: 75px;
   -webkit-transition: opacity 0.4s ease-in-out;
   -moz-transition: opacity 0.4s ease-in-out;

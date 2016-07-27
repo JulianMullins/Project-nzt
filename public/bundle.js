@@ -3866,7 +3866,7 @@ var Tutorial = React.createClass({
             } else {
               move(0);
             }
-          }, 20000);
+          }, 2000000);
         }
 
         $('.next_btn').on('click', function () {
@@ -3929,7 +3929,7 @@ var Tutorial = React.createClass({
                     'Welcome to Cortex!'
                   ),
                   React.createElement(
-                    'h4',
+                    'p',
                     null,
                     'Cortex is a ',
                     React.createElement(
@@ -3944,9 +3944,12 @@ var Tutorial = React.createClass({
                     null,
                     'Let’s get started!'
                   )
-                )
-              )
+                ),
+                ' '
+              ),
+              ' '
             ),
+            ' ',
             React.createElement(
               'div',
               { className: 'slide' },
@@ -3957,14 +3960,21 @@ var Tutorial = React.createClass({
                   'div',
                   { className: 'rules2' },
                   React.createElement(
-                    'h4',
+                    'h2',
+                    null,
+                    'Dual n-back'
+                  ),
+                  React.createElement(
+                    'p',
                     null,
                     'Cortex is based on the n-back genre of brain training games, which requires players to keep track of various changes happening on-screen.'
                   )
                 )
               ),
+              ' ',
               React.createElement('img', { src: './images/pattern.gif', alt: 'Mountain View' })
             ),
+            ' ',
             React.createElement(
               'div',
               { className: 'slide' },
@@ -3972,48 +3982,19 @@ var Tutorial = React.createClass({
                 'div',
                 { className: 'key-wrapper' },
                 React.createElement(
-                  'h4',
+                  'h2',
                   null,
-                  'Click ',
-                  React.createElement(
-                    'spanl',
-                    null,
-                    'here'
-                  ),
-                  ' to test your keys.'
+                  'Key Tips'
                 ),
                 React.createElement(
-                  'ul',
-                  { className: 'row' },
-                  React.createElement(
-                    'li',
-                    { className: 'key k38' },
-                    '↑'
-                  )
-                ),
-                React.createElement(
-                  'ul',
-                  { className: 'row' },
-                  React.createElement(
-                    'li',
-                    { className: 'key k37' },
-                    '←'
-                  ),
-                  React.createElement(
-                    'li',
-                    { className: 'key k40' },
-                    '↓'
-                  ),
-                  React.createElement(
-                    'li',
-                    { className: 'key k39' },
-                    '→'
-                  )
-                ),
-                React.createElement(
-                  'h4',
+                  'h3',
                   null,
-                  'Once pressed, you cannot undo it. For a double match, you need to press both keys.'
+                  'Once a button is pressed, you cannot undo the action.'
+                ),
+                React.createElement(
+                  'h3',
+                  null,
+                  'For a double match, you need to press both keys.'
                 ),
                 React.createElement(
                   'div',
@@ -4038,7 +4019,7 @@ var Tutorial = React.createClass({
                       { className: 'row' },
                       React.createElement(
                         'li',
-                        { className: 'key k38' },
+                        { className: 'key keyRelaxed k38' },
                         'POSITION'
                       )
                     ),
@@ -4047,17 +4028,17 @@ var Tutorial = React.createClass({
                       { className: 'row' },
                       React.createElement(
                         'li',
-                        { className: 'key k37' },
+                        { className: 'key keyRelaxed k37' },
                         '←'
                       ),
                       React.createElement(
                         'li',
-                        { className: 'key k40' },
+                        { className: 'key keyRelaxed k40' },
                         '↓'
                       ),
                       React.createElement(
                         'li',
-                        { className: 'key k39' },
+                        { className: 'key keyRelaxed k39' },
                         '→'
                       )
                     )
@@ -4082,7 +4063,7 @@ var Tutorial = React.createClass({
                       { className: 'row' },
                       React.createElement(
                         'li',
-                        { className: 'key k38' },
+                        { className: 'key keyClassic k38' },
                         '↑'
                       )
                     ),
@@ -4091,22 +4072,24 @@ var Tutorial = React.createClass({
                       { className: 'row' },
                       React.createElement(
                         'li',
-                        { className: 'key k37' },
+                        { className: 'key keyClassic k37' },
                         'POSITION'
                       ),
                       React.createElement(
                         'li',
-                        { className: 'key k40' },
+                        { className: 'key keyClassic k40' },
                         '↓'
                       ),
                       React.createElement(
                         'li',
-                        { className: 'key k39' },
+                        { className: 'key keyClassic k39' },
                         'SOUND'
                       )
                     )
-                  )
+                  ),
+                  ' '
                 ),
+                ' ',
                 React.createElement(
                   'div',
                   { className: 'rulemode' },
@@ -4130,7 +4113,7 @@ var Tutorial = React.createClass({
                       { className: 'row' },
                       React.createElement(
                         'li',
-                        { className: 'key k38' },
+                        { className: 'key keySilent k38' },
                         '↑'
                       )
                     ),
@@ -4139,17 +4122,17 @@ var Tutorial = React.createClass({
                       { className: 'row' },
                       React.createElement(
                         'li',
-                        { className: 'key k37' },
+                        { className: 'key keySilent k37' },
                         'POSITION'
                       ),
                       React.createElement(
                         'li',
-                        { className: 'key k40' },
+                        { className: 'key keySilent k40' },
                         '↓'
                       ),
                       React.createElement(
                         'li',
-                        { className: 'key k39' },
+                        { className: 'key keySilent k39' },
                         'COLOR'
                       )
                     )
@@ -4174,7 +4157,7 @@ var Tutorial = React.createClass({
                       { className: 'row' },
                       React.createElement(
                         'li',
-                        { className: 'key k38' },
+                        { className: 'key keyAdvanced k38' },
                         'POSITION'
                       )
                     ),
@@ -4183,24 +4166,28 @@ var Tutorial = React.createClass({
                       { className: 'row' },
                       React.createElement(
                         'li',
-                        { className: 'key k37' },
+                        { className: 'key keyAdvanced k37' },
                         'SOUND'
                       ),
                       React.createElement(
                         'li',
-                        { className: 'key k40' },
+                        { className: 'key keyAdvanced k40' },
                         '↓'
                       ),
                       React.createElement(
                         'li',
-                        { className: 'key k39' },
+                        { className: 'key keyAdvanced k39' },
                         'COLOR'
                       )
                     )
-                  )
-                )
-              )
+                  ),
+                  ' '
+                ),
+                ' '
+              ),
+              ' '
             ),
+            ' ',
             React.createElement(
               'div',
               { className: 'slide' },
@@ -4211,27 +4198,59 @@ var Tutorial = React.createClass({
                   'div',
                   { className: 'rules2' },
                   React.createElement(
-                    'h4',
+                    'h2',
                     null,
-                    'The n in n-back refers to the number of positions back that you have to keep track of. For example, at n=2, you would have to make matches based on the state of the board two steps back.',
-                    React.createElement('br', null),
-                    React.createElement('br', null),
-                    React.createElement('br', null),
-                    'If this seems like a daunting task, don’t worry! This game is designed to be a challenge and advancing up in level can be difficult. If you are new to the game or still unsure of how it works, we recommend starting out in relaxed mode first and then moving on once you are comfortable with the gameplay.',
-                    React.createElement('br', null),
-                    React.createElement('br', null),
-                    React.createElement('br', null),
-                    'However, once you get familiar with the game mechanics, it is always recommended to continue pushing up in n-level once you have unlocked the next one. You will experience the greatest mental effects by continuously challenging yourself!'
+                    'The n-back part'
+                  ),
+                  React.createElement(
+                    'p',
+                    null,
+                    'The n in n-back refers to the number of positions back that you have to keep track of. For example, at n=2, you would have to make matches based on the state of the board two steps back. '
+                  )
+                ),
+                ' '
+              ),
+              ' ',
+              React.createElement('img', { src: './images/pattern.gif', alt: 'Gameplay Pattern' })
+            ),
+            ' ',
+            React.createElement(
+              'div',
+              { className: 'slide' },
+              React.createElement(
+                'div',
+                { className: 'rulemode2' },
+                React.createElement(
+                  'div',
+                  { className: 'rules2' },
+                  React.createElement(
+                    'h2',
+                    null,
+                    'Expectations'
+                  ),
+                  React.createElement(
+                    'p',
+                    null,
+                    'If this seems like a daunting task, don’t worry! This game is designed to be a challenge and advancing up in level can be difficult. If you are new to the game or still unsure of how it works, we recommend starting out in relaxed mode first and then moving on once you are comfortable with the gameplay. '
+                  ),
+                  React.createElement(
+                    'p',
+                    null,
+                    'However, once you get familiar with the game mechanics, it is always recommended to continue pushing up in n-level once you have unlocked the next one. You will experience the greatest mental benefits by continuously challenging yourself! '
                   )
                 )
               ),
-              React.createElement('img', { src: './images/pattern.gif', alt: 'Mountain View' })
+              ' '
             ),
-            React.createElement('div', { className: 'slide' })
-          )
-        )
+            ' '
+          ),
+          ' '
+        ),
+        ' '
       ),
+      ' ',
       React.createElement('div', { className: 'slide_buttons' }),
+      ' ',
       React.createElement(
         'div',
         { className: 'directional_nav' },
@@ -4245,8 +4264,10 @@ var Tutorial = React.createClass({
           { className: 'next_btn', title: 'Next' },
           React.createElement('i', { className: 'fa fa-angle-right', 'aria-hidden': 'true' })
         )
-      )
-    );
+      ),
+      ' '
+    ) //tutorial
+    ;
   }
 });
 
