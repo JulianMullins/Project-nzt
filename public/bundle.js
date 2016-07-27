@@ -2247,17 +2247,15 @@ var _reactRouter = require('react-router');
 
 var React = require('react');
 var ReactDOM = require('react-dom');
+var axios = require('axios');
 
 
 var FacebookLogin = React.createClass({
 	displayName: 'FacebookLogin',
 	componentDidMount: function componentDidMount() {
 		console.log("fb login");
-		fetch('/login/facebook', { method: 'get'
-		}).then(function (response) {
-			return response.json();
-		}).then(function (response) {
-			if (response.success) {
+		axios.get('/login/facebook').then(function (response) {
+			if (response.data.success) {
 				this.props.history.push('/home');
 			}
 		}.bind(this));
@@ -2269,7 +2267,7 @@ var FacebookLogin = React.createClass({
 
 module.exports = FacebookLogin;
 
-},{"react":274,"react-dom":94,"react-router":124}],11:[function(require,module,exports){
+},{"axios":22,"react":274,"react-dom":94,"react-router":124}],11:[function(require,module,exports){
 (function (process){
 'use strict';
 
@@ -2530,25 +2528,36 @@ var AdvancedLevels = require('./levels').AdvancedLevels;
 var App = React.createClass({
   displayName: 'App',
   getInitialState: function getInitialState() {
-    // var isUser = null;
-    // axios({
-    //   url: '/isUser',
-    //   withCredentials: true
-    // }).then(function(response){
-    //   if(response.data.isUser){
-    //     isUser = true;
-    //   }
-    //   else{
-    //     isUser = false;
-    //   }
-    // }.bind(this))
-    return {};
+
+    return {
+      isUser: false,
+      isloggedin: false
+    };
   },
   componentDidMount: function componentDidMount() {
 
     console.log("app mounted");
+
+    // axios.get('/isUser')
+    //   .then(function(response){
+    //     this.setState({
+    //       isUser: response.data.isUser,
+    //       isloggedin: response.data.isloggedin
+    //     })
+    //   }.bind(this))
+  },
+  updateState: function updateState() {
+    // axios.get('/isUser')
+    //   .then(function(response){
+    //     this.setState({
+    //       isUser: response.data.isUser,
+    //       isloggedin: response.data.isloggedin
+    //     })
+    //   }.bind(this))
   },
   render: function render() {
+    //<NavBar loginFunction={this.updateState} isUser={this.state.isUser} isloggedin={this.state.isloggedin} />
+
     return React.createElement(
       'div',
       null,
@@ -2574,7 +2583,7 @@ ReactDOM.render(React.createElement(
     React.createElement(_reactRouter.Route, { path: 'register', component: Register }),
     React.createElement(_reactRouter.Route, { path: 'gameOver', component: GameOver }),
     React.createElement(_reactRouter.Route, { path: 'leaderboard', component: Leaderboard }),
-    React.createElement(_reactRouter.Route, { path: 'stats', component: Stats }),
+    React.createElement(_reactRouter.Route, { path: 'statss', component: Stats }),
     React.createElement(_reactRouter.Route, { path: 'contact', component: Contact }),
     React.createElement(_reactRouter.Route, { path: 'science', component: Science }),
     React.createElement(_reactRouter.Route, { path: 'tutorial', component: Tutorial }),
@@ -2675,6 +2684,7 @@ var _reactRouter = require('react-router');
 var React = require('react');
 var ReactDOM = require('react-dom');
 var url = process.env.url;
+var axios = require('axios');
 
 
 var getSquareArr = function getSquareArr(square, mode) {
@@ -2748,14 +2758,11 @@ var getSquareArr = function getSquareArr(square, mode) {
 
 var getMaxN = function getMaxN(mode, cb) {
   console.log("getting max n");
-  fetch('/getMaxN', {
-    method: 'get',
-    credentials: 'include'
+  axios.get('/getMaxN', {
+    withCredentials: true
   }).then(function (response) {
-    return response.json();
-  }).then(function (response) {
-    console.log(response.maxN);
-    return cb(response.maxN);
+    console.log(response.data.maxN);
+    return cb(response.data.maxN);
   });
 };
 
@@ -3002,7 +3009,7 @@ module.exports = {
 };
 
 }).call(this,require('_process'))
-},{"_process":1,"react":274,"react-dom":94,"react-router":124}],15:[function(require,module,exports){
+},{"_process":1,"axios":22,"react":274,"react-dom":94,"react-router":124}],15:[function(require,module,exports){
 'use strict';
 
 var _reactRouter = require('react-router');
@@ -3072,27 +3079,28 @@ var LoginOverlay = React.createClass({
       }
     }.bind(this));
   },
-  facebook: function facebook(e) {
-    e.preventDefault();
+  // facebook: function(e) {
+  //   e.preventDefault();
 
-    //ajax facebook get
+  //   ajax facebook get
 
-    // fetch('/login/facebook',{method:'get'
-    // }).then(function(response) {
-    //   console.log(response);
-    //     return response.json();
-    //   }).then(function(response) {
-    //     console.log(response);
-    //     if (response.success) {
-    //       this.props.history.push('/home');
-    //     }
-    //   }.bind(this))
+  //   fetch('/login/facebook',{method:'get'
+  //   }).then(function(response) {
+  //     console.log(response);
+  //       return response.json();
+  //     }).then(function(response) {
+  //       console.log(response);
+  //       if (response.success) {
+  //         this.props.history.push('/home');
+  //       }
+  //     }.bind(this))
 
-    // axios({
-    //   url:'/login/facebook',
-    //   withCredentials:true
-    // })
-  },
+  //   axios({
+  //     url:'/login/facebook',
+  //     withCredentials:true
+  //   })
+
+  // },
   render: function render() {
     return React.createElement(
       'div',
@@ -3213,7 +3221,7 @@ var Logout = React.createClass({
 				this.props.history.push('/home');
 			}
 		}.bind(this));
-		this.props.history.push('/home');
+		// this.props.history.push('/home');
 	},
 	render: function render() {
 		return null;
@@ -3233,17 +3241,11 @@ var ReactDOM = require('react-dom');
 var axios = require('axios');
 
 var updateLoggedIn = function updateLoggedIn(callback) {
-	var isUser = null;
 	axios({
 		url: '/isUser',
 		withCredentials: true
 	}).then(function (response) {
-		if (response.data.isUser) {
-			isUser = true;
-		} else {
-			isUser = false;
-		}
-		callback(isUser);
+		callback(response.data.isUser, response.data.isloggedin);
 	});
 };
 
@@ -3254,20 +3256,33 @@ var NavBar = React.createClass({
 		//console.log(this)
 		return {
 			open: false,
-			loggedIn: false
+			isloggedin: false,
+			isUser: false
+			// isloggedIn: this.props.isloggedin,
+			// loginFunction: this.props.loginFunction,
+			// isUser: this.props.isUser
 		};
 	},
 	componentDidMount: function componentDidMount() {
-		var loggedIn = updateLoggedIn(function (isUser) {
-			this.setState({ loggedIn: isUser });
+		// var loggedIn = updateLoggedIn(function(isUser){
+		// 	this.setState({loggedIn:isUser})
+		// }.bind(this))
+
+		axios.get('/isUser').then(function (response) {
+			this.setState({
+				isUser: response.data.isUser,
+				isloggedin: response.data.isloggedin
+			});
 		}.bind(this));
 
 		//console.log(this.state)
 	},
 	click: function click(e) {
 		e.preventDefault();
-		var loggedIn = updateLoggedIn(function (isUser) {
-			this.setState({ loggedIn: isUser });
+		var loggedIn = updateLoggedIn(function (isUser, isloggedin) {
+			this.setState({
+				isloggedIn: isloggedin,
+				isUser: isUser });
 		}.bind(this));
 		this.setState({
 			open: !this.state.open
@@ -3283,41 +3298,49 @@ var NavBar = React.createClass({
 		this.setState({
 			open: false
 		});
-		axios({
-			url: '/isUser',
-			withCredentials: true
-		}).then(function (response) {
-			if (response.data.isUser != this.state.loggedIn) {
-				this.setState({
-					loggedIn: response.data.isUser
-				});
-			}
+
+		var loggedIn = updateLoggedIn(function (isUser, isloggedin) {
+			this.setState({ isloggedIn: isloggedin, isUser: isUser });
 		}.bind(this));
-	},
-	logInOut: function logInOut(e) {
 
-		//console.log(this)
-		if (!this.state.loggedIn) {
-			this.props.history.push('/login');
-		} else {
-			axios({
-				url: '/logout',
-				withCredentials: true
-			}).then(function (response) {
-				console.log(response);
-				if (response.data.success) {
-					console.log("logged out success");
-					this.props.history.push('/home');
-				}
-			}.bind(this));
-		}
-
-		this.closeLogInOut(e);
+		// axios({
+		//      url: '/isUser',
+		//      withCredentials: true
+		//    }).then(function(response){
+		//      if(response.data.isUser!=this.state.loggedIn){
+		//        this.setState({
+		//        	loggedIn:response.data.isUser
+		//        })
+		//      }
+		//    }.bind(this))
 	},
 
+	// logInOut(e){
+
+	// 	//console.log(this)
+	// 	if(!this.state.loggedIn){
+	// 		this.props.history.push('/login')
+	// 	}
+	// 	else{
+	// 		axios({
+	// 	      url: '/logout',
+	// 	      withCredentials: true
+	// 	    }).then(function(response){
+	// 	    	console.log(response)
+	// 	    	if(response.data.success){
+	// 	    		this.setState({loggedIn:false})
+	// 	    		console.log("logged out success")
+	// 	    		this.props.history.push('/home')
+	// 	    		this.loginFunction();
+	// 	    	}
+	// 	    }.bind(this))
+	// 	}
+
+	//     this.closeLogInOut(e);
+	// },
 	render: function render() {
-		var logInOutLink = this.state.loggedIn ? '/logout' : '/login';
-		var logInOrOut = this.state.loggedIn ? 'Logout' : 'Login';
+		var logInOutLink = this.state.isloggedIn ? '/logout' : '/login';
+		var logInOrOut = this.state.isloggedIn ? 'Logout' : 'Login';
 		return React.createElement(
 			'div',
 			null,

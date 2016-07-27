@@ -47,4 +47,6 @@ leaderboardSchema.methods.mergeScoresArrays=function(scores2){
 	return newScores;
 }
 
+
+
 module.exports = mongoose.model('Leaderboard',leaderboardSchema)

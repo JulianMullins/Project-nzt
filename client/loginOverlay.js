@@ -63,28 +63,28 @@ var LoginOverlay = React.createClass({
       } 
     }.bind(this))
   },
-  facebook: function(e) {
-    e.preventDefault();
+  // facebook: function(e) {
+  //   e.preventDefault();
 
-    //ajax facebook get
+  //   ajax facebook get
 
-    // fetch('/login/facebook',{method:'get'
-    // }).then(function(response) {
-    //   console.log(response);
-    //     return response.json();
-    //   }).then(function(response) {
-    //     console.log(response);
-    //     if (response.success) {
-    //       this.props.history.push('/home');
-    //     }
-    //   }.bind(this))
+  //   fetch('/login/facebook',{method:'get'
+  //   }).then(function(response) {
+  //     console.log(response);
+  //       return response.json();
+  //     }).then(function(response) {
+  //       console.log(response);
+  //       if (response.success) {
+  //         this.props.history.push('/home');
+  //       }
+  //     }.bind(this))
 
-    // axios({
-    //   url:'/login/facebook',
-    //   withCredentials:true
-    // })
+  //   axios({
+  //     url:'/login/facebook',
+  //     withCredentials:true
+  //   })
 
-  },
+  // },
   render: function() {
     return (
       <div className="screen">
