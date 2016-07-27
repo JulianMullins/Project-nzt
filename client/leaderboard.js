@@ -4,28 +4,25 @@ var Table = Reactable.Table;
 var axios = require('axios');
 
 var Leaderboard = React.createClass({
+  getInitialState: function() {
+    return {allScores: []}
+  },
   componentDidMount: function() {
     this.getAllScores();
   },
   getAllScores: function() {
-    axios.get('/allHighScores')
-    .then(function(response) {
-      this.setState({
-        allScores: response.data
-      });
+    axios.get('/allHighScores').then(function(response) {
+      console.log(response.data);
+      this.setState({allScores: response.data});
     }.bind(this));
-    console.log('ran');
   },
   myScores: function() {
-    axios.get('/myHighScores')
-    .then(function(response) {
-      this.setState({
-        myScores: response.data
-      });
+    axios.get('/myHighScores').then(function(response) {
+      this.setState({myScores: response.data});
     }.bind(this));
   },
   render: function() {
-    var data = [
+    var testData = [
       {
         mode: 'Advanced',
         username: 'Adam',
@@ -72,7 +69,10 @@ var Leaderboard = React.createClass({
                 key: 'level',
                 label: 'Level'
               }
-            ]} data={data} itemsPerPage={10} pageButtonLimit={5} sortable={true} filterable={['mode', 'username']}/>
+            ]} data={this.state.allScores} currentPage={0} itemsPerPage={10} pageButtonLimit={5} sortable={true} defaultSort={{
+              column: 'score',
+              direction: 'desc'
+            }} filterable={['mode', 'username']}/>
           </section>
         </div>
       </div>
