@@ -214,16 +214,15 @@ router.post('/gameEnd',function(req,res,next){
 })
 
 router.get('/taco',function(req, res, next){
-
- return res.json({stats: [123]})
-  console.log("lolololololololol")
-  // console.log(req.user.stats,'170')
+ //return res.json({stats: [123]})
+  //console.log("lolololololololol")
+   console.log(req.user.stats,'170')
   Stats.findById(req.user.stats, function(err,stats){
     if(err){
       console.log(err)
     }
     else{
-      res.json({stats: [123]})
+      res.json({stats: req.user.stats})
     }
   })
 })
