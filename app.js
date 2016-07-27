@@ -76,8 +76,14 @@ passport.use(new LocalStrategy({
   passReqToCallback:true
   },
   function(req, username, password, done) {
+    console.log(req.user)
+    if(req.user && !req.user.temp){
+      console.log("already logged in")
+      return done(null,req.user);
+    }
+
     // Find the user with the given username
-    console.log("PASSPORT DATA: ", username,password,req.body)
+    console.log("PASSPORT DATA: ", username, password,req.body)
     User.findOne({$or: [{username: username},{email:username}] }, function (err, user) {
       // if there's an error, finish trying to authenticate (auth failed)
       if (err) {
@@ -85,7 +91,7 @@ passport.use(new LocalStrategy({
         return done(err);
       }
       console.log(user)
-
+      
       if (!user) {
         //console.log(user);
         return done(null, false, { message: 'Incorrect username.' });
@@ -126,6 +132,9 @@ passport.use(new FacebookStrategy({
   },
   function(req,accessToken, refreshToken, profile, done) {
    console.log(profile)
+   if(req.user && req.user.facebookId && !req.user.temp){
+    return done(null,req.user);
+   }
     User.findOne({$or:[{facebookId: profile.id},{email:profile._json.email}] })
       .populate('stats')
       .exec(function (err, user) {

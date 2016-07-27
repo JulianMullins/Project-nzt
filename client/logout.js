@@ -19,7 +19,7 @@ var Logout = React.createClass({
 	    		this.props.history.push('/home')
 	    	}
 	    }.bind(this))
-	    this.props.history.push('/home');
+	    // this.props.history.push('/home');
 	},
 	render(){
 		return null;

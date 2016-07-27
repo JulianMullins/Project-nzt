@@ -111,10 +111,10 @@ router.post('/startGame/:mode/:nLevel',function(req,res,next){
 router.get('/isUser',function(req,res,next){
   console.log(req.user)
   if(req.user){
-    res.json({isUser:true,isloggedin:req.user.temp})
+    res.json({isloggedin:true,isUser:req.user.temp})
   }
   else{
-    res.json({isUser:false})
+    res.json({isUser:false,isloggedin:false})
   }
   
 });
