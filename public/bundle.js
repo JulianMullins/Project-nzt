@@ -3567,6 +3567,8 @@ var ReactDOM = require('react-dom');
 var rd3 = require('react-d3');
 var LineChart = rd3.LineChart;
 
+console.log(LineChart, "asdf");
+
 // var width = 700,
 //     height = 300,
 //     margins = {left: 100, right: 100, top: 50, bottom: 50},
@@ -3612,8 +3614,7 @@ var MyComponent = React.createClass({
       name: "series2",
       values: [{ x: 70, y: 82 }, { x: 76, y: 82 }]
     }]; //return <div>TEST</div>
-    return;
-    React.createElement(LineChart, {
+    return React.createElement(LineChart, {
       legend: true,
       data: lineData,
       width: 500,

@@ -3,7 +3,7 @@ var ReactDOM = require('react-dom');
 var rd3 = require('react-d3');
 var LineChart = rd3.LineChart;
 
-
+console.log(LineChart,"asdf")
 
 
 // var width = 700,
@@ -52,9 +52,7 @@ var MyComponent = React.createClass({
     values: [ { x: 70, y: 82 },  { x: 76, y: 82 } ]
   }
 ]; //return <div>TEST</div>
-    return 
-(
-<LineChart
+    return (<LineChart
         legend={true}
         data={lineData}
         width={500}
