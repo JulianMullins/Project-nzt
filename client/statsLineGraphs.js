@@ -2,63 +2,54 @@ var React = require('react');
 var ReactDOM = require('react-dom');
 var rd3 = require('react-d3');
 var LineChart = rd3.LineChart;
-
-console.log(LineChart,"asdf")
-
-
-// var width = 700,
-//     height = 300,
-//     margins = {left: 100, right: 100, top: 50, bottom: 50},
-//     title = "User sample",
-//     // chart series,
-//     // field: is what field your data want to be selected
-//     // name: the name of the field that display in legend
-//     // color: what color is the line
-//     chartSeries = [
-//       {
-//         field: 'score',
-//         name: 'score',
-//         color: '#ff7f0e'
-//       }
-//     ],
-//     // your x accessor
-//     x = function(d) {
-//       return d.index;
-//     }
-
-    //console.log(x)
+var AreaChart = rd3.AreaChart;
 
 var MyComponent = React.createClass({
     componentDidMount: function(){
 //fetch call
 
-// fetch('/taco', {method: 'GET'})
-// .then(function(response){
-//     console.log(response, '38')
-//     return response.json()
-//     })
-// .then(function(responseJson){
-//     console.log(responseJson,'41')
-// })
+fetch('/taco', {method: 'GET'})
+.then(function(response){
+    console.log(response, '38')
+    return response.json()
+    })
+.then(function(responseJson){
+    console.log(responseJson,'41')
+})
     },
   render: function() {
-    var lineData = [
-  {
-    name: "series1",
-    values: [ { x: 0, y: 20 }, { x: 24, y: 10 } ]
-  },
-  {
-    name: "series2",
-    values: [ { x: 70, y: 82 },  { x: 76, y: 82 } ]
-  }
-]; //return <div>TEST</div>
-    return (<LineChart
-        legend={true}
-        data={lineData}
+    var lineData1 = [
+      { 
+        name: 'series1',
+        values: [ { x: 0, y: 20 }, { x: 1, y: 30 }, { x: 2, y: 10 }, { x: 3, y: 5 }, { x: 4, y: 8 }, { x: 5, y: 15 }, { x: 6, y: 10 } ]
+      }
+    ];
+    var lineData2 = [
+      { 
+        name: 'series1',
+        values: [ { x: 0, y: 20 }, { x: 1, y: 30 }, { x: 2, y: 10 }, { x: 3, y: 5 }, { x: 4, y: 8 }, { x: 5, y: 15 }, { x: 6, y: 10 } ]
+      },
+      {
+        name: 'series2',
+        values : [ { x: 0, y: 8 }, { x: 1, y: 5 }, { x: 2, y: 20 }, { x: 3, y: 12 }, { x: 4, y: 4 }, { x: 5, y: 6 }, { x: 6, y: 2 } ]
+      },
+      {
+        name: 'series3',
+        values: [ { x: 0, y: 0 }, { x: 1, y: 5 }, { x: 2, y: 8 }, { x: 3, y: 2 }, { x: 4, y: 6 }, { x: 5, y: 4 }, { x: 6, y: 2 } ]
+      } 
+    ];
+    return (<div><LineChart
+        data={lineData1}
         width={500}
         height={300}
         title="Line Chart"
-        />)
+        />
+        <AreaChart
+        data={lineData2}
+        width={500}
+        height={300}
+        title="Area Chart"
+        /></div>)
   }
 });
       
