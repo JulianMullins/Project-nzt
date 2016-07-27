@@ -4,8 +4,12 @@ var HighScore = require('../models/HighScore');
 
 //modes: classic,relaxed,silent,advanced
 
+<<<<<<< HEAD
 var serverLeaderboard=null;
 //serverLeaderboard.save();
+=======
+var serverLeaderboard= '5799071df2049724272d4876';
+>>>>>>> refs/remotes/origin/master
 
 
 var modeMultiplier = {
@@ -20,7 +24,7 @@ var positivePoints = 10;
 var leaderboardSize = 5;
 
 module.exports = {
-  serverLeaderboard: serverLeaderboard._id,
+  serverLeaderboard: serverLeaderboard,
   modeMultiplier:modeMultiplier,
   penalty:penaltyPoints,
   positivePoints:positivePoints,

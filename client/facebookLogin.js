@@ -1,15 +1,14 @@
 var React = require('react');
 var ReactDOM = require('react-dom');
+var axios = require('axios');
 import { Link } from 'react-router';
 
 var FacebookLogin = React.createClass({
 	componentDidMount(){
 		console.log("fb login")
-		fetch('/login/facebook',{method:'get'
-		}).then(function(response) {
-	      return response.json();
-	    }).then(function(response) {
-	      if (response.success) {
+		axios.get('/login/facebook')
+		.then(function(response) {
+	      if (response.data.success) {
 	        this.props.history.push('/home');
 	      }
 	    }.bind(this))

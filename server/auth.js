@@ -26,6 +26,9 @@ module.exports = function(passport) {
     else if(!userData.username){
       return false;
     }
+    else if(!userData.email){
+      return false;
+    }
     else{
       return true;
     }
@@ -228,13 +231,7 @@ module.exports = function(passport) {
     // .then(function(user){console.log(user.username)})
   };
 
-  // GET Login page
-  // router.get('/login', function(req, res) {
-  //   if(req.user){
-  //     res.redirect('/')
-  //   }
-  //   res.render('login');
-  // });
+  
 
   router.get('/login/failure',function(req,res,next){
     res.status(401).json({success:false})

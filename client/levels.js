@@ -1,6 +1,7 @@
 var React = require('react');
 var ReactDOM = require('react-dom');
 var url = process.env.url;
+var axios = require('axios');
 import {Link} from 'react-router'
 
 
@@ -71,14 +72,11 @@ var getSquareArr = function(square, mode) {
 
 var getMaxN = function(mode, cb) {
   console.log("getting max n")
-  fetch('/getMaxN', {
-    method: 'get',
-    credentials: 'include'
+  axios.get('/getMaxN', {
+    withCredentials: true
   }).then(function(response) {
-    return response.json();
-  }).then(function(response) {
-    console.log(response.maxN)
-    return cb(response.maxN)
+    console.log(response.data.maxN)
+    return cb(response.data.maxN)
   })
 };
 

@@ -40,27 +40,37 @@ var AdvancedLevels = require('./levels').AdvancedLevels;
 
 var App = React.createClass({
   getInitialState(){
-    // var isUser = null;
-    // axios({
-    //   url: '/isUser',
-    //   withCredentials: true
-    // }).then(function(response){
-    //   if(response.data.isUser){
-    //     isUser = true;
-    //   }
-    //   else{
-    //     isUser = false;
-    //   }
-    // }.bind(this))
+
     return{
-      
+      isUser:false,
+      isloggedin:false
     }
   },
   componentDidMount() {
     
     console.log("app mounted")
+
+    // axios.get('/isUser')
+    //   .then(function(response){
+    //     this.setState({
+    //       isUser: response.data.isUser,
+    //       isloggedin: response.data.isloggedin
+    //     })
+    //   }.bind(this))
+
+  },
+  updateState(){
+    // axios.get('/isUser')
+    //   .then(function(response){
+    //     this.setState({
+    //       isUser: response.data.isUser,
+    //       isloggedin: response.data.isloggedin
+    //     })
+    //   }.bind(this))
   },
   render() {
+            //<NavBar loginFunction={this.updateState} isUser={this.state.isUser} isloggedin={this.state.isloggedin} />
+
     return (
       <div>
 
@@ -88,7 +98,7 @@ ReactDOM.render((
       <Route path="register" component={Register}/>
       <Route path="gameOver" component={GameOver}/>
       <Route path="leaderboard" component={Leaderboard}/>
-      <Route path="stats" component={Stats}/>
+      <Route path="statss" component={Stats}/>
       <Route path="contact" component={Contact}/>
       <Route path="science" component={Science}/>
 
