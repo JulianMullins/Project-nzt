@@ -278,23 +278,32 @@ module.exports = function(passport) {
 
   // GET Logout page
   router.get('/logout', function(req, res) {
-    req.user.currentGame=[];
-    req.user.save();
+    if(req.user){
+      req.user.currentGame=[];
+      req.user.save(function(err,user){
+        req.logout();
+        res.json({success:true});
+      });
+    }
+    else{
+      res.status(400).json({success:false})
+    }
+    
     //console.log(req)
     //console.log(req.user, "before logged out")
-    req.logout(function(err){
+    // req.logout(function(err){
       
-      if(err){
-        console.log(err);
-      }
-      else{
-        console.log("LOGGED OUT", req.user)
-      }
-    });
-    console.log("before destroy: ",req.session);
-    req.session.destroy();
-    console.log("after destroy: ",req.session)
-    res.json({success:true});
+    //   if(err){
+    //     console.log(err);
+    //   }
+    //   else{
+    //     console.log("LOGGED OUT", req.user)
+    //   }
+    // });
+    // console.log("before destroy: ",req.session);
+    // req.session.destroy();
+    // console.log("after destroy: ",req.session)
+    
   });
 
   return router;

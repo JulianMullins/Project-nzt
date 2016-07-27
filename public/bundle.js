@@ -3186,6 +3186,7 @@ var NavBar = React.createClass({
 			}).then(function (response) {
 				console.log(response);
 				if (response.data.success) {
+					this.setState({ loggedIn: false });
 					console.log("logged out success");
 					this.props.history.push('/home');
 				}
