@@ -4,6 +4,12 @@ var User = require('../models/User');
 var Leaderboard = require('../models/Leaderboard');
 var HighScore = require('../models/HighScore');
 var Game = require('../models/Game');
+var serverData = require('./serverData');
+
+var modeMultiplier = serverData.modeMultiplier;
+var penalty = serverData.penalty;
+var positivePoints = serverData.positivePoints;
+
 var Stats = require('../models/Stats')
 
 var tempGame = null;
@@ -89,7 +95,13 @@ router.post('/startGame/:mode/:nLevel',function(req,res,next){
           req.user.currentGame.unshift(game);
           req.user.save();
           console.log(req.user, "game posted")
-          res.json({gameId: game._id,tempUser:false})
+          res.json({
+            gameId: game._id,
+            tempUser: false,
+            modeMultiplier: modeMultiplier,
+            penalty: penalty,
+            positivePoints: positivePoints
+          })
         }
       })
     // }
@@ -99,7 +111,7 @@ router.post('/startGame/:mode/:nLevel',function(req,res,next){
 router.get('/isUser',function(req,res,next){
   console.log(req.user)
   if(req.user){
-    res.json({isUser:true})
+    res.json({isUser:true,isloggedin:req.user.temp})
   }
   else{
     res.json({isUser:false})
@@ -149,14 +161,19 @@ router.get("/getGameData",function(req,res,next){
 router.get('/getUser',function(req,res,next){
   var games = null;
   var isUser = false;
+  var username=null;
+  var name=null;
   if(req.user && req.user.currentGame){
     games = req.user.currentGame
     isUser=true
+    username=req.user.username,
+    name=req.user.name
   }
   res.json({
     alreadyLoggedIn: !!req.user,
     isUser: isUser,
-    username:req.user.username
+    username:username,
+    name:name
   })
 })
 

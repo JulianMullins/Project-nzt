@@ -1,5 +1,6 @@
 var React = require('react');
 var ReactDOM = require('react-dom');
+var axios = require('axios');
 import { Link } from 'react-router';
 
 var RegisterOverlay = React.createClass({
@@ -9,7 +10,7 @@ var RegisterOverlay = React.createClass({
       email:'',
       password:'',
       passwordConfirm:'',
-
+      name:''
     }
   },
   // componentDidMount(){
@@ -73,24 +74,37 @@ var RegisterOverlay = React.createClass({
     e.preventDefault();
     //ajax post
     console.log(this)
-    fetch('/register', {
-      method: 'post',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
+    axios.post('/register', {
+      // headers: {
+      //   'Accept': 'application/json',
+      //   'Content-Type': 'application/json'
+      // },
+      // withCredentials:true,
+      // data: {
         username: this.state.username,
+        name:this.state.name,
         email: this.state.email,
         password: this.state.password,
-        passwordConfirm: this.state.passwordConfirm})
+        passwordConfirm: this.state.passwordConfirm
+      // }
     }).then(function(response){
-      return response.json();
-    }).then(function(response){
-      if(response.success){
+      console.log(response)
+      if(response.data.success){
         console.log("registration successful")
-        console.log(this)
-        this.props.history.push('/login')
+        //this.props.history.push('/login')
+
+
+        axios.post('/login', {
+          username: this.state.username,
+          password: this.state.password
+        }).then(function(response){
+          console.log(response)
+          if(response.data.success){
+            this.props.history.push('/home')
+          }
+        }.bind(this))
+
+
       }
       else{
         this.props.history.push('/register')
@@ -106,6 +120,8 @@ var RegisterOverlay = React.createClass({
           <h1>Welcome</h1>
           <div className="pa">Create an account to get started.</div>
           <form>
+            <input type="text" placeholder="name" name="name" id="name" value={this.state.name} onChange={this.update}></input>
+            <br></br>
             <input type="text" placeholder="username" name="username" id="username" value={this.state.username} onChange={this.update}></input>
             <br></br>
             <input type="text" placeholder="email" name="email" id="email" value={this.state.email} onChange={this.update}></input>

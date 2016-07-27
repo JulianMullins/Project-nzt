@@ -68,6 +68,7 @@ var NavBar = React.createClass({
 
 	},
 	logInOut(e){
+
 		//console.log(this)
 		if(!this.state.loggedIn){
 			this.props.history.push('/login')
@@ -77,12 +78,14 @@ var NavBar = React.createClass({
 		      url: '/logout',
 		      withCredentials: true
 		    }).then(function(response){
+		    	console.log(response)
 		    	if(response.data.success){
+		    		console.log("logged out success")
 		    		this.props.history.push('/home')
 		    	}
 		    }.bind(this))
 		}
-		
+
 	    this.closeLogInOut(e);
 	},
 	render: function(){
@@ -101,13 +104,13 @@ var NavBar = React.createClass({
 				}>
 					<a className="bt-menu-trigger" onClick={this.click}><span>Menu</span></a>
 					<ul style={this.state.open ? {pointerEvents: 'auto'} : {pointerEvents: 'none'}}>
-						<li><Link to="/home"><a onClick={this.close}>Home</a></Link></li>
-						<li><Link to={logInOutLink}><a onClick={this.closeLogInOut}>{logInOrOut}</a></Link></li>
-						<li><Link to="/leaderboard"><a onClick={this.close}>Leaderboard</a></Link></li>
-						<li><Link to="/stats"><a onClick={this.close}>Stats</a></Link></li>
-						<li><Link to="/tutorial"><a onClick={this.close}>Tutorial</a></Link></li>
-						<li><Link to="/science"><a onClick={this.close}>The Science</a></Link></li>
-						<li><Link to="/contact"><a onClick={this.close}>Contact</a></Link></li>
+						<li><Link to="/home" onClick={this.close}>Home</Link></li>
+						<li><Link to={logInOutLink} onClick={this.closeLogInOut}>{logInOrOut}</Link></li>
+						<li><Link to="/leaderboard" onClick={this.close}>Leaderboard</Link></li>
+						<li><Link to="/stats" onClick={this.close}>Stats</Link></li>
+						<li><Link to="/tutorial" onClick={this.close}>Tutorial</Link></li>
+						<li><Link to="/science" onClick={this.close}>The Science</Link></li>
+						<li><Link to="/contact" onClick={this.close}>Contact</Link></li>
 					</ul>
 					<div className='bt-overlay' onClick={this.click}/>
 				</nav>

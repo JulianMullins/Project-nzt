@@ -37,14 +37,18 @@ statsSchema.statics.combineStats=function(stats2){
 				    }
 				    else{
 				      leaderboard1.mergeScoresArrays(leaderboard2.scores)
+				      leaderboard1.save();
 				    }
 				  })
+				  //.remove();
 				}
+				this.save();
 			})
 		}
-		
+		this.save();
 	})
-
+	//.remove();
+	this.save();
 }
 
 

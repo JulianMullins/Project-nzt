@@ -3,6 +3,7 @@ var mongoose = require('mongoose')
 
 var userSchema = mongoose.Schema({
 	username: String,
+	name:String,
 	email: String,
 	password: String,
 	facebookId: String,
@@ -22,6 +23,15 @@ var userSchema = mongoose.Schema({
 		ref: 'Game'
 	}]
 })
+
+userSchema.statics.combineMaxN = function(maxN2){
+	for(var mode in this.maxN){
+		if(this.maxN[mode]<maxN2[mode]){
+			this.maxN[mode] = maxN2[mode];
+		}
+	}
+	this.save();
+}
 
 
 
