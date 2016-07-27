@@ -5,7 +5,6 @@ var axios = require('axios');
 
 var AdvancedStartOverlay = require('./gameStartOverlay').AdvancedStartOverlay;
 
-
 //COLLECTION OF GLOBAL VARIABLES TO MAKE EVERYONES LIFE EASIER
 //create global variable for reaction counter
 var reactionStart;
