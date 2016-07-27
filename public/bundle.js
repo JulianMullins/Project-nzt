@@ -1094,7 +1094,7 @@ var SilentStartOverlay = React.createClass({
 				React.createElement(
 					'p',
 					{ className: 'silent' },
-					'Use the left and right arrow keys or press the corresponding buttons to select a match. If there is a position and color match at the same time, select both options.'
+					'Use the left and right arrow keys or press the corresponding buttons to select a match. If there is a position and color match at the same time, select both options simultaneously.'
 				),
 				React.createElement(
 					'div',
@@ -1104,7 +1104,7 @@ var SilentStartOverlay = React.createClass({
 						{ className: 'row' },
 						React.createElement(
 							'li',
-							{ className: 'key k38' },
+							{ className: 'key keySilent k38' },
 							'↑'
 						)
 					),
@@ -1113,19 +1113,28 @@ var SilentStartOverlay = React.createClass({
 						{ className: 'row' },
 						React.createElement(
 							'li',
-							{ className: 'key k37' },
+							{ className: 'key keySilent k37' },
 							'←'
 						),
 						React.createElement(
 							'li',
-							{ className: 'key k40' },
+							{ className: 'key keyBlank k40' },
 							'↓'
 						),
 						React.createElement(
 							'li',
-							{ className: 'key k39' },
+							{ className: 'key keySilent k39' },
 							'→'
 						)
+					)
+				),
+				React.createElement(
+					_reactRouter.Link,
+					{ to: '/tutorial' },
+					React.createElement(
+						'h3',
+						{ className: 'silent tutorialBtn tutorialBtnSilent' },
+						'Full Tutorial'
 					)
 				),
 				React.createElement(
@@ -1180,7 +1189,7 @@ var ClassicStartOverlay = React.createClass({
 						{ className: 'row' },
 						React.createElement(
 							'li',
-							{ className: 'key k38' },
+							{ className: 'key keyClassic k38' },
 							'↑'
 						)
 					),
@@ -1189,19 +1198,24 @@ var ClassicStartOverlay = React.createClass({
 						{ className: 'row' },
 						React.createElement(
 							'li',
-							{ className: 'key k37' },
+							{ className: 'key keyClassic k37' },
 							'←'
 						),
+						React.createElement('li', { className: 'key k40 keyBlank' }),
 						React.createElement(
 							'li',
-							{ className: 'key k40' },
-							'↓'
-						),
-						React.createElement(
-							'li',
-							{ className: 'key k39' },
+							{ className: 'key keyClassic k39' },
 							'→'
 						)
+					)
+				),
+				React.createElement(
+					_reactRouter.Link,
+					{ to: '/tutorial' },
+					React.createElement(
+						'h3',
+						{ className: 'classic tutorialBtn tutorialBtnClassic' },
+						'Full Tutorial'
 					)
 				),
 				React.createElement(
@@ -1256,7 +1270,7 @@ var RelaxedStartOverlay = React.createClass({
 						{ className: 'row' },
 						React.createElement(
 							'li',
-							{ className: 'key k38' },
+							{ className: 'key k38 relaxed keyRelaxed' },
 							'↑'
 						)
 					),
@@ -1265,19 +1279,28 @@ var RelaxedStartOverlay = React.createClass({
 						{ className: 'row' },
 						React.createElement(
 							'li',
-							{ className: 'key k37' },
+							{ className: 'key keyBlank k37' },
 							'←'
 						),
 						React.createElement(
 							'li',
-							{ className: 'key k40' },
+							{ className: 'key keyBlank k40' },
 							'↓'
 						),
 						React.createElement(
 							'li',
-							{ className: 'key k39' },
+							{ className: 'key keyBlank k39' },
 							'→'
 						)
+					)
+				),
+				React.createElement(
+					_reactRouter.Link,
+					{ to: '/tutorial' },
+					React.createElement(
+						'h3',
+						{ className: 'relaxed tutorialBtn tutorialBtnRelaxed' },
+						'Full Tutorial'
 					)
 				),
 				React.createElement(
@@ -1332,7 +1355,7 @@ var AdvancedStartOverlay = React.createClass({
 						{ className: 'row' },
 						React.createElement(
 							'li',
-							{ className: 'key k38' },
+							{ className: 'key keyAdvanced k38' },
 							'↑'
 						)
 					),
@@ -1341,19 +1364,28 @@ var AdvancedStartOverlay = React.createClass({
 						{ className: 'row' },
 						React.createElement(
 							'li',
-							{ className: 'key k37' },
+							{ className: 'key keyAdvanced k37' },
 							'←'
 						),
 						React.createElement(
 							'li',
-							{ className: 'key k40' },
+							{ className: 'key k40 keyBlank' },
 							'↓'
 						),
 						React.createElement(
 							'li',
-							{ className: 'key k39' },
+							{ className: 'key keyAdvanced k39' },
 							'→'
 						)
+					)
+				),
+				React.createElement(
+					_reactRouter.Link,
+					{ to: '/tutorial' },
+					React.createElement(
+						'h3',
+						{ className: 'advanced tutorialBtn tutorialBtnAdvanced' },
+						'Full Tutorial'
 					)
 				),
 				React.createElement(
