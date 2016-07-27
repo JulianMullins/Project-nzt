@@ -1,8 +1,29 @@
 var React = require('react');
 var Reactable = require('reactable');
 var Table = Reactable.Table;
+var axios = require('axios');
 
 var Leaderboard = React.createClass({
+  componentDidMount: function() {
+    this.getAllScores();
+  },
+  getAllScores: function() {
+    axios.get('/allHighScores')
+    .then(function(response) {
+      this.setState({
+        allScores: response.data
+      });
+    }.bind(this));
+    console.log('ran');
+  },
+  myScores: function() {
+    axios.get('/myHighScores')
+    .then(function(response) {
+      this.setState({
+        myScores: response.data
+      });
+    }.bind(this));
+  },
   render: function() {
     var data = [
       {

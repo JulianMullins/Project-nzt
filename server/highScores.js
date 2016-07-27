@@ -7,7 +7,7 @@ var express = require('express');
 var router = express.Router();
 
 router.get('/myHighScores',function(req,res,next){
-  return user.stats.leaderboard.scores;
+  res.json(user.stats.leaderboard.scores);
 })
 
 //modes: classic,relaxed,silent,advanced
@@ -18,7 +18,7 @@ router.get('/allHighScores',function(req,res,next){
       console.log(err)
     }
     else{
-      return leaderboard.scores;
+      res.json(leaderboard.scores);
     }
   })
 });
