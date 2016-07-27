@@ -582,6 +582,7 @@ module.exports = AdvancedMode;
 var React = require('react');
 var GameTimer = require('./gameTimer');
 var ClassicStartOverlay = require('./gameStartOverlay').ClassicStartOverlay;
+var axios = require('axios');
 
 //COLLECTION OF GLOBAL VARIABLES TO MAKE EVERYONES LIFE EASIER
 //create global variable for reaction counter
@@ -944,7 +945,7 @@ var newStyle = {
 
 module.exports = ClassicMode;
 
-},{"./gameStartOverlay":4,"./gameTimer":5,"react":332}],4:[function(require,module,exports){
+},{"./gameStartOverlay":4,"./gameTimer":5,"axios":21,"react":332}],4:[function(require,module,exports){
 'use strict';
 
 var _reactRouter = require('react-router');
