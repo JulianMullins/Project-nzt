@@ -68,7 +68,7 @@ section {
   text-align: center;
   padding-top: 10px;
 }
-.reactable-page-button, .reactable-next-page {
+.reactable-page-button, .reactable-next-page, .reactable-previous-page {
   padding: 2px 6px;
   margin: 0 4px;
   border-radius: 3px;

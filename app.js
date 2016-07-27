@@ -150,8 +150,8 @@ passport.use(new LocalStrategy({
         }
       })
     });
-        
-        
+
+
   }
 ));
 
@@ -174,7 +174,7 @@ passport.use(new FacebookStrategy({
       .exec(function (err, user) {
       // if there's an error, finish trying to authenticate (auth failed)
       //console.log(profile.emails[0].value)
-        
+
 
         var email = profile._json.email;
         var username = profile._json.first_name + ' '+profile._json.last_name;
@@ -197,8 +197,8 @@ passport.use(new FacebookStrategy({
         req.logout();
         return done(null,user);
       }
-      
-  
+
+
       else if(req.user){
         console.log("req.user and user", user, user.stats)
         user.currentGame = req.user.currentGame;
@@ -229,7 +229,7 @@ passport.use(new FacebookStrategy({
 
 
 // var registerFacebookUser = function(facebookId,email,username,currentUser){
-    
+
 //     var user = new User({
 //       facebookId:facebookId,
 //       email:email,
@@ -261,7 +261,7 @@ passport.use(new FacebookStrategy({
 //       newStats.save();
 //       user.stats = newStats._id;
 //     }
-    
+
 //     return user;
 // }
 
@@ -269,6 +269,7 @@ passport.use(new FacebookStrategy({
 app.use('/', auth(passport));
 app.use('/',clientExpressFunctions);
 app.use('/', routes);
+app.use('/', highScores);
 
 app.use('/', gameOverUpdate);
 app.use('/',gameFunctions);
