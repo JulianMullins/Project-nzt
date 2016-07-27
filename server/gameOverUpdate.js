@@ -31,17 +31,17 @@ var checkOverall = function(newHighScore){
         if(leaderboard.size<leaderboardSize){
           leaderboard.push(newHighScore);
           leaderboard.sort(sortScores);
-          forEach (var score in myHighScores){
+          for (var score in myHighScores){
             if(score===newHighScore.score){
-              score = newHighScore._id
+              score = newHighScore._id;
             }
           }
         }
-        else if(newHighScore.score>leaderboard[leaderboard.length-1].score){
+        else if(newHighScore.score > leaderboard[leaderboard.length-1].score){
           leaderboard.pop();
           leaderboard.push(newHighScore);
           leaderboard.sort(sortScores);
-          forEach (var score in myHighScores){
+          for(var score in myHighScores){
             if(score===newHighScore.score){
               score = newHighScore._id
             }
@@ -60,7 +60,7 @@ checkMine = function(newHighScore,stats){
       if(myHighScores.length<leaderboardSize){
         myHighScores.push(newHighScore);
         myHighScores.sort(sortScores);
-        forEach (var score in myHighScores){
+        for (var score in myHighScores){
           if(score===newHighScore){
             score = newHighScore._id
           }
@@ -70,7 +70,7 @@ checkMine = function(newHighScore,stats){
         myHighScores.pop();
         myHighScores.push(newHighScore);
         myHighScores.sort(sortScores);
-        forEach (var score in myHighScores){
+        for(var score in myHighScores){
           if(score===newHighScore){
             score = newHighScore._id
           }
@@ -87,8 +87,38 @@ var sortScores = function(a,b){
 //save game
 router.post('/gameOver',function(req,res,next){
 
+  TempUser.findById(req.body.userId)
+    .populate('currentGame','stats')
+    .exec(function(err,tempUser){
+
+      var tempGame = tempUser.currentGame[0];
+
+      var newHighScore = new HighScore({
+        user: tempUser._id,
+        dateAchieved: new Date(),
+        score: tempGame.score,
+        nLevel: tempGame.nLevel,
+        mode: tempGame.mode,
+        reactionTimes:tempGame.reactionTimes
+      })
+
+      
+      newHighScore.user = req.body.inputUsername;
+      checkOverall(newHighScore);    
+      
+    
+      if(nLevel>tempUser.maxN[newHighScore.mode]){
+        tempUser.maxN[newHighScore.mode] = nLevel;
+      }
+
+      tempUser.stats.high
+
+      
+
+    })
+
   User.findById(req.user._id)
-    .populate('currentGame')
+    .populate('currentGame', 'stats')
     .exec(function(err,user){
     
 
@@ -104,33 +134,40 @@ router.post('/gameOver',function(req,res,next){
         reactionTimes:tempGame.reactionTimes
       })
 
-      if(user.temp){
-        newHighScore.user = req.body.inputUsername;
-        checkOverall(newHighScore);    
-      }
-
-      else{
-        if(nLevel>user.maxN[newHighScore.mode]){
-          user.maxN[newHighScore.mode] = nLevel;
+      
+      if(nLevel>user.maxN[newHighScore.mode]){
+        user.maxN[newHighScore.mode] = nLevel;
         }
 
         //check how scores compare on personal level;
-        Stats.findById(user.stats,function(err,stats){
+        
 
-            stats.totalPoints += newScore;
-            stats.progress = stats.progress.push(newHighScore._id);
-            
-            checkMine(newHighScore,stats)
-            checkOverall(newHighScore)
-        })
-
-      }
+        user.stats.totalPoints += newScore;
+        user.stats.progress = user.stats.progress.push(newHighScore._id);
+        
+        checkMine(newHighScore,user.stats)
+        checkOverall(newHighScore)
 
     
     })
-  })
+  
   
 });
+
+router.post('/gameOver/finish',function(req,res){
+
+  if(req.user){
+
+//update user stats
+
+  }
+  else{
+
+    //save score information with inputed username
+
+  }
+
+})
 
 
 module.exports=router;

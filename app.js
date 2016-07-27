@@ -17,11 +17,16 @@ var auth = require('./server/auth');
 var clientExpressFunctions = require('./server/clientExpressFunctions');
 var highScores = require('./server/highScores');
 var serverData = require('./server/serverData');
+var gameOverUpdate = require('./server/gameOverUpdate');
+var gameFunctions = require('./server/gameFunctions');
+var statsFunctions = require('./server/taylorsDataFile');
+
 
 
 var User = require('./models/User');
 var Stats = require('./models/Stats');
 var Leaderboard = require('./models/Leaderboard');
+var TempUser = require('./models/TempUser');
 
 
 var app = express();
@@ -76,16 +81,30 @@ passport.use(new LocalStrategy({
   passReqToCallback:true
   },
   function(req, username, password, done) {
-    console.log(req.user)
+    console.log("PASSPORT INITIALIZED ", req.user)
+
+    //check if already logged in
     if(req.user && !req.user.temp){
       console.log("already logged in")
       return done(null,req.user);
     }
 
-    // Find the user with the given username
+    //login tempuser
+    TempUser.findById(username,function(err,tempUser){
+      if(err){
+        done(err)
+      }
+      else if(tempUser){
+        console.log("tempUser logged in")
+        done(null,tempUser);
+      }
+    })
+
+    //log in real users
     console.log("PASSPORT DATA: ", username, password,req.body)
+    
+    // Find the user with the given username
     User.findOne({$or: [{username: username},{email:username}] }, function (err, user) {
-      // if there's an error, finish trying to authenticate (auth failed)
       if (err) {
         console.error(err);
         return done(err);
@@ -96,23 +115,38 @@ passport.use(new LocalStrategy({
         //console.log(user);
         return done(null, false, { message: 'Incorrect username.' });
       }
-      bcrypt.compare(password,user.password,function(err,res){
+
+      //check hashed passwords
+      bcrypt.compare(password,user.password,function(err,response){
         if(err){
           return done(err)
         }
-        else if(!res){
+        else if(!response){
           return done(null,null);
         }
         else{
+
+          //check if tempUser exists
           if(req.user){
             user.currentGame = req.user.currentGame;
             user.stats.combineStats(req.user.stats);
             user.combineMaxN(req.user.maxN);
-            user.save();
+            user.save(function(err,user){
+              if(err){
+                return done(err);
+              }
+              else{
+                return done(null,user)
+              }
+            });
             //User.findById(req.user._id).remove();
           }
           //user.currentGame = games.concat(user.currentGame);
-          return done(null,user)
+          
+          //tempUser doesn't exist, just log in
+          else{
+            return done(null,user)
+          }
         }
       })
     });
@@ -235,6 +269,10 @@ passport.use(new FacebookStrategy({
 app.use('/', auth(passport));
 app.use('/',clientExpressFunctions);
 app.use('/', routes);
+
+app.use('/', gameOverUpdate);
+app.use('/',gameFunctions);
+app.use('/',statsFunctions);
 
 
 // catch 404 and forward to error handler

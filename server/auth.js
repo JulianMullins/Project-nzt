@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var bcrypt = require('bcryptjs');
+var axios = require('axios');
 
 var User = require('../models/User');
 var Stats = require('../models/Stats');
@@ -253,7 +254,8 @@ module.exports = function(passport) {
     //       else{
             console.log("login success")
             console.log(req.user)
-            res.json({success:true})
+            res.json({success:true,user:req.user})
+            console.log(req.user +" after json-ing");
         //   }
         // })
 	});
