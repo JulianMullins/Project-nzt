@@ -4,6 +4,7 @@ var bcrypt = require('bcryptjs');
 
 var User = require('../models/User');
 var Stats = require('../models/Stats');
+var Leaderboard = require('../models/Leaderboard')
 
 /* GET users listing. */
 module.exports = function(passport) {
@@ -30,95 +31,202 @@ module.exports = function(passport) {
     }
   };
 
-  router.post('/register', function(req, res,next) {
+  router.post('/register', function(req, res) {
     // validation step
 
     if (!validateReq(req.body)) {
       console.log("validation failed")
-      return next("user validation failed")
+        res.json({success:false, message:'user already exists'});
+        return;
     }
 
-    bcrypt.genSalt(10, function(err, salt) {
-        bcrypt.hash(req.body.password, salt, function(err, hash) {
-            // Store hash in your password DB. 
-            var password = hash;
-           
-            var userStats = new Stats();
-            userStats.save();
+    User.findOne({username:req.body.username}).exec(function(err,userWithSameName){
+      if(err){
+        res.json({success:false});
+        return;
+      }
+      else if(!err && userWithSameName){
+        console.log(userWithSameName, "register failed")
+        res.json({success:false, message:'user already exists'})
+        return;
+      }
+      else{
 
+        bcrypt.genSalt(10, function(err, salt) {
+          bcrypt.hash(req.body.password, salt, function(err, hash) {
+              // Store hash in your password DB. 
+              var password = hash;
+              
+              
+              User.findOne({email:req.body.email},function(err,user){
+                if(err){
+                  return next(err);
+                }
+                else if(!user){
+                  var u = new User({
+                    username: req.body.username,
+                    name:req.body.name,
+                    email: req.body.email,
+                    password: password,
+                    facebookId: null,
+                    stats: null,
+                    temp:false,
+                    maxN:{
+                      classic: 1,
+                      relaxed: 1,
+                      silent: 1,
+                      advanced: 1
+                    },
+                    currentGame:[]
+                  });
 
+                  var leaderboard = new Leaderboard({user:u._id});
+                  leaderboard.save();
+                  var userStats = new Stats({user:u._id,leaderboard:leaderboard._id});
+                  userStats.save();
+                  u.stats = userStats._id;
 
-            var u = {
-              username: req.body.username,
-              email: req.body.email,
-              password: password,
-              facebookId: null,
-              stats: userStats._id,
-              temp:false,
-              maxN:1,
-              currentGame:[]
-            };
-
-            if(req.user){
-              u.currentGame=req.user.currentGame
-            }
-
-            User.findOne({email:u.email},function(err,user){
-              if(err){
-                return next(err);
-              }
-              else if(user && !user.password){
-                //user.username = u.username;
-                user.password = u.password;
-                user.currentGame = u.currentGame.concat(user.currentGame)
-                console.log(user);
-                user.save(function(err, user) {
-                  if (err) {
-                    return next(err);
+                  if(req.user){
+                    u.currentGame=req.user.currentGame;
+                    u.stats = req.user.stats;
+                    u.maxN = req.user.maxN;
                   }
-                  else{
-                    console.log(user);
-                    res.json({success:true});
+                  u.save(function(err,u){
+                    if(err){
+                      next(err);
+                    }
+                    else{
+                      console.log("success register")
+                      res.json({success:true,username:u.email,password:req.body.password})
+                    }
+                  });
+                }
+                else{ 
+                  if(!user.password){
+                    user.password = password;
+                    user.save();
                   }
-                })
-              }
-              else{
-                console.log(u)
-                user = new User({
-                  username: u.username,
-                  email: u.email,
-                  password: u.password,
-                  facebookId: u.facebookId,
-                  stats: u.stats,
-                  temp:u.temp,
-                  maxN: {
-                    classic:1,
-                    relaxed:1,
-                    silent:1,
-                    advanced:1
-                  },
-                  currentGame:u.currentGame
-                })
-                user.save(function(err, user) {
-                  if (err) {
-                    console.log(err);
-                    return next(err);
-                    //res.status(500).redirect('/register');
-                  }
-                  else{
-                    console.log(user);
-                    res.json({success:true});
-                  }
-                });
-              }
-            })
 
+                // else{
+                  user.username = req.body.username;
+                  if(req.user){
+                    user.currentGame = req.user.currentGame;
+                    user.stats.combineStats(req.user.stats);
+                    user.combineMaxN(req.user.maxN);
+                  }
+                  console.log(user);
+                  user.save(function(err, user) {
+                    if (err) {
+                      next(err);
+                    }
+                    else{
+                      console.log(user);
+                      console.log("success register")
+                      res.json({success:true,username:user.email,password:req.body.password})
+                    }
+                  })
+                }
+              })
+           });
         });
-    });
 
+
+      }
+    })
+
+    // bcrypt.genSalt(10, function(err, salt) {
+    //     bcrypt.hash(req.body.password, salt, function(err, hash) {
+    //         // Store hash in your password DB. 
+    //         var password = hash;
+            
+            
+    //         User.findOne({email:req.body.email},function(err,user){
+    //           if(err){
+    //             return next(err);
+    //           }
+    //           else if(!user){
+    //             var u = new User({
+    //               username: req.body.username,
+    //               name:req.body.name,
+    //               email: req.body.email,
+    //               password: password,
+    //               facebookId: null,
+    //               stats: null,
+    //               temp:false,
+    //               maxN:{
+    //                 classic: 1,
+    //                 relaxed: 1,
+    //                 silent: 1,
+    //                 advanced: 1
+    //               },
+    //               currentGame:[]
+    //             });
+
+    //             var leaderboard = new Leaderboard({user:u._id});
+    //             leaderboard.save();
+    //             var userStats = new Stats({user:u._id,leaderboard:leaderboard._id});
+    //             userStats.save();
+    //             u.stats = userStats._id;
+
+    //             if(req.user){
+    //               u.currentGame=req.user.currentGame;
+    //               u.stats = req.user.stats;
+    //               u.maxN = req.user.maxN;
+    //             }
+    //             u.save(function(err,u){
+    //               if(err){
+    //                 next(err);
+    //               }
+    //               else{
+    //                 res.json({success:true})
+    //               }
+    //             });
+    //           }
+    //           else{
+    //             if(!user.password){
+    //               user.password = password;
+    //               user.save();
+    //             }
+
+    //           // else{
+    //             user.username = req.body.username;
+    //             if(req.user){
+    //               user.currentGame = req.user.currentGame;
+    //               user.stats.combineStats(req.user.stats);
+    //               user.combineMaxN(req.user.maxN);
+    //             }
+    //             console.log(user);
+    //             user.save(function(err, user) {
+    //               if (err) {
+    //                 next(err);
+    //               }
+    //               else{
+    //                 console.log(user);
+    //                 res.json({success:true})
+    //               }
+    //             })
+    //           }
+
+    //         })
+
+    //     });
+    // });
+  });
+
+
+    var loginAfterRegister =function(username,password){
+      axios.post('/login', {
+        username: this.state.username,
+        password: this.state.password
+      }).then(function(response) {
+        console.log("response")
+        if (response.data.success) {
+          res.json({success:true})
+        } 
+      }.bind(this))
     
     // .then(function(user){console.log(user.username)})
-  });
+  };
 
   // GET Login page
   // router.get('/login', function(req, res) {
@@ -148,7 +256,7 @@ module.exports = function(passport) {
     //       else{
             console.log("login success")
             console.log(req.user)
-            res.json({success:true,user:req.user})
+            res.json({success:true})
         //   }
         // })
 	});

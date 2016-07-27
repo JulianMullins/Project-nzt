@@ -78,7 +78,7 @@ var NavBar = React.createClass({
 		      url: '/logout',
 		      withCredentials: true
 		    }).then(function(response){
-		    	console.log(response);
+		    	console.log(response)
 		    	if(response.data.success){
 		    		console.log("logged out success")
 		    		this.props.history.push('/home')
