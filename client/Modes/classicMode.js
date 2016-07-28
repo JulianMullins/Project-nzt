@@ -3,6 +3,7 @@ var GameTimer = require('./gameTimer');
 var ClassicStartOverlay = require('./gameStartOverlay').ClassicStartOverlay;
 var axios = require('axios')
 var fullScore = 0;
+var currentScore;
 
 //COLLECTION OF GLOBAL VARIABLES TO MAKE EVERYONES LIFE EASIER
 //create global variable for reaction counter
@@ -83,10 +84,8 @@ var ClassicMode = React.createClass({
       timeKeeper++;
       if (this.state.keepScore && !(this.state.soundMatch || this.state.positionMatch)) {
         reactionTimes.push(reactionEnd - reactionStart);
-        var currentScore = ((2000 - reactionTimes[reactionTimes.length - 1]) / 100).toFixed(2);
-        console.log(currentScore)
+        currentScore = ((2000 - reactionTimes[reactionTimes.length - 1]) / 100).toFixed(2);
         fullScore += parseFloat(currentScore);
-        console.log(fullScore)
         reactionEnd = null;
         this.setState({
           score: this.state.score + parseInt(currentScore),
@@ -96,20 +95,24 @@ var ClassicMode = React.createClass({
         this.setState({alert: "Not a match"})
         reactionEnd = null;
         if ((this.state.score - 5) >= 0) {
+          currentScore = 5;
           this.setState({
             score: this.state.score - 5
           });
         } else {
+          currentScore = this.state.score;
           this.setState({score: 0});
         }
       } else if (this.state.soundMatch || this.state.positionMatch) {
         this.setState({alert: "Missed a match"});
         reactionEnd = null;
         if ((this.state.score - 5) >= 0) {
+          currentScore = 5;
           this.setState({
             score: this.state.score - this.state.penalty
           });
         } else {
+          currentScore = this.state.score;
           this.setState({score: 0});
         }
       }
@@ -256,7 +259,7 @@ var ClassicMode = React.createClass({
       scoreUpdate = (
         <h2 style={{
           color: 'green'
-        }}>+10</h2>
+        }}>+{parseInt(currentScore)}</h2>
       )
     } else if (this.state.alert === "Not a match" || this.state.alert === "Missed a match") {
       scoreAlert = (
@@ -264,11 +267,11 @@ var ClassicMode = React.createClass({
           {this.state.alert}
         </div>
       )
-      if (this.state.score > 0) {
+      if (currentScore !== 0) {
         scoreUpdate = (
           <h2 style={{
             color: 'red'
-          }}>-5</h2>
+          }}>-{currentScore}</h2>
         )
       }
     } else {

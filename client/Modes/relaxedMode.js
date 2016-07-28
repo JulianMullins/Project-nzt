@@ -249,7 +249,7 @@ var RelaxedMode = React.createClass({
       scoreUpdate = (
         <h2 style={{
           color: '#01B6A7'
-        }}>+{currentScore}</h2>
+        }}>+{parseInt(currentScore)}</h2>
       )
     } else if (this.state.alert === "Not a match" || this.state.alert === "Missed a match") {
       scoreAlert = (
