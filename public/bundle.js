@@ -4162,7 +4162,7 @@ var Tutorial = React.createClass({
                   React.createElement(
                     'p',
                     null,
-                    'The n in n-back refers to the number of positions back that you have to keep track of. The example below demonstrates the gameplay at n=1, that is you have to remember the moving block\'s position just one step back and press the position key if the positions match. At n=2, you would have to make matches based on the state of the board two steps back, etc.'
+                    'The n in n-back refers to the number of positions back that you have to keep track of. The example below demonstrates gameplay at n=2. Therefore, if the current position matches the position it was at two steps back then you would indicate a match by pressing the position key. (The previous slide showed an example of position and color matches at n=1).'
                   )
                 ),
                 ' '
