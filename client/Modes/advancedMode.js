@@ -124,8 +124,6 @@ var AdvancedMode = React.createClass({
               score: this.state.score - 5
             });
           } else {
-            this.setState({score: 0});
-          } else {
             currentScore = this.state.score;
             this.setState({score: 0});
           }
