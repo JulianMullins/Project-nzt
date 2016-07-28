@@ -136,6 +136,7 @@ var GameTimer = require('./gameTimer');
 var axios = require('axios');
 var AdvancedStartOverlay = require('./gameStartOverlay').AdvancedStartOverlay;
 var fullScore = 0;
+var currentScore;
 
 //COLLECTION OF GLOBAL VARIABLES TO MAKE EVERYONES LIFE EASIER
 //create global variable for reaction counter
@@ -245,10 +246,12 @@ var AdvancedMode = React.createClass({
           });
           reactionEnd = null;
           if (this.state.score - 5 >= 0) {
+            currentScore = 5;
             this.setState({
               score: this.state.score - 5
             });
           } else {
+            currentScore = this.state.score;
             this.setState({
               score: 0
             });
@@ -256,10 +259,8 @@ var AdvancedMode = React.createClass({
         }
       } else if (this.state.correct[0] === this.state.colorMatch && this.state.correct[1] === this.state.soundMatch && this.state.correct[2] === this.state.positionMatch) {
         reactionTimes.push(reactionEnd - reactionStart);
-        var currentScore = ((2000 - reactionTimes[reactionTimes.length - 1]) / 100).toFixed(2);
-        console.log(currentScore);
+        currentScore = ((2000 - reactionTimes[reactionTimes.length - 1]) / 100).toFixed(2);
         fullScore += parseFloat(currentScore);
-        console.log(fullScore);
         reactionEnd = null;
         this.setState({
           soundPressed: noStyle,
@@ -285,10 +286,12 @@ var AdvancedMode = React.createClass({
           alert: 'Not a match'
         });
         if (this.state.score - 5 >= 0) {
+          currentScore = 5;
           this.setState({
             score: this.state.score - 5
           });
         } else {
+          currentScore = this.state.score;
           this.setState({
             score: 0
           });
@@ -445,7 +448,8 @@ var AdvancedMode = React.createClass({
         { style: {
             color: 'green'
           } },
-        '+10'
+        '+',
+        parseInt(currentScore)
       );
     } else if (this.state.alert === "Not a match" || this.state.alert === "Missed a match") {
       scoreAlert = React.createElement(
@@ -459,7 +463,8 @@ var AdvancedMode = React.createClass({
           { style: {
               color: 'red'
             } },
-          '-5'
+          '-',
+          currentScore
         );
       }
     } else {
@@ -596,6 +601,7 @@ var GameTimer = require('./gameTimer');
 var ClassicStartOverlay = require('./gameStartOverlay').ClassicStartOverlay;
 var axios = require('axios');
 var fullScore = 0;
+var currentScore;
 
 //COLLECTION OF GLOBAL VARIABLES TO MAKE EVERYONES LIFE EASIER
 //create global variable for reaction counter
@@ -674,10 +680,8 @@ var ClassicMode = React.createClass({
       timeKeeper++;
       if (this.state.keepScore && !(this.state.soundMatch || this.state.positionMatch)) {
         reactionTimes.push(reactionEnd - reactionStart);
-        var currentScore = ((2000 - reactionTimes[reactionTimes.length - 1]) / 100).toFixed(2);
-        console.log(currentScore);
+        currentScore = ((2000 - reactionTimes[reactionTimes.length - 1]) / 100).toFixed(2);
         fullScore += parseFloat(currentScore);
-        console.log(fullScore);
         reactionEnd = null;
         this.setState({
           score: this.state.score + parseInt(currentScore),
@@ -687,10 +691,12 @@ var ClassicMode = React.createClass({
         this.setState({ alert: "Not a match" });
         reactionEnd = null;
         if (this.state.score - 5 >= 0) {
+          currentScore = 5;
           this.setState({
             score: this.state.score - 5
           });
         } else {
+          currentScore = this.state.score;
           this.setState({
             score: 0
           });
@@ -699,10 +705,12 @@ var ClassicMode = React.createClass({
         this.setState({ alert: "Missed a match" });
         reactionEnd = null;
         if (this.state.score - 5 >= 0) {
+          currentScore = 5;
           this.setState({
             score: this.state.score - this.state.penalty
           });
         } else {
+          currentScore = this.state.score;
           this.setState({
             score: 0
           });
@@ -849,7 +857,8 @@ var ClassicMode = React.createClass({
         { style: {
             color: 'green'
           } },
-        '+10'
+        '+',
+        parseInt(currentScore)
       );
     } else if (this.state.alert === "Not a match" || this.state.alert === "Missed a match") {
       scoreAlert = React.createElement(
@@ -857,13 +866,14 @@ var ClassicMode = React.createClass({
         { className: 'scoreAlertNegative' },
         this.state.alert
       );
-      if (this.state.score > 0) {
+      if (currentScore !== 0) {
         scoreUpdate = React.createElement(
           'h2',
           { style: {
               color: 'red'
             } },
-          '-5'
+          '-',
+          currentScore
         );
       }
     } else {
@@ -1618,7 +1628,7 @@ var RelaxedMode = React.createClass({
             color: '#01B6A7'
           } },
         '+',
-        currentScore
+        parseInt(currentScore)
       );
     } else if (this.state.alert === "Not a match" || this.state.alert === "Missed a match") {
       scoreAlert = React.createElement(
