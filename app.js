@@ -244,32 +244,33 @@ passport.use(new FacebookStrategy({
         }
         
       }
-
-
-      else if(req.user){
-        console.log("req.user and user", user, user.stats)
-        user.currentGame = req.user.currentGame;
-        user.stats.combineStats(req.user.stats);
-        user.combineMaxN(req.user.maxN);
-        user.save();
-      }
-
-
-      if(!user.facebookId){
-        console.log("no facebook id")
-        user.facebookId = profile.id
-        //console.log("facebook id added")
-        user.save(function(err){
-          if(err){done(err)}
-        })
-        return done(null, user);
-      }
-      // auth has has succeeded
+      
       else{
-        //console.log("success")
-        console.log("returning done user")
-        return done(null, user);
+        if(req.user){
+          console.log("req.user and user", user, user.stats)
+          user.currentGame = req.user.currentGame;
+          user.stats.combineStats(req.user.stats);
+          user.combineMaxN(req.user.maxN);
+          user.save();
+        }
+
+        if(!user.facebookId){
+          console.log("no facebook id")
+          user.facebookId = profile.id
+          //console.log("facebook id added")
+          user.save(function(err){
+            if(err){done(err)}
+          })
+          return done(null, user);
+        }
+        // auth has has succeeded
+        else{
+          //console.log("success")
+          console.log("returning done user")
+          return done(null, user);
+        }
       }
+      
     });
 }));
 

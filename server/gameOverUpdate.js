@@ -26,6 +26,7 @@ var setLeaderboard = function(id,callback){
 
 //check overall leaderboards, and update accordingly
 var checkOverall = function(newHighScore){
+  var isHighScore = false;
   Leaderboard.findById(serverLeaderboard)
     .populate('scores')
     .exec(function(err,leaderboard){
@@ -38,8 +39,9 @@ var checkOverall = function(newHighScore){
               score = newHighScore._id;
             }
           }
+          isHighScore = true;
         }
-        else if(newHighScore.score > leaderboard[leaderboard.length-1].score){
+        else if(newHighScore.score > leaderboard.scores[leaderboard.length-1]){
           leaderboard.pop();
           leaderboard.push(newHighScore);
           leaderboard.sort(sortScores);
@@ -48,14 +50,17 @@ var checkOverall = function(newHighScore){
               score = newHighScore._id
             }
           }
+          isHighScore = true;
         }
         leaderboard.save();
+        return isHighScore;
     })
 }
 
 
 //update personal leaderboards (if !temp)
 var checkMine = function(newHighScore,stats){
+  var isHighScore = false;
   Leaderboard.findById(stats.leaderboard)
     .populate('scores')
     .exec(function(err,leaderboard){
@@ -70,6 +75,7 @@ var checkMine = function(newHighScore,stats){
             score = newHighScore._id
           }
         }
+        isHighScore = true;
       }
       else if(tempGame.score>myHighScores[myHighScores.length-1].score){
         myHighScores.pop();
@@ -80,9 +86,11 @@ var checkMine = function(newHighScore,stats){
             score = newHighScore._id
           }
         }
+        isHighScore = true;
       }
 
       leaderboard.save();
+      return isHighScore;
     })
 }
 
@@ -174,6 +182,9 @@ router.post('/gameOver',function(req,res,next){
           
           console.log('user stats', user.stats)
           //update Stats
+          if(!user.stats.totalPoints){
+            user.stats.totalPoints
+          }
           user.stats.totalPoints += newHighScore.score;
           user.stats.progress = user.stats.progress.push(newHighScore._id);
           
@@ -181,12 +192,21 @@ router.post('/gameOver',function(req,res,next){
              console.log('updated user stats', user.stats)
           })
 
+
           //update personal and overall leaderboards
-          checkMine(newHighScore,user.stats)
-          checkOverall(newHighScore)
+          var isMyHighScore = checkMine(newHighScore,user.stats)
+          var isOverallHighScore = checkOverall(newHighScore)
+
+          if(isMyHighScore || isOverallHighScore){
+            tempGame.isHighScore = true;
+            tempGame.save();
+          }
 
           //return if user highscore, overall high score, new nLevel
-
+          console.log("about to res.json success")
+          res.json({
+            success:true
+          })
 
           //set game isHighScore, etc.
 

@@ -215,7 +215,7 @@ var RelaxedMode = React.createClass({
               this.props.history.push('/gameOver');
             }
             this.props.history.push('/gameOver');
-          })
+          }.bind(this))
 
           
         }.bind(this))

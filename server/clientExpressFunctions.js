@@ -103,7 +103,10 @@ router.get('/getGame',function(req,res,next){
     }
     else{
       console.log(game)
-      res.json({game:game,success:true})
+      res.json({
+        game:game,
+        success:true
+      })
     }
   })
 })

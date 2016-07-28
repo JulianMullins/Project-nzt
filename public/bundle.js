@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
 // shim for using process in browser
 
@@ -1700,7 +1699,7 @@ var RelaxedMode = React.createClass({
               this.props.history.push('/gameOver');
             }
             this.props.history.push('/gameOver');
-          });
+          }.bind(this));
         }.bind(this));
       }
       ////////////////////////////////////////////////////////////////////////////////////
@@ -2426,8 +2425,8 @@ var GameOverOverlay = React.createClass({
       score: 0,
       mode: null,
       nLevel: 1,
-      renderLogin: React.createElement('div', null),
-      anonHighScore: React.createElement('div', null),
+      gameOverMessage: React.createElement('div', null),
+      nextLevelLink: React.createElement('div', null),
       anonUserName: null,
       isHighScore: false,
       passedLevel: false
@@ -2436,6 +2435,10 @@ var GameOverOverlay = React.createClass({
   componentDidMount: function componentDidMount() {
 
     this.getData();
+    this.unlockLevel();
+    this.anonHighScore();
+    this.renderLogin();
+    this.nextLevelBtn();
   },
   getData: function getData() {
     axios.all([getUser(), getGame()]).then(axios.spread(function (userData, gameData) {
@@ -2445,7 +2448,8 @@ var GameOverOverlay = React.createClass({
         score: gameData.data.game.score,
         mode: gameData.data.game.mode,
         nLevel: gameData.data.game.nLevel,
-        passedLevel: gameData.data.game.passedLevel
+        passedLevel: gameData.data.game.passedLevel,
+        isHighScore: gameData.data.game.isHighScore
       });
     }.bind(this))).then(function () {
       this.renderLogin();
@@ -2453,47 +2457,36 @@ var GameOverOverlay = React.createClass({
   },
 
 
-  //currently not in use
-  tempSaveData: function tempSaveData() {
-    axios.post({
-      url: '/tempSaveData',
-      data: {
-        score: this.state.score,
-        mode: this.state.mode
-
-      }
-    });
-  },
-
-
   gameOver: function gameOver() {
-    axios.post({
-      url: '/gameOver',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      },
-      data: {
-        inputUsername: this.state.username,
-        alreadyLoggedIn: this.state.isAnon
-      }
-    });
+    // axios.post({
+    //   url:'/gameOver',
+    //   headers:{
+    //     'Accept': 'application/json',
+    //     'Content-Type': 'application/json'
+    //   },
+    //   data: {
+    //     inputUsername:this.state.username,
+    //     alreadyLoggedIn:this.state.isAnon
+    //   }
+    // })
+
   },
-  click: function click(e) {
-
-    //ONLY IF EARNED
-
-    //go to next level (if earned)
-    this.props.history.push('/game/' + this.state.mode + '/' + (this.state.nLevel + 1));
+  unlockLevel: function unlockLevel() {
+    if (this.state.isHighScore) {
+      this.setState({
+        gameOverMessage: React.createElement(
+          'h1',
+          { className: 'gameOverInform classic' },
+          'You have unlocked level 2'
+        )
+      });
+    }
   },
   anonHighScore: function anonHighScore() {
-
-    //get isOverallHighScore
-
     //if anon get high score, can save with tempusername, or login
-    if (this.state.anonGetHighScore) {
+    if (this.state.isAnon && this.state.isHighScore) {
       this.setState({
-        anonHighScore: React.createElement(
+        gameOverMessage: React.createElement(
           'p',
           null,
           'You earned a high score on our overall leaderboards. If you wish to be added to the leaderboard and without logging in, provide a name below to display with your score',
@@ -2527,9 +2520,9 @@ var GameOverOverlay = React.createClass({
   renderLogin: function renderLogin() {
 
     //if not logged in, option to login to save
-    if (!this.state.isAnon && !anonGetHighScore) {
+    if (!this.state.isAnon && !this.state.isHighScore) {
       this.setState({
-        renderLogin: React.createElement(
+        gameOverMessage: React.createElement(
           'div',
           { className: 'gameOverPrompt' },
           React.createElement(
@@ -2572,18 +2565,27 @@ var GameOverOverlay = React.createClass({
       }
     });
   },
+  nextLevelBtn: function nextLevelBtn() {
+    if (this.state.passedLevel) {
+      this.setState({
+        nextLevel: React.createElement(
+          'h2',
+          { className: 'levelButton', onClick: this.nextLevelLink },
+          'next level'
+        )
+      });
+    }
+  },
+  nextLevelLink: function nextLevelLink(e) {
+    //go to next level (if earned)
+    this.props.history.push('/game/' + this.state.mode + '/' + (this.state.nLevel + 1));
+  },
+  repeatLevel: function repeatLevel(e) {
+    //go to next level (if earned)
+    this.props.history.push('/game/' + this.state.mode + '/' + this.state.nLevel);
+  },
 
   render: function render() {
-    // this.getData();
-
-    // var loggedIn = this.state.alreadyLoggedIn
-
-    //   ? <div></div>
-    //   : <div className="gameOverPrompt">
-    //       <p>It looks like you are not currently logged in. 
-    //       <Link to="/gameOver/login"> Sign in</Link> or <Link to="/gameOver/register">sign up</Link> to save your progress, 
-    //       view statistics and compete with friends!</p>  
-    //     </div> 
 
     return React.createElement(
       'div',
@@ -2599,13 +2601,7 @@ var GameOverOverlay = React.createClass({
         'Your score is ',
         this.state.score
       ),
-      React.createElement(
-        'h1',
-        { className: 'gameOverInform classic' },
-        'You have unlocked level 2'
-      ),
-      this.state.renderLogin,
-      this.state.anonHighScore,
+      this.state.gameOverMessage,
       React.createElement(
         'div',
         { className: 'gameOverActions' },
@@ -2623,10 +2619,11 @@ var GameOverOverlay = React.createClass({
             )
           )
         ),
+        this.state.nextLevel,
         React.createElement(
           'h2',
-          { className: 'levelButton', onClick: this.click },
-          'next level'
+          { className: 'levelButton', onClick: this.repeatLevel },
+          'replay level'
         ),
         React.createElement(
           'div',
@@ -46109,5 +46106,3 @@ module.exports = function (str) {
 },{}],348:[function(require,module,exports){
 arguments[4][89][0].apply(exports,arguments)
 },{"_process":1,"dup":89}]},{},[12]);
-=======
->>>>>>> 9c358fd9e6ad231ca0c2988423e5e2582b0b6cd4
