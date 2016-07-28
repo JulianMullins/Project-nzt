@@ -1389,6 +1389,7 @@ var reactionTimes = [];
 var gameScore;
 var iterations;
 var fullScore = 0;
+var currentScore;
 
 var RelaxedMode = React.createClass({
   displayName: 'RelaxedMode',
@@ -1466,10 +1467,8 @@ var RelaxedMode = React.createClass({
       timeKeeper--;
 
       if (this.state.keepScore && !this.state.posMatch) {
-        var currentScore = ((2000 - reactionTimes[reactionTimes.length - 1]) / 100).toFixed(2);
-        console.log(currentScore);
+        currentScore = ((2000 - reactionTimes[reactionTimes.length - 1]) / 100).toFixed(2);
         fullScore += parseFloat(currentScore);
-        console.log(fullScore);
         this.setState({
           alert: "Good job",
           score: this.state.score + parseInt(currentScore),
@@ -1478,11 +1477,13 @@ var RelaxedMode = React.createClass({
       } else if (!this.state.keepScore && this.state.posPressed) {
         this.setState({ alert: 'Not a match' });
         if (this.state.score - 5 >= 0) {
+          currentScore = 5;
           this.setState({
             score: this.state.score - 5,
             posStyle: noStyle
           });
         } else {
+          currentScore = this.state.score;
           this.setState({
             score: 0
           });
@@ -1490,11 +1491,13 @@ var RelaxedMode = React.createClass({
       } else if (this.state.keepScore && this.state.posMatch) {
         this.setState({ alert: "Missed a match" });
         if (this.state.score - 5 >= 0) {
+          currentScore = 5;
           this.setState({
             score: this.state.score - 5,
             posStyle: noStyle
           });
         } else {
+          currentScore = this.state.score;
           this.setState({
             score: 0
           });
@@ -1614,7 +1617,8 @@ var RelaxedMode = React.createClass({
         { style: {
             color: '#01B6A7'
           } },
-        '+10'
+        '+',
+        currentScore
       );
     } else if (this.state.alert === "Not a match" || this.state.alert === "Missed a match") {
       scoreAlert = React.createElement(
@@ -1622,13 +1626,14 @@ var RelaxedMode = React.createClass({
         { className: 'scoreAlertNegative' },
         this.state.alert
       );
-      if (this.state.score > 0) {
+      if (currentScore !== 0) {
         scoreUpdate = React.createElement(
           'h2',
           { style: {
               color: '#F13542'
             } },
-          '-5'
+          '-',
+          currentScore
         );
       }
     } else {
