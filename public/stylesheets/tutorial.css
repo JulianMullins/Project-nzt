@@ -17,16 +17,23 @@
 }
 
 .tutorial p {
-  width: 100%;
+  width: 75%;
   color: #c6c6c6;
   font-weight: 300;
-  margin-bottom: 5vh;
+  margin-bottom: 2vh;
+  font-size: 20px;
 }
 
-spanl {
-  padding: 0 0 2px;
+.tutorial h3 {
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.tutorialLink {
   border-bottom: 1px dotted #c6c6c6;
   cursor: pointer;
+  color: #c6c6c6;
+  text-decoration: none;
 
   -webkit-transition: .5s;
 		 -moz-transition: .5s;
@@ -36,7 +43,7 @@ spanl {
   pointer-events: auto;
 }
 
-spanl:hover {
+.tutorialLink:hover {
   color: #01B6A7;
 }
 
@@ -82,6 +89,21 @@ ul.row {
 .key-wrapper {
   text-align: center;
   margin-top: 10vh;
+  justify-content: center;
+}
+
+.key-wrapper ul li {
+  list-style: none;
+}
+
+.key-wrapper > ul {
+  margin: 10px 0;
+}
+
+.key-wrapper p {
+  width: 75%;
+  margin: 0 auto;
+  margin-bottom: 10px;
 }
 
 .rulemode, .rulemode2, .rulemode3 {
@@ -104,6 +126,7 @@ ul.row {
 .rules2{
   display: flex;
   flex-direction: column;
+  align-items: center;
   width: 75vw;
   margin-bottom: 5vh;
 }
@@ -118,4 +141,21 @@ ul.row {
 .slide img{
   width: 45vh;
   margin: 0 auto;
+}
+
+.playBtn {
+  margin-top: 10vh !important;
+  pointer-events: auto;
+  text-decoration: none;
+  background-color: #c6c6c6;
+  color: rgba(0,0,0,.88);
+  border: 1px solid #c6c6c6;
+  text-align: center;
+  width: 25vw;
+  margin: 0 auto;
+}
+
+.playBtn:hover {
+  transition-duration: .8s;
+  background-color: rgba(198,198,198,.5);
 }

@@ -1105,15 +1105,6 @@ var SilentStartOverlay = React.createClass({
 						{ className: 'row' },
 						React.createElement(
 							'li',
-							{ className: 'key keySilent k38' },
-							'↑'
-						)
-					),
-					React.createElement(
-						'ul',
-						{ className: 'row' },
-						React.createElement(
-							'li',
 							{ className: 'key keySilent k37' },
 							'←'
 						),
@@ -1185,15 +1176,6 @@ var ClassicStartOverlay = React.createClass({
 				React.createElement(
 					'div',
 					{ className: 'key-wrapper' },
-					React.createElement(
-						'ul',
-						{ className: 'row' },
-						React.createElement(
-							'li',
-							{ className: 'key keyClassic k38' },
-							'↑'
-						)
-					),
 					React.createElement(
 						'ul',
 						{ className: 'row' },
@@ -3962,20 +3944,20 @@ var Tutorial = React.createClass({
                   React.createElement(
                     'p',
                     null,
-                    'Cortex is a ',
+                    'Cortex is a game designed to exercise your working memory and increase fluid-intelligence (directly tied to IQ). This method of increasing IQ is',
                     React.createElement(
-                      'spanl',
-                      null,
-                      'scientifically supported'
+                      _reactRouter.Link,
+                      { to: '/science', className: 'tutorialLink' },
+                      ' scientifically supported and backed by numerous research studies'
                     ),
-                    ' game for exercising your working memory and increasing fluid-intelligence (directly tied to IQ). While the game can be tricky to grasp at first and increases in difficulty rather quickly, we have tried to make this game as fun and as easy to learn as possible. We hope that you’ll enjoy playing this game and that the cognitive benefits will simply follow along as you progress.'
+                    '. While the game can be tricky to grasp at first and increases in difficulty rather quickly, we have tried to make this game as fun and as easy to learn as possible. We hope that you’ll enjoy simply playing the game and that the cognitive benefits will follow along as you progress.'
                   ),
-                  React.createElement('img', { src: './images/brain.png', alt: 'BRAIN' }),
                   React.createElement(
-                    'div',
-                    { className: 'started' },
-                    'Let’s get started!'
-                  )
+                    'h3',
+                    null,
+                    'Let\'s get started! '
+                  ),
+                  React.createElement('img', { src: './images/brain.png', alt: 'BRAIN' })
                 ),
                 ' '
               ),
@@ -3999,12 +3981,38 @@ var Tutorial = React.createClass({
                   React.createElement(
                     'p',
                     null,
-                    'Cortex is based on the n-back genre of brain training games, which requires players to keep track of various changes happening on-screen.'
+                    'Cortex is based on the n-back genre of brain training games which requires players to keep track of various changes happening on-screen. Traditionally the game requires players to keep track of two things: position and sound (the \'dual\' in dual n-back). In this game, we have incorporated changing colors as well, and divided up the modes based on the number of things you have to keep track of (mono, dual and triple n-back).'
                   )
                 )
               ),
               ' ',
-              React.createElement('img', { src: './images/pattern.gif', alt: 'Mountain View' })
+              React.createElement('img', { src: './images/colorPosition.gif', alt: 'Mountain View' })
+            ),
+            ' ',
+            React.createElement(
+              'div',
+              { className: 'slide' },
+              React.createElement(
+                'div',
+                { className: 'rulemode2' },
+                React.createElement(
+                  'div',
+                  { className: 'rules2' },
+                  React.createElement(
+                    'h2',
+                    null,
+                    'The n-back part'
+                  ),
+                  React.createElement(
+                    'p',
+                    null,
+                    'The n in n-back refers to the number of positions back that you have to keep track of. The example below demonstrates the gameplay at n=1, that is you have to remember the moving block\'s position just one step back and press the position key if the positions match. At n=2, you would have to make matches based on the state of the board two steps back, etc.'
+                  )
+                ),
+                ' '
+              ),
+              ' ',
+              React.createElement('img', { src: './images/pattern.gif', alt: 'Gameplay Pattern' })
             ),
             ' ',
             React.createElement(
@@ -4021,9 +4029,7 @@ var Tutorial = React.createClass({
                 React.createElement(
                   'p',
                   null,
-                  'Once a button is pressed, you cannot undo the action.',
-                  React.createElement('br', null),
-                  'For a double match, you need to press both keys.'
+                  'Once a button is pressed, you cannot undo the action. For a double match, you need to press both keys'
                 ),
                 React.createElement(
                   'div',
@@ -4032,12 +4038,12 @@ var Tutorial = React.createClass({
                     'div',
                     { className: 'rules2' },
                     React.createElement(
-                      'h2',
+                      'h3',
                       null,
                       'RELAXED'
                     ),
                     React.createElement(
-                      'h3',
+                      'p',
                       null,
                       'Keep track of changing position. ',
                       React.createElement('br', null),
@@ -4076,12 +4082,12 @@ var Tutorial = React.createClass({
                     'div',
                     { className: 'rules2' },
                     React.createElement(
-                      'h2',
+                      'h3',
                       null,
                       'CLASSIC'
                     ),
                     React.createElement(
-                      'h3',
+                      'p',
                       null,
                       'Keep track of position and sounds. ',
                       React.createElement('br', null),
@@ -4126,12 +4132,12 @@ var Tutorial = React.createClass({
                     'div',
                     { className: 'rules2' },
                     React.createElement(
-                      'h2',
+                      'h3',
                       null,
                       'SILENT'
                     ),
                     React.createElement(
-                      'h3',
+                      'p',
                       null,
                       'Keep track of both position and colors. ',
                       React.createElement('br', null),
@@ -4170,12 +4176,12 @@ var Tutorial = React.createClass({
                     'div',
                     { className: 'rules2' },
                     React.createElement(
-                      'h2',
+                      'h3',
                       null,
                       'ADVANCED'
                     ),
                     React.createElement(
-                      'h3',
+                      'p',
                       null,
                       'Keep track of position, color and sound ',
                       React.createElement('br', null),
@@ -4229,34 +4235,6 @@ var Tutorial = React.createClass({
                   React.createElement(
                     'h2',
                     null,
-                    'The n-back part'
-                  ),
-                  React.createElement(
-                    'p',
-                    null,
-                    'The n in n-back refers to the number of positions back that you have to keep track of.',
-                    React.createElement('br', null),
-                    'For example, at n=2, you would have to make matches based on the state of the board two steps back. '
-                  )
-                ),
-                ' '
-              ),
-              ' ',
-              React.createElement('img', { src: './images/pattern.gif', alt: 'Gameplay Pattern' })
-            ),
-            ' ',
-            React.createElement(
-              'div',
-              { className: 'slide' },
-              React.createElement(
-                'div',
-                { className: 'rulemode2' },
-                React.createElement(
-                  'div',
-                  { className: 'rules2' },
-                  React.createElement(
-                    'h2',
-                    null,
                     'Expectations'
                   ),
                   React.createElement(
@@ -4267,7 +4245,17 @@ var Tutorial = React.createClass({
                   React.createElement(
                     'p',
                     null,
-                    'However, once you get familiar with the game mechanics, it is always recommended to continue pushing up in n-level once you have unlocked the next one. You will experience the greatest mental benefits by continuously challenging yourself! '
+                    'Once you\'ve become familiar with the game mechanics, it is always recommended to move on after unlocking the next n-level. You will experience the greatest cognitive benefits by continuously challenging yourself! '
+                  ),
+                  React.createElement(
+                    'h3',
+                    null,
+                    'Ready to begin?'
+                  ),
+                  React.createElement(
+                    _reactRouter.Link,
+                    { to: '/home', className: 'gameStartBtn playBtn' },
+                    'Start Playing!'
                   )
                 )
               ),
