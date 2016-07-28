@@ -1767,7 +1767,6 @@ var SilentMode = React.createClass({
 
     iterations = setInterval(function () {
       timeKeeper++;
-      console.log('TEST');
       if (this.state.keepScore && !(this.state.colorMatch || this.state.positionMatch)) {
         reactionTimes.push(reactionEnd - reactionStart);
         var currentScore = ((2000 - reactionTimes[reactionTimes.length - 1]) / 100).toFixed(2);
@@ -1777,7 +1776,7 @@ var SilentMode = React.createClass({
         console.log(fullScore);
         reactionEnd = null;
         this.setState({
-          score: this.state.score + 5,
+          score: this.state.score + parseInt(currentScore),
           alert: 'Good job',
           posStyle: noStyle,
           colorStyle: noStyle
