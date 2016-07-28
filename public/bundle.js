@@ -2468,7 +2468,7 @@ ReactDOM.render(React.createElement(
     React.createElement(_reactRouter.Route, { path: 'register', component: Register }),
     React.createElement(_reactRouter.Route, { path: 'gameOver', component: GameOver }),
     React.createElement(_reactRouter.Route, { path: 'leaderboard', component: Leaderboard }),
-    React.createElement(_reactRouter.Route, { path: 'statss', component: Stats }),
+    React.createElement(_reactRouter.Route, { path: 'stats', component: Stats }),
     React.createElement(_reactRouter.Route, { path: 'contact', component: Contact }),
     React.createElement(_reactRouter.Route, { path: 'science', component: Science }),
     React.createElement(_reactRouter.Route, { path: 'tutorial', component: Tutorial }),
