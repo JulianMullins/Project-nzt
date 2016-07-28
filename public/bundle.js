@@ -4162,7 +4162,7 @@ var Tutorial = React.createClass({
                 ' '
               ),
               ' ',
-              React.createElement('img', { src: './images/pattern.gif', alt: 'Gameplay Pattern' })
+              React.createElement('img', { src: './images/nback.gif', alt: 'Gameplay Pattern' })
             ),
             ' ',
             React.createElement(
