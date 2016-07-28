@@ -82,6 +82,7 @@ var SilentMode = React.createClass({
       this.enableKeys();
   },
   positionAndColor: function() {
+    console.log(this.state, 'state')
     var positionQueue = [];
     var colorQueue = [];
     var timeTilPositionMatch = parseInt((Math.random() * 5) + 2 + this.state.N);
@@ -90,7 +91,6 @@ var SilentMode = React.createClass({
 
     iterations = setInterval(function() {
       timeKeeper++;
-
       if (this.state.keepScore && !(this.state.colorMatch || this.state.positionMatch)) {
         reactionTimes.push(reactionEnd - reactionStart);
         var currentScore=((2000-reactionTimes[reactionTimes.length-1])/100).toFixed(2);
@@ -100,7 +100,7 @@ var SilentMode = React.createClass({
         console.log(fullScore)
         reactionEnd = null;
         this.setState({
-          score: this.state.score + 5,
+          score: this.state.score + parseInt(currentScore),
           alert: 'Good job',
           posStyle: noStyle,
           colorStyle: noStyle
@@ -110,7 +110,7 @@ var SilentMode = React.createClass({
         reactionEnd = null;
         if (this.state.score !== 0) {
           this.setState({
-            score: this.state.score - this.state.penalty,
+           // score: this.state.score - this.state.penalty,
             posStyle: noStyle,
             colorStyle: noStyle
           });
@@ -120,7 +120,7 @@ var SilentMode = React.createClass({
         reactionEnd = null;
         if (this.state.score !== 0) {
           this.setState({
-            score: this.state.score - this.state.penalty,
+            //score: this.state.score - this.state.penalty,
             posStyle: noStyle,
             colorStyle: noStyle
           });
@@ -200,13 +200,11 @@ var SilentMode = React.createClass({
       if (timeKeeper === 60) {
         clearInterval(iterations);
         setTimeout(function() {
-          gameScore = this.state.score;
-          console.log(gameScore, 'game score')
           console.log(reactionTimes, 'reaction times')
           console.log(this.state)
           axios.post('/gameEnd',{
               gameId: this.state.gameId,
-              score: gameScore,
+              score: fullScore,
               reactionTimes: reactionTimes
           }).then(function(response){
             console.log('end game posted')
