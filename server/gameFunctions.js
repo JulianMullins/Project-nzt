@@ -15,6 +15,7 @@ var serverData = require('./serverData');
 var modeMultiplier = serverData.modeMultiplier;
 var penalty = serverData.penalty;
 var positivePoints = serverData.positivePoints;
+var scoresToPass = serverData.scoresToPass;
 
 
 var tempGame = null;
@@ -192,6 +193,7 @@ router.post('/startGame/:mode/:nLevel',function(req,res,next){
 
 
 //game end - posted from mode files; find game, update game stats
+//check if passed level
 router.post('/gameEnd',function(req,res,next){
   console.log("game ended")
   console.log(req.user)
@@ -204,6 +206,10 @@ router.post('/gameEnd',function(req,res,next){
       console.log("no game")
     }
     else{
+      var passedLevel = false;
+      if(game.score>= scoresToPass[game.mode][game.nLevel]){
+        passedLevel=true;
+      }
       game.score = req.body.score;
       game.reactionTimes=req.body.reactionTimes;
       game.save(function(err,game){
@@ -212,7 +218,12 @@ router.post('/gameEnd',function(req,res,next){
         }
         else{
           console.log("game ended successfully",game)
-          res.json({success:true,score:req.body.score,userId:req.body.userId})
+          res.json({
+            success:true,
+            score:req.body.score,
+            userId:req.body.userId,
+            passedLevel:passedLevel
+          })
 
 
           //post to gameOver
