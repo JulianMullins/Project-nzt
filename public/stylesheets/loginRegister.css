@@ -1,0 +1,238 @@
+/*loginpage*/
+
+.screen {
+  display: flex;
+  justify-content: center;
+  height: 100vh;
+  width: 100vw;
+}
+.login, .register-log {
+  height: 100%;
+  color: white;
+  text-decoration: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  transition-duration: .8s;
+}
+.register-log {
+  width: 35%;
+  background-color: #7cd9d2;
+}
+.login {
+  width: 65%;
+  background-color: #008a7e;
+  text-align: left;
+}
+.register-log:hover {
+  transition-duration: .8s;
+  width: 45%;
+}
+.login:hover {
+  transition-duration: .8s;
+  width: 75%;
+}
+#login input:focus {
+  outline: none;
+}
+.pa {
+  font-weight: 100;
+  font-size: 3em;
+  font-family: "proxima-nova", sans-serif;
+}
+
+.pa a {
+  text-decoration: none;
+  color:white;
+}
+
+.register-log > h3 {
+  font-weight: 300;
+  text-align: center;
+  margin: 1em 1em 0;
+}
+form {
+  text-align: center;
+  width: 50vw;
+  border-radius: 5px;
+  padding: 30px 20px 0 20px;
+  box-sizing: border-box;
+}
+.register-log form {
+  width: 100%;
+  display: flex;
+}
+input, button {
+  outline: none !important;
+}
+.buttongroup {
+  display: flex;
+  width: 50vw;
+  justify-content: center;
+}
+.fb {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+	border: none;
+	background: #3b5998;
+	width: 20vw;
+	height: 60px;
+  font-size:calc(12px + .5vw);
+	color: #fff;
+	text-transform: uppercase;
+  text-decoration: none;
+  padding: 20px 0 20px;
+  cursor: pointer;
+  transition: all 0.3s linear;
+  margin: 2vw;
+}
+.fb:hover {
+  color: #3b5998;
+  background-color: white;
+}
+button.form-btn {
+	width: 50vw;
+	height: 60px;
+	bottom: 0;
+	border: 0;
+  font-size:calc(12px + .5vw);
+	text-transform: uppercase;
+  margin: 2vw;
+}
+button.form-btn.sx {
+  left: 0;
+  background-color: rgba(255, 125, 0, 0.35);
+  color: #fff;
+  transition: all 0.3s linear;
+}
+button.form-btn.dx:hover {
+	background-color:rgba(255, 125, 0, 0.65);
+  cursor:pointer;
+	color: #fff;
+}
+button.form-btn.dx {
+  right: 0;
+  background-color: #f1ba03;
+  color: #fff;
+  width: 20vw;
+}
+button.form-btn.dx2:hover {
+	background-color:rgba(203,14,27,0.65);
+  cursor:pointer;
+	color: #fff;
+}
+button.form-btn.dx2 {
+  right: 0;
+  background-color: #f13542;
+  color: #fff;
+  width: 20vw;
+}
+button.form-btn.dx a, button.form-btn.dx2 a {
+  text-decoration: none;
+  color: white;
+}
+
+.register-log button.form-btn.dx {
+  background-color: #f13542;
+}
+.register-log button.form-btn.dx:hover {
+	background-color: rgba(203,14,27,0.65);
+  color: white;
+}
+.register-log button.form-btn.dx a {
+  text-decoration: none;
+  color: white;
+}
+
+/*register page*/
+.register {
+  height: 100%;
+  width: 100%;
+  background-color: #7cd9d2;
+  color: white;
+  text-decoration: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  transition-duration: .8s;
+}
+
+input {
+  border: none;
+  border-bottom: 1px solid white;
+  color: white;
+  text-align: center;
+  font-size: 21px;
+  font-weight: 100;
+  margin-bottom: 25px;
+  background-color: transparent;
+  width: 50%;
+}
+::-webkit-input-placeholder {
+  color: white;
+  font-weight: 100;
+  text-align: center;
+}
+:-moz-placeholder {
+  color: white;
+  font-weight: 100;
+  text-align: center;
+}
+::-moz-placeholder {
+  color: white;
+  font-weight: 100;
+  text-align: center;
+}
+:-ms-input-placeholder {
+  color: white;
+  font-weight: 100;
+  text-align: center;
+}
+
+@media all and (max-width: 500px) {
+  .screen {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    width: 100vw;
+  }
+  .login, .register-log {
+    height: 50vh;
+    width: 100vw;
+    color: white;
+    text-decoration: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  }
+  .login:hover, .register-log:hover{
+    width: 100vw;
+  }
+  .login h1, .register-log h1{
+    font-size:calc(16px + 15vw);
+  }
+  form {
+    text-align: center;
+    width: 90vw;
+    border-radius: 5px;
+    padding: 30px 20px 0 20px;
+    box-sizing: border-box;
+  }
+  .register-log form{
+    width: 90vw;
+  }
+  .buttongroup {
+    display: flex;
+    width:100%;
+    justify-content: center;
+  }
+  .fb {
+    padding: 20px 0 20px;
+    font-size: calc(10px + .5vw)
+  }
+}

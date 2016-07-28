@@ -1,174 +1,78 @@
 var React = require('react');
 var ReactDOM = require('react-dom');
 var url = process.env.url;
+var axios = require('axios')
+
 var Levels = require('./levels');
 var ClassicLevels = Levels.ClassicLevels;
+var RelaxedLevels = Levels.RelaxedLevels;
 
-var MenuOverlay = require('./menuOverlay');
+import {Link} from 'react-router'
+
 var LoginOverlay = require('./loginOverlay');
 var RegisterOverlay = require('./registerOverlay');
-
 
 var Mainmenu = React.createClass({
 
   //initial functions
   getInitialState: function() {
     return {
-      menu: true,
-      login: false,
-      register: false,
+      name:null,
+      hasUsername:false
     }
   },
-  componentDidMount: function() {
-    fetch('/isLoggedIn', {
-      method: 'get',
-      credentials: 'include'
-    }).then(function(response) {
-      return response.json();
-    }).then(function(response) {
-      if (response.loggedIn) {
-        this.start({preventDefault: function() {}});
-      }
-    }.bind(this))
+  componentDidMount(){
+    axios.get('/getUser')
+      .then(function(response){
+        this.setState({
+          hasUsername:response.data.isUser,
+          name:response.data.name
+        })
+      }.bind(this))
   },
-
-  //functions related to login/registration/main menu
-  start: function(e) {
-    e.preventDefault();
-    this.setState({menu: false, login: false, register: false});
+  classic() {
+    this.props.history.push('/levels/classic')
   },
-  loginScreen: function(e) {
-    e.preventDefault();
-    this.setState({menu: false, login: true, register: false})
+  relaxed() {
+    this.props.history.push('/levels/relaxed')
   },
-  login: function(e) {
-    console.log("logging in")
-    e.preventDefault();
-
-    //ajax post
-    fetch('/login', {
-      method: 'post',
-      credentials: 'include',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({username: document.getElementById('username').value, password: document.getElementById('password').value})
-    }).then(function(response) {
-      return response.json();
-    }).then(function(response) {
-      if (response.success) {
-        this.setState({menu: false, login: false, register: false})
-      } else if (!response.success) {}
-    }.bind(this))
+  silent() {
+    this.props.history.push('/levels/silent')
   },
-
-  facebook: function(e) {
-    e.preventDefault();
-    this.setState({menu: false, login: false, register: false});
-
-    //ajax facebook get
-
-    fetch('/login/facebook', {method: 'get'})
-
+  advanced() {
+    this.props.history.push('/levels/advanced')
   },
-  registerScreen: function(e) {
-    e.preventDefault();
-    this.setState({menu: false, login: false, register: true})
-  },
-  register: function(e) {
-    e.preventDefault();
-
-    //ajax post
-    fetch('/register', {
-      method: 'post',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        username: document.getElementById('username').value,
-        email: document.getElementById('email').value,
-        password: document.getElementById('password').value,
-        passwordConfirm: document.getElementById('passwordConfirm').value})
-    });
-
-    this.setState({menu: false, login: true, register: false});
-
-  },
-  back: function(e) {
-    e.preventDefault();
-    this.setState({menu: true, login: false, register: false})
-  },
-
-  //set mode
-  classic: function(e) {
-    e.preventDefault();
-    ReactDOM.render(
-      <ClassicLevels></ClassicLevels>, document.getElementById('root'));
-  },
-  relaxed: function(e) {
-    e.preventDefault();
-    ReactDOM.render(
-      <RelaxedLevels></RelaxedLevels>, document.getElementById('root'));
-  },
-  silent: function(e) {
-    e.preventDefault();
-    ReactDOM.render(
-      <SilentLevels></SilentLevels>, document.getElementById('root'));
-  },
-  advanced: function(e) {
-    e.preventDefault();
-    ReactDOM.render(
-      <AdvancedLevels></AdvancedLevels>, document.getElementById('root'));
-  },
-
-  //start game
-  goToGame: function() {
-    ReactDOM.render(
-      <Game mode={this.state.mode}></Game>, document.getElementById('root'));
-  },
-
   render: function() {
-    var menu = this.state.menu
-      ? <MenuOverlay start={this.start} loginScreen={this.loginScreen} registerScreen={this.registerScreen}></MenuOverlay>
-      : '';
-    var login = this.state.login
-      ? <LoginOverlay login={this.login} back={this.back} registerScreen={this.registerScreen} facebook={this.facebook}></LoginOverlay>
-      : '';
-    var register = this.state.register
-      ? <RegisterOverlay register={this.register} back={this.loginScreen}></RegisterOverlay>
-      : '';
+    // var username = this.state.hasUsername
+    //   ? '<div>{this.state.username}</div>'
+    //   : '';
     return (
       <div>
-       {menu}
-       {login}
-       {register}
         <div className="heading">
-          <img src="../images/CortexLogo4.svg" />
+          <img src="../images/CortexLogo4.svg"/>
+          {this.state.name}
         </div>
         <div className="menu">
-          <a href="" className="menu-panel" id="menu1" onClick={this.classic}>
+          <a className="menu-panel classicBackground" onClick={this.classic}>
             <h2>Classic</h2>
-            <h3>(position, sound)</h3>
+            <h3>position, sound</h3>
           </a>
-          <a href="" className="menu-panel" id="menu2" onClick={this.relaxed}>
+          <a className="menu-panel relaxedBackground" onClick={this.relaxed}>
             <h2>Relaxed</h2>
-            <h3>(position only)</h3>
+            <h3>position only</h3>
           </a>
-          <a href="" className="menu-panel" id="menu3" onClick={this.silent}>
+          <a className="menu-panel silentBackground" onClick={this.silent}>
             <h2>Silent</h2>
-            <h3>(position, color)</h3>
+            <h3>position, color</h3>
           </a>
-          <a href="" className="menu-panel" id="menu4" onClick={this.advanced}>
+          <a className="menu-panel advancedBackground" onClick={this.advanced}>
             <h2>Advanced</h2>
-            <h3>(color, position, sound)</h3>
+            <h3>color, position, sound</h3>
           </a>
         </div>
       </div>
     );
   }
 });
-
 
 module.exports = Mainmenu;

@@ -1,0 +1,242 @@
+/* game page css */
+
+.gameContainer {
+  height: 90vh;
+  width: 640px;
+/*  min-width: 640px;*/
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+  background-color: rgba(255, 255, 255, 0.5);
+}
+
+.gameBoard {
+  display: flex;
+  width: 70vh;
+  height: 60vh;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+}
+.gameSquare {
+  background-color: #BFBFBF;
+  width: 25%;
+  height: 33%;
+  margin: .5vh;
+  border: 2px solid rgba(109, 110, 113, 0.5);
+}
+
+.gameFullHeader {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 20vh;
+}
+
+.gameFullFooter {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  width: 100%;
+  height: 20vh;
+}
+
+.gameButtonsContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 95%;
+  height: 40%;
+  margin-bottom: 1vh;
+}
+.gameButtonsContainer a {
+  margin: 0 25px;
+  padding: 10px;
+  text-align: center;
+  color: white;
+  font-size: 24px;
+  font-weight: bold;
+  cursor: default;
+  border: 2px solid rgba(0, 0, 0, .15);
+  box-shadow: 2px 2px rgba(0, 0, 0, .15);
+}
+.gameButtonsContainer a:active {
+  box-shadow: 0px 0px;
+}
+.gameButtonsContainer a:hover {
+  cursor: pointer;
+}
+.timerContainer {
+  display: flex;
+  width: 100%;
+  justify-content: flex-end;
+  width: 50%;
+}
+
+.gameTitle {
+  display: flex;
+  flex-direction: row;
+  align-items: baseline;
+  justify-content: center;
+  width: 100%;
+}
+
+.modeTitle {
+  padding: 0 10px;
+  font-size: 50px;
+}
+
+.nTitle {
+  font-size: 24px !important;
+  font-weight: normal !important;
+}
+
+.gameHeading {
+  display: flex;
+  flex-direction: row;
+  width: 85%;
+  margin-bottom: 10px;
+}
+
+.gameContainer h2 {
+  font-size: 40px;
+  font-weight: normal;
+}
+
+.gameTimer {
+  font-size: 64px;
+}
+.gameScore {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  font-size: 64px;
+  width: 50%;
+}
+.scoreAlert {
+  display: flex;
+  height: 70px;
+  width: 95%;
+  height: 40%;
+  align-items: center;
+  justify-content: center;
+}
+.scoreAlertNegative {
+  background-color: transparent;
+  color: transparent;
+  font-size: 28px;
+  margin: 10px auto;
+  height: 5vh;
+  width: 50%;
+  padding: 5px;
+  text-align: center;
+  -webkit-animation-name: negativeFadeOut;
+  -webkit-animation-duration: 5s;
+  animation-name: negativeFadeOut;
+  animation-duration: 5s;
+}
+.scoreAlertPositive {
+  background-color: transparent;
+  color: transparent;
+  font-size: 28px;
+  margin: 10px auto;
+  height: 5vh;
+  width: 50%;
+  padding: 5px;
+  text-align: center;
+  -webkit-animation-name: positiveFadeOut;
+  -webkit-animation-duration: 5s;
+  animation-name: positiveFadeOut;
+  animation-duration: 5s;
+}
+
+/* negative alert fade in and out */
+
+@keyframes negativeFadeIn {
+  from {
+    background-color: transparent;
+    color: transparent;
+  }
+  to {
+    background-color: rgba(255, 51, 51, 0.8);
+    color: white;
+  }
+}
+@keyframes negativeFadeOut {
+  from {
+    background-color: rgba(255, 51, 51, 0.8);
+    color: white;
+  }
+  to {
+    background-color: transparent;
+    color: transparent;
+  }
+}
+@-webkit-keyframes negativeFadeIn {
+  from {
+    background-color: transparent;
+    color: transparent;
+  }
+  to {
+    background-color: rgba(255, 51, 51, 0.8);
+    color: white;
+  }
+}
+@-webkit-keyframes negativeFadeOut {
+  from {
+    background-color: rgba(255, 51, 51, 0.8);
+    color: white;
+  }
+  to {
+    background-color: transparent;
+    color: transparent;
+  }
+}
+
+/* positive alert fade in and out */
+
+@keyframes positiveFadeIn {
+  from {
+    background-color: transparent;
+    color: transparent;
+  }
+  to {
+    background-color: rgba(0, 204, 153, 0.8);
+    color: white
+  }
+}
+@keyframes positiveFadeOut {
+  from {
+    background-color: rgba(0, 204, 153, 0.8);
+    color: white;
+  }
+  to {
+    background-color: transparent;
+    color: transparent;
+  }
+}
+@-webkit-keyframes positiveFadeIn {
+  from {
+    background-color: transparent;
+    color: transparent;
+  }
+  to {
+    background-color: rgba(0, 204, 153, 0.8);
+    color: white
+  }
+}
+@-webkit-keyframes positiveFadeOut {
+  from {
+    background-color: rgba(0, 204, 153, 0.8);
+    color: white;
+  }
+  to {
+    background-color: transparent;
+    color: transparent;
+  }
+}

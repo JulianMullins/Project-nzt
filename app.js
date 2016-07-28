@@ -16,16 +16,23 @@ var routes = require('./server/index');
 var auth = require('./server/auth');
 var clientExpressFunctions = require('./server/clientExpressFunctions');
 var highScores = require('./server/highScores');
-var serverData = require('./server/serverData')
+var serverData = require('./server/serverData');
 
 
 var User = require('./models/User');
-var Stats = require('./models/Stats')
+var Stats = require('./models/Stats');
+var Leaderboard = require('./models/Leaderboard');
+
 
 var app = express();
 var server = require('http').Server(app);
 var io = require('socket.io')(server);
 //end of react stuff
+
+//axios
+var axios = require('axios');
+axios.defaults.baseURL = process.env.url;
+
 
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs');
@@ -63,9 +70,20 @@ passport.deserializeUser(function(id, done) {
   });
 });
 
+
 // passport strategy
-passport.use(new LocalStrategy(function(username, password, done) {
+passport.use(new LocalStrategy({
+  passReqToCallback:true
+  },
+  function(req, username, password, done) {
+    console.log(req.user)
+    if(req.user && !req.user.temp){
+      console.log("already logged in")
+      return done(null,req.user);
+    }
+
     // Find the user with the given username
+    console.log("PASSPORT DATA: ", username, password,req.body)
     User.findOne({$or: [{username: username},{email:username}] }, function (err, user) {
       // if there's an error, finish trying to authenticate (auth failed)
       if (err) {
@@ -73,7 +91,7 @@ passport.use(new LocalStrategy(function(username, password, done) {
         return done(err);
       }
       console.log(user)
-      // if no user present, auth failed
+      
       if (!user) {
         //console.log(user);
         return done(null, false, { message: 'Incorrect username.' });
@@ -83,13 +101,23 @@ passport.use(new LocalStrategy(function(username, password, done) {
           return done(err)
         }
         else if(!res){
-          return done(null,false);
+          return done(null,null);
         }
         else{
+          if(req.user){
+            user.currentGame = req.user.currentGame;
+            user.stats.combineStats(req.user.stats);
+            user.combineMaxN(req.user.maxN);
+            user.save();
+            //User.findById(req.user._id).remove();
+          }
+          //user.currentGame = games.concat(user.currentGame);
           return done(null,user)
         }
       })
     });
+
+
   }
 ));
 
@@ -97,41 +125,57 @@ passport.use(new LocalStrategy(function(username, password, done) {
 passport.use(new FacebookStrategy({
     clientID: process.env.FACEBOOK_clientID,
     clientSecret: process.env.FACEBOOK_clientSecret,
+    //callbackURL: process.env.url+"/login/facebook/callback",
     callbackURL: process.env.url+"/login/facebook/callback",
-    profileFields: ['id','email','name']
+    profileFields: ['id','email','name'],
+    passReqToCallback:true
   },
-  function(accessToken, refreshToken, profile, done) {
+  function(req,accessToken, refreshToken, profile, done) {
    console.log(profile)
-    User.findOne({$or:[{facebookId: profile.id},{email:profile.emails[0].value}] }, function (err, user) {
+   if(req.user && req.user.facebookId && !req.user.temp){
+    return done(null,req.user);
+   }
+    User.findOne({$or:[{facebookId: profile.id},{email:profile._json.email}] })
+      .populate('stats')
+      .exec(function (err, user) {
       // if there's an error, finish trying to authenticate (auth failed)
       //console.log(profile.emails[0].value)
+
+
+        var email = profile._json.email;
+        var username = profile._json.first_name + ' '+profile._json.last_name;
+
 
       if (err) {
         console.error(err);
         return done(err);
       }
-      // if no user present, auth failed
-      var userStats = new Stats();
-      userStats.save();
-      if (!user) {
-        console.log(profile)
-        user = new User({
+
+      else if (!user) {
+
+        req.user.update({
           facebookId:profile.id,
-          email:profile._json.email,
-          username:profile._json.first_name + ' '+profile._json.last_name,
-          stats:userStats,
+          email:email,
+          username:username,
           temp:false
-        });
-        user.save(function(err,tempUser){
-          if(err){
-            return done(err, null);
-          }
-          else{
-            return done(null, tempUser);
-          }
-        });
+        })
+        var user = req.user;
+        req.logout();
+        return done(null,user);
       }
-      else if(!user.facebookId){
+
+
+      else if(req.user){
+        console.log("req.user and user", user, user.stats)
+        user.currentGame = req.user.currentGame;
+        user.stats.combineStats(req.user.stats);
+        user.combineMaxN(req.user.maxN);
+        user.save();
+      }
+
+
+      if(!user.facebookId){
+        console.log("no facebook id")
         user.facebookId = profile.id
         //console.log("facebook id added")
         user.save(function(err){
@@ -142,16 +186,56 @@ passport.use(new FacebookStrategy({
       // auth has has succeeded
       else{
         //console.log("success")
+        console.log("returning done user")
         return done(null, user);
       }
     });
-  }
-));
+}));
+
+
+
+// var registerFacebookUser = function(facebookId,email,username,currentUser){
+
+//     var user = new User({
+//       facebookId:facebookId,
+//       email:email,
+//       name:username,
+//       stats:null,
+//       temp:false,
+//       maxN:{
+//         classic:1,
+//         relaxed:1,
+//         silent:1,
+//         advanced:1
+//       },
+//       currentGame:[]
+//     });
+
+//     if(currentUser){
+//       user.stats = currentUser.stats;
+//       user.currentGame = currentUser.currentGame;
+//       user.maxN = currentUser.maxN;
+//       //User.findById(currentUser._id).remove();
+//     }
+//     else{
+//       var leaderboard = new Leaderboard({user:user._id});
+//       leaderboard.save();
+//       var newStats = new Stats({
+//         user:user._id,
+//         leaderboard: leaderboard._id
+//       });
+//       newStats.save();
+//       user.stats = newStats._id;
+//     }
+
+//     return user;
+// }
 
 
 app.use('/', auth(passport));
 app.use('/',clientExpressFunctions);
 app.use('/', routes);
+app.use('/', highScores);
 
 
 // catch 404 and forward to error handler

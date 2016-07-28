@@ -1,0 +1,152 @@
+.overlay {
+  display: flex;
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.9);
+  padding-top: 5vh;
+  justify-content: flex-start;
+  align-items: center;
+  flex-direction: column;
+  z-index: 2;
+}
+
+.overlayContent {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 75vw;
+  min-height: 75vh;
+}
+
+.overlayContent p {
+  text-align: center;
+  margin: 5vh 0;
+  font-size: 20px;
+}
+
+.overlayContent a {
+  text-decoration: none;
+  text-align: center;
+}
+
+.gameStartBtn {
+  margin: 5vh 0;
+  padding: 20px;
+  font-size: 32px;
+  cursor: pointer;
+  transition-duration: .5s;
+}
+
+.tutorialBtn {
+  padding: 10px;
+  margin-top: 5vh;
+  transition-duration: .5s;
+}
+
+.tutorialBtnClassic {
+  border: 1px solid #F13542;
+}
+
+.tutorialBtnClassic:hover {
+  background-color: #F13542;
+  color: white;
+  transition-duration: .5s;
+}
+
+.tutorialBtnRelaxed {
+  border: 1px solid #01B6A7;
+}
+
+.tutorialBtnRelaxed:hover {
+  background-color: #01B6A7;
+  color: white;
+  transition-duration: .5s;
+}
+
+.tutorialBtnSilent {
+  border: 1px solid #7CD9D2;
+}
+
+.tutorialBtnSilent:hover {
+  background-color: #7CD9D2;
+  color: white;
+  transition-duration: .5s;
+}
+
+.tutorialBtnAdvanced {
+  border: 1px solid #F1BA03;
+}
+
+.tutorialBtnAdvanced:hover {
+  background-color: #F1BA03;
+  color: white;
+  transition-duration: .5s;
+}
+
+.classicStartBtn {
+  background-color: #F13542;
+  transition-duration: .5s;
+  color: white;
+}
+
+.classicStartBtn:hover {
+  background-color: rgba(241, 53, 66, 0.6);
+}
+
+.relaxedStartBtn {
+  background-color: #01B6A7;
+  transition-duration: .5s;
+  color: white;
+}
+
+.relaxedStartBtn:hover {
+  background-color: rgba(1, 182, 167, 0.6);
+}
+
+.silentStartBtn {
+  background-color: #7CD9D2;
+  transition-duration: .5s;
+  color: white;
+}
+
+.silentStartBtn:hover {
+  background-color: rgba(124, 217, 210, 0.6);
+}
+
+.advancedStartBtn {
+  background-color: #F1BA03;
+  transition-duration: .5s;
+  color: white;
+}
+
+.advancedStartBtn:hover {
+  background-color: rgba(241, 186, 3, 0.6);
+}
+
+.keyClassic {
+  border: 2px solid #F13542;
+  color: #F13542;
+}
+
+.keySilent {
+  border: 2px solid #7CD9D2;
+  color: #7CD9D2;
+}
+
+.keyRelaxed {
+  border: 2px solid #01B6A7;
+  color: #01B6A7;
+}
+
+.keyAdvanced {
+  border: 2px solid #F1BA03;
+  color: #F1BA03;
+}
+
+.keyBlank {
+  visibility: hidden;
+}
