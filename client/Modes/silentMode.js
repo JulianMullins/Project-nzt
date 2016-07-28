@@ -200,13 +200,11 @@ var SilentMode = React.createClass({
       if (timeKeeper === 60) {
         clearInterval(iterations);
         setTimeout(function() {
-          gameScore = this.state.score;
-          console.log(gameScore, 'game score')
           console.log(reactionTimes, 'reaction times')
           console.log(this.state)
           axios.post('/gameEnd',{
               gameId: this.state.gameId,
-              score: gameScore,
+              score: fullScore,
               reactionTimes: reactionTimes
           }).then(function(response){
             console.log('end game posted')
