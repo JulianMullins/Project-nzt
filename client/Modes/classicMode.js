@@ -14,6 +14,7 @@ var reactionTimes = [];
 var gameScore;
 var reactionEnd = null;
 var iterations;
+var fullScore=0;
 
 var ClassicMode = React.createClass({
   getInitialState: function() {

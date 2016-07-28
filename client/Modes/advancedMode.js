@@ -2,6 +2,7 @@ var React = require('react');
 var GameTimer = require('./gameTimer');
 var axios = require('axios');
 var AdvancedStartOverlay = require('./gameStartOverlay').AdvancedStartOverlay;
+var fullScore=0;
 
 //COLLECTION OF GLOBAL VARIABLES TO MAKE EVERYONES LIFE EASIER
 //create global variable for reaction counter
@@ -13,6 +14,7 @@ var reactionTimes = [];
 var gameScore;
 var reactionEnd = null;
 var iterations;
+var fullScore=0;
 
 var AdvancedMode = React.createClass({
   getInitialState: function() {
@@ -122,14 +124,23 @@ var AdvancedMode = React.createClass({
             alert: "Missed a match"
           })
           reactionEnd = null;
-          if (this.state.score !== 0) {
+          if ((this.state.score-5) >= 0) {
             this.setState({
-              score: this.state.score - this.state.penalty
+              score: this.state.score - 5
             });
           }
+          else{
+          this.setState({
+            score: 0
+          });
+        }
         }
       } else if (this.state.correct[0] === this.state.colorMatch && this.state.correct[1] === this.state.soundMatch && this.state.correct[2] === this.state.positionMatch) {
         reactionTimes.push(reactionEnd - reactionStart);
+        var currentScore=((2000-reactionTimes[reactionTimes.length-1])/100).toFixed(2);
+        console.log(currentScore)
+        fullScore+=parseFloat(currentScore);
+        console.log(fullScore)
         reactionEnd = null;
         this.setState({
           soundPressed: noStyle,
@@ -142,7 +153,7 @@ var AdvancedMode = React.createClass({
             false, false, false
           ],
           alert: "Good job!",
-          score: this.state.score + this.state.positivePoints
+          score: this.state.score + parseInt(currentScore)
         })
       } else {
         //console.log('incorrect')
@@ -158,9 +169,14 @@ var AdvancedMode = React.createClass({
           ],
           alert: 'Not a match'
         })
-        if (this.state.score !== 0) {
+        if ((this.state.score-5) >= 0) {
           this.setState({
-            score: this.state.score - this.state.penalty
+            score: this.state.score - 5
+          });
+        }
+        else{
+          this.setState({
+            score: 0
           });
         }
       }
