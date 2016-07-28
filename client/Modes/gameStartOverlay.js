@@ -9,18 +9,19 @@ var SilentStartOverlay = React.createClass({
 	          <h2 className="silent">Silent Mode</h2>
 	          <h3 className="silent">(position &amp; color)</h3>
 	            <p className="silent">Use the left and right arrow keys or press the corresponding buttons to select a match. 
-	            If there is a position and color match at the same time, select both options.</p>
+	            If there is a position and color match at the same time, select both options simultaneously.</p>
 	            <div className="key-wrapper">
 	              <ul className="row">
-	                <li className="key k38">↑</li>
+	                <li className="key keySilent k38">↑</li>
 	              </ul>
 
 	              <ul className="row">
-	                <li className="key k37">←</li>
-	                <li className="key k40">↓</li>
-	                <li className="key k39">→</li>
+	                <li className="key keySilent k37">←</li>
+	                <li className="key keyBlank k40">↓</li>
+	                <li className="key keySilent k39">→</li>
 	              </ul>
 	            </div>
+	            <Link to="/tutorial"><h3 className="silent tutorialBtn tutorialBtnSilent">Full Tutorial</h3></Link>
 	            <a onClick={this.props.click} className="gameStartBtn silentStartBtn">
 	            	Start Game
 	            </a>
@@ -42,15 +43,16 @@ var ClassicStartOverlay = React.createClass({
 	            If there is a position and sound match at the same time, select both options simultaneously.</p>
 	            <div className="key-wrapper">
 	              <ul className="row">
-	                <li className="key k38">↑</li>
+	                <li className="key keyClassic k38">↑</li>
 	              </ul>
 
 	              <ul className="row">
-	                <li className="key k37">←</li>
-	                <li className="key k40">↓</li>
-	                <li className="key k39">→</li>
+	                <li className="key keyClassic k37">←</li>
+	                <li className="key k40 keyBlank"></li>
+	                <li className="key keyClassic k39">→</li>
 	              </ul>
 	            </div>
+	            <Link to="/tutorial"><h3 className="classic tutorialBtn tutorialBtnClassic">Full Tutorial</h3></Link>
 	            <a onClick={this.props.click} className="gameStartBtn classicStartBtn">
 	            	Start Game
 	            </a>
@@ -71,15 +73,16 @@ var RelaxedStartOverlay = React.createClass({
 	            <p className="relaxed">Use the up arrow key or press the corresponding button to select a position match.</p>
 	            <div className="key-wrapper">
 	              <ul className="row">
-	                <li className="key k38">↑</li>
+	                <li className="key k38 relaxed keyRelaxed">↑</li>
 	              </ul>
 
 	              <ul className="row">
-	                <li className="key k37">←</li>
-	                <li className="key k40">↓</li>
-	                <li className="key k39">→</li>
+	                <li className="key keyBlank k37">←</li>
+	                <li className="key keyBlank k40">↓</li>
+	                <li className="key keyBlank k39">→</li>
 	              </ul>
 	            </div>
+	            <Link to="/tutorial"><h3 className="relaxed tutorialBtn tutorialBtnRelaxed">Full Tutorial</h3></Link>
 	            <a onClick={this.props.click} className="gameStartBtn relaxedStartBtn">
 	            	Start Game
 	            </a>
@@ -101,15 +104,16 @@ var AdvancedStartOverlay = React.createClass({
 	            If there is a match of two (or all three) of the stimuli at the same time, select two or three options simultaneously.</p>
 	            <div className="key-wrapper">
 	              <ul className="row">
-	                <li className="key k38">↑</li>
+	                <li className="key keyAdvanced k38">↑</li>
 	              </ul>
 
 	              <ul className="row">
-	                <li className="key k37">←</li>
-	                <li className="key k40">↓</li>
-	                <li className="key k39">→</li>
+	                <li className="key keyAdvanced k37">←</li>
+	                <li className="key k40 keyBlank">↓</li>
+	                <li className="key keyAdvanced k39">→</li>
 	              </ul>
 	            </div>
+	            <Link to="/tutorial"><h3 className="advanced tutorialBtn tutorialBtnAdvanced">Full Tutorial</h3></Link>
 	            <a onClick={this.props.click} className="gameStartBtn advancedStartBtn">
 	            	Start Game
 	            </a>

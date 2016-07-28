@@ -98,7 +98,7 @@ ReactDOM.render((
       <Route path="register" component={Register}/>
       <Route path="gameOver" component={GameOver}/>
       <Route path="leaderboard" component={Leaderboard}/>
-      <Route path="statss" component={Stats}/>
+      <Route path="stats" component={Stats}/>
       <Route path="contact" component={Contact}/>
       <Route path="science" component={Science}/>
 

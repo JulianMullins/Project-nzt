@@ -3,15 +3,16 @@ var Leaderboard = require('../models/Leaderboard');
 var HighScore = require('../models/HighScore');
 
 //modes: classic,relaxed,silent,advanced
+var serverLeaderboard=null;
+//serverLeaderboard.save();
 
-var serverLeaderboard = '5799071df2049724272d4876';
 
 
 var modeMultiplier = {
-  classic: 1,
-  relaxed: 1,
-  silent: 1,
-  advanced: 1
+  classic: 5,
+  relaxed: 10,
+  silent: 15,
+  advanced: 20
 }
 
 var penaltyPoints = 5;
