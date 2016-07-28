@@ -14,7 +14,8 @@ var reactionTimes = [];
 //global variable for game score (saved once time runs out)
 var gameScore;
 var iterations;
-var fullScore=0;
+var fullScore = 0;
+var currentScore;
 
 var RelaxedMode = React.createClass({
   getInitialState: function() {
@@ -47,32 +48,28 @@ var RelaxedMode = React.createClass({
       modeMultiplier: 1,
       penalty: 0,
       positivePoints: 0,
-      userId:null
+      userId: null
     }
   },
   componentDidMount: function() {
-    axios.post('/startGame/' + this.state.mode + '/' + this.state.N)
-    .then(function(response) {
+    axios.post('/startGame/' + this.state.mode + '/' + this.state.N).then(function(response) {
       console.log("start game posted", response)
       this.setState({
-        tempUser: response.data.tempUser, 
-        gameId: response.data.gameId, 
-        modeMultiplier: response.data.modeMultiplier, 
-        penalty: response.data.penalty, 
+        tempUser: response.data.tempUser,
+        gameId: response.data.gameId,
+        modeMultiplier: response.data.modeMultiplier,
+        penalty: response.data.penalty,
         positivePoints: response.data.positivePoints,
-        userId:response.data.userId
+        userId: response.data.userId
       });
       console.log(this.state)
       console.log("game posted")
-    
-      axios.get('/isUser')
-      .then(function(response){
-        console.log("isuser data: "+response.data)
+
+      axios.get('/isUser').then(function(response) {
+        console.log("isuser data: " + response.data)
       })
 
     }.bind(this))
-
-
 
     console.log("component mounted")
   },
@@ -88,10 +85,9 @@ var RelaxedMode = React.createClass({
   },
   startGame: function() {
 
-    axios.get('/isUser')
-      .then(function(response){
-        console.log(response.data)
-      })
+    axios.get('/isUser').then(function(response) {
+      console.log(response.data)
+    })
 
     this.setState({overlay: false});
     this.position();
@@ -106,10 +102,8 @@ var RelaxedMode = React.createClass({
       timeKeeper--;
 
       if (this.state.keepScore && !this.state.posMatch) {
-        var currentScore=((2000-reactionTimes[reactionTimes.length-1])/100).toFixed(2);
-        console.log(currentScore)
-        fullScore+=parseFloat(currentScore);
-        console.log(fullScore)
+        currentScore = ((2000 - reactionTimes[reactionTimes.length - 1]) / 100).toFixed(2);
+        fullScore += parseFloat(currentScore);
         this.setState({
           alert: "Good job",
           score: this.state.score + parseInt(currentScore),
@@ -117,29 +111,27 @@ var RelaxedMode = React.createClass({
         });
       } else if (!this.state.keepScore && this.state.posPressed) {
         this.setState({alert: 'Not a match'});
-        if ((this.state.score-5) >= 0) {
+        if ((this.state.score - 5) >= 0) {
+          currentScore = 5;
           this.setState({
             score: this.state.score - 5,
             posStyle: noStyle
           });
-        }
-        else{
-          this.setState({
-            score: 0
-          });
+        } else {
+          currentScore = this.state.score
+          this.setState({score: 0});
         }
       } else if (this.state.keepScore && this.state.posMatch) {
         this.setState({alert: "Missed a match"});
-        if ((this.state.score-5) >= 0) {
+        if ((this.state.score - 5) >= 0) {
+          currentScore = 5
           this.setState({
             score: this.state.score - 5,
             posStyle: noStyle
           });
-        }
-        else{
-          this.setState({
-            score: 0
-          });
+        } else {
+          currentScore = this.state.score;
+          this.setState({score: 0});
         }
       }
 
@@ -257,7 +249,7 @@ var RelaxedMode = React.createClass({
       scoreUpdate = (
         <h2 style={{
           color: '#01B6A7'
-        }}>+10</h2>
+        }}>+{parseInt(currentScore)}</h2>
       )
     } else if (this.state.alert === "Not a match" || this.state.alert === "Missed a match") {
       scoreAlert = (
@@ -265,11 +257,11 @@ var RelaxedMode = React.createClass({
           {this.state.alert}
         </div>
       )
-      if (this.state.score > 0) {
+      if (currentScore !== 0) {
         scoreUpdate = (
           <h2 style={{
             color: '#F13542'
-          }}>-5</h2>
+          }}>-{currentScore}</h2>
         )
       }
     } else {
@@ -332,8 +324,9 @@ var RelaxedMode = React.createClass({
 var noStyle = {}
 
 var pushStyle = {
-  color: 'rgba(0, 0, 0, .65)',
-  boxShadow: '0 0'
+  backgroundColor: 'rgba(0, 0, 0, .1729)',
+  boxShadow: '0px 0px',
+  color: 'white'
 }
 
 var standardStyle = {

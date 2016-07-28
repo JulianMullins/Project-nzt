@@ -263,6 +263,8 @@ var React = require('react');
 var GameTimer = require('./gameTimer');
 var axios = require('axios');
 var AdvancedStartOverlay = require('./gameStartOverlay').AdvancedStartOverlay;
+var fullScore = 0;
+var currentScore;
 
 //COLLECTION OF GLOBAL VARIABLES TO MAKE EVERYONES LIFE EASIER
 //create global variable for reaction counter
@@ -274,6 +276,7 @@ var reactionTimes = [];
 var gameScore;
 var reactionEnd = null;
 var iterations;
+var fullScore = 0;
 
 var AdvancedMode = React.createClass({
   displayName: 'AdvancedMode',
@@ -370,14 +373,22 @@ var AdvancedMode = React.createClass({
             alert: "Missed a match"
           });
           reactionEnd = null;
-          if (this.state.score !== 0) {
+          if (this.state.score - 5 >= 0) {
+            currentScore = 5;
             this.setState({
-              score: this.state.score - this.state.penalty
+              score: this.state.score - 5
+            });
+          } else {
+            currentScore = this.state.score;
+            this.setState({
+              score: 0
             });
           }
         }
       } else if (this.state.correct[0] === this.state.colorMatch && this.state.correct[1] === this.state.soundMatch && this.state.correct[2] === this.state.positionMatch) {
         reactionTimes.push(reactionEnd - reactionStart);
+        currentScore = ((2000 - reactionTimes[reactionTimes.length - 1]) / 100).toFixed(2);
+        fullScore += parseFloat(currentScore);
         reactionEnd = null;
         this.setState({
           soundPressed: noStyle,
@@ -388,7 +399,7 @@ var AdvancedMode = React.createClass({
           positionMatch: false,
           correct: [false, false, false],
           alert: "Good job!",
-          score: this.state.score + this.state.positivePoints
+          score: this.state.score + parseInt(currentScore)
         });
       } else {
         //console.log('incorrect')
@@ -402,9 +413,15 @@ var AdvancedMode = React.createClass({
           correct: [false, false, false],
           alert: 'Not a match'
         });
-        if (this.state.score !== 0) {
+        if (this.state.score - 5 >= 0) {
+          currentScore = 5;
           this.setState({
-            score: this.state.score - this.state.penalty
+            score: this.state.score - 5
+          });
+        } else {
+          currentScore = this.state.score;
+          this.setState({
+            score: 0
           });
         }
       }
@@ -559,7 +576,8 @@ var AdvancedMode = React.createClass({
         { style: {
             color: 'green'
           } },
-        '+10'
+        '+',
+        parseInt(currentScore)
       );
     } else if (this.state.alert === "Not a match" || this.state.alert === "Missed a match") {
       scoreAlert = React.createElement(
@@ -573,7 +591,8 @@ var AdvancedMode = React.createClass({
           { style: {
               color: 'red'
             } },
-          '-5'
+          '-',
+          currentScore
         );
       }
     } else {
@@ -709,6 +728,8 @@ var React = require('react');
 var GameTimer = require('./gameTimer');
 var ClassicStartOverlay = require('./gameStartOverlay').ClassicStartOverlay;
 var axios = require('axios');
+var fullScore = 0;
+var currentScore;
 
 //COLLECTION OF GLOBAL VARIABLES TO MAKE EVERYONES LIFE EASIER
 //create global variable for reaction counter
@@ -720,6 +741,7 @@ var reactionTimes = [];
 var gameScore;
 var reactionEnd = null;
 var iterations;
+var fullScore = 0;
 
 var ClassicMode = React.createClass({
   displayName: 'ClassicMode',
@@ -746,13 +768,7 @@ var ClassicMode = React.createClass({
   componentDidMount: function componentDidMount() {
     axios.post('/startGame/' + this.state.mode + '/' + this.state.N).then(function (response) {
       console.log("start game posted", response);
-      this.setState({
-        tempUser: response.data.tempUser,
-        gameId: response.data.gameId,
-        modeMultiplier: response.data.modeMultiplier,
-        penalty: response.data.penalty,
-        positivePoints: response.data.positivePoints
-      });
+      this.setState({ tempUser: response.data.tempUser, gameId: response.data.gameId, modeMultiplier: response.data.modeMultiplier, penalty: response.data.penalty, positivePoints: response.data.positivePoints });
       console.log("game posted");
     }.bind(this));
     console.log("component mounted");
@@ -786,26 +802,36 @@ var ClassicMode = React.createClass({
       timeKeeper++;
       if (this.state.keepScore && !(this.state.soundMatch || this.state.positionMatch)) {
         reactionTimes.push(reactionEnd - reactionStart);
+        currentScore = ((2000 - reactionTimes[reactionTimes.length - 1]) / 100).toFixed(2);
+        fullScore += parseFloat(currentScore);
         reactionEnd = null;
         this.setState({
-          score: this.state.score + this.state.positivePoints,
+          score: this.state.score + parseInt(currentScore),
           alert: 'Good job'
         });
       } else if (!this.state.keepScore && (this.state.posPressed || this.state.soundPressed)) {
         this.setState({ alert: "Not a match" });
         reactionEnd = null;
-        if (this.state.score !== 0) {
+        if (this.state.score - 5 >= 0) {
+          currentScore = 5;
           this.setState({
-            score: this.state.score - this.state.penalty
+            score: this.state.score - 5
           });
+        } else {
+          currentScore = this.state.score;
+          this.setState({ score: 0 });
         }
       } else if (this.state.soundMatch || this.state.positionMatch) {
         this.setState({ alert: "Missed a match" });
         reactionEnd = null;
-        if (this.state.score !== 0) {
+        if (this.state.score - 5 >= 0) {
+          currentScore = 5;
           this.setState({
             score: this.state.score - this.state.penalty
           });
+        } else {
+          currentScore = this.state.score;
+          this.setState({ score: 0 });
         }
       }
       this.setState({
@@ -886,13 +912,11 @@ var ClassicMode = React.createClass({
       if (timeKeeper === 60) {
         clearInterval(iterations);
         setTimeout(function () {
-          gameScore = this.state.score;
-          console.log(gameScore, 'game score');
           console.log(reactionTimes, 'reaction times');
           console.log(this.state);
           axios.post('/gameEnd', {
             gameId: this.state.gameId,
-            score: gameScore,
+            score: fullScore,
             reactionTimes: reactionTimes
           }).then(function (response) {
             console.log('end game posted');
@@ -951,7 +975,8 @@ var ClassicMode = React.createClass({
         { style: {
             color: 'green'
           } },
-        '+10'
+        '+',
+        parseInt(currentScore)
       );
     } else if (this.state.alert === "Not a match" || this.state.alert === "Missed a match") {
       scoreAlert = React.createElement(
@@ -959,13 +984,14 @@ var ClassicMode = React.createClass({
         { className: 'scoreAlertNegative' },
         this.state.alert
       );
-      if (this.state.score > 0) {
+      if (currentScore !== 0) {
         scoreUpdate = React.createElement(
           'h2',
           { style: {
               color: 'red'
             } },
-          '-5'
+          '-',
+          currentScore
         );
       }
     } else {
@@ -973,7 +999,9 @@ var ClassicMode = React.createClass({
       scoreUpdate = React.createElement('h2', null);
     }
 
-    var gameTimer = this.state.overlay ? "" : React.createElement(GameTimer, { timeStyle: { 'color': "#F13542" } });
+    var gameTimer = this.state.overlay ? "" : React.createElement(GameTimer, { timeStyle: {
+        'color': "#F13542"
+      } });
 
     return React.createElement(
       'div',
@@ -1058,7 +1086,9 @@ var ClassicMode = React.createClass({
 var noStyle = {};
 
 var pushStyle = {
-  color: 'black'
+  backgroundColor: 'rgba(0, 0, 0, .1729)',
+  boxShadow: '0px 0px',
+  color: 'white'
 };
 
 var standardStyle = {
@@ -1080,328 +1110,337 @@ var React = require('react');
 
 
 var SilentStartOverlay = React.createClass({
-	displayName: 'SilentStartOverlay',
+  displayName: 'SilentStartOverlay',
 
-	render: function render() {
-		return React.createElement(
-			'div',
-			{ className: 'overlay' },
-			React.createElement(
-				'div',
-				{ className: 'overlayContent' },
-				React.createElement(
-					'h2',
-					{ className: 'silent' },
-					'Silent Mode'
-				),
-				React.createElement(
-					'h3',
-					{ className: 'silent' },
-					'(position & color)'
-				),
-				React.createElement(
-					'p',
-					{ className: 'silent' },
-					'Use the left and right arrow keys or press the corresponding buttons to select a match. If there is a position and color match at the same time, select both options simultaneously.'
-				),
-				React.createElement(
-					'div',
-					{ className: 'key-wrapper' },
-					React.createElement(
-						'ul',
-						{ className: 'row' },
-						React.createElement(
-							'li',
-							{ className: 'key keySilent k37' },
-							'←'
-						),
-						React.createElement(
-							'li',
-							{ className: 'key keyBlank k40' },
-							'↓'
-						),
-						React.createElement(
-							'li',
-							{ className: 'key keySilent k39' },
-							'→'
-						)
-					)
-				),
-				React.createElement(
-					_reactRouter.Link,
-					{ to: '/tutorial' },
-					React.createElement(
-						'h3',
-						{ className: 'silent tutorialBtn tutorialBtnSilent' },
-						'Full Tutorial'
-					)
-				),
-				React.createElement(
-					'a',
-					{ onClick: this.props.click, className: 'gameStartBtn silentStartBtn' },
-					'Start Game'
-				),
-				React.createElement(
-					_reactRouter.Link,
-					{ to: '/home' },
-					React.createElement(
-						'h3',
-						{ className: 'silent' },
-						'← Go Back'
-					)
-				)
-			)
-		);
-	}
+  render: function render() {
+    return React.createElement(
+      'div',
+      { className: 'overlay' },
+      React.createElement(
+        'div',
+        { className: 'overlayContent' },
+        React.createElement(
+          'h2',
+          { className: 'silent' },
+          'Silent Mode'
+        ),
+        React.createElement(
+          'h3',
+          { className: 'silent' },
+          '(position & color)'
+        ),
+        React.createElement(
+          'p',
+          { className: 'silent' },
+          'Use the left and right arrow keys or press the corresponding buttons to select a match. If there is a position and color match at the same time, select both options simultaneously.'
+        ),
+        React.createElement(
+          'div',
+          { className: 'key-wrapper' },
+          React.createElement(
+            'ul',
+            { className: 'row' },
+            React.createElement(
+              'li',
+              { className: 'key keySilent k37' },
+              '←'
+            ),
+            React.createElement(
+              'li',
+              { className: 'key keyBlank k40' },
+              '↓'
+            ),
+            React.createElement(
+              'li',
+              { className: 'key keySilent k39' },
+              '→'
+            )
+          )
+        ),
+        React.createElement(
+          _reactRouter.Link,
+          { to: '/tutorial' },
+          React.createElement(
+            'h3',
+            { className: 'silent tutorialBtn tutorialBtnSilent' },
+            'Full Tutorial'
+          )
+        ),
+        React.createElement(
+          'a',
+          { onClick: this.props.click, className: 'gameStartBtn silentStartBtn' },
+          'Start Game'
+        ),
+        React.createElement(
+          _reactRouter.Link,
+          { to: '/levels/silent' },
+          React.createElement(
+            'h3',
+            { className: 'silent' },
+            '← Go Back'
+          )
+        )
+      )
+    );
+  }
 });
 
 var ClassicStartOverlay = React.createClass({
-	displayName: 'ClassicStartOverlay',
+  displayName: 'ClassicStartOverlay',
 
-	render: function render() {
-		return React.createElement(
-			'div',
-			{ className: 'overlay' },
-			React.createElement(
-				'div',
-				{ className: 'overlayContent' },
-				React.createElement(
-					'h2',
-					{ className: 'classic' },
-					'Classic Mode'
-				),
-				React.createElement(
-					'h3',
-					{ className: 'classic' },
-					'(position & sound)'
-				),
-				React.createElement(
-					'p',
-					{ className: 'classic' },
-					'Use the left and right arrow keys or press the corresponding buttons to select a match. If there is a position and sound match at the same time, select both options simultaneously.'
-				),
-				React.createElement(
-					'div',
-					{ className: 'key-wrapper' },
-					React.createElement(
-						'ul',
-						{ className: 'row' },
-						React.createElement(
-							'li',
-							{ className: 'key keyClassic k37' },
-							'←'
-						),
-						React.createElement('li', { className: 'key k40 keyBlank' }),
-						React.createElement(
-							'li',
-							{ className: 'key keyClassic k39' },
-							'→'
-						)
-					)
-				),
-				React.createElement(
-					_reactRouter.Link,
-					{ to: '/tutorial' },
-					React.createElement(
-						'h3',
-						{ className: 'classic tutorialBtn tutorialBtnClassic' },
-						'Full Tutorial'
-					)
-				),
-				React.createElement(
-					'a',
-					{ onClick: this.props.click, className: 'gameStartBtn classicStartBtn' },
-					'Start Game'
-				),
-				React.createElement(
-					_reactRouter.Link,
-					{ to: '/home' },
-					React.createElement(
-						'h3',
-						{ className: 'classic' },
-						'← Go Back'
-					)
-				)
-			)
-		);
-	}
+  render: function render() {
+    return React.createElement(
+      'div',
+      { className: 'overlay' },
+      React.createElement(
+        'div',
+        { className: 'overlayContent' },
+        React.createElement(
+          'h2',
+          { className: 'classic' },
+          'Classic Mode'
+        ),
+        React.createElement(
+          'h3',
+          { className: 'classic' },
+          '(position & sound)'
+        ),
+        React.createElement(
+          'p',
+          { className: 'classic' },
+          'Use the left and right arrow keys or press the corresponding buttons to select a match. If there is a position and sound match at the same time, select both options simultaneously.'
+        ),
+        React.createElement(
+          'div',
+          { className: 'key-wrapper' },
+          React.createElement(
+            'ul',
+            { className: 'row' },
+            React.createElement(
+              'li',
+              { className: 'key keyBlank k38' },
+              '↑'
+            )
+          ),
+          React.createElement(
+            'ul',
+            { className: 'row' },
+            React.createElement(
+              'li',
+              { className: 'key keyClassic k37' },
+              '←'
+            ),
+            React.createElement('li', { className: 'key k40 keyBlank' }),
+            React.createElement(
+              'li',
+              { className: 'key keyClassic k39' },
+              '→'
+            )
+          )
+        ),
+        React.createElement(
+          _reactRouter.Link,
+          { to: '/tutorial' },
+          React.createElement(
+            'h3',
+            { className: 'classic tutorialBtn tutorialBtnClassic' },
+            'Full Tutorial'
+          )
+        ),
+        React.createElement(
+          'a',
+          { onClick: this.props.click, className: 'gameStartBtn classicStartBtn' },
+          'Start Game'
+        ),
+        React.createElement(
+          _reactRouter.Link,
+          { to: '/levels/classic' },
+          React.createElement(
+            'h3',
+            { className: 'classic' },
+            '← Go Back'
+          )
+        )
+      )
+    );
+  }
 });
 
 var RelaxedStartOverlay = React.createClass({
-	displayName: 'RelaxedStartOverlay',
+  displayName: 'RelaxedStartOverlay',
 
-	render: function render() {
-		return React.createElement(
-			'div',
-			{ className: 'overlay' },
-			React.createElement(
-				'div',
-				{ className: 'overlayContent' },
-				React.createElement(
-					'h2',
-					{ className: 'relaxed' },
-					'Relaxed Mode'
-				),
-				React.createElement(
-					'h3',
-					{ className: 'relaxed' },
-					'(position & sound)'
-				),
-				React.createElement(
-					'p',
-					{ className: 'relaxed' },
-					'Use the up arrow key or press the corresponding button to select a position match.'
-				),
-				React.createElement(
-					'div',
-					{ className: 'key-wrapper' },
-					React.createElement(
-						'ul',
-						{ className: 'row' },
-						React.createElement(
-							'li',
-							{ className: 'key k38 relaxed keyRelaxed' },
-							'↑'
-						)
-					),
-					React.createElement(
-						'ul',
-						{ className: 'row' },
-						React.createElement(
-							'li',
-							{ className: 'key keyBlank k37' },
-							'←'
-						),
-						React.createElement(
-							'li',
-							{ className: 'key keyBlank k40' },
-							'↓'
-						),
-						React.createElement(
-							'li',
-							{ className: 'key keyBlank k39' },
-							'→'
-						)
-					)
-				),
-				React.createElement(
-					_reactRouter.Link,
-					{ to: '/tutorial' },
-					React.createElement(
-						'h3',
-						{ className: 'relaxed tutorialBtn tutorialBtnRelaxed' },
-						'Full Tutorial'
-					)
-				),
-				React.createElement(
-					'a',
-					{ onClick: this.props.click, className: 'gameStartBtn relaxedStartBtn' },
-					'Start Game'
-				),
-				React.createElement(
-					_reactRouter.Link,
-					{ to: '/home' },
-					React.createElement(
-						'h3',
-						{ className: 'relaxed' },
-						'← Go Back'
-					)
-				)
-			)
-		);
-	}
+  render: function render() {
+    return React.createElement(
+      'div',
+      { className: 'overlay' },
+      React.createElement(
+        'div',
+        { className: 'overlayContent' },
+        React.createElement(
+          'h2',
+          { className: 'relaxed' },
+          'Relaxed Mode'
+        ),
+        React.createElement(
+          'h3',
+          { className: 'relaxed' },
+          '(position & sound)'
+        ),
+        React.createElement(
+          'p',
+          { className: 'relaxed' },
+          'Use the up arrow key or press the corresponding button to select a position match.'
+        ),
+        React.createElement(
+          'div',
+          { className: 'key-wrapper' },
+          React.createElement(
+            'ul',
+            { className: 'row' },
+            React.createElement(
+              'li',
+              { className: 'key k38 relaxed keyRelaxed' },
+              '↑'
+            )
+          ),
+          React.createElement(
+            'ul',
+            { className: 'row' },
+            React.createElement(
+              'li',
+              { className: 'key keyBlank k37' },
+              '←'
+            ),
+            React.createElement(
+              'li',
+              { className: 'key keyBlank k40' },
+              '↓'
+            ),
+            React.createElement(
+              'li',
+              { className: 'key keyBlank k39' },
+              '→'
+            )
+          )
+        ),
+        React.createElement(
+          _reactRouter.Link,
+          { to: '/tutorial' },
+          React.createElement(
+            'h3',
+            { className: 'relaxed tutorialBtn tutorialBtnRelaxed' },
+            'Full Tutorial'
+          )
+        ),
+        React.createElement(
+          'a',
+          { onClick: this.props.click, className: 'gameStartBtn relaxedStartBtn' },
+          'Start Game'
+        ),
+        React.createElement(
+          _reactRouter.Link,
+          { to: '/levels/relaxed' },
+          React.createElement(
+            'h3',
+            { className: 'relaxed' },
+            '← Go Back'
+          )
+        )
+      )
+    );
+  }
 });
 
 var AdvancedStartOverlay = React.createClass({
-	displayName: 'AdvancedStartOverlay',
+  displayName: 'AdvancedStartOverlay',
 
-	render: function render() {
-		return React.createElement(
-			'div',
-			{ className: 'overlay' },
-			React.createElement(
-				'div',
-				{ className: 'overlayContent' },
-				React.createElement(
-					'h2',
-					{ className: 'advanced' },
-					'Advanced Mode'
-				),
-				React.createElement(
-					'h3',
-					{ className: 'advanced' },
-					'(position & sound)'
-				),
-				React.createElement(
-					'p',
-					{ className: 'advanced' },
-					'Use the left, right and up arrow keys or press the corresponding buttons to select a match. If there is a match of two (or all three) of the stimuli at the same time, select two or three options simultaneously.'
-				),
-				React.createElement(
-					'div',
-					{ className: 'key-wrapper' },
-					React.createElement(
-						'ul',
-						{ className: 'row' },
-						React.createElement(
-							'li',
-							{ className: 'key keyAdvanced k38' },
-							'↑'
-						)
-					),
-					React.createElement(
-						'ul',
-						{ className: 'row' },
-						React.createElement(
-							'li',
-							{ className: 'key keyAdvanced k37' },
-							'←'
-						),
-						React.createElement(
-							'li',
-							{ className: 'key k40 keyBlank' },
-							'↓'
-						),
-						React.createElement(
-							'li',
-							{ className: 'key keyAdvanced k39' },
-							'→'
-						)
-					)
-				),
-				React.createElement(
-					_reactRouter.Link,
-					{ to: '/tutorial' },
-					React.createElement(
-						'h3',
-						{ className: 'advanced tutorialBtn tutorialBtnAdvanced' },
-						'Full Tutorial'
-					)
-				),
-				React.createElement(
-					'a',
-					{ onClick: this.props.click, className: 'gameStartBtn advancedStartBtn' },
-					'Start Game'
-				),
-				React.createElement(
-					_reactRouter.Link,
-					{ to: '/home' },
-					React.createElement(
-						'h3',
-						{ className: 'advanced' },
-						'← Go Back'
-					)
-				)
-			)
-		);
-	}
+  render: function render() {
+    return React.createElement(
+      'div',
+      { className: 'overlay' },
+      React.createElement(
+        'div',
+        { className: 'overlayContent' },
+        React.createElement(
+          'h2',
+          { className: 'advanced' },
+          'Advanced Mode'
+        ),
+        React.createElement(
+          'h3',
+          { className: 'advanced' },
+          '(position & sound)'
+        ),
+        React.createElement(
+          'p',
+          { className: 'advanced' },
+          'Use the left, right and up arrow keys or press the corresponding buttons to select a match. If there is a match of two (or all three) of the stimuli at the same time, select two or three options simultaneously.'
+        ),
+        React.createElement(
+          'div',
+          { className: 'key-wrapper' },
+          React.createElement(
+            'ul',
+            { className: 'row' },
+            React.createElement(
+              'li',
+              { className: 'key keyAdvanced k38' },
+              '↑'
+            )
+          ),
+          React.createElement(
+            'ul',
+            { className: 'row' },
+            React.createElement(
+              'li',
+              { className: 'key keyAdvanced k37' },
+              '←'
+            ),
+            React.createElement(
+              'li',
+              { className: 'key k40 keyBlank' },
+              '↓'
+            ),
+            React.createElement(
+              'li',
+              { className: 'key keyAdvanced k39' },
+              '→'
+            )
+          )
+        ),
+        React.createElement(
+          _reactRouter.Link,
+          { to: '/tutorial' },
+          React.createElement(
+            'h3',
+            { className: 'advanced tutorialBtn tutorialBtnAdvanced' },
+            'Full Tutorial'
+          )
+        ),
+        React.createElement(
+          'a',
+          { onClick: this.props.click, className: 'gameStartBtn advancedStartBtn' },
+          'Start Game'
+        ),
+        React.createElement(
+          _reactRouter.Link,
+          { to: '/levels/advanced' },
+          React.createElement(
+            'h3',
+            { className: 'advanced' },
+            '← Go Back'
+          )
+        )
+      )
+    );
+  }
 });
 
 module.exports = {
-	SilentStartOverlay: SilentStartOverlay,
-	ClassicStartOverlay: ClassicStartOverlay,
-	RelaxedStartOverlay: RelaxedStartOverlay,
-	AdvancedStartOverlay: AdvancedStartOverlay
+  SilentStartOverlay: SilentStartOverlay,
+  ClassicStartOverlay: ClassicStartOverlay,
+  RelaxedStartOverlay: RelaxedStartOverlay,
+  AdvancedStartOverlay: AdvancedStartOverlay
 };
 
 },{"react":332,"react-router":130}],6:[function(require,module,exports){
@@ -1414,23 +1453,19 @@ var GameTimer = React.createClass({
   displayName: "GameTimer",
 
   getInitialState: function getInitialState() {
-    return { seconds: 120, once: false };
+    return { seconds: 120 };
   },
   componentDidMount: function componentDidMount() {
-    this.setState({
-      interval: setInterval(this.timerSecs, 1000)
-    });
+    interval = setInterval(this.timerSecs, 1000);
   },
   componentWillUnmount: function componentWillUnmount() {
-    setTimeout(function () {
-      clearInterval(interval);
-    }.bind(this), 3000);
+    clearInterval(interval);
   },
   timerSecs: function timerSecs() {
     this.setState({
       seconds: this.state.seconds - 1
     });
-    if (this.seconds == 0) {
+    if (this.state.seconds == 0) {
       clearInterval(interval);
     }
   },
@@ -1473,6 +1508,7 @@ var reactionTimes = [];
 var gameScore;
 var iterations;
 var fullScore = 0;
+var currentScore;
 
 var RelaxedMode = React.createClass({
   displayName: 'RelaxedMode',
@@ -1550,10 +1586,8 @@ var RelaxedMode = React.createClass({
       timeKeeper--;
 
       if (this.state.keepScore && !this.state.posMatch) {
-        var currentScore = ((2000 - reactionTimes[reactionTimes.length - 1]) / 100).toFixed(2);
-        console.log(currentScore);
+        currentScore = ((2000 - reactionTimes[reactionTimes.length - 1]) / 100).toFixed(2);
         fullScore += parseFloat(currentScore);
-        console.log(fullScore);
         this.setState({
           alert: "Good job",
           score: this.state.score + parseInt(currentScore),
@@ -1562,26 +1596,26 @@ var RelaxedMode = React.createClass({
       } else if (!this.state.keepScore && this.state.posPressed) {
         this.setState({ alert: 'Not a match' });
         if (this.state.score - 5 >= 0) {
+          currentScore = 5;
           this.setState({
             score: this.state.score - 5,
             posStyle: noStyle
           });
         } else {
-          this.setState({
-            score: 0
-          });
+          currentScore = this.state.score;
+          this.setState({ score: 0 });
         }
       } else if (this.state.keepScore && this.state.posMatch) {
         this.setState({ alert: "Missed a match" });
         if (this.state.score - 5 >= 0) {
+          currentScore = 5;
           this.setState({
             score: this.state.score - 5,
             posStyle: noStyle
           });
         } else {
-          this.setState({
-            score: 0
-          });
+          currentScore = this.state.score;
+          this.setState({ score: 0 });
         }
       }
 
@@ -1698,7 +1732,8 @@ var RelaxedMode = React.createClass({
         { style: {
             color: '#01B6A7'
           } },
-        '+10'
+        '+',
+        parseInt(currentScore)
       );
     } else if (this.state.alert === "Not a match" || this.state.alert === "Missed a match") {
       scoreAlert = React.createElement(
@@ -1706,13 +1741,14 @@ var RelaxedMode = React.createClass({
         { className: 'scoreAlertNegative' },
         this.state.alert
       );
-      if (this.state.score > 0) {
+      if (currentScore !== 0) {
         scoreUpdate = React.createElement(
           'h2',
           { style: {
               color: '#F13542'
             } },
-          '-5'
+          '-',
+          currentScore
         );
       }
     } else {
@@ -1802,8 +1838,9 @@ var RelaxedMode = React.createClass({
 var noStyle = {};
 
 var pushStyle = {
-  color: 'rgba(0, 0, 0, .65)',
-  boxShadow: '0 0'
+  backgroundColor: 'rgba(0, 0, 0, .1729)',
+  boxShadow: '0px 0px',
+  color: 'white'
 };
 
 var standardStyle = {
@@ -1836,6 +1873,7 @@ var gameScore;
 var reactionEnd = null;
 var iterations;
 var fullScore = 0;
+var currentScore;
 
 var SilentMode = React.createClass({
   displayName: 'SilentMode',
@@ -1862,13 +1900,7 @@ var SilentMode = React.createClass({
   componentDidMount: function componentDidMount() {
     axios.post('/startGame/' + this.state.mode + '/' + this.state.N).then(function (response) {
       console.log("start game posted", response);
-      this.setState({
-        tempUser: response.data.tempUser,
-        gameId: response.data.gameId,
-        modeMultiplier: response.data.modeMultiplier,
-        penalty: response.data.penalty,
-        positivePoints: response.data.positivePoints
-      });
+      this.setState({ tempUser: response.data.tempUser, gameId: response.data.gameId, modeMultiplier: response.data.modeMultiplier, penalty: response.data.penalty, positivePoints: response.data.positivePoints });
       console.log(this.state, '57');
       //console.log("game posted")
     }.bind(this));
@@ -1906,9 +1938,7 @@ var SilentMode = React.createClass({
       timeKeeper++;
       if (this.state.keepScore && !(this.state.colorMatch || this.state.positionMatch)) {
         reactionTimes.push(reactionEnd - reactionStart);
-        var currentScore = ((2000 - reactionTimes[reactionTimes.length - 1]) / 100).toFixed(2);
-        console.log(currentScore);
-        console.log('test');
+        currentScore = ((2000 - reactionTimes[reactionTimes.length - 1]) / 100).toFixed(2);
         fullScore += parseFloat(currentScore);
         console.log(fullScore);
         reactionEnd = null;
@@ -1922,29 +1952,33 @@ var SilentMode = React.createClass({
         this.setState({ alert: "Not a match" });
         reactionEnd = null;
         if (this.state.score - 5 >= 0) {
+          fullscore -= 5;
+          currentScore = 5;
           this.setState({
             score: this.state.score - 5,
             posStyle: noStyle,
             colorStyle: noStyle
           });
         } else {
-          this.setState({
-            score: 0
-          });
+          fullscore = 0;
+          currentScore = this.state.score;
+          this.setState({ score: 0 });
         }
       } else if (this.state.keepScore && (this.state.colorMatch || this.state.positionMatch)) {
         this.setState({ alert: "Missed a match" });
         reactionEnd = null;
         if (this.state.score - 5 >= 0) {
+          fullScore -= 5;
+          currentScore = 5;
           this.setState({
-            //score: this.state.score - this.state.penalty,
+            score: this.state.score - 5,
             posStyle: noStyle,
             colorStyle: noStyle
           });
         } else {
-          this.setState({
-            score: 0
-          });
+          fullScore = 0;
+          currentScore = this.state.score;
+          this.setState({ score: 0 });
         }
       }
       this.setState({
@@ -2090,7 +2124,8 @@ var SilentMode = React.createClass({
         { style: {
             color: 'green'
           } },
-        '+10'
+        '+',
+        parseInt(currentScore)
       );
     } else if (this.state.alert === "Not a match" || this.state.alert === "Missed a match") {
       scoreAlert = React.createElement(
@@ -2098,13 +2133,14 @@ var SilentMode = React.createClass({
         { className: 'scoreAlertNegative' },
         this.state.alert
       );
-      if (this.state.score > 0) {
+      if (currentScore !== 0) {
         scoreUpdate = React.createElement(
           'h2',
           { style: {
               color: 'red'
             } },
-          '-5'
+          '-',
+          currentScore
         );
       }
     } else {
@@ -2112,7 +2148,9 @@ var SilentMode = React.createClass({
       scoreUpdate = React.createElement('h2', null);
     }
 
-    var gameTimer = this.state.overlay ? "" : React.createElement(GameTimer, { timeStyle: { 'color': "#7CD9D2" } });
+    var gameTimer = this.state.overlay ? "" : React.createElement(GameTimer, { timeStyle: {
+        'color': "#7CD9D2"
+      } });
 
     return React.createElement(
       'div',
@@ -2196,7 +2234,9 @@ var SilentMode = React.createClass({
 
 var noStyle = {};
 var pushStyle = {
-  color: 'black'
+  backgroundColor: 'rgba(0, 0, 0, .1729)',
+  boxShadow: '0px 0px',
+  color: 'white'
 };
 
 var standardStyle = {
@@ -3183,12 +3223,7 @@ var LoginOverlay = React.createClass({
 
   getInitialState: function getInitialState() {
     console.log(this);
-    return {
-      username: '',
-      password: '',
-      gameEnded: false,
-      games: null
-    };
+    return { username: '', password: '', gameEnded: false, games: null };
   },
   // componentDidMount(){
 
@@ -3313,11 +3348,7 @@ var LoginOverlay = React.createClass({
         React.createElement(
           'div',
           { className: 'pa' },
-          React.createElement(
-            _reactRouter.Link,
-            { to: '/register' },
-            'Register here.'
-          )
+          'Register here'
         ),
         React.createElement(
           'h3',
