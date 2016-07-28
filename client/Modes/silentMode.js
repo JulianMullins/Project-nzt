@@ -14,6 +14,7 @@ var gameScore;
 var reactionEnd = null;
 var iterations;
 var fullScore=0;
+var currentScore;
 
 var SilentMode = React.createClass({
   getInitialState: function() {
@@ -93,9 +94,7 @@ var SilentMode = React.createClass({
       timeKeeper++;
       if (this.state.keepScore && !(this.state.colorMatch || this.state.positionMatch)) {
         reactionTimes.push(reactionEnd - reactionStart);
-        var currentScore=((2000-reactionTimes[reactionTimes.length-1])/100).toFixed(2);
-        console.log(currentScore)
-        console.log('test')
+        currentScore=((2000-reactionTimes[reactionTimes.length-1])/100).toFixed(2);
         fullScore+=parseFloat(currentScore);
         console.log(fullScore)
         reactionEnd = null;
@@ -109,6 +108,8 @@ var SilentMode = React.createClass({
         this.setState({alert: "Not a match"})
         reactionEnd = null;
         if ((this.state.score-5) >= 0) {
+          fullscore-=5;
+          currentScore=5;
           this.setState({
            score: this.state.score - 5,
             posStyle: noStyle,
@@ -116,6 +117,8 @@ var SilentMode = React.createClass({
           });
         }
         else{
+          fullscore=0;
+          currentScore=this.state.score;
           this.setState({
             score: 0
           });
@@ -123,14 +126,18 @@ var SilentMode = React.createClass({
       } else if (this.state.keepScore && (this.state.colorMatch || this.state.positionMatch)) {
         this.setState({alert: "Missed a match"});
         reactionEnd = null;
-        if ((this.state.score-5) >== 0) {
+        if ((this.state.score-5) >= 0) {
+          fullScore-=5;
+          currentScore=5;
           this.setState({
-            //score: this.state.score - this.state.penalty,
+            score: this.state.score - 5,
             posStyle: noStyle,
             colorStyle: noStyle
           });
         }
         else{
+          fullScore=0;
+          currentScore=this.state.score;
           this.setState({
             score: 0
           });
@@ -286,7 +293,7 @@ var SilentMode = React.createClass({
       scoreUpdate = (
         <h2 style={{
           color: 'green'
-        }}>+10</h2>
+        }}>+{parseInt(currentScore)}</h2>
       )
     } else if (this.state.alert === "Not a match" || this.state.alert === "Missed a match") {
       scoreAlert = (
@@ -294,13 +301,13 @@ var SilentMode = React.createClass({
           {this.state.alert}
         </div>
       )
-      if (this.state.score > 0) {
+      if(currentScore!==0){
         scoreUpdate = (
           <h2 style={{
             color: 'red'
-          }}>-5</h2>
+          }}>-{currentScore}</h2>
         )
-      }
+      }   
     } else {
       scoreAlert = (
         <div></div>
