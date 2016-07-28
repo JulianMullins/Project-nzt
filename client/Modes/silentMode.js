@@ -82,6 +82,7 @@ var SilentMode = React.createClass({
       this.enableKeys();
   },
   positionAndColor: function() {
+    console.log(this.state, 'state')
     var positionQueue = [];
     var colorQueue = [];
     var timeTilPositionMatch = parseInt((Math.random() * 5) + 2 + this.state.N);
@@ -90,7 +91,7 @@ var SilentMode = React.createClass({
 
     iterations = setInterval(function() {
       timeKeeper++;
-
+console.log('TEST')
       if (this.state.keepScore && !(this.state.colorMatch || this.state.positionMatch)) {
         reactionTimes.push(reactionEnd - reactionStart);
         var currentScore=((2000-reactionTimes[reactionTimes.length-1])/100).toFixed(2);
@@ -110,7 +111,7 @@ var SilentMode = React.createClass({
         reactionEnd = null;
         if (this.state.score !== 0) {
           this.setState({
-            score: this.state.score - this.state.penalty,
+           // score: this.state.score - this.state.penalty,
             posStyle: noStyle,
             colorStyle: noStyle
           });
@@ -120,7 +121,7 @@ var SilentMode = React.createClass({
         reactionEnd = null;
         if (this.state.score !== 0) {
           this.setState({
-            score: this.state.score - this.state.penalty,
+            //score: this.state.score - this.state.penalty,
             posStyle: noStyle,
             colorStyle: noStyle
           });
