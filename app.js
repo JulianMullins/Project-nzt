@@ -193,20 +193,55 @@ passport.use(new FacebookStrategy({
         //   name:username,
         //   temp:false
         // })
-        
-        req.user.facebookId = profile.id;
-        req.user.email = email;
-        req.user.name = username;
-        req.user.temp = false;
+        if(req.user){
+           req.user.facebookId = profile.id;
+          req.user.email = email;
+          req.user.name = username;
+          req.user.temp = false;
 
-        if(!req.user.username){
-          req.user.username = username
+          if(!req.user.username){
+            req.user.username = username
+          }
+          req.user.save(function(err,reqUser){
+            var user = req.user;
+            req.logout();
+            return done(null,user);
+          })
         }
-        req.user.save(function(err,reqUser){
-          var user = req.user;
-          req.logout();
-          return done(null,user);
-        })
+        else{
+
+          var u = new User({
+            facebookId:profile.id,
+            email:email,
+            name:username,
+            temp:false,
+            username:username,
+            stats: null,
+            temp:false,
+            maxN:{
+              classic: 1,
+              relaxed: 1,
+              silent: 1,
+              advanced: 1
+            },
+            currentGame:[]
+          })
+
+          var leaderboard = new Leaderboard({user:u._id});
+          leaderboard.save();
+          var userStats = new Stats({user:u._id,leaderboard:leaderboard._id});
+          userStats.save();
+          u.stats = userStats._id;
+
+          u.save(function(err,user){
+            if(err){
+              return done(err);
+            }
+            else{
+              return done(null,user);
+            }
+          })
+        }
         
       }
 
