@@ -2,9 +2,12 @@ var User = require('../models/User');
 var Leaderboard = require('../models/Leaderboard');
 var HighScore = require('../models/HighScore');
 
+//DATA KEPT IN A CENTRAL LOCATION FOR EASY ADJUSTMENT
+
+
 //modes: classic,relaxed,silent,advanced
-var serverLeaderboard="5799071df2049724272d4876";
-//serverLeaderboard.save();
+var serverLeaderboard='5799071df2049724272d4876';
+
 
 
 
