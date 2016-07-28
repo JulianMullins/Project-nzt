@@ -30,6 +30,7 @@ router.get('/allHighScores', function(req, res, next) {
       if (err) {
         console.log(err)
       } else {
+        console.log(leaderboard);
         var result = [];
         leaderboard.scores.map(function(score) {
           User.findById(score.user, function(err, u) {

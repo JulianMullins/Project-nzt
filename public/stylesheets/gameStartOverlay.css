@@ -39,6 +39,9 @@
   font-size: 32px;
   cursor: pointer;
   transition-duration: .5s;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .tutorialBtn {

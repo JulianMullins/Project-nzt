@@ -3,7 +3,7 @@ var Leaderboard = require('../models/Leaderboard');
 var HighScore = require('../models/HighScore');
 
 //modes: classic,relaxed,silent,advanced
-var serverLeaderboard=null;
+var serverLeaderboard="5799071df2049724272d4876";
 //serverLeaderboard.save();
 
 
