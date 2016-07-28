@@ -192,9 +192,7 @@ var RelaxedMode = React.createClass({
       //RUTH THIS IS WHERE THE GAME ENDS///////////////////////////////////////////
       if (timeKeeper === 50) {
         //give gameScore variable the final score
-        console.log(reactionTimes, 'reaction times')
         clearInterval(iterations);
-        console.log(this.state)
         console.log(fullScore)
         axios.post('/gameEnd', {
           gameId: this.state.gameId,
