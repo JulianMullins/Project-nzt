@@ -65,7 +65,8 @@ router.get("/getGameData",function(req,res,next){
     res.json({
       score:game.score,
       mode:game.mode,
-      nLevel:game.nLevel
+      nLevel:game.nLevel,
+      passedLevel: game.passedLevel
     })
   })
 })
