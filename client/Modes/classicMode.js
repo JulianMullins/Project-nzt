@@ -2,6 +2,7 @@ var React = require('react');
 var GameTimer = require('./gameTimer');
 var ClassicStartOverlay = require('./gameStartOverlay').ClassicStartOverlay;
 var axios = require('axios')
+var fullScore=0;
 
 //COLLECTION OF GLOBAL VARIABLES TO MAKE EVERYONES LIFE EASIER
 //create global variable for reaction counter
@@ -13,6 +14,7 @@ var reactionTimes = [];
 var gameScore;
 var reactionEnd = null;
 var iterations;
+var fullScore=0;
 
 var ClassicMode = React.createClass({
   getInitialState: function() {
@@ -88,25 +90,39 @@ var ClassicMode = React.createClass({
         timeKeeper++;
         if (this.state.keepScore && !(this.state.soundMatch || this.state.positionMatch)) {
         reactionTimes.push(reactionEnd - reactionStart);
+        var currentScore=((2000-reactionTimes[reactionTimes.length-1])/100).toFixed(2);
+        console.log(currentScore)
+        fullScore+=parseFloat(currentScore);
+        console.log(fullScore)
         reactionEnd = null;
         this.setState({
-          score: this.state.score + this.state.positivePoints,
+          score: this.state.score + parseInt(currentScore),
           alert: 'Good job'
         });
       } else if (!this.state.keepScore && (this.state.posPressed || this.state.soundPressed)) {
         this.setState({alert: "Not a match"})
         reactionEnd = null;
-        if (this.state.score !== 0) {
+        if ((this.state.score-5) >= 0) {
           this.setState({
-            score: this.state.score - this.state.penalty
+            score: this.state.score - 5
+          });
+        }
+        else{
+          this.setState({
+            score: 0
           });
         }
       } else if (this.state.soundMatch || this.state.positionMatch) {
         this.setState({alert: "Missed a match"});
         reactionEnd = null;
-        if (this.state.score !== 0) {
+        if ((this.state.score-5) >= 0) {
           this.setState({
             score: this.state.score - this.state.penalty
+          });
+        }
+        else{
+          this.setState({
+            score: 0
           });
         }
       }
@@ -191,13 +207,11 @@ var ClassicMode = React.createClass({
      if (timeKeeper === 60) {
           clearInterval(iterations);
         setTimeout(function() {
-          gameScore = this.state.score;
-          console.log(gameScore, 'game score')
            console.log(reactionTimes, 'reaction times')
            console.log(this.state)
         axios.post('/gameEnd',{
                gameId: this.state.gameId,
-             score: gameScore,
+             score: fullScore,
             reactionTimes: reactionTimes
           }).then(function(response){
             console.log('end game posted')

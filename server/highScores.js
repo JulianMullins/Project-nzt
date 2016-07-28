@@ -13,6 +13,11 @@ router.get('/myHighScores', function(req, res, next) {
 
 //modes: classic,relaxed,silent,advanced
 
+
+
+//ADAM
+
+
 router.get('/allHighScores', function(req, res, next) {
   // var hs = new HS({
   //   user: '5797d0a4d398ed61377bc618',
