@@ -3,12 +3,13 @@ var ReactDOM = require('react-dom');
 var rd3 = require('react-d3');
 var LineChart = rd3.LineChart;
 var AreaChart = rd3.AreaChart;
+var axios = require('axios')
 
 var MyComponent = React.createClass({
     componentDidMount: function(){
 //fetch call
 
-fetch('/taco', {method: 'GET'})
+fetch('/taco', {method: 'GET', withCredentials: true})
 .then(function(response){
     console.log(response, '38')
     return response.json()
