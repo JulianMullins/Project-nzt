@@ -13,7 +13,7 @@ var reactionTimes = [];
 var gameScore;
 var reactionEnd = null;
 var iterations;
-var fullScore=0;
+var fullScore = 0;
 var currentScore;
 
 var SilentMode = React.createClass({
@@ -47,16 +47,9 @@ var SilentMode = React.createClass({
     }
   },
   componentDidMount: function() {
-    axios.post('/startGame/'+this.state.mode+'/'+this.state.N)
-    .then(function(response){
-      console.log("start game posted",response)
-      this.setState({
-        tempUser:response.data.tempUser,
-        gameId: response.data.gameId,
-        modeMultiplier:response.data.modeMultiplier,
-        penalty:response.data.penalty,
-        positivePoints:response.data.positivePoints
-      })
+    axios.post('/startGame/' + this.state.mode + '/' + this.state.N).then(function(response) {
+      console.log("start game posted", response)
+      this.setState({tempUser: response.data.tempUser, gameId: response.data.gameId, modeMultiplier: response.data.modeMultiplier, penalty: response.data.penalty, positivePoints: response.data.positivePoints})
       console.log(this.state, '57')
       //console.log("game posted")
     }.bind(this))
@@ -78,9 +71,9 @@ var SilentMode = React.createClass({
     }.bind(this);
   },
   startGame: function() {
-      this.setState({overlay: false});
-      this.positionAndColor();
-      this.enableKeys();
+    this.setState({overlay: false});
+    this.positionAndColor();
+    this.enableKeys();
   },
   positionAndColor: function() {
     console.log(this.state, 'state')
@@ -94,8 +87,8 @@ var SilentMode = React.createClass({
       timeKeeper++;
       if (this.state.keepScore && !(this.state.colorMatch || this.state.positionMatch)) {
         reactionTimes.push(reactionEnd - reactionStart);
-        currentScore=((2000-reactionTimes[reactionTimes.length-1])/100).toFixed(2);
-        fullScore+=parseFloat(currentScore);
+        currentScore = ((2000 - reactionTimes[reactionTimes.length - 1]) / 100).toFixed(2);
+        fullScore += parseFloat(currentScore);
         console.log(fullScore)
         reactionEnd = null;
         this.setState({
@@ -107,40 +100,34 @@ var SilentMode = React.createClass({
       } else if (!this.state.keepScore && (this.state.posPressed || this.state.colorPressed)) {
         this.setState({alert: "Not a match"})
         reactionEnd = null;
-        if ((this.state.score-5) >= 0) {
-          fullscore-=5;
-          currentScore=5;
-          this.setState({
-           score: this.state.score - 5,
-            posStyle: noStyle,
-            colorStyle: noStyle
-          });
-        }
-        else{
-          fullscore=0;
-          currentScore=this.state.score;
-          this.setState({
-            score: 0
-          });
-        }
-      } else if (this.state.keepScore && (this.state.colorMatch || this.state.positionMatch)) {
-        this.setState({alert: "Missed a match"});
-        reactionEnd = null;
-        if ((this.state.score-5) >= 0) {
-          fullScore-=5;
-          currentScore=5;
+        if ((this.state.score - 5) >= 0) {
+          fullscore -= 5;
+          currentScore = 5;
           this.setState({
             score: this.state.score - 5,
             posStyle: noStyle,
             colorStyle: noStyle
           });
+        } else {
+          fullscore = 0;
+          currentScore = this.state.score;
+          this.setState({score: 0});
         }
-        else{
-          fullScore=0;
-          currentScore=this.state.score;
+      } else if (this.state.keepScore && (this.state.colorMatch || this.state.positionMatch)) {
+        this.setState({alert: "Missed a match"});
+        reactionEnd = null;
+        if ((this.state.score - 5) >= 0) {
+          fullScore -= 5;
+          currentScore = 5;
           this.setState({
-            score: 0
+            score: this.state.score - 5,
+            posStyle: noStyle,
+            colorStyle: noStyle
           });
+        } else {
+          fullScore = 0;
+          currentScore = this.state.score;
+          this.setState({score: 0});
         }
       }
       this.setState({
@@ -219,17 +206,17 @@ var SilentMode = React.createClass({
         setTimeout(function() {
           console.log(reactionTimes, 'reaction times')
           console.log(this.state)
-          axios.post('/gameEnd',{
-              gameId: this.state.gameId,
-              score: fullScore,
-              reactionTimes: reactionTimes
-          }).then(function(response){
+          axios.post('/gameEnd', {
+            gameId: this.state.gameId,
+            score: fullScore,
+            reactionTimes: reactionTimes
+          }).then(function(response) {
             console.log('end game posted')
-              this.props.history.push('/gameOver');
+            this.props.history.push('/gameOver');
           }.bind(this))
 
-    }.bind(this),2000);
-  }
+        }.bind(this), 2000);
+      }
     }.bind(this), 2000);
   },
   positionMatch: function() {
@@ -266,9 +253,7 @@ var SilentMode = React.createClass({
   },
   render: function() {
     var overlay = this.state.overlay
-      ? (
-        <SilentStartOverlay click={this.startGame}/>
-      )
+      ? (<SilentStartOverlay click={this.startGame}/>)
       : '';
 
     var posButtonStyle = this.state.posPressed
@@ -301,13 +286,13 @@ var SilentMode = React.createClass({
           {this.state.alert}
         </div>
       )
-      if(currentScore!==0){
+      if (currentScore !== 0) {
         scoreUpdate = (
           <h2 style={{
             color: 'red'
           }}>-{currentScore}</h2>
         )
-      }   
+      }
     } else {
       scoreAlert = (
         <div></div>
@@ -318,8 +303,12 @@ var SilentMode = React.createClass({
     }
 
     var gameTimer = this.state.overlay
-    ? ""
-    : (<GameTimer timeStyle={{'color': "#7CD9D2"}}></GameTimer>);
+      ? ""
+      : (
+        <GameTimer timeStyle={{
+          'color': "#7CD9D2"
+        }}></GameTimer>
+      );
 
     return (
       <div className="gameContainer">
@@ -364,7 +353,9 @@ var SilentMode = React.createClass({
 
 var noStyle = {}
 var pushStyle = {
-  color: 'black'
+  backgroundColor: 'rgba(0, 0, 0, .1729)',
+  boxShadow: '0px 0px',
+  color: 'white'
 }
 
 var standardStyle = {

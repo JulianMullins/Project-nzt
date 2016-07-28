@@ -2,7 +2,7 @@ var React = require('react');
 var GameTimer = require('./gameTimer');
 var ClassicStartOverlay = require('./gameStartOverlay').ClassicStartOverlay;
 var axios = require('axios')
-var fullScore=0;
+var fullScore = 0;
 
 //COLLECTION OF GLOBAL VARIABLES TO MAKE EVERYONES LIFE EASIER
 //create global variable for reaction counter
@@ -14,7 +14,7 @@ var reactionTimes = [];
 var gameScore;
 var reactionEnd = null;
 var iterations;
-var fullScore=0;
+var fullScore = 0;
 
 var ClassicMode = React.createClass({
   getInitialState: function() {
@@ -47,16 +47,9 @@ var ClassicMode = React.createClass({
     }
   },
   componentDidMount: function() {
-    axios.post('/startGame/'+this.state.mode+'/'+this.state.N)
-    .then(function(response){
-      console.log("start game posted",response)
-      this.setState({
-        tempUser:response.data.tempUser,
-        gameId: response.data.gameId,
-        modeMultiplier:response.data.modeMultiplier,
-        penalty:response.data.penalty,
-        positivePoints:response.data.positivePoints
-      })
+    axios.post('/startGame/' + this.state.mode + '/' + this.state.N).then(function(response) {
+      console.log("start game posted", response)
+      this.setState({tempUser: response.data.tempUser, gameId: response.data.gameId, modeMultiplier: response.data.modeMultiplier, penalty: response.data.penalty, positivePoints: response.data.positivePoints})
       console.log("game posted")
     }.bind(this))
     console.log("component mounted")
@@ -75,9 +68,9 @@ var ClassicMode = React.createClass({
     }.bind(this)
   },
   startGame: function() {
-      this.setState({overlay: false});
-      this.positionAndSound();
-      this.enableKeys();
+    this.setState({overlay: false});
+    this.positionAndSound();
+    this.enableKeys();
   },
   positionAndSound: function() {
     var positionQueue = [];
@@ -87,12 +80,12 @@ var ClassicMode = React.createClass({
     var timeKeeper = 0;
 
     iterations = setInterval(function() {
-        timeKeeper++;
-        if (this.state.keepScore && !(this.state.soundMatch || this.state.positionMatch)) {
+      timeKeeper++;
+      if (this.state.keepScore && !(this.state.soundMatch || this.state.positionMatch)) {
         reactionTimes.push(reactionEnd - reactionStart);
-        var currentScore=((2000-reactionTimes[reactionTimes.length-1])/100).toFixed(2);
+        var currentScore = ((2000 - reactionTimes[reactionTimes.length - 1]) / 100).toFixed(2);
         console.log(currentScore)
-        fullScore+=parseFloat(currentScore);
+        fullScore += parseFloat(currentScore);
         console.log(fullScore)
         reactionEnd = null;
         this.setState({
@@ -102,31 +95,25 @@ var ClassicMode = React.createClass({
       } else if (!this.state.keepScore && (this.state.posPressed || this.state.soundPressed)) {
         this.setState({alert: "Not a match"})
         reactionEnd = null;
-        if ((this.state.score-5) >= 0) {
+        if ((this.state.score - 5) >= 0) {
           this.setState({
             score: this.state.score - 5
           });
-        }
-        else{
-          this.setState({
-            score: 0
-          });
+        } else {
+          this.setState({score: 0});
         }
       } else if (this.state.soundMatch || this.state.positionMatch) {
         this.setState({alert: "Missed a match"});
         reactionEnd = null;
-        if ((this.state.score-5) >= 0) {
+        if ((this.state.score - 5) >= 0) {
           this.setState({
             score: this.state.score - this.state.penalty
           });
-        }
-        else{
-          this.setState({
-            score: 0
-          });
+        } else {
+          this.setState({score: 0});
         }
       }
-        this.setState({
+      this.setState({
         keepScore: false,
         positionMatch: false,
         soundMatch: false,
@@ -139,19 +126,18 @@ var ClassicMode = React.createClass({
         this.setState({alert: ' '});
       }.bind(this), 800);
 
-
       if (timeTilPositionMatch === 0) {
         this.setState({positionMatch: true, keepScore: true})
         //reset position portion
         timeTilPositionMatch = parseInt((Math.random() * 5) + 2);
         //set up new position queue
         var nextPosition = positionQueue[0];
-       positionQueue.push(nextPosition);
+        positionQueue.push(nextPosition);
         positionQueue.splice(0, 1);
         var pMatch = true;
       }
 
-            //case 2: color match
+      //case 2: color match
       if (timeTilSoundMatch === 0) {
         this.setState({soundMatch: true, keepScore: true})
         //reset position portion
@@ -162,7 +148,6 @@ var ClassicMode = React.createClass({
         soundQueue.splice(0, 1);
         var sMatch = true;
       }
-
 
       // // pick a non-matching next number while interval is not 0
       //position:
@@ -178,7 +163,6 @@ var ClassicMode = React.createClass({
         }
       }
 
-
       //sound:
       if (!sMatch) {
         var nextSound = parseInt(Math.random() * 9);
@@ -191,7 +175,7 @@ var ClassicMode = React.createClass({
           soundQueue.splice(0, 1);
         }
       }
-            reactionStart = Date.now()
+      reactionStart = Date.now()
       var audio = new Audio('./audio/' + (nextSound + 1) + '.wav ');
       audio.play();
       this.state.style[nextPosition] = newStyle;
@@ -200,31 +184,31 @@ var ClassicMode = React.createClass({
         this.state.style[nextPosition] = standardStyle;
         this.setState({style: this.state.style});
         timeTilPositionMatch--;
-       timeTilSoundMatch--;
-      sMatch = false;
+        timeTilSoundMatch--;
+        sMatch = false;
         pMatch = false;
       }.bind(this), 800);
-     if (timeKeeper === 60) {
-          clearInterval(iterations);
+      if (timeKeeper === 60) {
+        clearInterval(iterations);
         setTimeout(function() {
-           console.log(reactionTimes, 'reaction times')
-           console.log(this.state)
-        axios.post('/gameEnd',{
-               gameId: this.state.gameId,
-             score: fullScore,
+          console.log(reactionTimes, 'reaction times')
+          console.log(this.state)
+          axios.post('/gameEnd', {
+            gameId: this.state.gameId,
+            score: fullScore,
             reactionTimes: reactionTimes
-          }).then(function(response){
+          }).then(function(response) {
             console.log('end game posted')
-              this.props.history.push('/gameOver');
+            this.props.history.push('/gameOver');
           }.bind(this))
 
         }.bind(this), 2000)
       }
 
-      }.bind(this),2000)
+    }.bind(this), 2000)
   },
-      //}
-    //}.bind(this), 2000);
+  //}
+  //}.bind(this), 2000);
   //},
   positionMatch: function() {
     if (this.state.pressed) {
@@ -258,9 +242,7 @@ var ClassicMode = React.createClass({
   },
   render: function() {
     var overlay = this.state.overlay
-      ? (
-        <ClassicStartOverlay click={this.startGame}/>
-      )
+      ? (<ClassicStartOverlay click={this.startGame}/>)
       : '';
 
     var scoreAlert;
@@ -299,9 +281,12 @@ var ClassicMode = React.createClass({
     }
 
     var gameTimer = this.state.overlay
-    ? ""
-    : (<GameTimer timeStyle={{'color': "#F13542"}}></GameTimer>);
-
+      ? ""
+      : (
+        <GameTimer timeStyle={{
+          'color': "#F13542"
+        }}></GameTimer>
+      );
 
     return (
       <div className="gameContainer">
@@ -347,7 +332,9 @@ var ClassicMode = React.createClass({
 var noStyle = {}
 
 var pushStyle = {
-  color: 'black'
+  backgroundColor: 'rgba(0, 0, 0, .1729)',
+  boxShadow: '0px 0px',
+  color: 'white'
 }
 
 var standardStyle = {
