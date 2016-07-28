@@ -1,1 +1,1 @@
-console.error("SyntaxError: C:/Users/tayco/OneDrive/Documents/GitHub/Project-nzt/client/Modes/silentMode.js: Unexpected token (126:35) while parsing file: C:\\Users\\tayco\\OneDrive\\Documents\\GitHub\\Project-nzt\\client\\Modes\\silentMode.js");
+console.error("SyntaxError: C:/Users/Student/Documents/Github/project-nzt/client/Modes/silentMode.js: Unexpected token (126:35) while parsing file: C:\\Users\\Student\\Documents\\Github\\project-nzt\\client\\Modes\\silentMode.js");
