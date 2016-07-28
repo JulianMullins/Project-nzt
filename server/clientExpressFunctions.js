@@ -15,7 +15,9 @@ var Stats = require('../models/Stats')
 var tempGame = null;
 
 
-  
+//check if user at all, check if tempuser/full user  
+    // navBar, relaxedMode
+    //(sort of in client/index.js, but commented out)
 router.get('/isUser',function(req,res,next){
   console.log(req.user)
   if(req.user){
@@ -27,6 +29,8 @@ router.get('/isUser',function(req,res,next){
   
 });
 
+
+//check if logged in ---- not in use
 router.get('/isLoggedIn',function(req,res,next){
   var isloggedin = false;
   console.log(req.user)
@@ -40,7 +44,7 @@ router.get('/isLoggedIn',function(req,res,next){
   })
 });
 
-
+//get max N (default 1) for level display
 router.get('/getMaxN',function(req,res,next){
   var maxN={
               classic:1,
@@ -55,7 +59,7 @@ router.get('/getMaxN',function(req,res,next){
   res.json({maxN:maxN})
 })
 
-
+//get data for game (not in use)
 router.get("/getGameData",function(req,res,next){
   Game.findById(req.user.currentGame[0],function(err,game){
     res.json({
@@ -66,6 +70,7 @@ router.get("/getGameData",function(req,res,next){
   })
 })
 
+//get various user data (gameOver, Mainmenu)
 router.get('/getUser',function(req,res,next){
   var games = null;
   var isUser = false;
@@ -87,7 +92,7 @@ router.get('/getUser',function(req,res,next){
   })
 })
 
-
+//get game data at end of game (gameOver)
 router.get('/getGame',function(req,res,next){
   console.log(req.user)
   Game.findById(req.user.currentGame[0],function(err,game){
@@ -103,19 +108,7 @@ router.get('/getGame',function(req,res,next){
 })
 
 
-router.get('/taco',function(req, res, next){
- //return res.json({stats: [123]})
-  //console.log("lolololololololol")
-   console.log(req.user.stats,'170')
-  Stats.findById(req.user.stats, function(err,stats){
-    if(err){
-      console.log(err)
-    }
-    else{
-      res.json({stats: req.user.stats})
-    }
-  })
-})
+
 
 
 module.exports=router;

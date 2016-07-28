@@ -8,6 +8,8 @@ var Game = require('../models/Game');
 var tempGame = null;
 
 
+//TAYLOR'S STATS FUNCTIONS
+
 router.get('/getstats',function(req, res, user){
   console.log(req.user.stats,'170')
   Stats.findById(req.user.stats, function(err,stats){

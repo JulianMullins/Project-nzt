@@ -20,9 +20,13 @@ var positivePoints = serverData.positivePoints;
 var tempGame = null;
 
 
+
+//post start game
 router.post('/startGame/:mode/:nLevel',function(req,res,next){
   console.log("trying to post game");
   console.log(req.user);
+
+  //if user, create game, save game, add to user.currentGame
   if(req.user){
     console.log(req.user);
     var tempGame = new Game({
@@ -52,6 +56,7 @@ router.post('/startGame/:mode/:nLevel',function(req,res,next){
     })
   }
   else{
+    //if no user, make tempUser,login tempUser, then do above (create game, add to tempUser, etc.)
     console.log("no req.user")
     var tempUser = new TempUser({
         username:null,
@@ -79,6 +84,8 @@ router.post('/startGame/:mode/:nLevel',function(req,res,next){
           return;
         }
         console.log(user)
+
+        //login tempUser
         axios.post('/login', {
           username: user._id,
           password: 'password'
@@ -112,7 +119,7 @@ router.post('/startGame/:mode/:nLevel',function(req,res,next){
             // })
 
 
-            
+            //create game
             console.log("creating game for " + user);
             var tempGame = new Game({
               user:user._id,
@@ -183,6 +190,8 @@ router.post('/startGame/:mode/:nLevel',function(req,res,next){
 //     })
 // }
 
+
+//game end - posted from mode files; find game, update game stats
 router.post('/gameEnd',function(req,res,next){
   console.log("game ended")
   console.log(req.user)
@@ -205,6 +214,8 @@ router.post('/gameEnd',function(req,res,next){
           console.log("game ended successfully",game)
           res.json({success:true,score:req.body.score,userId:req.body.userId})
 
+
+          //post to gameOver
           axios.post('/gameOver',{
             userId: req.body.userId
           })

@@ -29,7 +29,10 @@ var GameOverOverlay = React.createClass({
           score:0,
           mode:null,
           nLevel:1,
-          renderLogin: <div></div>
+          renderLogin: <div></div>,
+          anonHighScore: <div></div>,
+          anonUserName:null,
+          anonGetHighScore:false
         }
   },
   componentDidMount(){
@@ -70,11 +73,11 @@ var GameOverOverlay = React.createClass({
         this.renderLogin()
       }.bind(this))
   },
-  update:function(e){
-    this.setState({
-      username: e.target.value
-    })
-  },
+  // update:function(e){
+  //   this.setState({
+  //     username: e.target.value
+  //   })
+  // },
   tempSaveData(){
     axios.post({
       url:'/tempSaveData',
@@ -100,18 +103,66 @@ var GameOverOverlay = React.createClass({
 
   },
   click(e){
+
+    //ONLY IF EARNED
+
+    //go to next level (if earned)
     this.props.history.push('/game/'+this.state.mode+'/'+(this.state.nLevel+1))
   },
+  anonHighScore(){
+
+    //get isOverallHighScore
+
+    //if anon get high score, can save with tempusername, or login
+    if(anonGetHighScore){
+      this.setState({
+        anonHighScore: <p>You earned a high score on our overall leaderboards.
+          If you wish to be added to the leaderboard and without logging in, 
+          provide a name below to display with your score
+          <form>
+            <input type='text' name="anonUserName" onChange={this.update} />
+            <Link onClick={this.anonLeaderboard} to="/leaderboard" type="button">Submit</Link>
+          </form>
+            Or, you can <Link to="/gameOver/login"> login</Link> or <Link to="/gameOver/register">sign up</Link> to save your progress, 
+            view statistics and compete with friends!
+          </p>
+      })
+    }
+    
+  },
   renderLogin(){
-    if(!this.state.alreadyLoggedIn){
+
+    //if not logged in, option to login to save
+    if(!this.state.alreadyLoggedIn && !anonGetHighScore){
       this.setState({
         renderLogin: <div className="gameOverPrompt">
           <p>It looks like you are not currently logged in. 
           <Link to="/gameOver/login"> Sign in</Link> or <Link to="/gameOver/register">sign up</Link> to save your progress, 
-          view statistics and compete with friends!</p>  
+          view statistics and compete with friends!
+          </p> 
         </div>
       })
     }
+  },
+  update(e){
+
+    //update anonusername field
+    this.setState({
+      anonUserName: e.target.value
+    })
+  },
+  anonLeaderboard(){
+
+    //save anon score
+
+    axios.post('/postAnonScore',{
+      withCredentials:true,
+      data:{
+        anonUserName:this.state.anonUserName,
+
+      }
+    })
+
   },
   render: function() {
     // this.getData();
@@ -132,6 +183,7 @@ var GameOverOverlay = React.createClass({
           <h1 className="gameOverInform classic">You have unlocked level 2</h1>
 
           {this.state.renderLogin}
+          {this.state.anonHighScore}
 
           <div className="gameOverActions">
             <Link to="/home">
