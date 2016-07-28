@@ -120,11 +120,12 @@ componentDidMount: function(){
                   <div className="rules2">
                     <h2>Welcome to Cortex!</h2>
                     <p>Cortex is a <spanl>scientifically supported</spanl> game for exercising your working memory
-                    and increasing fluid-intelligence (directly tied to IQ). While the game can be tricky to grasp 
-                    at first and increases in difficulty rather quickly, we have tried to make this game as fun and 
-                    as easy to learn as possible. We hope that you’ll enjoy playing this game and that the cognitive 
+                    and increasing fluid-intelligence (directly tied to IQ). While the game can be tricky to grasp
+                    at first and increases in difficulty rather quickly, we have tried to make this game as fun and
+                    as easy to learn as possible. We hope that you’ll enjoy playing this game and that the cognitive
                     benefits will simply follow along as you progress.</p>
-                    <h3>Let’s get started!</h3>
+									<img src="./images/brain.png" alt="BRAIN"></img>
+                    <div className="started">Let’s get started!</div>
                   </div> {/* rules2 */}
                 </div> {/* rulemodel2 */}
               </div> {/* slide */}
@@ -133,7 +134,7 @@ componentDidMount: function(){
                 <div className="rulemode2">
                   <div className="rules2">
                   <h2>Dual n-back</h2>
-                    <p>Cortex is based on the n-back genre of brain training games, which requires players to keep 
+                    <p>Cortex is based on the n-back genre of brain training games, which requires players to keep
                   track of various changes happening on-screen.</p>
                   </div>
                 </div> {/* rulemode2 */}
@@ -143,8 +144,9 @@ componentDidMount: function(){
               <div className="slide">
                 <div className="key-wrapper">
                 <h2>Key Tips</h2>
-                <h3>Once a button is pressed, you cannot undo the action.</h3>
-                <h3>For a double match, you need to press both keys.</h3>
+                <p>Once a button is pressed, you cannot undo the action.
+									<br></br>
+                For a double match, you need to press both keys.</p>
                   <div className="rulemode">
                     <div className="rules2">
                       <h2>RELAXED</h2>
@@ -202,10 +204,11 @@ componentDidMount: function(){
               </div> {/* slide */}
 
               <div className="slide">
-                <div className="rulemode3">
+                <div className="rulemode2">
                   <div className="rules2">
                   <h2>The n-back part</h2>
-                    <p>The n in n-back refers to the number of positions back that you have to keep track of. 
+                    <p>The n in n-back refers to the number of positions back that you have to keep track of.
+											<br></br>
                     For example, at n=2, you would have to make matches based on the state of the board two steps back. </p>
                   </div> {/* rules2 */}
                 </div> {/* rulemode3 */}
@@ -216,12 +219,12 @@ componentDidMount: function(){
                 <div className="rulemode2">
                   <div className="rules2">
                   <h2>Expectations</h2>
-                    <p>If this seems like a daunting task, don’t worry! This game is designed to be a challenge and advancing 
-                    up in level can be difficult. If you are new to the game or still unsure of how it works, we recommend 
+                    <p>If this seems like a daunting task, don’t worry! This game is designed to be a challenge and advancing
+                    up in level can be difficult. If you are new to the game or still unsure of how it works, we recommend
                     starting out in relaxed mode first and then moving on once you are comfortable with the gameplay. </p>
 
-                    <p>However, once you get familiar with the game mechanics, it is always recommended to continue pushing 
-                    up in n-level once you have unlocked the next one. You will experience the greatest mental benefits by 
+                    <p>However, once you get familiar with the game mechanics, it is always recommended to continue pushing
+                    up in n-level once you have unlocked the next one. You will experience the greatest mental benefits by
                     continuously challenging yourself! </p>
                   </div>
                 </div> {/* rulemode2 */}
@@ -230,7 +233,7 @@ componentDidMount: function(){
             </div> {/* slide_group */}
           </div> {/* slide_viewer */}
         </div> {/* slider */}
-        
+
         <div className="slide_buttons">
         </div> {/* slide_buttons */}
 

@@ -5,18 +5,12 @@ var axios = require('axios');
 
 
 var updateLoggedIn = function(callback){
-	var isUser = null;
     axios({
       url: '/isUser',
       withCredentials: true
     }).then(function(response){
-      if(response.data.isUser){
-        isUser = true;
-      }
-      else{
-        isUser = false;
-      }
-      callback(isUser);
+      callback(response.data.isUser,response.data.isloggedin);
+
     })
 }
 
@@ -25,20 +19,34 @@ var NavBar = React.createClass({
 		//console.log(this)
 		return {
 			open: false,
-			loggedIn: false
+			isloggedin:false,
+			isUser:false
+			// isloggedIn: this.props.isloggedin,
+			// loginFunction: this.props.loginFunction,
+			// isUser: this.props.isUser
 		}
 	},
 	componentDidMount: function(){
-	    var loggedIn = updateLoggedIn(function(isUser){
-	    	this.setState({loggedIn:isUser})
-	    }.bind(this))
+	    // var loggedIn = updateLoggedIn(function(isUser){
+	    // 	this.setState({loggedIn:isUser})
+	    // }.bind(this))
+
+		axios.get('/isUser')
+	      .then(function(response){
+	        this.setState({
+	          isUser: response.data.isUser,
+	          isloggedin: response.data.isloggedin
+	        })
+	      }.bind(this))
 
 	    //console.log(this.state)
 	},
 	click: function(e){
 		e.preventDefault();
-		var loggedIn = updateLoggedIn(function(isUser){
-	    	this.setState({loggedIn:isUser})
+		var loggedIn = updateLoggedIn(function(isUser,isloggedin){
+	    	this.setState({
+	    		isloggedIn:isloggedin, 
+	    		isUser:isUser})
 	    }.bind(this))
 		this.setState({
 			open: !this.state.open
@@ -55,44 +63,51 @@ var NavBar = React.createClass({
 		this.setState({
 			open:false
 		})
-		axios({
-	      url: '/isUser',
-	      withCredentials: true
-	    }).then(function(response){
-	      if(response.data.isUser!=this.state.loggedIn){
-	        this.setState({
-	        	loggedIn:response.data.isUser
-	        })
-	      }
+		
+		var loggedIn = updateLoggedIn(function(isUser,isloggedin){
+	    	this.setState({isloggedIn:isloggedin, isUser:isUser})
 	    }.bind(this))
 
-	},
-	logInOut(e){
+		// axios({
+	 //      url: '/isUser',
+	 //      withCredentials: true
+	 //    }).then(function(response){
+	 //      if(response.data.isUser!=this.state.loggedIn){
+	 //        this.setState({
+	 //        	loggedIn:response.data.isUser
+	 //        })
+	 //      }
+	 //    }.bind(this))
 
-		//console.log(this)
-		if(!this.state.loggedIn){
-			this.props.history.push('/login')
-		}
-		else{
-			axios({
-		      url: '/logout',
-		      withCredentials: true
-		    }).then(function(response){
-		    	console.log(response);
-		    	if(response.data.success){
-		    		console.log("logged out success")
-		    		this.props.history.push('/home')
-		    	}
-		    }.bind(this))
-		}
-
-	    this.closeLogInOut(e);
 	},
+	// logInOut(e){
+
+	// 	//console.log(this)
+	// 	if(!this.state.loggedIn){
+	// 		this.props.history.push('/login')
+	// 	}
+	// 	else{
+	// 		axios({
+	// 	      url: '/logout',
+	// 	      withCredentials: true
+	// 	    }).then(function(response){
+	// 	    	console.log(response)
+	// 	    	if(response.data.success){
+	// 	    		this.setState({loggedIn:false})
+	// 	    		console.log("logged out success")
+	// 	    		this.props.history.push('/home')
+	// 	    		this.loginFunction();
+	// 	    	}
+	// 	    }.bind(this))
+	// 	}
+
+	//     this.closeLogInOut(e);
+	// },
 	render: function(){
-		var logInOutLink = this.state.loggedIn
+		var logInOutLink = this.state.isloggedIn
 			? '/logout'
 			: '/login'
-		var logInOrOut = this.state.loggedIn
+		var logInOrOut = this.state.isloggedIn
 			? 'Logout'
 			: 'Login';
 		return(

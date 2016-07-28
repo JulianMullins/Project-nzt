@@ -1,5 +1,6 @@
 var React = require('react');
 var ReactDOM = require('react-dom');
+var axios = require('axios');
 
 import {Link} from 'react-router';
 
@@ -39,55 +40,51 @@ var LoginOverlay = React.createClass({
     })
   },
   login: function(e) {
-    e.preventDefault();
+    //e.preventDefault();
 
     console.log("logging in")
     console.log(this.props)
 
     //ajax post
-    fetch('/login', {
-      method: 'post',
-      credentials: 'include',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
+    axios.post('/login', {
+     //withCredentials:true,
+      // headers: {
+      //   'Accept': 'application/json',
+      //   'Content-Type': 'application/json'
+      // },
+      
         username: this.state.username,
         password: this.state.password
-      })
+      
     }).then(function(response) {
-      console.log("response")
-      return response.json();
-    }).then(function(response) {
-      console.log("response")
-      if (response.success) {
+      console.log(response)
+      if (response.data.success) {
         this.props.history.push('/home');
-      } else if (!response.success) {}
+      } 
     }.bind(this))
   },
-  facebook: function(e) {
-    e.preventDefault();
+  // facebook: function(e) {
+  //   e.preventDefault();
 
-    //ajax facebook get
+  //   ajax facebook get
 
-    // fetch('/login/facebook',{method:'get'
-    // }).then(function(response) {
-    //   console.log(response);
-    //     return response.json();
-    //   }).then(function(response) {
-    //     console.log(response);
-    //     if (response.success) {
-    //       this.props.history.push('/home');
-    //     }
-    //   }.bind(this))
+  //   fetch('/login/facebook',{method:'get'
+  //   }).then(function(response) {
+  //     console.log(response);
+  //       return response.json();
+  //     }).then(function(response) {
+  //       console.log(response);
+  //       if (response.success) {
+  //         this.props.history.push('/home');
+  //       }
+  //     }.bind(this))
 
-    // axios({
-    //   url:'/login/facebook',
-    //   withCredentials:true
-    // })
+  //   axios({
+  //     url:'/login/facebook',
+  //     withCredentials:true
+  //   })
 
-  },
+  // },
   render: function() {
     return (
       <div className="screen">
@@ -101,7 +98,8 @@ var LoginOverlay = React.createClass({
             <br></br>
             <input type="password" placeholder="Password" name="password" id="password" value={this.state.password} onChange={this.update}></input>
             <div className="buttongroup">
-              <button className="form-btn dx" onClick={this.login}>Login</button>
+
+              <Link to="/home"><button className="form-btn dx" onClick={this.login}>Login</button></Link>
               <a className="fb" href="/login/facebook" >Login with Facebook</a>
             </div>
 

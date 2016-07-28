@@ -1,6 +1,7 @@
 var React = require('react');
 var GameTimer = require('./gameTimer');
 var ClassicStartOverlay = require('./gameStartOverlay').ClassicStartOverlay;
+var axios = require('axios')
 
 //COLLECTION OF GLOBAL VARIABLES TO MAKE EVERYONES LIFE EASIER
 //create global variable for reaction counter
@@ -32,7 +33,7 @@ var ClassicMode = React.createClass({
       score: 0,
       alert: " ",
       overlay: true,
-      N: this.props.params.n,
+      N: parseInt(this.props.params.n),
       posPressed: false,
       soundPressed: false,
       posStyle: noStyle,
@@ -84,7 +85,7 @@ var ClassicMode = React.createClass({
     var timeKeeper = 0;
 
     iterations = setInterval(function() {
-        timeKeeper++;    
+        timeKeeper++;
         if (this.state.keepScore && !(this.state.soundMatch || this.state.positionMatch)) {
         reactionTimes.push(reactionEnd - reactionStart);
         reactionEnd = null;
@@ -145,8 +146,8 @@ var ClassicMode = React.createClass({
         soundQueue.splice(0, 1);
         var sMatch = true;
       }
-      
-      
+
+
       // // pick a non-matching next number while interval is not 0
       //position:
       if (!pMatch) {
@@ -195,8 +196,8 @@ var ClassicMode = React.createClass({
            console.log(reactionTimes, 'reaction times')
            console.log(this.state)
         axios.post('/gameEnd',{
-               gameId: this.state.gameId, 
-             score: gameScore, 
+               gameId: this.state.gameId,
+             score: gameScore,
             reactionTimes: reactionTimes
           }).then(function(response){
             console.log('end game posted')
@@ -206,7 +207,7 @@ var ClassicMode = React.createClass({
         }.bind(this), 2000)
       }
 
-      }.bind(this),2000) 
+      }.bind(this),2000)
   },
       //}
     //}.bind(this), 2000);

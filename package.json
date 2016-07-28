@@ -17,6 +17,7 @@
     "chart.js": "^1.1.1",
     "connect-mongo": "^1.2.1",
     "cookie-parser": "^1.4.3",
+    "d3": "^4.1.1",
     "express": "~4.13.1",
     "express-session": "^1.14.0",
     "hbs": "^4.0.0",

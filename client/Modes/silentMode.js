@@ -1,6 +1,7 @@
 var React = require('react');
 var GameTimer = require('./gameTimer');
 var SilentStartOverlay = require('./gameStartOverlay').SilentStartOverlay;
+var axios = require('axios')
 
 //COLLECTION OF GLOBAL VARIABLES TO MAKE EVERYONES LIFE EASIER
 //create global variable for reaction counter
@@ -32,7 +33,7 @@ var SilentMode = React.createClass({
       score: 0,
       alert: " ",
       overlay: true,
-      N: this.props.params.n,
+      N: parseInt(this.props.params.n),
       posPressed: false,
       colorPressed: false,
       colorStyle: noStyle,
@@ -54,9 +55,10 @@ var SilentMode = React.createClass({
         penalty:response.data.penalty,
         positivePoints:response.data.positivePoints
       })
-      console.log("game posted")
+      console.log(this.state, '57')
+      //console.log("game posted")
     }.bind(this))
-    console.log("component mounted")
+    //console.log("component mounted")
     // fetch('/startGame/'+this.state.mode+'/'+this.state.N, {
     //  method: 'post'
     // });
@@ -197,16 +199,16 @@ var SilentMode = React.createClass({
           console.log(reactionTimes, 'reaction times')
           console.log(this.state)
           axios.post('/gameEnd',{
-              gameId: this.state.gameId, 
-              score: gameScore, 
+              gameId: this.state.gameId,
+              score: gameScore,
               reactionTimes: reactionTimes
           }).then(function(response){
             console.log('end game posted')
               this.props.history.push('/gameOver');
           }.bind(this))
-      
+
     }.bind(this),2000);
-  }   
+  }
     }.bind(this), 2000);
   },
   positionMatch: function() {

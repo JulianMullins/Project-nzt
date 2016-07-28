@@ -19,6 +19,9 @@ var GameTimer = React.createClass({
     this.setState({
       seconds: this.state.seconds - 1
     });
+    if (this.seconds == 0) {
+      clearInterval(interval);
+    }
   },
   render: function() {
     // console.log("Style: ", this.props.timeStyle);

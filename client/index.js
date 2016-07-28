@@ -40,27 +40,37 @@ var AdvancedLevels = require('./levels').AdvancedLevels;
 
 var App = React.createClass({
   getInitialState(){
-    // var isUser = null;
-    // axios({
-    //   url: '/isUser',
-    //   withCredentials: true
-    // }).then(function(response){
-    //   if(response.data.isUser){
-    //     isUser = true;
-    //   }
-    //   else{
-    //     isUser = false;
-    //   }
-    // }.bind(this))
+
     return{
-      
+      isUser:false,
+      isloggedin:false
     }
   },
   componentDidMount() {
     
     console.log("app mounted")
+
+    // axios.get('/isUser')
+    //   .then(function(response){
+    //     this.setState({
+    //       isUser: response.data.isUser,
+    //       isloggedin: response.data.isloggedin
+    //     })
+    //   }.bind(this))
+
+  },
+  updateState(){
+    // axios.get('/isUser')
+    //   .then(function(response){
+    //     this.setState({
+    //       isUser: response.data.isUser,
+    //       isloggedin: response.data.isloggedin
+    //     })
+    //   }.bind(this))
   },
   render() {
+            //<NavBar loginFunction={this.updateState} isUser={this.state.isUser} isloggedin={this.state.isloggedin} />
+
     return (
       <div>
 

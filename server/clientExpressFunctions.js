@@ -111,10 +111,10 @@ router.post('/startGame/:mode/:nLevel',function(req,res,next){
 router.get('/isUser',function(req,res,next){
   console.log(req.user)
   if(req.user){
-    res.json({isUser:true,isloggedin:req.user.temp})
+    res.json({isloggedin:true,isUser:req.user.temp})
   }
   else{
-    res.json({isUser:false})
+    res.json({isUser:false,isloggedin:false})
   }
   
 });
@@ -161,14 +161,19 @@ router.get("/getGameData",function(req,res,next){
 router.get('/getUser',function(req,res,next){
   var games = null;
   var isUser = false;
+  var username=null;
+  var name=null;
   if(req.user && req.user.currentGame){
     games = req.user.currentGame
     isUser=true
+    username=req.user.username,
+    name=req.user.name
   }
   res.json({
     alreadyLoggedIn: !!req.user,
     isUser: isUser,
-    username:req.user.username
+    username:username,
+    name:name
   })
 })
 
@@ -209,16 +214,15 @@ router.post('/gameEnd',function(req,res,next){
 })
 
 router.get('/taco',function(req, res, next){
-
- return res.json({stats: [123]})
-  console.log("lolololololololol")
-  // console.log(req.user.stats,'170')
+ //return res.json({stats: [123]})
+  //console.log("lolololololololol")
+   console.log(req.user.stats,'170')
   Stats.findById(req.user.stats, function(err,stats){
     if(err){
       console.log(err)
     }
     else{
-      res.json({stats: [123]})
+      res.json({stats: req.user.stats})
     }
   })
 })

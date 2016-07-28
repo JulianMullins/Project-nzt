@@ -15,7 +15,7 @@
 .key-wrapper > p:nth-of-type(1){
   padding: 20px;
 }
-  
+
 .tutorial p {
   width: 100%;
   color: #c6c6c6;
@@ -108,6 +108,14 @@ ul.row {
   margin-bottom: 5vh;
 }
 
-.slide > img{
-  width: 50vh;
+.started{
+  font-size: 1.3rem;
+  font-weight: 100;
+  margin-bottom: 5px;
+  text-align: center;
+}
+
+.slide img{
+  width: 45vh;
+  margin: 0 auto;
 }
