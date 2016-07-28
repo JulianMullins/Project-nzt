@@ -589,6 +589,7 @@ var React = require('react');
 var GameTimer = require('./gameTimer');
 var ClassicStartOverlay = require('./gameStartOverlay').ClassicStartOverlay;
 var axios = require('axios');
+var fullScore = 0;
 
 //COLLECTION OF GLOBAL VARIABLES TO MAKE EVERYONES LIFE EASIER
 //create global variable for reaction counter
@@ -666,9 +667,13 @@ var ClassicMode = React.createClass({
       timeKeeper++;
       if (this.state.keepScore && !(this.state.soundMatch || this.state.positionMatch)) {
         reactionTimes.push(reactionEnd - reactionStart);
+        var currentScore = ((2000 - reactionTimes[reactionTimes.length - 1]) / 100).toFixed(2);
+        console.log(currentScore);
+        fullScore += parseFloat(currentScore);
+        console.log(fullScore);
         reactionEnd = null;
         this.setState({
-          score: this.state.score + this.state.positivePoints,
+          score: this.state.score + parseInt(currentScore),
           alert: 'Good job'
         });
       } else if (!this.state.keepScore && (this.state.posPressed || this.state.soundPressed)) {
@@ -766,13 +771,11 @@ var ClassicMode = React.createClass({
       if (timeKeeper === 60) {
         clearInterval(iterations);
         setTimeout(function () {
-          gameScore = this.state.score;
-          console.log(gameScore, 'game score');
           console.log(reactionTimes, 'reaction times');
           console.log(this.state);
           axios.post('/gameEnd', {
             gameId: this.state.gameId,
-            score: gameScore,
+            score: fullScore,
             reactionTimes: reactionTimes
           }).then(function (response) {
             console.log('end game posted');
