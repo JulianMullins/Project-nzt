@@ -49,9 +49,12 @@ var Mainmenu = React.createClass({
   },
 
   render: function render() {
-    // var username = this.state.hasUsername
-    //   ? '<div>{this.state.username}</div>'
-    //   : '';
+    var username = this.state.hasUsername ? React.createElement(
+      'h3',
+      { className: 'advanced userWelcome' },
+      'Welcome: ',
+      this.state.name
+    ) : '';
     return React.createElement(
       'div',
       null,
@@ -59,7 +62,11 @@ var Mainmenu = React.createClass({
         'div',
         { className: 'heading' },
         React.createElement('img', { src: '../images/CortexLogo4.svg' }),
-        this.state.name
+        React.createElement(
+          'div',
+          { className: 'userHeading' },
+          username
+        )
       ),
       React.createElement(
         'div',
@@ -1381,6 +1388,8 @@ var gameScore;
 var iterations;
 var fullScore = 0;
 var currentScore;
+var matchCount = 0; //total matches in game
+var matchHit = 0; ///ones user gets
 
 var RelaxedMode = React.createClass({
   displayName: 'RelaxedMode',
@@ -1460,6 +1469,8 @@ var RelaxedMode = React.createClass({
       if (this.state.keepScore && !this.state.posMatch) {
         currentScore = ((2000 - reactionTimes[reactionTimes.length - 1]) / 100).toFixed(2);
         fullScore += parseFloat(currentScore);
+        matchCount += 1;
+        matchHit += 1;
         this.setState({
           alert: "Good job",
           score: this.state.score + parseInt(currentScore),
@@ -1468,6 +1479,7 @@ var RelaxedMode = React.createClass({
       } else if (!this.state.keepScore && this.state.posPressed) {
         this.setState({ alert: 'Not a match' });
         if (this.state.score - 5 >= 0) {
+          matchHit -= 1;
           currentScore = 5;
           this.setState({
             score: this.state.score - 5,
@@ -1480,6 +1492,7 @@ var RelaxedMode = React.createClass({
       } else if (this.state.keepScore && this.state.posMatch) {
         this.setState({ alert: "Missed a match" });
         if (this.state.score - 5 >= 0) {
+          matchCount += 1;
           currentScore = 5;
           this.setState({
             score: this.state.score - 5,
@@ -1550,6 +1563,7 @@ var RelaxedMode = React.createClass({
         //give gameScore variable the final score
         clearInterval(iterations);
         console.log(fullScore);
+        console.log(matchHit / matchCount, 'accurqacy');
         axios.post('/gameEnd', {
           gameId: this.state.gameId,
           score: fullScore,
@@ -4034,7 +4048,7 @@ var Tutorial = React.createClass({
                 ' '
               ),
               ' ',
-              React.createElement('img', { src: './images/pattern.gif', alt: 'Gameplay Pattern' })
+              React.createElement('img', { src: './images/nback.gif', alt: 'Gameplay Pattern' })
             ),
             ' ',
             React.createElement(
