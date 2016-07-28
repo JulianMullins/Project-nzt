@@ -43,14 +43,16 @@ var Mainmenu = React.createClass({
     this.props.history.push('/levels/advanced')
   },
   render: function() {
-    // var username = this.state.hasUsername
-    //   ? '<div>{this.state.username}</div>'
-    //   : '';
+    var username = this.state.hasUsername
+      ?   (<h3 className="advanced userWelcome">Welcome: {this.state.name}</h3>)
+      : '';
     return (
       <div>
         <div className="heading">
           <img src="../images/CortexLogo4.svg"/>
-          {this.state.name}
+          <div className="userHeading">
+            {username}
+          </div>
         </div>
         <div className="menu">
           <a className="menu-panel classicBackground" onClick={this.classic}>

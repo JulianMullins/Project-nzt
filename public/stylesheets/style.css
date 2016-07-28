@@ -63,8 +63,8 @@ h3 {
   /* padding: 2rem 0;*/
 }
 .heading> img {
-  width: 40vw;
-  min-width: 500px;
+  width: 35vw;
+  min-width: 600px;
 }
 
 .btn {
@@ -80,12 +80,27 @@ h3 {
 .heading {
   display: flex;
   height: 30vh;
-  justify-content: center;
+  justify-content: flex-end;
   align-items: center;
   /*background-color: white;*/
   color: #01B6A7;
   flex-direction: column;
 }
+
+.userHeading {
+  height: 5vh;
+  width: 100vw;
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-end;
+}
+
+.userWelcome {
+  margin-right: 10px;
+  margin-bottom: 0px;
+  font-weight: 500;
+}
+
 .menu {
   display: flex;
   justify-content: center;
