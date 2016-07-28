@@ -51,7 +51,7 @@ var GameOverOverlay = React.createClass({
       .then(axios.spread(function(userData,gameData){
         this.setState({
           //username:userData.data.username,
-          isAnon:userData.data.alreadyLoggedIn,
+          isAnon: !userData.data.alreadyLoggedIn,
           score:gameData.data.game.score,
           mode:gameData.data.game.mode,
           nLevel:gameData.data.game.nLevel,
@@ -106,7 +106,7 @@ var GameOverOverlay = React.createClass({
   renderLogin(){
 
     //if not logged in, option to login to save
-    if(!this.state.isAnon && !this.state.isHighScore){
+    if(this.state.isAnon && !this.state.isHighScore){
       this.setState({
         gameOverMessage: <div className="gameOverPrompt">
           <p>It looks like you are not currently logged in. 

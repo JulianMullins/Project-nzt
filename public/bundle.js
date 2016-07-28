@@ -145,7 +145,8 @@ var Mainmenu = React.createClass({
   getInitialState: function getInitialState() {
     return {
       name: null,
-      hasUsername: false
+      hasUsername: false,
+      userWelcome: React.createElement('div', null)
     };
   },
   componentDidMount: function componentDidMount() {
@@ -154,6 +155,16 @@ var Mainmenu = React.createClass({
         hasUsername: response.data.isUser,
         name: response.data.name
       });
+      if (this.state.hasUsername) {
+        this.setState({
+          userWelcome: React.createElement(
+            'h3',
+            { className: 'advanced userWelcome' },
+            'Welcome: ',
+            this.state.name
+          )
+        });
+      }
     }.bind(this));
   },
   classic: function classic() {
@@ -170,12 +181,9 @@ var Mainmenu = React.createClass({
   },
 
   render: function render() {
-    var username = this.state.hasUsername ? React.createElement(
-      'h3',
-      { className: 'advanced userWelcome' },
-      'Welcome: ',
-      this.state.name
-    ) : '';
+    // var username = this.state.hasUsername
+    //   ?   (<h3 className="advanced userWelcome">Welcome: {this.state.name}</h3>)
+    //   : '';
     return React.createElement(
       'div',
       null,
@@ -186,7 +194,7 @@ var Mainmenu = React.createClass({
         React.createElement(
           'div',
           { className: 'userHeading' },
-          username
+          this.state.userWelcome
         )
       ),
       React.createElement(
@@ -2444,7 +2452,7 @@ var GameOverOverlay = React.createClass({
     axios.all([getUser(), getGame()]).then(axios.spread(function (userData, gameData) {
       this.setState({
         //username:userData.data.username,
-        isAnon: userData.data.alreadyLoggedIn,
+        isAnon: !userData.data.alreadyLoggedIn,
         score: gameData.data.game.score,
         mode: gameData.data.game.mode,
         nLevel: gameData.data.game.nLevel,
@@ -2520,7 +2528,7 @@ var GameOverOverlay = React.createClass({
   renderLogin: function renderLogin() {
 
     //if not logged in, option to login to save
-    if (!this.state.isAnon && !this.state.isHighScore) {
+    if (this.state.isAnon && !this.state.isHighScore) {
       this.setState({
         gameOverMessage: React.createElement(
           'div',
@@ -3499,29 +3507,6 @@ var NavBar = React.createClass({
 		//    }.bind(this))
 	},
 
-	// logInOut(e){
-
-	// 	//console.log(this)
-	// 	if(!this.state.loggedIn){
-	// 		this.props.history.push('/login')
-	// 	}
-	// 	else{
-	// 		axios({
-	// 	      url: '/logout',
-	// 	      withCredentials: true
-	// 	    }).then(function(response){
-	// 	    	console.log(response)
-	// 	    	if(response.data.success){
-	// 	    		this.setState({loggedIn:false})
-	// 	    		console.log("logged out success")
-	// 	    		this.props.history.push('/home')
-	// 	    		this.loginFunction();
-	// 	    	}
-	// 	    }.bind(this))
-	// 	}
-
-	//     this.closeLogInOut(e);
-	// },
 	render: function render() {
 		var logInOutLink = this.state.isloggedIn ? '/logout' : '/login';
 		var logInOrOut = this.state.isloggedIn ? 'Logout' : 'Login';

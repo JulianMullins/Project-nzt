@@ -244,7 +244,8 @@ passport.use(new FacebookStrategy({
         }
         
       }
-      
+
+    
       else{
         if(req.user){
           console.log("req.user and user", user, user.stats)
