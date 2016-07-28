@@ -2,7 +2,7 @@ var React = require('react');
 var GameTimer = require('./gameTimer');
 var axios = require('axios');
 var AdvancedStartOverlay = require('./gameStartOverlay').AdvancedStartOverlay;
-var fullScore = 0;
+var fullScore=0;
 var currentScore;
 
 //COLLECTION OF GLOBAL VARIABLES TO MAKE EVERYONES LIFE EASIER
@@ -15,7 +15,7 @@ var reactionTimes = [];
 var gameScore;
 var reactionEnd = null;
 var iterations;
-var fullScore = 0;
+var fullScore=0;
 
 var AdvancedMode = React.createClass({
   getInitialState: function() {
@@ -52,9 +52,16 @@ var AdvancedMode = React.createClass({
     }
   },
   componentDidMount: function() {
-    axios.post('/startGame/' + this.state.mode + '/' + this.state.N).then(function(response) {
-      console.log("start game posted", response)
-      this.setState({tempUser: response.data.tempUser, gameId: response.data.gameId, modeMultiplier: response.data.modeMultiplier, penalty: response.data.penalty, positivePoints: response.data.positivePoints})
+    axios.post('/startGame/'+this.state.mode+'/'+this.state.N)
+    .then(function(response){
+      console.log("start game posted",response)
+      this.setState({
+        tempUser:response.data.tempUser,
+        gameId: response.data.gameId,
+        modeMultiplier:response.data.modeMultiplier,
+        penalty:response.data.penalty,
+        positivePoints:response.data.positivePoints
+      })
       console.log("game posted")
     }.bind(this))
     console.log("component mounted")
@@ -76,9 +83,9 @@ var AdvancedMode = React.createClass({
     }.bind(this)
   },
   startGame: function() {
-    this.setState({overlay: false});
-    this.playGame();
-    this.enableKeys();
+      this.setState({overlay: false});
+      this.playGame();
+      this.enableKeys();
   },
   playGame: function() {
     var positionQueue = [];
@@ -118,22 +125,23 @@ var AdvancedMode = React.createClass({
             alert: "Missed a match"
           })
           reactionEnd = null;
-          if ((this.state.score - 5) >= 0) {
-            currentScore = 5;
+          if ((this.state.score-5) >= 0) {
+            currentScore=5;
             this.setState({
               score: this.state.score - 5
             });
-          } else {
-            this.setState({score: 0});
-          } else {
-            currentScore = this.state.score;
-            this.setState({score: 0});
           }
+          else{
+            currentScore=this.state.score;
+            this.setState({
+            score: 0
+          });
+        }
         }
       } else if (this.state.correct[0] === this.state.colorMatch && this.state.correct[1] === this.state.soundMatch && this.state.correct[2] === this.state.positionMatch) {
         reactionTimes.push(reactionEnd - reactionStart);
-        currentScore = ((2000 - reactionTimes[reactionTimes.length - 1]) / 100).toFixed(2);
-        fullScore += parseFloat(currentScore);
+        currentScore=((2000-reactionTimes[reactionTimes.length-1])/100).toFixed(2);
+        fullScore+=parseFloat(currentScore);
         reactionEnd = null;
         this.setState({
           soundPressed: noStyle,
@@ -162,14 +170,17 @@ var AdvancedMode = React.createClass({
           ],
           alert: 'Not a match'
         })
-        if ((this.state.score - 5) >= 0) {
-          currentScore = 5;
+        if ((this.state.score-5) >= 0) {
+          currentScore=5;
           this.setState({
             score: this.state.score - 5
           });
-        } else {
-          currentScore = this.state.score;
-          this.setState({score: 0});
+        }
+        else{
+          currentScore=this.state.score;
+          this.setState({
+            score: 0
+          });
         }
       }
 
@@ -274,16 +285,16 @@ var AdvancedMode = React.createClass({
           console.log(gameScore, 'game score')
           console.log(reactionTimes, 'reaction times')
           console.log(this.state)
-          axios.post('/gameEnd', {
-            gameId: this.state.gameId,
-            score: gameScore,
-            reactionTimes: reactionTimes
-          }).then(function(response) {
+          axios.post('/gameEnd',{
+              gameId: this.state.gameId,
+              score: gameScore,
+              reactionTimes: reactionTimes
+          }).then(function(response){
             console.log('end game posted')
-            this.props.history.push('/gameOver');
+              this.props.history.push('/gameOver');
           }.bind(this))
-        }.bind(this), 2000);
-      }
+      }.bind(this),2000);
+    }
     }.bind(this), 2000);
   },
   colorMatch: function() {
@@ -309,7 +320,9 @@ var AdvancedMode = React.createClass({
   },
   render: function() {
     var overlay = this.state.overlay
-      ? (<AdvancedStartOverlay click={this.startGame}/>)
+      ? (
+        <AdvancedStartOverlay click={this.startGame}/>
+      )
       : '';
 
     var scoreAlert;
@@ -348,12 +361,8 @@ var AdvancedMode = React.createClass({
     }
 
     var gameTimer = this.state.overlay
-      ? ""
-      : (
-        <GameTimer timeStyle={{
-          'color': "#F1BA03"
-        }}></GameTimer>
-      );
+    ? ""
+    : (<GameTimer timeStyle={{'color': "#F1BA03"}}></GameTimer>);
 
     return (
       <div className="gameContainer">
@@ -399,9 +408,7 @@ var AdvancedMode = React.createClass({
 
 var noStyle = {}
 var pushStyle = {
-  backgroundColor: 'rgba(0, 0, 0, .1729)',
-  boxShadow: '0px 0px',
-  color: 'white'
+  color: 'black'
 }
 
 var standardStyle = {
