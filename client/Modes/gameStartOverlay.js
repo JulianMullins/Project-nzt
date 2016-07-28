@@ -11,10 +11,6 @@ var SilentStartOverlay = React.createClass({
           <p className="silent">Use the left and right arrow keys or press the corresponding buttons to select a match. If there is a position and color match at the same time, select both options simultaneously.</p>
           <div className="key-wrapper">
             <ul className="row">
-              <li className="key keyBlank k38">↑</li>
-            </ul>
-
-            <ul className="row">
               <li className="key keySilent k37">←</li>
               <li className="key keyBlank k40">↓</li>
               <li className="key keySilent k39">→</li>
