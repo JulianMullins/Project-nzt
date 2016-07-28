@@ -13,6 +13,7 @@ var reactionTimes = [];
 var gameScore;
 var reactionEnd = null;
 var iterations;
+var fullScore=0;
 
 var SilentMode = React.createClass({
   getInitialState: function() {
@@ -92,9 +93,14 @@ var SilentMode = React.createClass({
 
       if (this.state.keepScore && !(this.state.colorMatch || this.state.positionMatch)) {
         reactionTimes.push(reactionEnd - reactionStart);
+        var currentScore=((2000-reactionTimes[reactionTimes.length-1])/100).toFixed(2);
+        console.log(currentScore)
+        console.log('test')
+        fullScore+=parseFloat(currentScore);
+        console.log(fullScore)
         reactionEnd = null;
         this.setState({
-          score: this.state.score + this.state.positivePoints,
+          score: this.state.score + 5,
           alert: 'Good job',
           posStyle: noStyle,
           colorStyle: noStyle
