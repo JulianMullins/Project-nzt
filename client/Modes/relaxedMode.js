@@ -46,15 +46,34 @@ var RelaxedMode = React.createClass({
       mode: 'relaxed',
       modeMultiplier: 1,
       penalty: 0,
-      positivePoints: 0
+      positivePoints: 0,
+      userId:null
     }
   },
   componentDidMount: function() {
-    axios.post('/startGame/' + this.state.mode + '/' + this.state.N).then(function(response) {
+    axios.post('/startGame/' + this.state.mode + '/' + this.state.N)
+    .then(function(response) {
       console.log("start game posted", response)
-      this.setState({tempUser: response.data.tempUser, gameId: response.data.gameId, modeMultiplier: response.data.modeMultiplier, penalty: response.data.penalty, positivePoints: response.data.positivePoints});
+      this.setState({
+        tempUser: response.data.tempUser, 
+        gameId: response.data.gameId, 
+        modeMultiplier: response.data.modeMultiplier, 
+        penalty: response.data.penalty, 
+        positivePoints: response.data.positivePoints,
+        userId:response.data.userId
+      });
+      console.log(this.state)
       console.log("game posted")
+    
+      axios.get('/isUser')
+      .then(function(response){
+        console.log("isuser data: "+response.data)
+      })
+
     }.bind(this))
+
+
+
     console.log("component mounted")
   },
   componentWillUnmount: function() {
@@ -68,6 +87,12 @@ var RelaxedMode = React.createClass({
     }.bind(this);
   },
   startGame: function() {
+
+    axios.get('/isUser')
+      .then(function(response){
+        console.log(response.data)
+      })
+
     this.setState({overlay: false});
     this.position();
     this.enableKeys();
@@ -163,7 +188,7 @@ var RelaxedMode = React.createClass({
       ////////////////////////////////////////////////////////////////////////////////////////
       ////////////////////////////////////////////////////////////////////////////////////
       //RUTH THIS IS WHERE THE GAME ENDS///////////////////////////////////////////
-      if (timeKeeper === 0) {
+      if (timeKeeper === 50) {
         //give gameScore variable the final score
         console.log(reactionTimes, 'reaction times')
         clearInterval(iterations);
@@ -172,7 +197,9 @@ var RelaxedMode = React.createClass({
         axios.post('/gameEnd', {
           gameId: this.state.gameId,
           score: fullScore,
-          reactionTimes: reactionTimes
+          reactionTimes: reactionTimes,
+          userId: this.state.userId
+
         }).then(function(response) {
           console.log('end game posted')
           // if(response.data.success){
