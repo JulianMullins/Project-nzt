@@ -1,6 +1,7 @@
 var React = require('react');
 var GameTimer = require('./gameTimer');
 var SilentStartOverlay = require('./gameStartOverlay').SilentStartOverlay;
+var axios = require('axios')
 
 //COLLECTION OF GLOBAL VARIABLES TO MAKE EVERYONES LIFE EASIER
 //create global variable for reaction counter
@@ -54,9 +55,10 @@ var SilentMode = React.createClass({
         penalty:response.data.penalty,
         positivePoints:response.data.positivePoints
       })
-      console.log("game posted")
+      console.log(this.state, '57')
+      //console.log("game posted")
     }.bind(this))
-    console.log("component mounted")
+    //console.log("component mounted")
     // fetch('/startGame/'+this.state.mode+'/'+this.state.N, {
     //  method: 'post'
     // });
