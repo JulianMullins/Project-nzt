@@ -24,60 +24,42 @@ var getGame = function(){
 var GameOverOverlay = React.createClass({
   getInitialState:function(){  
     return{
-          username:null,
-          alreadyLoggedIn:false,
+          //username:null,
+          isAnon:false,
           score:0,
           mode:null,
           nLevel:1,
           renderLogin: <div></div>,
           anonHighScore: <div></div>,
           anonUserName:null,
-          anonGetHighScore:false
+          isHighScore:false,
+          passedLevel:false
         }
   },
   componentDidMount(){
-      
-    // axios.all([getUser(),getGame()])
-    //   .then(axios.spread(function(userData,gameData){
-    //     this.setState({
-    //       username:userData.data.username,
-    //       alreadyLoggedIn:userData.data.alreadyLoggedIn,
-    //       score:gameData.data.game.score,
-    //       mode:gameData.data.game.mode,
-    //       nLevel:gameData.data.game.nLevel
-    //     })
-    //     console.log(userData,gameData)
-    //     console.log("component mounted")
-    //   }.bind(this)))
-    this.getData();
 
+    this.getData();
 
   },
 
-  // componentDidMount(){
-  //     getUser().bind(this);
-  //     getScore().bind(this);
-  // },
   getData(){
     axios.all([getUser(),getGame()])
       .then(axios.spread(function(userData,gameData){
         this.setState({
-          username:userData.data.username,
-          alreadyLoggedIn:userData.data.alreadyLoggedIn,
+          //username:userData.data.username,
+          isAnon:userData.data.alreadyLoggedIn,
           score:gameData.data.game.score,
           mode:gameData.data.game.mode,
-          nLevel:gameData.data.game.nLevel
+          nLevel:gameData.data.game.nLevel,
+          passedLevel: gameData.data.game.passedLevel
         })
       }.bind(this)))
       .then(function(){
         this.renderLogin()
       }.bind(this))
   },
-  // update:function(e){
-  //   this.setState({
-  //     username: e.target.value
-  //   })
-  // },
+
+  //currently not in use
   tempSaveData(){
     axios.post({
       url:'/tempSaveData',
@@ -88,6 +70,8 @@ var GameOverOverlay = React.createClass({
       }
     })
   },
+
+
   gameOver: function(){
     axios.post({
       url:'/gameOver',
@@ -97,7 +81,7 @@ var GameOverOverlay = React.createClass({
       },
       data: {
         inputUsername:this.state.username,
-        alreadyLoggedIn:this.state.alreadyLoggedIn
+        alreadyLoggedIn:this.state.isAnon
       }
     })
 
@@ -114,7 +98,7 @@ var GameOverOverlay = React.createClass({
     //get isOverallHighScore
 
     //if anon get high score, can save with tempusername, or login
-    if(anonGetHighScore){
+    if(this.state.anonGetHighScore){
       this.setState({
         anonHighScore: <p>You earned a high score on our overall leaderboards.
           If you wish to be added to the leaderboard and without logging in, 
@@ -133,7 +117,7 @@ var GameOverOverlay = React.createClass({
   renderLogin(){
 
     //if not logged in, option to login to save
-    if(!this.state.alreadyLoggedIn && !anonGetHighScore){
+    if(!this.state.isAnon && !anonGetHighScore){
       this.setState({
         renderLogin: <div className="gameOverPrompt">
           <p>It looks like you are not currently logged in. 

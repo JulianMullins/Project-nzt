@@ -212,6 +212,7 @@ router.post('/gameEnd',function(req,res,next){
       }
       game.score = req.body.score;
       game.reactionTimes=req.body.reactionTimes;
+      game.passedLevel = passedLevel;
       game.save(function(err,game){
         if(err){
           res.json({success:false})
@@ -222,14 +223,17 @@ router.post('/gameEnd',function(req,res,next){
             success:true,
             score:req.body.score,
             userId:req.body.userId,
-            passedLevel:passedLevel
+            passedLevel:passedLevel,
+            gameId:game._id
           })
 
 
           //post to gameOver
-          axios.post('/gameOver',{
-            userId: req.body.userId
-          })
+          // axios.post('/gameOver',{
+          //   userId: req.body.userId,
+          //   passedLevel:passedLevel,
+          //   gameId:game._id
+          // })
 
         }
       });

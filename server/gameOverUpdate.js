@@ -26,7 +26,7 @@ var setLeaderboard = function(id,callback){
 
 //check overall leaderboards, and update accordingly
 var checkOverall = function(newHighScore){
-  Leaderboard.findbyId(serverLeaderboard)
+  Leaderboard.findById(serverLeaderboard)
     .populate('scores')
     .exec(function(err,leaderboard){
 
@@ -49,16 +49,17 @@ var checkOverall = function(newHighScore){
             }
           }
         }
+        leaderboard.save();
     })
 }
 
 
 //update personal leaderboards (if !temp)
-checkMine = function(newHighScore,stats){
+var checkMine = function(newHighScore,stats){
   Leaderboard.findById(stats.leaderboard)
     .populate('scores')
     .exec(function(err,leaderboard){
-
+      console.log(leaderboard)
       var myHighScores = leaderboard.scores;
 
       if(myHighScores.length<leaderboardSize){
@@ -80,6 +81,8 @@ checkMine = function(newHighScore,stats){
           }
         }
       }
+
+      leaderboard.save();
     })
 }
 
@@ -91,10 +94,15 @@ var sortScores = function(a,b){
 //save game
 router.post('/gameOver',function(req,res,next){
 
+  console.log("posting gameover")
+
   //check if tempUser
+  if(req.body.userId){
   TempUser.findById(req.body.userId)
     .populate('currentGame','stats')
     .exec(function(err,tempUser){
+
+      if(tempUser){
 
       var tempGame = tempUser.currentGame[0];
 
@@ -121,21 +129,26 @@ router.post('/gameOver',function(req,res,next){
 
       //return scoreId, userId, gameId, if overall high score
 
-      
-
+      }
     })
+  }
 
   //check if full user
+  console.log("not temp user")
   User.findById(req.user._id)
-    .populate('currentGame', 'stats')
+    .populate('stats currentGame')
     .exec(function(err,user){
       if(err){
         console.log(err)
       }
 
       if(user) {
-
+        console.log('full user found in POST:/gameOver')
+        console.log(user);
+        console.log(user.stats)
         var tempGame = user.currentGame[0];
+
+        var passedLevel = req.body.passedLevel;
 
         //make score
         var newHighScore = new HighScore({
@@ -147,23 +160,35 @@ router.post('/gameOver',function(req,res,next){
           reactionTimes:tempGame.reactionTimes
         })
 
-        //update maxN
-        if(nLevel>user.maxN[newHighScore.mode]){
+        //update maxN if passedLevel:
+
+        if(newHighScore.nLevel>user.maxN[newHighScore.mode]){
+
           user.maxN[newHighScore.mode] = nLevel;
-          }
+        }
+        if(newHighScore.nLevel === user.maxN[newHighScore.mode] && passedLevel){
+          user.maxN[newHighScore.mode]++;
+        }
 
           //check how scores compare on personal level;
           
+          console.log('user stats', user.stats)
           //update Stats
-          user.stats.totalPoints += newScore;
+          user.stats.totalPoints += newHighScore.score;
           user.stats.progress = user.stats.progress.push(newHighScore._id);
           
+          user.stats.save(function(err,stats){
+             console.log('updated user stats', user.stats)
+          })
+
           //update personal and overall leaderboards
           checkMine(newHighScore,user.stats)
           checkOverall(newHighScore)
 
           //return if user highscore, overall high score, new nLevel
 
+
+          //set game isHighScore, etc.
 
       }
      

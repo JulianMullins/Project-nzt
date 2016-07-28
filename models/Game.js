@@ -14,7 +14,9 @@ var gameSchema = mongoose.Schema({
 	finalScore:{
 		type:mongoose.Schema.Types.ObjectId,
 		ref:'HighScore'
-	}
+	},
+	passedLevel:Boolean,
+	isHighScore:Boolean
 })
 
 

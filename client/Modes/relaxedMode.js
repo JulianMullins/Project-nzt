@@ -205,7 +205,19 @@ var RelaxedMode = React.createClass({
           // if(response.data.success){
           //   this.props.history.push('/gameOver');
           // }
-          this.props.history.push('/gameOver');
+
+          axios.post('/gameOver',{
+            userId: response.data.userId,
+            passedLevel:response.data.passedLevel,
+            gameId:response.data.gameId
+          }).then(function(response){
+            if(response.data.success){
+              this.props.history.push('/gameOver');
+            }
+            this.props.history.push('/gameOver');
+          })
+
+          
         }.bind(this))
 
       }
