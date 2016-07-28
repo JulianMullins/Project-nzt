@@ -1483,6 +1483,7 @@ var reactionTimes = [];
 //global variable for game score (saved once time runs out)
 var gameScore;
 var iterations;
+var fullScore = 0;
 
 var RelaxedMode = React.createClass({
   displayName: 'RelaxedMode',
@@ -1541,9 +1542,13 @@ var RelaxedMode = React.createClass({
       timeKeeper--;
 
       if (this.state.keepScore && !this.state.posMatch) {
+        var currentScore = ((2000 - reactionTimes[reactionTimes.length - 1]) / 100).toFixed(2);
+        console.log(currentScore);
+        fullScore += parseFloat(currentScore);
+        console.log(fullScore);
         this.setState({
           alert: "Good job",
-          score: this.state.score + this.state.positivePoints,
+          score: this.state.score + parseInt(currentScore),
           posStle: noStyle
         });
       } else if (!this.state.keepScore && this.state.posPressed) {
@@ -1626,6 +1631,7 @@ var RelaxedMode = React.createClass({
         console.log(reactionTimes, 'reaction times');
         clearInterval(iterations);
         console.log(this.state);
+        console.log(fullScore);
         axios.post('/gameEnd', {
           gameId: this.state.gameId,
           score: gameScore,
