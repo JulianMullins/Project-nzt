@@ -1325,23 +1325,19 @@ var GameTimer = React.createClass({
   displayName: "GameTimer",
 
   getInitialState: function getInitialState() {
-    return { seconds: 120, once: false };
+    return { seconds: 120 };
   },
   componentDidMount: function componentDidMount() {
-    this.setState({
-      interval: setInterval(this.timerSecs, 1000)
-    });
+    interval = setInterval(this.timerSecs, 1000);
   },
   componentWillUnmount: function componentWillUnmount() {
-    setTimeout(function () {
-      clearInterval(interval);
-    }.bind(this), 3000);
+    clearInterval(interval);
   },
   timerSecs: function timerSecs() {
     this.setState({
       seconds: this.state.seconds - 1
     });
-    if (this.seconds == 0) {
+    if (this.state.seconds == 0) {
       clearInterval(interval);
     }
   },
@@ -2286,7 +2282,10 @@ var GameOverOverlay = React.createClass({
       score: 0,
       mode: null,
       nLevel: 1,
-      renderLogin: React.createElement('div', null)
+      renderLogin: React.createElement('div', null),
+      anonHighScore: React.createElement('div', null),
+      anonUserName: null,
+      anonGetHighScore: false
     };
   },
   componentDidMount: function componentDidMount() {
@@ -2325,11 +2324,11 @@ var GameOverOverlay = React.createClass({
     }.bind(this));
   },
 
-  update: function update(e) {
-    this.setState({
-      username: e.target.value
-    });
-  },
+  // update:function(e){
+  //   this.setState({
+  //     username: e.target.value
+  //   })
+  // },
   tempSaveData: function tempSaveData() {
     axios.post({
       url: '/tempSaveData',
@@ -2355,10 +2354,54 @@ var GameOverOverlay = React.createClass({
     });
   },
   click: function click(e) {
+
+    //ONLY IF EARNED
+
+    //go to next level (if earned)
     this.props.history.push('/game/' + this.state.mode + '/' + (this.state.nLevel + 1));
   },
+  anonHighScore: function anonHighScore() {
+
+    //get isOverallHighScore
+
+    //if anon get high score, can save with tempusername, or login
+    if (anonGetHighScore) {
+      this.setState({
+        anonHighScore: React.createElement(
+          'p',
+          null,
+          'You earned a high score on our overall leaderboards. If you wish to be added to the leaderboard and without logging in, provide a name below to display with your score',
+          React.createElement(
+            'form',
+            null,
+            React.createElement('input', { type: 'text', name: 'anonUserName', onChange: this.update }),
+            React.createElement(
+              _reactRouter.Link,
+              { onClick: this.anonLeaderboard, to: '/leaderboard', type: 'button' },
+              'Submit'
+            )
+          ),
+          'Or, you can ',
+          React.createElement(
+            _reactRouter.Link,
+            { to: '/gameOver/login' },
+            ' login'
+          ),
+          ' or ',
+          React.createElement(
+            _reactRouter.Link,
+            { to: '/gameOver/register' },
+            'sign up'
+          ),
+          ' to save your progress, view statistics and compete with friends!'
+        )
+      });
+    }
+  },
   renderLogin: function renderLogin() {
-    if (!this.state.alreadyLoggedIn) {
+
+    //if not logged in, option to login to save
+    if (!this.state.alreadyLoggedIn && !anonGetHighScore) {
       this.setState({
         renderLogin: React.createElement(
           'div',
@@ -2383,6 +2426,25 @@ var GameOverOverlay = React.createClass({
         )
       });
     }
+  },
+  update: function update(e) {
+
+    //update anonusername field
+    this.setState({
+      anonUserName: e.target.value
+    });
+  },
+  anonLeaderboard: function anonLeaderboard() {
+
+    //save anon score
+
+    axios.post('/postAnonScore', {
+      withCredentials: true,
+      data: {
+        anonUserName: this.state.anonUserName
+
+      }
+    });
   },
 
   render: function render() {
@@ -2417,6 +2479,7 @@ var GameOverOverlay = React.createClass({
         'You have unlocked level 2'
       ),
       this.state.renderLogin,
+      this.state.anonHighScore,
       React.createElement(
         'div',
         { className: 'gameOverActions' },
@@ -3032,12 +3095,7 @@ var LoginOverlay = React.createClass({
 
   getInitialState: function getInitialState() {
     console.log(this);
-    return {
-      username: '',
-      password: '',
-      gameEnded: false,
-      games: null
-    };
+    return { username: '', password: '', gameEnded: false, games: null };
   },
   // componentDidMount(){
 
@@ -3056,7 +3114,6 @@ var LoginOverlay = React.createClass({
   //         console.log('state set')
   //       }
   //     }.bind(this))
-
 
   // },
   update: function update(e) {
@@ -3163,11 +3220,7 @@ var LoginOverlay = React.createClass({
         React.createElement(
           'div',
           { className: 'pa' },
-          React.createElement(
-            _reactRouter.Link,
-            { to: '/register' },
-            'Register here.'
-          )
+          'Register here'
         ),
         React.createElement(
           'h3',
@@ -3718,6 +3771,7 @@ var ReactDOM = require('react-dom');
 var rd3 = require('react-d3');
 var LineChart = rd3.LineChart;
 var AreaChart = rd3.AreaChart;
+var axios = require('axios');
 
 var MyComponent = React.createClass({
   displayName: 'MyComponent',
@@ -3725,7 +3779,7 @@ var MyComponent = React.createClass({
   componentDidMount: function componentDidMount() {
     //fetch call
 
-    fetch('/taco', { method: 'GET' }).then(function (response) {
+    fetch('/taco', { method: 'GET', withCredentials: true }).then(function (response) {
       console.log(response, '38');
       return response.json();
     }).then(function (responseJson) {
@@ -3768,7 +3822,7 @@ var MyComponent = React.createClass({
 
 module.exports = MyComponent;
 
-},{"react":332,"react-d3":73,"react-dom":100}],20:[function(require,module,exports){
+},{"axios":21,"react":332,"react-d3":73,"react-dom":100}],20:[function(require,module,exports){
 'use strict';
 
 var _reactRouter = require('react-router');
@@ -3915,20 +3969,20 @@ var Tutorial = React.createClass({
                   React.createElement(
                     'p',
                     null,
-                    'Cortex is a ',
+                    'Cortex is a game designed to exercise your working memory and increase fluid-intelligence (directly tied to IQ). This method of increasing IQ is',
                     React.createElement(
-                      'spanl',
-                      null,
-                      'scientifically supported'
+                      _reactRouter.Link,
+                      { to: '/science', className: 'tutorialLink' },
+                      ' scientifically supported and backed by numerous research studies'
                     ),
-                    ' game for exercising your working memory and increasing fluid-intelligence (directly tied to IQ). While the game can be tricky to grasp at first and increases in difficulty rather quickly, we have tried to make this game as fun and as easy to learn as possible. We hope that you’ll enjoy playing this game and that the cognitive benefits will simply follow along as you progress.'
+                    '. While the game can be tricky to grasp at first and increases in difficulty rather quickly, we have tried to make this game as fun and as easy to learn as possible. We hope that you’ll enjoy simply playing the game and that the cognitive benefits will follow along as you progress.'
                   ),
-                  React.createElement('img', { src: './images/brain.png', alt: 'BRAIN' }),
                   React.createElement(
-                    'div',
-                    { className: 'started' },
-                    'Let’s get started!'
-                  )
+                    'h3',
+                    null,
+                    'Let\'s get started! '
+                  ),
+                  React.createElement('img', { src: './images/brain.png', alt: 'BRAIN' })
                 ),
                 ' '
               ),
@@ -3952,12 +4006,38 @@ var Tutorial = React.createClass({
                   React.createElement(
                     'p',
                     null,
-                    'Cortex is based on the n-back genre of brain training games, which requires players to keep track of various changes happening on-screen.'
+                    'Cortex is based on the n-back genre of brain training games which requires players to keep track of various changes happening on-screen. Traditionally the game requires players to keep track of two things: position and sound (the \'dual\' in dual n-back). In this game, we have incorporated changing colors as well, and divided up the modes based on the number of things you have to keep track of (mono, dual and triple n-back).'
                   )
                 )
               ),
               ' ',
-              React.createElement('img', { src: './images/pattern.gif', alt: 'Mountain View' })
+              React.createElement('img', { src: './images/colorPosition.gif', alt: 'Mountain View' })
+            ),
+            ' ',
+            React.createElement(
+              'div',
+              { className: 'slide' },
+              React.createElement(
+                'div',
+                { className: 'rulemode2' },
+                React.createElement(
+                  'div',
+                  { className: 'rules2' },
+                  React.createElement(
+                    'h2',
+                    null,
+                    'The n-back part'
+                  ),
+                  React.createElement(
+                    'p',
+                    null,
+                    'The n in n-back refers to the number of positions back that you have to keep track of. The example below demonstrates the gameplay at n=1, that is you have to remember the moving block\'s position just one step back and press the position key if the positions match. At n=2, you would have to make matches based on the state of the board two steps back, etc.'
+                  )
+                ),
+                ' '
+              ),
+              ' ',
+              React.createElement('img', { src: './images/pattern.gif', alt: 'Gameplay Pattern' })
             ),
             ' ',
             React.createElement(
@@ -3974,9 +4054,7 @@ var Tutorial = React.createClass({
                 React.createElement(
                   'p',
                   null,
-                  'Once a button is pressed, you cannot undo the action.',
-                  React.createElement('br', null),
-                  'For a double match, you need to press both keys.'
+                  'Once a button is pressed, you cannot undo the action. For a double match, you need to press both keys'
                 ),
                 React.createElement(
                   'div',
@@ -3985,12 +4063,12 @@ var Tutorial = React.createClass({
                     'div',
                     { className: 'rules2' },
                     React.createElement(
-                      'h2',
+                      'h3',
                       null,
                       'RELAXED'
                     ),
                     React.createElement(
-                      'h3',
+                      'p',
                       null,
                       'Keep track of changing position. ',
                       React.createElement('br', null),
@@ -4029,12 +4107,12 @@ var Tutorial = React.createClass({
                     'div',
                     { className: 'rules2' },
                     React.createElement(
-                      'h2',
+                      'h3',
                       null,
                       'CLASSIC'
                     ),
                     React.createElement(
-                      'h3',
+                      'p',
                       null,
                       'Keep track of position and sounds. ',
                       React.createElement('br', null),
@@ -4079,12 +4157,12 @@ var Tutorial = React.createClass({
                     'div',
                     { className: 'rules2' },
                     React.createElement(
-                      'h2',
+                      'h3',
                       null,
                       'SILENT'
                     ),
                     React.createElement(
-                      'h3',
+                      'p',
                       null,
                       'Keep track of both position and colors. ',
                       React.createElement('br', null),
@@ -4123,12 +4201,12 @@ var Tutorial = React.createClass({
                     'div',
                     { className: 'rules2' },
                     React.createElement(
-                      'h2',
+                      'h3',
                       null,
                       'ADVANCED'
                     ),
                     React.createElement(
-                      'h3',
+                      'p',
                       null,
                       'Keep track of position, color and sound ',
                       React.createElement('br', null),
@@ -4182,34 +4260,6 @@ var Tutorial = React.createClass({
                   React.createElement(
                     'h2',
                     null,
-                    'The n-back part'
-                  ),
-                  React.createElement(
-                    'p',
-                    null,
-                    'The n in n-back refers to the number of positions back that you have to keep track of.',
-                    React.createElement('br', null),
-                    'For example, at n=2, you would have to make matches based on the state of the board two steps back. '
-                  )
-                ),
-                ' '
-              ),
-              ' ',
-              React.createElement('img', { src: './images/pattern.gif', alt: 'Gameplay Pattern' })
-            ),
-            ' ',
-            React.createElement(
-              'div',
-              { className: 'slide' },
-              React.createElement(
-                'div',
-                { className: 'rulemode2' },
-                React.createElement(
-                  'div',
-                  { className: 'rules2' },
-                  React.createElement(
-                    'h2',
-                    null,
                     'Expectations'
                   ),
                   React.createElement(
@@ -4220,7 +4270,17 @@ var Tutorial = React.createClass({
                   React.createElement(
                     'p',
                     null,
-                    'However, once you get familiar with the game mechanics, it is always recommended to continue pushing up in n-level once you have unlocked the next one. You will experience the greatest mental benefits by continuously challenging yourself! '
+                    'Once you\'ve become familiar with the game mechanics, it is always recommended to move on after unlocking the next n-level. You will experience the greatest cognitive benefits by continuously challenging yourself! '
+                  ),
+                  React.createElement(
+                    'h3',
+                    null,
+                    'Ready to begin?'
+                  ),
+                  React.createElement(
+                    _reactRouter.Link,
+                    { to: '/home', className: 'gameStartBtn playBtn' },
+                    'Start Playing!'
                   )
                 )
               ),
