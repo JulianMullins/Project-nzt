@@ -157,6 +157,14 @@ ul.row {
 .slide img{
   width: 40vh;
   margin: 0 auto;
+    pointer-events: auto;
+ animation-timing-function: ease-out;
+}
+
+.slide:nth-of-type(1):hover img:hover{
+  -webkit-animation: bob-up 2s ease-in-out infinite;
+  pointer-events: auto;
+  transition-duration: 1s;
 }
 
 .playBtn {
@@ -174,4 +182,22 @@ ul.row {
 .playBtn:hover {
   transition-duration: .8s;
   background-color: rgba(198,198,198,.5);
+}
+
+@keyframes bob-up {
+    0% {
+        -webkit-transform: scale(1,1);
+    }
+    25% {
+        -webkit-transform: scale(1.03,1.03);
+    }
+    50% {
+        -webkit-transform: scale(1,1);
+    }
+    75% {
+        -webkit-transform: scale(1.03,1.03);
+    }
+    100% {
+        -webkit-transform: scale(1,1);
+    }
 }

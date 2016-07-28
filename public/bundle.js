@@ -1882,6 +1882,8 @@ var reactionEnd = null;
 var iterations;
 var fullScore = 0;
 var currentScore;
+var matchCount = 0; //total matches in game
+var matchHit = 0; ///ones user gets
 
 var SilentMode = React.createClass({
   displayName: 'SilentMode',
@@ -1945,6 +1947,8 @@ var SilentMode = React.createClass({
     iterations = setInterval(function () {
       timeKeeper++;
       if (this.state.keepScore && !(this.state.colorMatch || this.state.positionMatch)) {
+        matchCount += 1;
+        matchHit += 1;
         reactionTimes.push(reactionEnd - reactionStart);
         currentScore = ((2000 - reactionTimes[reactionTimes.length - 1]) / 100).toFixed(2);
         fullScore += parseFloat(currentScore);
@@ -1958,6 +1962,7 @@ var SilentMode = React.createClass({
         });
       } else if (!this.state.keepScore && (this.state.posPressed || this.state.colorPressed)) {
         this.setState({ alert: "Not a match" });
+        matchHit -= 1;
         reactionEnd = null;
         if (this.state.score - 5 >= 0) {
           fullscore -= 5;
@@ -1974,6 +1979,7 @@ var SilentMode = React.createClass({
         }
       } else if (this.state.keepScore && (this.state.colorMatch || this.state.positionMatch)) {
         this.setState({ alert: "Missed a match" });
+        matchCount += 1;
         reactionEnd = null;
         if (this.state.score - 5 >= 0) {
           fullScore -= 5;
@@ -2063,8 +2069,9 @@ var SilentMode = React.createClass({
       if (timeKeeper === 60) {
         clearInterval(iterations);
         setTimeout(function () {
-          console.log(reactionTimes, 'reaction times');
-          console.log(this.state);
+          //console.log(reactionTimes, 'reaction times')
+          //console.log(this.state)
+          console.log(matchHit / matchCount, 'accuracy');
           axios.post('/gameEnd', {
             gameId: this.state.gameId,
             score: fullScore,

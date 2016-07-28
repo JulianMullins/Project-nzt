@@ -187,15 +187,27 @@ passport.use(new FacebookStrategy({
 
       else if (!user) {
 
-        req.user.update({
-          facebookId:profile.id,
-          email:email,
-          username:username,
-          temp:false
+        // req.user.update({
+        //   facebookId:profile.id,
+        //   email:email,
+        //   name:username,
+        //   temp:false
+        // })
+        
+        req.user.facebookId = profile.id;
+        req.user.email = email;
+        req.user.name = username;
+        req.user.temp = false;
+
+        if(!req.user.username){
+          req.user.username = username
+        }
+        req.user.save(function(err,reqUser){
+          var user = req.user;
+          req.logout();
+          return done(null,user);
         })
-        var user = req.user;
-        req.logout();
-        return done(null,user);
+        
       }
 
 
