@@ -119,13 +119,14 @@ componentDidMount: function(){
                 <div className="rulemode2">
                   <div className="rules2">
                     <h2>Welcome to Cortex!</h2>
-                    <p>Cortex is a <spanl>scientifically supported</spanl> game for exercising your working memory
-                    and increasing fluid-intelligence (directly tied to IQ). While the game can be tricky to grasp
+                    <p>Cortex is a game designed to exercise your working memory
+                    and increase fluid-intelligence (directly tied to IQ). This method of increasing IQ is
+                    <Link to="/science" className="tutorialLink"> scientifically supported and backed by numerous research studies</Link>. While the game can be tricky to grasp
                     at first and increases in difficulty rather quickly, we have tried to make this game as fun and
-                    as easy to learn as possible. We hope that you’ll enjoy playing this game and that the cognitive
-                    benefits will simply follow along as you progress.</p>
+                    as easy to learn as possible. We hope that you’ll enjoy simply playing the game and that the cognitive
+                    benefits will follow along as you progress.</p>
+                    <h3>Let&#39;s get started! </h3>
 									<img src="./images/brain.png" alt="BRAIN"></img>
-                    <div className="started">Let’s get started!</div>
                   </div> {/* rules2 */}
                 </div> {/* rulemodel2 */}
               </div> {/* slide */}
@@ -134,23 +135,38 @@ componentDidMount: function(){
                 <div className="rulemode2">
                   <div className="rules2">
                   <h2>Dual n-back</h2>
-                    <p>Cortex is based on the n-back genre of brain training games, which requires players to keep
-                  track of various changes happening on-screen.</p>
+                    <p>Cortex is based on the n-back genre of brain training games which requires players to keep
+                  track of various changes happening on-screen. Traditionally the game requires players to keep track
+                  of two things: position and sound (the 'dual' in dual n-back). In this game, we have incorporated
+                  changing colors as well, and divided up the modes based on the number of things you have to keep track
+                  of (mono, dual and triple n-back).</p>
                   </div>
                 </div> {/* rulemode2 */}
-                  <img src="./images/pattern.gif" alt="Mountain View"></img>
+                  <img src="./images/colorPosition.gif" alt="Mountain View"></img>
+              </div> {/* slide */}
+
+              <div className="slide">
+                <div className="rulemode2">
+                  <div className="rules2">
+                  <h2>The n-back part</h2>
+                    <p>The n in n-back refers to the number of positions back that you have to keep track of.
+                    The example below demonstrates the gameplay at n=1, that is you have to remember the moving block&#39;s position
+                    just one step back and press the position key if the positions match.
+                    At n=2, you would have to make matches based on the state of the board two steps back, etc.</p>
+                  </div> {/* rules2 */}
+                </div> {/* rulemode3 */}
+                <img src="./images/nback.gif" alt="Gameplay Pattern"></img>
               </div> {/* slide */}
 
               <div className="slide">
                 <div className="key-wrapper">
                 <h2>Key Tips</h2>
-                <p>Once a button is pressed, you cannot undo the action.
-									<br></br>
-                For a double match, you need to press both keys.</p>
+                  <p>Once a button is pressed, you cannot undo the action.
+                  For a double match, you need to press both keys</p>
                   <div className="rulemode">
                     <div className="rules2">
-                      <h2>RELAXED</h2>
-                      <h3>Keep track of changing position. <br></br>(mono n-back)</h3>
+                      <h3>RELAXED</h3>
+                      <p>Keep track of changing position. <br></br>(mono n-back)</p>
                       <ul className="row">
                         <li className="key keyRelaxed k38">POSITION</li>
                       </ul>
@@ -161,8 +177,8 @@ componentDidMount: function(){
                       </ul>
                       </div>
                       <div className="rules2">
-                      <h2>CLASSIC</h2>
-                      <h3>Keep track of position and sounds. <br></br> (dual n-back)</h3>
+                      <h3>CLASSIC</h3>
+                      <p>Keep track of position and sounds. <br></br> (dual n-back)</p>
                       <ul className="row">
                         <li className="key keyClassic k38">↑</li>
                       </ul>
@@ -176,8 +192,8 @@ componentDidMount: function(){
 
                   <div className="rulemode">
                     <div className="rules2">
-                      <h2>SILENT</h2>
-                      <h3>Keep track of both position and colors. <br></br>(dual n-back)</h3>
+                      <h3>SILENT</h3>
+                      <p>Keep track of both position and colors. <br></br>(dual n-back)</p>
                       <ul className="row">
                         <li className="key keySilent k38">↑</li>
                       </ul>
@@ -188,8 +204,8 @@ componentDidMount: function(){
                       </ul>
                       </div>
                       <div className="rules2">
-                      <h2>ADVANCED</h2>
-                      <h3>Keep track of position, color and sound <br></br>(triple n-back)</h3>
+                      <h3>ADVANCED</h3>
+                      <p>Keep track of position, color and sound <br></br>(triple n-back)</p>
                       <ul className="row">
                         <li className="key keyAdvanced k38">POSITION</li>
                       </ul>
@@ -206,26 +222,18 @@ componentDidMount: function(){
               <div className="slide">
                 <div className="rulemode2">
                   <div className="rules2">
-                  <h2>The n-back part</h2>
-                    <p>The n in n-back refers to the number of positions back that you have to keep track of.
-											<br></br>
-                    For example, at n=2, you would have to make matches based on the state of the board two steps back. </p>
-                  </div> {/* rules2 */}
-                </div> {/* rulemode3 */}
-                <img src="./images/pattern.gif" alt="Gameplay Pattern"></img>
-              </div> {/* slide */}
-
-              <div className="slide">
-                <div className="rulemode2">
-                  <div className="rules2">
                   <h2>Expectations</h2>
                     <p>If this seems like a daunting task, don’t worry! This game is designed to be a challenge and advancing
                     up in level can be difficult. If you are new to the game or still unsure of how it works, we recommend
                     starting out in relaxed mode first and then moving on once you are comfortable with the gameplay. </p>
 
-                    <p>However, once you get familiar with the game mechanics, it is always recommended to continue pushing
-                    up in n-level once you have unlocked the next one. You will experience the greatest mental benefits by
+                    <p>Once you&#39;ve become familiar with the game mechanics, it is always recommended to move
+                    on after unlocking the next n-level. You will experience the greatest cognitive benefits by
                     continuously challenging yourself! </p>
+
+                    <h3>Ready to begin?</h3>
+
+                    <Link to="/home" className="gameStartBtn playBtn">Start Playing!</Link>
                   </div>
                 </div> {/* rulemode2 */}
               </div> {/* slide */}

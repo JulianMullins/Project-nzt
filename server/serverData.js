@@ -6,7 +6,6 @@ var HighScore = require('../models/HighScore');
 
 
 //modes: classic,relaxed,silent,advanced
-
 var serverLeaderboard='5799071df2049724272d4876';
 
 var scoresToPass={
@@ -59,6 +58,7 @@ var scoresToPass={
 		'10': 900
 	}
 }
+
 
 var modeMultiplier = {
   classic: 5,

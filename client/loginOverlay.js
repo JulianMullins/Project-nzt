@@ -7,12 +7,7 @@ import {Link} from 'react-router';
 var LoginOverlay = React.createClass({
   getInitialState: function() {
     console.log(this)
-    return {
-      username: '',
-      password: '',
-      gameEnded:false,
-      games:null
-    }
+    return {username: '', password: '', gameEnded: false, games: null}
   },
   // componentDidMount(){
 
@@ -32,7 +27,6 @@ var LoginOverlay = React.createClass({
   //       }
   //     }.bind(this))
 
-
   // },
   update(e) {
     this.setState({
@@ -47,20 +41,20 @@ var LoginOverlay = React.createClass({
 
     //ajax post
     axios.post('/login', {
-     //withCredentials:true,
+      //withCredentials:true,
       // headers: {
       //   'Accept': 'application/json',
       //   'Content-Type': 'application/json'
       // },
-      
-        username: this.state.username,
-        password: this.state.password
-      
+
+      username: this.state.username,
+      password: this.state.password
+
     }).then(function(response) {
       console.log(response)
       if (response.data.success) {
         this.props.history.push('/home');
-      } 
+      }
     }.bind(this))
   },
   // facebook: function(e) {
@@ -89,7 +83,6 @@ var LoginOverlay = React.createClass({
     return (
       <div className="screen">
 
-
         <div className="login" id="login">
           <h1>Hey you!</h1>
           <div className="pa">Login here.</div>
@@ -99,17 +92,17 @@ var LoginOverlay = React.createClass({
             <input type="password" placeholder="Password" name="password" id="password" value={this.state.password} onChange={this.update}></input>
             <div className="buttongroup">
 
-              <Link to="/home"><button className="form-btn dx" onClick={this.login}>Login</button></Link>
-              <a className="fb" href="/login/facebook" >Login with Facebook</a>
+              <Link to="/home">
+                <button className="form-btn dx" onClick={this.login}>Login</button>
+              </Link>
+              <a className="fb" href="/login/facebook">Login with Facebook</a>
             </div>
 
           </form>
         </div>
         <div className="register-log">
           <h1>New?</h1>
-          <div className="pa">
-            <Link to="/register">Register here.</Link>
-          </div>
+          <div className="pa">Register here</div>
           <h3>See your stats,
             <br></br>track your progress,
             <br></br>and improve your IQ.</h3>

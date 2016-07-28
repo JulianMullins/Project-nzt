@@ -14,7 +14,7 @@
 
 .gameBoard {
   display: flex;
-  width: 70vh;
+  width: 60vh;
   height: 60vh;
   flex-wrap: wrap;
   justify-content: center;
@@ -22,8 +22,8 @@
 }
 .gameSquare {
   background-color: #BFBFBF;
-  width: 25%;
-  height: 33%;
+  width: 27%;
+  height: 30%;
   margin: .5vh;
   border: 2px solid rgba(109, 110, 113, 0.5);
 }
@@ -41,7 +41,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: flex-end;
+  justify-content: space-around;
   width: 100%;
   height: 20vh;
 }
@@ -55,10 +55,14 @@
   margin-bottom: 1vh;
 }
 .gameButtonsContainer a {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   margin: 0 25px;
-  padding: 10px;
+  padding: 0 10px;
+  height: 80%;
   text-align: center;
-  color: white;
+  color: rgba(255, 255, 255, .85);
   font-size: 24px;
   font-weight: bold;
   cursor: default;
@@ -66,6 +70,7 @@
   box-shadow: 2px 2px rgba(0, 0, 0, .15);
 }
 .gameButtonsContainer a:active {
+  background-color: rgba(0, 0, 0, .25);
   box-shadow: 0px 0px;
 }
 .gameButtonsContainer a:hover {
@@ -119,19 +124,18 @@
   width: 50%;
 }
 .scoreAlert {
-  display: flex;
-  height: 70px;
   width: 95%;
   height: 40%;
-  align-items: center;
-  justify-content: center;
 }
 .scoreAlertNegative {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   background-color: transparent;
   color: transparent;
   font-size: 28px;
   margin: 10px auto;
-  height: 5vh;
+  height: 80%;
   width: 50%;
   padding: 5px;
   text-align: center;
@@ -141,11 +145,14 @@
   animation-duration: 5s;
 }
 .scoreAlertPositive {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   background-color: transparent;
   color: transparent;
   font-size: 28px;
   margin: 10px auto;
-  height: 5vh;
+  height: 80%;
   width: 50%;
   padding: 5px;
   text-align: center;
