@@ -108,21 +108,31 @@ var SilentMode = React.createClass({
       } else if (!this.state.keepScore && (this.state.posPressed || this.state.colorPressed)) {
         this.setState({alert: "Not a match"})
         reactionEnd = null;
-        if (this.state.score !== 0) {
+        if ((this.state.score-5) >= 0) {
           this.setState({
-           // score: this.state.score - this.state.penalty,
+           score: this.state.score - 5,
             posStyle: noStyle,
             colorStyle: noStyle
+          });
+        }
+        else{
+          this.setState({
+            score: 0
           });
         }
       } else if (this.state.keepScore && (this.state.colorMatch || this.state.positionMatch)) {
         this.setState({alert: "Missed a match"});
         reactionEnd = null;
-        if (this.state.score !== 0) {
+        if ((this.state.score-5) >== 0) {
           this.setState({
             //score: this.state.score - this.state.penalty,
             posStyle: noStyle,
             colorStyle: noStyle
+          });
+        }
+        else{
+          this.setState({
+            score: 0
           });
         }
       }

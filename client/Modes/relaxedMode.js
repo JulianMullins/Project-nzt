@@ -117,18 +117,28 @@ var RelaxedMode = React.createClass({
         });
       } else if (!this.state.keepScore && this.state.posPressed) {
         this.setState({alert: 'Not a match'});
-        if (this.state.score > 0) {
+        if ((this.state.score-5) >= 0) {
           this.setState({
-            score: this.state.score - this.state.penalty,
+            score: this.state.score - 5,
             posStyle: noStyle
+          });
+        }
+        else{
+          this.setState({
+            score: 0
           });
         }
       } else if (this.state.keepScore && this.state.posMatch) {
         this.setState({alert: "Missed a match"});
-        if (this.state.score !== 0) {
+        if ((this.state.score-5) >= 0) {
           this.setState({
-            score: this.state.score - this.state.penalty,
+            score: this.state.score - 5,
             posStyle: noStyle
+          });
+        }
+        else{
+          this.setState({
+            score: 0
           });
         }
       }
