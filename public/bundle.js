@@ -529,20 +529,20 @@ var AdvancedMode = React.createClass({
         ),
         React.createElement(
           'div',
-          { className: 'gameButtonsContainer advancedBackground', onKeyPress: this.handleKeyPres },
+          { className: 'gameButtonsContainer', onKeyPress: this.handleKeyPres },
           React.createElement(
             'a',
-            { onClick: this.soundMatch, style: this.state.soundPressed },
+            { onClick: this.soundMatch, style: this.state.soundPressed, className: 'advancedBackground' },
             'SOUND'
           ),
           React.createElement(
             'a',
-            { onClick: this.positionMatch, style: this.state.positionPressed },
+            { onClick: this.positionMatch, style: this.state.positionPressed, className: 'advancedBackground' },
             'POSITION'
           ),
           React.createElement(
             'a',
-            { onClick: this.colorMatch, style: this.state.colorPressed },
+            { onClick: this.colorMatch, style: this.state.colorPressed, className: 'advancedBackground' },
             'COLOR'
           )
         )
@@ -553,7 +553,7 @@ var AdvancedMode = React.createClass({
 
 var noStyle = {};
 var pushStyle = {
-  backgroundColor: 'rgba(0, 0, 0, .1729)',
+  backgroundColor: '#BE9300',
   boxShadow: '0px 0px',
   color: 'white'
 };
@@ -932,15 +932,15 @@ var ClassicMode = React.createClass({
         ),
         React.createElement(
           'div',
-          { className: 'gameButtonsContainer classicBackground' },
+          { className: 'gameButtonsContainer' },
           React.createElement(
             'a',
-            { onClick: this.positionMatch, style: this.state.posStyle },
+            { onClick: this.positionMatch, style: this.state.posStyle, className: 'classicBackground' },
             'POSITION'
           ),
           React.createElement(
             'a',
-            { onClick: this.soundMatch, style: this.state.soundStyle },
+            { onClick: this.soundMatch, style: this.state.soundStyle, className: 'classicBackground' },
             'SOUND'
           )
         )
@@ -952,7 +952,7 @@ var ClassicMode = React.createClass({
 var noStyle = {};
 
 var pushStyle = {
-  backgroundColor: 'rgba(0, 0, 0, .1729)',
+  backgroundColor: '#A8020F',
   boxShadow: '0px 0px',
   color: 'white'
 };
@@ -1689,10 +1689,10 @@ var RelaxedMode = React.createClass({
         ),
         React.createElement(
           'div',
-          { className: 'gameButtonsContainer relaxedBackground' },
+          { className: 'gameButtonsContainer' },
           React.createElement(
             'a',
-            { onClick: this.posMatch, style: this.state.posStyle },
+            { onClick: this.posMatch, style: this.state.posStyle, className: 'relaxedBackground' },
             'POSITION'
           )
         )
@@ -1704,7 +1704,7 @@ var RelaxedMode = React.createClass({
 var noStyle = {};
 
 var pushStyle = {
-  backgroundColor: 'rgba(0, 0, 0, .1729)',
+  backgroundColor: '#008C82',
   boxShadow: '0px 0px',
   color: 'white'
 };
@@ -1818,7 +1818,7 @@ var SilentMode = React.createClass({
         this.setState({ alert: "Not a match" });
         reactionEnd = null;
         if (this.state.score - 5 >= 0) {
-          fullscore -= 5;
+          fullScore -= 5;
           currentScore = 5;
           this.setState({
             score: this.state.score - 5,
@@ -1826,7 +1826,7 @@ var SilentMode = React.createClass({
             colorStyle: noStyle
           });
         } else {
-          fullscore = 0;
+          fullScore = 0;
           currentScore = this.state.score;
           this.setState({ score: 0 });
         }
@@ -2081,15 +2081,15 @@ var SilentMode = React.createClass({
         ),
         React.createElement(
           'div',
-          { className: 'gameButtonsContainer silentBackground' },
+          { className: 'gameButtonsContainer' },
           React.createElement(
             'a',
-            { onClick: this.positionMatch, style: this.state.posStyle },
+            { onClick: this.positionMatch, style: this.state.posStyle, className: 'silentBackground' },
             'POSITION'
           ),
           React.createElement(
             'a',
-            { onClick: this.colorMatch, style: this.state.colorStyle },
+            { onClick: this.colorMatch, style: this.state.colorStyle, className: 'silentBackground' },
             'COLOR'
           )
         )
@@ -2100,7 +2100,7 @@ var SilentMode = React.createClass({
 
 var noStyle = {};
 var pushStyle = {
-  backgroundColor: 'rgba(0, 0, 0, .1729)',
+  backgroundColor: '#319B93',
   boxShadow: '0px 0px',
   color: 'white'
 };
@@ -2306,13 +2306,7 @@ var GameOverOverlay = React.createClass({
   // },
   getData: function getData() {
     axios.all([getUser(), getGame()]).then(axios.spread(function (userData, gameData) {
-      this.setState({
-        username: userData.data.username,
-        alreadyLoggedIn: userData.data.alreadyLoggedIn,
-        score: gameData.data.game.score,
-        mode: gameData.data.game.mode,
-        nLevel: gameData.data.game.nLevel
-      });
+      this.setState({ username: userData.data.username, alreadyLoggedIn: userData.data.alreadyLoggedIn, score: gameData.data.game.score, mode: gameData.data.game.mode, nLevel: gameData.data.game.nLevel });
     }.bind(this))).then(function () {
       this.renderLogin();
     }.bind(this));
@@ -2329,7 +2323,6 @@ var GameOverOverlay = React.createClass({
       data: {
         score: this.state.score,
         mode: this.state.mode
-
       }
     });
   },
@@ -2375,19 +2368,19 @@ var GameOverOverlay = React.createClass({
               'Submit'
             )
           ),
-          'Or, you can ',
+          'Or, you can',
           React.createElement(
             _reactRouter.Link,
             { to: '/gameOver/login' },
-            ' login'
+            'login'
           ),
-          ' or ',
+          'or',
           React.createElement(
             _reactRouter.Link,
             { to: '/gameOver/register' },
             'sign up'
           ),
-          ' to save your progress, view statistics and compete with friends!'
+          'to save your progress, view statistics and compete with friends!'
         )
       });
     }
@@ -2407,15 +2400,15 @@ var GameOverOverlay = React.createClass({
             React.createElement(
               _reactRouter.Link,
               { to: '/gameOver/login' },
-              ' Sign in'
+              'Sign in'
             ),
-            ' or ',
+            'or',
             React.createElement(
               _reactRouter.Link,
               { to: '/gameOver/register' },
               'sign up'
             ),
-            ' to save your progress, view statistics and compete with friends!'
+            'to save your progress, view statistics and compete with friends!'
           )
         )
       });
@@ -2424,9 +2417,7 @@ var GameOverOverlay = React.createClass({
   update: function update(e) {
 
     //update anonusername field
-    this.setState({
-      anonUserName: e.target.value
-    });
+    this.setState({ anonUserName: e.target.value });
   },
   anonLeaderboard: function anonLeaderboard() {
 
@@ -2436,7 +2427,6 @@ var GameOverOverlay = React.createClass({
       withCredentials: true,
       data: {
         anonUserName: this.state.anonUserName
-
       }
     });
   },
@@ -2448,10 +2438,10 @@ var GameOverOverlay = React.createClass({
 
     //   ? <div></div>
     //   : <div className="gameOverPrompt">
-    //       <p>It looks like you are not currently logged in. 
-    //       <Link to="/gameOver/login"> Sign in</Link> or <Link to="/gameOver/register">sign up</Link> to save your progress, 
-    //       view statistics and compete with friends!</p>  
-    //     </div> 
+    //       <p>It looks like you are not currently logged in.
+    //       <Link to="/gameOver/login"> Sign in</Link> or <Link to="/gameOver/register">sign up</Link> to save your progress,
+    //       view statistics and compete with friends!</p>
+    //     </div>
 
     return React.createElement(
       'div',
@@ -2479,16 +2469,12 @@ var GameOverOverlay = React.createClass({
         { className: 'gameOverActions' },
         React.createElement(
           _reactRouter.Link,
-          { to: '/home' },
+          { to: '/home', onClick: this.gameOver },
+          React.createElement('span', { className: 'fa fa-home fa-5x' }),
           React.createElement(
-            'a',
-            { onClick: this.gameOver },
-            React.createElement('span', { className: 'fa fa-home fa-5x' }),
-            React.createElement(
-              'h2',
-              null,
-              'home'
-            )
+            'h2',
+            null,
+            'home'
           )
         ),
         React.createElement(
@@ -2501,19 +2487,15 @@ var GameOverOverlay = React.createClass({
           null,
           React.createElement(
             _reactRouter.Link,
-            { to: '/leaderboard' },
+            { to: '/leaderboard', onClick: this.gameOver },
             React.createElement(
-              'a',
-              { onClick: this.gameOver },
+              'span',
+              { className: 'lbChart' },
+              React.createElement('span', { className: 'fa fa-signal fa-5x' }),
               React.createElement(
-                'span',
-                { className: 'lbChart' },
-                React.createElement('span', { className: 'fa fa-signal fa-5x' }),
-                React.createElement(
-                  'h2',
-                  null,
-                  'leaderboard'
-                )
+                'h2',
+                null,
+                'leaderboard'
               )
             )
           )

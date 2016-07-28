@@ -384,10 +384,10 @@ var AdvancedMode = React.createClass({
           <div className="scoreAlert">
             {scoreAlert}
           </div>
-          <div className="gameButtonsContainer advancedBackground" onKeyPress={this.handleKeyPres}>
-            <a onClick={this.soundMatch} style={this.state.soundPressed}>SOUND</a>
-            <a onClick={this.positionMatch} style={this.state.positionPressed}>POSITION</a>
-            <a onClick={this.colorMatch} style={this.state.colorPressed}>COLOR</a>
+          <div className="gameButtonsContainer" onKeyPress={this.handleKeyPres}>
+            <a onClick={this.soundMatch} style={this.state.soundPressed} className='advancedBackground'>SOUND</a>
+            <a onClick={this.positionMatch} style={this.state.positionPressed} className='advancedBackground'>POSITION</a>
+            <a onClick={this.colorMatch} style={this.state.colorPressed} className='advancedBackground'>COLOR</a>
           </div>
         </div>
       </div>
@@ -397,7 +397,7 @@ var AdvancedMode = React.createClass({
 
 var noStyle = {}
 var pushStyle = {
-  backgroundColor: 'rgba(0, 0, 0, .1729)',
+  backgroundColor: '#BE9300',
   boxShadow: '0px 0px',
   color: 'white'
 }

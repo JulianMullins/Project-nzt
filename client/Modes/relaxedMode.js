@@ -312,8 +312,8 @@ var RelaxedMode = React.createClass({
           <div className="scoreAlert">
             {scoreAlert}
           </div>
-          <div className="gameButtonsContainer relaxedBackground">
-            <a onClick={this.posMatch} style={this.state.posStyle}>POSITION</a>
+          <div className="gameButtonsContainer">
+            <a onClick={this.posMatch} style={this.state.posStyle} className='relaxedBackground'>POSITION</a>
           </div>
         </div>
       </div>
@@ -324,7 +324,7 @@ var RelaxedMode = React.createClass({
 var noStyle = {}
 
 var pushStyle = {
-  backgroundColor: 'rgba(0, 0, 0, .1729)',
+  backgroundColor: '#008C82',
   boxShadow: '0px 0px',
   color: 'white'
 }

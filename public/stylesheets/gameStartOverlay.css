@@ -38,6 +38,7 @@
 .gameStartBtn {
   margin: 5vh 0;
   padding: 30px;
+  height: 0;
   font-size: 32px;
   cursor: pointer;
   transition-duration: .5s;
