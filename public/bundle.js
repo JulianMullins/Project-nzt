@@ -316,7 +316,10 @@ var AdvancedMode = React.createClass({
     };
   },
   componentDidMount: function componentDidMount() {
-    startGameFunction(this.state.mode, this.state.N, function (obj) {
+    startGameFunction(this.state.mode, this.state.N, function (err, obj) {
+      if (err) {
+        this.props.history.push('/levels/' + this.state.mode);
+      }
       this.setState({
         tempUser: obj.tempUser,
         gameId: obj.gameId,
@@ -799,7 +802,10 @@ var ClassicMode = React.createClass({
     };
   },
   componentDidMount: function componentDidMount() {
-    startGameFunction(this.state.mode, this.state.N, function (obj) {
+    startGameFunction(this.state.mode, this.state.N, function (err, obj) {
+      if (err) {
+        this.props.history.push('/levels/' + this.state.mode);
+      }
       this.setState({
         tempUser: obj.tempUser,
         gameId: obj.gameId,
@@ -1615,7 +1621,11 @@ var RelaxedMode = React.createClass({
 
     // }.bind(this))
 
-    startGameFunction(this.state.mode, this.state.N, function (obj) {
+    startGameFunction(this.state.mode, this.state.N, function (err, obj) {
+      if (err) {
+        this.props.history.push('/levels/' + this.state.mode + '/unauthorized');
+      }
+      console.log(obj);
       this.setState({
         tempUser: obj.tempUser,
         gameId: obj.gameId,
@@ -1954,8 +1964,12 @@ var axios = require('axios');
 var startGameFunction = function startGameFunction(mode, N, callback) {
   console.log("startGameFunction");
   axios.post('/startGame/' + mode + '/' + N).then(function (response) {
+    if (!response.data.authorized) {
+      console.log("unauthorized");
+      return callback(true);
+    }
     console.log("start game posted", response);
-    return callback({
+    return callback(null, {
       tempUser: response.data.tempUser,
       gameId: response.data.gameId,
       modeMultiplier: response.data.modeMultiplier,
@@ -2053,7 +2067,10 @@ var SilentMode = React.createClass({
     };
   },
   componentDidMount: function componentDidMount() {
-    startGameFunction(this.state.mode, this.state.N, function (obj) {
+    startGameFunction(this.state.mode, this.state.N, function (err, obj) {
+      if (err) {
+        this.props.history.push('/levels/' + this.state.mode);
+      }
       this.setState({
         tempUser: obj.tempUser,
         gameId: obj.gameId,
@@ -3028,10 +3045,10 @@ ReactDOM.render(React.createElement(
     React.createElement(_reactRouter.Route, { path: 'contact', component: Contact }),
     React.createElement(_reactRouter.Route, { path: 'science', component: Science }),
     React.createElement(_reactRouter.Route, { path: 'tutorial', component: Tutorial }),
-    React.createElement(_reactRouter.Route, { path: 'levels/classic', component: ClassicLevels }),
-    React.createElement(_reactRouter.Route, { path: 'levels/relaxed', component: RelaxedLevels }),
-    React.createElement(_reactRouter.Route, { path: 'levels/silent', component: SilentLevels }),
-    React.createElement(_reactRouter.Route, { path: 'levels/advanced', component: AdvancedLevels }),
+    React.createElement(_reactRouter.Route, { path: 'levels/classic(/:error)', component: ClassicLevels }),
+    React.createElement(_reactRouter.Route, { path: 'levels/relaxed(/:error)', component: RelaxedLevels }),
+    React.createElement(_reactRouter.Route, { path: 'levels/silent(/:error)', component: SilentLevels }),
+    React.createElement(_reactRouter.Route, { path: 'levels/advanced(/:error)', component: AdvancedLevels }),
     React.createElement(_reactRouter.Route, { path: 'game/classic/:n', component: ClassicGame }),
     React.createElement(_reactRouter.Route, { path: 'game/relaxed/:n', component: RelaxedGame }),
     React.createElement(_reactRouter.Route, { path: 'game/silent/:n', component: SilentGame }),
@@ -3168,7 +3185,7 @@ var getSquareArr = function getSquareArr(square, mode) {
   var arr = [];
   for (var i = 1; i < maxSquares + 1; i++) {
     var link = "/game/" + mode + "/" + i;
-    console.log(link);
+    //console.log(link)
     var sqClass = "levelSquare " + squareClass;
     if (i <= square) {
       var colorStyle = {
@@ -3233,7 +3250,12 @@ var ClassicLevels = React.createClass({
   displayName: 'ClassicLevels',
 
   getInitialState: function getInitialState() {
-    return { maxN: 1, mode: 'classic' };
+    console.log(this.props);
+    return {
+      maxN: 1,
+      mode: 'classic',
+      error: this.props.params.error
+    };
   },
   componentDidMount: function componentDidMount() {
     this.setMaxN();
@@ -3294,7 +3316,12 @@ var RelaxedLevels = React.createClass({
   displayName: 'RelaxedLevels',
 
   getInitialState: function getInitialState() {
-    return { maxN: 1, mode: 'relaxed' };
+    console.log(this.props);
+    return {
+      maxN: 1,
+      mode: 'relaxed',
+      error: this.props.params.error
+    };
   },
   componentDidMount: function componentDidMount() {
     this.setMaxN();
@@ -3313,6 +3340,7 @@ var RelaxedLevels = React.createClass({
     return React.createElement(
       'div',
       { className: 'levelBox' },
+      this.state.error,
       React.createElement(
         'h1',
         { id: 'relaxed', className: 'relaxed' },
@@ -3372,6 +3400,7 @@ var SilentLevels = React.createClass({
     return React.createElement(
       'div',
       { className: 'levelBox' },
+      this.state.error,
       React.createElement(
         'h1',
         { id: 'silent', className: 'silent' },
@@ -3523,11 +3552,11 @@ var LoginOverlay = React.createClass({
 
     //ajax post
     axios.post('/login', {
-      //withCredentials:true,
-      // headers: {
-      //   'Accept': 'application/json',
-      //   'Content-Type': 'application/json'
-      // },
+      withCredentials: true,
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
 
       username: this.state.username,
       password: this.state.password
@@ -3539,28 +3568,7 @@ var LoginOverlay = React.createClass({
       }
     }.bind(this));
   },
-  // facebook: function(e) {
-  //   e.preventDefault();
 
-  //   ajax facebook get
-
-  //   fetch('/login/facebook',{method:'get'
-  //   }).then(function(response) {
-  //     console.log(response);
-  //       return response.json();
-  //     }).then(function(response) {
-  //       console.log(response);
-  //       if (response.success) {
-  //         this.props.history.push('/home');
-  //       }
-  //     }.bind(this))
-
-  //   axios({
-  //     url:'/login/facebook',
-  //     withCredentials:true
-  //   })
-
-  // },
   render: function render() {
     return React.createElement(
       'div',
