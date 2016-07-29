@@ -240,9 +240,9 @@ router.post('/gameEnd',function(req,res,next){
           })
 
           //post to gameOver
-          axios.post('/gameOver',{
-            userId: req.body.userId
-          })
+          // axios.post('/gameOver',{
+          //   userId: req.body.userId
+          // })
 
         }
       });
