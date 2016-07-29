@@ -75,8 +75,11 @@ var RelaxedMode = React.createClass({
     //   })
 
     // }.bind(this))
-
-    startGameFunction(this.state.mode, this.state.N, function(obj) {
+    startGameFunction(this.state.mode, this.state.N, function(err, obj) {
+      if (err) {
+        this.props.history.push('/levels/' + this.state.mode + '/unauthorized');
+      }
+      console.log(obj)
       this.setState({
         tempUser: obj.tempUser,
         gameId: obj.gameId,

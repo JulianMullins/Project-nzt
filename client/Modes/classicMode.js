@@ -53,7 +53,10 @@ var ClassicMode = React.createClass({
     }
   },
   componentDidMount: function() {
-    startGameFunction(this.state.mode, this.state.N, function(obj) {
+    startGameFunction(this.state.mode,this.state.N,function(err,obj){
+      if(err){
+        this.props.history.push('/levels/'+this.state.mode);
+      }
       this.setState({
         tempUser: obj.tempUser,
         gameId: obj.gameId,

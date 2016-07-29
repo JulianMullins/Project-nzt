@@ -30,7 +30,7 @@ router.post('/startGame/:mode/:nLevel',function(req,res,next){
   if(req.user){
     //console.log(req.user);
     if(req.user.maxN[req.params.mode]<req.params.nLevel){
-      res.json({success:false});
+      res.json({authorized:false});
       return;
     }
     var tempGame = new Game({
@@ -49,7 +49,7 @@ router.post('/startGame/:mode/:nLevel',function(req,res,next){
         req.user.save();
         console.log(req.user, "game posted")
         res.json({
-          success:true,
+          authorized:true,
           gameId: game._id,
           tempUser: false,
           modeMultiplier: modeMultiplier,
@@ -143,6 +143,7 @@ router.post('/startGame/:mode/:nLevel',function(req,res,next){
                 user.save(function(err,user){
                   console.log(user, "game posted")
                   res.json({
+                    authorized:true,
                     gameId: game._id,
                     tempUser: user.temp,
                     modeMultiplier: modeMultiplier,
@@ -239,9 +240,9 @@ router.post('/gameEnd',function(req,res,next){
           })
 
           //post to gameOver
-          axios.post('/gameOver',{
-            userId: req.body.userId
-          })
+          // axios.post('/gameOver',{
+          //   userId: req.body.userId
+          // })
 
         }
       });
