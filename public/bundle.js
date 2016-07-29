@@ -316,7 +316,10 @@ var AdvancedMode = React.createClass({
     };
   },
   componentDidMount: function componentDidMount() {
-    startGameFunction(this.state.mode, this.state.N, function (obj) {
+    startGameFunction(this.state.mode, this.state.N, function (err, obj) {
+      if (err) {
+        this.props.history.push('/levels/' + this.state.mode);
+      }
       this.setState({
         tempUser: obj.tempUser,
         gameId: obj.gameId,
@@ -799,7 +802,10 @@ var ClassicMode = React.createClass({
     };
   },
   componentDidMount: function componentDidMount() {
-    startGameFunction(this.state.mode, this.state.N, function (obj) {
+    startGameFunction(this.state.mode, this.state.N, function (err, obj) {
+      if (err) {
+        this.props.history.push('/levels/' + this.state.mode);
+      }
       this.setState({
         tempUser: obj.tempUser,
         gameId: obj.gameId,
@@ -1615,7 +1621,11 @@ var RelaxedMode = React.createClass({
 
     // }.bind(this))
 
-    startGameFunction(this.state.mode, this.state.N, function (obj) {
+    startGameFunction(this.state.mode, this.state.N, function (err, obj) {
+      if (err) {
+        this.props.history.push('/levels/' + this.state.mode + '/unauthorized');
+      }
+      console.log(obj);
       this.setState({
         tempUser: obj.tempUser,
         gameId: obj.gameId,
@@ -2057,7 +2067,10 @@ var SilentMode = React.createClass({
     };
   },
   componentDidMount: function componentDidMount() {
-    startGameFunction(this.state.mode, this.state.N, function (obj) {
+    startGameFunction(this.state.mode, this.state.N, function (err, obj) {
+      if (err) {
+        this.props.history.push('/levels/' + this.state.mode);
+      }
       this.setState({
         tempUser: obj.tempUser,
         gameId: obj.gameId,
@@ -3010,10 +3023,10 @@ ReactDOM.render(React.createElement(
     React.createElement(_reactRouter.Route, { path: 'contact', component: Contact }),
     React.createElement(_reactRouter.Route, { path: 'science', component: Science }),
     React.createElement(_reactRouter.Route, { path: 'tutorial', component: Tutorial }),
-    React.createElement(_reactRouter.Route, { path: 'levels/classic', component: ClassicLevels }),
-    React.createElement(_reactRouter.Route, { path: 'levels/relaxed', component: RelaxedLevels }),
-    React.createElement(_reactRouter.Route, { path: 'levels/silent', component: SilentLevels }),
-    React.createElement(_reactRouter.Route, { path: 'levels/advanced', component: AdvancedLevels }),
+    React.createElement(_reactRouter.Route, { path: 'levels/classic(/:error)', component: ClassicLevels }),
+    React.createElement(_reactRouter.Route, { path: 'levels/relaxed(/:error)', component: RelaxedLevels }),
+    React.createElement(_reactRouter.Route, { path: 'levels/silent(/:error)', component: SilentLevels }),
+    React.createElement(_reactRouter.Route, { path: 'levels/advanced(/:error)', component: AdvancedLevels }),
     React.createElement(_reactRouter.Route, { path: 'game/classic/:n', component: ClassicGame }),
     React.createElement(_reactRouter.Route, { path: 'game/relaxed/:n', component: RelaxedGame }),
     React.createElement(_reactRouter.Route, { path: 'game/silent/:n', component: SilentGame }),
@@ -3038,49 +3051,25 @@ var Leaderboard = React.createClass({
   displayName: 'Leaderboard',
 
   getInitialState: function getInitialState() {
-    return { allScores: [] };
+    return { allScores: [], myScores: [], global: true };
   },
   componentDidMount: function componentDidMount() {
     this.getAllScores();
+    this.getMyScores();
   },
   getAllScores: function getAllScores() {
     axios.get('/allHighScores').then(function (response) {
-      console.log(response.data);
+      console.log('all scores', response.data);
       this.setState({ allScores: response.data });
     }.bind(this));
   },
-  myScores: function myScores() {
+  getMyScores: function getMyScores() {
     axios.get('/myHighScores').then(function (response) {
+      console.log('my scores', response.data);
       this.setState({ myScores: response.data });
     }.bind(this));
   },
   render: function render() {
-    var testData = [{
-      mode: 'Advanced',
-      username: 'Adam',
-      score: 2000,
-      level: 16
-    }, {
-      mode: 'Classic',
-      username: 'Taylor',
-      score: 1980,
-      level: 19
-    }, {
-      mode: 'Advanced',
-      username: 'Julian',
-      score: 1760,
-      level: 6
-    }, {
-      mode: 'Relaxed',
-      username: 'Ruth',
-      score: 1580,
-      level: 19
-    }, {
-      mode: 'Silent',
-      username: 'Virginia',
-      score: 70,
-      level: 2
-    }];
     return React.createElement(
       'div',
       { className: 'leaderboardPage' },
@@ -3095,6 +3084,24 @@ var Leaderboard = React.createClass({
         React.createElement(
           'section',
           null,
+          React.createElement(
+            'div',
+            { className: 'leaderboardButtons' },
+            React.createElement(
+              'a',
+              { onClick: function () {
+                  this.setState({ global: true });
+                }.bind(this), style: this.state.global ? selectedStyle : {} },
+              'Global'
+            ),
+            React.createElement(
+              'a',
+              { onClick: function () {
+                  this.setState({ global: false });
+                }.bind(this), style: !this.state.global ? selectedStyle : {} },
+              'Personal'
+            )
+          ),
           React.createElement(Table, { columns: [{
               key: 'username',
               label: 'Username'
@@ -3107,7 +3114,7 @@ var Leaderboard = React.createClass({
             }, {
               key: 'level',
               label: 'Level'
-            }], data: this.state.allScores, currentPage: 0, itemsPerPage: 10, pageButtonLimit: 5, sortable: true, defaultSort: {
+            }], data: this.state.global ? this.state.allScores : this.state.myScores, currentPage: 0, itemsPerPage: 10, pageButtonLimit: 5, sortable: true, defaultSort: {
               column: 'score',
               direction: 'desc'
             }, filterable: ['mode', 'username'] })
@@ -3116,6 +3123,11 @@ var Leaderboard = React.createClass({
     );
   }
 });
+
+var selectedStyle = {
+  backgroundColor: 'white',
+  color: '#f1ba03'
+};
 
 module.exports = Leaderboard;
 
@@ -3150,7 +3162,7 @@ var getSquareArr = function getSquareArr(square, mode) {
   var arr = [];
   for (var i = 1; i < maxSquares + 1; i++) {
     var link = "/game/" + mode + "/" + i;
-    console.log(link);
+    //console.log(link)
     var sqClass = "levelSquare " + squareClass;
     if (i <= square) {
       var colorStyle = {
@@ -3215,7 +3227,12 @@ var ClassicLevels = React.createClass({
   displayName: 'ClassicLevels',
 
   getInitialState: function getInitialState() {
-    return { maxN: 1, mode: 'classic' };
+    console.log(this.props);
+    return {
+      maxN: 1,
+      mode: 'classic',
+      error: this.props.params.error
+    };
   },
   componentDidMount: function componentDidMount() {
     this.setMaxN();
@@ -3276,7 +3293,12 @@ var RelaxedLevels = React.createClass({
   displayName: 'RelaxedLevels',
 
   getInitialState: function getInitialState() {
-    return { maxN: 1, mode: 'relaxed' };
+    console.log(this.props);
+    return {
+      maxN: 1,
+      mode: 'relaxed',
+      error: this.props.params.error
+    };
   },
   componentDidMount: function componentDidMount() {
     this.setMaxN();
@@ -3295,6 +3317,7 @@ var RelaxedLevels = React.createClass({
     return React.createElement(
       'div',
       { className: 'levelBox' },
+      this.state.error,
       React.createElement(
         'h1',
         { id: 'relaxed', className: 'relaxed' },
@@ -3354,6 +3377,7 @@ var SilentLevels = React.createClass({
     return React.createElement(
       'div',
       { className: 'levelBox' },
+      this.state.error,
       React.createElement(
         'h1',
         { id: 'silent', className: 'silent' },
@@ -3505,11 +3529,11 @@ var LoginOverlay = React.createClass({
 
     //ajax post
     axios.post('/login', {
-      //withCredentials:true,
-      // headers: {
-      //   'Accept': 'application/json',
-      //   'Content-Type': 'application/json'
-      // },
+      withCredentials: true,
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
 
       username: this.state.username,
       password: this.state.password
@@ -3521,28 +3545,7 @@ var LoginOverlay = React.createClass({
       }
     }.bind(this));
   },
-  // facebook: function(e) {
-  //   e.preventDefault();
 
-  //   ajax facebook get
-
-  //   fetch('/login/facebook',{method:'get'
-  //   }).then(function(response) {
-  //     console.log(response);
-  //       return response.json();
-  //     }).then(function(response) {
-  //       console.log(response);
-  //       if (response.success) {
-  //         this.props.history.push('/home');
-  //       }
-  //     }.bind(this))
-
-  //   axios({
-  //     url:'/login/facebook',
-  //     withCredentials:true
-  //   })
-
-  // },
   render: function render() {
     return React.createElement(
       'div',
@@ -4128,49 +4131,68 @@ var AreaChart = rd3.AreaChart;
 var axios = require('axios');
 var _ = require('underscore');
 var stats;
-var mode;
+var dates = [];
+// var lineData1 = [{name: 'scores', values:[]}];
+// var lineData2 = [{name: 'reaction times', values:[]}];
 
 var MyComponent = React.createClass({
   displayName: 'MyComponent',
 
+  getInitialState: function getInitialState() {
+    return {
+      lineData1: [{ name: 'scores', values: [{ x: 0, y: 0 }] }],
+      lineData2: [{ name: 'max reaction time', values: [{ x: 0, y: 0 }] }, { name: 'avg reaction time', values: [{ x: 0, y: 0 }] }, { name: 'min reaction time', values: [{ x: 0, y: 0 }] }]
+    };
+  },
   componentDidMount: function componentDidMount() {
-    //fetch call
-
+    // console.log(this.state, 'state')
     axios.get('/taco', { withCredentials: true }).then(function (responseJson) {
-      //console.log(responseJson.data,'41')
+      //console.log(this.state,'state')
+      // //console.log(responseJson.data,'41')
+      this.state.lineData1[0].values = [];
+      this.state.lineData2[0].values = [];
+      this.state.lineData2[1].values = [];
+      this.state.lineData2[2].values = [];
       stats = responseJson.data.stats;
-      console.log(stats, 'stats');
-    });
+      // //console.log(stats,'stats')
+      _.map(stats, function (item, index) {
+        if (item.score === 0 || item.reactionTimes[0] === 0) {
+          return;
+        }
+        this.state.lineData1[0].values.push({ x: index, y: item.score });
+        this.state.lineData2[0].values.push({ x: index, y: parseFloat(item.reactionTimes[0]) * 1.2 / 1000 });
+        this.state.lineData2[1].values.push({ x: index, y: parseFloat(item.reactionTimes[0]) / 1000 });
+        this.state.lineData2[2].values.push({ x: index, y: parseFloat(item.reactionTimes[0]) * .8 / 1000 });
+        var date = item.dateAchieved.split('Z');
+        date = date[0].split('T');
+        date = date[0].split('-');
+        dates.push({ full: item.dateAchieved, splitDate: date });
+      }.bind(this));
+      console.log(dates, 'dates');
+      console.log(this.state.lineData2);
+    }.bind(this)).then(function () {
+      //console.log(this.state,'this.state')
+      this.setState({
+        lineData1: this.state.lineData1,
+        lineData2: this.state.lineData2
+      });
+    }.bind(this));
   },
   render: function render() {
-    var lineData1 = [{
-      name: 'series1',
-      values: [{ x: 0, y: 20 }, { x: 1, y: 30 }, { x: 2, y: 10 }, { x: 3, y: 5 }, { x: 4, y: 8 }, { x: 5, y: 15 }, { x: 6, y: 10 }]
-    }];
-    var lineData2 = [{
-      name: 'series1',
-      values: [{ x: 0, y: 20 }, { x: 1, y: 30 }, { x: 2, y: 10 }, { x: 3, y: 5 }, { x: 4, y: 8 }, { x: 5, y: 15 }, { x: 6, y: 10 }]
-    }, {
-      name: 'series2',
-      values: [{ x: 0, y: 8 }, { x: 1, y: 5 }, { x: 2, y: 20 }, { x: 3, y: 12 }, { x: 4, y: 4 }, { x: 5, y: 6 }, { x: 6, y: 2 }]
-    }, {
-      name: 'series3',
-      values: [{ x: 0, y: 0 }, { x: 1, y: 5 }, { x: 2, y: 8 }, { x: 3, y: 2 }, { x: 4, y: 6 }, { x: 5, y: 4 }, { x: 6, y: 2 }]
-    }];
     return React.createElement(
       'div',
       null,
       React.createElement(LineChart, {
-        data: lineData1,
-        width: 500,
-        height: 300,
-        title: 'Line Chart'
+        data: this.state.lineData1,
+        width: 800,
+        height: 500,
+        title: 'Score Trends'
       }),
       React.createElement(AreaChart, {
-        data: lineData2,
-        width: 500,
-        height: 300,
-        title: 'Area Chart'
+        data: this.state.lineData2,
+        width: 800,
+        height: 500,
+        title: 'Reaction Time Trends'
       })
     );
   }
