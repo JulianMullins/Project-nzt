@@ -19,20 +19,23 @@ router.get('/myHighScores', function(req, res, next) {
               console.log(err);
             } else {
               var result = [];
-              leaderboard.scores.map(function(score) {
-                result.push({
-                  mode: score.mode,
-                  username: user.username,
-                  level: score.nLevel,
-                  score: score.score
+              if (leaderboard.scores.length == 0) {
+                res.json(result);
+              } else {
+                leaderboard.scores.map(function(score) {
+                  result.push({
+                    mode: score.mode,
+                    username: user.username,
+                    level: score.nLevel,
+                    score: parseInt(score.score)
+                  });
+                  console.log(result);
+                  if (result.length == leaderboard.scores.length) {
+                    res.json(result);
+                    return;
+                  }
                 });
-                console.log(result);
-                if (result.length == leaderboard.scores.length) {
-                  res.json(result);
-                  return;
-                }
-              });
-              res.json(result);
+              }
             }
           });
       }
@@ -70,7 +73,7 @@ router.get('/allHighScores', function(req, res, next) {
               mode: score.mode,
               username: u.username,
               level: score.nLevel,
-              score: score.score
+              score: parseInt(score.score)
             });
             if (result.length == leaderboard.scores.length) {
               res.json(result);
