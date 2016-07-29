@@ -5,19 +5,21 @@ var axios = require('axios');
 
 var Leaderboard = React.createClass({
   getInitialState: function() {
-    return {allScores: []}
+    return {allScores: [], myScores: []}
   },
   componentDidMount: function() {
     this.getAllScores();
+    this.getMyScores();
   },
   getAllScores: function() {
     axios.get('/allHighScores').then(function(response) {
-      console.log(response.data);
+      console.log('all scores', response.data);
       this.setState({allScores: response.data});
     }.bind(this));
   },
-  myScores: function() {
+  getMyScores: function() {
     axios.get('/myHighScores').then(function(response) {
+      console.log('my scores', response.data);
       this.setState({myScores: response.data});
     }.bind(this));
   },

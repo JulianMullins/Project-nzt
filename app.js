@@ -92,11 +92,11 @@ passport.use(new LocalStrategy({
     //login tempuser
     TempUser.findById(username,function(err,tempUser){
       if(err){
-        done(err)
+        return done(err)
       }
       else if(tempUser){
         console.log("tempUser logged in")
-        done(null,tempUser);
+        return done(null,tempUser);
       }
     })
 
@@ -122,12 +122,13 @@ passport.use(new LocalStrategy({
           return done(err)
         }
         else if(!response){
-          return done(null,null);
+          return done(null,false,{message:"Incorrect password"});
         }
         else{
-
+          console.log("passwords hashed")
           //check if tempUser exists
           if(req.user){
+            console.log("already req.user")
             user.currentGame = req.user.currentGame;
             user.stats.combineStats(req.user.stats);
             user.combineMaxN(req.user.maxN);
@@ -145,7 +146,17 @@ passport.use(new LocalStrategy({
           
           //tempUser doesn't exist, just log in
           else{
-            return done(null,user)
+            console.log("no req.user")
+            console.log(done)
+            console.log(user)
+            req.login(user,function(err){
+              console.log('req.logging in')
+              if(!err){
+                console.log("success")
+                return res.send({success:true})
+              }
+            })
+            return done(null,user);
           }
         }
       })

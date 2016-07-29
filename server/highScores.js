@@ -1,5 +1,4 @@
 var HighScore = require('../models/HighScore');
-var User = require('../models/HighScore');
 var Leaderboard = require('../models/Leaderboard');
 var User = require('../models/User');
 var leaderboardSize = require('./serverData').leaderboardSize;
@@ -8,8 +7,37 @@ var express = require('express');
 var router = express.Router();
 
 router.get('/myHighScores', function(req, res, next) {
-  res.json(user.stats.leaderboard.scores);
-})
+  User.findById(req.user._id)
+    .populate('stats')
+    .exec(function(err, user) {
+      console.log(user.username);
+      if (!err) {
+        Leaderboard.findById(user.stats.leaderboard)
+          .populate('scores')
+          .exec(function(err, leaderboard) {
+            if (err) {
+              console.log(err);
+            } else {
+              var result = [];
+              leaderboard.scores.map(function(score) {
+                result.push({
+                  mode: score.mode,
+                  username: user.username,
+                  level: score.nLevel,
+                  score: score.score
+                });
+                console.log(result);
+                if (result.length == leaderboard.scores.length) {
+                  res.json(result);
+                  return;
+                }
+              });
+              res.json(result);
+            }
+          });
+      }
+    });
+});
 
 //modes: classic,relaxed,silent,advanced
 
@@ -35,7 +63,6 @@ router.get('/allHighScores', function(req, res, next) {
       if (err) {
         console.log(err)
       } else {
-        console.log(leaderboard);
         var result = [];
         leaderboard.scores.map(function(score) {
           User.findById(score.user, function(err, u) {

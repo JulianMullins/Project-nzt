@@ -15,7 +15,7 @@ var serverData = require('./serverData');
 var modeMultiplier = serverData.modeMultiplier;
 var penalty = serverData.penalty;
 var positivePoints = serverData.positivePoints;
-
+var scoresToPass = serverData.scoresToPass;
 
 var tempGame = null;
 
@@ -24,11 +24,15 @@ var tempGame = null;
 //post start game
 router.post('/startGame/:mode/:nLevel',function(req,res,next){
   console.log("trying to post game");
-  console.log(req.user);
+  //console.log(req.user);
 
   //if user, create game, save game, add to user.currentGame
   if(req.user){
-    console.log(req.user);
+    //console.log(req.user);
+    if(req.user.maxN[req.params.mode]<req.params.nLevel){
+      res.json({success:false});
+      return;
+    }
     var tempGame = new Game({
       user:req.user,
       mode:req.params.mode,
@@ -45,6 +49,7 @@ router.post('/startGame/:mode/:nLevel',function(req,res,next){
         req.user.save();
         console.log(req.user, "game posted")
         res.json({
+          success:true,
           gameId: game._id,
           tempUser: false,
           modeMultiplier: modeMultiplier,
@@ -194,7 +199,7 @@ router.post('/startGame/:mode/:nLevel',function(req,res,next){
 //game end - posted from mode files; find game, update game stats
 router.post('/gameEnd',function(req,res,next){
   console.log("game ended")
-  console.log(req.user)
+  //console.log(req.user)
   console.log(req.body)
   Game.findById(req.body.gameId,function(err,game){
     if(err){
@@ -208,6 +213,7 @@ router.post('/gameEnd',function(req,res,next){
 
       game.passedLevel = false;
       console.log(game)
+      //console.log(scoresToPass)
       console.log(scoresToPass[game.mode][game.nLevel])
       console.log(game.score);
       console.log(game.score>= scoresToPass[game.mode][game.nLevel]);

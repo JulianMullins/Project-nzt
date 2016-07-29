@@ -7,6 +7,10 @@ var currentScore;
 var matchCount = 0; //total matches in game
 var matchHit = 0; ///ones user gets
 
+var endGameFunction = require('./serverFunctions').endGameFunction;
+var startGameFunction = require('./serverFunctions').startGameFunction;
+
+
 //COLLECTION OF GLOBAL VARIABLES TO MAKE EVERYONES LIFE EASIER
 //create global variable for reaction counter
 var reactionStart;
@@ -54,11 +58,16 @@ var AdvancedMode = React.createClass({
     }
   },
   componentDidMount: function() {
-    axios.post('/startGame/' + this.state.mode + '/' + this.state.N).then(function(response) {
-      console.log("start game posted", response)
-      this.setState({tempUser: response.data.tempUser, gameId: response.data.gameId, modeMultiplier: response.data.modeMultiplier, penalty: response.data.penalty, positivePoints: response.data.positivePoints})
-      console.log("game posted")
-    }.bind(this))
+    startGameFunction(this.state.mode,this.state.N,function(obj){
+      this.setState({
+        tempUser: obj.tempUser,
+        gameId: obj.gameId,
+        modeMultiplier:obj.modeMultiplier,
+        penalty:obj.penalty,
+        positivePoints:obj.positivePoints,
+        userId: obj.userId
+      })
+    }.bind(this));
     console.log("component mounted")
   },
   componentWillUnmount: function() {
@@ -271,6 +280,15 @@ var AdvancedMode = React.createClass({
         cMatch = false;
         pMatch = false;
       }.bind(this), 800);
+
+
+      ////////////////////////////////////////////////////////////////////////////////////
+      ///////////////////////////////////////////////////////////////////////////////////
+      ///////////////////////////////////////////////////////////////////////////////////
+      ////////////////////////////////////////////////////////////////////////////////////////
+      ////////////////////////////////////////////////////////////////////////////////////
+      //RUTH THIS IS WHERE THE GAME ENDS///////////////////////////////////////////
+
       if (timeKeeper === 60) {
         clearInterval(iterations);
         setTimeout(function() {
@@ -279,15 +297,21 @@ var AdvancedMode = React.createClass({
           console.log(reactionTimes, 'reaction times')
           console.log(this.state)
           console.log(matchHit / matchCount, 'accuracy')
-          axios.post('/gameEnd', {
-            gameId: this.state.gameId,
-            score: gameScore,
-            reactionTimes: reactionTimes
-          }).then(function(response) {
-            console.log('end game posted')
-            this.props.history.push('/gameOver');
+          
+
+          endGameFunction(fullScore,reactionTimes,this.state.gameId,this.state.userId,function(success){
+            if(success){
+              this.props.history.push('/gameOver')
+            }
           }.bind(this))
+
         }.bind(this), 2000);
+      ////////////////////////////////////////////////////////////////////////////////////
+      ///////////////////////////////////////////////////////////////////////////////////
+      ///////////////////////////////////////////////////////////////////////////////////
+      ////////////////////////////////////////////////////////////////////////////////////////
+      ////////////////////////////////////////////////
+    
       }
     }.bind(this), 2000);
   },
