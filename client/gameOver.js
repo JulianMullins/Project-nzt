@@ -95,7 +95,7 @@ var GameOverOverlay = React.createClass({
     //   data: {
     //     inputUsername:this.state.username,
     //     alreadyLoggedIn:this.state.isAnon
-    //   }
+    //   } 
     // })
 
   },
