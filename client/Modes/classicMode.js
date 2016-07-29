@@ -4,12 +4,11 @@ var ClassicStartOverlay = require('./gameStartOverlay').ClassicStartOverlay;
 var axios = require('axios')
 var fullScore = 0;
 var currentScore;
-var matchCount=0; //total matches in game
-var matchHit=0; ///ones user gets
+var matchCount = 0; //total matches in game
+var matchHit = 0; ///ones user gets
 
 var endGameFunction = require('./serverFunctions').endGameFunction;
 var startGameFunction = require('./serverFunctions').startGameFunction;
-
 
 //COLLECTION OF GLOBAL VARIABLES TO MAKE EVERYONES LIFE EASIER
 //create global variable for reaction counter
@@ -61,9 +60,9 @@ var ClassicMode = React.createClass({
       this.setState({
         tempUser: obj.tempUser,
         gameId: obj.gameId,
-        modeMultiplier:obj.modeMultiplier,
-        penalty:obj.penalty,
-        positivePoints:obj.positivePoints,
+        modeMultiplier: obj.modeMultiplier,
+        penalty: obj.penalty,
+        positivePoints: obj.positivePoints,
         userId: obj.userId
       })
     }.bind(this));
@@ -90,8 +89,8 @@ var ClassicMode = React.createClass({
   positionAndSound: function() {
     var positionQueue = [];
     var soundQueue = [];
-    var timeTilPositionMatch = parseInt((Math.random() * 5) + 2 + this.state.N);
-    var timeTilSoundMatch = parseInt((Math.random() * 5) + 2 + this.state.N);
+    var timeTilPositionMatch = parseInt((Math.random() * 5) + this.state.N);
+    var timeTilSoundMatch = parseInt((Math.random() * 5) + this.state.N);
     var timeKeeper = 0;
 
     iterations = setInterval(function() {
@@ -101,8 +100,8 @@ var ClassicMode = React.createClass({
         currentScore = ((2000 - reactionTimes[reactionTimes.length - 1]) / 100).toFixed(2);
         fullScore += parseFloat(currentScore);
         reactionEnd = null;
-        matchCount+=1;
-        matchHit+=1;
+        matchCount += 1;
+        matchHit += 1;
         this.setState({
           score: this.state.score + parseInt(currentScore),
           alert: 'Good job'
@@ -110,7 +109,7 @@ var ClassicMode = React.createClass({
       } else if (!this.state.keepScore && (this.state.posPressed || this.state.soundPressed)) {
         this.setState({alert: "Not a match"})
         reactionEnd = null;
-        matchHit-=1;
+        matchHit -= 1;
         if ((this.state.score - 5) >= 0) {
           currentScore = 5;
           this.setState({
@@ -123,7 +122,7 @@ var ClassicMode = React.createClass({
       } else if (this.state.soundMatch || this.state.positionMatch) {
         this.setState({alert: "Missed a match"});
         reactionEnd = null;
-        matchCount+=1;
+        matchCount += 1;
         if ((this.state.score - 5) >= 0) {
           currentScore = 5;
           this.setState({
@@ -220,23 +219,22 @@ var ClassicMode = React.createClass({
         clearInterval(iterations);
         setTimeout(function() {
           console.log(reactionTimes, 'reaction times')
-          console.log(matchHit/matchCount, 'accuracy')
+          console.log(matchHit / matchCount, 'accuracy')
           console.log(this.state)
 
-
-          endGameFunction(fullScore,reactionTimes,this.state.gameId,this.state.userId,function(success){
-            if(success){
+          endGameFunction(fullScore, reactionTimes, this.state.gameId, this.state.userId, function(success) {
+            if (success) {
               this.props.history.push('/gameOver')
             }
           }.bind(this))
 
         }.bind(this), 2000)
-          
-////////////////////////////////////////////////////////////////////////////////////
-      //////////////////////////////////////////////////////////////////////////////////
-      /////////////////////////////////////////////////////////////////////////////////
-      ///////////////////////////////////////////////////////////////////////////////
-      ///////////////////////////////////////////////////////////////////////////////
+
+        ////////////////////////////////////////////////////////////////////////////////////
+        //////////////////////////////////////////////////////////////////////////////////
+        /////////////////////////////////////////////////////////////////////////////////
+        ///////////////////////////////////////////////////////////////////////////////
+        ///////////////////////////////////////////////////////////////////////////////
 
       }
 
