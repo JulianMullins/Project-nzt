@@ -23,7 +23,7 @@ var getSquareArr = function(square, mode) {
   var arr = [];
   for (var i = 1; i < maxSquares + 1; i++) {
     var link = "/game/" + mode + "/" + i;
-    console.log(link)
+    //console.log(link)
     var sqClass = "levelSquare " + squareClass;
     if (i <= square) {
       var colorStyle = {
@@ -82,7 +82,12 @@ var getMaxN = function(mode, cb) {
 
 var ClassicLevels = React.createClass({
   getInitialState: function() {
-    return {maxN: 1, mode: 'classic'}
+    console.log(this.props)
+    return {
+      maxN: 1, 
+      mode: 'classic',
+      error:this.props.params.error
+    }
   },
   componentDidMount() {
     this.setMaxN();
@@ -122,7 +127,12 @@ var ClassicLevels = React.createClass({
 
 var RelaxedLevels = React.createClass({
   getInitialState: function() {
-    return {maxN: 1, mode: 'relaxed'}
+    console.log(this.props)
+    return {
+      maxN: 1, 
+      mode: 'relaxed',
+      error:this.props.params.error
+    }
   },
   componentDidMount() {
     this.setMaxN();
@@ -139,6 +149,7 @@ var RelaxedLevels = React.createClass({
     var squareArr = getSquareArr(square, this.state.mode)
     return (
       <div className="levelBox">
+      {this.state.error}
         <h1 id="relaxed" className="relaxed">Relaxed</h1>
         <div className="grid">
           {squareArr.map(function(square) {
@@ -176,6 +187,7 @@ var SilentLevels = React.createClass({
 
     return (
       <div className="levelBox">
+        {this.state.error}
         <h1 id="silent" className="silent">Silent</h1>
         <div className="grid">
           {squareArr.map(function(square) {
