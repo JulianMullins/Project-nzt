@@ -1,5 +1,4 @@
 var HighScore = require('../models/HighScore');
-var User = require('../models/HighScore');
 var Leaderboard = require('../models/Leaderboard');
 var User = require('../models/User');
 var leaderboardSize = require('./serverData').leaderboardSize;
@@ -8,7 +7,13 @@ var express = require('express');
 var router = express.Router();
 
 router.get('/myHighScores', function(req, res, next) {
-  res.json(user.stats.leaderboard.scores);
+  User.findById(req.user._id)
+    .populate('stats')
+    .exec(function(err,user){
+      Leaderboard.findById(user.stats.leaderboard,function(err,leaderboard){
+        return leaderboard.scores;
+      })
+    })
 })
 
 //modes: classic,relaxed,silent,advanced

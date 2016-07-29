@@ -7,6 +7,10 @@ var currentScore;
 var matchCount=0; //total matches in game
 var matchHit=0; ///ones user gets
 
+var endGameFunction = require('./serverFunctions').endGameFunction;
+var startGameFunction = require('./serverFunctions').startGameFunction;
+
+
 //COLLECTION OF GLOBAL VARIABLES TO MAKE EVERYONES LIFE EASIER
 //create global variable for reaction counter
 var reactionStart;
@@ -50,11 +54,16 @@ var ClassicMode = React.createClass({
     }
   },
   componentDidMount: function() {
-    axios.post('/startGame/' + this.state.mode + '/' + this.state.N).then(function(response) {
-      console.log("start game posted", response)
-      this.setState({tempUser: response.data.tempUser, gameId: response.data.gameId, modeMultiplier: response.data.modeMultiplier, penalty: response.data.penalty, positivePoints: response.data.positivePoints})
-      console.log("game posted")
-    }.bind(this))
+    startGameFunction(this.state.mode,this.state.N,function(obj){
+      this.setState({
+        tempUser: obj.tempUser,
+        gameId: obj.gameId,
+        modeMultiplier:obj.modeMultiplier,
+        penalty:obj.penalty,
+        positivePoints:obj.positivePoints,
+        userId: obj.userId
+      })
+    }.bind(this));
     console.log("component mounted")
   },
   componentWillUnmount: function() {
@@ -197,22 +206,35 @@ var ClassicMode = React.createClass({
         sMatch = false;
         pMatch = false;
       }.bind(this), 800);
+
+      ////////////////////////////////////////////////////////////////////////////////////
+      ///////////////////////////////////////////////////////////////////////////////////
+      ///////////////////////////////////////////////////////////////////////////////////
+      ////////////////////////////////////////////////////////////////////////////////////////
+      ////////////////////////////////////////////////////////////////////////////////////
+      //RUTH THIS IS WHERE THE GAME ENDS///////////////////////////////////////////
       if (timeKeeper === 60) {
         clearInterval(iterations);
         setTimeout(function() {
           console.log(reactionTimes, 'reaction times')
           console.log(matchHit/matchCount, 'accuracy')
           console.log(this.state)
-          axios.post('/gameEnd', {
-            gameId: this.state.gameId,
-            score: fullScore,
-            reactionTimes: reactionTimes
-          }).then(function(response) {
-            console.log('end game posted')
-            this.props.history.push('/gameOver');
+
+
+          endGameFunction(fullScore,reactionTimes,this.state.gameId,this.state.userId,function(success){
+            if(success){
+              this.props.history.push('/gameOver')
+            }
           }.bind(this))
 
         }.bind(this), 2000)
+          
+////////////////////////////////////////////////////////////////////////////////////
+      //////////////////////////////////////////////////////////////////////////////////
+      /////////////////////////////////////////////////////////////////////////////////
+      ///////////////////////////////////////////////////////////////////////////////
+      ///////////////////////////////////////////////////////////////////////////////
+
       }
 
     }.bind(this), 2000)
@@ -329,9 +351,9 @@ var ClassicMode = React.createClass({
           <div className="scoreAlert">
             {scoreAlert}
           </div>
-          <div className="gameButtonsContainer classicBackground">
-            <a onClick={this.positionMatch} style={this.state.posStyle}>POSITION</a>
-            <a onClick={this.soundMatch} style={this.state.soundStyle}>SOUND</a>
+          <div className="gameButtonsContainer">
+            <a onClick={this.positionMatch} style={this.state.posStyle} className="classicButton">POSITION</a>
+            <a onClick={this.soundMatch} style={this.state.soundStyle} className="classicButton">SOUND</a>
           </div>
         </div>
       </div>
@@ -342,7 +364,7 @@ var ClassicMode = React.createClass({
 var noStyle = {}
 
 var pushStyle = {
-  backgroundColor: 'rgba(0, 0, 0, .1729)',
+  backgroundColor: '#A8020F',
   boxShadow: '0px 0px',
   color: 'white'
 }

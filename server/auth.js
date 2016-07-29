@@ -37,7 +37,7 @@ module.exports = function(passport) {
     }
   };
 
-  router.post('/register', function(req, res) {
+  router.post('/register', function(req, res,next) {
     
     //didn't fill out form right
     if (!validateReq(req.body)) {
@@ -169,23 +169,36 @@ module.exports = function(passport) {
   
 
   router.get('/login/failure',function(req,res,next){
-    res.status(401).json({success:false})
+    //res.status(401).json({success:false})
+    res.send({success:false,error:"login failure"})
   })
 
   // POST Login page
-  router.post('/login', passport.authenticate('local'), function(req,res,next){
+  router.post('/login', passport.authenticate('local',{failureRedirect: 'login/failure'}), function(req,res,next){
     
-            console.log("login success")
-            console.log(req.user)
-            res.json({success:true,user:req.user})
-            console.log(req.user +" after json-ing");
+      console.log("login success")
+      console.log(req.user)
+      res.json({success:true,user:req.user})
+      console.log(req.user +" after json-ing");
 
 	});
+
+  //testing custom login post
+  // router.post('/login', function(req, res, next) {
+  //   passport.authenticate('local', function(err, user, info) {
+  //     if (err) { return next(err); }
+  //     if (!user) { return res.send({success:false,error:"failed login"}); }
+  //     req.logIn(user, function(err) {
+  //       if (err) { return next(err); }
+  //       return res.send({success:true});
+  //     });
+  //   })(req, res, next);
+  // });
 
 
   // facebook
   router.get('/login/facebook',
-    passport.authenticate('facebook', { scope:['email','user_friends']}), function(req,res){
+    passport.authenticate('facebook', { scope:['email','user_friends']}), function(req,res,next){
       console.log("getting /login/facebook")
     });
 
@@ -199,7 +212,7 @@ module.exports = function(passport) {
 
 
   // reset user currentgame and logout (or err if !req.user)
-  router.get('/logout', function(req, res) {
+  router.get('/logout', function(req, res,next) {
     if(req.user){
       req.user.currentGame=[];
       req.user.save(function(err,user){

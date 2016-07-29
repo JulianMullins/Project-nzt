@@ -3,6 +3,10 @@ var GameTimer = require('./gameTimer');
 var SilentStartOverlay = require('./gameStartOverlay').SilentStartOverlay;
 var axios = require('axios')
 
+var endGameFunction = require('./serverFunctions').endGameFunction;
+var startGameFunction = require('./serverFunctions').startGameFunction;
+
+
 //COLLECTION OF GLOBAL VARIABLES TO MAKE EVERYONES LIFE EASIER
 //create global variable for reaction counter
 var reactionStart;
@@ -49,12 +53,16 @@ var SilentMode = React.createClass({
     }
   },
   componentDidMount: function() {
-    axios.post('/startGame/' + this.state.mode + '/' + this.state.N).then(function(response) {
-      console.log("start game posted", response)
-      this.setState({tempUser: response.data.tempUser, gameId: response.data.gameId, modeMultiplier: response.data.modeMultiplier, penalty: response.data.penalty, positivePoints: response.data.positivePoints})
-      console.log(this.state, '57')
-      //console.log("game posted")
-    }.bind(this))
+    startGameFunction(this.state.mode,this.state.N,function(obj){
+      this.setState({
+        tempUser: obj.tempUser,
+        gameId: obj.gameId,
+        modeMultiplier:obj.modeMultiplier,
+        penalty:obj.penalty,
+        positivePoints:obj.positivePoints,
+        userId: obj.userId
+      })
+    }.bind(this));
     //console.log("component mounted")
     // fetch('/startGame/'+this.state.mode+'/'+this.state.N, {
     //  method: 'post'
@@ -106,7 +114,7 @@ var SilentMode = React.createClass({
         matchHit-=1;
         reactionEnd = null;
         if ((this.state.score - 5) >= 0) {
-          fullscore -= 5;
+          fullScore -= 5;
           currentScore = 5;
           this.setState({
             score: this.state.score - 5,
@@ -114,7 +122,7 @@ var SilentMode = React.createClass({
             colorStyle: noStyle
           });
         } else {
-          fullscore = 0;
+          fullScore = 0;
           currentScore = this.state.score;
           this.setState({score: 0});
         }
@@ -207,22 +215,36 @@ var SilentMode = React.createClass({
         cMatch = false;
         pMatch = false;
       }.bind(this), 800);
+
+       ////////////////////////////////////////////////////////////////////////////////////
+      ///////////////////////////////////////////////////////////////////////////////////
+      ///////////////////////////////////////////////////////////////////////////////////
+      ////////////////////////////////////////////////////////////////////////////////////////
+      ////////////////////////////////////////////////////////////////////////////////////
+      //RUTH THIS IS WHERE THE GAME ENDS////////////////
       if (timeKeeper === 60) {
         clearInterval(iterations);
         setTimeout(function() {
           //console.log(reactionTimes, 'reaction times')
           //console.log(this.state)
           console.log(matchHit/matchCount, 'accuracy')
-          axios.post('/gameEnd', {
-            gameId: this.state.gameId,
-            score: fullScore,
-            reactionTimes: reactionTimes
-          }).then(function(response) {
-            console.log('end game posted')
-            this.props.history.push('/gameOver');
+          
+
+
+          endGameFunction(fullScore,reactionTimes,this.state.gameId,this.state.userId,function(success){
+            if(success){
+              this.props.history.push('/gameOver')
+            }
           }.bind(this))
 
         }.bind(this), 2000);
+
+           ////////////////////////////////////////////////////////////////////////////////////
+      ///////////////////////////////////////////////////////////////////////////////////
+      ///////////////////////////////////////////////////////////////////////////////////
+      ////////////////////////////////////////////////////////////////////////////////////////
+      /////////////////////////////////////////////////////////////////////
+
       }
     }.bind(this), 2000);
   },
@@ -348,9 +370,9 @@ var SilentMode = React.createClass({
           <div className="scoreAlert">
             {scoreAlert}
           </div>
-          <div className="gameButtonsContainer silentBackground">
-            <a onClick={this.positionMatch} style={this.state.posStyle}>POSITION</a>
-            <a onClick={this.colorMatch} style={this.state.colorStyle}>COLOR</a>
+          <div className="gameButtonsContainer">
+            <a onClick={this.positionMatch} style={this.state.posStyle} className="silentButton">POSITION</a>
+            <a onClick={this.colorMatch} style={this.state.colorStyle} className="silentButton">COLOR</a>
           </div>
         </div>
       </div>
@@ -360,7 +382,7 @@ var SilentMode = React.createClass({
 
 var noStyle = {}
 var pushStyle = {
-  backgroundColor: 'rgba(0, 0, 0, .1729)',
+  backgroundColor: '#319B93',
   boxShadow: '0px 0px',
   color: 'white'
 }

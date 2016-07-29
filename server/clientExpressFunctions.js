@@ -19,7 +19,7 @@ var tempGame = null;
     // navBar, relaxedMode
     //(sort of in client/index.js, but commented out)
 router.get('/isUser',function(req,res,next){
-  console.log(req.user)
+  //console.log(req.user)
   if(req.user){
     res.json({isloggedin:true,isUser:req.user.temp})
   }
@@ -33,7 +33,7 @@ router.get('/isUser',function(req,res,next){
 //check if logged in ---- not in use
 router.get('/isLoggedIn',function(req,res,next){
   var isloggedin = false;
-  console.log(req.user)
+  //console.log(req.user)
   if(req.user && !req.user.temp){
     isloggedin = true;
   }
@@ -101,7 +101,7 @@ router.get('/getUser',function(req,res,next){
 
 //get game data at end of game (gameOver)
 router.get('/getGame',function(req,res,next){
-  console.log(req.user)
+  //console.log(req.user)
   Game.findById(req.user.currentGame[0],function(err,game){
     if(err){
       console.log(err)

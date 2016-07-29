@@ -2,10 +2,14 @@ var React = require('react');
 var GameTimer = require('./gameTimer');
 var axios = require('axios');
 var AdvancedStartOverlay = require('./gameStartOverlay').AdvancedStartOverlay;
-var fullScore=0;
+var fullScore = 0;
 var currentScore;
-var matchCount=0; //total matches in game
-var matchHit=0; ///ones user gets
+var matchCount = 0; //total matches in game
+var matchHit = 0; ///ones user gets
+
+var endGameFunction = require('./serverFunctions').endGameFunction;
+var startGameFunction = require('./serverFunctions').startGameFunction;
+
 
 //COLLECTION OF GLOBAL VARIABLES TO MAKE EVERYONES LIFE EASIER
 //create global variable for reaction counter
@@ -17,7 +21,7 @@ var reactionTimes = [];
 var gameScore;
 var reactionEnd = null;
 var iterations;
-var fullScore=0;
+var fullScore = 0;
 
 var AdvancedMode = React.createClass({
   getInitialState: function() {
@@ -54,18 +58,16 @@ var AdvancedMode = React.createClass({
     }
   },
   componentDidMount: function() {
-    axios.post('/startGame/'+this.state.mode+'/'+this.state.N)
-    .then(function(response){
-      console.log("start game posted",response)
+    startGameFunction(this.state.mode,this.state.N,function(obj){
       this.setState({
-        tempUser:response.data.tempUser,
-        gameId: response.data.gameId,
-        modeMultiplier:response.data.modeMultiplier,
-        penalty:response.data.penalty,
-        positivePoints:response.data.positivePoints
+        tempUser: obj.tempUser,
+        gameId: obj.gameId,
+        modeMultiplier:obj.modeMultiplier,
+        penalty:obj.penalty,
+        positivePoints:obj.positivePoints,
+        userId: obj.userId
       })
-      console.log("game posted")
-    }.bind(this))
+    }.bind(this));
     console.log("component mounted")
   },
   componentWillUnmount: function() {
@@ -85,9 +87,9 @@ var AdvancedMode = React.createClass({
     }.bind(this)
   },
   startGame: function() {
-      this.setState({overlay: false});
-      this.playGame();
-      this.enableKeys();
+    this.setState({overlay: false});
+    this.playGame();
+    this.enableKeys();
   },
   playGame: function() {
     var positionQueue = [];
@@ -114,7 +116,7 @@ var AdvancedMode = React.createClass({
           })
           reactionEnd = null;
         } else {
-          matchCount+=1;
+          matchCount += 1;
           this.setState({
             soundPressed: noStyle,
             colorPressed: noStyle,
@@ -128,26 +130,23 @@ var AdvancedMode = React.createClass({
             alert: "Missed a match"
           })
           reactionEnd = null;
-          if ((this.state.score-5) >= 0) {
-            currentScore=5;
+          if ((this.state.score - 5) >= 0) {
+            currentScore = 5;
             this.setState({
               score: this.state.score - 5
             });
+          } else {
+            currentScore = this.state.score;
+            this.setState({score: 0});
           }
-          else{
-            currentScore=this.state.score;
-            this.setState({
-            score: 0
-          });
-        }
         }
       } else if (this.state.correct[0] === this.state.colorMatch && this.state.correct[1] === this.state.soundMatch && this.state.correct[2] === this.state.positionMatch) {
         reactionTimes.push(reactionEnd - reactionStart);
-        currentScore=((2000-reactionTimes[reactionTimes.length-1])/100).toFixed(2);
-        fullScore+=parseFloat(currentScore);
+        currentScore = ((2000 - reactionTimes[reactionTimes.length - 1]) / 100).toFixed(2);
+        fullScore += parseFloat(currentScore);
         reactionEnd = null;
-        matchHit+=1;
-        matchCount+=1;
+        matchHit += 1;
+        matchCount += 1;
         this.setState({
           soundPressed: noStyle,
           colorPressed: noStyle,
@@ -163,7 +162,7 @@ var AdvancedMode = React.createClass({
         })
       } else {
         //console.log('incorrect')
-        matchHit-=1;
+        matchHit -= 1;
         this.setState({
           soundPressed: noStyle,
           colorPressed: noStyle,
@@ -176,17 +175,14 @@ var AdvancedMode = React.createClass({
           ],
           alert: 'Not a match'
         })
-        if ((this.state.score-5) >= 0) {
-          currentScore=5;
+        if ((this.state.score - 5) >= 0) {
+          currentScore = 5;
           this.setState({
             score: this.state.score - 5
           });
-        }
-        else{
-          currentScore=this.state.score;
-          this.setState({
-            score: 0
-          });
+        } else {
+          currentScore = this.state.score;
+          this.setState({score: 0});
         }
       }
 
@@ -284,6 +280,15 @@ var AdvancedMode = React.createClass({
         cMatch = false;
         pMatch = false;
       }.bind(this), 800);
+
+
+      ////////////////////////////////////////////////////////////////////////////////////
+      ///////////////////////////////////////////////////////////////////////////////////
+      ///////////////////////////////////////////////////////////////////////////////////
+      ////////////////////////////////////////////////////////////////////////////////////////
+      ////////////////////////////////////////////////////////////////////////////////////
+      //RUTH THIS IS WHERE THE GAME ENDS///////////////////////////////////////////
+
       if (timeKeeper === 60) {
         clearInterval(iterations);
         setTimeout(function() {
@@ -291,17 +296,23 @@ var AdvancedMode = React.createClass({
           console.log(gameScore, 'game score')
           console.log(reactionTimes, 'reaction times')
           console.log(this.state)
-          console.log(matchHit/matchCount, 'accuracy')
-          axios.post('/gameEnd',{
-              gameId: this.state.gameId,
-              score: gameScore,
-              reactionTimes: reactionTimes
-          }).then(function(response){
-            console.log('end game posted')
-              this.props.history.push('/gameOver');
+          console.log(matchHit / matchCount, 'accuracy')
+          
+
+          endGameFunction(fullScore,reactionTimes,this.state.gameId,this.state.userId,function(success){
+            if(success){
+              this.props.history.push('/gameOver')
+            }
           }.bind(this))
-      }.bind(this),2000);
-    }
+
+        }.bind(this), 2000);
+      ////////////////////////////////////////////////////////////////////////////////////
+      ///////////////////////////////////////////////////////////////////////////////////
+      ///////////////////////////////////////////////////////////////////////////////////
+      ////////////////////////////////////////////////////////////////////////////////////////
+      ////////////////////////////////////////////////
+    
+      }
     }.bind(this), 2000);
   },
   colorMatch: function() {
@@ -327,9 +338,7 @@ var AdvancedMode = React.createClass({
   },
   render: function() {
     var overlay = this.state.overlay
-      ? (
-        <AdvancedStartOverlay click={this.startGame}/>
-      )
+      ? (<AdvancedStartOverlay click={this.startGame}/>)
       : '';
 
     var scoreAlert;
@@ -368,8 +377,12 @@ var AdvancedMode = React.createClass({
     }
 
     var gameTimer = this.state.overlay
-    ? ""
-    : (<GameTimer timeStyle={{'color': "#F1BA03"}}></GameTimer>);
+      ? ""
+      : (
+        <GameTimer timeStyle={{
+          'color': "#F1BA03"
+        }}></GameTimer>
+      );
 
     return (
       <div className="gameContainer">
@@ -402,10 +415,10 @@ var AdvancedMode = React.createClass({
           <div className="scoreAlert">
             {scoreAlert}
           </div>
-          <div className="gameButtonsContainer advancedBackground" onKeyPress={this.handleKeyPres}>
-            <a onClick={this.soundMatch} style={this.state.soundPressed}>SOUND</a>
-            <a onClick={this.positionMatch} style={this.state.positionPressed}>POSITION</a>
-            <a onClick={this.colorMatch} style={this.state.colorPressed}>COLOR</a>
+          <div className="gameButtonsContainer" onKeyPress={this.handleKeyPres}>
+            <a onClick={this.soundMatch} style={this.state.soundPressed} className='advancedButton'>SOUND</a>
+            <a onClick={this.positionMatch} style={this.state.positionPressed} className='advancedButton'>POSITION</a>
+            <a onClick={this.colorMatch} style={this.state.colorPressed} className='advancedButton'>COLOR</a>
           </div>
         </div>
       </div>
@@ -415,7 +428,9 @@ var AdvancedMode = React.createClass({
 
 var noStyle = {}
 var pushStyle = {
-  color: 'black'
+  backgroundColor: '#957300',
+  boxShadow: '0px 0px',
+  color: 'white'
 }
 
 var standardStyle = {
