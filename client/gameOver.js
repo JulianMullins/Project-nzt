@@ -35,7 +35,8 @@ var GameOverOverlay = React.createClass({
       nextLevelLink: <div></div>,
       anonUserName: null,
       isHighScore: false,
-      passedLevel: false
+      passedLevel: false,
+      modeMultiplier:0
     }
   },
   componentDidMount() {
@@ -67,7 +68,6 @@ var GameOverOverlay = React.createClass({
         modeMultiplier: gameData.data.modeMultiplier,
         start: 0
       })
-      //console.log(this.state,'data')
     }.bind(this))).then(function() {
       this.renderLogin()
     //console.log(this.state,'this.state')
@@ -223,7 +223,7 @@ var GameOverOverlay = React.createClass({
                 </tr>
                 <tr>
                   <td>mode: </td>
-                  <td className="scoreValue">x {modeM}</td>
+                  <td className="scoreValue">x {this.state.modeMultiplier}</td>
                 </tr>
                 <tr className="totalScore">
                   <td>total score: </td>
