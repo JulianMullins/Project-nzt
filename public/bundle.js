@@ -1,1 +1,1 @@
-console.error("SyntaxError: C:/Users/Student/documents/github/project-nzt/client/gameOver.js: Adjacent JSX elements must be wrapped in an enclosing tag (233:4) while parsing file: C:\\Users\\Student\\documents\\github\\project-nzt\\client\\gameOver.js");
+console.error("Error: Cannot find module 'underscore' from 'C:\\Users\\Student\\documents\\github\\project-nzt\\client'");

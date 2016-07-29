@@ -214,9 +214,7 @@ var GameOverOverlay = React.createClass({
               <h2>home</h2>
               </a>
             </Link>
-
             {this.state.nextLevel}
-
             <h2 className="levelButton" onClick={this.repeatLevel}>replay level</h2>
             <div>
               <Link to="/leaderboard">
@@ -230,7 +228,6 @@ var GameOverOverlay = React.createClass({
             </div>
           </div>
       </div>
-    </div>
     )
   }
 });
