@@ -2768,33 +2768,8 @@ var GameOverOverlay = React.createClass({
     this.props.history.push('/game/' + this.state.mode + '/' + this.state.nLevel);
   },
 
-  countUp: function countUp(count) {
-    var div_by = 100;
-    var speed = parseInt(count / div_by);
-    console.log('ini speed', speed);
-    var display = $('.count');
-    var run_count = 1;
-    var int_speed = 18;
-
-    var int = setInterval(function () {
-      if (run_count < div_by) {
-        display.text(speed * run_count);
-        console.log('speed', speed, 'run', run_count);
-        run_count++;
-      } else if (parseInt(display.text) < count) {
-        var curr_count = parseInt(display.text) + 1;
-        console.log("current", curr_count);
-        display.text(curr_count);
-      } else {
-        clearInterval(int);
-      }
-    }, int_speed);
-  },
+  countUp: function countUp(count) {},
   render: function render() {
-    var score = parseFloat(this.state.score);
-    var n = parseInt(this.state.nLevel);
-    var modeM = parseInt(this.state.modeMultiplier);
-    var totalScore = parseInt(score * n * modeM);
     return React.createElement(
       'div',
       { className: 'gameOver', id: 'gameover' },
@@ -2874,6 +2849,7 @@ var GameOverOverlay = React.createClass({
                 null,
                 'total score: '
               ),
+              totalScore,
               React.createElement(
                 'td',
                 { className: 'count scoreValue' },
