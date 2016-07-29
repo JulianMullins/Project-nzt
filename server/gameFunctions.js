@@ -24,11 +24,11 @@ var tempGame = null;
 //post start game
 router.post('/startGame/:mode/:nLevel',function(req,res,next){
   console.log("trying to post game");
-  console.log(req.user);
+  //console.log(req.user);
 
   //if user, create game, save game, add to user.currentGame
   if(req.user){
-    console.log(req.user);
+    //console.log(req.user);
     var tempGame = new Game({
       user:req.user,
       mode:req.params.mode,
@@ -194,7 +194,7 @@ router.post('/startGame/:mode/:nLevel',function(req,res,next){
 //game end - posted from mode files; find game, update game stats
 router.post('/gameEnd',function(req,res,next){
   console.log("game ended")
-  console.log(req.user)
+  //console.log(req.user)
   console.log(req.body)
   Game.findById(req.body.gameId,function(err,game){
     if(err){

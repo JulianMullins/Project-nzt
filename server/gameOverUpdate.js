@@ -58,15 +58,15 @@ var checkOverall = function(newHighScore,callback){
                 return callback(isHighScore);
               }
             });
-         
+
 
 
         }
         else if(newHighScore.score > overallHighScores[leaderboard.length-1]){
           console.log("leaderboard full, but highscore")
-          leaderboard.pop();
-          leaderboard.push(newHighScore);
-          leaderboard.sort(sortScores);
+          myHighScores.pop();
+          myHighScores.push(newHighScore);
+          myHighScores.sort(sortScores);
           for (var score in overallHighScores){
             if(score._id===newHighScore._id){
               score = newHighScore._id;
@@ -81,12 +81,12 @@ var checkOverall = function(newHighScore,callback){
                 return callback(isHighScore);
               }
             });
-          
+
         }
         else{
           return callback(isHighScore)
         }
-        
+
   })
 }
 
@@ -96,6 +96,7 @@ var checkMine = function(newHighScore,stats,callback){
   Leaderboard.findById(stats.leaderboard)
     .populate('scores')
     .exec(function(err,leaderboard){
+
       console.log(" MY LEADERBOARD: ", leaderboard)
       var myHighScores = leaderboard.scores;
 
@@ -103,7 +104,7 @@ var checkMine = function(newHighScore,stats,callback){
         console.log("my leaderboard undersize")
         myHighScores.push(newHighScore);
         myHighScores.sort(sortScores);
-        console.log("myHighScores: ", myHighScores);
+        //console.log("myHighScores: ", myHighScores);
         console.log("newHighScore: ",newHighScore)
         for (var score in myHighScores){
           if(score._id===newHighScore._id){
@@ -122,7 +123,7 @@ var checkMine = function(newHighScore,stats,callback){
               return callback(isHighScore);
             }
           });
-        
+
       }
       else if(tempGame.score>myHighScores[myHighScores.length-1].score){
         console.log("my leaderboard full, but highScore")
@@ -143,14 +144,17 @@ var checkMine = function(newHighScore,stats,callback){
               return callback(isHighScore);
             }
           });
-        
+
+      }
+      else{
+        return callback(isHighScore)
       }
     })
 }
 
 //sort score models
 var sortScores = function(a,b){
-  return a.score-b.score
+  return b.score-a.score
 };
 
 //save game
@@ -177,19 +181,19 @@ router.post('/gameOver',function(req,res,next){
           reactionTimes:tempGame.reactionTimes
         })
 
-        
+
         //newHighScore.user = req.body.anonUserName;
 
         //check overall stats
-        checkOverall(newHighScore);    
-        
+        checkOverall(newHighScore);
+
         //update maxN
         if(nLevel>tempUser.maxN[newHighScore.mode]){
           tempUser.maxN[newHighScore.mode] = nLevel;
         }
 
         //return scoreId, userId, gameId, if overall high score
-
+        res.json({success:false})
         }
       })
   }
@@ -198,6 +202,9 @@ router.post('/gameOver',function(req,res,next){
   User.findById(req.user._id)
     .populate('currentGame stats')
     .exec(function(err,user){
+      
+      console.log(req.user.stats)
+
       if(err){
         console.log(err)
       }
@@ -227,17 +234,18 @@ router.post('/gameOver',function(req,res,next){
 
           //check how scores compare on personal level;
         newHighScore.save(function(err,newHighScore){
-          
+          console.log(user.stats)
+
+          var stats = user.stats;
+
           //update Stats
-          if(!user.stats.totalPoints){
-            user.stats.totalPoints= newHighScore.score;
-          }
-          console.log(user.stats.totalPoints,newHighScore.score)
-          user.stats.totalPoints += newHighScore.score;
-          user.stats.progress = user.stats.progress.push(newHighScore._id);
           
-          user.stats.save(function(err,stats){
-            console.log('updated user stats', user.stats)
+          console.log(stats.totalPoints,newHighScore.score)
+          stats.totalPoints += newHighScore.score;
+          stats.progress.push(newHighScore._id);
+
+          stats.save(function(err,stats){
+            console.log('updated user stats', stats)
 
             //update personal and overall leaderboards
             var isMyHighScore = null;
@@ -246,8 +254,8 @@ router.post('/gameOver',function(req,res,next){
             checkMine(newHighScore,user.stats,function(isHighScore){
               isMyHighScore = isHighScore;
 
-              // checkOverall(newHighScore,function(isOverallHighScore){
-              //   isOverallHighScore = isOverallHighScore;
+              checkOverall(newHighScore,function(isOverallHighScore){
+                isOverallHighScore = isOverallHighScore;
 
                 if(isMyHighScore || isOverallHighScore){
                   tempGame.isHighScore = true;
@@ -255,7 +263,7 @@ router.post('/gameOver',function(req,res,next){
                     console.log("isHighScore")
                     console.log("about to res.json success")
                     console.log(req.user.stats)
-                    
+
 
                     user.save(function(err,user){
                       if(!err){
@@ -265,7 +273,7 @@ router.post('/gameOver',function(req,res,next){
                       }
                     })
 
-                    
+
                   });
                 }
                 else{
@@ -279,22 +287,22 @@ router.post('/gameOver',function(req,res,next){
                     })
                 }
 
-              //})
+              })
             })
-             
+
             //return if user highscore, overall high score, new nLevel
-            
+
           })
 
 
           //set game isHighScore, etc.
         })
-      }     
-    })    
+      }
+    })
 });
 
 
-//new function, for tempUser gameOver routes 
+//new function, for tempUser gameOver routes
   //(either save with tempname, or login/register and combine stats/data)
 router.post('/gameOver/finish',function(req,res){
 

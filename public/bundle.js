@@ -315,13 +315,7 @@ var AdvancedMode = React.createClass({
   componentDidMount: function componentDidMount() {
     axios.post('/startGame/' + this.state.mode + '/' + this.state.N).then(function (response) {
       console.log("start game posted", response);
-      this.setState({
-        tempUser: response.data.tempUser,
-        gameId: response.data.gameId,
-        modeMultiplier: response.data.modeMultiplier,
-        penalty: response.data.penalty,
-        positivePoints: response.data.positivePoints
-      });
+      this.setState({ tempUser: response.data.tempUser, gameId: response.data.gameId, modeMultiplier: response.data.modeMultiplier, penalty: response.data.penalty, positivePoints: response.data.positivePoints });
       console.log("game posted");
     }.bind(this));
     console.log("component mounted");
@@ -391,9 +385,7 @@ var AdvancedMode = React.createClass({
             });
           } else {
             currentScore = this.state.score;
-            this.setState({
-              score: 0
-            });
+            this.setState({ score: 0 });
           }
         }
       } else if (this.state.correct[0] === this.state.colorMatch && this.state.correct[1] === this.state.soundMatch && this.state.correct[2] === this.state.positionMatch) {
@@ -434,9 +426,7 @@ var AdvancedMode = React.createClass({
           });
         } else {
           currentScore = this.state.score;
-          this.setState({
-            score: 0
-          });
+          this.setState({ score: 0 });
         }
       }
 
@@ -615,7 +605,9 @@ var AdvancedMode = React.createClass({
       scoreUpdate = React.createElement('h2', null);
     }
 
-    var gameTimer = this.state.overlay ? "" : React.createElement(GameTimer, { timeStyle: { 'color': "#F1BA03" } });
+    var gameTimer = this.state.overlay ? "" : React.createElement(GameTimer, { timeStyle: {
+        'color': "#F1BA03"
+      } });
 
     return React.createElement(
       'div',
@@ -680,20 +672,20 @@ var AdvancedMode = React.createClass({
         ),
         React.createElement(
           'div',
-          { className: 'gameButtonsContainer advancedBackground', onKeyPress: this.handleKeyPres },
+          { className: 'gameButtonsContainer', onKeyPress: this.handleKeyPres },
           React.createElement(
             'a',
-            { onClick: this.soundMatch, style: this.state.soundPressed },
+            { onClick: this.soundMatch, style: this.state.soundPressed, className: 'advancedButton' },
             'SOUND'
           ),
           React.createElement(
             'a',
-            { onClick: this.positionMatch, style: this.state.positionPressed },
+            { onClick: this.positionMatch, style: this.state.positionPressed, className: 'advancedButton' },
             'POSITION'
           ),
           React.createElement(
             'a',
-            { onClick: this.colorMatch, style: this.state.colorPressed },
+            { onClick: this.colorMatch, style: this.state.colorPressed, className: 'advancedButton' },
             'COLOR'
           )
         )
@@ -704,7 +696,9 @@ var AdvancedMode = React.createClass({
 
 var noStyle = {};
 var pushStyle = {
-  color: 'black'
+  backgroundColor: '#957300',
+  boxShadow: '0px 0px',
+  color: 'white'
 };
 
 var standardStyle = {
@@ -1088,15 +1082,15 @@ var ClassicMode = React.createClass({
         ),
         React.createElement(
           'div',
-          { className: 'gameButtonsContainer classicBackground' },
+          { className: 'gameButtonsContainer' },
           React.createElement(
             'a',
-            { onClick: this.positionMatch, style: this.state.posStyle },
+            { onClick: this.positionMatch, style: this.state.posStyle, className: 'classicButton' },
             'POSITION'
           ),
           React.createElement(
             'a',
-            { onClick: this.soundMatch, style: this.state.soundStyle },
+            { onClick: this.soundMatch, style: this.state.soundStyle, className: 'classicButton' },
             'SOUND'
           )
         )
@@ -1108,7 +1102,7 @@ var ClassicMode = React.createClass({
 var noStyle = {};
 
 var pushStyle = {
-  backgroundColor: 'rgba(0, 0, 0, .1729)',
+  backgroundColor: '#A8020F',
   boxShadow: '0px 0px',
   color: 'white'
 };
@@ -1860,10 +1854,10 @@ var RelaxedMode = React.createClass({
         ),
         React.createElement(
           'div',
-          { className: 'gameButtonsContainer relaxedBackground' },
+          { className: 'gameButtonsContainer' },
           React.createElement(
             'a',
-            { onClick: this.posMatch, style: this.state.posStyle },
+            { onClick: this.posMatch, style: this.state.posStyle, className: 'relaxedButton' },
             'POSITION'
           )
         )
@@ -1875,7 +1869,7 @@ var RelaxedMode = React.createClass({
 var noStyle = {};
 
 var pushStyle = {
-  backgroundColor: 'rgba(0, 0, 0, .1729)',
+  backgroundColor: '#006D65',
   boxShadow: '0px 0px',
   color: 'white'
 };
@@ -1994,7 +1988,7 @@ var SilentMode = React.createClass({
         matchHit -= 1;
         reactionEnd = null;
         if (this.state.score - 5 >= 0) {
-          fullscore -= 5;
+          fullScore -= 5;
           currentScore = 5;
           this.setState({
             score: this.state.score - 5,
@@ -2002,7 +1996,7 @@ var SilentMode = React.createClass({
             colorStyle: noStyle
           });
         } else {
-          fullscore = 0;
+          fullScore = 0;
           currentScore = this.state.score;
           this.setState({ score: 0 });
         }
@@ -2259,15 +2253,15 @@ var SilentMode = React.createClass({
         ),
         React.createElement(
           'div',
-          { className: 'gameButtonsContainer silentBackground' },
+          { className: 'gameButtonsContainer' },
           React.createElement(
             'a',
-            { onClick: this.positionMatch, style: this.state.posStyle },
+            { onClick: this.positionMatch, style: this.state.posStyle, className: 'silentButton' },
             'POSITION'
           ),
           React.createElement(
             'a',
-            { onClick: this.colorMatch, style: this.state.colorStyle },
+            { onClick: this.colorMatch, style: this.state.colorStyle, className: 'silentButton' },
             'COLOR'
           )
         )
@@ -2278,7 +2272,7 @@ var SilentMode = React.createClass({
 
 var noStyle = {};
 var pushStyle = {
-  backgroundColor: 'rgba(0, 0, 0, .1729)',
+  backgroundColor: '#319B93',
   boxShadow: '0px 0px',
   color: 'white'
 };
@@ -2536,19 +2530,19 @@ var GameOverOverlay = React.createClass({
               'Submit'
             )
           ),
-          'Or, you can ',
+          'Or, you can',
           React.createElement(
             _reactRouter.Link,
             { to: '/gameOver/login' },
-            ' login'
+            'login'
           ),
-          ' or ',
+          'or',
           React.createElement(
             _reactRouter.Link,
             { to: '/gameOver/register' },
             'sign up'
           ),
-          ' to save your progress, view statistics and compete with friends!'
+          'to save your progress, view statistics and compete with friends!'
         )
       });
     }
@@ -2568,15 +2562,15 @@ var GameOverOverlay = React.createClass({
             React.createElement(
               _reactRouter.Link,
               { to: '/gameOver/login' },
-              ' Sign in'
+              'Sign in'
             ),
-            ' or ',
+            'or',
             React.createElement(
               _reactRouter.Link,
               { to: '/gameOver/register' },
               'sign up'
             ),
-            ' to save your progress, view statistics and compete with friends!'
+            'to save your progress, view statistics and compete with friends!'
           )
         )
       });
@@ -2585,9 +2579,7 @@ var GameOverOverlay = React.createClass({
   update: function update(e) {
 
     //update anonusername field
-    this.setState({
-      anonUserName: e.target.value
-    });
+    this.setState({ anonUserName: e.target.value });
   },
   anonLeaderboard: function anonLeaderboard() {
 
@@ -2597,7 +2589,6 @@ var GameOverOverlay = React.createClass({
       withCredentials: true,
       data: {
         anonUserName: this.state.anonUserName
-
       }
     });
   },
@@ -2622,7 +2613,6 @@ var GameOverOverlay = React.createClass({
   },
 
   render: function render() {
-
     return React.createElement(
       'div',
       { className: 'gameOver', id: 'gameover' },
@@ -2943,7 +2933,10 @@ var getSquareArr = function getSquareArr(square, mode) {
         color: "white",
         opacity: 1 - 0.4 / maxSquares * i
       };
-      var opacityStyle = { backgroundColor: '#F13542', opacity: .8 - 0.2 / square * i };
+      var opacityStyle = {
+        backgroundColor: '#F13542',
+        opacity: .8 - 0.2 / square * i
+      };
       if (mode === 'relaxed') {
         colorStyle.backgroundColor = '#01B6A7';
         opacityStyle.backgroundColor = '#01B6A7';
@@ -2987,9 +2980,7 @@ var getSquareArr = function getSquareArr(square, mode) {
 
 var getMaxN = function getMaxN(mode, cb) {
   console.log("getting max n");
-  axios.get('/getMaxN', {
-    withCredentials: true
-  }).then(function (response) {
+  axios.get('/getMaxN', { withCredentials: true }).then(function (response) {
     console.log(response.data.maxN);
     return cb(response.data.maxN);
   });
@@ -2999,9 +2990,7 @@ var ClassicLevels = React.createClass({
   displayName: 'ClassicLevels',
 
   getInitialState: function getInitialState() {
-    return {
-      maxN: 1,
-      mode: 'classic' };
+    return { maxN: 1, mode: 'classic' };
   },
   componentDidMount: function componentDidMount() {
     this.setMaxN();
@@ -3009,7 +2998,9 @@ var ClassicLevels = React.createClass({
 
   setMaxN: function setMaxN() {
     getMaxN(this.state.mode, function (maxN) {
-      this.setState({ maxN: maxN[this.state.mode] });
+      this.setState({
+        maxN: maxN[this.state.mode]
+      });
     }.bind(this));
     console.log("maxN is " + this.state.maxN);
   },
@@ -3047,7 +3038,7 @@ var ClassicLevels = React.createClass({
           { to: '/home' },
           React.createElement(
             'h3',
-            { className: 'classicBackground returnBtn' },
+            { className: 'classicButton returnBtn' },
             '← Go Back'
           )
         )
@@ -3060,9 +3051,7 @@ var RelaxedLevels = React.createClass({
   displayName: 'RelaxedLevels',
 
   getInitialState: function getInitialState() {
-    return {
-      maxN: 1,
-      mode: 'relaxed' };
+    return { maxN: 1, mode: 'relaxed' };
   },
   componentDidMount: function componentDidMount() {
     this.setMaxN();
@@ -3070,7 +3059,9 @@ var RelaxedLevels = React.createClass({
 
   setMaxN: function setMaxN() {
     getMaxN(this.state.mode, function (maxN) {
-      this.setState({ maxN: maxN[this.state.mode] });
+      this.setState({
+        maxN: maxN[this.state.mode]
+      });
     }.bind(this));
   },
   render: function render() {
@@ -3105,7 +3096,7 @@ var RelaxedLevels = React.createClass({
           { to: '/home' },
           React.createElement(
             'h3',
-            { className: 'relaxedBackground returnBtn' },
+            { className: 'relaxedButton returnBtn' },
             '← Go Back'
           )
         )
@@ -3118,12 +3109,13 @@ var SilentLevels = React.createClass({
   displayName: 'SilentLevels',
 
   getInitialState: function getInitialState() {
-    return { maxN: 1,
-      mode: 'silent' };
+    return { maxN: 1, mode: 'silent' };
   },
   setMaxN: function setMaxN() {
     getMaxN(this.state.mode, function (maxN) {
-      this.setState({ maxN: maxN[this.state.mode] });
+      this.setState({
+        maxN: maxN[this.state.mode]
+      });
     }.bind(this));
   },
   componentDidMount: function componentDidMount() {
@@ -3163,7 +3155,7 @@ var SilentLevels = React.createClass({
           { to: '/home' },
           React.createElement(
             'h3',
-            { className: 'silentBackground returnBtn' },
+            { className: 'silentButton returnBtn' },
             '← Go Back'
           )
         )
@@ -3176,12 +3168,13 @@ var AdvancedLevels = React.createClass({
   displayName: 'AdvancedLevels',
 
   getInitialState: function getInitialState() {
-    return { maxN: 1,
-      mode: 'advanced' };
+    return { maxN: 1, mode: 'advanced' };
   },
   setMaxN: function setMaxN() {
     getMaxN(this.state.mode, function (maxN) {
-      this.setState({ maxN: maxN[this.state.mode] });
+      this.setState({
+        maxN: maxN[this.state.mode]
+      });
     }.bind(this));
   },
   componentDidMount: function componentDidMount() {
@@ -3221,7 +3214,7 @@ var AdvancedLevels = React.createClass({
           { to: '/home' },
           React.createElement(
             'h3',
-            { className: 'advancedBackground returnBtn' },
+            { className: 'advancedButton returnBtn' },
             '← Go Back'
           )
         )
