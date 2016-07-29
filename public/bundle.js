@@ -3796,7 +3796,7 @@ var MyComponent = React.createClass({
   getInitialState: function getInitialState() {
     return {
       lineData1: [{ name: 'scores', values: [{ x: 0, y: 0 }] }],
-      lineData2: [{ name: 'reaction times', values: [{ x: 0, y: 0 }] }]
+      lineData2: [{ name: 'max reaction time', values: [{ x: 0, y: 0 }] }, { name: 'avg reaction time', values: [{ x: 0, y: 0 }] }, { name: 'min reaction time', values: [{ x: 0, y: 0 }] }]
     };
   },
   componentDidMount: function componentDidMount() {
@@ -3806,6 +3806,8 @@ var MyComponent = React.createClass({
       // //console.log(responseJson.data,'41')
       this.state.lineData1[0].values = [];
       this.state.lineData2[0].values = [];
+      this.state.lineData2[1].values = [];
+      this.state.lineData2[2].values = [];
       stats = responseJson.data.stats;
       // //console.log(stats,'stats')
       _.map(stats, function (item, index) {
@@ -3813,12 +3815,18 @@ var MyComponent = React.createClass({
           return;
         }
         this.state.lineData1[0].values.push({ x: index, y: item.score });
-        this.state.lineData2[0].values.push({ x: index, y: item.reactionTimes[0] || 0 });
-        dates.push(item.dateAchieved);
+        this.state.lineData2[0].values.push({ x: index, y: parseFloat(item.reactionTimes[0]) * 1.2 / 1000 });
+        this.state.lineData2[1].values.push({ x: index, y: parseFloat(item.reactionTimes[0]) / 1000 });
+        this.state.lineData2[2].values.push({ x: index, y: parseFloat(item.reactionTimes[0]) * .8 / 1000 });
+        var date = item.dateAchieved.split('Z');
+        date = date[0].split('T');
+        date = date[0].split('-');
+        dates.push({ full: item.dateAchieved, splitDate: date });
       }.bind(this));
-      //console.log(this,'this')
+      console.log(dates, 'dates');
+      console.log(this.state.lineData2);
     }.bind(this)).then(function () {
-      console.log(this.state, 'this.state');
+      //console.log(this.state,'this.state')
       this.setState({
         lineData1: this.state.lineData1,
         lineData2: this.state.lineData2
@@ -3831,15 +3839,15 @@ var MyComponent = React.createClass({
       null,
       React.createElement(LineChart, {
         data: this.state.lineData1,
-        width: 500,
-        height: 300,
-        title: 'Line Chart'
+        width: 800,
+        height: 500,
+        title: 'Score Trends'
       }),
       React.createElement(AreaChart, {
         data: this.state.lineData2,
-        width: 500,
-        height: 300,
-        title: 'Area Chart'
+        width: 800,
+        height: 500,
+        title: 'Reaction Time Trends'
       })
     );
   }
