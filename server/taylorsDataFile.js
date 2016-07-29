@@ -9,8 +9,10 @@ router.get('/taco',function(req, res, next){
 
  //return res.json({stats: [123]})
   console.log("lolololololololol")
-  // console.log(req.user.stats,'170')
-  Stats.find({_id: req.user.stats}, function(err,stats){
+  console.log(req.user)
+console.log(req.user.stats,'170')
+   //return res.json({stats: req.user.stats})
+  Stats.find({_id: '579a80e63a9316c80c2a6c30'}, function(err,stats){
     if(err){
       console.log(err)
     }

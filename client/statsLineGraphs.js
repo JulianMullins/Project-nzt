@@ -9,13 +9,9 @@ var MyComponent = React.createClass({
     componentDidMount: function(){
 //fetch call
 
-fetch('/taco', {method: 'GET', withCredentials: true})
-.then(function(response){
-    console.log(response, '38')
-    return response.json()
-    })
+axios.get('/taco', {withCredentials: true})
 .then(function(responseJson){
-    console.log(responseJson,'41')
+    console.log(responseJson.data,'41')
 })
     },
   render: function() {
