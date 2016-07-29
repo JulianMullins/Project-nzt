@@ -4,6 +4,8 @@ var ClassicStartOverlay = require('./gameStartOverlay').ClassicStartOverlay;
 var axios = require('axios')
 var fullScore = 0;
 var currentScore;
+var matchCount=0; //total matches in game
+var matchHit=0; ///ones user gets
 
 //COLLECTION OF GLOBAL VARIABLES TO MAKE EVERYONES LIFE EASIER
 //create global variable for reaction counter
@@ -87,6 +89,8 @@ var ClassicMode = React.createClass({
         currentScore = ((2000 - reactionTimes[reactionTimes.length - 1]) / 100).toFixed(2);
         fullScore += parseFloat(currentScore);
         reactionEnd = null;
+        matchCount+=1;
+        matchHit+=1;
         this.setState({
           score: this.state.score + parseInt(currentScore),
           alert: 'Good job'
@@ -94,6 +98,7 @@ var ClassicMode = React.createClass({
       } else if (!this.state.keepScore && (this.state.posPressed || this.state.soundPressed)) {
         this.setState({alert: "Not a match"})
         reactionEnd = null;
+        matchHit-=1;
         if ((this.state.score - 5) >= 0) {
           currentScore = 5;
           this.setState({
@@ -106,6 +111,7 @@ var ClassicMode = React.createClass({
       } else if (this.state.soundMatch || this.state.positionMatch) {
         this.setState({alert: "Missed a match"});
         reactionEnd = null;
+        matchCount+=1;
         if ((this.state.score - 5) >= 0) {
           currentScore = 5;
           this.setState({
@@ -195,6 +201,7 @@ var ClassicMode = React.createClass({
         clearInterval(iterations);
         setTimeout(function() {
           console.log(reactionTimes, 'reaction times')
+          console.log(matchHit/matchCount, 'accuracy')
           console.log(this.state)
           axios.post('/gameEnd', {
             gameId: this.state.gameId,

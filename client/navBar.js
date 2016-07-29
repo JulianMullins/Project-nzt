@@ -80,29 +80,6 @@ var NavBar = React.createClass({
 	 //    }.bind(this))
 
 	},
-	// logInOut(e){
-
-	// 	//console.log(this)
-	// 	if(!this.state.loggedIn){
-	// 		this.props.history.push('/login')
-	// 	}
-	// 	else{
-	// 		axios({
-	// 	      url: '/logout',
-	// 	      withCredentials: true
-	// 	    }).then(function(response){
-	// 	    	console.log(response)
-	// 	    	if(response.data.success){
-	// 	    		this.setState({loggedIn:false})
-	// 	    		console.log("logged out success")
-	// 	    		this.props.history.push('/home')
-	// 	    		this.loginFunction();
-	// 	    	}
-	// 	    }.bind(this))
-	// 	}
-
-	//     this.closeLogInOut(e);
-	// },
 	render: function(){
 		var logInOutLink = this.state.isloggedIn
 			? '/logout'

@@ -136,8 +136,8 @@ componentDidMount: function(){
                   <div className="rules2">
                   <h2>Dual n-back</h2>
                     <p>Cortex is based on the n-back genre of brain training games which requires players to keep
-                  track of various changes happening on-screen. Traditionally the game requires players to keep track 
-                  of two things: position and sound (the 'dual' in dual n-back). In this game, we have incorporated 
+                  track of various changes happening on-screen. Traditionally the game requires players to keep track
+                  of two things: position and sound (the 'dual' in dual n-back). In this game, we have incorporated
                   changing colors as well, and divided up the modes based on the number of things you have to keep track
                   of (mono, dual and triple n-back).</p>
                   </div>
@@ -150,12 +150,12 @@ componentDidMount: function(){
                   <div className="rules2">
                   <h2>The n-back part</h2>
                     <p>The n in n-back refers to the number of positions back that you have to keep track of.
-                    The example below demonstrates the gameplay at n=1, that is you have to remember the moving block&#39;s position
-                    just one step back and press the position key if the positions match.
-                    At n=2, you would have to make matches based on the state of the board two steps back, etc.</p>
+                    The example below demonstrates gameplay at n=2. Therefore, if the current position matches the position 
+                    it was at two steps back then you would indicate a match by pressing the position key.
+                    (The previous slide showed an example of position and color matches at n=1).</p>
                   </div> {/* rules2 */}
                 </div> {/* rulemode3 */}
-                <img src="./images/pattern.gif" alt="Gameplay Pattern"></img>
+                <img src="./images/nback.gif" alt="Gameplay Pattern"></img>
               </div> {/* slide */}
 
               <div className="slide">

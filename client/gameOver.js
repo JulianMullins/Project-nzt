@@ -21,89 +21,76 @@ var getGame = function() {
 var GameOverOverlay = React.createClass({
   getInitialState: function() {
     return {
-      username: null,
-      alreadyLoggedIn: false,
+      //username:null,
+      isAnon: false,
       score: 0,
       mode: null,
       nLevel: 1,
-      renderLogin: <div></div>,
-      anonHighScore: <div></div>,
+      gameOverMessage: <div></div>,
+      nextLevelLink: <div></div>,
       anonUserName: null,
-      anonGetHighScore: false
+      isHighScore: false,
+      passedLevel: false
     }
   },
   componentDidMount() {
 
-    // axios.all([getUser(),getGame()])
-    //   .then(axios.spread(function(userData,gameData){
-    //     this.setState({
-    //       username:userData.data.username,
-    //       alreadyLoggedIn:userData.data.alreadyLoggedIn,
-    //       score:gameData.data.game.score,
-    //       mode:gameData.data.game.mode,
-    //       nLevel:gameData.data.game.nLevel
-    //     })
-    //     console.log(userData,gameData)
-    //     console.log("component mounted")
-    //   }.bind(this)))
+    this.setScore();
     this.getData();
+    this.unlockLevel();
+    this.anonHighScore();
+    this.renderLogin();
+    this.nextLevelBtn();
+    this.setState({firstRender: false})
 
   },
-
-  // componentDidMount(){
-  //     getUser().bind(this);
-  //     getScore().bind(this);
-  // },
+  setScore() {
+    axios.get('/getScore').then(function(response) {
+      this.setState({score: response.data.score})
+    }.bind(this))
+  },
   getData() {
     axios.all([getUser(), getGame()]).then(axios.spread(function(userData, gameData) {
-      this.setState({username: userData.data.username, alreadyLoggedIn: userData.data.alreadyLoggedIn, score: gameData.data.game.score, mode: gameData.data.game.mode, nLevel: gameData.data.game.nLevel})
+      this.setState({
+        //username:userData.data.username,
+        isAnon: !userData.data.alreadyLoggedIn,
+        score: Math.floor(gameData.data.game.score),
+        mode: gameData.data.game.mode,
+        nLevel: gameData.data.game.nLevel,
+        passedLevel: gameData.data.game.passedLevel,
+        isHighScore: gameData.data.game.isHighScore
+      })
     }.bind(this))).then(function() {
       this.renderLogin()
     }.bind(this))
   },
-  // update:function(e){
-  //   this.setState({
-  //     username: e.target.value
-  //   })
-  // },
-  tempSaveData() {
-    axios.post({
-      url: '/tempSaveData',
-      data: {
-        score: this.state.score,
-        mode: this.state.mode
-      }
-    })
-  },
+
   gameOver: function() {
-    axios.post({
-      url: '/gameOver',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      },
-      data: {
-        inputUsername: this.state.username,
-        alreadyLoggedIn: this.state.alreadyLoggedIn
-      }
-    })
+    // axios.post({
+    //   url:'/gameOver',
+    //   headers:{
+    //     'Accept': 'application/json',
+    //     'Content-Type': 'application/json'
+    //   },
+    //   data: {
+    //     inputUsername:this.state.username,
+    //     alreadyLoggedIn:this.state.isAnon
+    //   }
+    // })
 
   },
-  click(e) {
-
-    //ONLY IF EARNED
-
-    //go to next level (if earned)
-    this.props.history.push('/game/' + this.state.mode + '/' + (this.state.nLevel + 1))
+  unlockLevel() {
+    if (this.state.isHighScore) {
+      this.setState({
+        gameOverMessage: <h1 className="gameOverInform classic">You have unlocked level 2</h1>
+      })
+    }
   },
   anonHighScore() {
-
-    //get isOverallHighScore
-
     //if anon get high score, can save with tempusername, or login
-    if (anonGetHighScore) {
+    if (this.state.isAnon && this.state.isHighScore) {
       this.setState({
-        anonHighScore: <p>You earned a high score on our overall leaderboards. If you wish to be added to the leaderboard and without logging in, provide a name below to display with your score
+        gameOverMessage: <p>You earned a high score on our overall leaderboards. If you wish to be added to the leaderboard and without logging in, provide a name below to display with your score
             <form>
               <input type='text' name="anonUserName" onChange={this.update}/>
               <Link onClick={this.anonLeaderboard} to="/leaderboard" type="button">Submit</Link>
@@ -122,9 +109,9 @@ var GameOverOverlay = React.createClass({
   renderLogin() {
 
     //if not logged in, option to login to save
-    if (!this.state.alreadyLoggedIn && !anonGetHighScore) {
+    if (this.state.isAnon && !this.state.isHighScore) {
       this.setState({
-        renderLogin: <div className="gameOverPrompt">
+        gameOverMessage: <div className="gameOverPrompt">
             <p>It looks like you are not currently logged in.
               <Link to="/gameOver/login">
                 Sign in</Link>
@@ -153,43 +140,52 @@ var GameOverOverlay = React.createClass({
     })
 
   },
+  nextLevelBtn() {
+    if (this.state.passedLevel) {
+      this.setState({
+        nextLevel: <h2 className="levelButton" onClick={this.nextLevelLink}>next level</h2>
+      })
+    }
+  },
+  nextLevelLink(e) {
+    //go to next level (if earned)
+    this.props.history.push('/game/' + this.state.mode + '/' + (this.state.nLevel + 1))
+  },
+  repeatLevel(e) {
+    //go to next level (if earned)
+    this.props.history.push('/game/' + this.state.mode + '/' + (this.state.nLevel))
+  },
   render: function() {
-    // this.getData();
-
-    // var loggedIn = this.state.alreadyLoggedIn
-
-    //   ? <div></div>
-    //   : <div className="gameOverPrompt">
-    //       <p>It looks like you are not currently logged in.
-    //       <Link to="/gameOver/login"> Sign in</Link> or <Link to="/gameOver/register">sign up</Link> to save your progress,
-    //       view statistics and compete with friends!</p>
-    //     </div>
-
     return (
       <div className="gameOver" id="gameover">
-        <h1>Congrats!</h1>
-        <h2>Your score is {this.state.score}</h2>
-        <h1 className="gameOverInform classic">You have unlocked level 2</h1>
+      <h1>Congrats!</h1>
+      <h2>Your score is {this.state.score}</h2>
 
-        {this.state.renderLogin}
-        {this.state.anonHighScore}
+      {this.state.gameOverMessage}
 
-        <div className="gameOverActions">
-          <Link to="/home" onClick={this.gameOver}>
+      <div className="gameOverActions">
+        <Link to="/home">
+          <a onClick={this.gameOver}>
             <span className="fa fa-home fa-5x"></span>
             <h2>home</h2>
-          </Link>
-          <h2 className="levelButton" onClick={this.click}>next level</h2>
-          <div>
-            <Link to="/leaderboard" onClick={this.gameOver}>
+          </a>
+        </Link>
+
+        {this.state.nextLevel}
+
+        <h2 className="levelButton" onClick={this.repeatLevel}>replay level</h2>
+        <div>
+          <Link to="/leaderboard">
+            <a onClick={this.gameOver}>
               <span className="lbChart">
                 <span className="fa fa-signal fa-5x"></span>
                 <h2>leaderboard</h2>
               </span>
-            </Link>
-          </div>
+            </a>
+          </Link>
         </div>
       </div>
+    </div> < /div>
     )
   }
 });

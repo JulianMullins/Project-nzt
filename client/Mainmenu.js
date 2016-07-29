@@ -18,7 +18,8 @@ var Mainmenu = React.createClass({
   getInitialState: function() {
     return {
       name:null,
-      hasUsername:false
+      hasUsername:false,
+      userWelcome:<div></div>
     }
   },
   componentDidMount(){
@@ -26,8 +27,13 @@ var Mainmenu = React.createClass({
       .then(function(response){
         this.setState({
           hasUsername:response.data.isUser,
-          name:response.data.name
+          name:response.data.name,
         })
+        if(this.state.hasUsername){
+          this.setState({
+            userWelcome: <h3 className="advanced userWelcome">Welcome: {this.state.name}</h3>
+          })
+        }
       }.bind(this))
   },
   classic() {
@@ -44,13 +50,15 @@ var Mainmenu = React.createClass({
   },
   render: function() {
     // var username = this.state.hasUsername
-    //   ? '<div>{this.state.username}</div>'
+    //   ?   (<h3 className="advanced userWelcome">Welcome: {this.state.name}</h3>)
     //   : '';
     return (
       <div>
         <div className="heading">
           <img src="../images/CortexLogo4.svg"/>
-          {this.state.name}
+          <div className="userHeading">
+            {this.state.userWelcome}
+          </div>
         </div>
         <div className="menu">
           <a className="menu-panel classicBackground" onClick={this.classic}>

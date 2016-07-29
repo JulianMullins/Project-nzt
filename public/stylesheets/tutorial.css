@@ -17,16 +17,23 @@
 }
 
 .tutorial p {
-  width: 75%;
+  width: 80%;
   color: #c6c6c6;
   font-weight: 300;
   margin-bottom: 2vh;
   font-size: 20px;
 }
 
+.tutorial h2 {
+  width: 80%;
+  text-align: left;
+}
+
 .tutorial h3 {
   font-size: 28px;
   font-weight: bold;
+  width: 80%;
+  text-align: left;
 }
 
 .tutorialLink {
@@ -92,6 +99,15 @@ ul.row {
   justify-content: center;
 }
 
+.key-wrapper h2 {
+  text-align: center;
+  width: 100%;
+}
+
+.key-wrapper h3 {
+  text-align: center;
+}
+
 .key-wrapper ul li {
   list-style: none;
 }
@@ -139,7 +155,7 @@ ul.row {
 }
 
 .slide img{
-  width: 45vh;
+  width: 40vh;
   margin: 0 auto;
 }
 

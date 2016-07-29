@@ -186,43 +186,90 @@ passport.use(new FacebookStrategy({
       }
 
       else if (!user) {
+        // req.user.update({
+        //   facebookId:profile.id,
+        //   email:email,
+        //   name:username,
+        //   temp:false
+        // })
+        if(req.user){
+           req.user.facebookId = profile.id;
+          req.user.email = email;
+          req.user.name = username;
+          req.user.temp = false;
 
-        req.user.update({
-          facebookId:profile.id,
-          email:email,
-          username:username,
-          temp:false
-        })
-        var user = req.user;
-        req.logout();
-        return done(null,user);
+          if(!req.user.username){
+            req.user.username = username
+          }
+          req.user.save(function(err,reqUser){
+            var user = req.user;
+            req.logout();
+            return done(null,user);
+          })
+        }
+        else{
+
+          var u = new User({
+            facebookId:profile.id,
+            email:email,
+            name:username,
+            temp:false,
+            username:username,
+            stats: null,
+            temp:false,
+            maxN:{
+              classic: 1,
+              relaxed: 1,
+              silent: 1,
+              advanced: 1
+            },
+            currentGame:[]
+          })
+
+          var leaderboard = new Leaderboard({user:u._id});
+          leaderboard.save();
+          var userStats = new Stats({user:u._id,leaderboard:leaderboard._id});
+          userStats.save();
+          u.stats = userStats._id;
+
+          u.save(function(err,user){
+            if(err){
+              return done(err);
+            }
+            else{
+              return done(null,user);
+            }
+          })
+        }
       }
 
-
-      else if(req.user){
-        console.log("req.user and user", user, user.stats)
-        user.currentGame = req.user.currentGame;
-        user.stats.combineStats(req.user.stats);
-        user.combineMaxN(req.user.maxN);
-        user.save();
-      }
-
-
-      if(!user.facebookId){
-        console.log("no facebook id")
-        user.facebookId = profile.id
-        //console.log("facebook id added")
-        user.save(function(err){
-          if(err){done(err)}
-        })
-        return done(null, user);
-      }
-      // auth has has succeeded
+    
       else{
-        //console.log("success")
-        console.log("returning done user")
-        return done(null, user);
+        if(req.user){
+          console.log("req.user and user", user, user.stats)
+          user.currentGame = req.user.currentGame;
+          user.stats.combineStats(req.user.stats);
+          user.combineMaxN(req.user.maxN);
+          user.save();
+        }
+
+        if(!user.facebookId){
+          console.log("no facebook id")
+          user.facebookId = profile.id
+          //console.log("facebook id added")
+          user.save(function(err){
+            if(err){done(err)}
+          })
+          return done(null, user);
+        }
+        // auth has has succeeded
+        else{
+          //console.log("success")
+          console.log("returning done user")
+          return done(null, user);
+        }
       }
+      
     });
 }));
 

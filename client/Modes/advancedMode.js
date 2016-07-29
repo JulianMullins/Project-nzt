@@ -4,6 +4,8 @@ var axios = require('axios');
 var AdvancedStartOverlay = require('./gameStartOverlay').AdvancedStartOverlay;
 var fullScore = 0;
 var currentScore;
+var matchCount = 0; //total matches in game
+var matchHit = 0; ///ones user gets
 
 //COLLECTION OF GLOBAL VARIABLES TO MAKE EVERYONES LIFE EASIER
 //create global variable for reaction counter
@@ -105,6 +107,7 @@ var AdvancedMode = React.createClass({
           })
           reactionEnd = null;
         } else {
+          matchCount += 1;
           this.setState({
             soundPressed: noStyle,
             colorPressed: noStyle,
@@ -133,6 +136,8 @@ var AdvancedMode = React.createClass({
         currentScore = ((2000 - reactionTimes[reactionTimes.length - 1]) / 100).toFixed(2);
         fullScore += parseFloat(currentScore);
         reactionEnd = null;
+        matchHit += 1;
+        matchCount += 1;
         this.setState({
           soundPressed: noStyle,
           colorPressed: noStyle,
@@ -148,6 +153,7 @@ var AdvancedMode = React.createClass({
         })
       } else {
         //console.log('incorrect')
+        matchHit -= 1;
         this.setState({
           soundPressed: noStyle,
           colorPressed: noStyle,
@@ -272,6 +278,7 @@ var AdvancedMode = React.createClass({
           console.log(gameScore, 'game score')
           console.log(reactionTimes, 'reaction times')
           console.log(this.state)
+          console.log(matchHit / matchCount, 'accuracy')
           axios.post('/gameEnd', {
             gameId: this.state.gameId,
             score: gameScore,
