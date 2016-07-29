@@ -1,6 +1,10 @@
 var React = require('react');
 var ReactDOM = require('react-dom');
 var axios = require('axios');
+var totalScore=0;
+var n=0;
+var score=0;
+var modeM=0;
 
 axios.defaults.baseURL = process.env.url;
 
@@ -42,7 +46,7 @@ var GameOverOverlay = React.createClass({
     this.anonHighScore();
     this.renderLogin();
     this.nextLevelBtn();
-    this.setState({firstRender: false})
+    //this.setState({firstRender: false})
 
   },
   setScore() {
@@ -60,10 +64,24 @@ var GameOverOverlay = React.createClass({
         nLevel: gameData.data.game.nLevel,
         passedLevel: gameData.data.game.passedLevel,
         isHighScore: gameData.data.game.isHighScore,
-        modeMultiplier: gameData.data.modeMultiplier
+        modeMultiplier: gameData.data.modeMultiplier,
+        start: 0
       })
+      //console.log(this.state,'data')
     }.bind(this))).then(function() {
       this.renderLogin()
+    //console.log(this.state,'this.state')
+    score = parseFloat(this.state.score);
+    console.log(score,'score')
+    var n = parseInt(this.state.nLevel);
+    console.log(n,'n')
+    var modeM = parseInt(this.state.modeMultiplier);
+    console.log(modeM,'modeM')
+    var totalScore = parseInt(score*n*modeM);
+    console.log(totalScore,'totalScore')
+    this.setState({
+      start: this.countUp(totalScore)
+    })
     }.bind(this))
   },
 
@@ -159,6 +177,28 @@ var GameOverOverlay = React.createClass({
 
   },
   render: function() {
+    var div_by = 100;
+    console.log(count,'count')
+    var speed = parseInt(count / div_by);
+    console.log('ini speed', speed);
+    var display = $('.count');
+    var run_count = 1;
+    var int_speed = 18;
+  
+    var int = setInterval(function() {
+      if(run_count < div_by){
+        display.text(speed * run_count);
+        console.log('speed', speed, 'run', run_count);
+        run_count++;
+      } else if(parseInt(display.text) < count) {
+        var curr_count = parseInt(display.text) + 1;
+        console.log("current", curr_count);
+        display.text(curr_count);
+      } else {
+        clearInterval(int);
+      }
+    }, int_speed);
+  },
     return (
       <div className="gameOver" id="gameover">
           <div className="gameOverHeader">
@@ -182,8 +222,7 @@ var GameOverOverlay = React.createClass({
                 </tr>
                 <tr className="totalScore">
                   <td>total score: </td>
-                  {totalScore}
-                  <td className="count scoreValue">{this.countUp(totalScore)}</td>
+                  <td className="count scoreValue">{this.state.start}</td>
                 </tr>
               </tbody>
             </table>
