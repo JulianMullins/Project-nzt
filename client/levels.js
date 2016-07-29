@@ -4,17 +4,16 @@ var url = process.env.url;
 var axios = require('axios');
 import {Link} from 'react-router'
 
-
 var getSquareArr = function(square, mode) {
   var squareClass = "";
   var maxSquares = 0;
   if (square <= 4) {
     maxSquares = 4;
     squareClass = "grid4"
-  } else if (square <=9) {
+  } else if (square <= 9) {
     maxSquares = 9;
     squareClass = "grid9"
-  } else if (square <=16){
+  } else if (square <= 16) {
     maxSquares = 16;
     squareClass = "grid16"
   } else {
@@ -32,7 +31,10 @@ var getSquareArr = function(square, mode) {
         color: "white",
         opacity: 1 - (0.4 / maxSquares) * i
       };
-      var opacityStyle = {backgroundColor: '#F13542', opacity: .8 - (0.2 / square)*i};
+      var opacityStyle = {
+        backgroundColor: '#F13542',
+        opacity: .8 - (0.2 / square) * i
+      };
       if (mode === 'relaxed') {
         colorStyle.backgroundColor = '#01B6A7';
         opacityStyle.backgroundColor = '#01B6A7';
@@ -72,9 +74,7 @@ var getSquareArr = function(square, mode) {
 
 var getMaxN = function(mode, cb) {
   console.log("getting max n")
-  axios.get('/getMaxN', {
-    withCredentials: true
-  }).then(function(response) {
+  axios.get('/getMaxN', {withCredentials: true}).then(function(response) {
     console.log(response.data.maxN)
     return cb(response.data.maxN)
   })
@@ -82,18 +82,18 @@ var getMaxN = function(mode, cb) {
 
 var ClassicLevels = React.createClass({
   getInitialState: function() {
-    return {
-      maxN: 1,
-      mode: 'classic'}
+    return {maxN: 1, mode: 'classic'}
   },
   componentDidMount() {
     this.setMaxN();
   },
   setMaxN: function() {
     getMaxN(this.state.mode, function(maxN) {
-      this.setState({maxN: maxN[this.state.mode]})
+      this.setState({
+        maxN: maxN[this.state.mode]
+      })
     }.bind(this))
-          console.log("maxN is " + this.state.maxN)
+    console.log("maxN is " + this.state.maxN)
 
   },
   render: function() {
@@ -111,7 +111,9 @@ var ClassicLevels = React.createClass({
         </div>
         <div className="levelsFooter">
           <h3 className="classic">Highest: Level {this.state.maxN}</h3>
-          <Link to="/home"><h3 className="classicBackground returnBtn">&larr; Go Back</h3></Link>
+          <Link to="/home">
+            <h3 className="classicButton returnBtn">&larr; Go Back</h3>
+          </Link>
         </div>
       </div>
     );
@@ -120,16 +122,16 @@ var ClassicLevels = React.createClass({
 
 var RelaxedLevels = React.createClass({
   getInitialState: function() {
-    return {
-      maxN: 1,
-      mode: 'relaxed'}
+    return {maxN: 1, mode: 'relaxed'}
   },
   componentDidMount() {
     this.setMaxN();
   },
   setMaxN: function() {
     getMaxN(this.state.mode, function(maxN) {
-      this.setState({maxN: maxN[this.state.mode]})
+      this.setState({
+        maxN: maxN[this.state.mode]
+      })
     }.bind(this))
   },
   render: function() {
@@ -145,7 +147,9 @@ var RelaxedLevels = React.createClass({
         </div>
         <div className="levelsFooter">
           <h3 className="relaxed">Highest: Level {this.state.maxN}</h3>
-          <Link to="/home"><h3 className="relaxedBackground returnBtn">&larr; Go Back</h3></Link>
+          <Link to="/home">
+            <h3 className="relaxedButton returnBtn">&larr; Go Back</h3>
+          </Link>
         </div>
       </div>
     );
@@ -154,12 +158,13 @@ var RelaxedLevels = React.createClass({
 
 var SilentLevels = React.createClass({
   getInitialState: function() {
-    return {maxN: 1,
-      mode: 'silent'}
+    return {maxN: 1, mode: 'silent'}
   },
   setMaxN: function() {
     getMaxN(this.state.mode, function(maxN) {
-      this.setState({maxN: maxN[this.state.mode]})
+      this.setState({
+        maxN: maxN[this.state.mode]
+      })
     }.bind(this))
   },
   componentDidMount() {
@@ -179,7 +184,9 @@ var SilentLevels = React.createClass({
         </div>
         <div className="levelsFooter">
           <h3 className="silent">Highest: Level {this.state.maxN}</h3>
-          <Link to="/home"><h3 className="silentBackground returnBtn">&larr; Go Back</h3></Link>
+          <Link to="/home">
+            <h3 className="silentButton returnBtn">&larr; Go Back</h3>
+          </Link>
         </div>
       </div>
     );
@@ -188,12 +195,13 @@ var SilentLevels = React.createClass({
 
 var AdvancedLevels = React.createClass({
   getInitialState: function() {
-    return {maxN: 1,
-     mode: 'advanced'}
+    return {maxN: 1, mode: 'advanced'}
   },
   setMaxN: function() {
     getMaxN(this.state.mode, function(maxN) {
-      this.setState({maxN: maxN[this.state.mode]})
+      this.setState({
+        maxN: maxN[this.state.mode]
+      })
     }.bind(this))
   },
   componentDidMount() {
@@ -213,7 +221,9 @@ var AdvancedLevels = React.createClass({
         </div>
         <div className="levelsFooter">
           <h3 className="advanced">Highest: Level {this.state.maxN}</h3>
-          <Link to="/home"><h3 className="advancedBackground returnBtn">&larr; Go Back</h3></Link>
+          <Link to="/home">
+            <h3 className="advancedButton returnBtn">&larr; Go Back</h3>
+          </Link>
         </div>
       </div>
     );

@@ -185,7 +185,7 @@ var GameOverOverlay = React.createClass({
           </Link>
         </div>
       </div>
-    </div> < /div>
+    </div>
     )
   }
 });

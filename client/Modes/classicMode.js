@@ -330,8 +330,8 @@ var ClassicMode = React.createClass({
             {scoreAlert}
           </div>
           <div className="gameButtonsContainer">
-            <a onClick={this.positionMatch} style={this.state.posStyle} className="classicBackground">POSITION</a>
-            <a onClick={this.soundMatch} style={this.state.soundStyle} className="classicBackground">SOUND</a>
+            <a onClick={this.positionMatch} style={this.state.posStyle} className="classicButton">POSITION</a>
+            <a onClick={this.soundMatch} style={this.state.soundStyle} className="classicButton">SOUND</a>
           </div>
         </div>
       </div>

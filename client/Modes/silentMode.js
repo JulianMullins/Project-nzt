@@ -349,8 +349,8 @@ var SilentMode = React.createClass({
             {scoreAlert}
           </div>
           <div className="gameButtonsContainer">
-            <a onClick={this.positionMatch} style={this.state.posStyle} className="silentBackground">POSITION</a>
-            <a onClick={this.colorMatch} style={this.state.colorStyle} className="silentBackground">COLOR</a>
+            <a onClick={this.positionMatch} style={this.state.posStyle} className="silentButton">POSITION</a>
+            <a onClick={this.colorMatch} style={this.state.colorStyle} className="silentButton">COLOR</a>
           </div>
         </div>
       </div>
