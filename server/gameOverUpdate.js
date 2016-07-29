@@ -27,14 +27,9 @@ var setLeaderboard = function(id,callback){
 }
 
 //check overall leaderboards, and update accordingly
-<<<<<<< HEAD
-var checkOverall = function(newHighScore){
-  Leaderboard.findbyId(serverLeaderboard)
-=======
 var checkOverall = function(newHighScore,callback){
   var isHighScore = false;
   Leaderboard.findById(serverLeaderboard)
->>>>>>> origin/master
     .populate('scores')
     .exec(function(err,leaderboard){
 
@@ -88,32 +83,20 @@ var checkOverall = function(newHighScore,callback){
             });
           
         }
-<<<<<<< HEAD
-    })
-=======
         else{
           return callback(isHighScore)
         }
         
   })
->>>>>>> origin/master
 }
 
 //update personal leaderboards (if !temp)
-<<<<<<< HEAD
-checkMine = function(newHighScore,stats){
-  Leaderboard.findById(stats.leaderboard)
-    .populate('scores')
-    .exec(function(err,leaderboard){
-
-=======
 var checkMine = function(newHighScore,stats,callback){
   var isHighScore = false;
   Leaderboard.findById(stats.leaderboard)
     .populate('scores')
     .exec(function(err,leaderboard){
       console.log(" MY LEADERBOARD: ", leaderboard)
->>>>>>> origin/master
       var myHighScores = leaderboard.scores;
 
       if(myHighScores.length<leaderboardSize){
@@ -161,10 +144,6 @@ var checkMine = function(newHighScore,stats,callback){
           });
         
       }
-<<<<<<< HEAD
-=======
-
->>>>>>> origin/master
     })
 }
 
@@ -177,29 +156,11 @@ var sortScores = function(a,b){
 router.post('/gameOver',function(req,res,next){
 
   //check if tempUser
-<<<<<<< HEAD
-  TempUser.findById(req.body.userId)
-    .populate('currentGame','stats')
-    .exec(function(err,tempUser){
-
-      var tempGame = tempUser.currentGame[0];
-
-      //make new score
-      var newHighScore = new HighScore({
-        user: tempUser._id,
-        dateAchieved: new Date(),
-        score: tempGame.score,
-        nLevel: tempGame.nLevel,
-        mode: tempGame.mode,
-        reactionTimes:tempGame.reactionTimes
-      })
-=======
   if(req.body.userId){
     console.log("checking tempUser")
     TempUser.findById(req.body.userId)
       .populate('currentGame','stats')
       .exec(function(err,tempUser){
->>>>>>> origin/master
 
         if(tempUser){
 
@@ -218,11 +179,6 @@ router.post('/gameOver',function(req,res,next){
         
         //newHighScore.user = req.body.anonUserName;
 
-<<<<<<< HEAD
-      
-
-    })
-=======
         //check overall stats
         checkOverall(newHighScore);    
         
@@ -236,7 +192,6 @@ router.post('/gameOver',function(req,res,next){
         }
       })
   }
->>>>>>> origin/master
 
   //check if full user
   User.findById(req.user._id)
@@ -263,37 +218,15 @@ router.post('/gameOver',function(req,res,next){
         //update maxN
         if(nLevel>user.maxN[newHighScore.mode]){
           user.maxN[newHighScore.mode] = nLevel;
-<<<<<<< HEAD
-          }
-=======
         }
         if(newHighScore.nLevel === user.maxN[newHighScore.mode] && passedLevel){
           user.maxN[newHighScore.mode]++;
           console.log("advanced nLevel!")
         }
->>>>>>> origin/master
 
           //check how scores compare on personal level;
           
           //update Stats
-<<<<<<< HEAD
-          user.stats.totalPoints += newScore;
-          user.stats.progress = user.stats.progress.push(newHighScore._id);
-          
-          //update personal and overall leaderboards
-          checkMine(newHighScore,user.stats)
-          checkOverall(newHighScore)
-
-          //return if user highscore, overall high score, new nLevel
-
-
-      }
-     
-    
-    })
-  
-  
-=======
           if(!user.stats.totalPoints){
             user.stats.totalPoints= newHighScore.score;
           }
@@ -351,7 +284,6 @@ router.post('/gameOver',function(req,res,next){
 
       }     
     })    
->>>>>>> origin/master
 });
 
 

@@ -186,18 +186,6 @@ passport.use(new FacebookStrategy({
       }
 
       else if (!user) {
-
-<<<<<<< HEAD
-        req.user.update({
-          facebookId:profile.id,
-          email:email,
-          username:username,
-          temp:false
-        })
-        var user = req.user;
-        req.logout();
-        return done(null,user);
-=======
         // req.user.update({
         //   facebookId:profile.id,
         //   email:email,
@@ -253,8 +241,6 @@ passport.use(new FacebookStrategy({
             }
           })
         }
-        
->>>>>>> origin/master
       }
 
     
