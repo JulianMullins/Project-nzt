@@ -111,14 +111,12 @@ var GameOverOverlay = React.createClass({
     //if not logged in, option to login to save
     if (this.state.isAnon && !this.state.isHighScore) {
       this.setState({
-        gameOverMessage: <div className="gameOverPrompt">
-            <p>It looks like you are not currently logged in.
-              <Link to="/gameOver/login">
-                Sign in</Link>
-              or
-              <Link to="/gameOver/register">sign up</Link>
-              to save your progress, view statistics and compete with friends!
-            </p>
+        gameOverMessage:
+          <div className="gameOverPrompt">
+            <p>It looks like you are not currently logged in. 
+            <Link to="/gameOver/login"> Sign in</Link> or <Link to="/gameOver/register">sign up</Link> to save your progress, 
+            view statistics and compete with friends!
+            </p> 
           </div>
       })
     }
@@ -160,7 +158,7 @@ var GameOverOverlay = React.createClass({
     speed = Math.round(count / div_by),
     $display = $('.count'),
     run_count = 1,
-    int_speed = 24;
+    int_speed = 18;
   
     var int = setInterval(function() {
       if(run_count < div_by){
@@ -183,47 +181,40 @@ var GameOverOverlay = React.createClass({
           </div>
           <div className="scoreTable">
             <table>
-              <tr>
-                <td>game score: </td>
-                <td className="scoreValue">{this.state.score}</td>
-              </tr>
-              <tr>
-                <td>n-level: </td>
-                <td className="scoreValue">x</td>
-              </tr>
-              <tr>
-                <td>mode: </td>
-                <td className="scoreValue">x</td>
-              </tr>
-              <tr className="totalScore">
-                <td>total score: </td>
-                <td className="count scoreValue">{this.countUp(2000)}</td>
-              </tr>
+              <tbody>
+                <tr>
+                  <td>game score: </td>
+                  <td className="scoreValue">{this.state.score}</td>
+                </tr>
+                <tr>
+                  <td>n-level: </td>
+                  <td className="scoreValue">x {this.state.nLevel}</td>
+                </tr>
+                <tr>
+                  <td>mode: </td>
+                  <td className="scoreValue">x{this.state.mode}</td>
+                </tr>
+                <tr className="totalScore">
+                  <td>total score: </td>
+                  <td className="count scoreValue">{this.countUp(this.state.score)}</td>
+                </tr>
+              </tbody>
             </table>
           </div>
-            <div className="gameOverPrompt">
-            <p>It looks like you are not currently logged in. 
-            <Link to="/gameOver/login"> Sign in</Link> or <Link to="/gameOver/register">sign up</Link> to save your progress, 
-            view statistics and compete with friends!
-            </p> 
-            </div>
+            {this.state.gameOverMessage}
           <div className="gameOverActions">
-            <Link to="/home">
-              <a onClick={this.gameOver}>
+            <Link onClick={this.gameOver} to="/home">
               <span className="fa fa-home fa-5x"></span>
               <h2>home</h2>
-              </a>
             </Link>
             {this.state.nextLevel}
             <h2 className="levelButton" onClick={this.repeatLevel}>replay level</h2>
             <div>
-              <Link to="/leaderboard">
-              <a onClick={this.gameOver}>
+              <Link onClick={this.gameOver} to="/leaderboard">
                 <span className="lbChart">
                   <span className="fa fa-signal fa-5x"></span>
                   <h2>leaderboard</h2>
                 </span>
-              </a>
               </Link>
             </div>
           </div>

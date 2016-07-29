@@ -74,6 +74,8 @@
 
 .totalScore td {
   border-top: 2px solid white;
+  color: #F13542;
+  font-weight: bold;
 }
 
 .gameOverPrompt {
