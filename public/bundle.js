@@ -356,9 +356,9 @@ var AdvancedMode = React.createClass({
     var positionQueue = [];
     var colorQueue = [];
     var soundQueue = [];
-    var timeTilPositionMatch = parseInt(Math.random() * 5 + this.state.N);
-    var timeTilColorMatch = parseInt(Math.random() * 5 + this.state.N);
-    var timeTilSoundMatch = parseInt(Math.random() * 5 + this.state.N);
+    var timeTilPositionMatch = parseInt(Math.random() * 5 + 2 + this.state.N);
+    var timeTilColorMatch = parseInt(Math.random() * 5 + 2 + this.state.N);
+    var timeTilSoundMatch = parseInt(Math.random() * 5 + 2 + this.state.N);
     var timeKeeper = 0;
     //console.log(timekeeper)
     iterations = setInterval(function () {
@@ -838,8 +838,8 @@ var ClassicMode = React.createClass({
   positionAndSound: function positionAndSound() {
     var positionQueue = [];
     var soundQueue = [];
-    var timeTilPositionMatch = parseInt(Math.random() * 5 + this.state.N);
-    var timeTilSoundMatch = parseInt(Math.random() * 5 + this.state.N);
+    var timeTilPositionMatch = parseInt(Math.random() * 5 + 2 + this.state.N);
+    var timeTilSoundMatch = parseInt(Math.random() * 5 + 2 + this.state.N);
     var timeKeeper = 0;
 
     iterations = setInterval(function () {
@@ -1620,6 +1620,7 @@ var RelaxedMode = React.createClass({
     //   })
 
     // }.bind(this))
+
     startGameFunction(this.state.mode, this.state.N, function (err, obj) {
       if (err) {
         this.props.history.push('/levels/' + this.state.mode + '/unauthorized');
@@ -1658,7 +1659,7 @@ var RelaxedMode = React.createClass({
   },
   position: function position() {
     var posQueue = [];
-    var timeTilPosMatch = parseInt(Math.random() * 5 + this.state.N);
+    var timeTilPosMatch = parseInt(Math.random() * 5 + 2 + this.state.N);
     var timeKeeper = 60;
 
     iterations = setInterval(function () {
@@ -2105,8 +2106,8 @@ var SilentMode = React.createClass({
     console.log(this.state, 'state');
     var positionQueue = [];
     var colorQueue = [];
-    var timeTilPositionMatch = parseInt(Math.random() * 5 + this.state.N);
-    var timeTilColorMatch = parseInt(Math.random() * 5 + this.state.N);
+    var timeTilPositionMatch = parseInt(Math.random() * 5 + 2 + this.state.N);
+    var timeTilColorMatch = parseInt(Math.random() * 5 + 2 + this.state.N);
     var timeKeeper = 0;
 
     iterations = setInterval(function () {
@@ -4246,12 +4247,8 @@ var ReactDOM = require('react-dom');
 var Tutorial = React.createClass({
   displayName: 'Tutorial',
 
-  getInitialState: function getInitialState() {
-    return { currentIndex: 0 };
-  },
 
   componentDidMount: function componentDidMount() {
-    var self = this;
     $(document).ready(function () {
       $(window).keydown(function (e) {
         var key = e.keyCode ? e.keyCode : e.which;
@@ -4269,6 +4266,7 @@ var Tutorial = React.createClass({
         var $group = $this.find('.slide_group');
         var $slides = $this.find('.slide');
         var bulletArray = [];
+        var currentIndex = 0;
         var timeout;
 
         function move(newIndex) {
@@ -4276,14 +4274,14 @@ var Tutorial = React.createClass({
 
           advance();
 
-          if ($group.is(':animated') || self.state.currentIndex === newIndex) {
+          if ($group.is(':animated') || currentIndex === newIndex) {
             return;
           }
 
-          bulletArray[self.state.currentIndex].removeClass('activer');
+          bulletArray[currentIndex].removeClass('activer');
           bulletArray[newIndex].addClass('activer');
 
-          if (newIndex > self.state.currentIndex) {
+          if (newIndex > currentIndex) {
             slideLeft = '100%';
             animateLeft = '-100%';
           } else {
@@ -4291,22 +4289,31 @@ var Tutorial = React.createClass({
             animateLeft = '100%';
           }
 
-          $slides.eq(newIndex).css({ display: 'block', left: slideLeft });
+          $slides.eq(newIndex).css({
+            display: 'block',
+            left: slideLeft
+          });
           $group.animate({
             left: animateLeft
           }, function () {
-            $slides.eq(self.state.currentIndex).css({ display: 'none' });
-            $slides.eq(newIndex).css({ left: 0 });
-            $group.css({ left: 0 });
-            self.setState({ currentIndex: newIndex });
+            $slides.eq(currentIndex).css({
+              display: 'none'
+            });
+            $slides.eq(newIndex).css({
+              left: 0
+            });
+            $group.css({
+              left: 0
+            });
+            currentIndex = newIndex;
           });
         }
 
         function advance() {
           clearTimeout(timeout);
           timeout = setTimeout(function () {
-            if (self.state.currentIndex < $slides.length - 1) {
-              move(self.state.currentIndex + 1);
+            if (currentIndex < $slides.length - 1) {
+              move(currentIndex + 1);
             } else {
               move(0);
             }
@@ -4314,16 +4321,16 @@ var Tutorial = React.createClass({
         }
 
         $('.next_btn').on('click', function () {
-          if (self.state.currentIndex < $slides.length - 1) {
-            move(self.state.currentIndex + 1);
+          if (currentIndex < $slides.length - 1) {
+            move(currentIndex + 1);
           } else {
             move(0);
           }
         });
-        $('.previous_btn').css('display', 'none');
+
         $('.previous_btn').on('click', function () {
-          if (self.state.currentIndex !== 0) {
-            move(self.state.currentIndex - 1);
+          if (currentIndex !== 0) {
+            move(currentIndex - 1);
           } else {
             move(3);
           }
@@ -4332,7 +4339,7 @@ var Tutorial = React.createClass({
         $.each($slides, function (index) {
           var $button = $('<a className="slide_btn">&bull;</a>');
 
-          if (index === self.state.currentIndex) {
+          if (index === currentIndex) {
             $button.addClass('activer');
           }
           $button.on('click', function () {
@@ -4346,17 +4353,6 @@ var Tutorial = React.createClass({
     });
   },
   render: function render() {
-    if (this.state.currentIndex == 0) {
-      $('.previous_btn').css('display', 'none');
-    } else {
-      $('.previous_btn').css('display', 'block');
-    }
-
-    if (this.state.currentIndex == 4) {
-      $('.next_btn').css('display', 'none');
-    } else {
-      $('.next_btn').css('display', 'block');
-    }
     return React.createElement(
       'div',
       { className: 'tutorial' },
@@ -4390,19 +4386,22 @@ var Tutorial = React.createClass({
                     React.createElement(
                       _reactRouter.Link,
                       { to: '/science', className: 'tutorialLink' },
-                      'scientifically supported and backed by numerous research studies'
+                      ' scientifically supported and backed by numerous research studies'
                     ),
                     '. While the game can be tricky to grasp at first and increases in difficulty rather quickly, we have tried to make this game as fun and as easy to learn as possible. We hope that you’ll enjoy simply playing the game and that the cognitive benefits will follow along as you progress.'
                   ),
                   React.createElement(
                     'h3',
                     null,
-                    'Let\'s get started!'
+                    'Let\'s get started! '
                   ),
                   React.createElement('img', { src: './images/brain.png', alt: 'BRAIN' })
-                )
-              )
+                ),
+                ' '
+              ),
+              ' '
             ),
+            ' ',
             React.createElement(
               'div',
               { className: 'slide' },
@@ -4424,8 +4423,10 @@ var Tutorial = React.createClass({
                   )
                 )
               ),
+              ' ',
               React.createElement('img', { src: './images/colorPosition.gif', alt: 'Mountain View' })
             ),
+            ' ',
             React.createElement(
               'div',
               { className: 'slide' },
@@ -4445,10 +4446,13 @@ var Tutorial = React.createClass({
                     null,
                     'The n in n-back refers to the number of positions back that you have to keep track of. The example below demonstrates gameplay at n=2. Therefore, if the current position matches the position it was at two steps back then you would indicate a match by pressing the position key. (The previous slide showed an example of position and color matches at n=1).'
                   )
-                )
+                ),
+                ' '
               ),
+              ' ',
               React.createElement('img', { src: './images/nback.gif', alt: 'Gameplay Pattern' })
             ),
+            ' ',
             React.createElement(
               'div',
               { className: 'slide' },
@@ -4479,7 +4483,7 @@ var Tutorial = React.createClass({
                     React.createElement(
                       'p',
                       null,
-                      'Keep track of changing position.',
+                      'Keep track of changing position. ',
                       React.createElement('br', null),
                       '(mono n-back)'
                     ),
@@ -4523,9 +4527,9 @@ var Tutorial = React.createClass({
                     React.createElement(
                       'p',
                       null,
-                      'Keep track of position and sounds.',
+                      'Keep track of position and sounds. ',
                       React.createElement('br', null),
-                      '(dual n-back)'
+                      ' (dual n-back)'
                     ),
                     React.createElement(
                       'ul',
@@ -4555,8 +4559,10 @@ var Tutorial = React.createClass({
                         'SOUND'
                       )
                     )
-                  )
+                  ),
+                  ' '
                 ),
+                ' ',
                 React.createElement(
                   'div',
                   { className: 'rulemode' },
@@ -4571,7 +4577,7 @@ var Tutorial = React.createClass({
                     React.createElement(
                       'p',
                       null,
-                      'Keep track of both position and colors.',
+                      'Keep track of both position and colors. ',
                       React.createElement('br', null),
                       '(dual n-back)'
                     ),
@@ -4615,7 +4621,7 @@ var Tutorial = React.createClass({
                     React.createElement(
                       'p',
                       null,
-                      'Keep track of position, color and sound',
+                      'Keep track of position, color and sound ',
                       React.createElement('br', null),
                       '(triple n-back)'
                     ),
@@ -4647,10 +4653,14 @@ var Tutorial = React.createClass({
                         'COLOR'
                       )
                     )
-                  )
-                )
-              )
+                  ),
+                  ' '
+                ),
+                ' '
+              ),
+              ' '
             ),
+            ' ',
             React.createElement(
               'div',
               { className: 'slide' },
@@ -4668,12 +4678,12 @@ var Tutorial = React.createClass({
                   React.createElement(
                     'p',
                     null,
-                    'If this seems like a daunting task, don’t worry! This game is designed to be a challenge and advancing up in level can be difficult. If you are new to the game or still unsure of how it works, we recommend starting out in relaxed mode first and then moving on once you are comfortable with the gameplay.'
+                    'If this seems like a daunting task, don’t worry! This game is designed to be a challenge and advancing up in level can be difficult. If you are new to the game or still unsure of how it works, we recommend starting out in relaxed mode first and then moving on once you are comfortable with the gameplay. '
                   ),
                   React.createElement(
                     'p',
                     null,
-                    'Once you\'ve become familiar with the game mechanics, it is always recommended to move on after unlocking the next n-level. You will experience the greatest cognitive benefits by continuously challenging yourself!'
+                    'Once you\'ve become familiar with the game mechanics, it is always recommended to move on after unlocking the next n-level. You will experience the greatest cognitive benefits by continuously challenging yourself! '
                   ),
                   React.createElement(
                     'h3',
@@ -4686,12 +4696,18 @@ var Tutorial = React.createClass({
                     'Start Playing!'
                   )
                 )
-              )
-            )
-          )
-        )
+              ),
+              ' '
+            ),
+            ' '
+          ),
+          ' '
+        ),
+        ' '
       ),
+      ' ',
       React.createElement('div', { className: 'slide_buttons' }),
+      ' ',
       React.createElement(
         'div',
         { className: 'directional_nav' },
@@ -4705,7 +4721,8 @@ var Tutorial = React.createClass({
           { className: 'next_btn', title: 'Next' },
           React.createElement('i', { className: 'fa fa-angle-right', 'aria-hidden': 'true' })
         )
-      )
+      ),
+      ' '
     ) //tutorial
     ;
   }
