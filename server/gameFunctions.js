@@ -206,13 +206,20 @@ router.post('/gameEnd',function(req,res,next){
       console.log("no game")
     }
     else{
-      var passedLevel = false;
-      if(game.score>= scoresToPass[game.mode][game.nLevel]){
-        passedLevel=true;
-      }
       game.score = req.body.score;
+
+      game.passedLevel = false;
+      console.log(game)
+      console.log(scoresToPass[game.mode][game.nLevel])
+      console.log(game.score);
+      console.log(game.score>= scoresToPass[game.mode][game.nLevel]);
+      if(game.score>= scoresToPass[game.mode][game.nLevel]){
+        game.passedLevel=true;
+        console.log("If statement passed level: ", game.passedLevel)
+      }
+      
       game.reactionTimes=req.body.reactionTimes;
-      game.passedLevel = passedLevel;
+      console.log(game.passedLevel)
       game.save(function(err,game){
         if(err){
           res.json({success:false})
@@ -221,9 +228,9 @@ router.post('/gameEnd',function(req,res,next){
           console.log("game ended successfully",game)
           res.json({
             success:true,
-            score:req.body.score,
+            score:game.score,
             userId:req.body.userId,
-            passedLevel:passedLevel,
+            passedLevel:game.passedLevel,
             gameId:game._id
           })
 

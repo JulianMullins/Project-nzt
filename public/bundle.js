@@ -1706,7 +1706,7 @@ var RelaxedMode = React.createClass({
         //give gameScore variable the final score
         clearInterval(iterations);
         console.log(fullScore);
-        console.log(matchHit / matchCount, 'accurqacy');
+        console.log(matchHit / matchCount, 'accuracy');
         axios.post('/gameEnd', {
           gameId: this.state.gameId,
           score: fullScore,
@@ -2463,18 +2463,25 @@ var GameOverOverlay = React.createClass({
   },
   componentDidMount: function componentDidMount() {
 
+    this.setScore();
     this.getData();
     this.unlockLevel();
     this.anonHighScore();
     this.renderLogin();
     this.nextLevelBtn();
+    this.setState({ firstRender: false });
+  },
+  setScore: function setScore() {
+    axios.get('/getScore').then(function (response) {
+      this.setState({ score: response.data.score });
+    }.bind(this));
   },
   getData: function getData() {
     axios.all([getUser(), getGame()]).then(axios.spread(function (userData, gameData) {
       this.setState({
         //username:userData.data.username,
         isAnon: !userData.data.alreadyLoggedIn,
-        score: gameData.data.game.score,
+        score: Math.floor(gameData.data.game.score),
         mode: gameData.data.game.mode,
         nLevel: gameData.data.game.nLevel,
         passedLevel: gameData.data.game.passedLevel,

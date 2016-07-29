@@ -200,7 +200,7 @@ var RelaxedMode = React.createClass({
         //give gameScore variable the final score
         clearInterval(iterations);
         console.log(fullScore)
-        console.log(matchHit/matchCount, 'accurqacy')
+        console.log(matchHit/matchCount, 'accuracy')
         axios.post('/gameEnd', {
           gameId: this.state.gameId,
           score: fullScore,
@@ -212,7 +212,7 @@ var RelaxedMode = React.createClass({
           // if(response.data.success){
           //   this.props.history.push('/gameOver');
           // }
-
+          
           axios.post('/gameOver',{
             userId: response.data.userId,
             passedLevel:response.data.passedLevel,

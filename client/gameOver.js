@@ -38,21 +38,29 @@ var GameOverOverlay = React.createClass({
   },
   componentDidMount(){
 
+    this.setScore(); 
     this.getData();
     this.unlockLevel();
     this.anonHighScore();
     this.renderLogin();
     this.nextLevelBtn();
+    this.setState({firstRender:false})
+    
 
   },
-
+  setScore(){
+    axios.get('/getScore')
+      .then(function(response){
+        this.setState({score:response.data.score})
+      }.bind(this))
+  },
   getData(){
     axios.all([getUser(),getGame()])
       .then(axios.spread(function(userData,gameData){
         this.setState({
           //username:userData.data.username,
           isAnon: !userData.data.alreadyLoggedIn,
-          score:gameData.data.game.score,
+          score:Math.floor(gameData.data.game.score),
           mode:gameData.data.game.mode,
           nLevel:gameData.data.game.nLevel,
           passedLevel: gameData.data.game.passedLevel,
@@ -153,6 +161,7 @@ var GameOverOverlay = React.createClass({
     this.props.history.push('/game/'+this.state.mode+'/'+(this.state.nLevel))
   },
   render: function() {
+   
 
     return (
       <div className="gameOver" id="gameover">
