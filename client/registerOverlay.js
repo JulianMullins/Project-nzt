@@ -102,6 +102,9 @@ var RegisterOverlay = React.createClass({
           if(response.data.success){
             this.props.history.push('/home')
           }
+          else{
+            this.props.history.push('/login')
+          }
         }.bind(this))
 
 
