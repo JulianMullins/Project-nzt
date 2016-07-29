@@ -144,7 +144,6 @@ var checkMine = function(newHighScore,stats,callback){
           });
         
       }
-
     })
 }
 
@@ -155,8 +154,6 @@ var sortScores = function(a,b){
 
 //save game
 router.post('/gameOver',function(req,res,next){
-
-  console.log("posting gameover")
 
   //check if tempUser
   if(req.body.userId){
@@ -197,21 +194,16 @@ router.post('/gameOver',function(req,res,next){
   }
 
   //check if full user
-  console.log("not temp user")
   User.findById(req.user._id)
-    .populate('stats currentGame')
+    .populate('currentGame', 'stats')
     .exec(function(err,user){
       if(err){
         console.log(err)
       }
 
       if(user) {
-        console.log('full user found in POST:/gameOver')
-        console.log(user);
-        console.log(user.stats)
-        var tempGame = user.currentGame[0];
 
-        var passedLevel = req.body.passedLevel;
+        var tempGame = user.currentGame[0];
 
         //make score
         var newHighScore = new HighScore({
@@ -223,10 +215,8 @@ router.post('/gameOver',function(req,res,next){
           reactionTimes:tempGame.reactionTimes
         })
 
-        //update maxN if passedLevel:
-
-        if(newHighScore.nLevel>user.maxN[newHighScore.mode]){
-
+        //update maxN
+        if(nLevel>user.maxN[newHighScore.mode]){
           user.maxN[newHighScore.mode] = nLevel;
         }
         if(newHighScore.nLevel === user.maxN[newHighScore.mode] && passedLevel){
@@ -236,7 +226,6 @@ router.post('/gameOver',function(req,res,next){
 
           //check how scores compare on personal level;
           
-          console.log('user stats', user.stats)
           //update Stats
           if(!user.stats.totalPoints){
             user.stats.totalPoints= newHighScore.score;

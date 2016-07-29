@@ -76,6 +76,5 @@ module.exports = {
   modeMultiplier:modeMultiplier,
   penalty:penaltyPoints,
   positivePoints:positivePoints,
-  leaderboardSize:leaderboardSize,
-  scoresToPass:scoresToPass
+  leaderboardSize:leaderboardSize
 }

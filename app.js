@@ -196,7 +196,6 @@ passport.use(new FacebookStrategy({
       }
 
       else if (!user) {
-
         // req.user.update({
         //   facebookId:profile.id,
         //   email:email,
@@ -252,7 +251,6 @@ passport.use(new FacebookStrategy({
             }
           })
         }
-        
       }
 
     

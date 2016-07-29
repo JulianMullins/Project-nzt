@@ -15,7 +15,6 @@ var serverData = require('./serverData');
 var modeMultiplier = serverData.modeMultiplier;
 var penalty = serverData.penalty;
 var positivePoints = serverData.positivePoints;
-var scoresToPass = serverData.scoresToPass;
 
 
 var tempGame = null;
@@ -193,7 +192,6 @@ router.post('/startGame/:mode/:nLevel',function(req,res,next){
 
 
 //game end - posted from mode files; find game, update game stats
-//check if passed level
 router.post('/gameEnd',function(req,res,next){
   console.log("game ended")
   console.log(req.user)
@@ -234,13 +232,10 @@ router.post('/gameEnd',function(req,res,next){
             gameId:game._id
           })
 
-
           //post to gameOver
-          // axios.post('/gameOver',{
-          //   userId: req.body.userId,
-          //   passedLevel:passedLevel,
-          //   gameId:game._id
-          // })
+          axios.post('/gameOver',{
+            userId: req.body.userId
+          })
 
         }
       });
