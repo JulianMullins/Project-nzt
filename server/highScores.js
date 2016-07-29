@@ -1,5 +1,4 @@
 var HighScore = require('../models/HighScore');
-var User = require('../models/HighScore');
 var Leaderboard = require('../models/Leaderboard');
 var User = require('../models/User');
 var leaderboardSize = require('./serverData').leaderboardSize;
