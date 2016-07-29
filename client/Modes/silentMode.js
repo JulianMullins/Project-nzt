@@ -106,7 +106,7 @@ var SilentMode = React.createClass({
         matchHit-=1;
         reactionEnd = null;
         if ((this.state.score - 5) >= 0) {
-          fullscore -= 5;
+          fullScore -= 5;
           currentScore = 5;
           this.setState({
             score: this.state.score - 5,
@@ -114,7 +114,7 @@ var SilentMode = React.createClass({
             colorStyle: noStyle
           });
         } else {
-          fullscore = 0;
+          fullScore = 0;
           currentScore = this.state.score;
           this.setState({score: 0});
         }
@@ -348,9 +348,9 @@ var SilentMode = React.createClass({
           <div className="scoreAlert">
             {scoreAlert}
           </div>
-          <div className="gameButtonsContainer silentBackground">
-            <a onClick={this.positionMatch} style={this.state.posStyle}>POSITION</a>
-            <a onClick={this.colorMatch} style={this.state.colorStyle}>COLOR</a>
+          <div className="gameButtonsContainer">
+            <a onClick={this.positionMatch} style={this.state.posStyle} className="silentButton">POSITION</a>
+            <a onClick={this.colorMatch} style={this.state.colorStyle} className="silentButton">COLOR</a>
           </div>
         </div>
       </div>
@@ -360,7 +360,7 @@ var SilentMode = React.createClass({
 
 var noStyle = {}
 var pushStyle = {
-  backgroundColor: 'rgba(0, 0, 0, .1729)',
+  backgroundColor: '#319B93',
   boxShadow: '0px 0px',
   color: 'white'
 }

@@ -329,9 +329,9 @@ var ClassicMode = React.createClass({
           <div className="scoreAlert">
             {scoreAlert}
           </div>
-          <div className="gameButtonsContainer classicBackground">
-            <a onClick={this.positionMatch} style={this.state.posStyle}>POSITION</a>
-            <a onClick={this.soundMatch} style={this.state.soundStyle}>SOUND</a>
+          <div className="gameButtonsContainer">
+            <a onClick={this.positionMatch} style={this.state.posStyle} className="classicButton">POSITION</a>
+            <a onClick={this.soundMatch} style={this.state.soundStyle} className="classicButton">SOUND</a>
           </div>
         </div>
       </div>
@@ -342,7 +342,7 @@ var ClassicMode = React.createClass({
 var noStyle = {}
 
 var pushStyle = {
-  backgroundColor: 'rgba(0, 0, 0, .1729)',
+  backgroundColor: '#A8020F',
   boxShadow: '0px 0px',
   color: 'white'
 }

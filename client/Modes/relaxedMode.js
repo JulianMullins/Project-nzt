@@ -212,7 +212,7 @@ var RelaxedMode = React.createClass({
           // if(response.data.success){
           //   this.props.history.push('/gameOver');
           // }
-          
+
           axios.post('/gameOver',{
             userId: response.data.userId,
             passedLevel:response.data.passedLevel,
@@ -224,7 +224,7 @@ var RelaxedMode = React.createClass({
             this.props.history.push('/gameOver');
           }.bind(this))
 
-          
+
         }.bind(this))
 
       }
@@ -329,8 +329,8 @@ var RelaxedMode = React.createClass({
           <div className="scoreAlert">
             {scoreAlert}
           </div>
-          <div className="gameButtonsContainer relaxedBackground">
-            <a onClick={this.posMatch} style={this.state.posStyle}>POSITION</a>
+          <div className="gameButtonsContainer">
+            <a onClick={this.posMatch} style={this.state.posStyle} className='relaxedButton'>POSITION</a>
           </div>
         </div>
       </div>
@@ -341,7 +341,7 @@ var RelaxedMode = React.createClass({
 var noStyle = {}
 
 var pushStyle = {
-  backgroundColor: 'rgba(0, 0, 0, .1729)',
+  backgroundColor: '#006D65',
   boxShadow: '0px 0px',
   color: 'white'
 }
