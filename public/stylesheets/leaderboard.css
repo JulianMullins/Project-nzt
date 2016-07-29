@@ -76,3 +76,28 @@ section {
   color: white;
   background-color: rgba(255, 255, 255, 0.15);
 }
+
+.leaderboardButtons {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 10px;
+}
+.leaderboardButtons a {
+  width: 120px;
+  text-align: center;
+  padding: 5px 0;
+  margin: 0 30px;
+  border: 2px solid white;
+  font-size: 20px;
+}
+.leaderboardButtons a:hover {
+  cursor: pointer;
+}
+.leaderboardButtons a:active {
+  background-color: white;
+  color: #f1ba03;
+}
+.leaderboardButtons a:target {
+  background-color: white;
+  color: #f1ba03;
+}
