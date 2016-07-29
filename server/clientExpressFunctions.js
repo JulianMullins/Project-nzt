@@ -65,8 +65,7 @@ router.get("/getGameData",function(req,res,next){
     res.json({
       score:game.score,
       mode:game.mode,
-      nLevel:game.nLevel,
-      passedLevel: game.passedLevel
+      nLevel:game.nLevel
     })
   })
 })
@@ -85,6 +84,13 @@ router.get('/getUser',function(req,res,next){
   if(req.user && req.user.currentGame){
     games = req.user.currentGame
   }
+  if(req.user){
+    console.log("real user, here are stats:")
+    Stats.findById(req.user.stats,function(err,stats){
+      console.log(stats);
+    })
+  }
+  
   res.json({
     alreadyLoggedIn: !!req.user,
     isUser: isUser,
@@ -103,12 +109,21 @@ router.get('/getGame',function(req,res,next){
     }
     else{
       console.log(game)
-      res.json({game:game,success:true})
+      res.json({
+        game:game,
+        success:true
+      })
     }
   })
 })
 
-
+router.get('/getScore',function(req,res){
+  Game.findById(req.user.currentGame[0],function(err,game){
+    if(game){
+      res.json({score:game.score});
+    }
+  })
+})
 
 
 
