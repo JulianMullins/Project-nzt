@@ -3838,12 +3838,14 @@ var MyComponent = React.createClass({
       'div',
       null,
       React.createElement(LineChart, {
+        className: 'topStatsGraph',
         data: this.state.lineData1,
         width: 800,
         height: 500,
         title: 'Score Trends'
       }),
       React.createElement(AreaChart, {
+        className: 'bottomStatsGraph',
         data: this.state.lineData2,
         width: 800,
         height: 500,

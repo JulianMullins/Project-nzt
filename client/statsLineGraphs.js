@@ -55,12 +55,14 @@ axios.get('/taco', {withCredentials: true})
 },
   render: function() {
    return (<div><LineChart
+        className='topStatsGraph'
         data={this.state.lineData1}
         width={800}
         height={500}
         title="Score Trends"
         />
         <AreaChart
+        className='bottomStatsGraph'
         data={this.state.lineData2}
         width={800}
         height={500}
