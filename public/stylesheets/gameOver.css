@@ -9,7 +9,6 @@
   flex-direction: column;
   color: white;
   text-align: center;
-  padding-top: 10vh;
 }
 
 .gameOver a {
@@ -31,31 +30,83 @@
   font-size: 32px;
 }
 
+.gameOver p {
+  font-size: 32px;
+}
+
+.gameOverHeader {
+  height: 30vh;
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  padding-top: 5vh;
+}
+
+.gameOverHeader h1 {
+  font-size: calc(28px + 5vw);
+}
+
+.gameOverHeader h2 {
+  font-size: calc(24px + 3vw);
+}
+
+.scoreTable {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 30vh;
+  width: 100vw;
+}
+
+.scoreTable table {
+  width: 500px;
+  line-height: 1.5;
+}
+
+.scoreTable td {
+  font-size: 32px;
+  text-align: left;
+}
+
+.scoreValue {
+  text-align: right !important;
+}
+
+.totalScore td {
+  border-top: 2px solid white;
+}
+
 .gameOverPrompt {
   display: flex;
   justify-content: center;
   align-items: center;
+  color: white;
+  background-color: #F13542;
   width: 75vw;
-  padding: 15px;
-  border: 1px solid white;
+  height: 20vh;
+  padding: 10px;
 }
 
-.gameOverInform {
-  margin: 50px 0 25px 0;
+.gameOverPrompt a {
+  font-weight: bold;
+  color: #F1BA03;
+  transition-duration: .5s;
 }
 
-.gameOver p {
-  font-size: 32px;
+.gameOverPrompt a:hover {
+  color: white;
+  transition-duration: .5s;
 }
+
 
 .gameOverActions {
   display: flex;
   flex-direction: row;
   justify-content: space-around;
   width: 100vw;
-  height: 30vh;
+  height: 20vh;
   align-items: flex-end;
-  margin-bottom: 15px;
+  margin-bottom: 20px;
 }
 
 .levelButton {

@@ -2621,23 +2621,129 @@ var GameOverOverlay = React.createClass({
     this.props.history.push('/game/' + this.state.mode + '/' + this.state.nLevel);
   },
 
-  render: function render() {
 
+  countUp: function countUp(count) {
+    var div_by = 100,
+        speed = Math.round(count / div_by),
+        $display = $('.count'),
+        run_count = 1,
+        int_speed = 24;
+
+    var int = setInterval(function () {
+      if (run_count < div_by) {
+        $display.text(speed * run_count);
+        run_count++;
+      } else if (parseInt($display.text()) < count) {
+        var curr_count = parseInt($display.text()) + 1;
+        $display.text(curr_count);
+      } else {
+        clearInterval(int);
+      }
+    }, int_speed);
+  },
+  render: function render() {
     return React.createElement(
       'div',
       { className: 'gameOver', id: 'gameover' },
       React.createElement(
-        'h1',
-        null,
-        'Congrats!'
+        'div',
+        { className: 'gameOverHeader' },
+        React.createElement(
+          'h1',
+          null,
+          'Congrats!'
+        ),
+        React.createElement(
+          'h2',
+          { className: 'classic' },
+          'You have unlocked level 2'
+        )
       ),
       React.createElement(
-        'h2',
-        null,
-        'Your score is ',
-        this.state.score
+        'div',
+        { className: 'scoreTable' },
+        React.createElement(
+          'table',
+          null,
+          React.createElement(
+            'tr',
+            null,
+            React.createElement(
+              'td',
+              null,
+              'game score: '
+            ),
+            React.createElement(
+              'td',
+              { className: 'scoreValue' },
+              this.state.score
+            )
+          ),
+          React.createElement(
+            'tr',
+            null,
+            React.createElement(
+              'td',
+              null,
+              'n-level: '
+            ),
+            React.createElement(
+              'td',
+              { className: 'scoreValue' },
+              'x'
+            )
+          ),
+          React.createElement(
+            'tr',
+            null,
+            React.createElement(
+              'td',
+              null,
+              'mode: '
+            ),
+            React.createElement(
+              'td',
+              { className: 'scoreValue' },
+              'x'
+            )
+          ),
+          React.createElement(
+            'tr',
+            { className: 'totalScore' },
+            React.createElement(
+              'td',
+              null,
+              'total score: '
+            ),
+            React.createElement(
+              'td',
+              { className: 'count scoreValue' },
+              this.countUp(2000)
+            )
+          )
+        )
       ),
-      this.state.gameOverMessage,
+      React.createElement(
+        'div',
+        { className: 'gameOverPrompt' },
+        React.createElement(
+          'p',
+          null,
+          'It looks like you are not currently logged in.',
+          React.createElement(
+            _reactRouter.Link,
+            { to: '/gameOver/login' },
+            ' Sign in'
+          ),
+          ' or ',
+          React.createElement(
+            _reactRouter.Link,
+            { to: '/gameOver/register' },
+            'sign up'
+          ),
+          ' to save your progress, view statistics and compete with friends!'
+        )
+      ),
       React.createElement(
         'div',
         { className: 'gameOverActions' },

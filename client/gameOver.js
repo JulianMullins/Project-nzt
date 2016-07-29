@@ -160,16 +160,59 @@ var GameOverOverlay = React.createClass({
    //go to next level (if earned)
     this.props.history.push('/game/'+this.state.mode+'/'+(this.state.nLevel))
   },
-  render: function() {
-   
 
+  countUp: function(count){
+    var div_by = 100,
+    speed = Math.round(count / div_by),
+    $display = $('.count'),
+    run_count = 1,
+    int_speed = 24;
+  
+    var int = setInterval(function() {
+      if(run_count < div_by){
+        $display.text(speed * run_count);
+        run_count++;
+      } else if(parseInt($display.text()) < count) {
+        var curr_count = parseInt($display.text()) + 1;
+        $display.text(curr_count);
+      } else {
+        clearInterval(int);
+      }
+    }, int_speed);
+  },
+  render: function() {
     return (
       <div className="gameOver" id="gameover">
-          <h1>Congrats!</h1>
-          <h2>Your score is {this.state.score}</h2>
-
-          {this.state.gameOverMessage}
-
+          <div className="gameOverHeader">
+              <h1>Congrats!</h1>
+              <h2 className="classic">You have unlocked level 2</h2>
+          </div>
+          <div className="scoreTable">
+            <table>
+              <tr>
+                <td>game score: </td>
+                <td className="scoreValue">{this.state.score}</td>
+              </tr>
+              <tr>
+                <td>n-level: </td>
+                <td className="scoreValue">x</td>
+              </tr>
+              <tr>
+                <td>mode: </td>
+                <td className="scoreValue">x</td>
+              </tr>
+              <tr className="totalScore">
+                <td>total score: </td>
+                <td className="count scoreValue">{this.countUp(2000)}</td>
+              </tr>
+            </table>
+          </div>
+            <div className="gameOverPrompt">
+            <p>It looks like you are not currently logged in. 
+            <Link to="/gameOver/login"> Sign in</Link> or <Link to="/gameOver/register">sign up</Link> to save your progress, 
+            view statistics and compete with friends!
+            </p> 
+            </div>
           <div className="gameOverActions">
             <Link to="/home">
               <a onClick={this.gameOver}>
