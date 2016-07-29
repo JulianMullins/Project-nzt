@@ -228,7 +228,7 @@ var SilentMode = React.createClass({
           //console.log(reactionTimes, 'reaction times')
           //console.log(this.state)
           console.log(matchHit/matchCount, 'accuracy')
-          
+
 
 
           endGameFunction(fullScore,reactionTimes,this.state.gameId,this.state.userId,function(success){
