@@ -6,7 +6,6 @@ var axios = require('axios')
 var endGameFunction = require('./serverFunctions').endGameFunction;
 var startGameFunction = require('./serverFunctions').startGameFunction;
 
-
 //COLLECTION OF GLOBAL VARIABLES TO MAKE EVERYONES LIFE EASIER
 //create global variable for reaction counter
 var reactionStart;
@@ -19,8 +18,8 @@ var reactionEnd = null;
 var iterations;
 var fullScore = 0;
 var currentScore;
-var matchCount=0; //total matches in game
-var matchHit=0; ///ones user gets
+var matchCount = 0; //total matches in game
+var matchHit = 0; ///ones user gets
 
 var SilentMode = React.createClass({
   getInitialState: function() {
@@ -53,13 +52,13 @@ var SilentMode = React.createClass({
     }
   },
   componentDidMount: function() {
-    startGameFunction(this.state.mode,this.state.N,function(obj){
+    startGameFunction(this.state.mode, this.state.N, function(obj) {
       this.setState({
         tempUser: obj.tempUser,
         gameId: obj.gameId,
-        modeMultiplier:obj.modeMultiplier,
-        penalty:obj.penalty,
-        positivePoints:obj.positivePoints,
+        modeMultiplier: obj.modeMultiplier,
+        penalty: obj.penalty,
+        positivePoints: obj.positivePoints,
         userId: obj.userId
       })
     }.bind(this));
@@ -89,15 +88,15 @@ var SilentMode = React.createClass({
     console.log(this.state, 'state')
     var positionQueue = [];
     var colorQueue = [];
-    var timeTilPositionMatch = parseInt((Math.random() * 5) + 2 + this.state.N);
-    var timeTilColorMatch = parseInt((Math.random() * 5) + 2 + this.state.N);
+    var timeTilPositionMatch = parseInt((Math.random() * 5) + this.state.N);
+    var timeTilColorMatch = parseInt((Math.random() * 5) + this.state.N);
     var timeKeeper = 0;
 
     iterations = setInterval(function() {
       timeKeeper++;
       if (this.state.keepScore && !(this.state.colorMatch || this.state.positionMatch)) {
-        matchCount+=1;
-        matchHit+=1;
+        matchCount += 1;
+        matchHit += 1;
         reactionTimes.push(reactionEnd - reactionStart);
         currentScore = ((2000 - reactionTimes[reactionTimes.length - 1]) / 100).toFixed(2);
         fullScore += parseFloat(currentScore);
@@ -111,7 +110,7 @@ var SilentMode = React.createClass({
         });
       } else if (!this.state.keepScore && (this.state.posPressed || this.state.colorPressed)) {
         this.setState({alert: "Not a match"})
-        matchHit-=1;
+        matchHit -= 1;
         reactionEnd = null;
         if ((this.state.score - 5) >= 0) {
           fullScore -= 5;
@@ -128,7 +127,7 @@ var SilentMode = React.createClass({
         }
       } else if (this.state.keepScore && (this.state.colorMatch || this.state.positionMatch)) {
         this.setState({alert: "Missed a match"});
-        matchCount+=1;
+        matchCount += 1;
         reactionEnd = null;
         if ((this.state.score - 5) >= 0) {
           fullScore -= 5;
@@ -216,7 +215,7 @@ var SilentMode = React.createClass({
         pMatch = false;
       }.bind(this), 800);
 
-       ////////////////////////////////////////////////////////////////////////////////////
+      ////////////////////////////////////////////////////////////////////////////////////
       ///////////////////////////////////////////////////////////////////////////////////
       ///////////////////////////////////////////////////////////////////////////////////
       ////////////////////////////////////////////////////////////////////////////////////////
@@ -227,23 +226,21 @@ var SilentMode = React.createClass({
         setTimeout(function() {
           //console.log(reactionTimes, 'reaction times')
           //console.log(this.state)
-          console.log(matchHit/matchCount, 'accuracy')
+          console.log(matchHit / matchCount, 'accuracy')
 
-
-
-          endGameFunction(fullScore,reactionTimes,this.state.gameId,this.state.userId,function(success){
-            if(success){
+          endGameFunction(fullScore, reactionTimes, this.state.gameId, this.state.userId, function(success) {
+            if (success) {
               this.props.history.push('/gameOver')
             }
           }.bind(this))
 
         }.bind(this), 2000);
 
-           ////////////////////////////////////////////////////////////////////////////////////
-      ///////////////////////////////////////////////////////////////////////////////////
-      ///////////////////////////////////////////////////////////////////////////////////
-      ////////////////////////////////////////////////////////////////////////////////////////
-      /////////////////////////////////////////////////////////////////////
+        ////////////////////////////////////////////////////////////////////////////////////
+        ///////////////////////////////////////////////////////////////////////////////////
+        ///////////////////////////////////////////////////////////////////////////////////
+        ////////////////////////////////////////////////////////////////////////////////////////
+        /////////////////////////////////////////////////////////////////////
 
       }
     }.bind(this), 2000);

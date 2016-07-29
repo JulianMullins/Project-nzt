@@ -10,7 +10,6 @@ var matchHit = 0; ///ones user gets
 var endGameFunction = require('./serverFunctions').endGameFunction;
 var startGameFunction = require('./serverFunctions').startGameFunction;
 
-
 //COLLECTION OF GLOBAL VARIABLES TO MAKE EVERYONES LIFE EASIER
 //create global variable for reaction counter
 var reactionStart;
@@ -58,13 +57,13 @@ var AdvancedMode = React.createClass({
     }
   },
   componentDidMount: function() {
-    startGameFunction(this.state.mode,this.state.N,function(obj){
+    startGameFunction(this.state.mode, this.state.N, function(obj) {
       this.setState({
         tempUser: obj.tempUser,
         gameId: obj.gameId,
-        modeMultiplier:obj.modeMultiplier,
-        penalty:obj.penalty,
-        positivePoints:obj.positivePoints,
+        modeMultiplier: obj.modeMultiplier,
+        penalty: obj.penalty,
+        positivePoints: obj.positivePoints,
         userId: obj.userId
       })
     }.bind(this));
@@ -95,9 +94,9 @@ var AdvancedMode = React.createClass({
     var positionQueue = [];
     var colorQueue = [];
     var soundQueue = [];
-    var timeTilPositionMatch = parseInt((Math.random() * 5) + 2 + this.state.N);
-    var timeTilColorMatch = parseInt((Math.random() * 5) + 2 + this.state.N);
-    var timeTilSoundMatch = parseInt((Math.random() * 5) + 2 + this.state.N);
+    var timeTilPositionMatch = parseInt((Math.random() * 5) + this.state.N);
+    var timeTilColorMatch = parseInt((Math.random() * 5) + this.state.N);
+    var timeTilSoundMatch = parseInt((Math.random() * 5) + this.state.N);
     var timeKeeper = 0;
     //console.log(timekeeper)
     iterations = setInterval(function() {
@@ -281,7 +280,6 @@ var AdvancedMode = React.createClass({
         pMatch = false;
       }.bind(this), 800);
 
-
       ////////////////////////////////////////////////////////////////////////////////////
       ///////////////////////////////////////////////////////////////////////////////////
       ///////////////////////////////////////////////////////////////////////////////////
@@ -297,21 +295,20 @@ var AdvancedMode = React.createClass({
           console.log(reactionTimes, 'reaction times')
           console.log(this.state)
           console.log(matchHit / matchCount, 'accuracy')
-          
 
-          endGameFunction(fullScore,reactionTimes,this.state.gameId,this.state.userId,function(success){
-            if(success){
+          endGameFunction(fullScore, reactionTimes, this.state.gameId, this.state.userId, function(success) {
+            if (success) {
               this.props.history.push('/gameOver')
             }
           }.bind(this))
 
         }.bind(this), 2000);
-      ////////////////////////////////////////////////////////////////////////////////////
-      ///////////////////////////////////////////////////////////////////////////////////
-      ///////////////////////////////////////////////////////////////////////////////////
-      ////////////////////////////////////////////////////////////////////////////////////////
-      ////////////////////////////////////////////////
-    
+        ////////////////////////////////////////////////////////////////////////////////////
+        ///////////////////////////////////////////////////////////////////////////////////
+        ///////////////////////////////////////////////////////////////////////////////////
+        ////////////////////////////////////////////////////////////////////////////////////////
+        ////////////////////////////////////////////////
+
       }
     }.bind(this), 2000);
   },

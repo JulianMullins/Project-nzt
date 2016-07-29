@@ -19,8 +19,8 @@ var gameScore;
 var iterations;
 var fullScore = 0;
 var currentScore;
-var matchCount=0; //total matches in game
-var matchHit=0; ///ones user gets
+var matchCount = 0; //total matches in game
+var matchHit = 0; ///ones user gets
 
 var RelaxedMode = React.createClass({
   getInitialState: function() {
@@ -76,15 +76,13 @@ var RelaxedMode = React.createClass({
 
     // }.bind(this))
 
-
-
-    startGameFunction(this.state.mode,this.state.N,function(obj){
+    startGameFunction(this.state.mode, this.state.N, function(obj) {
       this.setState({
         tempUser: obj.tempUser,
         gameId: obj.gameId,
-        modeMultiplier:obj.modeMultiplier,
-        penalty:obj.penalty,
-        positivePoints:obj.positivePoints,
+        modeMultiplier: obj.modeMultiplier,
+        penalty: obj.penalty,
+        positivePoints: obj.positivePoints,
         userId: obj.userId
       })
     }.bind(this));
@@ -112,7 +110,7 @@ var RelaxedMode = React.createClass({
   },
   position: function() {
     var posQueue = [];
-    var timeTilPosMatch = parseInt((Math.random() * 5) + 2 + this.state.N);
+    var timeTilPosMatch = parseInt((Math.random() * 5) + this.state.N);
     var timeKeeper = 60;
 
     iterations = setInterval(function() {
@@ -121,8 +119,8 @@ var RelaxedMode = React.createClass({
       if (this.state.keepScore && !this.state.posMatch) {
         currentScore = ((2000 - reactionTimes[reactionTimes.length - 1]) / 100).toFixed(2);
         fullScore += parseFloat(currentScore);
-        matchCount+=1;
-        matchHit+=1;
+        matchCount += 1;
+        matchHit += 1;
         this.setState({
           alert: "Good job",
           score: this.state.score + parseInt(currentScore),
@@ -131,7 +129,7 @@ var RelaxedMode = React.createClass({
       } else if (!this.state.keepScore && this.state.posPressed) {
         this.setState({alert: 'Not a match'});
         if ((this.state.score - 5) >= 0) {
-          matchHit-=1;
+          matchHit -= 1;
           currentScore = 5;
           this.setState({
             score: this.state.score - 5,
@@ -144,7 +142,7 @@ var RelaxedMode = React.createClass({
       } else if (this.state.keepScore && this.state.posMatch) {
         this.setState({alert: "Missed a match"});
         if ((this.state.score - 5) >= 0) {
-          matchCount+=1;
+          matchCount += 1;
           currentScore = 5
           this.setState({
             score: this.state.score - 5,
@@ -215,17 +213,13 @@ var RelaxedMode = React.createClass({
         //give gameScore variable the final score
         clearInterval(iterations);
         console.log(fullScore)
-        console.log(matchHit/matchCount, 'accuracy')
+        console.log(matchHit / matchCount, 'accuracy')
 
-
-
-        endGameFunction(fullScore,reactionTimes,this.state.gameId,this.state.userId,function(success){
-          if(success){
+        endGameFunction(fullScore, reactionTimes, this.state.gameId, this.state.userId, function(success) {
+          if (success) {
             this.props.history.push('/gameOver')
           }
         }.bind(this))
-
-
 
         // axios.post('/gameEnd', {
         //   gameId: this.state.gameId,
@@ -249,7 +243,6 @@ var RelaxedMode = React.createClass({
         //     }
         //     this.props.history.push('/gameOver');
         //   }.bind(this))
-
 
         // }.bind(this))
 
