@@ -68,5 +68,5 @@ axios.get('/taco', {withCredentials: true})
         /></div>)
   }
 });
-      
+
 module.exports = MyComponent
