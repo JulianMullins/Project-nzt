@@ -2692,19 +2692,21 @@ var Leaderboard = React.createClass({
   displayName: 'Leaderboard',
 
   getInitialState: function getInitialState() {
-    return { allScores: [] };
+    return { allScores: [], myScores: [] };
   },
   componentDidMount: function componentDidMount() {
     this.getAllScores();
+    this.getMyScores();
   },
   getAllScores: function getAllScores() {
     axios.get('/allHighScores').then(function (response) {
-      console.log(response.data);
+      console.log('all scores', response.data);
       this.setState({ allScores: response.data });
     }.bind(this));
   },
-  myScores: function myScores() {
+  getMyScores: function getMyScores() {
     axios.get('/myHighScores').then(function (response) {
+      console.log('my scores', response.data);
       this.setState({ myScores: response.data });
     }.bind(this));
   },
