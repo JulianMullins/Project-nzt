@@ -4,6 +4,9 @@ var rd3 = require('react-d3');
 var LineChart = rd3.LineChart;
 var AreaChart = rd3.AreaChart;
 var axios = require('axios')
+var _=require('underscore')
+var stats;
+var mode;
 
 var MyComponent = React.createClass({
     componentDidMount: function(){
@@ -11,7 +14,9 @@ var MyComponent = React.createClass({
 
 axios.get('/taco', {withCredentials: true})
 .then(function(responseJson){
-    console.log(responseJson.data,'41')
+    //console.log(responseJson.data,'41')
+    stats=responseJson.data.stats;
+    console.log(stats,'stats')
 })
     },
   render: function() {
