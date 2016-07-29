@@ -273,6 +273,8 @@ var axios = require('axios');
 var AdvancedStartOverlay = require('./gameStartOverlay').AdvancedStartOverlay;
 var fullScore = 0;
 var currentScore;
+var matchCount = 0; //total matches in game
+var matchHit = 0; ///ones user gets
 
 //COLLECTION OF GLOBAL VARIABLES TO MAKE EVERYONES LIFE EASIER
 //create global variable for reaction counter
@@ -370,6 +372,7 @@ var AdvancedMode = React.createClass({
           });
           reactionEnd = null;
         } else {
+          matchCount += 1;
           this.setState({
             soundPressed: noStyle,
             colorPressed: noStyle,
@@ -398,6 +401,8 @@ var AdvancedMode = React.createClass({
         currentScore = ((2000 - reactionTimes[reactionTimes.length - 1]) / 100).toFixed(2);
         fullScore += parseFloat(currentScore);
         reactionEnd = null;
+        matchHit += 1;
+        matchCount += 1;
         this.setState({
           soundPressed: noStyle,
           colorPressed: noStyle,
@@ -411,6 +416,7 @@ var AdvancedMode = React.createClass({
         });
       } else {
         //console.log('incorrect')
+        matchHit -= 1;
         this.setState({
           soundPressed: noStyle,
           colorPressed: noStyle,
@@ -535,6 +541,7 @@ var AdvancedMode = React.createClass({
           console.log(gameScore, 'game score');
           console.log(reactionTimes, 'reaction times');
           console.log(this.state);
+          console.log(matchHit / matchCount, 'accuracy');
           axios.post('/gameEnd', {
             gameId: this.state.gameId,
             score: gameScore,
@@ -738,6 +745,8 @@ var ClassicStartOverlay = require('./gameStartOverlay').ClassicStartOverlay;
 var axios = require('axios');
 var fullScore = 0;
 var currentScore;
+var matchCount = 0; //total matches in game
+var matchHit = 0; ///ones user gets
 
 //COLLECTION OF GLOBAL VARIABLES TO MAKE EVERYONES LIFE EASIER
 //create global variable for reaction counter
@@ -813,6 +822,8 @@ var ClassicMode = React.createClass({
         currentScore = ((2000 - reactionTimes[reactionTimes.length - 1]) / 100).toFixed(2);
         fullScore += parseFloat(currentScore);
         reactionEnd = null;
+        matchCount += 1;
+        matchHit += 1;
         this.setState({
           score: this.state.score + parseInt(currentScore),
           alert: 'Good job'
@@ -820,6 +831,7 @@ var ClassicMode = React.createClass({
       } else if (!this.state.keepScore && (this.state.posPressed || this.state.soundPressed)) {
         this.setState({ alert: "Not a match" });
         reactionEnd = null;
+        matchHit -= 1;
         if (this.state.score - 5 >= 0) {
           currentScore = 5;
           this.setState({
@@ -832,6 +844,7 @@ var ClassicMode = React.createClass({
       } else if (this.state.soundMatch || this.state.positionMatch) {
         this.setState({ alert: "Missed a match" });
         reactionEnd = null;
+        matchCount += 1;
         if (this.state.score - 5 >= 0) {
           currentScore = 5;
           this.setState({
@@ -921,6 +934,7 @@ var ClassicMode = React.createClass({
         clearInterval(iterations);
         setTimeout(function () {
           console.log(reactionTimes, 'reaction times');
+          console.log(matchHit / matchCount, 'accuracy');
           console.log(this.state);
           axios.post('/gameEnd', {
             gameId: this.state.gameId,
@@ -1517,6 +1531,8 @@ var gameScore;
 var iterations;
 var fullScore = 0;
 var currentScore;
+var matchCount = 0; //total matches in game
+var matchHit = 0; ///ones user gets
 
 var RelaxedMode = React.createClass({
   displayName: 'RelaxedMode',
@@ -1596,6 +1612,8 @@ var RelaxedMode = React.createClass({
       if (this.state.keepScore && !this.state.posMatch) {
         currentScore = ((2000 - reactionTimes[reactionTimes.length - 1]) / 100).toFixed(2);
         fullScore += parseFloat(currentScore);
+        matchCount += 1;
+        matchHit += 1;
         this.setState({
           alert: "Good job",
           score: this.state.score + parseInt(currentScore),
@@ -1604,6 +1622,7 @@ var RelaxedMode = React.createClass({
       } else if (!this.state.keepScore && this.state.posPressed) {
         this.setState({ alert: 'Not a match' });
         if (this.state.score - 5 >= 0) {
+          matchHit -= 1;
           currentScore = 5;
           this.setState({
             score: this.state.score - 5,
@@ -1616,6 +1635,7 @@ var RelaxedMode = React.createClass({
       } else if (this.state.keepScore && this.state.posMatch) {
         this.setState({ alert: "Missed a match" });
         if (this.state.score - 5 >= 0) {
+          matchCount += 1;
           currentScore = 5;
           this.setState({
             score: this.state.score - 5,
@@ -1686,6 +1706,7 @@ var RelaxedMode = React.createClass({
         //give gameScore variable the final score
         clearInterval(iterations);
         console.log(fullScore);
+        console.log(matchHit / matchCount, 'accurqacy');
         axios.post('/gameEnd', {
           gameId: this.state.gameId,
           score: fullScore,
