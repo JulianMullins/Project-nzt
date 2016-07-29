@@ -174,7 +174,7 @@ module.exports = function(passport) {
   })
 
   // POST Login page
-  router.post('/login', passport.authenticate('local',{failureRedirect: 'login/failure'}), function(req,res,next){
+  router.post('/login', passport.authenticate('local',{failureRedirect: '/login/failure'}), function(req,res,next){
     
       console.log("login success")
       console.log(req.user)

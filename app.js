@@ -90,15 +90,15 @@ passport.use(new LocalStrategy({
     }
 
     //login tempuser
-    TempUser.findById(username,function(err,tempUser){
-      if(err){
-        return done(err)
-      }
-      else if(tempUser){
-        console.log("tempUser logged in")
-        return done(null,tempUser);
-      }
-    })
+    // TempUser.findById(username,function(err,tempUser){
+    //   if(err){
+    //     return done(err)
+    //   }
+    //   else if(tempUser){
+    //     console.log("tempUser logged in")
+    //     return done(null,tempUser);
+    //   }
+    // })
 
     //log in real users
     console.log("PASSPORT DATA: ", username, password,req.body)
@@ -149,13 +149,13 @@ passport.use(new LocalStrategy({
             console.log("no req.user")
             console.log(done)
             console.log(user)
-            req.login(user,function(err){
-              console.log('req.logging in')
-              if(!err){
-                console.log("success")
-                return res.send({success:true})
-              }
-            })
+            // req.login(user,function(err){
+            //   console.log('req.logging in')
+            //   if(!err){
+            //     console.log("success")
+            //     return res.send({success:true})
+            //   }
+            // })
             return done(null,user);
           }
         }

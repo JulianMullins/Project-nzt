@@ -6,8 +6,12 @@ var startGameFunction = function(mode,N,callback){
 	console.log("startGameFunction")
 	axios.post('/startGame/' + mode + '/' + N)
 	.then(function(response) {
+      if(!response.data.authorized){
+        console.log("unauthorized")
+        return callback(true)
+      }
       console.log("start game posted", response)
-      return callback({
+      return callback(null,{
         tempUser: response.data.tempUser,
         gameId: response.data.gameId,
         modeMultiplier: response.data.modeMultiplier,
