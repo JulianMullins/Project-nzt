@@ -9,12 +9,38 @@ var router = express.Router();
 router.get('/myHighScores', function(req, res, next) {
   User.findById(req.user._id)
     .populate('stats')
-    .exec(function(err,user){
-      Leaderboard.findById(user.stats.leaderboard,function(err,leaderboard){
-        return leaderboard.scores;
-      })
-    })
-})
+    .exec(function(err, user) {
+      console.log(user.username);
+      if (!err) {
+        Leaderboard.findById(user.stats.leaderboard)
+          .populate('scores')
+          .exec(function(err, leaderboard) {
+            if (err) {
+              console.log(err);
+            } else {
+              var result = [];
+              if (leaderboard.scores.length == 0) {
+                res.json(result);
+              } else {
+                leaderboard.scores.map(function(score) {
+                  result.push({
+                    mode: score.mode,
+                    username: user.username,
+                    level: score.nLevel,
+                    score: parseInt(score.score)
+                  });
+                  console.log(result);
+                  if (result.length == leaderboard.scores.length) {
+                    res.json(result);
+                    return;
+                  }
+                });
+              }
+            }
+          });
+      }
+    });
+});
 
 //modes: classic,relaxed,silent,advanced
 
@@ -48,7 +74,7 @@ router.get('/allHighScores', function(req, res, next) {
               mode: score.mode,
               username: u.username,
               level: score.nLevel,
-              score: score.score
+              score: parseInt(score.score)
             });
             if (result.length == leaderboard.scores.length) {
               res.json(result);

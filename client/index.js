@@ -104,10 +104,10 @@ ReactDOM.render((
 
       <Route path="tutorial" component={Tutorial}/>
 
-      <Route path="levels/classic" component={ClassicLevels}/>
-      <Route path="levels/relaxed" component={RelaxedLevels}/>
-      <Route path="levels/silent" component={SilentLevels}/>
-      <Route path="levels/advanced" component={AdvancedLevels}/>
+      <Route path="levels/classic(/:error)" component={ClassicLevels}/>
+      <Route path="levels/relaxed(/:error)" component={RelaxedLevels}/>
+      <Route path="levels/silent(/:error)" component={SilentLevels}/>
+      <Route path="levels/advanced(/:error)" component={AdvancedLevels}/>
       <Route path="game/classic/:n" component={ClassicGame}/>
       <Route path="game/relaxed/:n" component={RelaxedGame}/>
       <Route path="game/silent/:n" component={SilentGame}/>

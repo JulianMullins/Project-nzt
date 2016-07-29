@@ -41,11 +41,11 @@ var LoginOverlay = React.createClass({
 
     //ajax post
     axios.post('/login', {
-      //withCredentials:true,
-      // headers: {
-      //   'Accept': 'application/json',
-      //   'Content-Type': 'application/json'
-      // },
+      withCredentials:true,
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
 
       username: this.state.username,
       password: this.state.password
@@ -57,28 +57,7 @@ var LoginOverlay = React.createClass({
       }
     }.bind(this))
   },
-  // facebook: function(e) {
-  //   e.preventDefault();
 
-  //   ajax facebook get
-
-  //   fetch('/login/facebook',{method:'get'
-  //   }).then(function(response) {
-  //     console.log(response);
-  //       return response.json();
-  //     }).then(function(response) {
-  //       console.log(response);
-  //       if (response.success) {
-  //         this.props.history.push('/home');
-  //       }
-  //     }.bind(this))
-
-  //   axios({
-  //     url:'/login/facebook',
-  //     withCredentials:true
-  //   })
-
-  // },
   render: function() {
     return (
       <div className="screen">
