@@ -4157,31 +4157,27 @@ var MyComponent = React.createClass({
   componentDidMount: function componentDidMount() {
     // console.log(this.state, 'state')
     axios.get('/taco', { withCredentials: true }).then(function (responseJson) {
-      //console.log(this.state,'state')
-      // //console.log(responseJson.data,'41')
       this.state.lineData1[0].values = [];
       this.state.lineData2[0].values = [];
       this.state.lineData2[1].values = [];
       this.state.lineData2[2].values = [];
       stats = responseJson.data.stats;
-      // //console.log(stats,'stats')
       _.map(stats, function (item, index) {
         if (item.score === 0 || item.reactionTimes[0] === 0) {
           return;
         }
         this.state.lineData1[0].values.push({ x: index, y: item.score });
-        this.state.lineData2[0].values.push({ x: index, y: parseFloat(item.reactionTimes[0]) * 1.2 / 1000 });
-        this.state.lineData2[1].values.push({ x: index, y: parseFloat(item.reactionTimes[0]) / 1000 });
-        this.state.lineData2[2].values.push({ x: index, y: parseFloat(item.reactionTimes[0]) * .8 / 1000 });
+        this.state.lineData2[0].values.push({ x: index, y: item.reactionTimes[0] * 1.2 / 1000 });
+        this.state.lineData2[1].values.push({ x: index, y: item.reactionTimes[0] / 1000 });
+        this.state.lineData2[2].values.push({ x: index, y: item.reactionTimes[0] * .8 / 1000 });
         var date = item.dateAchieved.split('Z');
         date = date[0].split('T');
         date = date[0].split('-');
         dates.push({ full: item.dateAchieved, splitDate: date });
       }.bind(this));
       console.log(dates, 'dates');
-      console.log(this.state.lineData2);
+      console.log(this.state.lineData2[2].values);
     }.bind(this)).then(function () {
-      //console.log(this.state,'this.state')
       this.setState({
         lineData1: this.state.lineData1,
         lineData2: this.state.lineData2
@@ -4193,16 +4189,23 @@ var MyComponent = React.createClass({
       'div',
       null,
       React.createElement(LineChart, {
+        className: 'topStatsGraph',
         data: this.state.lineData1,
-        width: 800,
-        height: 500,
-        title: 'Score Trends'
+        width: 1100,
+        height: 400,
+        title: 'Score Trends',
+        yAxisLabel: 'Altitude',
+        xAxisLabel: 'Elapsed Time (sec)'
+
       }),
       React.createElement(AreaChart, {
+        className: 'bottomStatsGraph',
         data: this.state.lineData2,
-        width: 800,
-        height: 500,
-        title: 'Reaction Time Trends'
+        width: 1100,
+        height: 400,
+        title: 'Reaction Time Trends',
+        yAxisLabel: 'Altitude',
+        xAxisLabel: 'Elapsed Time (sec)'
       })
     );
   }
