@@ -152,7 +152,8 @@ passport.use(new LocalStrategy({
             req.login(user,function(err){
               console.log('req.logging in')
               if(!err){
-                //return res.send({success:true})
+                console.log("success")
+                return res.send({success:true})
               }
             })
             return done(null,user);

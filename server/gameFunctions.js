@@ -15,7 +15,7 @@ var serverData = require('./serverData');
 var modeMultiplier = serverData.modeMultiplier;
 var penalty = serverData.penalty;
 var positivePoints = serverData.positivePoints;
-
+var scoresToPass = serverData.scoresToPass;
 
 var tempGame = null;
 
@@ -208,6 +208,7 @@ router.post('/gameEnd',function(req,res,next){
 
       game.passedLevel = false;
       console.log(game)
+      //console.log(scoresToPass)
       console.log(scoresToPass[game.mode][game.nLevel])
       console.log(game.score);
       console.log(game.score>= scoresToPass[game.mode][game.nLevel]);
