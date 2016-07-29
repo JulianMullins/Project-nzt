@@ -2578,6 +2578,7 @@ var _reactRouter = require('react-router');
 var React = require('react');
 var ReactDOM = require('react-dom');
 var axios = require('axios');
+
 axios.defaults.baseURL = process.env.url;
 
 var loginOverlay = require('./loginOverlay');
@@ -2633,7 +2634,8 @@ var GameOverOverlay = React.createClass({
         mode: gameData.data.game.mode,
         nLevel: gameData.data.game.nLevel,
         passedLevel: gameData.data.game.passedLevel,
-        isHighScore: gameData.data.game.isHighScore
+        isHighScore: gameData.data.game.isHighScore,
+        modeMultiplier: gameData.data.modeMultiplier
       });
     }.bind(this))).then(function () {
       this.renderLogin();
@@ -2716,15 +2718,15 @@ var GameOverOverlay = React.createClass({
             React.createElement(
               _reactRouter.Link,
               { to: '/gameOver/login' },
-              'Sign in'
+              ' Sign in'
             ),
-            'or',
+            ' or ',
             React.createElement(
               _reactRouter.Link,
               { to: '/gameOver/register' },
               'sign up'
             ),
-            'to save your progress, view statistics and compete with friends!'
+            ' to save your progress, view statistics and compete with friends!'
           )
         )
       });
@@ -2767,25 +2769,32 @@ var GameOverOverlay = React.createClass({
   },
 
   countUp: function countUp(count) {
-    var div_by = 100,
-        speed = Math.round(count / div_by),
-        $display = $('.count'),
-        run_count = 1,
-        int_speed = 24;
+    var div_by = 100;
+    var speed = parseInt(count / div_by);
+    console.log('ini speed', speed);
+    var display = $('.count');
+    var run_count = 1;
+    var int_speed = 18;
 
     var int = setInterval(function () {
       if (run_count < div_by) {
-        $display.text(speed * run_count);
+        display.text(speed * run_count);
+        console.log('speed', speed, 'run', run_count);
         run_count++;
-      } else if (parseInt($display.text()) < count) {
-        var curr_count = parseInt($display.text()) + 1;
-        $display.text(curr_count);
+      } else if (parseInt(display.text) < count) {
+        var curr_count = parseInt(display.text) + 1;
+        console.log("current", curr_count);
+        display.text(curr_count);
       } else {
         clearInterval(int);
       }
     }, int_speed);
   },
   render: function render() {
+    var score = parseFloat(this.state.score);
+    var n = parseInt(this.state.nLevel);
+    var modeM = parseInt(this.state.modeMultiplier);
+    var totalScore = parseInt(score * n * modeM);
     return React.createElement(
       'div',
       { className: 'gameOver', id: 'gameover' },
@@ -2800,7 +2809,8 @@ var GameOverOverlay = React.createClass({
         React.createElement(
           'h2',
           { className: 'classic' },
-          'You have unlocked level 2'
+          'You have unlocked level ',
+          n + 1
         )
       ),
       React.createElement(
@@ -2810,99 +2820,81 @@ var GameOverOverlay = React.createClass({
           'table',
           null,
           React.createElement(
-            'tr',
+            'tbody',
             null,
             React.createElement(
-              'td',
+              'tr',
               null,
-              'game score: '
+              React.createElement(
+                'td',
+                null,
+                'game score: '
+              ),
+              React.createElement(
+                'td',
+                { className: 'scoreValue' },
+                score
+              )
             ),
             React.createElement(
-              'td',
-              { className: 'scoreValue' },
-              this.state.score
-            )
-          ),
-          React.createElement(
-            'tr',
-            null,
-            React.createElement(
-              'td',
+              'tr',
               null,
-              'n-level: '
+              React.createElement(
+                'td',
+                null,
+                'n-level: '
+              ),
+              React.createElement(
+                'td',
+                { className: 'scoreValue' },
+                'x ',
+                this.state.nLevel
+              )
             ),
             React.createElement(
-              'td',
-              { className: 'scoreValue' },
-              'x'
-            )
-          ),
-          React.createElement(
-            'tr',
-            null,
-            React.createElement(
-              'td',
+              'tr',
               null,
-              'mode: '
+              React.createElement(
+                'td',
+                null,
+                'mode: '
+              ),
+              React.createElement(
+                'td',
+                { className: 'scoreValue' },
+                'x ',
+                modeM
+              )
             ),
             React.createElement(
-              'td',
-              { className: 'scoreValue' },
-              'x'
-            )
-          ),
-          React.createElement(
-            'tr',
-            { className: 'totalScore' },
-            React.createElement(
-              'td',
-              null,
-              'total score: '
-            ),
-            React.createElement(
-              'td',
-              { className: 'count scoreValue' },
-              this.countUp(2000)
+              'tr',
+              { className: 'totalScore' },
+              React.createElement(
+                'td',
+                null,
+                'total score: '
+              ),
+              React.createElement(
+                'td',
+                { className: 'count scoreValue' },
+                this.countUp(totalScore)
+              )
             )
           )
         )
       ),
-      React.createElement(
-        'div',
-        { className: 'gameOverPrompt' },
-        React.createElement(
-          'p',
-          null,
-          'It looks like you are not currently logged in.',
-          React.createElement(
-            _reactRouter.Link,
-            { to: '/gameOver/login' },
-            ' Sign in'
-          ),
-          ' or ',
-          React.createElement(
-            _reactRouter.Link,
-            { to: '/gameOver/register' },
-            'sign up'
-          ),
-          ' to save your progress, view statistics and compete with friends!'
-        )
-      ),
+      this.state.gameOverMessage,
       React.createElement(
         'div',
         { className: 'gameOverActions' },
         React.createElement(
           _reactRouter.Link,
-          { to: '/home' },
+          { onClick: this.gameOver, to: '/home' },
+          React.createElement('span', { className: 'fa fa-home fa-5x' }),
           React.createElement(
-            'a',
-            { onClick: this.gameOver },
-            React.createElement('span', { className: 'fa fa-home fa-5x' }),
-            React.createElement(
-              'h2',
-              null,
-              'home'
-            )
+            'h2',
+            null,
+            'home'
           )
         ),
         this.state.nextLevel,
@@ -2916,19 +2908,15 @@ var GameOverOverlay = React.createClass({
           null,
           React.createElement(
             _reactRouter.Link,
-            { to: '/leaderboard' },
+            { onClick: this.gameOver, to: '/leaderboard' },
             React.createElement(
-              'a',
-              { onClick: this.gameOver },
+              'span',
+              { className: 'lbChart' },
+              React.createElement('span', { className: 'fa fa-signal fa-5x' }),
               React.createElement(
-                'span',
-                { className: 'lbChart' },
-                React.createElement('span', { className: 'fa fa-signal fa-5x' }),
-                React.createElement(
-                  'h2',
-                  null,
-                  'leaderboard'
-                )
+                'h2',
+                null,
+                'leaderboard'
               )
             )
           )
