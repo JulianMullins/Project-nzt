@@ -110,6 +110,7 @@ router.get('/getGame',function(req,res,next){
     else{
       console.log(game)
       res.json({
+        modeMultiplier:modeMultiplier[game.mode],
         game:game,
         success:true
       })
