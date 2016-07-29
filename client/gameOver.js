@@ -35,7 +35,8 @@ var GameOverOverlay = React.createClass({
       nextLevelLink: <div></div>,
       anonUserName: null,
       isHighScore: false,
-      passedLevel: false
+      passedLevel: false,
+      modeMultiplier:0
     }
   },
   componentDidMount() {
@@ -67,7 +68,6 @@ var GameOverOverlay = React.createClass({
         modeMultiplier: gameData.data.modeMultiplier,
         start: 0
       })
-      //console.log(this.state,'data')
     }.bind(this))).then(function() {
       this.renderLogin()
     //console.log(this.state,'this.state')
@@ -95,7 +95,7 @@ var GameOverOverlay = React.createClass({
     //   data: {
     //     inputUsername:this.state.username,
     //     alreadyLoggedIn:this.state.isAnon
-    //   }
+    //   } 
     // })
 
   },
@@ -174,31 +174,29 @@ var GameOverOverlay = React.createClass({
     this.props.history.push('/game/' + this.state.mode + '/' + (this.state.nLevel))
   },
   countUp: function(count){
-
-  },
-  render: function() {
     var div_by = 100;
     console.log(count,'count')
-    var speed = parseInt(count / div_by);
-    console.log('ini speed', speed);
+    //count=parseInt(count)
+    var speed = parseFloat(count / div_by);
+    //console.log('ini speed', speed);
     var display = $('.count');
     var run_count = 1;
     var int_speed = 18;
   
     var int = setInterval(function() {
       if(run_count < div_by){
-        display.text(speed * run_count);
-        console.log('speed', speed, 'run', run_count);
+        display.text(parseInt(speed * run_count));
         run_count++;
       } else if(parseInt(display.text) < count) {
         var curr_count = parseInt(display.text) + 1;
-        console.log("current", curr_count);
-        display.text(curr_count);
-      } else {
+      } else { 
+        display.text(count)
         clearInterval(int);
       }
     }, int_speed);
+   
   },
+  render: function() {
     return (
       <div className="gameOver" id="gameover">
           <div className="gameOverHeader">
@@ -218,7 +216,7 @@ var GameOverOverlay = React.createClass({
                 </tr>
                 <tr>
                   <td>mode: </td>
-                  <td className="scoreValue">x {modeM}</td>
+                  <td className="scoreValue">x {this.state.modeMultiplier}</td>
                 </tr>
                 <tr className="totalScore">
                   <td>total score: </td>
