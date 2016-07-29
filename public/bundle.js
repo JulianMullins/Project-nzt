@@ -3073,49 +3073,25 @@ var Leaderboard = React.createClass({
   displayName: 'Leaderboard',
 
   getInitialState: function getInitialState() {
-    return { allScores: [] };
+    return { allScores: [], myScores: [], global: true };
   },
   componentDidMount: function componentDidMount() {
     this.getAllScores();
+    this.getMyScores();
   },
   getAllScores: function getAllScores() {
     axios.get('/allHighScores').then(function (response) {
-      console.log(response.data);
+      console.log('all scores', response.data);
       this.setState({ allScores: response.data });
     }.bind(this));
   },
-  myScores: function myScores() {
+  getMyScores: function getMyScores() {
     axios.get('/myHighScores').then(function (response) {
+      console.log('my scores', response.data);
       this.setState({ myScores: response.data });
     }.bind(this));
   },
   render: function render() {
-    var testData = [{
-      mode: 'Advanced',
-      username: 'Adam',
-      score: 2000,
-      level: 16
-    }, {
-      mode: 'Classic',
-      username: 'Taylor',
-      score: 1980,
-      level: 19
-    }, {
-      mode: 'Advanced',
-      username: 'Julian',
-      score: 1760,
-      level: 6
-    }, {
-      mode: 'Relaxed',
-      username: 'Ruth',
-      score: 1580,
-      level: 19
-    }, {
-      mode: 'Silent',
-      username: 'Virginia',
-      score: 70,
-      level: 2
-    }];
     return React.createElement(
       'div',
       { className: 'leaderboardPage' },
@@ -3130,6 +3106,24 @@ var Leaderboard = React.createClass({
         React.createElement(
           'section',
           null,
+          React.createElement(
+            'div',
+            { className: 'leaderboardButtons' },
+            React.createElement(
+              'a',
+              { onClick: function () {
+                  this.setState({ global: true });
+                }.bind(this), style: this.state.global ? selectedStyle : {} },
+              'Global'
+            ),
+            React.createElement(
+              'a',
+              { onClick: function () {
+                  this.setState({ global: false });
+                }.bind(this), style: !this.state.global ? selectedStyle : {} },
+              'Personal'
+            )
+          ),
           React.createElement(Table, { columns: [{
               key: 'username',
               label: 'Username'
@@ -3142,7 +3136,7 @@ var Leaderboard = React.createClass({
             }, {
               key: 'level',
               label: 'Level'
-            }], data: this.state.allScores, currentPage: 0, itemsPerPage: 10, pageButtonLimit: 5, sortable: true, defaultSort: {
+            }], data: this.state.global ? this.state.allScores : this.state.myScores, currentPage: 0, itemsPerPage: 10, pageButtonLimit: 5, sortable: true, defaultSort: {
               column: 'score',
               direction: 'desc'
             }, filterable: ['mode', 'username'] })
@@ -3151,6 +3145,11 @@ var Leaderboard = React.createClass({
     );
   }
 });
+
+var selectedStyle = {
+  backgroundColor: 'white',
+  color: '#f1ba03'
+};
 
 module.exports = Leaderboard;
 
@@ -4164,7 +4163,7 @@ var MyComponent = React.createClass({
   getInitialState: function getInitialState() {
     return {
       lineData1: [{ name: 'scores', values: [{ x: 0, y: 0 }] }],
-      lineData2: [{ name: 'reaction times', values: [{ x: 0, y: 0 }] }]
+      lineData2: [{ name: 'max reaction time', values: [{ x: 0, y: 0 }] }, { name: 'avg reaction time', values: [{ x: 0, y: 0 }] }, { name: 'min reaction time', values: [{ x: 0, y: 0 }] }]
     };
   },
   componentDidMount: function componentDidMount() {
@@ -4174,6 +4173,8 @@ var MyComponent = React.createClass({
       // //console.log(responseJson.data,'41')
       this.state.lineData1[0].values = [];
       this.state.lineData2[0].values = [];
+      this.state.lineData2[1].values = [];
+      this.state.lineData2[2].values = [];
       stats = responseJson.data.stats;
       // //console.log(stats,'stats')
       _.map(stats, function (item, index) {
@@ -4181,12 +4182,18 @@ var MyComponent = React.createClass({
           return;
         }
         this.state.lineData1[0].values.push({ x: index, y: item.score });
-        this.state.lineData2[0].values.push({ x: index, y: item.reactionTimes[0] || 0 });
-        dates.push(item.dateAchieved);
+        this.state.lineData2[0].values.push({ x: index, y: parseFloat(item.reactionTimes[0]) * 1.2 / 1000 });
+        this.state.lineData2[1].values.push({ x: index, y: parseFloat(item.reactionTimes[0]) / 1000 });
+        this.state.lineData2[2].values.push({ x: index, y: parseFloat(item.reactionTimes[0]) * .8 / 1000 });
+        var date = item.dateAchieved.split('Z');
+        date = date[0].split('T');
+        date = date[0].split('-');
+        dates.push({ full: item.dateAchieved, splitDate: date });
       }.bind(this));
-      //console.log(this,'this')
+      console.log(dates, 'dates');
+      console.log(this.state.lineData2);
     }.bind(this)).then(function () {
-      console.log(this.state, 'this.state');
+      //console.log(this.state,'this.state')
       this.setState({
         lineData1: this.state.lineData1,
         lineData2: this.state.lineData2
@@ -4199,15 +4206,15 @@ var MyComponent = React.createClass({
       null,
       React.createElement(LineChart, {
         data: this.state.lineData1,
-        width: 500,
-        height: 300,
-        title: 'Line Chart'
+        width: 800,
+        height: 500,
+        title: 'Score Trends'
       }),
       React.createElement(AreaChart, {
         data: this.state.lineData2,
-        width: 500,
-        height: 300,
-        title: 'Area Chart'
+        width: 800,
+        height: 500,
+        title: 'Reaction Time Trends'
       })
     );
   }
