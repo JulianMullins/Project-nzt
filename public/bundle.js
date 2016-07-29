@@ -1,6 +1,3 @@
-<<<<<<< HEAD
-console.error("SyntaxError: C:/Users/Student/documents/github/project-nzt/client/gameOver.js: Unexpected token (203:6) while parsing file: C:\\Users\\Student\\documents\\github\\project-nzt\\client\\gameOver.js");
-=======
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
 // shim for using process in browser
 
@@ -2613,7 +2610,8 @@ var GameOverOverlay = React.createClass({
       nextLevelLink: React.createElement('div', null),
       anonUserName: null,
       isHighScore: false,
-      passedLevel: false
+      passedLevel: false,
+      modeMultiplier: 0
     };
   },
   componentDidMount: function componentDidMount() {
@@ -2644,7 +2642,6 @@ var GameOverOverlay = React.createClass({
         modeMultiplier: gameData.data.modeMultiplier,
         start: 0
       });
-      //console.log(this.state,'data')
     }.bind(this))).then(function () {
       this.renderLogin();
       //console.log(this.state,'this.state')
@@ -2673,7 +2670,7 @@ var GameOverOverlay = React.createClass({
     //   data: {
     //     inputUsername:this.state.username,
     //     alreadyLoggedIn:this.state.isAnon
-    //   }
+    //   } 
     // })
 
   },
@@ -2791,34 +2788,26 @@ var GameOverOverlay = React.createClass({
   countUp: function countUp(count) {
     var div_by = 100;
     console.log(count, 'count');
-    var speed = parseInt(count / div_by);
-    console.log('ini speed', speed);
+    //count=parseInt(count)
+    var speed = parseFloat(count / div_by);
+    //console.log('ini speed', speed);
     var display = $('.count');
     var run_count = 1;
     var int_speed = 18;
 
     var int = setInterval(function () {
       if (run_count < div_by) {
-        display.text(speed * run_count);
-        console.log('speed', speed, 'run', run_count);
+        display.text(parseInt(speed * run_count));
         run_count++;
       } else if (parseInt(display.text) < count) {
         var curr_count = parseInt(display.text) + 1;
-        console.log("current", curr_count);
-        display.text(curr_count);
       } else {
+        display.text(count);
         clearInterval(int);
       }
     }, int_speed);
   },
   render: function render() {
-    // console.log(this.state,'this.state')
-    // var score = parseFloat(this.state.score);
-    // var n = parseInt(this.state.nLevel);
-    // var modeM = parseInt(this.state.modeMultiplier);
-    // console.log(modeM,'modeM')
-    // var totalScore = parseInt(score*n*modeM);
-    // console.log(totalScore,'totalScore')
     return React.createElement(
       'div',
       { className: 'gameOver', id: 'gameover' },
@@ -2887,7 +2876,7 @@ var GameOverOverlay = React.createClass({
                 'td',
                 { className: 'scoreValue' },
                 'x ',
-                modeM
+                this.state.modeMultiplier
               )
             ),
             React.createElement(
@@ -47934,4 +47923,3 @@ function isUnsafe(obj) {
 }.call(this));
 
 },{}]},{},[13]);
->>>>>>> refs/remotes/origin/master
