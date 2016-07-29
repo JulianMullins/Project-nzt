@@ -5,6 +5,9 @@ var RelaxedStartOverlay = require('./gameStartOverlay').RelaxedStartOverlay;
 var axios = require('axios');
 axios.defaults.baseURL = process.env.url;
 
+var endGameFunction = require('./serverFunctions').endGameFunction;
+var startGameFunction = require('./serverFunctions').startGameFunction;
+
 //COLLECTION OF GLOBAL VARIABLES TO MAKE EVERYONES LIFE EASIER
 //create global variable for reaction counter
 var reactionStart;
@@ -54,25 +57,37 @@ var RelaxedMode = React.createClass({
     }
   },
   componentDidMount: function() {
-    axios.post('/startGame/' + this.state.mode + '/' + this.state.N).then(function(response) {
-      console.log("start game posted", response)
+    // axios.post('/startGame/' + this.state.mode + '/' + this.state.N).then(function(response) {
+    //   console.log("start game posted", response)
+    //   this.setState({
+    //     tempUser: response.data.tempUser,
+    //     gameId: response.data.gameId,
+    //     modeMultiplier: response.data.modeMultiplier,
+    //     penalty: response.data.penalty,
+    //     positivePoints: response.data.positivePoints,
+    //     userId: response.data.userId
+    //   });
+    //   console.log(this.state)
+    //   console.log("game posted")
+
+    //   axios.get('/isUser').then(function(response) {
+    //     console.log("isuser data: " + response.data)
+    //   })
+
+    // }.bind(this))
+
+
+
+    startGameFunction(this.state.mode,this.state.N,function(obj){
       this.setState({
-        tempUser: response.data.tempUser,
-        gameId: response.data.gameId,
-        modeMultiplier: response.data.modeMultiplier,
-        penalty: response.data.penalty,
-        positivePoints: response.data.positivePoints,
-        userId: response.data.userId
-      });
-      console.log(this.state)
-      console.log("game posted")
-
-      axios.get('/isUser').then(function(response) {
-        console.log("isuser data: " + response.data)
+        tempUser: obj.tempUser,
+        gameId: obj.gameId,
+        modeMultiplier:obj.modeMultiplier,
+        penalty:obj.penalty,
+        positivePoints:obj.positivePoints,
+        userId: obj.userId
       })
-
-    }.bind(this))
-
+    }.bind(this));
     console.log("component mounted")
   },
   componentWillUnmount: function() {
@@ -201,31 +216,42 @@ var RelaxedMode = React.createClass({
         clearInterval(iterations);
         console.log(fullScore)
         console.log(matchHit/matchCount, 'accuracy')
-        axios.post('/gameEnd', {
-          gameId: this.state.gameId,
-          score: fullScore,
-          reactionTimes: reactionTimes,
-          userId: this.state.userId
-
-        }).then(function(response) {
-          console.log('end game posted')
-          // if(response.data.success){
-          //   this.props.history.push('/gameOver');
-          // }
-
-          axios.post('/gameOver',{
-            userId: response.data.userId,
-            passedLevel:response.data.passedLevel,
-            gameId:response.data.gameId
-          }).then(function(response){
-            if(response.data.success){
-              this.props.history.push('/gameOver');
-            }
-            this.props.history.push('/gameOver');
-          }.bind(this))
 
 
+
+        endGameFunction(fullScore,reactionTimes,this.state.gameId,this.state.userId,function(success){
+          if(success){
+            this.props.history.push('/gameOver')
+          }
         }.bind(this))
+
+
+
+        // axios.post('/gameEnd', {
+        //   gameId: this.state.gameId,
+        //   score: fullScore,
+        //   reactionTimes: reactionTimes,
+        //   userId: this.state.userId
+
+        // }).then(function(response) {
+        //   console.log('end game posted')
+        //   // if(response.data.success){
+        //   //   this.props.history.push('/gameOver');
+        //   // }
+
+        //   axios.post('/gameOver',{
+        //     userId: response.data.userId,
+        //     passedLevel:response.data.passedLevel,
+        //     gameId:response.data.gameId
+        //   }).then(function(response){
+        //     if(response.data.success){
+        //       this.props.history.push('/gameOver');
+        //     }
+        //     this.props.history.push('/gameOver');
+        //   }.bind(this))
+
+
+        // }.bind(this))
 
       }
       ////////////////////////////////////////////////////////////////////////////////////

@@ -29,6 +29,10 @@ router.post('/startGame/:mode/:nLevel',function(req,res,next){
   //if user, create game, save game, add to user.currentGame
   if(req.user){
     //console.log(req.user);
+    if(req.user.maxN[req.params.mode]<req.params.nLevel){
+      res.json({success:false});
+      return;
+    }
     var tempGame = new Game({
       user:req.user,
       mode:req.params.mode,
@@ -45,6 +49,7 @@ router.post('/startGame/:mode/:nLevel',function(req,res,next){
         req.user.save();
         console.log(req.user, "game posted")
         res.json({
+          success:true,
           gameId: game._id,
           tempUser: false,
           modeMultiplier: modeMultiplier,

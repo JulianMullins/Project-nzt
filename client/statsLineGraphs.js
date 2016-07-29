@@ -28,18 +28,22 @@ axios.get('/taco', {withCredentials: true})
     stats=responseJson.data.stats;
     // //console.log(stats,'stats')
     _.map(stats, function(item, index){
-      this.state.lineData1[0].values.push({x: item.score, y:index})
-      this.state.lineData2[0].values.push({x: item.reactionTimes[0], y: index})
+      if(item.score===0 || item.reactionTimes[0]===0){
+        return
+      }
+      this.state.lineData1[0].values.push({x: index, y:item.score})
+      this.state.lineData2[0].values.push({x: index, y:item.reactionTimes[0] || 0})
       dates.push(item.dateAchieved)
     }.bind(this))
-    console.log(this,'this')
+    //console.log(this,'this')
   }.bind(this))
-  // .then(function(){
-  //   this.setState({
-  //     lineData1: this.state.lineData1,
-  //     lineData2: this.state.lineData2
-  //   })
-  // })
+  .then(function(){
+    console.log(this.state,'this.state')
+    this.setState({
+      lineData1: this.state.lineData1,
+      lineData2: this.state.lineData2
+    })
+}.bind(this))
 },
   render: function() {
    return (<div><LineChart
