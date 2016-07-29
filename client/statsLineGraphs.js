@@ -54,7 +54,7 @@ axios.get('/taco', {withCredentials: true})
         className='topStatsGraph'
         data={this.state.lineData1}
         width={1100}
-        height={500}
+        height={400}
         title="Score Trends"
         yAxisLabel="Altitude"
         xAxisLabel="Elapsed Time (sec)"
@@ -64,7 +64,7 @@ axios.get('/taco', {withCredentials: true})
         className='bottomStatsGraph'
         data={this.state.lineData2}
         width={1100}
-        height={500}
+        height={400}
         title="Reaction Time Trends"
         yAxisLabel="Altitude"
         xAxisLabel="Elapsed Time (sec)"
