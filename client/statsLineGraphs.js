@@ -60,6 +60,8 @@ axios.get('/taco', {withCredentials: true})
         width={800}
         height={500}
         title="Score Trends"
+        xAxis={{innerTickSize: 10, label: "date"}}
+        yAxis={{label: "score"}}
         />
         <AreaChart
         className='bottomStatsGraph'
@@ -67,6 +69,8 @@ axios.get('/taco', {withCredentials: true})
         width={800}
         height={500}
         title="Reaction Time Trends"
+        xAxis={{label: "date"}}
+        yAxis={{label: "time (s)"}}
         /></div>)
   }
 });
