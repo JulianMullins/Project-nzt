@@ -201,7 +201,7 @@ var GameOverOverlay = React.createClass({
       <div className="gameOver" id="gameover">
           <div className="gameOverHeader">
               <h1>Congrats!</h1>
-              <h2 className="classic">You have unlocked level {n+1}</h2>
+              <h2 className="classic">You have unlocked level {nLevel+1}</h2>
           </div>
           <div className="scoreTable">
             <table>

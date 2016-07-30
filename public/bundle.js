@@ -2823,7 +2823,7 @@ var GameOverOverlay = React.createClass({
           'h2',
           { className: 'classic' },
           'You have unlocked level ',
-          n + 1
+          nLevel + 1
         )
       ),
       React.createElement(
