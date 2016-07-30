@@ -2607,6 +2607,8 @@ var GameOverOverlay = React.createClass({
       mode: null,
       nLevel: 1,
       gameOverMessage: React.createElement('div', null),
+      gameOverInform: React.createElement('h2', null),
+      gameOverCongrats: React.createElement('h1', null),
       nextLevelLink: React.createElement('div', null),
       anonUserName: null,
       isHighScore: false,
@@ -2618,10 +2620,6 @@ var GameOverOverlay = React.createClass({
 
     this.setScore();
     this.getData();
-    this.unlockLevel();
-    this.anonHighScore();
-    this.renderLogin();
-    this.nextLevelBtn();
     //this.setState({firstRender: false})
   },
   setScore: function setScore() {
@@ -2631,30 +2629,32 @@ var GameOverOverlay = React.createClass({
   },
   getData: function getData() {
     axios.all([getUser(), getGame()]).then(axios.spread(function (userData, gameData) {
+      console.log("gameData: ", gameData);
+      console.log("userData: ", userData);
       this.setState({
         //username:userData.data.username,
         isAnon: !userData.data.alreadyLoggedIn,
         score: Math.floor(gameData.data.game.score),
         mode: gameData.data.game.mode,
         nLevel: gameData.data.game.nLevel,
-        passedLevel: gameData.data.game.passedLevel,
+        scoreToPass: gameData.data.scoreToPass,
+        passedLevel: gameData.data.passedLevel,
         isHighScore: gameData.data.game.isHighScore,
         modeMultiplier: gameData.data.modeMultiplier,
         start: 0
       });
     }.bind(this))).then(function () {
       this.renderLogin();
-      //console.log(this.state,'this.state')
+      this.unlockLevel();
+      this.anonHighScore();
+      this.renderLogin();
+      this.nextLevelBtn();
       score = parseFloat(this.state.score);
-      console.log(score, 'score');
       var n = parseInt(this.state.nLevel);
-      console.log(n, 'n');
       var modeM = parseInt(this.state.modeMultiplier);
-      console.log(modeM, 'modeM');
       var totalScore = parseInt(score * n * modeM);
-      console.log(totalScore, 'totalScore');
       this.setState({
-        start: this.countUp(totalScore)
+        countUp: this.countUp(totalScore)
       });
     }.bind(this));
   },
@@ -2675,15 +2675,38 @@ var GameOverOverlay = React.createClass({
 
   },
   unlockLevel: function unlockLevel() {
-    if (this.state.isHighScore) {
+    if (this.state.passedLevel) {
       this.setState({
-        gameOverMessage: React.createElement(
+        gameOverInform: React.createElement(
+          'h2',
+          { className: 'classic' },
+          'You have unlocked level ',
+          this.state.nLevel + 1
+        ),
+        gameOverCongrats: React.createElement(
           'h1',
-          { className: 'gameOverInform classic' },
-          'You have unlocked level 2'
+          null,
+          'Congrats!'
+        )
+      });
+    } else {
+      this.setState({
+        gameOverInform: React.createElement(
+          'h2',
+          { className: 'classic' },
+          'You need ',
+          this.state.scoreToPass * this.state.nLevel * this.state.modeMultiplier,
+          ' points to unlock level ',
+          this.state.nLevel + 1
+        ),
+        gameOverCongrats: React.createElement(
+          'h1',
+          null,
+          'Nice try!'
         )
       });
     }
+    console.log("state: ", this.state);
   },
   anonHighScore: function anonHighScore() {
     //if anon get high score, can save with tempusername, or login
@@ -2692,7 +2715,7 @@ var GameOverOverlay = React.createClass({
         gameOverMessage: React.createElement(
           'p',
           null,
-          'You earned a high score on our overall leaderboards. If you wish to be added to the leaderboard and without logging in, provide a name below to display with your score',
+          'You earned a high score on our overall leaderboards. If you wish to be added to the leaderboard without logging in, provide a name below to display with your score',
           React.createElement(
             'form',
             null,
@@ -2768,10 +2791,18 @@ var GameOverOverlay = React.createClass({
   nextLevelBtn: function nextLevelBtn() {
     if (this.state.passedLevel) {
       this.setState({
-        nextLevel: React.createElement(
+        nextOrReplay: React.createElement(
           'h2',
           { className: 'levelButton', onClick: this.nextLevelLink },
           'next level'
+        )
+      });
+    } else {
+      this.setState({
+        nextOrReplay: React.createElement(
+          'h2',
+          { className: 'levelButton', onClick: this.repeatLevel },
+          'replay level'
         )
       });
     }
@@ -2814,17 +2845,8 @@ var GameOverOverlay = React.createClass({
       React.createElement(
         'div',
         { className: 'gameOverHeader' },
-        React.createElement(
-          'h1',
-          null,
-          'Congrats!'
-        ),
-        React.createElement(
-          'h2',
-          { className: 'classic' },
-          'You have unlocked level ',
-          nLevel + 1
-        )
+        this.state.gameOverCongrats,
+        this.state.gameOverInform
       ),
       React.createElement(
         'div',
@@ -2890,7 +2912,7 @@ var GameOverOverlay = React.createClass({
               React.createElement(
                 'td',
                 { className: 'count scoreValue' },
-                this.state.start
+                this.state.countUp
               )
             )
           )
@@ -2910,12 +2932,7 @@ var GameOverOverlay = React.createClass({
             'home'
           )
         ),
-        this.state.nextLevel,
-        React.createElement(
-          'h2',
-          { className: 'levelButton', onClick: this.repeatLevel },
-          'replay level'
-        ),
+        this.state.nextOrReplay,
         React.createElement(
           'div',
           null,
