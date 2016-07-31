@@ -123,15 +123,15 @@ var RegisterOverlay = React.createClass({
           <h1>Welcome</h1>
           <div className="pa">Create an account to get started.</div>
           <form>
-            <input type="text" placeholder="name" name="name" id="name" value={this.state.name} onChange={this.update}></input>
+            <input type="text" placeholder="Name" name="name" id="name" value={this.state.name} onChange={this.update}></input>
             <br></br>
-            <input type="text" placeholder="username" name="username" id="username" value={this.state.username} onChange={this.update}></input>
+            <input type="text" placeholder="Username" name="username" id="username" value={this.state.username} onChange={this.update}></input>
             <br></br>
-            <input type="text" placeholder="email" name="email" id="email" value={this.state.email} onChange={this.update}></input>
+            <input type="text" placeholder="Email" name="email" id="email" value={this.state.email} onChange={this.update}></input>
             <br/>
-            <input type="password" placeholder="password" name="password" id="password" value={this.state.password} onChange={this.update}></input>
+            <input type="password" placeholder="Password" name="password" id="password" value={this.state.password} onChange={this.update}></input>
             <br></br>
-            <input type="password" placeholder="confirm password" name="passwordConfirm" id="passwordConfirm" value={this.state.passwordConfirm} onChange={this.update}></input>
+            <input type="password" placeholder="Confirm password" name="passwordConfirm" id="passwordConfirm" value={this.state.passwordConfirm} onChange={this.update}></input>
             <div className="buttongroup">
               <button className="form-btn dx" onClick={this.register}><Link to="/">Register</Link></button>
               <button className="form-btn dx2"><Link to="/login">Back to Login</Link></button>
