@@ -2770,6 +2770,10 @@ var GameOverOverlay = React.createClass({
           )
         )
       });
+    } else {
+      this.setState({
+        gameOverMessage: React.createElement('div', { className: 'gameOverPromptDefault' })
+      });
     }
   },
   update: function update(e) {

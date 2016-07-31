@@ -147,6 +147,13 @@ var GameOverOverlay = React.createClass({
           </div>
       })
     }
+    else {
+      this.setState({
+        gameOverMessage:
+          <div className="gameOverPromptDefault">
+          </div>
+      })
+    }
   },
   update(e) {
 
