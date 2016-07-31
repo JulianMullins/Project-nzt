@@ -2481,24 +2481,100 @@ var Contact = React.createClass({
 				'div',
 				{ className: 'contactTop' },
 				React.createElement(
-					'h1',
-					null,
-					'Contact Us'
+					'div',
+					{ className: 'contactTopHeading' },
+					React.createElement(
+						'h1',
+						null,
+						'About Us'
+					),
+					React.createElement(
+						'p',
+						null,
+						'We are a team of college students from the Horizons School of Technology who came together to create a fun and intuitive method for increasing intelligence. We hope you enjoy playing this game as much as we enjoyed making it!'
+					)
 				),
 				React.createElement(
-					'p',
-					null,
-					'We\'d love to hear from you'
-				),
-				React.createElement(
-					'a',
-					{ target: '_blank', href: 'https://github.com/JulianMullins/Project-nzt' },
-					'Github'
-				),
-				React.createElement(
-					'a',
-					_defineProperty({ target: '_blank', href: 'https://cortexgame.typeform.com/to/xK1GK6' }, 'target', '_blank'),
-					'Feedback Form'
+					'div',
+					{ className: 'profiles' },
+					React.createElement(
+						'div',
+						{ className: 'aboutProfile' },
+						React.createElement(
+							'h2',
+							null,
+							'Julian Mullins'
+						),
+						React.createElement(
+							'p',
+							null,
+							'Front-End'
+						),
+						React.createElement('img', { src: 'images/profiles/julian.jpg' }),
+						React.createElement(
+							'span',
+							{ className: 'socialMedia' },
+							React.createElement('a', { target: '_blank', href: 'https://www.linkedin.com/in/mullinsjulian', className: 'fa fa-linkedin-square fa-2x' }),
+							React.createElement('a', { target: '_blank', href: 'mailto:mullinsjulian@gmail.com', className: 'fa fa-envelope fa-2x' }),
+							React.createElement('a', { target: '_blank', href: 'http://www.mullinsjulian.com', className: 'fa fa-globe fa-2x' })
+						)
+					),
+					React.createElement(
+						'div',
+						{ className: 'aboutProfile' },
+						React.createElement(
+							'h2',
+							null,
+							'Adam He'
+						),
+						React.createElement(
+							'p',
+							null,
+							'Front-End'
+						)
+					),
+					React.createElement(
+						'div',
+						{ className: 'aboutProfile' },
+						React.createElement(
+							'h2',
+							null,
+							'Ruth Bagley'
+						),
+						React.createElement(
+							'p',
+							null,
+							'Back-End'
+						)
+					),
+					React.createElement(
+						'div',
+						{ className: 'aboutProfile' },
+						React.createElement(
+							'h2',
+							null,
+							'Taylor Concannon'
+						),
+						React.createElement(
+							'p',
+							null,
+							'Back-End'
+						)
+					),
+					React.createElement(
+						'div',
+						{ className: 'aboutProfile' },
+						React.createElement(
+							'h2',
+							null,
+							'Virginia Van Keuren'
+						),
+						React.createElement(
+							'p',
+							null,
+							'Designer'
+						)
+					)
 				)
 			),
 			React.createElement(
@@ -2507,12 +2583,17 @@ var Contact = React.createClass({
 				React.createElement(
 					'h1',
 					null,
-					'About Us'
+					'Contact Us'
 				),
 				React.createElement(
 					'p',
 					null,
-					'We\'re a team of college students from Horizons School of Technology who came together to create beautifully designed products that puts people\'s needs first. Cortex is the brain child of five people who want to improve the memories of people in a fun and easy way. Check out our work on Github and other projects!'
+					'We\'d love to hear from you!'
+				),
+				React.createElement(
+					'a',
+					_defineProperty({ target: '_blank', href: 'https://cortexgame.typeform.com/to/xK1GK6' }, 'target', '_blank'),
+					'Feedback Form'
 				)
 			)
 		);
@@ -4037,15 +4118,15 @@ var RegisterOverlay = React.createClass({
         React.createElement(
           'form',
           null,
-          React.createElement('input', { type: 'text', placeholder: 'name', name: 'name', id: 'name', value: this.state.name, onChange: this.update }),
+          React.createElement('input', { type: 'text', placeholder: 'Name', name: 'name', id: 'name', value: this.state.name, onChange: this.update }),
           React.createElement('br', null),
-          React.createElement('input', { type: 'text', placeholder: 'username', name: 'username', id: 'username', value: this.state.username, onChange: this.update }),
+          React.createElement('input', { type: 'text', placeholder: 'Username', name: 'username', id: 'username', value: this.state.username, onChange: this.update }),
           React.createElement('br', null),
-          React.createElement('input', { type: 'text', placeholder: 'email', name: 'email', id: 'email', value: this.state.email, onChange: this.update }),
+          React.createElement('input', { type: 'text', placeholder: 'Email', name: 'email', id: 'email', value: this.state.email, onChange: this.update }),
           React.createElement('br', null),
-          React.createElement('input', { type: 'password', placeholder: 'password', name: 'password', id: 'password', value: this.state.password, onChange: this.update }),
+          React.createElement('input', { type: 'password', placeholder: 'Password', name: 'password', id: 'password', value: this.state.password, onChange: this.update }),
           React.createElement('br', null),
-          React.createElement('input', { type: 'password', placeholder: 'confirm password', name: 'passwordConfirm', id: 'passwordConfirm', value: this.state.passwordConfirm, onChange: this.update }),
+          React.createElement('input', { type: 'password', placeholder: 'Confirm password', name: 'passwordConfirm', id: 'passwordConfirm', value: this.state.passwordConfirm, onChange: this.update }),
           React.createElement(
             'div',
             { className: 'buttongroup' },

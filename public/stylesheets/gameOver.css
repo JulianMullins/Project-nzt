@@ -52,7 +52,7 @@
 
 .scoreTable {
   display: flex;
-  align-items: center;
+  align-items: flex-end;
   justify-content: center;
   height: 30vh;
   width: 100vw;
@@ -103,7 +103,6 @@
 .gameOverPromptDefault {
   height: 20vh;
 }
-
 
 .gameOverActions {
   display: flex;
