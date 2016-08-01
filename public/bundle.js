@@ -2653,6 +2653,14 @@ var Contact = React.createClass({
 							'p',
 							null,
 							'Front-End'
+						),
+						React.createElement('img', { src: 'images/profiles/adam.jpg' }),
+						React.createElement(
+							'span',
+							{ className: 'socialMedia' },
+							React.createElement('a', { target: '_blank', href: 'https://www.linkedin.com/in/shuaihe', className: 'fa fa-linkedin-square fa-2x' }),
+							React.createElement('a', { target: '_blank', href: 'mailto:shuaihe2018@u.northwestern.edu', className: 'fa fa-envelope fa-2x' }),
+							React.createElement('a', { target: '_blank', href: 'http://www.adamhe.me/', className: 'fa fa-globe fa-2x' })
 						)
 					),
 					React.createElement(
@@ -4422,8 +4430,6 @@ module.exports = Science;
 // </div>
 
 },{"react":277,"react-dom":45,"react-router":75}],21:[function(require,module,exports){
-<<<<<<< HEAD
-=======
 // var React = require('react');
 // var ReactDOM = require('react-dom');
 // var rd3 = require('react-d3-basic');
@@ -4510,7 +4516,6 @@ module.exports = Science;
 //  //        yAxisLabel="Altitude"
 //  //        xAxisLabel="Elapsed Time (sec)"
 //  //        />
->>>>>>> refs/remotes/origin/master
 "use strict";
 
 },{}],22:[function(require,module,exports){

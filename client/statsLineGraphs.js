@@ -1,5 +1,3 @@
-<<<<<<< HEAD
-=======
 // var React = require('react');
 // var ReactDOM = require('react-dom');
 // var rd3 = require('react-d3-basic');
@@ -90,4 +88,3 @@
 //  //        yAxisLabel="Altitude"
 //  //        xAxisLabel="Elapsed Time (sec)"
 //  //        />
->>>>>>> refs/remotes/origin/master
