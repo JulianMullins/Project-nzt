@@ -4322,6 +4322,8 @@ var MyComponent = React.createClass({
         title: 'Score History',
         x: x,
         xScale: xScale,
+        yAxisClassName: 'lineY',
+        xAxisClassName: 'lineX',
         yLabel: 'Scores'
         //x axis includes first and last day of play (for time range)
         , xLabel: 'Gameplay from ' + dayA + ', ' + monthA + ' ' + dateA + ', ' + yearA + ' to ' + dayB + ', ' + monthB + ' ' + dateB + ', ' + yearB
@@ -4334,6 +4336,8 @@ var MyComponent = React.createClass({
         className: 'StatsReactionGraph',
         margins: margins,
         chartSeries: this.state.chartSeries2,
+        yAxisClassName: 'areaY',
+        xAxisClassName: 'areaX',
         x: x,
         xScale: xScale,
         yLabel: 'Reaction Times (ms)'
