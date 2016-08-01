@@ -59,10 +59,10 @@ var scoresToPass = {
 }
 
 var modeMultiplier = {
-  relaxed: 5,
-  silent: 10,
-  classic: 15,
-  advanced: 20
+  relaxed: 1,
+  silent: 2,
+  classic: 3,
+  advanced: 4
 }
 
 var penaltyPoints = 5;

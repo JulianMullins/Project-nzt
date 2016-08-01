@@ -4,6 +4,7 @@ var RelaxedStartOverlay = require('./gameStartOverlay').RelaxedStartOverlay;
 
 var axios = require('axios');
 axios.defaults.baseURL = process.env.url;
+import { Link } from 'react-router'
 
 var endGameFunction = require('./serverFunctions').endGameFunction;
 var startGameFunction = require('./serverFunctions').startGameFunction;
@@ -119,7 +120,7 @@ var RelaxedMode = React.createClass({
   position: function() {
     var posQueue = [];
     var timeTilPosMatch = parseInt((Math.random() * 5) + this.state.N);
-    var timeKeeper = 60;
+    var timeKeeper = 44;
 
     iterations = setInterval(function() {
       timeKeeper--;
@@ -217,7 +218,7 @@ var RelaxedMode = React.createClass({
       ////////////////////////////////////////////////////////////////////////////////////////
       ////////////////////////////////////////////////////////////////////////////////////
       //RUTH THIS IS WHERE THE GAME ENDS///////////////////////////////////////////
-      if (timeKeeper === 50) {
+      if (timeKeeper === 0) {
         //give gameScore variable the final score
         clearInterval(iterations);
         console.log(fullScore)
@@ -279,7 +280,7 @@ var RelaxedMode = React.createClass({
   },
   render: function() {
     var overlay = this.state.overlay
-      ? (<RelaxedStartOverlay click={this.startGame}/>)
+      ? (<RelaxedStartOverlay nLevel={this.state.N} click={this.startGame}/>)
       : '';
 
     var scoreAlert;
@@ -326,40 +327,45 @@ var RelaxedMode = React.createClass({
       );
 
     return (
-      <div className="gameContainer">
-        {overlay}
-        <div className="gameFullHeader">
-          <span className="gameTitle">
-            <h1 className="relaxed modeTitle">Relaxed</h1>
-            <h1 className="relaxed nTitle">(N={this.state.N})</h1>
-          </span>
-          <div className="gameHeading">
-            <div className="gameScore relaxed">
-              <h2>Score: {this.state.score}</h2>
-              {scoreUpdate}
+      <div className="fullGameView">
+        <div className="gameContainer">
+          {overlay}
+          <div className="gameFullHeader">
+            <span className="gameTitle">
+              <h1 className="relaxed modeTitle">Relaxed</h1>
+              <h1 className="relaxed nTitle">(N={this.state.N})</h1>
+            </span>
+            <div className="gameHeading">
+              <div className="gameScore relaxed">
+                <h2>Score: {this.state.score}</h2>
+                {scoreUpdate}
+              </div>
+              {gameTimer}
             </div>
-            {gameTimer}
+          </div>
+          <div className="gameBoard">
+            <div className="gameSquare" style={this.state.style[0]}></div>
+            <div className="gameSquare" style={this.state.style[1]}></div>
+            <div className="gameSquare" style={this.state.style[2]}></div>
+            <div className="gameSquare" style={this.state.style[3]}></div>
+            <div className="gameSquare" style={this.state.style[4]}></div>
+            <div className="gameSquare" style={this.state.style[5]}></div>
+            <div className="gameSquare" style={this.state.style[6]}></div>
+            <div className="gameSquare" style={this.state.style[7]}></div>
+            <div className="gameSquare" style={this.state.style[8]}></div>
+          </div>
+          <div className="gameFullFooter">
+            <div className="scoreAlert">
+              {scoreAlert}
+            </div>
+            <div className="gameButtonsContainer">
+              <a onClick={this.posMatch} style={this.state.posStyle} className='relaxedButton'>POSITION</a>
+            </div>
           </div>
         </div>
-        <div className="gameBoard">
-          <div className="gameSquare" style={this.state.style[0]}></div>
-          <div className="gameSquare" style={this.state.style[1]}></div>
-          <div className="gameSquare" style={this.state.style[2]}></div>
-          <div className="gameSquare" style={this.state.style[3]}></div>
-          <div className="gameSquare" style={this.state.style[4]}></div>
-          <div className="gameSquare" style={this.state.style[5]}></div>
-          <div className="gameSquare" style={this.state.style[6]}></div>
-          <div className="gameSquare" style={this.state.style[7]}></div>
-          <div className="gameSquare" style={this.state.style[8]}></div>
-        </div>
-        <div className="gameFullFooter">
-          <div className="scoreAlert">
-            {scoreAlert}
-          </div>
-          <div className="gameButtonsContainer">
-            <a onClick={this.posMatch} style={this.state.posStyle} className='relaxedButton'>POSITION</a>
-          </div>
-        </div>
+
+        <Link className="gameHomeBtn" to="/home"><span className="fa fa-home fa-4x relaxed">
+        </span></Link>
       </div>
     );
   }
