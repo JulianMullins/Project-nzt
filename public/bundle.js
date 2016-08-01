@@ -4560,6 +4560,15 @@ var MyComponent = React.createClass({
   }
 });
 
+//  //        <AreaChart
+//  //        className='bottomStatsGraph'
+//  //        data={this.state.lineData2}
+//  //        width={1100}
+//  //        height={400}
+//  //        title="Reaction Time Trends"
+//  //        yAxisLabel="Altitude"
+//  //        xAxisLabel="Elapsed Time (sec)"
+//  //        />
 module.exports = MyComponent;
 
 },{"axios":23,"d3":45,"react":511,"react-d3-basic":55,"react-dom":276,"underscore":528}],22:[function(require,module,exports){
