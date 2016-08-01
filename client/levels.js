@@ -109,6 +109,7 @@ var ClassicLevels = React.createClass({
     return (
       <div className="levelBox">
         <h1 id="classic" className="classic">Classic</h1>
+        {this.state.error ? <div>Unauthorized!</div> :''}
         <div className="grid">
           {squareArr.map(function(square) {
             return square;
@@ -147,10 +148,11 @@ var RelaxedLevels = React.createClass({
   render: function() {
     var square = this.state.maxN;
     var squareArr = getSquareArr(square, this.state.mode)
+
     return (
       <div className="levelBox">
-      {this.state.error}
         <h1 id="relaxed" className="relaxed">Relaxed</h1>
+        {this.state.error ? <div>Unauthorized!</div> :''}
         <div className="grid">
           {squareArr.map(function(square) {
             return square;
@@ -169,7 +171,11 @@ var RelaxedLevels = React.createClass({
 
 var SilentLevels = React.createClass({
   getInitialState: function() {
-    return {maxN: 1, mode: 'silent'}
+    return {
+      maxN: 1, 
+      mode: 'silent',
+      error:this.props.params.error
+    }
   },
   setMaxN: function() {
     getMaxN(this.state.mode, function(maxN) {
@@ -187,8 +193,8 @@ var SilentLevels = React.createClass({
 
     return (
       <div className="levelBox">
-        {this.state.error}
         <h1 id="silent" className="silent">Silent</h1>
+        {this.state.error ? <div>Unauthorized!</div> :''}
         <div className="grid">
           {squareArr.map(function(square) {
             return square;
@@ -207,7 +213,11 @@ var SilentLevels = React.createClass({
 
 var AdvancedLevels = React.createClass({
   getInitialState: function() {
-    return {maxN: 1, mode: 'advanced'}
+    return {
+      maxN: 1, 
+      mode: 'advanced',
+      error:this.props.params.error
+    }
   },
   setMaxN: function() {
     getMaxN(this.state.mode, function(maxN) {
@@ -226,6 +236,7 @@ var AdvancedLevels = React.createClass({
     return (
       <div className="levelBox">
         <h1 id="advanced" className="advanced">Advanced</h1>
+        {this.state.error ? <div>Unauthorized!</div> :''}
         <div className="grid">
           {squareArr.map(function(square) {
             return square;
