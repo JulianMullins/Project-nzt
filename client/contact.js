@@ -60,7 +60,7 @@ var Contact = React.createClass({
 
 						<div className="aboutProfile">
 							<h2>Virginia Van Keuren</h2>
-							<p>Designer</p>
+							<p>Design</p>
 							<img src="images/profiles/virginia.jpg" />
 							<span className="socialMedia">
 								<a target="_blank" href="https://www.linkedin.com/in/virginiavankeuren" className="fa fa-linkedin-square fa-2x"></a>
