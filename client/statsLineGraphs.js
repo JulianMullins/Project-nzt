@@ -92,4 +92,13 @@ axios.get('/taco', {withCredentials: true})
   }
 });
 
+//  //        <AreaChart
+//  //        className='bottomStatsGraph'
+//  //        data={this.state.lineData2}
+//  //        width={1100}
+//  //        height={400}
+//  //        title="Reaction Time Trends"
+//  //        yAxisLabel="Altitude"
+//  //        xAxisLabel="Elapsed Time (sec)"
+//  //        />
 module.exports = MyComponent
