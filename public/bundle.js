@@ -155,6 +155,7 @@ var Mainmenu = React.createClass({
         hasUsername: response.data.isUser,
         name: response.data.name
       });
+    }.bind(this)).then(function () {
       if (this.state.hasUsername) {
         this.setState({
           userWelcome: React.createElement(
@@ -267,9 +268,13 @@ module.exports = Mainmenu;
 },{"./levels":15,"./loginOverlay":16,"./registerOverlay":19,"_process":1,"axios":23,"react":333,"react-dom":101,"react-router":131}],3:[function(require,module,exports){
 'use strict';
 
+var _reactRouter = require('react-router');
+
 var React = require('react');
 var GameTimer = require('./gameTimer');
 var axios = require('axios');
+
+
 var AdvancedStartOverlay = require('./gameStartOverlay').AdvancedStartOverlay;
 var fullScore = 0;
 var currentScore;
@@ -359,10 +364,10 @@ var AdvancedMode = React.createClass({
     var timeTilPositionMatch = parseInt(Math.random() * 5 + this.state.N);
     var timeTilColorMatch = parseInt(Math.random() * 5 + this.state.N);
     var timeTilSoundMatch = parseInt(Math.random() * 5 + this.state.N);
-    var timeKeeper = 0;
+    var timeKeeper = 44;
     //console.log(timekeeper)
     iterations = setInterval(function () {
-      timeKeeper++;
+      timeKeeper--;
       if (!this.state.correct[0] && !this.state.correct[1] && !this.state.correct[2]) {
         if (!this.state.colorMatch && !this.state.positionMatch && !this.state.soundMatch) {
           //console.log('no matches')
@@ -543,7 +548,7 @@ var AdvancedMode = React.createClass({
       ////////////////////////////////////////////////////////////////////////////////////
       //RUTH THIS IS WHERE THE GAME ENDS///////////////////////////////////////////
 
-      if (timeKeeper === 60) {
+      if (timeKeeper === 0) {
         clearInterval(iterations);
         setTimeout(function () {
           gameScore = this.state.score;
@@ -588,7 +593,7 @@ var AdvancedMode = React.createClass({
     this.setState({ soundPressed: pushStyle, correct: this.state.correct });
   },
   render: function render() {
-    var overlay = this.state.overlay ? React.createElement(AdvancedStartOverlay, { click: this.startGame }) : '';
+    var overlay = this.state.overlay ? React.createElement(AdvancedStartOverlay, { nLevel: this.state.N, click: this.startGame }) : '';
 
     var scoreAlert;
     var scoreUpdate;
@@ -633,84 +638,93 @@ var AdvancedMode = React.createClass({
 
     return React.createElement(
       'div',
-      { className: 'gameContainer' },
-      overlay,
+      { className: 'fullGameView' },
       React.createElement(
         'div',
-        { className: 'gameFullHeader' },
-        React.createElement(
-          'span',
-          { className: 'gameTitle' },
-          React.createElement(
-            'h1',
-            { className: 'advanced modeTitle' },
-            'Advanced'
-          ),
-          React.createElement(
-            'h1',
-            { className: 'advanced nTitle' },
-            '(N=',
-            this.state.N,
-            ')'
-          )
-        ),
+        { className: 'gameContainer' },
+        overlay,
         React.createElement(
           'div',
-          { className: 'gameHeading' },
+          { className: 'gameFullHeader' },
+          React.createElement(
+            'span',
+            { className: 'gameTitle' },
+            React.createElement(
+              'h1',
+              { className: 'advanced modeTitle' },
+              'Advanced'
+            ),
+            React.createElement(
+              'h1',
+              { className: 'advanced nTitle' },
+              '(N=',
+              this.state.N,
+              ')'
+            )
+          ),
           React.createElement(
             'div',
-            { className: 'gameScore advanced' },
+            { className: 'gameHeading' },
             React.createElement(
-              'h2',
-              null,
-              'Score: ',
-              this.state.score
+              'div',
+              { className: 'gameScore advanced' },
+              React.createElement(
+                'h2',
+                null,
+                'Score: ',
+                this.state.score
+              ),
+              scoreUpdate
             ),
-            scoreUpdate
-          ),
-          gameTimer
-        )
-      ),
-      React.createElement(
-        'div',
-        { className: 'gameBoard' },
-        React.createElement('div', { className: 'gameSquare', style: this.state.style[0] }),
-        React.createElement('div', { className: 'gameSquare', style: this.state.style[1] }),
-        React.createElement('div', { className: 'gameSquare', style: this.state.style[2] }),
-        React.createElement('div', { className: 'gameSquare', style: this.state.style[3] }),
-        React.createElement('div', { className: 'gameSquare', style: this.state.style[4] }),
-        React.createElement('div', { className: 'gameSquare', style: this.state.style[5] }),
-        React.createElement('div', { className: 'gameSquare', style: this.state.style[6] }),
-        React.createElement('div', { className: 'gameSquare', style: this.state.style[7] }),
-        React.createElement('div', { className: 'gameSquare', style: this.state.style[8] })
-      ),
-      React.createElement(
-        'div',
-        { className: 'gameFullFooter' },
-        React.createElement(
-          'div',
-          { className: 'scoreAlert' },
-          scoreAlert
+            gameTimer
+          )
         ),
         React.createElement(
           'div',
-          { className: 'gameButtonsContainer', onKeyPress: this.handleKeyPres },
+          { className: 'gameBoard' },
+          React.createElement('div', { className: 'gameSquare', style: this.state.style[0] }),
+          React.createElement('div', { className: 'gameSquare', style: this.state.style[1] }),
+          React.createElement('div', { className: 'gameSquare', style: this.state.style[2] }),
+          React.createElement('div', { className: 'gameSquare', style: this.state.style[3] }),
+          React.createElement('div', { className: 'gameSquare', style: this.state.style[4] }),
+          React.createElement('div', { className: 'gameSquare', style: this.state.style[5] }),
+          React.createElement('div', { className: 'gameSquare', style: this.state.style[6] }),
+          React.createElement('div', { className: 'gameSquare', style: this.state.style[7] }),
+          React.createElement('div', { className: 'gameSquare', style: this.state.style[8] })
+        ),
+        React.createElement(
+          'div',
+          { className: 'gameFullFooter' },
           React.createElement(
-            'a',
-            { onClick: this.soundMatch, style: this.state.soundPressed, className: 'advancedButton' },
-            'SOUND'
+            'div',
+            { className: 'scoreAlert' },
+            scoreAlert
           ),
           React.createElement(
-            'a',
-            { onClick: this.positionMatch, style: this.state.positionPressed, className: 'advancedButton' },
-            'POSITION'
-          ),
-          React.createElement(
-            'a',
-            { onClick: this.colorMatch, style: this.state.colorPressed, className: 'advancedButton' },
-            'COLOR'
+            'div',
+            { className: 'gameButtonsContainer', onKeyPress: this.handleKeyPres },
+            React.createElement(
+              'a',
+              { onClick: this.soundMatch, style: this.state.soundPressed, className: 'advancedButton' },
+              'SOUND'
+            ),
+            React.createElement(
+              'a',
+              { onClick: this.positionMatch, style: this.state.positionPressed, className: 'advancedButton' },
+              'POSITION'
+            ),
+            React.createElement(
+              'a',
+              { onClick: this.colorMatch, style: this.state.colorPressed, className: 'advancedButton' },
+              'COLOR'
+            )
           )
         )
+      ),
+      React.createElement(
+        _reactRouter.Link,
+        { className: 'gameHomeBtn', to: '/home' },
+        React.createElement('span', { className: 'fa fa-home fa-4x advanced' })
       )
     );
   }
@@ -752,13 +766,17 @@ var newStyle = [{
 
 module.exports = AdvancedMode;
 
-},{"./gameStartOverlay":5,"./gameTimer":6,"./serverFunctions":8,"axios":23,"react":333}],4:[function(require,module,exports){
+},{"./gameStartOverlay":5,"./gameTimer":6,"./serverFunctions":8,"axios":23,"react":333,"react-router":131}],4:[function(require,module,exports){
 'use strict';
+
+var _reactRouter = require('react-router');
 
 var React = require('react');
 var GameTimer = require('./gameTimer');
 var ClassicStartOverlay = require('./gameStartOverlay').ClassicStartOverlay;
 var axios = require('axios');
+
+
 var fullScore = 0;
 var currentScore;
 var matchCount = 0; //total matches in game
@@ -840,10 +858,10 @@ var ClassicMode = React.createClass({
     var soundQueue = [];
     var timeTilPositionMatch = parseInt(Math.random() * 5 + this.state.N);
     var timeTilSoundMatch = parseInt(Math.random() * 5 + this.state.N);
-    var timeKeeper = 0;
+    var timeKeeper = 44;
 
     iterations = setInterval(function () {
-      timeKeeper++;
+      timeKeeper--;
       if (this.state.keepScore && !(this.state.soundMatch || this.state.positionMatch)) {
         reactionTimes.push(reactionEnd - reactionStart);
         currentScore = ((2000 - reactionTimes[reactionTimes.length - 1]) / 100).toFixed(2);
@@ -964,7 +982,7 @@ var ClassicMode = React.createClass({
       ////////////////////////////////////////////////////////////////////////////////////////
       ////////////////////////////////////////////////////////////////////////////////////
       //RUTH THIS IS WHERE THE GAME ENDS///////////////////////////////////////////
-      if (timeKeeper === 60) {
+      if (timeKeeper === 0) {
         clearInterval(iterations);
         setTimeout(function () {
           console.log(reactionTimes, 'reaction times');
@@ -1020,7 +1038,7 @@ var ClassicMode = React.createClass({
     });
   },
   render: function render() {
-    var overlay = this.state.overlay ? React.createElement(ClassicStartOverlay, { click: this.startGame }) : '';
+    var overlay = this.state.overlay ? React.createElement(ClassicStartOverlay, { nLevel: this.state.N, click: this.startGame }) : '';
 
     var scoreAlert;
     var scoreUpdate;
@@ -1065,79 +1083,88 @@ var ClassicMode = React.createClass({
 
     return React.createElement(
       'div',
-      { className: 'gameContainer' },
-      overlay,
+      { className: 'fullGameView' },
       React.createElement(
         'div',
-        { className: 'gameFullHeader' },
-        React.createElement(
-          'span',
-          { className: 'gameTitle' },
-          React.createElement(
-            'h1',
-            { className: 'classic modeTitle' },
-            'Classic'
-          ),
-          React.createElement(
-            'h1',
-            { className: 'classic nTitle' },
-            '(N=',
-            this.state.N,
-            ')'
-          )
-        ),
+        { className: 'gameContainer' },
+        overlay,
         React.createElement(
           'div',
-          { className: 'gameHeading' },
+          { className: 'gameFullHeader' },
+          React.createElement(
+            'span',
+            { className: 'gameTitle' },
+            React.createElement(
+              'h1',
+              { className: 'classic modeTitle' },
+              'Classic'
+            ),
+            React.createElement(
+              'h1',
+              { className: 'classic nTitle' },
+              '(N=',
+              this.state.N,
+              ')'
+            )
+          ),
           React.createElement(
             'div',
-            { className: 'gameScore classic' },
+            { className: 'gameHeading' },
             React.createElement(
-              'h2',
-              null,
-              'Score: ',
-              this.state.score
+              'div',
+              { className: 'gameScore classic' },
+              React.createElement(
+                'h2',
+                null,
+                'Score: ',
+                this.state.score
+              ),
+              scoreUpdate
             ),
-            scoreUpdate
-          ),
-          gameTimer
-        )
-      ),
-      React.createElement(
-        'div',
-        { className: 'gameBoard' },
-        React.createElement('div', { className: 'gameSquare', style: this.state.style[0] }),
-        React.createElement('div', { className: 'gameSquare', style: this.state.style[1] }),
-        React.createElement('div', { className: 'gameSquare', style: this.state.style[2] }),
-        React.createElement('div', { className: 'gameSquare', style: this.state.style[3] }),
-        React.createElement('div', { className: 'gameSquare', style: this.state.style[4] }),
-        React.createElement('div', { className: 'gameSquare', style: this.state.style[5] }),
-        React.createElement('div', { className: 'gameSquare', style: this.state.style[6] }),
-        React.createElement('div', { className: 'gameSquare', style: this.state.style[7] }),
-        React.createElement('div', { className: 'gameSquare', style: this.state.style[8] })
-      ),
-      React.createElement(
-        'div',
-        { className: 'gameFullFooter' },
-        React.createElement(
-          'div',
-          { className: 'scoreAlert' },
-          scoreAlert
+            gameTimer
+          )
         ),
         React.createElement(
           'div',
-          { className: 'gameButtonsContainer' },
+          { className: 'gameBoard' },
+          React.createElement('div', { className: 'gameSquare', style: this.state.style[0] }),
+          React.createElement('div', { className: 'gameSquare', style: this.state.style[1] }),
+          React.createElement('div', { className: 'gameSquare', style: this.state.style[2] }),
+          React.createElement('div', { className: 'gameSquare', style: this.state.style[3] }),
+          React.createElement('div', { className: 'gameSquare', style: this.state.style[4] }),
+          React.createElement('div', { className: 'gameSquare', style: this.state.style[5] }),
+          React.createElement('div', { className: 'gameSquare', style: this.state.style[6] }),
+          React.createElement('div', { className: 'gameSquare', style: this.state.style[7] }),
+          React.createElement('div', { className: 'gameSquare', style: this.state.style[8] })
+        ),
+        React.createElement(
+          'div',
+          { className: 'gameFullFooter' },
           React.createElement(
-            'a',
-            { onClick: this.positionMatch, style: this.state.posStyle, className: 'classicButton' },
-            'POSITION'
+            'div',
+            { className: 'scoreAlert' },
+            scoreAlert
           ),
           React.createElement(
-            'a',
-            { onClick: this.soundMatch, style: this.state.soundStyle, className: 'classicButton' },
-            'SOUND'
+            'div',
+            { className: 'gameButtonsContainer' },
+            React.createElement(
+              'a',
+              { onClick: this.positionMatch, style: this.state.posStyle, className: 'classicButton' },
+              'POSITION'
+            ),
+            React.createElement(
+              'a',
+              { onClick: this.soundMatch, style: this.state.soundStyle, className: 'classicButton' },
+              'SOUND'
+            )
           )
         )
+      ),
+      React.createElement(
+        _reactRouter.Link,
+        { className: 'gameHomeBtn', to: '/home' },
+        React.createElement('span', { className: 'fa fa-home fa-4x classic' })
       )
     );
   }
@@ -1161,17 +1188,31 @@ var newStyle = {
 
 module.exports = ClassicMode;
 
-},{"./gameStartOverlay":5,"./gameTimer":6,"./serverFunctions":8,"axios":23,"react":333}],5:[function(require,module,exports){
+},{"./gameStartOverlay":5,"./gameTimer":6,"./serverFunctions":8,"axios":23,"react":333,"react-router":131}],5:[function(require,module,exports){
 'use strict';
 
 var _reactRouter = require('react-router');
 
 var React = require('react');
+var axios = require('axios');
 
 
 var SilentStartOverlay = React.createClass({
   displayName: 'SilentStartOverlay',
 
+  getInitialState: function getInitialState() {
+    return {
+      nLevel: this.props.nLevel,
+      moves: "moves"
+    };
+  },
+  componentDidMount: function componentDidMount() {
+    if (this.state.nLevel === 1) {
+      this.setState({
+        moves: "move"
+      });
+    }
+  },
   render: function render() {
     return React.createElement(
       'div',
@@ -1218,6 +1259,17 @@ var SilentStartOverlay = React.createClass({
           )
         ),
         React.createElement(
+          'i',
+          { className: 'classic' },
+          'You are on n-level ',
+          this.state.nLevel,
+          ', therefore a match occurs when a position/color stimulus from ',
+          this.state.nLevel,
+          ' ',
+          this.state.moves,
+          ' back matches the current position/color.'
+        ),
+        React.createElement(
           _reactRouter.Link,
           { to: '/tutorial' },
           React.createElement(
@@ -1248,6 +1300,19 @@ var SilentStartOverlay = React.createClass({
 var ClassicStartOverlay = React.createClass({
   displayName: 'ClassicStartOverlay',
 
+  getInitialState: function getInitialState() {
+    return {
+      nLevel: this.props.nLevel,
+      moves: "moves"
+    };
+  },
+  componentDidMount: function componentDidMount() {
+    if (this.state.nLevel === 1) {
+      this.setState({
+        moves: "move"
+      });
+    }
+  },
   render: function render() {
     return React.createElement(
       'div',
@@ -1278,15 +1343,6 @@ var ClassicStartOverlay = React.createClass({
             { className: 'row' },
             React.createElement(
               'li',
-              { className: 'key keyBlank k38' },
-              '↑'
-            )
-          ),
-          React.createElement(
-            'ul',
-            { className: 'row' },
-            React.createElement(
-              'li',
               { className: 'key keyClassic k37' },
               '←'
             ),
@@ -1297,6 +1353,17 @@ var ClassicStartOverlay = React.createClass({
               '→'
             )
           )
+        ),
+        React.createElement(
+          'i',
+          { className: 'classic' },
+          'You are on n-level ',
+          this.state.nLevel,
+          ', therefore a match occurs when a position/sound stimulus from ',
+          this.state.nLevel,
+          ' ',
+          this.state.moves,
+          ' back matches the current position/sound.'
         ),
         React.createElement(
           _reactRouter.Link,
@@ -1329,6 +1396,19 @@ var ClassicStartOverlay = React.createClass({
 var RelaxedStartOverlay = React.createClass({
   displayName: 'RelaxedStartOverlay',
 
+  getInitialState: function getInitialState() {
+    return {
+      nLevel: this.props.nLevel,
+      moves: "moves"
+    };
+  },
+  componentDidMount: function componentDidMount() {
+    if (this.state.nLevel === 1) {
+      this.setState({
+        moves: "move"
+      });
+    }
+  },
   render: function render() {
     return React.createElement(
       'div',
@@ -1348,7 +1428,7 @@ var RelaxedStartOverlay = React.createClass({
         ),
         React.createElement(
           'p',
-          { className: 'relaxed' },
+          null,
           'Use the up arrow key or press the corresponding button to select a position match.'
         ),
         React.createElement(
@@ -1362,26 +1442,18 @@ var RelaxedStartOverlay = React.createClass({
               { className: 'key k38 relaxed keyRelaxed' },
               '↑'
             )
-          ),
-          React.createElement(
-            'ul',
-            { className: 'row' },
-            React.createElement(
-              'li',
-              { className: 'key keyBlank k37' },
-              '←'
-            ),
-            React.createElement(
-              'li',
-              { className: 'key keyBlank k40' },
-              '↓'
-            ),
-            React.createElement(
-              'li',
-              { className: 'key keyBlank k39' },
-              '→'
-            )
           )
+        ),
+        React.createElement(
+          'i',
+          null,
+          'You are on n-level ',
+          this.state.nLevel,
+          ', therefore a match occurs when a position stimulus from ',
+          this.state.nLevel,
+          ' ',
+          this.state.moves,
+          ' back matches the current position.'
         ),
         React.createElement(
           _reactRouter.Link,
@@ -1414,6 +1486,19 @@ var RelaxedStartOverlay = React.createClass({
 var AdvancedStartOverlay = React.createClass({
   displayName: 'AdvancedStartOverlay',
 
+  getInitialState: function getInitialState() {
+    return {
+      nLevel: this.props.nLevel,
+      moves: "moves"
+    };
+  },
+  componentDidMount: function componentDidMount() {
+    if (this.state.nLevel === 1) {
+      this.setState({
+        moves: "move"
+      });
+    }
+  },
   render: function render() {
     return React.createElement(
       'div',
@@ -1469,6 +1554,17 @@ var AdvancedStartOverlay = React.createClass({
           )
         ),
         React.createElement(
+          'i',
+          { className: 'classic' },
+          'You are on n-level ',
+          this.state.nLevel,
+          ', therefore a match occurs when a position/sound/color stimulus from ',
+          this.state.nLevel,
+          ' ',
+          this.state.moves,
+          ' back matches the current position/sound/color.'
+        ),
+        React.createElement(
           _reactRouter.Link,
           { to: '/tutorial' },
           React.createElement(
@@ -1503,7 +1599,7 @@ module.exports = {
   AdvancedStartOverlay: AdvancedStartOverlay
 };
 
-},{"react":333,"react-router":131}],6:[function(require,module,exports){
+},{"axios":23,"react":333,"react-router":131}],6:[function(require,module,exports){
 "use strict";
 
 var React = require('react');
@@ -1513,7 +1609,7 @@ var GameTimer = React.createClass({
   displayName: "GameTimer",
 
   getInitialState: function getInitialState() {
-    return { seconds: 120 };
+    return { seconds: 90 };
   },
   componentDidMount: function componentDidMount() {
     interval = setInterval(this.timerSecs, 1000);
@@ -1551,12 +1647,15 @@ module.exports = GameTimer;
 (function (process){
 'use strict';
 
+var _reactRouter = require('react-router');
+
 var React = require('react');
 var GameTimer = require('./gameTimer');
 var RelaxedStartOverlay = require('./gameStartOverlay').RelaxedStartOverlay;
 
 var axios = require('axios');
 axios.defaults.baseURL = process.env.url;
+
 
 var endGameFunction = require('./serverFunctions').endGameFunction;
 var startGameFunction = require('./serverFunctions').startGameFunction;
@@ -1659,7 +1758,7 @@ var RelaxedMode = React.createClass({
   position: function position() {
     var posQueue = [];
     var timeTilPosMatch = parseInt(Math.random() * 5 + this.state.N);
-    var timeKeeper = 60;
+    var timeKeeper = 44;
 
     iterations = setInterval(function () {
       timeKeeper--;
@@ -1757,7 +1856,7 @@ var RelaxedMode = React.createClass({
       ////////////////////////////////////////////////////////////////////////////////////////
       ////////////////////////////////////////////////////////////////////////////////////
       //RUTH THIS IS WHERE THE GAME ENDS///////////////////////////////////////////
-      if (timeKeeper === 50) {
+      if (timeKeeper === 0) {
         //give gameScore variable the final score
         clearInterval(iterations);
         console.log(fullScore);
@@ -1817,7 +1916,7 @@ var RelaxedMode = React.createClass({
     });
   },
   render: function render() {
-    var overlay = this.state.overlay ? React.createElement(RelaxedStartOverlay, { click: this.startGame }) : '';
+    var overlay = this.state.overlay ? React.createElement(RelaxedStartOverlay, { nLevel: this.state.N, click: this.startGame }) : '';
 
     var scoreAlert;
     var scoreUpdate;
@@ -1862,74 +1961,83 @@ var RelaxedMode = React.createClass({
 
     return React.createElement(
       'div',
-      { className: 'gameContainer' },
-      overlay,
+      { className: 'fullGameView' },
       React.createElement(
         'div',
-        { className: 'gameFullHeader' },
-        React.createElement(
-          'span',
-          { className: 'gameTitle' },
-          React.createElement(
-            'h1',
-            { className: 'relaxed modeTitle' },
-            'Relaxed'
-          ),
-          React.createElement(
-            'h1',
-            { className: 'relaxed nTitle' },
-            '(N=',
-            this.state.N,
-            ')'
-          )
-        ),
+        { className: 'gameContainer' },
+        overlay,
         React.createElement(
           'div',
-          { className: 'gameHeading' },
+          { className: 'gameFullHeader' },
+          React.createElement(
+            'span',
+            { className: 'gameTitle' },
+            React.createElement(
+              'h1',
+              { className: 'relaxed modeTitle' },
+              'Relaxed'
+            ),
+            React.createElement(
+              'h1',
+              { className: 'relaxed nTitle' },
+              '(N=',
+              this.state.N,
+              ')'
+            )
+          ),
           React.createElement(
             'div',
-            { className: 'gameScore relaxed' },
+            { className: 'gameHeading' },
             React.createElement(
-              'h2',
-              null,
-              'Score: ',
-              this.state.score
+              'div',
+              { className: 'gameScore relaxed' },
+              React.createElement(
+                'h2',
+                null,
+                'Score: ',
+                this.state.score
+              ),
+              scoreUpdate
             ),
-            scoreUpdate
-          ),
-          gameTimer
-        )
-      ),
-      React.createElement(
-        'div',
-        { className: 'gameBoard' },
-        React.createElement('div', { className: 'gameSquare', style: this.state.style[0] }),
-        React.createElement('div', { className: 'gameSquare', style: this.state.style[1] }),
-        React.createElement('div', { className: 'gameSquare', style: this.state.style[2] }),
-        React.createElement('div', { className: 'gameSquare', style: this.state.style[3] }),
-        React.createElement('div', { className: 'gameSquare', style: this.state.style[4] }),
-        React.createElement('div', { className: 'gameSquare', style: this.state.style[5] }),
-        React.createElement('div', { className: 'gameSquare', style: this.state.style[6] }),
-        React.createElement('div', { className: 'gameSquare', style: this.state.style[7] }),
-        React.createElement('div', { className: 'gameSquare', style: this.state.style[8] })
-      ),
-      React.createElement(
-        'div',
-        { className: 'gameFullFooter' },
-        React.createElement(
-          'div',
-          { className: 'scoreAlert' },
-          scoreAlert
+            gameTimer
+          )
         ),
         React.createElement(
           'div',
-          { className: 'gameButtonsContainer' },
+          { className: 'gameBoard' },
+          React.createElement('div', { className: 'gameSquare', style: this.state.style[0] }),
+          React.createElement('div', { className: 'gameSquare', style: this.state.style[1] }),
+          React.createElement('div', { className: 'gameSquare', style: this.state.style[2] }),
+          React.createElement('div', { className: 'gameSquare', style: this.state.style[3] }),
+          React.createElement('div', { className: 'gameSquare', style: this.state.style[4] }),
+          React.createElement('div', { className: 'gameSquare', style: this.state.style[5] }),
+          React.createElement('div', { className: 'gameSquare', style: this.state.style[6] }),
+          React.createElement('div', { className: 'gameSquare', style: this.state.style[7] }),
+          React.createElement('div', { className: 'gameSquare', style: this.state.style[8] })
+        ),
+        React.createElement(
+          'div',
+          { className: 'gameFullFooter' },
           React.createElement(
-            'a',
-            { onClick: this.posMatch, style: this.state.posStyle, className: 'relaxedButton' },
-            'POSITION'
+            'div',
+            { className: 'scoreAlert' },
+            scoreAlert
+          ),
+          React.createElement(
+            'div',
+            { className: 'gameButtonsContainer' },
+            React.createElement(
+              'a',
+              { onClick: this.posMatch, style: this.state.posStyle, className: 'relaxedButton' },
+              'POSITION'
+            )
           )
         )
+      ),
+      React.createElement(
+        _reactRouter.Link,
+        { className: 'gameHomeBtn', to: '/home' },
+        React.createElement('span', { className: 'fa fa-home fa-4x relaxed' })
       )
     );
   }
@@ -1954,7 +2062,7 @@ var newStyle = {
 module.exports = RelaxedMode;
 
 }).call(this,require('_process'))
-},{"./gameStartOverlay":5,"./gameTimer":6,"./serverFunctions":8,"_process":1,"axios":23,"react":333}],8:[function(require,module,exports){
+},{"./gameStartOverlay":5,"./gameTimer":6,"./serverFunctions":8,"_process":1,"axios":23,"react":333,"react-router":131}],8:[function(require,module,exports){
 'use strict';
 
 var React = require('react');
@@ -2020,10 +2128,13 @@ module.exports = {
 },{"axios":23,"react":333}],9:[function(require,module,exports){
 'use strict';
 
+var _reactRouter = require('react-router');
+
 var React = require('react');
 var GameTimer = require('./gameTimer');
 var SilentStartOverlay = require('./gameStartOverlay').SilentStartOverlay;
 var axios = require('axios');
+
 
 var endGameFunction = require('./serverFunctions').endGameFunction;
 var startGameFunction = require('./serverFunctions').startGameFunction;
@@ -2107,10 +2218,10 @@ var SilentMode = React.createClass({
     var colorQueue = [];
     var timeTilPositionMatch = parseInt(Math.random() * 5 + this.state.N);
     var timeTilColorMatch = parseInt(Math.random() * 5 + this.state.N);
-    var timeKeeper = 0;
+    var timeKeeper = 44;
 
     iterations = setInterval(function () {
-      timeKeeper++;
+      timeKeeper--;
       if (this.state.keepScore && !(this.state.colorMatch || this.state.positionMatch)) {
         matchCount += 1;
         matchHit += 1;
@@ -2238,7 +2349,7 @@ var SilentMode = React.createClass({
       ////////////////////////////////////////////////////////////////////////////////////////
       ////////////////////////////////////////////////////////////////////////////////////
       //RUTH THIS IS WHERE THE GAME ENDS////////////////
-      if (timeKeeper === 60) {
+      if (timeKeeper === 0) {
         clearInterval(iterations);
         setTimeout(function () {
           //console.log(reactionTimes, 'reaction times')
@@ -2293,7 +2404,7 @@ var SilentMode = React.createClass({
     });
   },
   render: function render() {
-    var overlay = this.state.overlay ? React.createElement(SilentStartOverlay, { click: this.startGame }) : '';
+    var overlay = this.state.overlay ? React.createElement(SilentStartOverlay, { nLevel: this.state.N, click: this.startGame }) : '';
 
     var posButtonStyle = this.state.posPressed ? {
       backgroundColor: 'black'
@@ -2345,79 +2456,88 @@ var SilentMode = React.createClass({
 
     return React.createElement(
       'div',
-      { className: 'gameContainer' },
-      overlay,
+      { className: 'fullGameView' },
       React.createElement(
         'div',
-        { className: 'gameFullHeader' },
-        React.createElement(
-          'span',
-          { className: 'gameTitle' },
-          React.createElement(
-            'h1',
-            { className: 'silent modeTitle' },
-            'Silent'
-          ),
-          React.createElement(
-            'h1',
-            { className: 'silent nTitle' },
-            '(N=',
-            this.state.N,
-            ')'
-          )
-        ),
+        { className: 'gameContainer' },
+        overlay,
         React.createElement(
           'div',
-          { className: 'gameHeading' },
+          { className: 'gameFullHeader' },
+          React.createElement(
+            'span',
+            { className: 'gameTitle' },
+            React.createElement(
+              'h1',
+              { className: 'silent modeTitle' },
+              'Silent'
+            ),
+            React.createElement(
+              'h1',
+              { className: 'silent nTitle' },
+              '(N=',
+              this.state.N,
+              ')'
+            )
+          ),
           React.createElement(
             'div',
-            { className: 'gameScore silent' },
+            { className: 'gameHeading' },
             React.createElement(
-              'h2',
-              null,
-              'Score: ',
-              this.state.score
+              'div',
+              { className: 'gameScore silent' },
+              React.createElement(
+                'h2',
+                null,
+                'Score: ',
+                this.state.score
+              ),
+              scoreUpdate
             ),
-            scoreUpdate
-          ),
-          gameTimer
-        )
-      ),
-      React.createElement(
-        'div',
-        { className: 'gameBoard' },
-        React.createElement('div', { className: 'gameSquare', style: this.state.style[0] }),
-        React.createElement('div', { className: 'gameSquare', style: this.state.style[1] }),
-        React.createElement('div', { className: 'gameSquare', style: this.state.style[2] }),
-        React.createElement('div', { className: 'gameSquare', style: this.state.style[3] }),
-        React.createElement('div', { className: 'gameSquare', style: this.state.style[4] }),
-        React.createElement('div', { className: 'gameSquare', style: this.state.style[5] }),
-        React.createElement('div', { className: 'gameSquare', style: this.state.style[6] }),
-        React.createElement('div', { className: 'gameSquare', style: this.state.style[7] }),
-        React.createElement('div', { className: 'gameSquare', style: this.state.style[8] })
-      ),
-      React.createElement(
-        'div',
-        { className: 'gameFullFooter' },
-        React.createElement(
-          'div',
-          { className: 'scoreAlert' },
-          scoreAlert
+            gameTimer
+          )
         ),
         React.createElement(
           'div',
-          { className: 'gameButtonsContainer' },
+          { className: 'gameBoard' },
+          React.createElement('div', { className: 'gameSquare', style: this.state.style[0] }),
+          React.createElement('div', { className: 'gameSquare', style: this.state.style[1] }),
+          React.createElement('div', { className: 'gameSquare', style: this.state.style[2] }),
+          React.createElement('div', { className: 'gameSquare', style: this.state.style[3] }),
+          React.createElement('div', { className: 'gameSquare', style: this.state.style[4] }),
+          React.createElement('div', { className: 'gameSquare', style: this.state.style[5] }),
+          React.createElement('div', { className: 'gameSquare', style: this.state.style[6] }),
+          React.createElement('div', { className: 'gameSquare', style: this.state.style[7] }),
+          React.createElement('div', { className: 'gameSquare', style: this.state.style[8] })
+        ),
+        React.createElement(
+          'div',
+          { className: 'gameFullFooter' },
           React.createElement(
-            'a',
-            { onClick: this.positionMatch, style: this.state.posStyle, className: 'silentButton' },
-            'POSITION'
+            'div',
+            { className: 'scoreAlert' },
+            scoreAlert
           ),
           React.createElement(
-            'a',
-            { onClick: this.colorMatch, style: this.state.colorStyle, className: 'silentButton' },
-            'COLOR'
+            'div',
+            { className: 'gameButtonsContainer' },
+            React.createElement(
+              'a',
+              { onClick: this.positionMatch, style: this.state.posStyle, className: 'silentButton' },
+              'POSITION'
+            ),
+            React.createElement(
+              'a',
+              { onClick: this.colorMatch, style: this.state.colorStyle, className: 'silentButton' },
+              'COLOR'
+            )
           )
         )
+      ),
+      React.createElement(
+        _reactRouter.Link,
+        { className: 'gameHomeBtn', to: '/home' },
+        React.createElement('span', { className: 'fa fa-home fa-4x silent' })
       )
     );
   }
@@ -2459,7 +2579,7 @@ var newStyle = [{
 
 module.exports = SilentMode;
 
-},{"./gameStartOverlay":5,"./gameTimer":6,"./serverFunctions":8,"axios":23,"react":333}],10:[function(require,module,exports){
+},{"./gameStartOverlay":5,"./gameTimer":6,"./serverFunctions":8,"axios":23,"react":333,"react-router":131}],10:[function(require,module,exports){
 'use strict';
 
 var _reactRouter = require('react-router');
@@ -2550,9 +2670,8 @@ var Contact = React.createClass({
 						React.createElement(
 							'span',
 							{ className: 'socialMedia' },
-							React.createElement('a', { target: '_blank', href: '', className: 'fa fa-linkedin-square fa-2x' }),
-							React.createElement('a', { target: '_blank', href: '', className: 'fa fa-envelope fa-2x' }),
-							React.createElement('a', { target: '_blank', href: '', className: 'fa fa-globe fa-2x' })
+							React.createElement('a', { target: '_blank', href: 'https://www.linkedin.com/in/ruth-bagley-24781996', className: 'fa fa-linkedin-square fa-2x' }),
+							React.createElement('a', { target: '_blank', href: 'mailto:ruthbagley16@gmail.com', className: 'fa fa-envelope fa-2x' })
 						)
 					),
 					React.createElement(
@@ -2572,9 +2691,8 @@ var Contact = React.createClass({
 						React.createElement(
 							'span',
 							{ className: 'socialMedia' },
-							React.createElement('a', { target: '_blank', href: '', className: 'fa fa-linkedin-square fa-2x' }),
-							React.createElement('a', { target: '_blank', href: '', className: 'fa fa-envelope fa-2x' }),
-							React.createElement('a', { target: '_blank', href: '', className: 'fa fa-globe fa-2x' })
+							React.createElement('a', { target: '_blank', href: 'https://www.linkedin.com/in/taylor-concannon-b2706097', className: 'fa fa-linkedin-square fa-2x' }),
+							React.createElement('a', { target: '_blank', href: 'mailto:taycon@seas.upenn.edu', className: 'fa fa-envelope fa-2x' })
 						)
 					),
 					React.createElement(
@@ -2594,9 +2712,8 @@ var Contact = React.createClass({
 						React.createElement(
 							'span',
 							{ className: 'socialMedia' },
-							React.createElement('a', { target: '_blank', href: '', className: 'fa fa-linkedin-square fa-2x' }),
-							React.createElement('a', { target: '_blank', href: '', className: 'fa fa-envelope fa-2x' }),
-							React.createElement('a', { target: '_blank', href: '', className: 'fa fa-globe fa-2x' })
+							React.createElement('a', { target: '_blank', href: 'https://www.linkedin.com/in/virginiavankeuren', className: 'fa fa-linkedin-square fa-2x' }),
+							React.createElement('a', { target: '_blank', href: 'mailto:virginiavk@u.northwestern.edu', className: 'fa fa-envelope fa-2x' })
 						)
 					)
 				)

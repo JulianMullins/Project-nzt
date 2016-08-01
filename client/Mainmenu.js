@@ -29,12 +29,13 @@ var Mainmenu = React.createClass({
           hasUsername:response.data.isUser,
           name:response.data.name,
         })
+      }.bind(this)).then(function() {
         if(this.state.hasUsername){
           this.setState({
             userWelcome: <h3 className="advanced userWelcome">Welcome: {this.state.name}</h3>
           })
-        }
-      }.bind(this))
+      }
+    }.bind(this))
   },
   classic() {
     this.props.history.push('/levels/classic')
