@@ -1,19 +1,18 @@
 var React = require('react');
 var ReactDOM = require('react-dom');
-var d3=require('d3');
-//var rd3 = require('react-d3-basic');
+var d3=require('d3'); //some documentation hass this in examples, so keep to be safe
 var LineChart = require('react-d3-basic').LineChart;
-//var Chart = require('react-d3-core').Chart;
 var AreaChart = require('react-d3-basic').AreaChart;
 var _=require('underscore');
 var axios=require('axios');
 
+//global variables for changing state below
 var stats;
 var dates=[];
 
 var xScale='time'
 var yLabel='age'
-//var parseDate = d3.time.format("%YM%m").parse;
+//these are just variables to parse and add the first and last game dates to the x axes
 var dayA =' '
 var monthA =' '
 var dateA =' '
@@ -23,8 +22,9 @@ var monthB =' '
 var dateB =' '
 var yearB =' '
 
-
+//setting margins as global
 var margins = {left: 100, right: 100, top: 50, bottom: 50}
+
 var MyComponent = React.createClass({
   getInitialState: function(){
     return{
@@ -37,11 +37,9 @@ var MyComponent = React.createClass({
                     }
     },
 componentDidMount: function(){
- //console.log(this.state, 'state')
 axios.get('/taco', {withCredentials: true})
 .then(function(responseJson){
     stats=responseJson.data.stats;
-    console.log(stats, 'stats')
     this.state.data=[];
    _.map(stats, function(item, index){
       if(item.score===0 || !item.reactionTimes[0]){
@@ -61,6 +59,7 @@ axios.get('/taco', {withCredentials: true})
         return a+b
       })/(item.reactionTimes.length)).toFixed(2)
    }.bind(this))
+   //pull first and last data objects and parse for axes
    dayA = this.state.data[0].dateAchieved.toString().split(' ')[0]
    monthA=this.state.data[0].dateAchieved.toString().split(' ')[1]
    dateA=this.state.data[0].dateAchieved.toString().split(' ')[2]
@@ -69,8 +68,6 @@ axios.get('/taco', {withCredentials: true})
    monthB=this.state.data[this.state.data.length-1].dateAchieved.toString().split(' ')[1]
    dateB=this.state.data[this.state.data.length-1].dateAchieved.toString().split(' ')[2]
    yearB=this.state.data[this.state.data.length-1].dateAchieved.toString().split(' ')[3]
-   // console.log(dates,'dates')
-   // console.log(this.state.lineData2[2].values)
   }.bind(this))
   .then(function(){
     this.setState({
@@ -83,39 +80,33 @@ axios.get('/taco', {withCredentials: true})
       return d.dateAchieved;
     }
    return (<div> <LineChart
-        className='topStatsGraph'
+        className='StatsScoreGraph'
         data={this.state.data}
         margins={margins}
         chartSeries={this.state.chartSeries1}
-        width={1100}
-        height={500}
+        //width={1100}
+        //height={500}
         x={x}
         xScale={xScale}
         yLabel={'Scores'}
+        //x axis includes first and last day of play (for time range)
         xLabel={'Gameplay from '+dayA+', '+ monthA + ' '+ dateA+ ', ' +yearA + ' to ' +dayB+', '+ monthB + ' '+ dateB+ ', ' +yearB}
         />
     <AreaChart
-    //console.log(this.state.data[0].dateAchieved.toString().split(' '),'date')
+      //width={1100}
+      //height={500}
       data= {this.state.data}
-      width= {1100}
-      height= {500}
+      className='StatsReactionGraph'
+      margins={margins}
       chartSeries= {this.state.chartSeries2}
       x= {x}
       xScale={xScale}
       yLabel={'Reaction Times (ms)'}
+      //x axis includes first and last day of play (for time range)
       xLabel={'Gameplay from '+dayA+', '+ monthA + ' '+ dateA+ ', ' +yearA + ' to ' +dayB+', '+ monthB + ' '+ dateB+ ', ' +yearB}
     />
    </div>)
   }
 });
 
-//  //        <AreaChart
-//  //        className='bottomStatsGraph'
-//  //        data={this.state.lineData2}
-//  //        width={1100}
-//  //        height={400}
-//  //        title="Reaction Time Trends"
-//  //        yAxisLabel="Altitude"
-//  //        xAxisLabel="Elapsed Time (sec)"
-//  //        />
 module.exports = MyComponent
