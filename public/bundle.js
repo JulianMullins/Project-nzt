@@ -1,1 +1,1 @@
-console.error("SyntaxError: C:/Users/Student/documents/github/project-nzt/client/statsLineGraphs.js: Unexpected token (20:18) while parsing file: C:\\Users\\Student\\documents\\github\\project-nzt\\client\\statsLineGraphs.js");
+console.error("Error: Cannot find module './statsLineGraphs' from 'C:\\Users\\Student\\documents\\github\\project-nzt\\client'");
