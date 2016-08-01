@@ -79,6 +79,7 @@ axios.get('/taco', {withCredentials: true})
     var x = function(d) {
       return d.dateAchieved;
     }
+    var title = "Stack Area Chart"
    return (<div> <LineChart
         className='StatsScoreGraph'
         data={this.state.data}
@@ -86,6 +87,7 @@ axios.get('/taco', {withCredentials: true})
         chartSeries={this.state.chartSeries1}
         //width={1100}
         //height={500}
+        title={'Score History'}
         x={x}
         xScale={xScale}
         yLabel={'Scores'}
@@ -95,6 +97,7 @@ axios.get('/taco', {withCredentials: true})
     <AreaChart
       //width={1100}
       //height={500}
+      title='TITLE'
       data= {this.state.data}
       className='StatsReactionGraph'
       margins={margins}

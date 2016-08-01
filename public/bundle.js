@@ -4286,6 +4286,7 @@ var MyComponent = React.createClass({
     var x = function x(d) {
       return d.dateAchieved;
     };
+    var title = "Stack Area Chart";
     return React.createElement(
       'div',
       null,
@@ -4297,7 +4298,8 @@ var MyComponent = React.createClass({
         chartSeries: this.state.chartSeries1
         //width={1100}
         //height={500}
-        , x: x,
+        , title: 'Score History',
+        x: x,
         xScale: xScale,
         yLabel: 'Scores'
         //x axis includes first and last day of play (for time range)
@@ -4306,7 +4308,8 @@ var MyComponent = React.createClass({
       React.createElement(AreaChart
       //width={1100}
       //height={500}
-      , { data: this.state.data,
+      , { title: 'TITLE',
+        data: this.state.data,
         className: 'StatsReactionGraph',
         margins: margins,
         chartSeries: this.state.chartSeries2,
