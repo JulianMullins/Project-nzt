@@ -164,40 +164,7 @@ router.post('/gameOver',function(req,res,next){
 
   //check if tempUser
   if(req.body.userId){
-    console.log("checking tempUser")
-    TempUser.findById(req.body.userId)
-      .populate('currentGame stats')
-      .exec(function(err,tempUser){
-
-        if(tempUser){
-
-        var tempGame = tempUser.currentGame[0];
-
-        //make new score
-        var newHighScore = new HighScore({
-          user: tempUser._id,
-          dateAchieved: new Date(),
-          score: tempGame.score,
-          nLevel: tempGame.nLevel,
-          mode: tempGame.mode,
-          reactionTimes:tempGame.reactionTimes
-        })
-
-
-        //newHighScore.user = req.body.anonUserName;
-
-        //check overall stats
-        checkOverall(newHighScore);
-
-        //update maxN
-        if(nLevel>tempUser.maxN[newHighScore.mode]){
-          tempUser.maxN[newHighScore.mode] = nLevel;
-        }
-
-        //return scoreId, userId, gameId, if overall high score
-        res.json({success:false})
-        }
-      })
+    
   }
 
   //check if full user
@@ -313,21 +280,8 @@ router.post('/gameOver/finish',function(req,res){
   //if don't want to login, use temp username
   if(req.user && !req.user.temp){
 
-//update user stats
-      TempUser.findById(req.body.userId)
-        .populate('stats')
-        .exec(function(err,tempUser){
-
-          req.user.stats.combineStats(tempUser.stats);
-          req.user.combineMaxN(tempUser.maxN);
-          req.user.currentGame = tempUser.currentGame;
-        })
-
-        HighScore.findById(req.body.scoreId,function(err,score){
-          score.user = req.user._id;
-          score.save();
-        })
-        req.user.save();
+//update temp user stats
+      
 
 
   }

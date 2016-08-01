@@ -8,7 +8,6 @@ var Leaderboard = require('../models/Leaderboard');
 var HighScore = require('../models/HighScore');
 var Game = require('../models/Game');
 var Stats = require('../models/Stats');
-var TempUser = require('../models/TempUser');
 
 var serverData = require('./serverData');
 
@@ -27,26 +26,26 @@ router.post('/startGame/:mode/:nLevel',function(req,res,next){
   //console.log(req.user);
 
   //if user, create game, save game, add to user.currentGame
-  if(req.user){
+  if(req.session.user){
     //console.log(req.user);
-    if(req.user.maxN[req.params.mode]<req.params.nLevel){
+    if(req.session.user.maxN[req.params.mode]<req.params.nLevel){
       res.json({authorized:false});
       return;
     }
     var tempGame = new Game({
-      user:req.user,
+      user:req.session.user,
       mode:req.params.mode,
       score:0,
       nLevel:req.params.nLevel,
-      tempUser:req.user.temp
+      tempUser:req.session.user.temp
     })
     tempGame.save(function(err,game){
       if(err){
         console.log(err);
       }
       else{
-        req.user.currentGame.unshift(game);
-        req.user.save();
+        req.session.user.currentGame.unshift(game);
+        req.session.user.save();
         console.log(req.user, "game posted")
         res.json({
           authorized:true,
@@ -61,10 +60,11 @@ router.post('/startGame/:mode/:nLevel',function(req,res,next){
     })
   }
   else{
-    //if no user, make tempUser,login tempUser, then do above (create game, add to tempUser, etc.)
+    //if no user, make tempUser then do above (create game, add to tempUser, etc.)
+    
+    
     console.log("no req.user")
-    var tempUser = new TempUser({
-        username:null,
+    var tempUser = new User({
         stats:null,
         currentGame:[],
         maxN:{
@@ -90,38 +90,8 @@ router.post('/startGame/:mode/:nLevel',function(req,res,next){
         }
         console.log(user)
 
-        //login tempUser
-        axios.post('/login', {
-          username: user._id,
-          password: 'password'
-        }).then(function(response){
-          console.log(response.data)
-          if(response.data.success){
-            console.log("tempuser created")
-            console.log(req.user)
-
-            req.user = response.data.user;
-            console.log(req.user);
-
-            // axios.get('/isUser')
-            // .then(function(response){
-            //   console.log(req.user)
-            //   console.log("isuser data: ")
-            //   console.log(response.data)
-
-
-
-            //   res.json({
-            //         gameId: '12431432543',
-            //         tempUser: user.temp,
-            //         modeMultiplier: modeMultiplier,
-            //         penalty: penalty,
-            //         positivePoints: positivePoints
-            //       })
-            // console.log("res.json'ed")
-
-
-            // })
+        req.session.user = user;
+        req.fullUser = false;
 
 
             //create game
@@ -168,33 +138,6 @@ router.post('/startGame/:mode/:nLevel',function(req,res,next){
    //console.log(req.user); 
 });
 
-// var createGame = function(req,res,userTemp){
-//     console.log("creating game for " + user);
-//     var tempGame = new Game({
-//       user:req.user,
-//       mode:req.params.mode,
-//       score:0,
-//       nLevel:req.params.nLevel,
-//       tempUser:req.user.temp
-//     })
-//     tempGame.save(function(err,game){
-//       if(err){
-//         console.log(err);
-//       }
-//       else{
-//         req.user.currentGame.unshift(game._id);
-//         req.user.save();
-//         console.log(req.user, "game posted")
-//         res.json({
-//           gameId: game._id,
-//           tempUser: userTemp,
-//           modeMultiplier: modeMultiplier,
-//           penalty: penalty,
-//           positivePoints: positivePoints
-//         })
-//       }
-//     })
-// }
 
 
 //game end - posted from mode files; find game, update game stats
