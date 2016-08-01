@@ -34,6 +34,7 @@ var Mainmenu = React.createClass({
         hasUsername: response.data.isUser,
         name: response.data.name
       });
+    }.bind(this)).then(function () {
       if (this.state.hasUsername) {
         this.setState({
           userWelcome: React.createElement(
@@ -4354,7 +4355,7 @@ var dateB = ' ';
 var yearB = ' ';
 
 //setting margins as global
-var margins = { left: 100, right: 100, top: 50, bottom: 50 };
+var margins = { left: 100, right: 100, top: 10, bottom: 60 };
 
 var MyComponent = React.createClass({
   displayName: 'MyComponent',
@@ -4408,6 +4409,7 @@ var MyComponent = React.createClass({
     var x = function x(d) {
       return d.dateAchieved;
     };
+    var title = "Stack Area Chart";
     return React.createElement(
       'div',
       null,
@@ -4416,19 +4418,21 @@ var MyComponent = React.createClass({
         className: 'StatsScoreGraph',
         data: this.state.data,
         margins: margins,
-        chartSeries: this.state.chartSeries1
-        //width={1100}
-        //height={500}
-        , x: x,
+        chartSeries: this.state.chartSeries1,
+        width: 1100,
+        height: 500,
+        title: 'Score History',
+        x: x,
         xScale: xScale,
         yLabel: 'Scores'
         //x axis includes first and last day of play (for time range)
         , xLabel: 'Gameplay from ' + dayA + ', ' + monthA + ' ' + dateA + ', ' + yearA + ' to ' + dayB + ', ' + monthB + ' ' + dateB + ', ' + yearB
       }),
-      React.createElement(AreaChart
-      //width={1100}
-      //height={500}
-      , { data: this.state.data,
+      React.createElement(AreaChart, {
+        width: 1100,
+        height: 500,
+        title: 'TITLE',
+        data: this.state.data,
         className: 'StatsReactionGraph',
         margins: margins,
         chartSeries: this.state.chartSeries2,

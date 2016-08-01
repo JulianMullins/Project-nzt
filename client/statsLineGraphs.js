@@ -23,7 +23,7 @@ var dateB =' '
 var yearB =' '
 
 //setting margins as global
-var margins = {left: 100, right: 100, top: 50, bottom: 50}
+var margins = {left: 100, right: 100, top: 10, bottom: 60}
 
 var MyComponent = React.createClass({
   getInitialState: function(){
@@ -79,13 +79,15 @@ axios.get('/taco', {withCredentials: true})
     var x = function(d) {
       return d.dateAchieved;
     }
+    var title = "Stack Area Chart"
    return (<div> <LineChart
         className='StatsScoreGraph'
         data={this.state.data}
         margins={margins}
         chartSeries={this.state.chartSeries1}
-        //width={1100}
-        //height={500}
+        width={1100}
+        height={500}
+        title={'Score History'}
         x={x}
         xScale={xScale}
         yLabel={'Scores'}
@@ -93,8 +95,9 @@ axios.get('/taco', {withCredentials: true})
         xLabel={'Gameplay from '+dayA+', '+ monthA + ' '+ dateA+ ', ' +yearA + ' to ' +dayB+', '+ monthB + ' '+ dateB+ ', ' +yearB}
         />
     <AreaChart
-      //width={1100}
-      //height={500}
+      width={1100}
+      height={500}
+      title='TITLE'
       data= {this.state.data}
       className='StatsReactionGraph'
       margins={margins}

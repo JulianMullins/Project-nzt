@@ -43,5 +43,8 @@
     "watchify": "^3.7.0",
     "eslint-plugin-react": "^5.2.2",
     "nodemon": "^1.9.2"
+  },
+  "engines": {
+    "node": ">=6.2.1"
   }
 }
