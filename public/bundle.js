@@ -143,7 +143,7 @@ var Mainmenu = React.createClass({
 module.exports = Mainmenu;
 
 }).call(this,require('_process'))
-},{"./levels":14,"./loginOverlay":15,"./registerOverlay":18,"_process":44,"axios":22,"react":374,"react-dom":131,"react-router":172}],2:[function(require,module,exports){
+},{"./levels":14,"./loginOverlay":15,"./registerOverlay":18,"_process":44,"axios":22,"react":350,"react-dom":107,"react-router":148}],2:[function(require,module,exports){
 'use strict';
 
 var React = require('react');
@@ -631,7 +631,7 @@ var newStyle = [{
 
 module.exports = AdvancedMode;
 
-},{"./gameStartOverlay":4,"./gameTimer":5,"./serverFunctions":7,"axios":22,"react":374}],3:[function(require,module,exports){
+},{"./gameStartOverlay":4,"./gameTimer":5,"./serverFunctions":7,"axios":22,"react":350}],3:[function(require,module,exports){
 'use strict';
 
 var React = require('react');
@@ -1040,7 +1040,7 @@ var newStyle = {
 
 module.exports = ClassicMode;
 
-},{"./gameStartOverlay":4,"./gameTimer":5,"./serverFunctions":7,"axios":22,"react":374}],4:[function(require,module,exports){
+},{"./gameStartOverlay":4,"./gameTimer":5,"./serverFunctions":7,"axios":22,"react":350}],4:[function(require,module,exports){
 'use strict';
 
 var _reactRouter = require('react-router');
@@ -1382,7 +1382,7 @@ module.exports = {
   AdvancedStartOverlay: AdvancedStartOverlay
 };
 
-},{"react":374,"react-router":172}],5:[function(require,module,exports){
+},{"react":350,"react-router":148}],5:[function(require,module,exports){
 "use strict";
 
 var React = require('react');
@@ -1426,7 +1426,7 @@ var GameTimer = React.createClass({
 
 module.exports = GameTimer;
 
-},{"react":374}],6:[function(require,module,exports){
+},{"react":350}],6:[function(require,module,exports){
 (function (process){
 'use strict';
 
@@ -1833,7 +1833,7 @@ var newStyle = {
 module.exports = RelaxedMode;
 
 }).call(this,require('_process'))
-},{"./gameStartOverlay":4,"./gameTimer":5,"./serverFunctions":7,"_process":44,"axios":22,"react":374}],7:[function(require,module,exports){
+},{"./gameStartOverlay":4,"./gameTimer":5,"./serverFunctions":7,"_process":44,"axios":22,"react":350}],7:[function(require,module,exports){
 'use strict';
 
 var React = require('react');
@@ -1896,7 +1896,7 @@ module.exports = {
   startGameFunction: startGameFunction
 };
 
-},{"axios":22,"react":374}],8:[function(require,module,exports){
+},{"axios":22,"react":350}],8:[function(require,module,exports){
 'use strict';
 
 var React = require('react');
@@ -2338,7 +2338,7 @@ var newStyle = [{
 
 module.exports = SilentMode;
 
-},{"./gameStartOverlay":4,"./gameTimer":5,"./serverFunctions":7,"axios":22,"react":374}],9:[function(require,module,exports){
+},{"./gameStartOverlay":4,"./gameTimer":5,"./serverFunctions":7,"axios":22,"react":350}],9:[function(require,module,exports){
 'use strict';
 
 var _reactRouter = require('react-router');
@@ -2525,7 +2525,7 @@ module.exports = Contact;
 // 	</div>
 // </div>
 
-},{"react":374,"react-dom":131,"react-router":172}],10:[function(require,module,exports){
+},{"react":350,"react-dom":107,"react-router":148}],10:[function(require,module,exports){
 'use strict';
 
 var _reactRouter = require('react-router');
@@ -2552,7 +2552,7 @@ var FacebookLogin = React.createClass({
 
 module.exports = FacebookLogin;
 
-},{"axios":22,"react":374,"react-dom":131,"react-router":172}],11:[function(require,module,exports){
+},{"axios":22,"react":350,"react-dom":107,"react-router":148}],11:[function(require,module,exports){
 (function (process){
 'use strict';
 
@@ -2947,7 +2947,7 @@ var GameOverOverlay = React.createClass({
 module.exports = GameOverOverlay;
 
 }).call(this,require('_process'))
-},{"./loginOverlay":15,"_process":44,"axios":22,"react":374,"react-dom":131,"react-router":172}],12:[function(require,module,exports){
+},{"./loginOverlay":15,"_process":44,"axios":22,"react":350,"react-dom":107,"react-router":148}],12:[function(require,module,exports){
 (function (process){
 'use strict';
 
@@ -3067,7 +3067,7 @@ ReactDOM.render(React.createElement(
 // ReactDOM.render(<GameOver/>, document.getElementById('root'));
 
 }).call(this,require('_process'))
-},{"./Mainmenu":1,"./Modes/advancedMode":2,"./Modes/classicMode":3,"./Modes/relaxedMode":6,"./Modes/silentMode":8,"./contact":9,"./facebookLogin":10,"./gameOver":11,"./leaderboard":13,"./levels":14,"./loginOverlay":15,"./logout":16,"./navBar":17,"./registerOverlay":18,"./science":19,"./statsLineGraphs":20,"./tutorial":21,"_process":44,"axios":22,"react":374,"react-dom":131,"react-router":172}],13:[function(require,module,exports){
+},{"./Mainmenu":1,"./Modes/advancedMode":2,"./Modes/classicMode":3,"./Modes/relaxedMode":6,"./Modes/silentMode":8,"./contact":9,"./facebookLogin":10,"./gameOver":11,"./leaderboard":13,"./levels":14,"./loginOverlay":15,"./logout":16,"./navBar":17,"./registerOverlay":18,"./science":19,"./statsLineGraphs":20,"./tutorial":21,"_process":44,"axios":22,"react":350,"react-dom":107,"react-router":148}],13:[function(require,module,exports){
 'use strict';
 
 var React = require('react');
@@ -3159,7 +3159,7 @@ var selectedStyle = {
 
 module.exports = Leaderboard;
 
-},{"axios":22,"react":374,"reactable":375}],14:[function(require,module,exports){
+},{"axios":22,"react":350,"reactable":351}],14:[function(require,module,exports){
 (function (process){
 'use strict';
 
@@ -3508,7 +3508,7 @@ module.exports = {
 };
 
 }).call(this,require('_process'))
-},{"_process":44,"axios":22,"react":374,"react-dom":131,"react-router":172}],15:[function(require,module,exports){
+},{"_process":44,"axios":22,"react":350,"react-dom":107,"react-router":148}],15:[function(require,module,exports){
 'use strict';
 
 var _reactRouter = require('react-router');
@@ -3663,7 +3663,7 @@ var LoginOverlay = React.createClass({
 
 module.exports = LoginOverlay;
 
-},{"axios":22,"react":374,"react-dom":131,"react-router":172}],16:[function(require,module,exports){
+},{"axios":22,"react":350,"react-dom":107,"react-router":148}],16:[function(require,module,exports){
 'use strict';
 
 var _reactRouter = require('react-router');
@@ -3699,7 +3699,7 @@ var Logout = React.createClass({
 
 module.exports = Logout;
 
-},{"axios":22,"react":374,"react-dom":131,"react-router":172}],17:[function(require,module,exports){
+},{"axios":22,"react":350,"react-dom":107,"react-router":148}],17:[function(require,module,exports){
 'use strict';
 
 var _reactRouter = require('react-router');
@@ -3883,7 +3883,7 @@ var NavBar = React.createClass({
 
 module.exports = NavBar;
 
-},{"axios":22,"react":374,"react-dom":131,"react-router":172}],18:[function(require,module,exports){
+},{"axios":22,"react":350,"react-dom":107,"react-router":148}],18:[function(require,module,exports){
 'use strict';
 
 var _reactRouter = require('react-router');
@@ -4062,7 +4062,7 @@ var RegisterOverlay = React.createClass({
 
 module.exports = RegisterOverlay;
 
-},{"axios":22,"react":374,"react-dom":131,"react-router":172}],19:[function(require,module,exports){
+},{"axios":22,"react":350,"react-dom":107,"react-router":148}],19:[function(require,module,exports){
 'use strict';
 
 var _reactRouter = require('react-router');
@@ -4150,41 +4150,49 @@ module.exports = Science;
 // 	target="_blank">DUAL N-BACK FAQ</a>
 // </div>
 
-},{"react":374,"react-dom":131,"react-router":172}],20:[function(require,module,exports){
+},{"react":350,"react-dom":107,"react-router":148}],20:[function(require,module,exports){
 'use strict';
 
 var React = require('react');
 var ReactDOM = require('react-dom');
-var rd3 = require('react-d3');
+var rd3 = require('react-d3-basic');
 var LineChart = rd3.LineChart;
 var AreaChart = rd3.AreaChart;
-var axios = require('axios');
 var _ = require('underscore');
+var axios = require('axios');
 var stats;
 var dates = [];
 // var lineData1 = [{name: 'scores', values:[]}];
 // var lineData2 = [{name: 'reaction times', values:[]}];
-var Legend = require('react-d3-core').Legend;
+//var Legend = require('react-d3-core').Legend;
 
-// setting you svg width
-var width = 500;
-// setting your svg height
-var height = 100;
-// setting your margins of your svg
-var margins = { top: 20, right: 50, bottom: 20, left: 50 };
-// your x Axis accessor
-// var x = function(d) {
-//     return parseDate(d.month);
-//   },
-// set your x domain
-//var xDomain = d3.extent(chartData, function(d){ return x(d) }),
-// set your x range
-var xDomain = [0, 1];
-var xRange = [0, 10];
-// your scale type 'linear', 'ordinal', 'time'... etc.
-var xScale = 'time';
-// set your label name
-var xLabel = "Month";
+var data = [{
+  "age": 0,
+  "index": 0
+}, {
+  "age": .2,
+  "index": 1
+}, {
+  "age": .7,
+  "index": 2
+}, {
+  "age": .4,
+  "index": 3
+}];
+
+var chartSeries = [{
+  field: 'age',
+  name: 'Age',
+  color: '#ff7f0e',
+  style: {
+    "stroke-width": 2,
+    "stroke-opacity": .2,
+    "fill-opacity": .2
+  }
+}];
+var x = function x(d) {
+  return d.index;
+};
 
 var MyComponent = React.createClass({
   displayName: 'MyComponent',
@@ -4197,46 +4205,48 @@ var MyComponent = React.createClass({
   },
   componentDidMount: function componentDidMount() {
     // console.log(this.state, 'state')
-    axios.get('/taco', { withCredentials: true }).then(function (responseJson) {
-      this.state.lineData1[0].values = [];
-      this.state.lineData2[0].values = [];
-      this.state.lineData2[1].values = [];
-      this.state.lineData2[2].values = [];
-      stats = responseJson.data.stats;
-      _.map(stats, function (item, index) {
-        if (item.score === 0 || item.reactionTimes[0] === 0) {
-          return;
-        }
-        this.state.lineData1[0].values.push({ x: index, y: item.score });
-        this.state.lineData2[0].values.push({ x: index, y: item.reactionTimes[0] * 1.2 / 1000 });
-        this.state.lineData2[1].values.push({ x: index, y: item.reactionTimes[0] / 1000 });
-        this.state.lineData2[2].values.push({ x: index, y: item.reactionTimes[0] * .8 / 1000 });
-        var date = item.dateAchieved.split('Z');
-        date = date[0].split('T');
-        date = date[0].split('-');
-        dates.push({ full: item.dateAchieved, splitDate: date });
-      }.bind(this));
-      // console.log(dates,'dates')
-      // console.log(this.state.lineData2[2].values)
-    }.bind(this)).then(function () {
-      this.setState({
-        lineData1: this.state.lineData1,
-        lineData2: this.state.lineData2
-      });
-    }.bind(this));
+    // axios.get('/taco', {withCredentials: true})
+    // .then(function(responseJson){
+    //     this.state.lineData1[0].values=[];
+    //     this.state.lineData2[0].values=[];
+    //     this.state.lineData2[1].values=[];
+    //     this.state.lineData2[2].values=[];
+    //     stats=responseJson.data.stats;
+    //     _.map(stats, function(item, index){
+    //       if(item.score===0 || item.reactionTimes[0]===0){
+    //         return
+    //       }
+    //       this.state.lineData1[0].values.push({x: index, y:item.score})
+    //       this.state.lineData2[0].values.push({x: index, y:item.reactionTimes[0]*1.2/1000})
+    //       this.state.lineData2[1].values.push({x: index, y:item.reactionTimes[0]/1000})
+    //       this.state.lineData2[2].values.push({x: index, y:(item.reactionTimes[0]*.8/1000)})
+    //       var date=item.dateAchieved.split('Z');
+    //       date=date[0].split('T');
+    //       date=date[0].split('-')
+    //       dates.push({full: item.dateAchieved, splitDate: date})
+    //     }.bind(this))
+    //    // console.log(dates,'dates')
+    //    // console.log(this.state.lineData2[2].values)
+    //   }.bind(this))
+    //   .then(function(){
+    //     this.setState({
+    //       lineData1: this.state.lineData1,
+    //       lineData2: this.state.lineData2
+    //     })
+    // }.bind(this))
   },
   render: function render() {
     return React.createElement(
       'div',
       null,
-      React.createElement(Legend, {
-        width: width,
-        height: height,
-        margins: margins,
-        legendClassName: legendClassName,
-        legendPosition: legendPosition,
-        legendOffset: legendOffset,
-        chartSeries: chartSeries
+      ' ',
+      React.createElement(LineChart, {
+        className: 'topStatsGraph',
+        data: data,
+        chartSeries: chartSeries,
+        width: 1100,
+        height: 400,
+        x: x
       })
     );
   }
@@ -4244,16 +4254,17 @@ var MyComponent = React.createClass({
 
 module.exports = MyComponent;
 
-// <LineChart
-//        className='topStatsGraph'
-//        data={this.state.lineData1}
-//        width={1100}
-//        height={400}
-//        title="Score Trends"
-//        yAxisLabel="Altitude"
-//        xAxisLabel="Elapsed Time (sec)"
+// <Legend
+//       width= {width}
+//       height= {height}
+//       margins= {margins}
+//       legendClassName= {legendClassName}
+//       legendPosition= {legendPosition}
+//       legendOffset= {legendOffset}
+//       chartSeries = {chartSeries}
+//     />
 
-//        />
+
 //        <AreaChart
 //        className='bottomStatsGraph'
 //        data={this.state.lineData2}
@@ -4264,7 +4275,7 @@ module.exports = MyComponent;
 //        xAxisLabel="Elapsed Time (sec)"
 //        />
 
-},{"axios":22,"react":374,"react-d3":104,"react-d3-core":70,"react-dom":131,"underscore":392}],21:[function(require,module,exports){
+},{"axios":22,"react":350,"react-d3-basic":70,"react-dom":107,"underscore":368}],21:[function(require,module,exports){
 'use strict';
 
 var _reactRouter = require('react-router');
@@ -4743,7 +4754,7 @@ var Tutorial = React.createClass({
 
 module.exports = Tutorial;
 
-},{"react":374,"react-dom":131,"react-router":172}],22:[function(require,module,exports){
+},{"react":350,"react-dom":107,"react-router":148}],22:[function(require,module,exports){
 module.exports = require('./lib/axios');
 },{"./lib/axios":24}],23:[function(require,module,exports){
 (function (process){
@@ -8529,6 +8540,162 @@ process.umask = function() { return 0; };
 }));
 },{"d3-color":48}],51:[function(require,module,exports){
 (function (global, factory) {
+  typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports) :
+  typeof define === 'function' && define.amd ? define(['exports'], factory) :
+  (factory((global.d3_path = global.d3_path || {})));
+}(this, function (exports) { 'use strict';
+
+  var pi = Math.PI;
+  var tau = 2 * pi;
+  var epsilon = 1e-6;
+  var tauEpsilon = tau - epsilon;
+  function Path() {
+    this._x0 = this._y0 = // start of current subpath
+    this._x1 = this._y1 = null; // end of current subpath
+    this._ = [];
+  }
+
+  function path() {
+    return new Path;
+  }
+
+  Path.prototype = path.prototype = {
+    constructor: Path,
+    moveTo: function(x, y) {
+      this._.push("M", this._x0 = this._x1 = +x, ",", this._y0 = this._y1 = +y);
+    },
+    closePath: function() {
+      if (this._x1 !== null) {
+        this._x1 = this._x0, this._y1 = this._y0;
+        this._.push("Z");
+      }
+    },
+    lineTo: function(x, y) {
+      this._.push("L", this._x1 = +x, ",", this._y1 = +y);
+    },
+    quadraticCurveTo: function(x1, y1, x, y) {
+      this._.push("Q", +x1, ",", +y1, ",", this._x1 = +x, ",", this._y1 = +y);
+    },
+    bezierCurveTo: function(x1, y1, x2, y2, x, y) {
+      this._.push("C", +x1, ",", +y1, ",", +x2, ",", +y2, ",", this._x1 = +x, ",", this._y1 = +y);
+    },
+    arcTo: function(x1, y1, x2, y2, r) {
+      x1 = +x1, y1 = +y1, x2 = +x2, y2 = +y2, r = +r;
+      var x0 = this._x1,
+          y0 = this._y1,
+          x21 = x2 - x1,
+          y21 = y2 - y1,
+          x01 = x0 - x1,
+          y01 = y0 - y1,
+          l01_2 = x01 * x01 + y01 * y01;
+
+      // Is the radius negative? Error.
+      if (r < 0) throw new Error("negative radius: " + r);
+
+      // Is this path empty? Move to (x1,y1).
+      if (this._x1 === null) {
+        this._.push(
+          "M", this._x1 = x1, ",", this._y1 = y1
+        );
+      }
+
+      // Or, is (x1,y1) coincident with (x0,y0)? Do nothing.
+      else if (!(l01_2 > epsilon));
+
+      // Or, are (x0,y0), (x1,y1) and (x2,y2) collinear?
+      // Equivalently, is (x1,y1) coincident with (x2,y2)?
+      // Or, is the radius zero? Line to (x1,y1).
+      else if (!(Math.abs(y01 * x21 - y21 * x01) > epsilon) || !r) {
+        this._.push(
+          "L", this._x1 = x1, ",", this._y1 = y1
+        );
+      }
+
+      // Otherwise, draw an arc!
+      else {
+        var x20 = x2 - x0,
+            y20 = y2 - y0,
+            l21_2 = x21 * x21 + y21 * y21,
+            l20_2 = x20 * x20 + y20 * y20,
+            l21 = Math.sqrt(l21_2),
+            l01 = Math.sqrt(l01_2),
+            l = r * Math.tan((pi - Math.acos((l21_2 + l01_2 - l20_2) / (2 * l21 * l01))) / 2),
+            t01 = l / l01,
+            t21 = l / l21;
+
+        // If the start tangent is not coincident with (x0,y0), line to.
+        if (Math.abs(t01 - 1) > epsilon) {
+          this._.push(
+            "L", x1 + t01 * x01, ",", y1 + t01 * y01
+          );
+        }
+
+        this._.push(
+          "A", r, ",", r, ",0,0,", +(y01 * x20 > x01 * y20), ",", this._x1 = x1 + t21 * x21, ",", this._y1 = y1 + t21 * y21
+        );
+      }
+    },
+    arc: function(x, y, r, a0, a1, ccw) {
+      x = +x, y = +y, r = +r;
+      var dx = r * Math.cos(a0),
+          dy = r * Math.sin(a0),
+          x0 = x + dx,
+          y0 = y + dy,
+          cw = 1 ^ ccw,
+          da = ccw ? a0 - a1 : a1 - a0;
+
+      // Is the radius negative? Error.
+      if (r < 0) throw new Error("negative radius: " + r);
+
+      // Is this path empty? Move to (x0,y0).
+      if (this._x1 === null) {
+        this._.push(
+          "M", x0, ",", y0
+        );
+      }
+
+      // Or, is (x0,y0) not coincident with the previous point? Line to (x0,y0).
+      else if (Math.abs(this._x1 - x0) > epsilon || Math.abs(this._y1 - y0) > epsilon) {
+        this._.push(
+          "L", x0, ",", y0
+        );
+      }
+
+      // Is this arc empty? We’re done.
+      if (!r) return;
+
+      // Is this a complete circle? Draw two arcs to complete the circle.
+      if (da > tauEpsilon) {
+        this._.push(
+          "A", r, ",", r, ",0,1,", cw, ",", x - dx, ",", y - dy,
+          "A", r, ",", r, ",0,1,", cw, ",", this._x1 = x0, ",", this._y1 = y0
+        );
+      }
+
+      // Otherwise, draw an arc!
+      else {
+        if (da < 0) da = da % tau + tau;
+        this._.push(
+          "A", r, ",", r, ",0,", +(da >= pi), ",", cw, ",", this._x1 = x + r * Math.cos(a1), ",", this._y1 = y + r * Math.sin(a1)
+        );
+      }
+    },
+    rect: function(x, y, w, h) {
+      this._.push("M", this._x0 = this._x1 = +x, ",", this._y0 = this._y1 = +y, "h", +w, "v", +h, "h", -w, "Z");
+    },
+    toString: function() {
+      return this._.join("");
+    }
+  };
+
+  var version = "0.1.5";
+
+  exports.version = version;
+  exports.path = path;
+
+}));
+},{}],52:[function(require,module,exports){
+(function (global, factory) {
   typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('d3-array'), require('d3-collection'), require('d3-interpolate'), require('d3-format'), require('d3-time'), require('d3-time-format'), require('d3-color')) :
   typeof define === 'function' && define.amd ? define(['exports', 'd3-array', 'd3-collection', 'd3-interpolate', 'd3-format', 'd3-time', 'd3-time-format', 'd3-color'], factory) :
   (factory((global.d3_scale = global.d3_scale || {}),global.d3_array,global.d3_collection,global.d3_interpolate,global.d3_format,global.d3_time,global.d3_time_format,global.d3_color));
@@ -9457,7 +9624,7 @@ process.umask = function() { return 0; };
   exports.scalePlasma = plasma;
 
 }));
-},{"d3-array":45,"d3-collection":47,"d3-color":48,"d3-format":49,"d3-interpolate":50,"d3-time":54,"d3-time-format":53}],52:[function(require,module,exports){
+},{"d3-array":45,"d3-collection":47,"d3-color":48,"d3-format":49,"d3-interpolate":50,"d3-time":56,"d3-time-format":55}],53:[function(require,module,exports){
 (function (global, factory) {
   typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports) :
   typeof define === 'function' && define.amd ? define(['exports'], factory) :
@@ -10402,7 +10569,1755 @@ process.umask = function() { return 0; };
   exports.customEvent = customEvent;
 
 }));
-},{}],53:[function(require,module,exports){
+},{}],54:[function(require,module,exports){
+(function (global, factory) {
+  typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('d3-path')) :
+  typeof define === 'function' && define.amd ? define(['exports', 'd3-path'], factory) :
+  (factory((global.d3_shape = {}),global.d3_path));
+}(this, function (exports,d3Path) { 'use strict';
+
+  function constant(x) {
+    return function constant() {
+      return x;
+    };
+  }
+
+  var epsilon = 1e-12;
+  var pi = Math.PI;
+  var halfPi = pi / 2;
+  var tau = 2 * pi;
+
+  function arcInnerRadius(d) {
+    return d.innerRadius;
+  }
+
+  function arcOuterRadius(d) {
+    return d.outerRadius;
+  }
+
+  function arcStartAngle(d) {
+    return d.startAngle;
+  }
+
+  function arcEndAngle(d) {
+    return d.endAngle;
+  }
+
+  function arcPadAngle(d) {
+    return d && d.padAngle; // Note: optional!
+  }
+
+  function asin(x) {
+    return x >= 1 ? halfPi : x <= -1 ? -halfPi : Math.asin(x);
+  }
+
+  function intersect(x0, y0, x1, y1, x2, y2, x3, y3) {
+    var x10 = x1 - x0, y10 = y1 - y0,
+        x32 = x3 - x2, y32 = y3 - y2,
+        t = (x32 * (y0 - y2) - y32 * (x0 - x2)) / (y32 * x10 - x32 * y10);
+    return [x0 + t * x10, y0 + t * y10];
+  }
+
+  // Compute perpendicular offset line of length rc.
+  // http://mathworld.wolfram.com/Circle-LineIntersection.html
+  function cornerTangents(x0, y0, x1, y1, r1, rc, cw) {
+    var x01 = x0 - x1,
+        y01 = y0 - y1,
+        lo = (cw ? rc : -rc) / Math.sqrt(x01 * x01 + y01 * y01),
+        ox = lo * y01,
+        oy = -lo * x01,
+        x11 = x0 + ox,
+        y11 = y0 + oy,
+        x10 = x1 + ox,
+        y10 = y1 + oy,
+        x00 = (x11 + x10) / 2,
+        y00 = (y11 + y10) / 2,
+        dx = x10 - x11,
+        dy = y10 - y11,
+        d2 = dx * dx + dy * dy,
+        r = r1 - rc,
+        D = x11 * y10 - x10 * y11,
+        d = (dy < 0 ? -1 : 1) * Math.sqrt(Math.max(0, r * r * d2 - D * D)),
+        cx0 = (D * dy - dx * d) / d2,
+        cy0 = (-D * dx - dy * d) / d2,
+        cx1 = (D * dy + dx * d) / d2,
+        cy1 = (-D * dx + dy * d) / d2,
+        dx0 = cx0 - x00,
+        dy0 = cy0 - y00,
+        dx1 = cx1 - x00,
+        dy1 = cy1 - y00;
+
+    // Pick the closer of the two intersection points.
+    // TODO Is there a faster way to determine which intersection to use?
+    if (dx0 * dx0 + dy0 * dy0 > dx1 * dx1 + dy1 * dy1) cx0 = cx1, cy0 = cy1;
+
+    return {
+      cx: cx0,
+      cy: cy0,
+      x01: -ox,
+      y01: -oy,
+      x11: cx0 * (r1 / r - 1),
+      y11: cy0 * (r1 / r - 1)
+    };
+  }
+
+  function arc() {
+    var innerRadius = arcInnerRadius,
+        outerRadius = arcOuterRadius,
+        cornerRadius = constant(0),
+        padRadius = null,
+        startAngle = arcStartAngle,
+        endAngle = arcEndAngle,
+        padAngle = arcPadAngle,
+        context = null;
+
+    function arc() {
+      var buffer,
+          r,
+          r0 = +innerRadius.apply(this, arguments),
+          r1 = +outerRadius.apply(this, arguments),
+          a0 = startAngle.apply(this, arguments) - halfPi,
+          a1 = endAngle.apply(this, arguments) - halfPi,
+          da = Math.abs(a1 - a0),
+          cw = a1 > a0;
+
+      if (!context) context = buffer = d3Path.path();
+
+      // Ensure that the outer radius is always larger than the inner radius.
+      if (r1 < r0) r = r1, r1 = r0, r0 = r;
+
+      // Is it a point?
+      if (!(r1 > epsilon)) context.moveTo(0, 0);
+
+      // Or is it a circle or annulus?
+      else if (da > tau - epsilon) {
+        context.moveTo(r1 * Math.cos(a0), r1 * Math.sin(a0));
+        context.arc(0, 0, r1, a0, a1, !cw);
+        if (r0 > epsilon) {
+          context.moveTo(r0 * Math.cos(a1), r0 * Math.sin(a1));
+          context.arc(0, 0, r0, a1, a0, cw);
+        }
+      }
+
+      // Or is it a circular or annular sector?
+      else {
+        var a01 = a0,
+            a11 = a1,
+            a00 = a0,
+            a10 = a1,
+            da0 = da,
+            da1 = da,
+            ap = padAngle.apply(this, arguments) / 2,
+            rp = (ap > epsilon) && (padRadius ? +padRadius.apply(this, arguments) : Math.sqrt(r0 * r0 + r1 * r1)),
+            rc = Math.min(Math.abs(r1 - r0) / 2, +cornerRadius.apply(this, arguments)),
+            rc0 = rc,
+            rc1 = rc,
+            t0,
+            t1;
+
+        // Apply padding? Note that since r1 ≥ r0, da1 ≥ da0.
+        if (rp > epsilon) {
+          var p0 = asin(rp / r0 * Math.sin(ap)),
+              p1 = asin(rp / r1 * Math.sin(ap));
+          if ((da0 -= p0 * 2) > epsilon) p0 *= (cw ? 1 : -1), a00 += p0, a10 -= p0;
+          else da0 = 0, a00 = a10 = (a0 + a1) / 2;
+          if ((da1 -= p1 * 2) > epsilon) p1 *= (cw ? 1 : -1), a01 += p1, a11 -= p1;
+          else da1 = 0, a01 = a11 = (a0 + a1) / 2;
+        }
+
+        var x01 = r1 * Math.cos(a01),
+            y01 = r1 * Math.sin(a01),
+            x10 = r0 * Math.cos(a10),
+            y10 = r0 * Math.sin(a10);
+
+        // Apply rounded corners?
+        if (rc > epsilon) {
+          var x11 = r1 * Math.cos(a11),
+              y11 = r1 * Math.sin(a11),
+              x00 = r0 * Math.cos(a00),
+              y00 = r0 * Math.sin(a00);
+
+          // Restrict the corner radius according to the sector angle.
+          if (da < pi) {
+            var oc = da0 > epsilon ? intersect(x01, y01, x00, y00, x11, y11, x10, y10) : [x10, y10],
+                ax = x01 - oc[0],
+                ay = y01 - oc[1],
+                bx = x11 - oc[0],
+                by = y11 - oc[1],
+                kc = 1 / Math.sin(Math.acos((ax * bx + ay * by) / (Math.sqrt(ax * ax + ay * ay) * Math.sqrt(bx * bx + by * by))) / 2),
+                lc = Math.sqrt(oc[0] * oc[0] + oc[1] * oc[1]);
+            rc0 = Math.min(rc, (r0 - lc) / (kc - 1));
+            rc1 = Math.min(rc, (r1 - lc) / (kc + 1));
+          }
+        }
+
+        // Is the sector collapsed to a line?
+        if (!(da1 > epsilon)) context.moveTo(x01, y01);
+
+        // Does the sector’s outer ring have rounded corners?
+        else if (rc1 > epsilon) {
+          t0 = cornerTangents(x00, y00, x01, y01, r1, rc1, cw);
+          t1 = cornerTangents(x11, y11, x10, y10, r1, rc1, cw);
+
+          context.moveTo(t0.cx + t0.x01, t0.cy + t0.y01);
+
+          // Have the corners merged?
+          if (rc1 < rc) context.arc(t0.cx, t0.cy, rc1, Math.atan2(t0.y01, t0.x01), Math.atan2(t1.y01, t1.x01), !cw);
+
+          // Otherwise, draw the two corners and the ring.
+          else {
+            context.arc(t0.cx, t0.cy, rc1, Math.atan2(t0.y01, t0.x01), Math.atan2(t0.y11, t0.x11), !cw);
+            context.arc(0, 0, r1, Math.atan2(t0.cy + t0.y11, t0.cx + t0.x11), Math.atan2(t1.cy + t1.y11, t1.cx + t1.x11), !cw);
+            context.arc(t1.cx, t1.cy, rc1, Math.atan2(t1.y11, t1.x11), Math.atan2(t1.y01, t1.x01), !cw);
+          }
+        }
+
+        // Or is the outer ring just a circular arc?
+        else context.moveTo(x01, y01), context.arc(0, 0, r1, a01, a11, !cw);
+
+        // Is there no inner ring, and it’s a circular sector?
+        // Or perhaps it’s an annular sector collapsed due to padding?
+        if (!(r0 > epsilon) || !(da0 > epsilon)) context.lineTo(x10, y10);
+
+        // Does the sector’s inner ring (or point) have rounded corners?
+        else if (rc0 > epsilon) {
+          t0 = cornerTangents(x10, y10, x11, y11, r0, -rc0, cw);
+          t1 = cornerTangents(x01, y01, x00, y00, r0, -rc0, cw);
+
+          context.lineTo(t0.cx + t0.x01, t0.cy + t0.y01);
+
+          // Have the corners merged?
+          if (rc0 < rc) context.arc(t0.cx, t0.cy, rc0, Math.atan2(t0.y01, t0.x01), Math.atan2(t1.y01, t1.x01), !cw);
+
+          // Otherwise, draw the two corners and the ring.
+          else {
+            context.arc(t0.cx, t0.cy, rc0, Math.atan2(t0.y01, t0.x01), Math.atan2(t0.y11, t0.x11), !cw);
+            context.arc(0, 0, r0, Math.atan2(t0.cy + t0.y11, t0.cx + t0.x11), Math.atan2(t1.cy + t1.y11, t1.cx + t1.x11), cw);
+            context.arc(t1.cx, t1.cy, rc0, Math.atan2(t1.y11, t1.x11), Math.atan2(t1.y01, t1.x01), !cw);
+          }
+        }
+
+        // Or is the inner ring just a circular arc?
+        else context.arc(0, 0, r0, a10, a00, cw);
+      }
+
+      context.closePath();
+
+      if (buffer) return context = null, buffer + "" || null;
+    }
+
+    arc.centroid = function() {
+      var r = (+innerRadius.apply(this, arguments) + +outerRadius.apply(this, arguments)) / 2,
+          a = (+startAngle.apply(this, arguments) + +endAngle.apply(this, arguments)) / 2 - pi / 2;
+      return [Math.cos(a) * r, Math.sin(a) * r];
+    };
+
+    arc.innerRadius = function(_) {
+      return arguments.length ? (innerRadius = typeof _ === "function" ? _ : constant(+_), arc) : innerRadius;
+    };
+
+    arc.outerRadius = function(_) {
+      return arguments.length ? (outerRadius = typeof _ === "function" ? _ : constant(+_), arc) : outerRadius;
+    };
+
+    arc.cornerRadius = function(_) {
+      return arguments.length ? (cornerRadius = typeof _ === "function" ? _ : constant(+_), arc) : cornerRadius;
+    };
+
+    arc.padRadius = function(_) {
+      return arguments.length ? (padRadius = _ == null ? null : typeof _ === "function" ? _ : constant(+_), arc) : padRadius;
+    };
+
+    arc.startAngle = function(_) {
+      return arguments.length ? (startAngle = typeof _ === "function" ? _ : constant(+_), arc) : startAngle;
+    };
+
+    arc.endAngle = function(_) {
+      return arguments.length ? (endAngle = typeof _ === "function" ? _ : constant(+_), arc) : endAngle;
+    };
+
+    arc.padAngle = function(_) {
+      return arguments.length ? (padAngle = typeof _ === "function" ? _ : constant(+_), arc) : padAngle;
+    };
+
+    arc.context = function(_) {
+      return arguments.length ? ((context = _ == null ? null : _), arc) : context;
+    };
+
+    return arc;
+  }
+
+  var slice = Array.prototype.slice;
+
+  function bind(curve, args) {
+    if (args.length < 2) return curve;
+    args = slice.call(args);
+    args[0] = null;
+    return function(context) {
+      args[0] = context;
+      return curve.apply(null, args);
+    };
+  }
+
+  function Linear(context) {
+    this._context = context;
+  }
+
+  Linear.prototype = {
+    areaStart: function() {
+      this._line = 0;
+    },
+    areaEnd: function() {
+      this._line = NaN;
+    },
+    lineStart: function() {
+      this._point = 0;
+    },
+    lineEnd: function() {
+      if (this._line || (this._line !== 0 && this._point === 1)) this._context.closePath();
+      this._line = 1 - this._line;
+    },
+    point: function(x, y) {
+      x = +x, y = +y;
+      switch (this._point) {
+        case 0: this._point = 1; this._line ? this._context.lineTo(x, y) : this._context.moveTo(x, y); break;
+        case 1: this._point = 2; // proceed
+        default: this._context.lineTo(x, y); break;
+      }
+    }
+  };
+
+  function curveLinear(context) {
+    return new Linear(context);
+  }
+
+  function x(p) {
+    return p[0];
+  }
+
+  function y(p) {
+    return p[1];
+  }
+
+  function area() {
+    var x0 = x,
+        x1 = null,
+        y0 = constant(0),
+        y1 = y,
+        defined = constant(true),
+        context = null,
+        curve = curveLinear,
+        output = null;
+
+    function area(data) {
+      var i,
+          j,
+          k,
+          n = data.length,
+          d,
+          defined0 = false,
+          buffer,
+          x0z = new Array(n),
+          y0z = new Array(n);
+
+      if (!context) output = curve(buffer = d3Path.path());
+
+      for (i = 0; i <= n; ++i) {
+        if (!(i < n && defined(d = data[i], i, data)) === defined0) {
+          if (defined0 = !defined0) {
+            j = i;
+            output.areaStart();
+            output.lineStart();
+          } else {
+            output.lineEnd();
+            output.lineStart();
+            for (k = i - 1; k >= j; --k) {
+              output.point(x0z[k], y0z[k]);
+            }
+            output.lineEnd();
+            output.areaEnd();
+          }
+        }
+        if (defined0) {
+          x0z[i] = +x0(d, i, data), y0z[i] = +y0(d, i, data);
+          output.point(x1 ? +x1(d, i, data) : x0z[i], y1 ? +y1(d, i, data) : y0z[i]);
+        }
+      }
+
+      if (buffer) return output = null, buffer + "" || null;
+    }
+
+    area.x = function(_) {
+      return arguments.length ? (x0 = typeof _ === "function" ? _ : constant(+_), x1 = null, area) : x0;
+    };
+
+    area.x0 = function(_) {
+      return arguments.length ? (x0 = typeof _ === "function" ? _ : constant(+_), area) : x0;
+    };
+
+    area.x1 = function(_) {
+      return arguments.length ? (x1 = _ == null ? null : typeof _ === "function" ? _ : constant(+_), area) : x1;
+    };
+
+    area.y = function(_) {
+      return arguments.length ? (y0 = typeof _ === "function" ? _ : constant(+_), y1 = null, area) : y0;
+    };
+
+    area.y0 = function(_) {
+      return arguments.length ? (y0 = typeof _ === "function" ? _ : constant(+_), area) : y0;
+    };
+
+    area.y1 = function(_) {
+      return arguments.length ? (y1 = _ == null ? null : typeof _ === "function" ? _ : constant(+_), area) : y1;
+    };
+
+    area.defined = function(_) {
+      return arguments.length ? (defined = typeof _ === "function" ? _ : constant(!!_), area) : defined;
+    };
+
+    area.curve = function(_) {
+      return arguments.length ? (curve = bind(_, arguments), context != null && (output = curve(context)), area) : curve;
+    };
+
+    area.context = function(_) {
+      return arguments.length ? (_ == null ? context = output = null : output = curve(context = _), area) : context;
+    };
+
+    return area;
+  }
+
+  function line() {
+    var x$$ = x,
+        y$$ = y,
+        defined = constant(true),
+        context = null,
+        curve = curveLinear,
+        output = null;
+
+    function line(data) {
+      var i,
+          n = data.length,
+          d,
+          defined0 = false,
+          buffer;
+
+      if (!context) output = curve(buffer = d3Path.path());
+
+      for (i = 0; i <= n; ++i) {
+        if (!(i < n && defined(d = data[i], i, data)) === defined0) {
+          if (defined0 = !defined0) output.lineStart();
+          else output.lineEnd();
+        }
+        if (defined0) output.point(+x$$(d, i, data), +y$$(d, i, data));
+      }
+
+      if (buffer) return output = null, buffer + "" || null;
+    }
+
+    line.x = function(_) {
+      return arguments.length ? (x$$ = typeof _ === "function" ? _ : constant(+_), line) : x$$;
+    };
+
+    line.y = function(_) {
+      return arguments.length ? (y$$ = typeof _ === "function" ? _ : constant(+_), line) : y$$;
+    };
+
+    line.defined = function(_) {
+      return arguments.length ? (defined = typeof _ === "function" ? _ : constant(!!_), line) : defined;
+    };
+
+    line.curve = function(_) {
+      return arguments.length ? (curve = bind(_, arguments), context != null && (output = curve(context)), line) : curve;
+    };
+
+    line.context = function(_) {
+      return arguments.length ? (_ == null ? context = output = null : output = curve(context = _), line) : context;
+    };
+
+    return line;
+  }
+
+  function descending$1(a, b) {
+    return b < a ? -1 : b > a ? 1 : b >= a ? 0 : NaN;
+  }
+
+  function identity(d) {
+    return d;
+  }
+
+  function pie() {
+    var value = identity,
+        sortValues = descending$1,
+        sort = null,
+        startAngle = constant(0),
+        endAngle = constant(tau),
+        padAngle = constant(0);
+
+    function pie(data) {
+      var i,
+          n = data.length,
+          j,
+          k,
+          sum = 0,
+          index = new Array(n),
+          arcs = new Array(n),
+          a0 = +startAngle.apply(this, arguments),
+          da = Math.min(tau, Math.max(-tau, endAngle.apply(this, arguments) - a0)),
+          a1,
+          p = Math.min(Math.abs(da) / n, padAngle.apply(this, arguments)),
+          pa = p * (da < 0 ? -1 : 1),
+          v;
+
+      for (i = 0; i < n; ++i) {
+        if ((v = arcs[index[i] = i] = +value(data[i], i, data)) > 0) {
+          sum += v;
+        }
+      }
+
+      // Optionally sort the arcs by previously-computed values or by data.
+      if (sortValues != null) index.sort(function(i, j) { return sortValues(arcs[i], arcs[j]); });
+      else if (sort !== null) index.sort(function(i, j) { return sort(data[i], data[j]); });
+
+      // Compute the arcs! They are stored in the original data's order.
+      for (i = 0, k = sum ? (da - n * pa) / sum : 0; i < n; ++i, a0 = a1) {
+        j = index[i], v = arcs[j], a1 = a0 + (v > 0 ? v * k : 0) + pa, arcs[j] = {
+          data: data[j],
+          index: i,
+          value: v,
+          startAngle: a0,
+          endAngle: a1,
+          padAngle: p
+        };
+      }
+
+      return arcs;
+    }
+
+    pie.value = function(_) {
+      return arguments.length ? (value = typeof _ === "function" ? _ : constant(+_), pie) : value;
+    };
+
+    pie.sortValues = function(_) {
+      return arguments.length ? (sortValues = _, sort = null, pie) : sortValues;
+    };
+
+    pie.sort = function(_) {
+      return arguments.length ? (sort = _, sortValues = null, pie) : sort;
+    };
+
+    pie.startAngle = function(_) {
+      return arguments.length ? (startAngle = typeof _ === "function" ? _ : constant(+_), pie) : startAngle;
+    };
+
+    pie.endAngle = function(_) {
+      return arguments.length ? (endAngle = typeof _ === "function" ? _ : constant(+_), pie) : endAngle;
+    };
+
+    pie.padAngle = function(_) {
+      return arguments.length ? (padAngle = typeof _ === "function" ? _ : constant(+_), pie) : padAngle;
+    };
+
+    return pie;
+  }
+
+  function Radial(curve) {
+    this._curve = curve;
+  }
+
+  Radial.prototype = {
+    areaStart: function() {
+      this._curve.areaStart();
+    },
+    areaEnd: function() {
+      this._curve.areaEnd();
+    },
+    lineStart: function() {
+      this._curve.lineStart();
+    },
+    lineEnd: function() {
+      this._curve.lineEnd();
+    },
+    point: function(a, r) {
+      a -= halfPi, this._curve.point(r * Math.cos(a), r * Math.sin(a));
+    }
+  };
+
+  function curveRadial(curve, args) {
+    curve = bind(curve, args);
+
+    function radial(context) {
+      return new Radial(curve(context));
+    }
+
+    radial._curve = curve;
+
+    return radial;
+  }
+
+  function radialArea() {
+    var a = area(),
+        c = a.curve;
+
+    a.angle = a.x, delete a.x;
+    a.startAngle = a.x0, delete a.x0;
+    a.endAngle = a.x1, delete a.x1;
+    a.radius = a.y, delete a.y;
+    a.innerRadius = a.y0, delete a.y0;
+    a.outerRadius = a.y1, delete a.y1;
+
+    a.curve = function(_) {
+      return arguments.length ? c(curveRadial(_, arguments)) : c()._curve;
+    };
+
+    return a.curve(curveLinear);
+  }
+
+  function radialLine() {
+    var l = line(),
+        c = l.curve;
+
+    l.angle = l.x, delete l.x;
+    l.radius = l.y, delete l.y;
+
+    l.curve = function(_) {
+      return arguments.length ? c(curveRadial(_, arguments)) : c()._curve;
+    };
+
+    return l.curve(curveLinear);
+  }
+
+  var circle = {
+    draw: function(context, size) {
+      var r = Math.sqrt(size / pi);
+      context.moveTo(r, 0);
+      context.arc(0, 0, r, 0, tau);
+    }
+  };
+
+  var cross = {
+    draw: function(context, size) {
+      var r = Math.sqrt(size / 5) / 2;
+      context.moveTo(-3 * r, -r);
+      context.lineTo(-r, -r);
+      context.lineTo(-r, -3 * r);
+      context.lineTo(r, -3 * r);
+      context.lineTo(r, -r);
+      context.lineTo(3 * r, -r);
+      context.lineTo(3 * r, r);
+      context.lineTo(r, r);
+      context.lineTo(r, 3 * r);
+      context.lineTo(-r, 3 * r);
+      context.lineTo(-r, r);
+      context.lineTo(-3 * r, r);
+      context.closePath();
+    }
+  };
+
+  var tan30 = Math.sqrt(1 / 3);
+  var tan30_2 = tan30 * 2;
+  var diamond = {
+    draw: function(context, size) {
+      var y = Math.sqrt(size / tan30_2),
+          x = y * tan30;
+      context.moveTo(0, -y);
+      context.lineTo(x, 0);
+      context.lineTo(0, y);
+      context.lineTo(-x, 0);
+      context.closePath();
+    }
+  };
+
+  var ka = 0.89081309152928522810;
+  var kr = Math.sin(pi / 10) / Math.sin(7 * pi / 10);
+  var kx = Math.sin(tau / 10) * kr;
+  var ky = -Math.cos(tau / 10) * kr;
+  var star = {
+    draw: function(context, size) {
+      var r = Math.sqrt(size * ka),
+          x = kx * r,
+          y = ky * r;
+      context.moveTo(0, -r);
+      context.lineTo(x, y);
+      for (var i = 1; i < 5; ++i) {
+        var a = tau * i / 5,
+            c = Math.cos(a),
+            s = Math.sin(a);
+        context.lineTo(s * r, -c * r);
+        context.lineTo(c * x - s * y, s * x + c * y);
+      }
+      context.closePath();
+    }
+  };
+
+  var square = {
+    draw: function(context, size) {
+      var w = Math.sqrt(size),
+          x = -w / 2;
+      context.rect(x, x, w, w);
+    }
+  };
+
+  var sqrt3 = Math.sqrt(3);
+
+  var triangle = {
+    draw: function(context, size) {
+      var y = -Math.sqrt(size / (sqrt3 * 3));
+      context.moveTo(0, y * 2);
+      context.lineTo(-sqrt3 * y, -y);
+      context.lineTo(sqrt3 * y, -y);
+      context.closePath();
+    }
+  };
+
+  var c = -0.5;
+  var s = Math.sqrt(3) / 2;
+  var k = 1 / Math.sqrt(12);
+  var a = (k / 2 + 1) * 3;
+  var wye = {
+    draw: function(context, size) {
+      var r = Math.sqrt(size / a),
+          x0 = r / 2,
+          y0 = r * k,
+          x1 = x0,
+          y1 = r * k + r,
+          x2 = -x1,
+          y2 = y1;
+      context.moveTo(x0, y0);
+      context.lineTo(x1, y1);
+      context.lineTo(x2, y2);
+      context.lineTo(c * x0 - s * y0, s * x0 + c * y0);
+      context.lineTo(c * x1 - s * y1, s * x1 + c * y1);
+      context.lineTo(c * x2 - s * y2, s * x2 + c * y2);
+      context.lineTo(c * x0 + s * y0, c * y0 - s * x0);
+      context.lineTo(c * x1 + s * y1, c * y1 - s * x1);
+      context.lineTo(c * x2 + s * y2, c * y2 - s * x2);
+      context.closePath();
+    }
+  };
+
+  var symbols = [
+    circle,
+    cross,
+    diamond,
+    square,
+    star,
+    triangle,
+    wye
+  ];
+
+  function symbol() {
+    var type = constant(circle),
+        size = constant(64),
+        context = null;
+
+    function symbol() {
+      var buffer;
+      if (!context) context = buffer = d3Path.path();
+      type.apply(this, arguments).draw(context, +size.apply(this, arguments));
+      if (buffer) return context = null, buffer + "" || null;
+    }
+
+    symbol.type = function(_) {
+      return arguments.length ? (type = typeof _ === "function" ? _ : constant(_), symbol) : type;
+    };
+
+    symbol.size = function(_) {
+      return arguments.length ? (size = typeof _ === "function" ? _ : constant(+_), symbol) : size;
+    };
+
+    symbol.context = function(_) {
+      return arguments.length ? (context = _ == null ? null : _, symbol) : context;
+    };
+
+    return symbol;
+  }
+
+  function noop() {}
+
+  function point(that, x, y) {
+    that._context.bezierCurveTo(
+      (2 * that._x0 + that._x1) / 3,
+      (2 * that._y0 + that._y1) / 3,
+      (that._x0 + 2 * that._x1) / 3,
+      (that._y0 + 2 * that._y1) / 3,
+      (that._x0 + 4 * that._x1 + x) / 6,
+      (that._y0 + 4 * that._y1 + y) / 6
+    );
+  }
+
+  function Basis(context) {
+    this._context = context;
+  }
+
+  Basis.prototype = {
+    areaStart: function() {
+      this._line = 0;
+    },
+    areaEnd: function() {
+      this._line = NaN;
+    },
+    lineStart: function() {
+      this._x0 = this._x1 =
+      this._y0 = this._y1 = NaN;
+      this._point = 0;
+    },
+    lineEnd: function() {
+      switch (this._point) {
+        case 3: point(this, this._x1, this._y1); // proceed
+        case 2: this._context.lineTo(this._x1, this._y1); break;
+      }
+      if (this._line || (this._line !== 0 && this._point === 1)) this._context.closePath();
+      this._line = 1 - this._line;
+    },
+    point: function(x, y) {
+      x = +x, y = +y;
+      switch (this._point) {
+        case 0: this._point = 1; this._line ? this._context.lineTo(x, y) : this._context.moveTo(x, y); break;
+        case 1: this._point = 2; break;
+        case 2: this._point = 3; this._context.lineTo((5 * this._x0 + this._x1) / 6, (5 * this._y0 + this._y1) / 6); // proceed
+        default: point(this, x, y); break;
+      }
+      this._x0 = this._x1, this._x1 = x;
+      this._y0 = this._y1, this._y1 = y;
+    }
+  };
+
+  function basis(context) {
+    return new Basis(context);
+  }
+
+  function BasisClosed(context) {
+    this._context = context;
+  }
+
+  BasisClosed.prototype = {
+    areaStart: noop,
+    areaEnd: noop,
+    lineStart: function() {
+      this._x0 = this._x1 = this._x2 = this._x3 = this._x4 =
+      this._y0 = this._y1 = this._y2 = this._y3 = this._y4 = NaN;
+      this._point = 0;
+    },
+    lineEnd: function() {
+      switch (this._point) {
+        case 1: {
+          this._context.moveTo(this._x2, this._y2);
+          this._context.closePath();
+          break;
+        }
+        case 2: {
+          this._context.moveTo((this._x2 + 2 * this._x3) / 3, (this._y2 + 2 * this._y3) / 3);
+          this._context.lineTo((this._x3 + 2 * this._x2) / 3, (this._y3 + 2 * this._y2) / 3);
+          this._context.closePath();
+          break;
+        }
+        case 3: {
+          this.point(this._x2, this._y2);
+          this.point(this._x3, this._y3);
+          this.point(this._x4, this._y4);
+          break;
+        }
+      }
+    },
+    point: function(x, y) {
+      x = +x, y = +y;
+      switch (this._point) {
+        case 0: this._point = 1; this._x2 = x, this._y2 = y; break;
+        case 1: this._point = 2; this._x3 = x, this._y3 = y; break;
+        case 2: this._point = 3; this._x4 = x, this._y4 = y; this._context.moveTo((this._x0 + 4 * this._x1 + x) / 6, (this._y0 + 4 * this._y1 + y) / 6); break;
+        default: point(this, x, y); break;
+      }
+      this._x0 = this._x1, this._x1 = x;
+      this._y0 = this._y1, this._y1 = y;
+    }
+  };
+
+  function basisClosed(context) {
+    return new BasisClosed(context);
+  }
+
+  function BasisOpen(context) {
+    this._context = context;
+  }
+
+  BasisOpen.prototype = {
+    areaStart: function() {
+      this._line = 0;
+    },
+    areaEnd: function() {
+      this._line = NaN;
+    },
+    lineStart: function() {
+      this._x0 = this._x1 =
+      this._y0 = this._y1 = NaN;
+      this._point = 0;
+    },
+    lineEnd: function() {
+      if (this._line || (this._line !== 0 && this._point === 3)) this._context.closePath();
+      this._line = 1 - this._line;
+    },
+    point: function(x, y) {
+      x = +x, y = +y;
+      switch (this._point) {
+        case 0: this._point = 1; break;
+        case 1: this._point = 2; break;
+        case 2: this._point = 3; var x0 = (this._x0 + 4 * this._x1 + x) / 6, y0 = (this._y0 + 4 * this._y1 + y) / 6; this._line ? this._context.lineTo(x0, y0) : this._context.moveTo(x0, y0); break;
+        case 3: this._point = 4; // proceed
+        default: point(this, x, y); break;
+      }
+      this._x0 = this._x1, this._x1 = x;
+      this._y0 = this._y1, this._y1 = y;
+    }
+  };
+
+  function basisOpen(context) {
+    return new BasisOpen(context);
+  }
+
+  function Bundle(context, beta) {
+    this._basis = basis(context);
+    this._beta = beta;
+  }
+
+  Bundle.prototype = {
+    lineStart: function() {
+      this._x = [];
+      this._y = [];
+      this._basis.lineStart();
+    },
+    lineEnd: function() {
+      var x = this._x,
+          y = this._y,
+          j = x.length - 1;
+
+      if (j > 0) {
+        var x0 = x[0],
+            y0 = y[0],
+            dx = x[j] - x0,
+            dy = y[j] - y0,
+            i = -1,
+            t;
+
+        while (++i <= j) {
+          t = i / j;
+          this._basis.point(
+            this._beta * x[i] + (1 - this._beta) * (x0 + t * dx),
+            this._beta * y[i] + (1 - this._beta) * (y0 + t * dy)
+          );
+        }
+      }
+
+      this._x = this._y = null;
+      this._basis.lineEnd();
+    },
+    point: function(x, y) {
+      this._x.push(+x);
+      this._y.push(+y);
+    }
+  };
+
+  function bundle(context, beta) {
+    return beta == null ? new Bundle(context, 0.85)
+        : (beta = +beta) === 1 ? basis(context)
+        : new Bundle(context, beta);
+  }
+
+  function point$1(that, x, y) {
+    that._context.bezierCurveTo(
+      that._x1 + that._k * (that._x2 - that._x0),
+      that._y1 + that._k * (that._y2 - that._y0),
+      that._x2 + that._k * (that._x1 - x),
+      that._y2 + that._k * (that._y1 - y),
+      that._x2,
+      that._y2
+    );
+  }
+
+  function Cardinal(context, k) {
+    this._context = context;
+    this._k = k;
+  }
+
+  Cardinal.prototype = {
+    areaStart: function() {
+      this._line = 0;
+    },
+    areaEnd: function() {
+      this._line = NaN;
+    },
+    lineStart: function() {
+      this._x0 = this._x1 = this._x2 =
+      this._y0 = this._y1 = this._y2 = NaN;
+      this._point = 0;
+    },
+    lineEnd: function() {
+      switch (this._point) {
+        case 2: this._context.lineTo(this._x2, this._y2); break;
+        case 3: point$1(this, this._x1, this._y1); break;
+      }
+      if (this._line || (this._line !== 0 && this._point === 1)) this._context.closePath();
+      this._line = 1 - this._line;
+    },
+    point: function(x, y) {
+      x = +x, y = +y;
+      switch (this._point) {
+        case 0: this._point = 1; this._line ? this._context.lineTo(x, y) : this._context.moveTo(x, y); break;
+        case 1: this._point = 2; this._x1 = x, this._y1 = y; break;
+        case 2: this._point = 3; // proceed
+        default: point$1(this, x, y); break;
+      }
+      this._x0 = this._x1, this._x1 = this._x2, this._x2 = x;
+      this._y0 = this._y1, this._y1 = this._y2, this._y2 = y;
+    }
+  };
+
+  function cardinal(context, tension) {
+    return new Cardinal(context, (tension == null ? 1 : 1 - tension) / 6);
+  }
+
+  function CardinalClosed(context, k) {
+    this._context = context;
+    this._k = k;
+  }
+
+  CardinalClosed.prototype = {
+    areaStart: noop,
+    areaEnd: noop,
+    lineStart: function() {
+      this._x0 = this._x1 = this._x2 = this._x3 = this._x4 = this._x5 =
+      this._y0 = this._y1 = this._y2 = this._y3 = this._y4 = this._y5 = NaN;
+      this._point = 0;
+    },
+    lineEnd: function() {
+      switch (this._point) {
+        case 1: {
+          this._context.moveTo(this._x3, this._y3);
+          this._context.closePath();
+          break;
+        }
+        case 2: {
+          this._context.lineTo(this._x3, this._y3);
+          this._context.closePath();
+          break;
+        }
+        case 3: {
+          this.point(this._x3, this._y3);
+          this.point(this._x4, this._y4);
+          this.point(this._x5, this._y5);
+          break;
+        }
+      }
+    },
+    point: function(x, y) {
+      x = +x, y = +y;
+      switch (this._point) {
+        case 0: this._point = 1; this._x3 = x, this._y3 = y; break;
+        case 1: this._point = 2; this._context.moveTo(this._x4 = x, this._y4 = y); break;
+        case 2: this._point = 3; this._x5 = x, this._y5 = y; break;
+        default: point$1(this, x, y); break;
+      }
+      this._x0 = this._x1, this._x1 = this._x2, this._x2 = x;
+      this._y0 = this._y1, this._y1 = this._y2, this._y2 = y;
+    }
+  };
+
+  function cardinalClosed(context, tension) {
+    return new CardinalClosed(context, (tension == null ? 1 : 1 - tension) / 6);
+  }
+
+  function CardinalOpen(context, k) {
+    this._context = context;
+    this._k = k;
+  }
+
+  CardinalOpen.prototype = {
+    areaStart: function() {
+      this._line = 0;
+    },
+    areaEnd: function() {
+      this._line = NaN;
+    },
+    lineStart: function() {
+      this._x0 = this._x1 = this._x2 =
+      this._y0 = this._y1 = this._y2 = NaN;
+      this._point = 0;
+    },
+    lineEnd: function() {
+      if (this._line || (this._line !== 0 && this._point === 3)) this._context.closePath();
+      this._line = 1 - this._line;
+    },
+    point: function(x, y) {
+      x = +x, y = +y;
+      switch (this._point) {
+        case 0: this._point = 1; break;
+        case 1: this._point = 2; break;
+        case 2: this._point = 3; this._line ? this._context.lineTo(this._x2, this._y2) : this._context.moveTo(this._x2, this._y2); break;
+        case 3: this._point = 4; // proceed
+        default: point$1(this, x, y); break;
+      }
+      this._x0 = this._x1, this._x1 = this._x2, this._x2 = x;
+      this._y0 = this._y1, this._y1 = this._y2, this._y2 = y;
+    }
+  };
+
+  function cardinalOpen(context, tension) {
+    return new CardinalOpen(context, (tension == null ? 1 : 1 - tension) / 6);
+  }
+
+  function point$2(that, x, y) {
+    var x1 = that._x1,
+        y1 = that._y1,
+        x2 = that._x2,
+        y2 = that._y2;
+
+    if (that._l01_a > epsilon) {
+      var a = 2 * that._l01_2a + 3 * that._l01_a * that._l12_a + that._l12_2a,
+          n = 3 * that._l01_a * (that._l01_a + that._l12_a);
+      x1 = (x1 * a - that._x0 * that._l12_2a + that._x2 * that._l01_2a) / n;
+      y1 = (y1 * a - that._y0 * that._l12_2a + that._y2 * that._l01_2a) / n;
+    }
+
+    if (that._l23_a > epsilon) {
+      var b = 2 * that._l23_2a + 3 * that._l23_a * that._l12_a + that._l12_2a,
+          m = 3 * that._l23_a * (that._l23_a + that._l12_a);
+      x2 = (x2 * b + that._x1 * that._l23_2a - x * that._l12_2a) / m;
+      y2 = (y2 * b + that._y1 * that._l23_2a - y * that._l12_2a) / m;
+    }
+
+    that._context.bezierCurveTo(x1, y1, x2, y2, that._x2, that._y2);
+  }
+
+  function CatmullRom(context, alpha) {
+    this._context = context;
+    this._alpha = alpha;
+  }
+
+  CatmullRom.prototype = {
+    areaStart: function() {
+      this._line = 0;
+    },
+    areaEnd: function() {
+      this._line = NaN;
+    },
+    lineStart: function() {
+      this._x0 = this._x1 = this._x2 =
+      this._y0 = this._y1 = this._y2 = NaN;
+      this._l01_a = this._l12_a = this._l23_a =
+      this._l01_2a = this._l12_2a = this._l23_2a =
+      this._point = 0;
+    },
+    lineEnd: function() {
+      switch (this._point) {
+        case 2: this._context.lineTo(this._x2, this._y2); break;
+        case 3: this.point(this, this._x2, this._y2); break;
+      }
+      if (this._line || (this._line !== 0 && this._point === 1)) this._context.closePath();
+      this._line = 1 - this._line;
+    },
+    point: function(x, y) {
+      x = +x, y = +y;
+
+      if (this._point) {
+        var x23 = this._x2 - x,
+            y23 = this._y2 - y;
+        this._l23_a = Math.sqrt(this._l23_2a = Math.pow(x23 * x23 + y23 * y23, this._alpha));
+      }
+
+      switch (this._point) {
+        case 0: this._point = 1; this._line ? this._context.lineTo(x, y) : this._context.moveTo(x, y); break;
+        case 1: this._point = 2; break;
+        case 2: this._point = 3; // proceed
+        default: point$2(this, x, y); break;
+      }
+
+      this._l01_a = this._l12_a, this._l12_a = this._l23_a;
+      this._l01_2a = this._l12_2a, this._l12_2a = this._l23_2a;
+      this._x0 = this._x1, this._x1 = this._x2, this._x2 = x;
+      this._y0 = this._y1, this._y1 = this._y2, this._y2 = y;
+    }
+  };
+
+  function catmullRom(context, alpha) {
+    return (alpha = alpha == null ? 0.5 : +alpha)
+        ? new CatmullRom(context, alpha)
+        : cardinal(context, 0);
+  }
+
+  function CatmullRomClosed(context, alpha) {
+    this._context = context;
+    this._alpha = alpha;
+  }
+
+  CatmullRomClosed.prototype = {
+    areaStart: noop,
+    areaEnd: noop,
+    lineStart: function() {
+      this._x0 = this._x1 = this._x2 = this._x3 = this._x4 = this._x5 =
+      this._y0 = this._y1 = this._y2 = this._y3 = this._y4 = this._y5 = NaN;
+      this._l01_a = this._l12_a = this._l23_a =
+      this._l01_2a = this._l12_2a = this._l23_2a =
+      this._point = 0;
+    },
+    lineEnd: function() {
+      switch (this._point) {
+        case 1: {
+          this._context.moveTo(this._x3, this._y3);
+          this._context.closePath();
+          break;
+        }
+        case 2: {
+          this._context.lineTo(this._x3, this._y3);
+          this._context.closePath();
+          break;
+        }
+        case 3: {
+          this.point(this._x3, this._y3);
+          this.point(this._x4, this._y4);
+          this.point(this._x5, this._y5);
+          break;
+        }
+      }
+    },
+    point: function(x, y) {
+      x = +x, y = +y;
+
+      if (this._point) {
+        var x23 = this._x2 - x,
+            y23 = this._y2 - y;
+        this._l23_a = Math.sqrt(this._l23_2a = Math.pow(x23 * x23 + y23 * y23, this._alpha));
+      }
+
+      switch (this._point) {
+        case 0: this._point = 1; this._x3 = x, this._y3 = y; break;
+        case 1: this._point = 2; this._context.moveTo(this._x4 = x, this._y4 = y); break;
+        case 2: this._point = 3; this._x5 = x, this._y5 = y; break;
+        default: point$2(this, x, y); break;
+      }
+
+      this._l01_a = this._l12_a, this._l12_a = this._l23_a;
+      this._l01_2a = this._l12_2a, this._l12_2a = this._l23_2a;
+      this._x0 = this._x1, this._x1 = this._x2, this._x2 = x;
+      this._y0 = this._y1, this._y1 = this._y2, this._y2 = y;
+    }
+  };
+
+  function catmullRomClosed(context, alpha) {
+    return (alpha = alpha == null ? 0.5 : +alpha)
+        ? new CatmullRomClosed(context, alpha)
+        : cardinalClosed(context, 0);
+  }
+
+  function CatmullRomOpen(context, alpha) {
+    this._context = context;
+    this._alpha = alpha;
+  }
+
+  CatmullRomOpen.prototype = {
+    areaStart: function() {
+      this._line = 0;
+    },
+    areaEnd: function() {
+      this._line = NaN;
+    },
+    lineStart: function() {
+      this._x0 = this._x1 = this._x2 =
+      this._y0 = this._y1 = this._y2 = NaN;
+      this._l01_a = this._l12_a = this._l23_a =
+      this._l01_2a = this._l12_2a = this._l23_2a =
+      this._point = 0;
+    },
+    lineEnd: function() {
+      if (this._line || (this._line !== 0 && this._point === 3)) this._context.closePath();
+      this._line = 1 - this._line;
+    },
+    point: function(x, y) {
+      x = +x, y = +y;
+
+      if (this._point) {
+        var x23 = this._x2 - x,
+            y23 = this._y2 - y;
+        this._l23_a = Math.sqrt(this._l23_2a = Math.pow(x23 * x23 + y23 * y23, this._alpha));
+      }
+
+      switch (this._point) {
+        case 0: this._point = 1; break;
+        case 1: this._point = 2; break;
+        case 2: this._point = 3; this._line ? this._context.lineTo(this._x2, this._y2) : this._context.moveTo(this._x2, this._y2); break;
+        case 3: this._point = 4; // proceed
+        default: point$2(this, x, y); break;
+      }
+
+      this._l01_a = this._l12_a, this._l12_a = this._l23_a;
+      this._l01_2a = this._l12_2a, this._l12_2a = this._l23_2a;
+      this._x0 = this._x1, this._x1 = this._x2, this._x2 = x;
+      this._y0 = this._y1, this._y1 = this._y2, this._y2 = y;
+    }
+  };
+
+  function catmullRomOpen(context, alpha) {
+    return (alpha = alpha == null ? 0.5 : +alpha)
+        ? new CatmullRomOpen(context, alpha)
+        : cardinalOpen(context, 0);
+  }
+
+  function LinearClosed(context) {
+    this._context = context;
+  }
+
+  LinearClosed.prototype = {
+    areaStart: noop,
+    areaEnd: noop,
+    lineStart: function() {
+      this._point = 0;
+    },
+    lineEnd: function() {
+      if (this._point) this._context.closePath();
+    },
+    point: function(x, y) {
+      x = +x, y = +y;
+      if (this._point) this._context.lineTo(x, y);
+      else this._point = 1, this._context.moveTo(x, y);
+    }
+  };
+
+  function linearClosed(context) {
+    return new LinearClosed(context);
+  }
+
+  function sign(x) {
+    return x < 0 ? -1 : 1;
+  }
+
+  // Calculate the slopes of the tangents (Hermite-type interpolation) based on
+  // the following paper: Steffen, M. 1990. A Simple Method for Monotonic
+  // Interpolation in One Dimension. Astronomy and Astrophysics, Vol. 239, NO.
+  // NOV(II), P. 443, 1990.
+  function slope3(that, x2, y2) {
+    var h0 = that._x1 - that._x0,
+        h1 = x2 - that._x1,
+        s0 = (that._y1 - that._y0) / (h0 || h1 < 0 && -0),
+        s1 = (y2 - that._y1) / (h1 || h0 < 0 && -0),
+        p = (s0 * h1 + s1 * h0) / (h0 + h1);
+    return (sign(s0) + sign(s1)) * Math.min(Math.abs(s0), Math.abs(s1), 0.5 * Math.abs(p)) || 0;
+  }
+
+  // Calculate a one-sided slope.
+  function slope2(that, t) {
+    var h = that._x1 - that._x0;
+    return h ? (3 * (that._y1 - that._y0) / h - t) / 2 : t;
+  }
+
+  // According to https://en.wikipedia.org/wiki/Cubic_Hermite_spline#Representations
+  // "you can express cubic Hermite interpolation in terms of cubic Bézier curves
+  // with respect to the four values p0, p0 + m0 / 3, p1 - m1 / 3, p1".
+  function point$3(that, t0, t1) {
+    var x0 = that._x0,
+        y0 = that._y0,
+        x1 = that._x1,
+        y1 = that._y1,
+        dx = (x1 - x0) / 3;
+    that._context.bezierCurveTo(x0 + dx, y0 + dx * t0, x1 - dx, y1 - dx * t1, x1, y1);
+  }
+
+  function MonotoneX(context) {
+    this._context = context;
+  }
+
+  MonotoneX.prototype = {
+    areaStart: function() {
+      this._line = 0;
+    },
+    areaEnd: function() {
+      this._line = NaN;
+    },
+    lineStart: function() {
+      this._x0 = this._x1 =
+      this._y0 = this._y1 =
+      this._t0 = NaN;
+      this._point = 0;
+    },
+    lineEnd: function() {
+      switch (this._point) {
+        case 2: this._context.lineTo(this._x1, this._y1); break;
+        case 3: point$3(this, this._t0, slope2(this, this._t0)); break;
+      }
+      if (this._line || (this._line !== 0 && this._point === 1)) this._context.closePath();
+      this._line = 1 - this._line;
+    },
+    point: function(x, y) {
+      var t1 = NaN;
+
+      x = +x, y = +y;
+      if (x === this._x1 && y === this._y1) return; // Ignore coincident points.
+      switch (this._point) {
+        case 0: this._point = 1; this._line ? this._context.lineTo(x, y) : this._context.moveTo(x, y); break;
+        case 1: this._point = 2; break;
+        case 2: this._point = 3; point$3(this, slope2(this, t1 = slope3(this, x, y)), t1); break;
+        default: point$3(this, this._t0, t1 = slope3(this, x, y)); break;
+      }
+
+      this._x0 = this._x1, this._x1 = x;
+      this._y0 = this._y1, this._y1 = y;
+      this._t0 = t1;
+    }
+  }
+
+  function MonotoneY(context) {
+    this._context = new ReflectContext(context);
+  }
+
+  (MonotoneY.prototype = Object.create(MonotoneX.prototype)).point = function(x, y) {
+    MonotoneX.prototype.point.call(this, y, x);
+  };
+
+  function ReflectContext(context) {
+    this._context = context;
+  }
+
+  ReflectContext.prototype = {
+    moveTo: function(x, y) { this._context.moveTo(y, x); },
+    closePath: function() { this._context.closePath(); },
+    lineTo: function(x, y) { this._context.lineTo(y, x); },
+    bezierCurveTo: function(x1, y1, x2, y2, x, y) { this._context.bezierCurveTo(y1, x1, y2, x2, y, x); }
+  };
+
+  function monotoneX(context) {
+    return new MonotoneX(context);
+  }
+
+  function monotoneY(context) {
+    return new MonotoneY(context);
+  }
+
+  function Natural(context) {
+    this._context = context;
+  }
+
+  Natural.prototype = {
+    areaStart: function() {
+      this._line = 0;
+    },
+    areaEnd: function() {
+      this._line = NaN;
+    },
+    lineStart: function() {
+      this._x = [];
+      this._y = [];
+    },
+    lineEnd: function() {
+      var x = this._x,
+          y = this._y,
+          n = x.length;
+
+      if (n) {
+        this._line ? this._context.lineTo(x[0], y[0]) : this._context.moveTo(x[0], y[0]);
+        if (n === 2) {
+          this._context.lineTo(x[1], y[1]);
+        } else {
+          var px = controlPoints(x),
+              py = controlPoints(y);
+          for (var i0 = 0, i1 = 1; i1 < n; ++i0, ++i1) {
+            this._context.bezierCurveTo(px[0][i0], py[0][i0], px[1][i0], py[1][i0], x[i1], y[i1]);
+          }
+        }
+      }
+
+      if (this._line || (this._line !== 0 && n === 1)) this._context.closePath();
+      this._line = 1 - this._line;
+      this._x = this._y = null;
+    },
+    point: function(x, y) {
+      this._x.push(+x);
+      this._y.push(+y);
+    }
+  };
+
+  // See https://www.particleincell.com/2012/bezier-splines/ for derivation.
+  function controlPoints(x) {
+    var i,
+        n = x.length - 1,
+        m,
+        a = new Array(n),
+        b = new Array(n),
+        r = new Array(n);
+    a[0] = 0, b[0] = 2, r[0] = x[0] + 2 * x[1];
+    for (i = 1; i < n - 1; ++i) a[i] = 1, b[i] = 4, r[i] = 4 * x[i] + 2 * x[i + 1];
+    a[n - 1] = 2, b[n - 1] = 7, r[n - 1] = 8 * x[n - 1] + x[n];
+    for (i = 1; i < n; ++i) m = a[i] / b[i - 1], b[i] -= m, r[i] -= m * r[i - 1];
+    a[n - 1] = r[n - 1] / b[n - 1];
+    for (i = n - 2; i >= 0; --i) a[i] = (r[i] - a[i + 1]) / b[i];
+    b[n - 1] = (x[n] + a[n - 1]) / 2;
+    for (i = 0; i < n - 1; ++i) b[i] = 2 * x[i + 1] - a[i + 1];
+    return [a, b];
+  }
+
+  function natural(context) {
+    return new Natural(context);
+  }
+
+  function Step(context, t) {
+    this._context = context;
+    this._t = t;
+  }
+
+  Step.prototype = {
+    areaStart: function() {
+      this._line = 0;
+    },
+    areaEnd: function() {
+      this._line = NaN;
+    },
+    lineStart: function() {
+      this._x = this._y = NaN;
+      this._point = 0;
+    },
+    lineEnd: function() {
+      if (0 < this._t && this._t < 1 && this._point === 2) this._context.lineTo(this._x, this._y);
+      if (this._line || (this._line !== 0 && this._point === 1)) this._context.closePath();
+      this._line = 1 - this._line;
+    },
+    point: function(x, y) {
+      x = +x, y = +y;
+      switch (this._point) {
+        case 0: this._point = 1; this._line ? this._context.lineTo(x, y) : this._context.moveTo(x, y); break;
+        case 1: this._point = 2; // proceed
+        default: {
+          var t = x > this._x ? this._t : 1 - this._t;
+          if (t <= 0) {
+            this._context.lineTo(this._x, y);
+            this._context.lineTo(x, y);
+          } else if (t >= 1) {
+            this._context.lineTo(x, this._y);
+            this._context.lineTo(x, y);
+          } else {
+            var x1 = (this._x + x) * t;
+            this._context.lineTo(x1, this._y);
+            this._context.lineTo(x1, y);
+          }
+          break;
+        }
+      }
+      this._x = x, this._y = y;
+    }
+  };
+
+  function step(context) {
+    return new Step(context, 0.5);
+  }
+
+  function stepBefore(context) {
+    return new Step(context, 0);
+  }
+
+  function stepAfter(context) {
+    return new Step(context, 1);
+  }
+
+  var slice$1 = Array.prototype.slice;
+
+  function none(series, order) {
+    if (!((n = series.length) > 1)) return;
+    for (var i = 1, s0, s1 = series[order[0]], n, m = s1.length; i < n; ++i) {
+      s0 = s1, s1 = series[order[i]];
+      for (var j = 0; j < m; ++j) {
+        s1[j][1] += s1[j][0] = isNaN(s0[j][1]) ? s0[j][0] : s0[j][1];
+      }
+    }
+  }
+
+  function none$1(series) {
+    var n = series.length, o = new Array(n);
+    while (--n >= 0) o[n] = n;
+    return o;
+  }
+
+  function stackValue(d, key) {
+    return d[key];
+  }
+
+  function stack() {
+    var keys = constant([]),
+        order = none$1,
+        offset = none,
+        value = stackValue;
+
+    function stack(data) {
+      var kz = keys.apply(this, arguments),
+          i,
+          m = data.length,
+          n = kz.length,
+          sz = new Array(n),
+          oz;
+
+      for (i = 0; i < n; ++i) {
+        for (var ki = kz[i], si = sz[i] = new Array(m), j = 0, sij; j < m; ++j) {
+          si[j] = sij = [0, +value(data[j], ki, j, data)];
+          sij.data = data[j];
+        }
+        si.key = ki;
+      }
+
+      for (i = 0, oz = order(sz); i < n; ++i) {
+        sz[oz[i]].index = i;
+      }
+
+      offset(sz, oz);
+      return sz;
+    }
+
+    stack.keys = function(_) {
+      return arguments.length ? (keys = typeof _ === "function" ? _ : constant(slice$1.call(_)), stack) : keys;
+    };
+
+    stack.value = function(_) {
+      return arguments.length ? (value = typeof _ === "function" ? _ : constant(+_), stack) : value;
+    };
+
+    stack.order = function(_) {
+      return arguments.length ? (order = _ == null ? none$1 : typeof _ === "function" ? _ : constant(slice$1.call(_)), stack) : order;
+    };
+
+    stack.offset = function(_) {
+      return arguments.length ? (offset = _ == null ? none : _, stack) : offset;
+    };
+
+    return stack;
+  }
+
+  function expand(series, order) {
+    if (!((n = series.length) > 0)) return;
+    for (var i, n, j = 0, m = series[0].length, y; j < m; ++j) {
+      for (y = i = 0; i < n; ++i) y += series[i][j][1] || 0;
+      if (y) for (i = 0; i < n; ++i) series[i][j][1] /= y;
+    }
+    none(series, order);
+  }
+
+  function silhouette(series, order) {
+    if (!((n = series.length) > 0)) return;
+    for (var j = 0, s0 = series[order[0]], n, m = s0.length; j < m; ++j) {
+      for (var i = 0, y = 0; i < n; ++i) y += series[i][j][1] || 0;
+      s0[j][1] += s0[j][0] = -y / 2;
+    }
+    none(series, order);
+  }
+
+  function wiggle(series, order) {
+    if (!((n = series.length) > 0) || !((m = (s0 = series[order[0]]).length) > 0)) return;
+    for (var y = 0, j = 1, s0, m, n; j < m; ++j) {
+      for (var i = 0, s1 = 0, s2 = 0; i < n; ++i) {
+        var si = series[order[i]],
+            sij0 = si[j][1] || 0,
+            sij1 = si[j - 1][1] || 0,
+            s3 = (sij0 - sij1) / 2;
+        for (var k = 0; k < i; ++k) {
+          var sk = series[order[k]],
+              skj0 = sk[j][1] || 0,
+              skj1 = sk[j - 1][1] || 0;
+          s3 += skj0 - skj1;
+        }
+        s1 += sij0, s2 += s3 * sij0;
+      }
+      s0[j - 1][1] += s0[j - 1][0] = y;
+      if (s1) y -= s2 / s1;
+    }
+    s0[j - 1][1] += s0[j - 1][0] = y;
+    none(series, order);
+  }
+
+  function ascending(series) {
+    var sums = series.map(sum);
+    return none$1(series).sort(function(a, b) { return sums[a] - sums[b]; });
+  }
+
+  function sum(series) {
+    var s = 0, i = -1, n = series.length, v;
+    while (++i < n) if (v = +series[i][1]) s += v;
+    return s;
+  }
+
+  function descending(series) {
+    return ascending(series).reverse();
+  }
+
+  function insideOut(series) {
+    var n = series.length,
+        i,
+        j,
+        sums = series.map(sum),
+        order = none$1(series).sort(function(a, b) { return sums[b] - sums[a]; }),
+        top = 0,
+        bottom = 0,
+        tops = [],
+        bottoms = [];
+
+    for (i = 0; i < n; ++i) {
+      j = order[i];
+      if (top < bottom) {
+        top += sums[j];
+        tops.push(j);
+      } else {
+        bottom += sums[j];
+        bottoms.push(j);
+      }
+    }
+
+    return bottoms.reverse().concat(tops);
+  }
+
+  function reverse(series) {
+    return none$1(series).reverse();
+  }
+
+  var version = "0.5.1";
+
+  exports.version = version;
+  exports.arc = arc;
+  exports.area = area;
+  exports.line = line;
+  exports.pie = pie;
+  exports.radialArea = radialArea;
+  exports.radialLine = radialLine;
+  exports.symbol = symbol;
+  exports.symbols = symbols;
+  exports.symbolCircle = circle;
+  exports.symbolCross = cross;
+  exports.symbolDiamond = diamond;
+  exports.symbolSquare = square;
+  exports.symbolStar = star;
+  exports.symbolTriangle = triangle;
+  exports.symbolWye = wye;
+  exports.curveBasisClosed = basisClosed;
+  exports.curveBasisOpen = basisOpen;
+  exports.curveBasis = basis;
+  exports.curveBundle = bundle;
+  exports.curveCardinalClosed = cardinalClosed;
+  exports.curveCardinalOpen = cardinalOpen;
+  exports.curveCardinal = cardinal;
+  exports.curveCatmullRomClosed = catmullRomClosed;
+  exports.curveCatmullRomOpen = catmullRomOpen;
+  exports.curveCatmullRom = catmullRom;
+  exports.curveLinearClosed = linearClosed;
+  exports.curveLinear = curveLinear;
+  exports.curveMonotoneX = monotoneX;
+  exports.curveMonotoneY = monotoneY;
+  exports.curveNatural = natural;
+  exports.curveStep = step;
+  exports.curveStepAfter = stepAfter;
+  exports.curveStepBefore = stepBefore;
+  exports.stack = stack;
+  exports.stackOffsetExpand = expand;
+  exports.stackOffsetNone = none;
+  exports.stackOffsetSilhouette = silhouette;
+  exports.stackOffsetWiggle = wiggle;
+  exports.stackOrderAscending = ascending;
+  exports.stackOrderDescending = descending;
+  exports.stackOrderInsideOut = insideOut;
+  exports.stackOrderNone = none$1;
+  exports.stackOrderReverse = reverse;
+
+}));
+},{"d3-path":51}],55:[function(require,module,exports){
 (function (global, factory) {
   typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('d3-time')) :
   typeof define === 'function' && define.amd ? define(['exports', 'd3-time'], factory) :
@@ -11236,7 +13151,7 @@ process.umask = function() { return 0; };
   exports.isoParse = parseIso;
 
 }));
-},{"d3-time":54}],54:[function(require,module,exports){
+},{"d3-time":56}],56:[function(require,module,exports){
 (function (global, factory) {
   typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports) :
   typeof define === 'function' && define.amd ? define(['exports'], factory) :
@@ -11586,9 +13501,9 @@ process.umask = function() { return 0; };
   Object.defineProperty(exports, '__esModule', { value: true });
 
 }));
-},{}],55:[function(require,module,exports){
+},{}],57:[function(require,module,exports){
 module.exports = require('./lib/query-selector');
-},{"./lib/query-selector":56}],56:[function(require,module,exports){
+},{"./lib/query-selector":58}],58:[function(require,module,exports){
 /**
  * @ignore
  * css3 selector engine for ie6-8
@@ -12287,7 +14202,7 @@ select.version = '@VERSION@';
  *  - http://blogs.msdn.com/ie/archive/2010/05/13/the-css-corner-css3-selectors.aspx
  *  - http://sizzlejs.com/
  */
-},{"./query-selector/parser":57,"./query-selector/util":58}],57:[function(require,module,exports){
+},{"./query-selector/parser":59,"./query-selector/util":60}],59:[function(require,module,exports){
 /*
   Generated by kison.*/
 var parser = (function (undefined) {
@@ -13492,7 +15407,7 @@ var parser = (function (undefined) {
 if (typeof module !== 'undefined') {
     module.exports = parser;
 }
-},{}],58:[function(require,module,exports){
+},{}],60:[function(require,module,exports){
 /**
  * attr fix for old ie
  * @author yiminghe@gmail.com
@@ -13839,7 +15754,1279 @@ var util = module.exports = {
     }
   }
 };
-},{}],59:[function(require,module,exports){
+},{}],61:[function(require,module,exports){
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = require('react');
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactD3Core = require('react-d3-core');
+
+var _reactD3Shape = require('react-d3-shape');
+
+var _commonProps = require('./commonProps');
+
+var _commonProps2 = _interopRequireDefault(_commonProps);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var AreaChart = function (_Component) {
+  _inherits(AreaChart, _Component);
+
+  function AreaChart(props) {
+    _classCallCheck(this, AreaChart);
+
+    return _possibleConstructorReturn(this, Object.getPrototypeOf(AreaChart).call(this, props));
+  }
+
+  _createClass(AreaChart, [{
+    key: 'render',
+    value: function render() {
+      var _props = this.props;
+      var width = _props.width;
+      var height = _props.height;
+      var margins = _props.margins;
+      var data = _props.data;
+      var chartSeries = _props.chartSeries;
+      var showXGrid = _props.showXGrid;
+      var showYGrid = _props.showYGrid;
+      var showLegend = _props.showLegend;
+      var categoricalColors = _props.categoricalColors;
+
+
+      var xgrid, ygrid;
+
+      if (showXGrid) xgrid = _react2.default.createElement(_reactD3Core.Xgrid, null);
+      if (showYGrid) ygrid = _react2.default.createElement(_reactD3Core.Ygrid, null);
+
+      return _react2.default.createElement(
+        'div',
+        null,
+        showLegend ? _react2.default.createElement(_reactD3Core.Legend, _extends({}, this.props, {
+          width: width,
+          margins: margins,
+          chartSeries: chartSeries,
+          categoricalColors: categoricalColors
+        })) : null,
+        _react2.default.createElement(
+          _reactD3Shape.Chart,
+          _extends({}, this.props, {
+            width: width,
+            height: height,
+            data: data,
+            chartSeries: chartSeries
+          }),
+          _react2.default.createElement(_reactD3Shape.Area, {
+            chartSeries: chartSeries
+          }),
+          xgrid,
+          ygrid,
+          _react2.default.createElement(_reactD3Core.Xaxis, null),
+          _react2.default.createElement(_reactD3Core.Yaxis, null),
+          this.props.children
+        )
+      );
+    }
+  }]);
+
+  return AreaChart;
+}(_react.Component);
+
+AreaChart.defaultProps = _extends({
+  showScatter: false
+}, _commonProps2.default);
+AreaChart.propTypes = {
+  width: _react.PropTypes.number.isRequired,
+  height: _react.PropTypes.number.isRequired,
+  margins: _react.PropTypes.object.isRequired,
+  data: _react.PropTypes.array.isRequired,
+  chartSeries: _react.PropTypes.array.isRequired
+};
+exports.default = AreaChart;
+module.exports = exports['default'];
+},{"./commonProps":69,"react":350,"react-d3-core":85,"react-d3-shape":104}],62:[function(require,module,exports){
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = require('react');
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactD3Core = require('react-d3-core');
+
+var _reactD3Shape = require('react-d3-shape');
+
+var _commonProps = require('./commonProps');
+
+var _commonProps2 = _interopRequireDefault(_commonProps);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var AreaStackChart = function (_Component) {
+  _inherits(AreaStackChart, _Component);
+
+  function AreaStackChart(props) {
+    _classCallCheck(this, AreaStackChart);
+
+    return _possibleConstructorReturn(this, Object.getPrototypeOf(AreaStackChart).call(this, props));
+  }
+
+  _createClass(AreaStackChart, [{
+    key: 'render',
+    value: function render() {
+      var _props = this.props;
+      var width = _props.width;
+      var height = _props.height;
+      var margins = _props.margins;
+      var data = _props.data;
+      var chartSeries = _props.chartSeries;
+      var showXGrid = _props.showXGrid;
+      var showYGrid = _props.showYGrid;
+      var showLegend = _props.showLegend;
+      var categoricalColors = _props.categoricalColors;
+
+
+      var xgrid, ygrid;
+
+      if (showXGrid) xgrid = _react2.default.createElement(_reactD3Core.Xgrid, null);
+      if (showYGrid) ygrid = _react2.default.createElement(_reactD3Core.Ygrid, null);
+
+      return _react2.default.createElement(
+        'div',
+        null,
+        showLegend ? _react2.default.createElement(_reactD3Core.Legend, _extends({}, this.props, {
+          width: width,
+          margins: margins,
+          chartSeries: chartSeries,
+          categoricalColors: categoricalColors
+        })) : null,
+        _react2.default.createElement(
+          _reactD3Shape.Chart,
+          _extends({}, this.props, {
+            width: width,
+            height: height,
+            data: data,
+            chartSeries: chartSeries,
+            stack: true
+          }),
+          _react2.default.createElement(_reactD3Shape.AreaStack, {
+            chartSeries: chartSeries
+          }),
+          xgrid,
+          ygrid,
+          _react2.default.createElement(_reactD3Core.Xaxis, null),
+          _react2.default.createElement(_reactD3Core.Yaxis, null),
+          this.props.children
+        )
+      );
+    }
+  }]);
+
+  return AreaStackChart;
+}(_react.Component);
+
+AreaStackChart.defaultProps = _commonProps2.default;
+AreaStackChart.propTypes = {
+  width: _react.PropTypes.number.isRequired,
+  height: _react.PropTypes.number.isRequired,
+  margins: _react.PropTypes.object.isRequired,
+  data: _react.PropTypes.array.isRequired,
+  chartSeries: _react.PropTypes.array.isRequired
+};
+exports.default = AreaStackChart;
+module.exports = exports['default'];
+},{"./commonProps":69,"react":350,"react-d3-core":85,"react-d3-shape":104}],63:[function(require,module,exports){
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = require('react');
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactD3Core = require('react-d3-core');
+
+var _reactD3Shape = require('react-d3-shape');
+
+var _commonProps = require('./commonProps');
+
+var _commonProps2 = _interopRequireDefault(_commonProps);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var BarChart = function (_Component) {
+  _inherits(BarChart, _Component);
+
+  function BarChart(props) {
+    _classCallCheck(this, BarChart);
+
+    return _possibleConstructorReturn(this, Object.getPrototypeOf(BarChart).call(this, props));
+  }
+
+  _createClass(BarChart, [{
+    key: 'render',
+    value: function render() {
+      var _props = this.props;
+      var width = _props.width;
+      var height = _props.height;
+      var margins = _props.margins;
+      var data = _props.data;
+      var chartSeries = _props.chartSeries;
+      var showXGrid = _props.showXGrid;
+      var showYGrid = _props.showYGrid;
+      var showLegend = _props.showLegend;
+      var categoricalColors = _props.categoricalColors;
+
+
+      var xgrid, ygrid;
+
+      if (showXGrid) xgrid = _react2.default.createElement(_reactD3Core.Xgrid, null);
+      if (showYGrid) ygrid = _react2.default.createElement(_reactD3Core.Ygrid, null);
+
+      return _react2.default.createElement(
+        'div',
+        null,
+        showLegend ? _react2.default.createElement(_reactD3Core.Legend, _extends({}, this.props, {
+          width: width,
+          margins: margins,
+          chartSeries: chartSeries,
+          categoricalColors: categoricalColors
+        })) : null,
+        _react2.default.createElement(
+          _reactD3Shape.Chart,
+          _extends({}, this.props, {
+            width: width,
+            height: height,
+            data: data,
+            chartSeries: chartSeries
+          }),
+          _react2.default.createElement(_reactD3Shape.Bar, {
+            chartSeries: chartSeries
+          }),
+          xgrid,
+          ygrid,
+          _react2.default.createElement(_reactD3Core.Xaxis, null),
+          _react2.default.createElement(_reactD3Core.Yaxis, null),
+          this.props.children
+        )
+      );
+    }
+  }]);
+
+  return BarChart;
+}(_react.Component);
+
+BarChart.defaultProps = _extends({
+  onMouseOver: function onMouseOver() {},
+  onMouseOut: function onMouseOut() {}
+}, _commonProps2.default);
+BarChart.propTypes = {
+  width: _react.PropTypes.number.isRequired,
+  height: _react.PropTypes.number.isRequired,
+  margins: _react.PropTypes.object.isRequired,
+  data: _react.PropTypes.array.isRequired,
+  chartSeries: _react.PropTypes.array.isRequired
+};
+exports.default = BarChart;
+module.exports = exports['default'];
+},{"./commonProps":69,"react":350,"react-d3-core":85,"react-d3-shape":104}],64:[function(require,module,exports){
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = require('react');
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactD3Core = require('react-d3-core');
+
+var _reactD3Shape = require('react-d3-shape');
+
+var _commonProps = require('./commonProps');
+
+var _commonProps2 = _interopRequireDefault(_commonProps);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var BarGroupChart = function (_Component) {
+  _inherits(BarGroupChart, _Component);
+
+  function BarGroupChart(props) {
+    _classCallCheck(this, BarGroupChart);
+
+    return _possibleConstructorReturn(this, Object.getPrototypeOf(BarGroupChart).call(this, props));
+  }
+
+  _createClass(BarGroupChart, [{
+    key: 'render',
+    value: function render() {
+      var _props = this.props;
+      var width = _props.width;
+      var height = _props.height;
+      var margins = _props.margins;
+      var data = _props.data;
+      var chartSeries = _props.chartSeries;
+      var showXGrid = _props.showXGrid;
+      var showYGrid = _props.showYGrid;
+      var showLegend = _props.showLegend;
+      var categoricalColors = _props.categoricalColors;
+
+
+      var xgrid, ygrid;
+
+      if (showXGrid) xgrid = _react2.default.createElement(_reactD3Core.Xgrid, null);
+      if (showYGrid) ygrid = _react2.default.createElement(_reactD3Core.Ygrid, null);
+
+      return _react2.default.createElement(
+        'div',
+        null,
+        showLegend ? _react2.default.createElement(_reactD3Core.Legend, _extends({}, this.props, {
+          width: width,
+          margins: margins,
+          chartSeries: chartSeries,
+          categoricalColors: categoricalColors
+        })) : null,
+        _react2.default.createElement(
+          _reactD3Shape.Chart,
+          _extends({}, this.props, {
+            width: width,
+            height: height,
+            data: data,
+            chartSeries: chartSeries
+          }),
+          _react2.default.createElement(_reactD3Shape.BarGroup, {
+            chartSeries: chartSeries
+          }),
+          xgrid,
+          ygrid,
+          _react2.default.createElement(_reactD3Core.Xaxis, null),
+          _react2.default.createElement(_reactD3Core.Yaxis, null),
+          this.props.children
+        )
+      );
+    }
+  }]);
+
+  return BarGroupChart;
+}(_react.Component);
+
+BarGroupChart.defaultProps = _extends({
+  onMouseOver: function onMouseOver() {},
+  onMouseOut: function onMouseOut() {}
+}, _commonProps2.default);
+BarGroupChart.propTypes = {
+  width: _react.PropTypes.number.isRequired,
+  height: _react.PropTypes.number.isRequired,
+  margins: _react.PropTypes.object.isRequired,
+  data: _react.PropTypes.array.isRequired,
+  chartSeries: _react.PropTypes.array.isRequired
+};
+exports.default = BarGroupChart;
+module.exports = exports['default'];
+},{"./commonProps":69,"react":350,"react-d3-core":85,"react-d3-shape":104}],65:[function(require,module,exports){
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = require('react');
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactD3Core = require('react-d3-core');
+
+var _reactD3Shape = require('react-d3-shape');
+
+var _commonProps = require('./commonProps');
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var BarGroupHorizontalChart = function (_Component) {
+  _inherits(BarGroupHorizontalChart, _Component);
+
+  function BarGroupHorizontalChart(props) {
+    _classCallCheck(this, BarGroupHorizontalChart);
+
+    return _possibleConstructorReturn(this, Object.getPrototypeOf(BarGroupHorizontalChart).call(this, props));
+  }
+
+  _createClass(BarGroupHorizontalChart, [{
+    key: 'render',
+    value: function render() {
+      var _props = this.props;
+      var width = _props.width;
+      var height = _props.height;
+      var margins = _props.margins;
+      var data = _props.data;
+      var chartSeries = _props.chartSeries;
+      var showXGrid = _props.showXGrid;
+      var showYGrid = _props.showYGrid;
+      var showLegend = _props.showLegend;
+      var categoricalColors = _props.categoricalColors;
+
+
+      var xgrid, ygrid;
+
+      if (showXGrid) xgrid = _react2.default.createElement(_reactD3Core.Xgrid, null);
+      if (showYGrid) ygrid = _react2.default.createElement(_reactD3Core.Ygrid, null);
+
+      return _react2.default.createElement(
+        'div',
+        null,
+        showLegend ? _react2.default.createElement(_reactD3Core.Legend, _extends({}, this.props, {
+          width: width,
+          margins: margins,
+          chartSeries: chartSeries,
+          categoricalColors: categoricalColors
+        })) : null,
+        _react2.default.createElement(
+          _reactD3Shape.Chart,
+          _extends({}, this.props, {
+            width: width,
+            height: height,
+            data: data,
+            chartSeries: chartSeries,
+            horizontal: true
+          }),
+          _react2.default.createElement(_reactD3Shape.BarGroupHorizontal, {
+            chartSeries: chartSeries
+          }),
+          xgrid,
+          ygrid,
+          _react2.default.createElement(_reactD3Core.Xaxis, null),
+          _react2.default.createElement(_reactD3Core.Yaxis, null),
+          this.props.children
+        )
+      );
+    }
+  }]);
+
+  return BarGroupHorizontalChart;
+}(_react.Component);
+
+BarGroupHorizontalChart.defaultProps = _extends({
+  onMouseOver: function onMouseOver() {},
+  onMouseOut: function onMouseOut() {}
+}, _commonProps.horizontalProps);
+BarGroupHorizontalChart.propTypes = {
+  width: _react.PropTypes.number.isRequired,
+  height: _react.PropTypes.number.isRequired,
+  margins: _react.PropTypes.object.isRequired,
+  data: _react.PropTypes.array.isRequired,
+  chartSeries: _react.PropTypes.array.isRequired
+};
+exports.default = BarGroupHorizontalChart;
+module.exports = exports['default'];
+},{"./commonProps":69,"react":350,"react-d3-core":85,"react-d3-shape":104}],66:[function(require,module,exports){
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = require('react');
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactD3Core = require('react-d3-core');
+
+var _reactD3Shape = require('react-d3-shape');
+
+var _commonProps = require('./commonProps');
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var BarHorizontalChart = function (_Component) {
+  _inherits(BarHorizontalChart, _Component);
+
+  function BarHorizontalChart(props) {
+    _classCallCheck(this, BarHorizontalChart);
+
+    return _possibleConstructorReturn(this, Object.getPrototypeOf(BarHorizontalChart).call(this, props));
+  }
+
+  _createClass(BarHorizontalChart, [{
+    key: 'render',
+    value: function render() {
+      var _props = this.props;
+      var width = _props.width;
+      var height = _props.height;
+      var margins = _props.margins;
+      var data = _props.data;
+      var chartSeries = _props.chartSeries;
+      var showXGrid = _props.showXGrid;
+      var showYGrid = _props.showYGrid;
+      var showLegend = _props.showLegend;
+      var categoricalColors = _props.categoricalColors;
+
+
+      var xgrid, ygrid;
+
+      if (showXGrid) xgrid = _react2.default.createElement(_reactD3Core.Xgrid, null);
+      if (showYGrid) ygrid = _react2.default.createElement(_reactD3Core.Ygrid, null);
+
+      return _react2.default.createElement(
+        'div',
+        null,
+        showLegend ? _react2.default.createElement(_reactD3Core.Legend, _extends({}, this.props, {
+          width: width,
+          margins: margins,
+          chartSeries: chartSeries,
+          categoricalColors: categoricalColors
+        })) : null,
+        _react2.default.createElement(
+          _reactD3Shape.Chart,
+          _extends({}, this.props, {
+            width: width,
+            height: height,
+            data: data,
+            chartSeries: chartSeries,
+            horizontal: true
+          }),
+          _react2.default.createElement(_reactD3Shape.BarHorizontal, {
+            chartSeries: chartSeries
+          }),
+          xgrid,
+          ygrid,
+          _react2.default.createElement(_reactD3Core.Xaxis, null),
+          _react2.default.createElement(_reactD3Core.Yaxis, null),
+          this.props.children
+        )
+      );
+    }
+  }]);
+
+  return BarHorizontalChart;
+}(_react.Component);
+
+BarHorizontalChart.defaultProps = _extends({
+  onMouseOver: function onMouseOver() {},
+  onMouseOut: function onMouseOut() {}
+}, _commonProps.horizontalProps);
+BarHorizontalChart.propTypes = {
+  width: _react.PropTypes.number.isRequired,
+  height: _react.PropTypes.number.isRequired,
+  margins: _react.PropTypes.object.isRequired,
+  data: _react.PropTypes.array.isRequired,
+  chartSeries: _react.PropTypes.array.isRequired
+};
+exports.default = BarHorizontalChart;
+module.exports = exports['default'];
+},{"./commonProps":69,"react":350,"react-d3-core":85,"react-d3-shape":104}],67:[function(require,module,exports){
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = require('react');
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactD3Core = require('react-d3-core');
+
+var _reactD3Shape = require('react-d3-shape');
+
+var _commonProps = require('./commonProps');
+
+var _commonProps2 = _interopRequireDefault(_commonProps);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var BarStackChart = function (_Component) {
+  _inherits(BarStackChart, _Component);
+
+  function BarStackChart(props) {
+    _classCallCheck(this, BarStackChart);
+
+    return _possibleConstructorReturn(this, Object.getPrototypeOf(BarStackChart).call(this, props));
+  }
+
+  _createClass(BarStackChart, [{
+    key: 'render',
+    value: function render() {
+      var _props = this.props;
+      var width = _props.width;
+      var height = _props.height;
+      var margins = _props.margins;
+      var data = _props.data;
+      var chartSeries = _props.chartSeries;
+      var showXGrid = _props.showXGrid;
+      var showYGrid = _props.showYGrid;
+      var showLegend = _props.showLegend;
+      var categoricalColors = _props.categoricalColors;
+
+
+      var xgrid, ygrid;
+
+      if (showXGrid) xgrid = _react2.default.createElement(_reactD3Core.Xgrid, null);
+      if (showYGrid) ygrid = _react2.default.createElement(_reactD3Core.Ygrid, null);
+
+      return _react2.default.createElement(
+        'div',
+        null,
+        showLegend ? _react2.default.createElement(_reactD3Core.Legend, _extends({}, this.props, {
+          width: width,
+          margins: margins,
+          chartSeries: chartSeries,
+          categoricalColors: categoricalColors
+        })) : null,
+        _react2.default.createElement(
+          _reactD3Shape.Chart,
+          _extends({}, this.props, {
+            width: width,
+            height: height,
+            data: data,
+            chartSeries: chartSeries,
+            stack: true
+          }),
+          _react2.default.createElement(_reactD3Shape.BarStack, {
+            chartSeries: chartSeries
+          }),
+          xgrid,
+          ygrid,
+          _react2.default.createElement(_reactD3Core.Xaxis, null),
+          _react2.default.createElement(_reactD3Core.Yaxis, null),
+          this.props.children
+        )
+      );
+    }
+  }]);
+
+  return BarStackChart;
+}(_react.Component);
+
+BarStackChart.defaultProps = _extends({
+  onMouseOver: function onMouseOver() {},
+  onMouseOut: function onMouseOut() {}
+}, _commonProps2.default);
+BarStackChart.propTypes = {
+  width: _react.PropTypes.number.isRequired,
+  height: _react.PropTypes.number.isRequired,
+  margins: _react.PropTypes.object.isRequired,
+  data: _react.PropTypes.array.isRequired,
+  chartSeries: _react.PropTypes.array.isRequired
+};
+exports.default = BarStackChart;
+module.exports = exports['default'];
+},{"./commonProps":69,"react":350,"react-d3-core":85,"react-d3-shape":104}],68:[function(require,module,exports){
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = require('react');
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactD3Core = require('react-d3-core');
+
+var _reactD3Shape = require('react-d3-shape');
+
+var _commonProps = require('./commonProps');
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var BarStackChart = function (_Component) {
+  _inherits(BarStackChart, _Component);
+
+  function BarStackChart(props) {
+    _classCallCheck(this, BarStackChart);
+
+    return _possibleConstructorReturn(this, Object.getPrototypeOf(BarStackChart).call(this, props));
+  }
+
+  _createClass(BarStackChart, [{
+    key: 'render',
+    value: function render() {
+      var _props = this.props;
+      var width = _props.width;
+      var height = _props.height;
+      var margins = _props.margins;
+      var data = _props.data;
+      var chartSeries = _props.chartSeries;
+      var showXGrid = _props.showXGrid;
+      var showYGrid = _props.showYGrid;
+      var showLegend = _props.showLegend;
+      var categoricalColors = _props.categoricalColors;
+
+
+      var xgrid, ygrid;
+
+      if (showXGrid) xgrid = _react2.default.createElement(_reactD3Core.Xgrid, null);
+      if (showYGrid) ygrid = _react2.default.createElement(_reactD3Core.Ygrid, null);
+
+      return _react2.default.createElement(
+        'div',
+        null,
+        showLegend ? _react2.default.createElement(_reactD3Core.Legend, _extends({}, this.props, {
+          width: width,
+          margins: margins,
+          chartSeries: chartSeries,
+          categoricalColors: categoricalColors
+        })) : null,
+        _react2.default.createElement(
+          _reactD3Shape.Chart,
+          _extends({}, this.props, {
+            width: width,
+            height: height,
+            data: data,
+            chartSeries: chartSeries,
+            stack: true,
+            horizontal: true
+          }),
+          _react2.default.createElement(_reactD3Shape.BarStackHorizontal, {
+            chartSeries: chartSeries
+          }),
+          xgrid,
+          ygrid,
+          _react2.default.createElement(_reactD3Core.Xaxis, null),
+          _react2.default.createElement(_reactD3Core.Yaxis, null),
+          this.props.children
+        )
+      );
+    }
+  }]);
+
+  return BarStackChart;
+}(_react.Component);
+
+BarStackChart.defaultProps = _extends({
+  onMouseOver: function onMouseOver() {},
+  onMouseOut: function onMouseOut() {}
+}, _commonProps.horizontalProps);
+BarStackChart.propTypes = {
+  width: _react.PropTypes.number.isRequired,
+  height: _react.PropTypes.number.isRequired,
+  margins: _react.PropTypes.object.isRequired,
+  data: _react.PropTypes.array.isRequired,
+  chartSeries: _react.PropTypes.array.isRequired
+};
+exports.default = BarStackChart;
+module.exports = exports['default'];
+},{"./commonProps":69,"react":350,"react-d3-core":85,"react-d3-shape":104}],69:[function(require,module,exports){
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.pieProps = exports.horizontalProps = undefined;
+
+var _d3Scale = require('d3-scale');
+
+var _d3Scale2 = _interopRequireDefault(_d3Scale);
+
+var _d3Array = require('d3-array');
+
+var _d3Array2 = _interopRequireDefault(_d3Array);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var width = 960;
+var height = 500;
+var margins = { top: 40, right: 100, bottom: 40, left: 100 };
+
+exports.default = {
+  width: width,
+  height: height,
+  margins: margins,
+  y: function y(d) {
+    return +d;
+  },
+  xScale: 'linear',
+  yScale: 'linear',
+  showXGrid: true,
+  showYGrid: true,
+  showLegend: true
+};
+var horizontalProps = exports.horizontalProps = {
+  width: width,
+  height: height,
+  margins: margins,
+  x: function x(d) {
+    return +d;
+  },
+  xScale: 'linear',
+  yScale: 'linear',
+  showXGrid: true,
+  showYGrid: true,
+  showLegend: true
+};
+
+var pieProps = exports.pieProps = {
+  width: width,
+  height: height,
+  margins: margins,
+  innerRadius: 0,
+  categoricalColors: _d3Scale2.default.scaleCategory10(),
+  pieSort: _d3Array2.default.descending
+};
+},{"d3-array":45,"d3-scale":52}],70:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.PieChart = exports.BarStackHorizontalChart = exports.BarStackChart = exports.AreaStackChart = exports.BarGroupHorizontalChart = exports.BarGroupChart = exports.BarHorizontalChart = exports.BarChart = exports.ScatterPlot = exports.AreaChart = exports.LineChart = undefined;
+
+var _line = require('./line');
+
+var _line2 = _interopRequireDefault(_line);
+
+var _area = require('./area');
+
+var _area2 = _interopRequireDefault(_area);
+
+var _scatter = require('./scatter');
+
+var _scatter2 = _interopRequireDefault(_scatter);
+
+var _bar = require('./bar');
+
+var _bar2 = _interopRequireDefault(_bar);
+
+var _bar_horizontal = require('./bar_horizontal');
+
+var _bar_horizontal2 = _interopRequireDefault(_bar_horizontal);
+
+var _bar_group = require('./bar_group');
+
+var _bar_group2 = _interopRequireDefault(_bar_group);
+
+var _bar_group_horizontal = require('./bar_group_horizontal');
+
+var _bar_group_horizontal2 = _interopRequireDefault(_bar_group_horizontal);
+
+var _area_stack = require('./area_stack');
+
+var _area_stack2 = _interopRequireDefault(_area_stack);
+
+var _bar_stack = require('./bar_stack');
+
+var _bar_stack2 = _interopRequireDefault(_bar_stack);
+
+var _bar_stack_horizontal = require('./bar_stack_horizontal');
+
+var _bar_stack_horizontal2 = _interopRequireDefault(_bar_stack_horizontal);
+
+var _pie = require('./pie');
+
+var _pie2 = _interopRequireDefault(_pie);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+exports.LineChart = _line2.default; // Export high level charts
+
+exports.AreaChart = _area2.default;
+exports.ScatterPlot = _scatter2.default;
+exports.BarChart = _bar2.default;
+exports.BarHorizontalChart = _bar_horizontal2.default;
+exports.BarGroupChart = _bar_group2.default;
+exports.BarGroupHorizontalChart = _bar_group_horizontal2.default;
+exports.AreaStackChart = _area_stack2.default;
+exports.BarStackChart = _bar_stack2.default;
+exports.BarStackHorizontalChart = _bar_stack_horizontal2.default;
+exports.PieChart = _pie2.default;
+},{"./area":61,"./area_stack":62,"./bar":63,"./bar_group":64,"./bar_group_horizontal":65,"./bar_horizontal":66,"./bar_stack":67,"./bar_stack_horizontal":68,"./line":71,"./pie":72,"./scatter":73}],71:[function(require,module,exports){
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = require('react');
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactD3Core = require('react-d3-core');
+
+var _reactD3Shape = require('react-d3-shape');
+
+var _commonProps = require('./commonProps');
+
+var _commonProps2 = _interopRequireDefault(_commonProps);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var LineChart = function (_Component) {
+  _inherits(LineChart, _Component);
+
+  function LineChart(props) {
+    _classCallCheck(this, LineChart);
+
+    return _possibleConstructorReturn(this, Object.getPrototypeOf(LineChart).call(this, props));
+  }
+
+  _createClass(LineChart, [{
+    key: 'render',
+    value: function render() {
+      var _props = this.props;
+      var width = _props.width;
+      var height = _props.height;
+      var margins = _props.margins;
+      var data = _props.data;
+      var chartSeries = _props.chartSeries;
+      var showXGrid = _props.showXGrid;
+      var showYGrid = _props.showYGrid;
+      var showLegend = _props.showLegend;
+      var categoricalColors = _props.categoricalColors;
+
+
+      var xgrid, ygrid;
+
+      if (showXGrid) xgrid = _react2.default.createElement(_reactD3Core.Xgrid, null);
+      if (showYGrid) ygrid = _react2.default.createElement(_reactD3Core.Ygrid, null);
+
+      return _react2.default.createElement(
+        'div',
+        null,
+        showLegend ? _react2.default.createElement(_reactD3Core.Legend, _extends({}, this.props, {
+          width: width,
+          margins: margins,
+          chartSeries: chartSeries,
+          categoricalColors: categoricalColors
+        })) : null,
+        _react2.default.createElement(
+          _reactD3Shape.Chart,
+          _extends({}, this.props, {
+            width: width,
+            height: height,
+            data: data,
+            chartSeries: chartSeries
+          }),
+          _react2.default.createElement(_reactD3Shape.Line, {
+            chartSeries: chartSeries
+          }),
+          xgrid,
+          ygrid,
+          _react2.default.createElement(_reactD3Core.Xaxis, null),
+          _react2.default.createElement(_reactD3Core.Yaxis, null),
+          this.props.children
+        )
+      );
+    }
+  }]);
+
+  return LineChart;
+}(_react.Component);
+
+LineChart.defaultProps = _extends({
+  showScatter: false
+}, _commonProps2.default);
+LineChart.propTypes = {
+  width: _react.PropTypes.number.isRequired,
+  height: _react.PropTypes.number.isRequired,
+  margins: _react.PropTypes.object.isRequired,
+  data: _react.PropTypes.array.isRequired,
+  chartSeries: _react.PropTypes.array.isRequired
+};
+exports.default = LineChart;
+module.exports = exports['default'];
+},{"./commonProps":69,"react":350,"react-d3-core":85,"react-d3-shape":104}],72:[function(require,module,exports){
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = require('react');
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactD3Core = require('react-d3-core');
+
+var _reactD3Shape = require('react-d3-shape');
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var PieChart = function (_Component) {
+  _inherits(PieChart, _Component);
+
+  function PieChart(props) {
+    _classCallCheck(this, PieChart);
+
+    return _possibleConstructorReturn(this, Object.getPrototypeOf(PieChart).call(this, props));
+  }
+
+  _createClass(PieChart, [{
+    key: 'render',
+    value: function render() {
+      var _props = this.props;
+      var width = _props.width;
+      var height = _props.height;
+      var margins = _props.margins;
+      var data = _props.data;
+      var chartSeries = _props.chartSeries;
+      var value = _props.value;
+      var name = _props.name;
+      var categoricalColors = _props.categoricalColors;
+      var showLegend = _props.showLegend;
+
+
+      return _react2.default.createElement(
+        'div',
+        null,
+        showLegend ? _react2.default.createElement(_reactD3Core.Legend, _extends({}, this.props, {
+          width: width,
+          margins: margins,
+          chartSeries: chartSeries,
+          categoricalColors: categoricalColors
+        })) : null,
+        _react2.default.createElement(
+          _reactD3Shape.ChartPie,
+          _extends({}, this.props, {
+            width: width,
+            height: height,
+            data: data,
+            chartSeries: chartSeries,
+            value: value,
+            name: name
+          }),
+          _react2.default.createElement(_reactD3Shape.Pie, _extends({}, this.props, {
+            chartSeries: chartSeries
+          })),
+          this.props.children
+        )
+      );
+    }
+  }]);
+
+  return PieChart;
+}(_react.Component);
+
+PieChart.defaultProps = {
+  onMouseOver: function onMouseOver() {},
+  onMouseOut: function onMouseOut() {},
+  showLegend: true
+};
+PieChart.propTypes = {
+  width: _react.PropTypes.number.isRequired,
+  height: _react.PropTypes.number.isRequired,
+  data: _react.PropTypes.array.isRequired,
+  chartSeries: _react.PropTypes.array.isRequired,
+  value: _react.PropTypes.func.isRequired,
+  name: _react.PropTypes.func.isRequired
+};
+exports.default = PieChart;
+module.exports = exports['default'];
+},{"react":350,"react-d3-core":85,"react-d3-shape":104}],73:[function(require,module,exports){
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = require('react');
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactD3Core = require('react-d3-core');
+
+var _reactD3Shape = require('react-d3-shape');
+
+var _commonProps = require('./commonProps');
+
+var _commonProps2 = _interopRequireDefault(_commonProps);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var ScatterPlot = function (_Component) {
+  _inherits(ScatterPlot, _Component);
+
+  function ScatterPlot(props) {
+    _classCallCheck(this, ScatterPlot);
+
+    return _possibleConstructorReturn(this, Object.getPrototypeOf(ScatterPlot).call(this, props));
+  }
+
+  _createClass(ScatterPlot, [{
+    key: 'render',
+    value: function render() {
+      var _props = this.props;
+      var width = _props.width;
+      var height = _props.height;
+      var margins = _props.margins;
+      var data = _props.data;
+      var chartSeries = _props.chartSeries;
+      var showXGrid = _props.showXGrid;
+      var showYGrid = _props.showYGrid;
+      var showLegend = _props.showLegend;
+      var categoricalColors = _props.categoricalColors;
+
+
+      var xgrid, ygrid;
+
+      if (showXGrid) xgrid = _react2.default.createElement(_reactD3Core.Xgrid, null);
+      if (showYGrid) ygrid = _react2.default.createElement(_reactD3Core.Ygrid, null);
+
+      return _react2.default.createElement(
+        'div',
+        null,
+        showLegend ? _react2.default.createElement(_reactD3Core.Legend, _extends({}, this.props, {
+          width: width,
+          margins: margins,
+          chartSeries: chartSeries,
+          categoricalColors: categoricalColors
+        })) : null,
+        _react2.default.createElement(
+          _reactD3Shape.Chart,
+          _extends({}, this.props, {
+            width: width,
+            height: height,
+            data: data,
+            chartSeries: chartSeries
+          }),
+          _react2.default.createElement(_reactD3Shape.Scatter, {
+            chartSeries: chartSeries
+          }),
+          xgrid,
+          ygrid,
+          _react2.default.createElement(_reactD3Core.Xaxis, null),
+          _react2.default.createElement(_reactD3Core.Yaxis, null),
+          this.props.children
+        )
+      );
+    }
+  }]);
+
+  return ScatterPlot;
+}(_react.Component);
+
+ScatterPlot.defaultProps = _commonProps2.default;
+ScatterPlot.propTypes = {
+  width: _react.PropTypes.number.isRequired,
+  height: _react.PropTypes.number.isRequired,
+  margins: _react.PropTypes.object.isRequired,
+  data: _react.PropTypes.array.isRequired,
+  chartSeries: _react.PropTypes.array.isRequired
+};
+exports.default = ScatterPlot;
+module.exports = exports['default'];
+},{"./commonProps":69,"react":350,"react-d3-core":85,"react-d3-shape":104}],74:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -14017,7 +17204,7 @@ Axis.PropTypes = {
   tickOrient: _react.PropTypes.oneOf(['top', 'bottom', 'left', 'right'])
 };
 exports.default = Axis;
-},{"../utils/scale":72,"d3-axis":46,"d3-selection":52,"react":374,"react-faux-dom":133}],60:[function(require,module,exports){
+},{"../utils/scale":87,"d3-axis":46,"d3-selection":53,"react":350,"react-faux-dom":109}],75:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -14137,7 +17324,7 @@ Label.propTypes = {
   labelClassName: _react.PropTypes.string
 };
 exports.default = Label;
-},{"../commonProps":64,"d3-selection":52,"react":374,"react-faux-dom":133}],61:[function(require,module,exports){
+},{"../commonProps":79,"d3-selection":53,"react":350,"react-faux-dom":109}],76:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -14315,7 +17502,7 @@ Xaxis.propTypes = {
   xTickValues: _react.PropTypes.array
 };
 exports.default = Xaxis;
-},{"../commonProps":64,"./axis":59,"./label":60,"react":374}],62:[function(require,module,exports){
+},{"../commonProps":79,"./axis":74,"./label":75,"react":350}],77:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -14493,7 +17680,7 @@ Yaxis.propTypes = {
   yTickValues: _react.PropTypes.array
 };
 exports.default = Yaxis;
-},{"../commonProps":64,"./axis":59,"./label":60,"react":374}],63:[function(require,module,exports){
+},{"../commonProps":79,"./axis":74,"./label":75,"react":350}],78:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -14571,7 +17758,7 @@ var ChartContainer = function (_Component) {
 
 ChartContainer.defaultProps = _commonProps2.default;
 exports.default = ChartContainer;
-},{"./commonProps":64,"./container/svg":65,"./legend":71,"react":374}],64:[function(require,module,exports){
+},{"./commonProps":79,"./container/svg":80,"./legend":86,"react":350}],79:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -14582,7 +17769,7 @@ exports.default = {
   height: 500,
   margins: { top: 80, right: 100, bottom: 80, left: 100 }
 };
-},{}],65:[function(require,module,exports){
+},{}],80:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -14670,7 +17857,7 @@ ChartSvg.propTypes = {
   svgClassName: _react.PropTypes.string.isRequired
 };
 exports.default = ChartSvg;
-},{"../commonProps":64,"../utils/scale":72,"react":374}],66:[function(require,module,exports){
+},{"../commonProps":79,"../utils/scale":87,"react":350}],81:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -14746,7 +17933,7 @@ ChartTitle.propTypes = {
   titleClassName: _react.PropTypes.string
 };
 exports.default = ChartTitle;
-},{"../commonProps":64,"react":374}],67:[function(require,module,exports){
+},{"../commonProps":79,"react":350}],82:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -14924,7 +18111,7 @@ Grid.propTypes = {
   xTickValues: _react.PropTypes.array
 };
 exports.default = Grid;
-},{"../axis/axis":59,"../commonProps":64,"react":374}],68:[function(require,module,exports){
+},{"../axis/axis":74,"../commonProps":79,"react":350}],83:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -14973,7 +18160,7 @@ var XGrid = function (_Component) {
 }(_react.Component);
 
 exports.default = XGrid;
-},{"./grid":67,"react":374}],69:[function(require,module,exports){
+},{"./grid":82,"react":350}],84:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -15022,7 +18209,7 @@ var YGrid = function (_Component) {
 }(_react.Component);
 
 exports.default = YGrid;
-},{"./grid":67,"react":374}],70:[function(require,module,exports){
+},{"./grid":82,"react":350}],85:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -15156,7 +18343,7 @@ Object.defineProperty(exports, 'yDomainCount', {
 });
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-},{"./axis/axis":59,"./axis/label":60,"./axis/xaxis":61,"./axis/yaxis":62,"./chartContainer":63,"./container/svg":65,"./container/title":66,"./grid/grid":67,"./grid/xgrid":68,"./grid/ygrid":69,"./legend":71,"./utils/scale":72,"./utils/xDomain":73,"./utils/yDomain":74}],71:[function(require,module,exports){
+},{"./axis/axis":74,"./axis/label":75,"./axis/xaxis":76,"./axis/yaxis":77,"./chartContainer":78,"./container/svg":80,"./container/title":81,"./grid/grid":82,"./grid/xgrid":83,"./grid/ygrid":84,"./legend":86,"./utils/scale":87,"./utils/xDomain":88,"./utils/yDomain":89}],86:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -15302,7 +18489,7 @@ Legend.propTypes = {
   swatchShape: _react.PropTypes.oneOf(['circle', 'square'])
 };
 exports.default = Legend;
-},{"./commonProps":64,"d3-scale":51,"d3-selection":52,"react":374,"react-faux-dom":133}],72:[function(require,module,exports){
+},{"./commonProps":79,"d3-scale":52,"d3-selection":53,"react":350,"react-faux-dom":109}],87:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -15354,7 +18541,7 @@ function _mkScaleSettings(props, func) {
 
   return func;
 }
-},{"d3-scale":51}],73:[function(require,module,exports){
+},{"d3-scale":52}],88:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -15428,7 +18615,7 @@ function xDomain(props, stack, horizonal) {
     }
   }
 }
-},{"d3-array":45}],74:[function(require,module,exports){
+},{"d3-array":45}],89:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -15508,2536 +18695,1950 @@ function yDomain(props, stack, horizonal) {
     }
   }
 }
-},{"d3-array":45}],75:[function(require,module,exports){
-'use strict';
+},{"d3-array":45}],90:[function(require,module,exports){
+"use strict";
 
-var React = require('react');
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
 
-module.exports = React.createClass({
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
-  displayName: 'Area',
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-  propTypes: {
-    path: React.PropTypes.string,
-    fill: React.PropTypes.string
-  },
+var _react = require('react');
 
-  getDefaultProps:function() {
-    return {
-      fill: '#3182bd'
-    };
-  },
+var _react2 = _interopRequireDefault(_react);
 
-  render:function() {
+var _reactD3Core = require('react-d3-core');
 
-    return (
-      React.createElement("path", {
-        className: "rd3-areachart-area", 
-        d: this.props.path, 
-        fill: this.props.fill, 
-        onMouseOver: this.props.handleMouseOver, 
-        onMouseLeave: this.props.handleMouseLeave}
-      )
-    );
+var _commonProps = require('./commonProps');
+
+var _commonProps2 = _interopRequireDefault(_commonProps);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var ChartSvg = function (_Component) {
+  _inherits(ChartSvg, _Component);
+
+  function ChartSvg(props) {
+    _classCallCheck(this, ChartSvg);
+
+    return _possibleConstructorReturn(this, Object.getPrototypeOf(ChartSvg).call(this, props));
   }
 
-});
-
-},{"react":374}],76:[function(require,module,exports){
-'use strict';
-
-var React = require('react');
-var d3 = require('d3');
-var DataSeries = require('./DataSeries');
-var $__0=      require('../common'),Chart=$__0.Chart,XAxis=$__0.XAxis,YAxis=$__0.YAxis;
-var $__1=     require('../mixins'),CartesianChartPropsMixin=$__1.CartesianChartPropsMixin,ViewBoxMixin=$__1.ViewBoxMixin;
-
-module.exports = React.createClass({
-
-  mixins: [ CartesianChartPropsMixin, ViewBoxMixin ],
-
-  displayName: 'AreaChart',
-
-  propTypes: {
-    margins:           React.PropTypes.object,
-    interpolate:       React.PropTypes.bool,
-    interpolationType: React.PropTypes.string,
-    hoverAnimation:    React.PropTypes.bool,
- },
-
-  getDefaultProps:function() {
-    return {
-      margins: {top: 10, right: 20, bottom: 40, left: 45},
-      yAxisTickCount: 4,
-      interpolate: false,
-      interpolationType: null,
-      className: 'rd3-areachart',
-      hoverAnimation: true
-    };
-  },
-
-  render:function() {
-
-    var props = this.props;
-
-    var data = props.data;
-
-    var interpolationType = props.interpolationType || (props.interpolate ? 'cardinal' : 'linear');
-
-    // Calculate inner chart dimensions
-    var innerWidth, innerHeight;
-    innerWidth = this.getOuterDimensions().width - props.margins.left - props.margins.right;
-    innerHeight = this.getOuterDimensions().height - props.margins.top - props.margins.bottom;
-
-    if (!Array.isArray(data)) {
-      data = [data];
-    }
-
-    var yScale = d3.scale.linear()
-      .range([innerHeight, 0]);
-
-    var xValues = [];
-    var yValues = [];
-    var seriesNames = [];
-    var yMaxValues = [];
-    data.forEach( function(series)  {
-      var upper = 0;
-      seriesNames.push(series.name);
-      series.values.forEach(function(val, idx)  {
-        upper = Math.max(upper, props.yAccessor(val));
-        xValues.push(props.xAccessor(val));
-        yValues.push(props.yAccessor(val));
-      });
-      yMaxValues.push(upper);
-    });
-
-    var xScale;
-    if (xValues.length > 0 && Object.prototype.toString.call(xValues[0]) === '[object Date]' && props.xAxisTickInterval) {
-      xScale = d3.time.scale()
-        .range([0, innerWidth]);
-    } else {
-      xScale = d3.scale.linear()
-        .range([0, innerWidth]);
-    }
-
-    xScale.domain(d3.extent(xValues));
-    yScale.domain([0, d3.sum(yMaxValues)]);
-
-    props.colors.domain(seriesNames);
-
-    var stack = d3.layout.stack()
-      .x(props.xAccessor)
-      .y(props.yAccessor)
-      .values(function(d) { return d.values; });
-
-    var layers = stack(data);
-
-    var trans = ("translate(" +  props.margins.left + "," +  props.margins.top + ")");
-
-    var dataSeries = layers.map( function(d, idx)  {
-      return (
-          React.createElement(DataSeries, {
-            key: idx, 
-            seriesName: d.name, 
-            fill: props.colors(props.colorAccessor(d, idx)), 
-            index: idx, 
-            xScale: xScale, 
-            yScale: yScale, 
-            data: d.values, 
-            xAccessor: props.xAccessor, 
-            yAccessor: props.yAccessor, 
-            interpolationType: interpolationType, 
-            hoverAnimation: props.hoverAnimation}
-          )
-        );
-      });
-
-    return (
-      React.createElement(Chart, {
-        viewBox: this.getViewBox(), 
-        legend: props.legend, 
-        data: data, 
-        margins: props.margins, 
-        colors: props.colors, 
-        colorAccessor: props.colorAccessor, 
-        width: props.width, 
-        height: props.height, 
-        title: props.title
-      }, 
-        React.createElement("g", {transform: trans, className: props.className}, 
-          React.createElement(XAxis, {
-            xAxisClassName: "rd3-areachart-xaxis", 
-            xScale: xScale, 
-            xAxisTickValues: props.xAxisTickValues, 
-            xAxisTickInterval: props.xAxisTickInterval, 
-            xAxisTickCount: props.xAxisTickCount, 
-            xAxisLabel: props.xAxisLabel, 
-            xAxisLabelOffset: props.xAxisLabelOffset, 
-            tickFormatting: props.xAxisFormatter, 
-            xOrient: props.xOrient, 
-            yOrient: props.yOrient, 
-            margins: props.margins, 
-            width: innerWidth, 
-            height: innerHeight, 
-            gridVertical: props.gridVertical, 
-            gridVerticalStroke: props.gridVerticalStroke, 
-            gridVerticalStrokeWidth: props.gridVerticalStrokeWidth, 
-            gridVerticalStrokeDash: props.gridVerticalStrokeDash}
-          ), 
-          React.createElement(YAxis, {
-            yAxisClassName: "rd3-areachart-yaxis", 
-            yScale: yScale, 
-            yAxisTickValues: props.yAxisTickValues, 
-            yAxisTickInterval: props.yAxisTickInterval, 
-            yAxisTickCount: props.yAxisTickCount, 
-            yAxisLabel: props.yAxisLabel, 
-            yAxisLabelOffset: props.yAxisLabelOffset, 
-            tickFormatting: props.yAxisFormatter, 
-            xOrient: props.xOrient, 
-            yOrient: props.yOrient, 
-            margins: props.margins, 
-            width: innerWidth, 
-            height: props.height, 
-            gridHorizontal: props.gridHorizontal, 
-            gridHorizontalStroke: props.gridHorizontalStroke, 
-            gridHorizontalStrokeWidth: props.gridHorizontalStrokeWidth, 
-            gridHorizontalStrokeDash: props.gridHorizontalStrokeDash}
-          ), 
-          dataSeries
-        )
-      )
-    );
-  }
-
-});
-
-},{"../common":103,"../mixins":113,"./DataSeries":78,"d3":114,"react":374}],77:[function(require,module,exports){
-'use strict';
-
-var React = require('react');
-var d3 = require('d3');
-var shade = require('../utils').shade;
-var Area = require('./Area');
-
-module.exports = React.createClass({
-
-  displayName: 'AreaContainer',
-
-  propTypes: {
-    fill: React.PropTypes.string, 
-  },
-
-  getDefaultProps:function() {
-    return {
-      fill: '#3182bd'
-    };
-  },
-
-  getInitialState:function() {
-    return { 
-      fill: this.props.fill
-    };
-  },
-
-  render:function() {
-
-    var props = this.props;
-
-    // animation controller
-    var handleMouseOver, handleMouseLeave;
-    if(props.hoverAnimation) {
-      handleMouseOver = this._animateArea;
-      handleMouseLeave = this._restoreArea;
-    } else {
-      handleMouseOver = handleMouseLeave = null;
-    }
-
-    return (
-      React.createElement(Area, React.__spread({
-          handleMouseOver: handleMouseOver, 
-          handleMouseLeave: handleMouseLeave}, 
-          props, 
-          {fill: this.state.fill})
-      )
-    );
-  },
-
-  _animateArea:function() {
-    this.setState({ 
-      fill: shade(this.props.fill, 0.02)
-    });
-  },
-
-  _restoreArea:function() {
-    this.setState({ 
-      fill: this.props.fill
-    });
-  },
-
-});
-
-},{"../utils":130,"./Area":75,"d3":114,"react":374}],78:[function(require,module,exports){
-'use strict';
-
-var React = require('react');
-var d3 = require('d3');
-var AreaContainer = require('./AreaContainer');
-
-module.exports = React.createClass({
-
-  displayName: 'DataSeries',
-
-  propTypes: {
-    fill:              React.PropTypes.string,
-    interpolationType: React.PropTypes.string
-  },
-
-  getDefaultProps:function() {
-    return {
-      interpolationType: 'linear'
-    };
-  },
-
-  render:function() {
-
-    var props = this.props;
-
-    var area = d3.svg.area()
-      .x(function(d) { return props.xScale(props.xAccessor(d)); })
-      .y0(function(d) { return props.yScale(d.y0); })
-      .y1(function(d) { return props.yScale(d.y0 + props.yAccessor(d)); })
-      .interpolate(props.interpolationType);
-
-    var path = area(props.data);
-
-    return (
-      React.createElement(AreaContainer, {
-        fill: props.fill, 
-        hoverAnimation: props.hoverAnimation, 
-        path: path}
-      )
-    );
-  }
-
-});
-
-},{"./AreaContainer":77,"d3":114,"react":374}],79:[function(require,module,exports){
-
-exports.AreaChart = require('./AreaChart');
-
-},{"./AreaChart":76}],80:[function(require,module,exports){
-'use strict';
-
-var React = require('react');
-
-module.exports = React.createClass({displayName: "exports",
-
-  propTypes: {
-    fill: React.PropTypes.string,
-    width: React.PropTypes.number,
-    height: React.PropTypes.number,
-    x: React.PropTypes.number,
-    y: React.PropTypes.number,
-    className: React.PropTypes.string
-  },
-
-  getDefaultProps:function() {
-    return {
-      offset: 0,
-      className: 'rd3-barchart-bar'
-    };
-  },
-
-  render:function() {
-    return (
-      React.createElement("rect", React.__spread({
-        className: "rd3-barchart-bar"}, 
-        this.props, 
-        {fill: this.props.fill, 
-        onMouseOver: this.props.handleMouseOver, 
-        onMouseLeave: this.props.handleMouseLeave})
-      )
-    );
-  }
-});
-
-},{"react":374}],81:[function(require,module,exports){
-'use strict';
-
-var React = require('react');
-var d3 = require('d3');
-var DataSeries = require('./DataSeries');
-var utils = require('../utils');
-
-var $__0=      require('../common'),Chart=$__0.Chart,XAxis=$__0.XAxis,YAxis=$__0.YAxis;
-var $__1=     require('../mixins'),CartesianChartPropsMixin=$__1.CartesianChartPropsMixin,ViewBoxMixin=$__1.ViewBoxMixin;
-
-module.exports = React.createClass({
-
-  mixins: [ CartesianChartPropsMixin, ViewBoxMixin ],
-
-  displayName: 'BarChart',
-
-  propTypes: {
-    chartClassName:         React.PropTypes.string,
-    data:                   React.PropTypes.array.isRequired,
-    hoverAnimation:         React.PropTypes.bool,
-    height:                 React.PropTypes.number,
-    margins:                React.PropTypes.object,
-    rangeRoundBandsPadding: React.PropTypes.number,
-    // https://github.com/mbostock/d3/wiki/Stack-Layout#offset
-    stackOffset:            React.PropTypes.oneOf(['silhouette', 'expand', 'wigget', 'zero']),
-    valuesAccessor:         React.PropTypes.func,
-    title:                  React.PropTypes.string,
-    width:                  React.PropTypes.number,
-    xAxisClassName:         React.PropTypes.string,
-    yAxisClassName:         React.PropTypes.string,
-    yAxisTickCount:         React.PropTypes.number,
-  },
-
-  getDefaultProps:function() {
-    return {
-      chartClassName:         'rd3-barchart',
-      hoverAnimation:         true,
-      margins:                {top: 10, right: 20, bottom: 40, left: 45},
-      rangeRoundBandsPadding: 0.25,
-      stackOffset:            'zero',
-      valuesAccessor:         function(d)  {return d.values;},
-      xAxisClassName:         'rd3-barchart-xaxis',
-      yAxisClassName:         'rd3-barchart-yaxis',
-      yAxisTickCount:         4,
-    };
-  },
-
-  _getStackedValuesMaxY:function(_data) {
-    // in stacked bar chart, the maximum height we need for 
-    // yScale domain is the sum of y0 + y
-    var $__0=    this.props,valuesAccessor=$__0.valuesAccessor;
-    return d3.max(_data, function(d) {
-      return d3.max(valuesAccessor(d), function(d) {
-        // where y0, y is generated by d3.layout.stack()
-        return d.y0 + d.y;
-      });
-    });
-  },
-
-  _getLabels:function(firstSeries) {
-    // we only need first series to get all the labels
-    var $__0=     this.props,valuesAccessor=$__0.valuesAccessor,xAccessor=$__0.xAccessor;
-    return valuesAccessor(firstSeries).map(xAccessor);
-  },
-
-  _stack:function() {
-    var $__0=       this.props,stackOffset=$__0.stackOffset,xAccessor=$__0.xAccessor,yAccessor=$__0.yAccessor,valuesAccessor=$__0.valuesAccessor;
-    return d3.layout.stack()
-                    .offset(stackOffset)
-                    .x(xAccessor)
-                    .y(yAccessor)
-                    .values(valuesAccessor);
-  },
-
-  render:function() {
-
-    var props = this.props;
-
-    var _data = this._stack()(props.data);
-
-    var margins = props.margins;
-
-    var innerHeight = props.height - ( margins.top + margins.bottom );
-    var innerWidth = props.width - ( margins.left + margins.right );
-
-    var xScale = d3.scale.ordinal()
-      .domain(this._getLabels(_data[0]))
-      .rangeRoundBands([0, innerWidth], props.rangeRoundBandsPadding);
-
-    var yScale = d3.scale.linear()
-      .range([innerHeight, 0])
-      .domain([0, this._getStackedValuesMaxY(_data)]);
-
-    var trans = ("translate(" +  margins.left + "," +  margins.top + ")");
-
-    return (
-      React.createElement(Chart, {
-        viewBox: props.viewBox, 
-        legend: props.legend, 
-        data: props.data, 
-        margins: props.margins, 
-        colors: props.colors, 
-        colorAccessor: props.colorAccessor, 
-        width: props.width, 
-        height: props.height, 
-        title: props.title
-      }, 
-        React.createElement("g", {transform: trans, className: props.chartClassName}, 
-          React.createElement(YAxis, {
-            yAxisClassName: props.yAxisClassName, 
-            yAxisTickValues: props.yAxisTickValues, 
-            yAxisLabel: props.yAxisLabel, 
-            yAxisLabelOffset: props.yAxisLabelOffset, 
-            yScale: yScale, 
-            margins: margins, 
-            yAxisTickCount: props.yAxisTickCount, 
-            tickFormatting: props.yAxisFormatter, 
-            width: innerWidth, 
-            height: innerHeight, 
-            xOrient: props.xOrient, 
-            yOrient: props.yOrient, 
-            gridHorizontal: props.gridHorizontal, 
-            gridHorizontalStroke: props.gridHorizontalStroke, 
-            gridHorizontalStrokeWidth: props.gridHorizontalStrokeWidth, 
-            gridHorizontalStrokeDash: props.gridHorizontalStrokeDash}
-          ), 
-          React.createElement(XAxis, {
-            xAxisClassName: props.xAxisClassName, 
-            xAxisTickValues: props.xAxisTickValues, 
-            xAxisLabel: props.xAxisLabel, 
-            xAxisLabelOffset: props.xAxisLabelOffset, 
-            xScale: xScale, 
-            margins: margins, 
-            tickFormatting: props.xAxisFormatter, 
-            width: innerWidth, 
-            height: innerHeight, 
-            xOrient: props.xOrient, 
-            yOrient: props.yOrient, 
-            gridVertical: props.gridVertical, 
-            gridVerticalStroke: props.gridVerticalStroke, 
-            gridVerticalStrokeWidth: props.gridVerticalStrokeWidth, 
-            gridVerticalStrokeDash: props.gridVerticalStrokeDash}
-          ), 
-          React.createElement(DataSeries, {
-            yScale: yScale, 
-            xScale: xScale, 
-            margins: margins, 
-            _data: _data, 
-            width: innerWidth, 
-            height: innerHeight, 
-            colors: props.colors, 
-            colorAccessor: props.colorAccessor, 
-            hoverAnimation: props.hoverAnimation, 
-            valuesAccessor: props.valuesAccessor}
-            )
-        )
-      )
-    );
-  }
-
-});
-
-},{"../common":103,"../mixins":113,"../utils":130,"./DataSeries":83,"d3":114,"react":374}],82:[function(require,module,exports){
-'use strict';
-
-var React = require('react');
-var Bar = require('./Bar');
-var shade = require('../utils').shade;
-
-module.exports = React.createClass({displayName: "exports",
-
-  propTypes: {
-    fill: React.PropTypes.string,
-  },
-
-  getDefaultProps:function() {
-    return {
-      fill: '#3182BD'
-    };
-  },
-
-  getInitialState:function() {
-    return {
-      // fill is named as fill instead of initialFill to avoid
-      // confusion when passing down props from top parent
-      fill: this.props.fill
-    };
-  },
-
-  render:function() {
-
-    var props = this.props;
-
-    return (
-      React.createElement(Bar, React.__spread({}, 
-        props, 
-        {fill: this.state.fill, 
-        handleMouseOver: props.hoverAnimation ? this._animateBar : null, 
-        handleMouseLeave: props.hoverAnimation ? this._restoreBar : null})
-      )
-    );
-  },
-
-  _animateBar:function() {
-    this.setState({ 
-      fill: shade(this.props.fill, 0.2)
-    });
-  },
-
-  _restoreBar:function() {
-    this.setState({ 
-      fill: this.props.fill
-    });
-  },
-});
-
-},{"../utils":130,"./Bar":80,"react":374}],83:[function(require,module,exports){
-'use strict';
-
-var React = require('react');
-var d3 = require('d3');
-var BarContainer = require('./BarContainer');
-
-module.exports = React.createClass({
-
-  displayName: 'DataSeries',
-
-  propTypes: {
-    _data:          React.PropTypes.array,
-    colors:         React.PropTypes.func,
-    colorAccessor:  React.PropTypes.func,
-    height:         React.PropTypes.number,
-    width:          React.PropTypes.number,
-    valuesAccessor: React.PropTypes.func,
-  },
-
-  render:function() {
-    return (
-      React.createElement("g", null, this._renderBarSeries())
-    );
-  },
-
-  _renderBarSeries:function() {
-    var $__0=     this.props,_data=$__0._data,valuesAccessor=$__0.valuesAccessor;
-    return _data.map(function(layer, seriesIdx)  {
-      return valuesAccessor(layer)
-             .map(function(segment)  {return this._renderBarContainer(segment, seriesIdx);}.bind(this))
-    }.bind(this));
-  },
-
-  _renderBarContainer:function(segment, seriesIdx) {
-    var $__0=         this.props,colors=$__0.colors,colorAccessor=$__0.colorAccessor,height=$__0.height,hoverAnimation=$__0.hoverAnimation,xScale=$__0.xScale,yScale=$__0.yScale;
-    return (
-      React.createElement(BarContainer, {
-        height: height - yScale(segment.y), 
-        width: xScale.rangeBand(), 
-        x: xScale(segment.x), 
-        y: yScale( segment.y0 + segment.y), 
-        fill: colors(colorAccessor(segment, seriesIdx)), 
-        hoverAnimation: hoverAnimation}
-      )
-    )
-  }
-
-});
-
-},{"./BarContainer":82,"d3":114,"react":374}],84:[function(require,module,exports){
-
-exports.BarChart = require('./BarChart');
-
-},{"./BarChart":81}],85:[function(require,module,exports){
-'use strict';
-
-var React = require('react');
-
-module.exports = React.createClass({
-
-  displayName: 'Candle',
-
-  propTypes: {
-    className:      React.PropTypes.string,
-    shapeRendering: React.PropTypes.string,
-    stroke:         React.PropTypes.string,
-    strokeWidth:    React.PropTypes.number,
-  },
-
-  getDefaultProps:function() {
-    return {
-      className:      'rd3-candlestick-candle',
-      shapeRendering: 'crispEdges',
-      stroke:         '#000',
-      strokeWidth:    1,
-    };
-  },
-
-  render:function() {
-    var props = this.props;
-
-    return (
-      React.createElement("rect", {
-        className: props.className, 
-        fill: props.candleFill, 
-        x: props.candle_x, 
-        y: props.candle_y, 
-        stroke: props.stroke, 
-        strokeWidth: props.strokeWidth, 
-        style: { shapeRendering: props.shapeRendering}, 
-        width: props.candleWidth, 
-        height: props.candleHeight, 
-        onMouseOver: props.handleMouseOver, 
-        onMouseLeave: props.handleMouseLeave}
-      )
-    );
-  }
-
-});
-
-},{"react":374}],86:[function(require,module,exports){
-'use strict';
-
-var React = require('react');
-var d3 = require('d3');
-var utils = require('../utils');
-var DataSeries = require('./DataSeries');
-var $__0=      require('../common'),Chart=$__0.Chart,XAxis=$__0.XAxis,YAxis=$__0.YAxis;
-
-module.exports = React.createClass({
-
-  displayName: 'CandleStickChart',
-
-  propTypes: {
-    data:              React.PropTypes.oneOfType([
-                         React.PropTypes.array,
-                         React.PropTypes.object
-                       ]),
-    fillUp:            React.PropTypes.func,
-    fillUpAccessor:    React.PropTypes.func,
-    fillDown:          React.PropTypes.func,
-    fillDownAccessor:  React.PropTypes.func,
-    height:            React.PropTypes.number,
-    hoverAnimation:    React.PropTypes.bool,
-    title:             React.PropTypes.string,
-    xAccessor:         React.PropTypes.func,
-    xAxisFormatter:    React.PropTypes.func,
-    xAxisTickInterval: React.PropTypes.object,
-    xAxisTickValues:   React.PropTypes.array,
-    yAccessor:         React.PropTypes.func,
-    yAxisFormatter:    React.PropTypes.func,
-    yAxisTickCount:    React.PropTypes.number,
-    yAxisTickValues:   React.PropTypes.array,
-    width:             React.PropTypes.number,
-  },
-
-  getDefaultProps:function() {
-    return {
-      className:        'rd3-candlestick',
-      xAxisClassName:   'rd3-candlestick-xaxis',
-      yAxisClassName:   'rd3-candlestick-yaxis',
-      data:             [],
-      fillUp:           function(value)  {return '#ffffff';},
-      fillUpAccessor:   function(d, idx)  {return idx;},
-      fillDown:         d3.scale.category20c(),
-      fillDownAccessor: function(d, idx)  {return idx;},
-      height:           200,
-      hoverAnimation:   true,
-      margins:          {top: 10, right: 20, bottom: 30, left: 45},
-      legendOffset:     120,
-      title:            '',
-      xAccessor:        function(d)  {return d.x;},
-      yAccessor:        function(d)  {return { open: d.open, high: d.high, low: d.low, close: d.close };},
-      width:            400,
-    };
-  },
-
-  render:function() {
-
-    var props = this.props;
-
-    // Calculate inner chart dimensions
-    var innerWidth, innerHeight;
-    innerWidth = props.width - props.margins.left - props.margins.right;
-    innerHeight = props.height - props.margins.top - props.margins.bottom;
-
-    if (!Array.isArray(props.data)) {
-      props.data = [props.data];
-    }
-    var flattenedData = utils.flattenData(props.data, props.xAccessor, props.yAccessor);
-
-    var allValues = flattenedData.allValues,
-        xValues = flattenedData.xValues,
-        yValues = flattenedData.yValues;
-    var scales = utils.calculateScales(innerWidth, innerHeight, xValues, yValues);
-
-    var trans = ("translate(" + ( props.yAxisOffset < 0 ? props.margins.left + Math.abs(props.yAxisOffset) : props.margins.left) + "," +  props.margins.top + ")");
-
-    var dataSeries = props.data.map( function(series, idx)  {
-      return (
-          React.createElement(DataSeries, {
-            key: idx, 
-            seriesName: series.name, 
-            index: idx, 
-            xScale: scales.xScale, 
-            yScale: scales.yScale, 
-            data: series.values, 
-            fillUp: props.fillUp(props.fillUpAccessor(series, idx)), 
-            fillDown: props.fillDown(props.fillDownAccessor(series, idx)), 
-            xAccessor: props.xAccessor, 
-            yAccessor: props.yAccessor, 
-            hoverAnimation: props.hoverAnimation}
-          )
-        );
-      });
-
-    return (
-      React.createElement(Chart, {
-        viewBox: props.viewBox, 
-        width: props.width, 
-        height: props.height, 
-        margins: props.margins, 
-        title: props.title
-      }, 
-        React.createElement("g", {transform: trans, className: props.className}, 
-          React.createElement(XAxis, {
-            xAxisClassName: props.xAxisClassName, 
-            xScale: scales.xScale, 
-            xAxisTickValues: props.xAxisTickValues, 
-            xAxisTickInterval: props.xAxisTickInterval, 
-            xAxisOffset: props.xAxisOffset, 
-            tickFormatting: props.xAxisFormatter, 
-            xAxisLabel: props.xAxisLabel, 
-            xAxisLabelOffset: props.xAxisLabelOffset, 
-            xOrient: props.xOrient, 
-            yOrient: props.yOrient, 
-            margins: props.margins, 
-            width: innerWidth, 
-            height: innerHeight, 
-            gridVertical: props.gridVertical, 
-            gridVerticalStroke: props.gridVerticalStroke, 
-            gridVerticalStrokeWidth: props.gridVerticalStrokeWidth, 
-            gridVerticalStrokeDash: props.gridVerticalStrokeDash}
-          ), 
-          React.createElement(YAxis, {
-            yAxisClassName: props.yAxisClassName, 
-            yScale: scales.yScale, 
-            yAxisTickValues: props.yAxisTickValues, 
-            yAxisOffset: props.yAxisOffset, 
-            yAxisTickCount: props.yAxisTickCount, 
-            tickFormatting: props.yAxisFormatter, 
-            yAxisLabel: props.yAxisLabel, 
-            yAxisLabelOffset: props.yAxisLabelOffset, 
-            xOrient: props.xOrient, 
-            yOrient: props.yOrient, 
-            margins: props.margins, 
-            width: innerWidth, 
-            height: props.height, 
-            gridHorizontal: props.gridHorizontal, 
-            gridHorizontalStroke: props.gridHorizontalStroke, 
-            gridHorizontalStrokeWidth: props.gridHorizontalStrokeWidth, 
-            gridHorizontalStrokeDash: props.gridHorizontalStrokeDash}
-          ), 
-          dataSeries
-        )
-      )
-    );
-  }
-
-});
-
-},{"../common":103,"../utils":130,"./DataSeries":88,"d3":114,"react":374}],87:[function(require,module,exports){
-'use strict';
-
-var React = require('react');
-var d3 = require('d3');
-var utils = require('../utils');
-var Candle = require('./Candle');
-var Wick = require('./Wick');
-
-module.exports = React.createClass({
-
-  displayName: 'CandleStickContainer',
-
-  propTypes: {
-    candle_x:       React.PropTypes.number,
-    candle_y:       React.PropTypes.number,
-    className:      React.PropTypes.string,
-    candleFill:     React.PropTypes.string,
-    candleHeight:   React.PropTypes.number,
-    candleWidth:    React.PropTypes.number,
-    wick_x1:        React.PropTypes.number,
-    wick_x2:        React.PropTypes.number,
-    wick_y1:        React.PropTypes.number,
-    wick_y2:        React.PropTypes.number,
-  },
-
-  getDefaultProps:function() {
-    return {
-      className: 'rd3-candlestick-container'
-    };
-  },
-
-  getInitialState:function() {
-    // state for animation usage
-    return {
-      candleWidth: this.props.candleWidth,
-      candleFill: this.props.candleFill
-    };
-  },
-
-  render:function() {
-
-    var props = this.props;
-    var state = this.state;
-
-    // animation controller
-    var handleMouseOver, handleMouseLeave;
-    if(props.hoverAnimation) {
-      handleMouseOver = this._animateCandle;
-      handleMouseLeave = this._restoreCandle;
-    } else {
-      handleMouseOver = handleMouseLeave = null;
-    }
-
-    return (
-      React.createElement("g", {className: props.className}, 
-       React.createElement(Wick, {
-         wick_x1: props.wick_x1, 
-         wick_x2: props.wick_x2, 
-         wick_y1: props.wick_y1, 
-         wick_y2: props.wick_y2}
-       ), 
-       React.createElement(Candle, {
-         candleFill: state.candleFill, 
-         candleWidth: state.candleWidth, 
-         candle_x: props.candle_x - ((state.candleWidth - props.candleWidth) / 2), 
-         candle_y: props.candle_y, 
-         candleHeight: props.candleHeight, 
-         handleMouseOver: handleMouseOver, 
-         handleMouseLeave: handleMouseLeave}
-       )
-      )
-    );
-  },
-
-  _animateCandle:function() {
-    this.setState({ 
-      candleWidth: this.props.candleWidth * 1.5,
-      candleFill: utils.shade(this.props.candleFill, -0.2)
-    });
-  },
-
-  _restoreCandle:function() {
-    this.setState({ 
-      candleWidth: this.props.candleWidth,
-      candleFill: this.props.candleFill
-    });
-  },
-
-});
-
-},{"../utils":130,"./Candle":85,"./Wick":89,"d3":114,"react":374}],88:[function(require,module,exports){
-'use strict';
-
-var React = require('react');
-var d3 = require('d3');
-var utils = require('../utils');
-var CandlestickContainer = require('./CandlestickContainer');
-
-
-module.exports = React.createClass({
-
-  displayName: 'DataSeries',
-
-  propTypes: {
-    fillUp:   React.PropTypes.string.isRequired,
-    fillDown: React.PropTypes.string.isRequired
-  },
-
-  render:function() {
-
-    var props = this.props;
-
-    var xRange = props.xScale.range(),
-        width = Math.abs(xRange[0] - xRange[1]),
-        candleWidth = (width / (props.data.length + 2)) * 0.5;
-
-    var dataSeriesArray = props.data.map( function(d, idx) {
-      // Candles
-      var ohlc = props.yAccessor(d),
-        candle_x = props.xScale(props.xAccessor(d)) - 0.5 * candleWidth,
-        candle_y = props.yScale(Math.max(ohlc.open, ohlc.close)),
-        candleHeight = Math.abs(props.yScale(ohlc.open) - props.yScale(ohlc.close)),
-        wick_y2 = props.yScale(ohlc.low),
-        ohlcClass = (ohlc.open <= ohlc.close) ? 'up' : 'down',
-        className = ( ohlcClass + " rd3-candlestick-rect"),
-        candleFill = (ohlc.open <= ohlc.close) ? props.fillUp : props.fillDown;
-
-      //Wicks
-      var wick_x1 = props.xScale(props.xAccessor(d)),
-        wick_y1 = props.yScale(ohlc.high),
-        wick_x2 = wick_x1;
-
-      return (
-        React.createElement(CandlestickContainer, {
-          key: idx, 
-          candleFill: candleFill, 
-          candleHeight: candleHeight, 
-          candleWidth: candleWidth, 
-          candle_x: candle_x, 
-          candle_y: candle_y, 
-          wick_x1: wick_x1, 
-          wick_x2: wick_x2, 
-          wick_y1: wick_y1, 
-          wick_y2: wick_y2, 
-          hoverAnimation: props.hoverAnimation}
-        )
-      );
-    }, this);
-
-    return (
-      React.createElement("g", null, 
-        dataSeriesArray
-      )
-    );
-  }
-
-});
-
-},{"../utils":130,"./CandlestickContainer":87,"d3":114,"react":374}],89:[function(require,module,exports){
-'use strict';
-
-var React = require('react');
-
-
-module.exports = React.createClass({
-
-  displayName: 'Wick',
-
-  propTypes: {
-    className:      React.PropTypes.string,
-    shapeRendering: React.PropTypes.string,
-    stroke:         React.PropTypes.string,
-    strokeWidth:    React.PropTypes.number,
-  },
-
-  getDefaultProps:function() {
-    return {
-      className:      'rd3-candlestick-wick',
-      stroke:         '#000',
-      strokeWidth:    1,
-      shapeRendering: 'crispEdges',
-    };
-  },
-
-  render:function() {
-    var props = this.props;
-    return React.createElement("line", {
-            stroke: props.stroke, 
-            strokeWidth: props.strokeWidth, 
-            style: { shapeRendering: props.shapeRendering}, 
-            className: props.className, 
-            x1: props.wick_x1, 
-            y1: props.wick_y1, 
-            x2: props.wick_x2, 
-            y2: props.wick_y2}
-          );
-  }
-
-});
-
-},{"react":374}],90:[function(require,module,exports){
-
-exports.CandlestickChart = require('./CandlestickChart');
-
-},{"./CandlestickChart":86}],91:[function(require,module,exports){
-'use strict';
-
-var React = require('react');
-var d3 = require('d3');
-
-module.exports = React.createClass({
-
-  displayName: 'Legend',
-
-  propTypes: {
-    className:     React.PropTypes.string,
-    colors:        React.PropTypes.func,
-    colorAccessor: React.PropTypes.func,
-    data:          React.PropTypes.array.isRequired,
-    itemClassName: React.PropTypes.string,
-    margins:       React.PropTypes.object,
-    text:          React.PropTypes.string,
-    width:         React.PropTypes.number.isRequired
-  },
-
-  getDefaultProps: function() {
-    return {
-      className:    'rd3-legend',
-      colors:        d3.scale.category20c(),
-      colorAccessor: function(d, idx)  {return idx;},
-      itemClassName: 'rd3-legend-item',
-      text:          '#000'
-    };
-  },
-
-  render: function() {
-
-    var props = this.props;
-
-    var textStyle = {
-      'color': 'black',
-      'fontSize': '50%',
-      'verticalAlign': 'top'
-    };
-
-    var legendItems = [];
-
-    props.data.forEach( function(series, idx)  {
-      var itemStyle = {
-        'color': props.colors(props.colorAccessor(series, idx)),
-        'lineHeight': '60%',
-        'fontSize': '200%'
+  _createClass(ChartSvg, [{
+    key: 'render',
+    value: function render() {
+      var _props = this.props;
+      var horizontal = _props.horizontal;
+      var height = _props.height;
+      var width = _props.width;
+      var margins = _props.margins;
+      var xScale = _props.xScale;
+      var yScale = _props.yScale;
+      var xRange = _props.xRange;
+      var yRange = _props.yRange;
+      var xDomain = _props.xDomain;
+      var yDomain = _props.yDomain;
+      var xTicks = _props.xTicks;
+      var yTicks = _props.yTicks;
+      var xTickFormat = _props.xTickFormat;
+      var yTickFormat = _props.yTickFormat;
+      var xBandPaddingInner = _props.xBandPaddingInner;
+      var xBandPaddingOuter = _props.xBandPaddingOuter;
+      var yBandPaddingInner = _props.yBandPaddingInner;
+      var yBandPaddingOuter = _props.yBandPaddingOuter;
+      var xLabel = _props.xLabel;
+      var yLabel = _props.yLabel;
+      var stack = _props.stack;
+      var data = _props.data;
+      var svgClassName = _props.svgClassName;
+      var id = _props.id;
+      var x = _props.x;
+      var y = _props.y;
+
+
+      var xRange = xRange || [0, width - margins.left - margins.right];
+      var yRange = yRange || [height - margins.top - margins.bottom, 0];
+      var xDomain = xDomain || (0, _reactD3Core.xDomainCount)(this.props, stack, horizontal);
+      var yDomain = yDomain || (0, _reactD3Core.yDomainCount)(this.props, stack, horizontal);
+
+      if (xScale === 'ordinal') xScale = 'band';
+
+      if (yScale === 'ordinal') yScale = 'band';
+
+      var newXScale = {
+        scale: xScale,
+        range: xRange,
+        domain: xDomain,
+        bandPaddingInner: xBandPaddingInner,
+        bandPaddingOuter: xBandPaddingOuter
       };
 
-      legendItems.push(
-        React.createElement("li", {
-          key: idx, 
-          className: props.itemClassName, 
-          style: itemStyle
-        }, 
-          React.createElement("span", {
-            style: textStyle
-          }, 
-            series.name
-          )
-        )
-      );
-
-    });
-
-    var topMargin = props.margins.top;
-
-    var legendBlockStyle = {
-      'wordWrap': 'break-word',
-      'width': props.width,
-      'paddingLeft': '0',
-      'marginBottom': '0',
-      'marginTop': topMargin,
-      'listStylePosition': 'inside'
-    };
-
-    return (
-      React.createElement("ul", {
-        className: props.className, 
-        style: legendBlockStyle
-      }, 
-        legendItems
-      )
-    );
-  }
-
-});
-
-},{"d3":114,"react":374}],92:[function(require,module,exports){
-'use strict';
-
-var React = require('react');
-var d3 = require('d3');
-
-var Polygon = React.createClass({displayName: "Polygon",
-
-  _animateCircle: function() {
-    this.props.structure.cursor('voronoi').cursor(this.props.id).update(function(){return 'active';});
-    // this.props.pubsub.emit('animate', this.props.id);
-  },
-
-  _restoreCircle: function() {
-    this.props.structure.cursor('voronoi').cursor(this.props.id).update(function(){return 'inactive';});
-    // this.props.pubsub.emit('restore', this.props.id);
-  },
-
-  _drawPath: function(d) {
-    if(d === undefined) {
-      return; 
-    }  
-    return 'M' + d.join(',') + 'Z';
-  },
-
-  render: function() {
-    return React.createElement("path", {
-      onMouseOver: this._animateCircle, 
-      onMouseOut: this._restoreCircle, 
-      fill: "white", 
-      opacity: "0", 
-      d: this._drawPath(this.props.vnode)});
-  }
-
-});
-
-
-module.exports = React.createClass({
-
-  displayName: 'Voronoi',
-
-  render: function() {
-    var xScale = this.props.xScale;
-    var yScale = this.props.yScale;
-
-    var voronoi = d3.geom.voronoi()
-      .x(function(d){ return xScale(d.coord.x); })
-      .y(function(d){ return yScale(d.coord.y); })
-      .clipExtent([[0, 0], [ this.props.width , this.props.height]]);
-
-    var regions = voronoi(this.props.data).map(function(vnode, idx) {
-      return React.createElement(Polygon, {structure: this.props.structure, key: idx, id: vnode.point.id, vnode: vnode});
-    }.bind(this));
-
-    return (
-      React.createElement("g", null, 
-        regions
-      )
-    );
-  }
-
-});
-
-},{"d3":114,"react":374}],93:[function(require,module,exports){
-'use strict';
-
-var React = require('react');
-var d3 = require('d3');
-
-module.exports = React.createClass({
-
-  displayName: 'AxisLine',
-
-  propTypes: {
-    scale: React.PropTypes.func.isRequired,
-    innerTickSize: React.PropTypes.number,
-    outerTickSize: React.PropTypes.number,
-    tickPadding: React.PropTypes.number,
-    tickArguments: React.PropTypes.array,
-    fill: React.PropTypes.string,
-    stroke: React.PropTypes.string
-  },
-
-  getDefaultProps:function() {
-    return {
-      innerTickSize: 6,
-      outerTickSize: 6,
-      tickPadding: 3,
-      fill: 'none',
-      tickArguments: [10],
-      tickValues: null,
-      tickFormat: null 
-    };
-  },
-
-
-  _d3_scaleExtent:function(domain) {
-    var start = domain[0], stop = domain[domain.length - 1];
-    return start < stop ? [start, stop] : [stop, start];
-  },
-
-  _d3_scaleRange:function(scale) {
-    return scale.rangeExtent ? scale.rangeExtent() : this._d3_scaleExtent(scale.range());
-  },
-
-  render:function() {
-
-    var props = this.props;
-    var sign = props.orient === "top" || props.orient === "left" ? -1 : 1;
-
-    var range = this._d3_scaleRange(props.scale);
-
-    var d;
-
-    if (props.orient === "bottom" || props.orient === "top") {
-      d = "M" + range[0] + "," + sign * props.outerTickSize + "V0H" + range[1] + "V" + sign * props.outerTickSize;
-    } else {
-      d = "M" + sign * props.outerTickSize + "," + range[0] + "H0V" + range[1] + "H" + sign * props.outerTickSize;
-    }
-
-
-    return (
-      React.createElement("path", {
-        className: "domain", 
-        d: d, 
-        style: {'shapeRendering':'crispEdges'}, 
-        fill: props.fill, 
-        stroke: props.stroke, 
-        strokeWidth: props.strokeWidth
-      }
-      )
-    );
-  }
-});
-
-},{"d3":114,"react":374}],94:[function(require,module,exports){
-'use strict';
-
-var React = require('react');
-var d3 = require('d3');
-
-module.exports = React.createClass({
-
-  displayName: 'AxisTick',
-
-  propTypes: {
-    scale: React.PropTypes.func.isRequired,
-    orient: React.PropTypes.oneOf(['top','bottom','left','right']).isRequired,
-    orient2nd: React.PropTypes.oneOf(['top','bottom','left','right']),
-    height: React.PropTypes.number.isRequired,
-    width: React.PropTypes.number.isRequired,
-    tickArguments : React.PropTypes.array,
-    tickValues: React.PropTypes.array,
-    innerTickSize: React.PropTypes.number,
-    outerTickSize: React.PropTypes.number,
-    tickPadding: React.PropTypes.number,
-    tickFormat: React.PropTypes.func,
-    tickStroke: React.PropTypes.string,
-    gridHorizontal: React.PropTypes.bool,
-    gridVertical: React.PropTypes.bool,
-    gridHorizontalStroke: React.PropTypes.string,
-    gridVerticalStroke: React.PropTypes.string,
-    gridHorizontalStrokeWidth: React.PropTypes.number,
-    gridVerticalStrokeWidth: React.PropTypes.number,
-    gridHorizontalStrokeDash: React.PropTypes.string,
-    gridVerticalStrokeDash: React.PropTypes.string
-  },
-  getDefaultProps:function() {
-    return {
-      innerTickSize: 6,
-      outerTickSize: 6,
-      tickStroke: '#000',
-      tickPadding: 3,
-      tickArguments: [10],
-      tickValues: null,
-      gridHorizontal: false,
-      gridVertical: false,
-      gridHorizontalStroke: '#D8D7D7',
-      gridVerticalStroke: '#D8D7D7',
-      gridHorizontalStrokeWidth: 1,
-      gridVerticalStrokeWidth: 1,
-      gridHorizontalStrokeDash: '5, 5',
-      gridVerticalStrokeDash: '5, 5'
-    };
-  },
-
-  render:function() {
-    var props = this.props;
-
-    var tr,
-        ticks,
-        scale,
-        adjustedScale,
-        textAnchor,
-        tickFormat,
-        y0, y1, y2, dy, x0, x1, x2, dx;
-
-    var gridStrokeWidth,
-        gridStroke,
-        gridStrokeDashArray,
-        x2grid,
-        y2grid;
-    var gridOn = false;
-
-    var sign = props.orient === 'top' || props.orient === 'right' ? -1 : 1;
-    var tickSpacing = Math.max(props.innerTickSize, 0) + props.tickPadding;
-
-    scale = props.scale;
-
-    if (props.tickValues) {
-      ticks = props.tickValues;
-    } else if (scale.ticks) {
-      ticks = scale.ticks.apply(scale, props.tickArguments);
-    } else {
-      ticks = scale.domain();
-    }
-
-    if (props.tickFormatting) {
-        tickFormat = props.tickFormatting;
-    } else if (scale.tickFormat) {
-        tickFormat = scale.tickFormat.apply(scale, props.tickArguments);
-    } else {
-        tickFormat = function(d) {return d;};
-    }
-
-    adjustedScale = scale.rangeBand ? function(d)  { return scale(d) + scale.rangeBand() / 2; } : scale;
-
-    // Still working on this
-    // Ticks and lines are not fully aligned
-    // in some orientations
-    switch (props.orient) {
-      case 'top':
-        tr = function(tick)  {return ("translate(" + adjustedScale(tick) + ",0)");};
-        textAnchor = "middle";
-        y2 = props.innerTickSize * sign;
-        y1 = tickSpacing * sign;
-        dy =  sign < 0 ? "0em" : ".71em";
-        x2grid = 0;
-        y2grid = -props.height;
-        break;
-      case 'bottom':
-        tr = function(tick)  {return ("translate(" + adjustedScale(tick) + ",0)");};
-        textAnchor = "middle";
-        y2 = props.innerTickSize * sign;
-        y1 = tickSpacing * sign;
-        dy =  sign < 0 ? "0em" : ".71em";
-        x2grid = 0;
-        y2grid = -props.height;
-        break;
-      case 'left':
-        tr = function(tick)  {return ("translate(0," + adjustedScale(tick) + ")");};
-        textAnchor = "end";
-        x2 = props.innerTickSize * -sign;
-        x1 = tickSpacing * -sign;
-        dy = ".32em";
-        x2grid = props.width;
-        y2grid = 0;
-        break;
-      case 'right':
-        tr = function(tick)  {return ("translate(0," + adjustedScale(tick) + ")");};
-        textAnchor = "start";
-        x2 = props.innerTickSize * -sign;
-        x1 = tickSpacing * -sign;
-        dy = ".32em";
-        x2grid = -props.width;
-        y2grid = 0;
-        break;
-    }
-
-    if (props.gridHorizontal) {
-      gridOn = true;
-      gridStrokeWidth = props.gridHorizontalStrokeWidth;
-      gridStroke = props.gridHorizontalStroke;
-      gridStrokeDashArray = props.gridHorizontalStrokeDash;
-    }
-    else if (props.gridVertical) {
-      gridOn = true;
-      gridStrokeWidth = props.gridVerticalStrokeWidth;
-      gridStroke = props.gridVerticalStroke;
-      gridStrokeDashArray = props.gridVerticalStrokeDash;
-    }
-
-    // return grid line if grid is enabled and grid line is not on at same position as other axis.
-    var gridLine = function(pos) {
-      if (gridOn
-        && !(props.orient2nd == 'left' && pos == 0)
-        && !(props.orient2nd == 'right' && pos == props.width)
-        && !((props.orient == 'left' || props.orient == 'right') && pos == props.height)
-      ) {
-        return (
-          React.createElement("line", {style: {
-            strokeWidth: gridStrokeWidth,
-            shapeRendering: 'crispEdges',
-            stroke: gridStroke,
-            strokeDasharray: gridStrokeDashArray
-            }, x2: x2grid, y2: y2grid})
-        )
-      }
-    }
-
-    return (
-    React.createElement("g", null, 
-      ticks.map( function(tick, idx)  {
-        return (
-          React.createElement("g", {key: idx, className: "tick", transform: tr(tick)}, 
-            gridLine(adjustedScale(tick)), 
-            React.createElement("line", {style: {shapeRendering:'crispEdges',opacity:'1',stroke:props.tickStroke}, x2: x2, y2: y2}
-            ), 
-            React.createElement("text", {
-              strokeWidth: "0.01", 
-              dy: dy, x: x1, y: y1, 
-              style: {stroke:props.tickTextStroke, fill:props.tickTextStroke}, 
-              textAnchor: textAnchor
-            }, 
-              tickFormat(tick)
-            )
-          )
-        );
-        })
-      
-    )
-    );
-  }
-
-});
-
-},{"d3":114,"react":374}],95:[function(require,module,exports){
-'use strict';
-
-var React = require('react');
-
-
-module.exports = React.createClass({
-
-  displayName: 'Label',
-
-  propTypes: {
-    height:              React.PropTypes.number,
-    horizontalTransform: React.PropTypes.string,
-    label:               React.PropTypes.string.isRequired,
-    width:               React.PropTypes.number,
-    strokeWidth:         React.PropTypes.number,
-    textAnchor:          React.PropTypes.string,
-    verticalTransform:   React.PropTypes.string
-  },
-
-  getDefaultProps:function() {
-    return {
-      horizontalTransform: 'rotate(270)',
-      strokeWidth:         0.01,
-      textAnchor:          'middle',
-      verticalTransform:   'rotate(0)'
-    };
-  },
-
-  render:function() {
-
-    var props = this.props;
-
-    if (props.label) {
-      switch (props.orient) {
-        case 'top':
-          return (
-            React.createElement("text", {
-              strokeWidth: props.strokeWidth.toString(), 
-              textAnchor: props.textAnchor, 
-              transform: props.verticalTransform, 
-              x: props.width / 2, 
-              y: props.offset
-            }, 
-              props.label
-            )
-          );
-        case 'bottom':
-          return (
-            React.createElement("text", {
-              strokeWidth: props.strokeWidth.toString(), 
-              textAnchor: props.textAnchor, 
-              transform: props.verticalTransform, 
-              x: props.width / 2, 
-              y: props.offset
-            }, 
-              props.label
-            )
-          );
-        case 'left':
-          return (
-            React.createElement("text", {
-              strokeWidth: props.strokeWidth.toString(), 
-              textAnchor: props.textAnchor, 
-              transform: props.horizontalTransform, 
-              y: -props.offset, 
-              x: -props.height / 2
-            }, 
-              props.label
-            )
-          );
-        case 'right':
-          return (
-            React.createElement("text", {
-              strokeWidth: props.strokeWidth.toString(), 
-              textAnchor: props.textAnchor, 
-              transform: props.horizontalTransform, 
-              y: props.offset, 
-              x: -props.height / 2
-            }, 
-              props.label
-            )
-          );
-      }
-    }
-    return React.createElement("text", null);
-  }
-
-});
-
-},{"react":374}],96:[function(require,module,exports){
-'use strict';
-
-var React = require('react');
-var d3 = require('d3');
-var AxisTicks = require('./AxisTicks');
-var AxisLine = require('./AxisLine');
-var Label = require('./Label');
-
-module.exports = React.createClass({
-
-  displayName: 'XAxis',
-
-  propTypes: {
-    fill:            React.PropTypes.string,
-    height:          React.PropTypes.number.isRequired,
-    width:           React.PropTypes.number.isRequired,
-    stroke:          React.PropTypes.string,
-    strokeWidth:     React.PropTypes.string,
-    tickStroke:      React.PropTypes.string,
-    xAxisClassName:  React.PropTypes.string,
-    xAxisLabel:      React.PropTypes.string,
-    xAxisTickValues: React.PropTypes.array,
-    xAxisOffset:     React.PropTypes.number,
-    xScale:          React.PropTypes.func.isRequired,
-    xOrient:         React.PropTypes.oneOf(['top', 'bottom']),
-    yOrient:         React.PropTypes.oneOf(['left', 'right']),
-    gridVertical:  React.PropTypes.bool,
-    gridVerticalStroke: React.PropTypes.string,
-    gridVerticalStrokeWidth: React.PropTypes.number,
-    gridVerticalStrokeDash: React.PropTypes.string
-  },
-
-  getDefaultProps:function() {
-    return {
-      fill:            'none',
-      stroke:          'none',
-      strokeWidth:     '1',
-      tickStroke:      '#000',
-      xAxisClassName:  'rd3-x-axis',
-      xAxisLabel:      '',
-      xAxisLabelOffset: 10,
-      xAxisOffset:      0,
-      xOrient:         'bottom',
-      yOrient:         'left'
-    };
-  },
-
-  render:function() {
-    var props = this.props;
-
-    var t = ("translate(0 ," + (props.xAxisOffset + props.height) + ")");
-
-    var tickArguments;
-    if (typeof props.xAxisTickCount !== 'undefined') {
-      tickArguments = [props.xAxisTickCount];
-    }
-
-    if (typeof props.xAxisTickInterval !== 'undefined') {
-      tickArguments = [d3.time[props.xAxisTickInterval.unit], props.xAxisTickInterval.interval];
-    }
-
-    return (
-      React.createElement("g", {
-        className: props.xAxisClassName, 
-        transform: t
-      }, 
-        React.createElement(AxisTicks, {
-          tickValues: props.xAxisTickValues, 
-          tickFormatting: props.tickFormatting, 
-          tickArguments: tickArguments, 
-          tickStroke: props.tickStroke, 
-          tickTextStroke: props.tickTextStroke, 
-          innerTickSize: props.tickSize, 
-          scale: props.xScale, 
-          orient: props.xOrient, 
-          orient2nd: props.yOrient, 
-          height: props.height, 
-          width: props.width, 
-          gridVertical: props.gridVertical, 
-          gridVerticalStroke: props.gridVerticalStroke, 
-          gridVerticalStrokeWidth: props.gridVerticalStrokeWidth, 
-          gridVerticalStrokeDash: props.gridVerticalStrokeDash}
-        ), 
-        React.createElement(AxisLine, React.__spread({
-          scale: props.xScale, 
-          stroke: props.stroke, 
-          orient: props.xOrient, 
-          outerTickSize: props.tickSize}, 
-          props)
-        ), 
-        React.createElement(Label, {
-          label: props.xAxisLabel, 
-          offset: props.xAxisLabelOffset, 
-          orient: props.xOrient, 
-          margins: props.margins, 
-          width: props.width}
-          )
-      )
-    );
-  }
-
-});
-
-},{"./AxisLine":93,"./AxisTicks":94,"./Label":95,"d3":114,"react":374}],97:[function(require,module,exports){
-'use strict';
-
-var React = require('react');
-var d3 = require('d3');
-var AxisTicks = require('./AxisTicks');
-var AxisLine = require('./AxisLine');
-var Label = require('./Label');
-
-module.exports = React.createClass({
-
-  displayName: 'YAxis',
-
-  propTypes: {
-    fill:            React.PropTypes.string,
-    stroke:          React.PropTypes.string,
-    strokeWidth:     React.PropTypes.string,
-    tickStroke:      React.PropTypes.string,
-    width:           React.PropTypes.number.isRequired,
-    height:          React.PropTypes.number.isRequired,
-    yAxisClassName:  React.PropTypes.string,
-    yAxisLabel:      React.PropTypes.string,
-    yAxisOffset:     React.PropTypes.number,
-    yAxisTickValues: React.PropTypes.array,
-    xOrient:         React.PropTypes.oneOf(['top', 'bottom']),
-    yOrient:         React.PropTypes.oneOf(['left', 'right']),
-    yScale:          React.PropTypes.func.isRequired,
-    gridVertical: React.PropTypes.bool,
-    gridVerticalStroke: React.PropTypes.string,
-    gridVerticalStrokeWidth: React.PropTypes.number,
-    gridVerticalStrokeDash: React.PropTypes.string
-  },
-
-  getDefaultProps:function() {
-    return {
-      fill:           'none',
-      stroke:         '#000',
-      strokeWidth:    '1',
-      tickStroke:     '#000',
-      yAxisClassName: 'rd3-y-axis',
-      yAxisLabel:     '',
-      yAxisOffset:    0,
-      xOrient:        'bottom',
-      yOrient:        'left'
-    };
-  },
-
-  render:function() {
-
-    var props = this.props;
-
-    var t;
-    if (props.yOrient === 'right') {
-       t = ("translate(" + (props.yAxisOffset + props.width) + ", 0)");
-    } else {
-       t = ("translate(" + props.yAxisOffset + ", 0)");
-    }
-
-    var tickArguments;
-    if (props.yAxisTickCount) {
-      tickArguments = [props.yAxisTickCount];
-    }
-
-    if (props.yAxisTickInterval) {
-      tickArguments = [d3.time[props.yAxisTickInterval.unit], props.yAxisTickInterval.interval];
-    }
-
-    return (
-      React.createElement("g", {
-        className: props.yAxisClassName, 
-        transform: t
-      }, 
-        React.createElement(AxisTicks, {
-          innerTickSize: props.tickSize, 
-          orient: props.yOrient, 
-          orient2nd: props.xOrient, 
-          tickArguments: tickArguments, 
-          tickFormatting: props.tickFormatting, 
-          tickStroke: props.tickStroke, 
-          tickTextStroke: props.tickTextStroke, 
-          tickValues: props.yAxisTickValues, 
-          scale: props.yScale, 
-          height: props.height, 
-          width: props.width, 
-          gridHorizontal: props.gridHorizontal, 
-          gridHorizontalStroke: props.gridHorizontalStroke, 
-          gridHorizontalStrokeWidth: props.gridHorizontalStrokeWidth, 
-          gridHorizontalStrokeDash: props.gridHorizontalStrokeDash}
-        ), 
-        React.createElement(AxisLine, React.__spread({
-          orient: props.yOrient, 
-          outerTickSize: props.tickSize, 
-          scale: props.yScale, 
-          stroke: props.stroke}, 
-          props)
-        ), 
-        React.createElement(Label, {
-          height: props.height, 
-          label: props.yAxisLabel, 
-          margins: props.margins, 
-          offset: props.yAxisLabelOffset, 
-          orient: props.yOrient}
-        )
-      )
-    );
-  }
-
-});
-
-},{"./AxisLine":93,"./AxisTicks":94,"./Label":95,"d3":114,"react":374}],98:[function(require,module,exports){
-
-exports.XAxis = require('./XAxis');
-exports.YAxis = require('./YAxis');
-
-},{"./XAxis":96,"./YAxis":97}],99:[function(require,module,exports){
-'use strict';
-
-var React = require('react');
-var mixins = require('../../mixins');
-
-module.exports = React.createClass({
-
-  displayName: 'BasicChart',
-
-  propTypes: {
-    children:       React.PropTypes.node,
-    className:      React.PropTypes.string,
-    height:         React.PropTypes.node,
-    svgClassName:   React.PropTypes.string,
-    title:          React.PropTypes.node,
-    titleClassName: React.PropTypes.string,
-    width:          React.PropTypes.node
-  },
-
-  getDefaultProps:function() {
-    return {
-      className:      'rd3-basic-chart',
-      svgClassName:   'rd3-chart',
-      titleClassName: 'rd3-chart-title'
-    };
-  },
-
-  _renderTitle:function() {
-    var props = this.props;
-
-    if (props.title != '' && props.title != null) {
-      return (
-        React.createElement("h4", {
-          className: props.titleClassName
-        }, 
-          props.title
-        )
-      );
-    } else {
-      return null;
-    }
-  },
-
-  _renderChart: function() {
-    var props = this.props;
-
-    return (
-      React.createElement("svg", {
-        className: props.svgClassName, 
-        height: props.height, 
-        viewBox: props.viewBox, 
-        width: props.width
-      }, 
-        props.children
-      )
-    );
-  },
-
-  render: function() {
-    var props = this.props;
-
-    return (
-      React.createElement("div", {
-        className: props.className
-      }, 
-        this._renderTitle(), 
-        this._renderChart()
-      )
-    );
-  }
-});
-
-},{"../../mixins":113,"react":374}],100:[function(require,module,exports){
-'use strict';
-
-var React = require('react');
-var LegendChart = require('./LegendChart');
-var BasicChart = require('./BasicChart');
-
-module.exports = React.createClass({
-
-  displayName: 'Chart',
-
-  propTypes: {
-    legend:         React.PropTypes.bool,
-    svgClassName:   React.PropTypes.string,
-    titleClassName: React.PropTypes.string
-  },
-
-  getDefaultProps: function() {
-    return {
-      legend:         false,
-      svgClassName:   'rd3-chart',
-      titleClassName: 'rd3-chart-title'
-    };
-  },
-
-  render: function() {
-    var props = this.props;
-
-    if (props.legend) {
-      return (
-        React.createElement(LegendChart, React.__spread({
-          svgClassName: props.svgClassName, 
-          titleClassName: props.titleClassName}, 
-          this.props)
-        )
-      );
-    }
-    return (
-      React.createElement(BasicChart, React.__spread({
-        svgClassName: props.svgClassName, 
-        titleClassName: props.titleClassName}, 
-        this.props)
-      )
-    );
-  }
-
-});
-
-},{"./BasicChart":99,"./LegendChart":101,"react":374}],101:[function(require,module,exports){
-'use strict';
-
-var React = require('react');
-var Legend = require('../Legend');
-var d3 = require('d3');
-
-module.exports = React.createClass({
-
-  displayName: 'LegendChart',
-
-  propTypes: {
-    children:       React.PropTypes.node,
-    createClass:    React.PropTypes.string,
-    colors:         React.PropTypes.func,
-    colorAccessor:  React.PropTypes.func,
-    data:           React.PropTypes.array,
-    height:         React.PropTypes.node,
-    legend:         React.PropTypes.bool,
-    legendPosition: React.PropTypes.string,
-    margins:        React.PropTypes.object,
-    sideOffset:     React.PropTypes.number,
-    svgClassName:   React.PropTypes.string,
-    title:          React.PropTypes.node,
-    titleClassName: React.PropTypes.string,
-    viewBox:        React.PropTypes.string,
-    width:          React.PropTypes.node
-  },
-
-  getDefaultProps:function() {
-    return {
-      className:      'rd3-legend-chart',
-      colors:         d3.scale.category20c(),
-      colorAccessor:  function(d, idx)  {return idx;},
-      data:           [],
-      legend:         false,
-      legendPosition: 'right',
-      sideOffset:     90,
-      svgClassName:   'rd3-chart',
-      titleClassName: 'rd3-chart-title'
-    };
-  },
-
-  _renderLegend:function() {
-    var props = this.props;
-
-    if (props.legend) {
-      return (
-        React.createElement(Legend, {
-          colors: props.colors, 
-          colorAccessor: props.colorAccessor, 
-          data: props.data, 
-          legendPosition: props.legendPosition, 
-          margins: props.margins, 
-          width: props.sideOffset}
-        )
-      );
-    }
-  },
-
-  _renderTitle:function() {
-    var props = this.props;
-
-    if (props.title != '' && props.title != null) {
-      return (
-        React.createElement("h4", {
-          className: props.titleClassName
-        }, 
-          props.title
-        )
-      );
-    }
-    return null;
-  },
-
-  _renderChart: function() {
-    var props = this.props;
-
-    return (
-      React.createElement("svg", {
-        className: props.svgClassName, 
-        height: "100%", 
-        viewBox: props.viewBox, 
-        width: "100%"
-      }, 
-        props.children
-      )
-    );
-  },
-
-  render:function() {
-    var props = this.props;
-
-    return (
-      React.createElement("div", {
-        className: props.className, 
-        style: {'width': props.width, 'height': props.height}
-      }, 
-        this._renderTitle(), 
-        React.createElement("div", {style: { display: 'table', width: '100%', height: '100%'}}, 
-          React.createElement("div", {style: { display: 'table-cell'}}, 
-            this._renderChart()
-          ), 
-          React.createElement("div", {style: { display: 'table-cell', width: props.sideOffset, 'verticalAlign': 'top'}}, 
-            this._renderLegend()
-          )
-        )
-      )
-    );
-  }
-});
-
-},{"../Legend":91,"d3":114,"react":374}],102:[function(require,module,exports){
-
-exports.BasicChart = require('./BasicChart');
-exports.Chart = require('./Chart');
-exports.LegendChart = require('./LegendChart');
-
-},{"./BasicChart":99,"./Chart":100,"./LegendChart":101}],103:[function(require,module,exports){
-
-exports.XAxis = require('./axes').XAxis;
-exports.YAxis = require('./axes').YAxis;
-exports.Chart = require('./charts').Chart;
-exports.LegendChart = require('./charts').LegendChart;
-exports.Legend = require('./Legend');
-exports.Voronoi = require('./Voronoi');
-
-},{"./Legend":91,"./Voronoi":92,"./axes":98,"./charts":102}],104:[function(require,module,exports){
-exports.BarChart = require('./barchart').BarChart;
-exports.LineChart = require('./linechart').LineChart;
-exports.PieChart = require('./piechart').PieChart;
-exports.AreaChart = require('./areachart').AreaChart;
-exports.Treemap = require('./treemap').Treemap;
-exports.ScatterChart = require('./scatterchart').ScatterChart;
-exports.CandlestickChart = require('./candlestick').CandlestickChart;
-
-
-},{"./areachart":79,"./barchart":84,"./candlestick":90,"./linechart":110,"./piechart":119,"./scatterchart":124,"./treemap":129}],105:[function(require,module,exports){
-'use strict';
-
-var React = require('react');
-var d3 = require('d3');
-var VoronoiCircleContainer = require('./VoronoiCircleContainer');
-var Line = require('./Line');
-
-module.exports = React.createClass({
-
-  displayName: 'DataSeries',
-
-  propTypes: {
-    color: React.PropTypes.func,
-    colorAccessor: React.PropTypes.func,
-    data: React.PropTypes.array,
-    interpolationType: React.PropTypes.string,
-    xAccessor: React.PropTypes.func,
-    yAccessor: React.PropTypes.func,
-  },
-
-  getDefaultProps:function() {
-    return {
-      data: [],
-      xAccessor: function(d)  {return d.x;},
-      yAccessor: function(d)  {return d.y;},
-      interpolationType: 'linear'
-    };
-  },
-  
-  _isDate:function(d, accessor) {
-      return Object.prototype.toString.call(accessor(d)) === '[object Date]';
-  },
-
-  render:function() {
-    var props = this.props;
-    var xScale = props.xScale;
-    var yScale = props.yScale;
-    var xAccessor = props.xAccessor,
-        yAccessor = props.yAccessor;
-    
-    var interpolatePath = d3.svg.line()
-        .y( function(d)  {return props.yScale(yAccessor(d));} )
-        .interpolate(props.interpolationType);
-
-        if (this._isDate(props.data[0].values[0], xAccessor)) {
-          interpolatePath.x(function(d) {
-            return props.xScale(props.xAccessor(d).getTime());
+      var xScaleSet = (0, _reactD3Core.scale)(newXScale);
+
+      var newYScale = {
+        scale: yScale,
+        range: yRange,
+        domain: yDomain,
+        bandPaddingInner: yBandPaddingInner,
+        bandPaddingOuter: yBandPaddingOuter
+      };
+
+      var yScaleSet = (0, _reactD3Core.scale)(newYScale);
+
+      var children = _react2.default.Children.map(this.props.children, function (el) {
+        if (el) {
+          return _react2.default.cloneElement(el, {
+            height: height,
+            width: width,
+            margins: margins,
+            xScaleSet: xScaleSet,
+            yScaleSet: yScaleSet,
+            xDomain: xDomain,
+            yDomain: yDomain,
+            xRange: xRange,
+            yRange: yRange,
+            xBandPaddingInner: xBandPaddingInner,
+            xBandPaddingOuter: xBandPaddingOuter,
+            yBandPaddingInner: yBandPaddingInner,
+            yBandPaddingOuter: yBandPaddingOuter,
+            xScale: xScale,
+            yScale: yScale,
+            xTickFormat: xTickFormat,
+            yTickFormat: yTickFormat,
+            xTicks: xTicks,
+            yTicks: yTicks,
+            xLabel: xLabel,
+            yLabel: yLabel,
+            data: data,
+            x: x,
+            y: y
           });
         } else {
-          interpolatePath.x(function(d) {
-            return props.xScale(props.xAccessor(d));
-          });
+          return null;
         }
+      });
 
-    var lines = props.data.map(function(series, idx)  {
-      return (
-        React.createElement(Line, {
-          path: interpolatePath(series.values), 
-          stroke: props.colors(props.colorAccessor(series, idx)), 
-          strokeWidth: series.strokeWidth, 
-          strokeDashArray: series.strokeDashArray, 
-          seriesName: series.name, 
-          key: idx}
+      var t = 'translate(' + margins.left + ', ' + margins.top + ')';
+
+      return _react2.default.createElement(
+        'svg',
+        {
+          height: height,
+          width: width,
+          className: svgClassName,
+          id: id,
+          ref: 'svgContainer'
+        },
+        _react2.default.createElement(
+          'g',
+          {
+            transform: t
+          },
+          children
         )
       );
-    });
+    }
+  }]);
 
-    var voronoi = d3.geom.voronoi()
-      .x(function(d){ return xScale(d.coord.x); })
-      .y(function(d){ return yScale(d.coord.y); })
-      .clipExtent([[0, 0], [ props.width , props.height]]);
+  return ChartSvg;
+}(_react.Component);
 
-    var cx, cy, circleFill;
-    var regions = voronoi(props.value).map(function(vnode, idx) {
-      var point = vnode.point.coord;
-      if (Object.prototype.toString.call(xAccessor(point)) === '[object Date]') {
-        cx = props.xScale(xAccessor(point).getTime());
-      } else {
-        cx = props.xScale(xAccessor(point));
-      }
-      if (Object.prototype.toString.call(yAccessor(point)) === '[object Date]') {
-        cy = props.yScale(yAccessor(point).getTime());
-      } else {
-        cy = props.yScale(yAccessor(point));
-      }
-      circleFill = props.colors(props.colorAccessor(vnode, vnode.point.seriesIndex));
-      
-      return (
-          React.createElement(VoronoiCircleContainer, {
-              key: idx, 
-              circleFill: circleFill, 
-              vnode: vnode, 
-              cx: cx, cy: cy, 
-              circleRadius: props.circleRadius}
-          )
+ChartSvg.defaultProps = _extends({
+  svgClassName: 'react-d3-core__container_svg'
+}, _commonProps2.default);
+ChartSvg.propTypes = {
+  id: _react.PropTypes.string,
+  width: _react.PropTypes.number.isRequired,
+  height: _react.PropTypes.number.isRequired,
+  margins: _react.PropTypes.object.isRequired,
+  svgClassName: _react.PropTypes.string.isRequired
+};
+exports.default = ChartSvg;
+},{"./commonProps":92,"react":350,"react-d3-core":85}],91:[function(require,module,exports){
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = require('react');
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactD3Core = require('react-d3-core');
+
+var _commonProps = require('./commonProps');
+
+var _commonProps2 = _interopRequireDefault(_commonProps);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var ChartSvg = function (_Component) {
+  _inherits(ChartSvg, _Component);
+
+  function ChartSvg(props) {
+    _classCallCheck(this, ChartSvg);
+
+    return _possibleConstructorReturn(this, Object.getPrototypeOf(ChartSvg).call(this, props));
+  }
+
+  _createClass(ChartSvg, [{
+    key: 'render',
+    value: function render() {
+      var _this2 = this;
+
+      var _props = this.props;
+      var height = _props.height;
+      var width = _props.width;
+      var margins = _props.margins;
+      var data = _props.data;
+      var svgClassName = _props.svgClassName;
+      var id = _props.id;
+      var name = _props.name;
+      var value = _props.value;
+
+
+      var children = _react2.default.Children.map(this.props.children, function (el) {
+        if (el) return _react2.default.cloneElement(el, _this2.props);else return null;
+      });
+
+      var t = 'translate(' + margins.left + ', ' + margins.top + ')';
+
+      return _react2.default.createElement(
+        'svg',
+        {
+          height: height,
+          width: width,
+          className: svgClassName,
+          id: id,
+          ref: 'svgContainer'
+        },
+        _react2.default.createElement(
+          'g',
+          {
+            transform: t
+          },
+          children
+        )
       );
-    }.bind(this));
-
-    return (
-      React.createElement("g", null, 
-        React.createElement("g", null, regions), 
-        React.createElement("g", null, lines)
-      )
-    );
-  }
-
-});
-
-},{"./Line":106,"./VoronoiCircleContainer":109,"d3":114,"react":374}],106:[function(require,module,exports){
-'use strict';
-
-var React = require('react');
-
-
-module.exports = React.createClass({
-
-  displayName: 'Line',
-
-  propTypes: {
-    fill: React.PropTypes.string,
-    path: React.PropTypes.string,
-    stroke: React.PropTypes.string,
-    strokeWidth: React.PropTypes.number,
-    strokeDashArray: React.PropTypes.string,
-  },
-
-  getDefaultProps:function() {
-    return {
-      stroke: '#3182bd',
-      fill: 'none',
-      strokeWidth: 1,
-      className: 'rd3-linechart-path'
-    };
-  },
-
-  render:function() {
-    var props = this.props;
-    return (
-      React.createElement("path", {
-        d: props.path, 
-        stroke: props.stroke, 
-        strokeWidth: props.strokeWidth, 
-        strokeDasharray: props.strokeDashArray, 
-        fill: props.fill, 
-        className: props.className}
-      )
-    );
-  }
-
-});
-
-},{"react":374}],107:[function(require,module,exports){
-'use strict';
-
-var React = require('react');
-var d3 = require('d3');
-var $__0=      require('../common'),Chart=$__0.Chart,XAxis=$__0.XAxis,YAxis=$__0.YAxis;
-var DataSeries = require('./DataSeries');
-var utils = require('../utils');
-var $__1=     require('../mixins'),CartesianChartPropsMixin=$__1.CartesianChartPropsMixin,ViewBoxMixin=$__1.ViewBoxMixin;
-
-module.exports = React.createClass({
-
-  mixins: [ CartesianChartPropsMixin, ViewBoxMixin ],
-
-  displayName: 'LineChart',
-
-  propTypes: {
-    circleRadius:   React.PropTypes.number,
-    hoverAnimation: React.PropTypes.bool,
-    margins:        React.PropTypes.object,
- },
-
-  getDefaultProps:function() {
-    return {
-      circleRadius:    3,
-      className: 'rd3-linechart',
-      hoverAnimation: true,
-      margins:        {top: 10, right: 20, bottom: 50, left: 45},
-      xAxisClassName: 'rd3-linechart-xaxis',
-      yAxisClassName: 'rd3-linechart-yaxis',
-    };
-  },
-
-  _calculateScales: utils.calculateScales,
-
-  render:function() {
-
-    var props = this.props;
-
-    if (this.props.data && this.props.data.length < 1) {
-      return null;
     }
+  }]);
 
-    // Calculate inner chart dimensions
-    var innerWidth, innerHeight;
+  return ChartSvg;
+}(_react.Component);
 
-    innerWidth = this.getOuterDimensions().width - props.margins.left - props.margins.right;
-    innerHeight = this.getOuterDimensions().height - props.margins.top - props.margins.bottom;
-
-    if (!Array.isArray(props.data)) {
-      props.data = [props.data];
-    }
-
-    // Returns an object of flattened allValues, xValues, and yValues
-    var flattenedData = utils.flattenData(props.data, props.xAccessor, props.yAccessor);
-
-    var allValues = flattenedData.allValues,
-        xValues = flattenedData.xValues,
-        yValues = flattenedData.yValues;
-    var scales = this._calculateScales(innerWidth, innerHeight, xValues, yValues);
-    var trans = "translate(" + (props.yAxisOffset < 0 ? props.margins.left + Math.abs(props.yAxisOffset) : props.margins.left) + "," + props.margins.top + ")";
-
-    return (
-      React.createElement(Chart, {
-        viewBox: this.getViewBox(), 
-        legend: props.legend, 
-        data: props.data, 
-        margins: props.margins, 
-        colors: props.colors, 
-        colorAccessor: props.colorAccessor, 
-        width: props.width, 
-        height: props.height, 
-        title: props.title}, 
-        React.createElement("g", {transform: trans, className: props.className}, 
-          React.createElement(XAxis, {
-            xAxisClassName: props.xAxisClassName, 
-            strokeWidth: props.xAxisStrokeWidth, 
-            xAxisTickValues: props.xAxisTickValues, 
-            xAxisTickInterval: props.xAxisTickInterval, 
-            xAxisOffset: props.xAxisOffset, 
-            xScale: scales.xScale, 
-            xAxisLabel: props.xAxisLabel, 
-            xAxisLabelOffset: props.xAxisLabelOffset, 
-            tickFormatting: props.xAxisFormatter, 
-            xOrient: props.xOrient, 
-            yOrient: props.yOrient, 
-            data: props.data, 
-            margins: props.margins, 
-            width: innerWidth, 
-            height: innerHeight, 
-            stroke: props.axesColor, 
-            gridVertical: props.gridVertical, 
-            gridVerticalStroke: props.gridVerticalStroke, 
-            gridVerticalStrokeWidth: props.gridVerticalStrokeWidth, 
-            gridVerticalStrokeDash: props.gridVerticalStrokeDash}
-          ), 
-          React.createElement(YAxis, {
-            yAxisClassName: props.yAxisClassName, 
-            strokeWidth: props.yAxisStrokeWidth, 
-            yScale: scales.yScale, 
-            yAxisTickValues: props.yAxisTickValues, 
-            yAxisTickCount: props.yAxisTickCount, 
-            yAxisOffset: props.yAxisOffset, 
-            yAxisLabel: props.yAxisLabel, 
-            yAxisLabelOffset: props.yAxisLabelOffset, 
-            tickFormatting: props.yAxisFormatter, 
-            xOrient: props.xOrient, 
-            yOrient: props.yOrient, 
-            margins: props.margins, 
-            width: innerWidth, 
-            height: innerHeight, 
-            stroke: props.axesColor, 
-            gridHorizontal: props.gridHorizontal, 
-            gridHorizontalStroke: props.gridHorizontalStroke, 
-            gridHorizontalStrokeWidth: props.gridHorizontalStrokeWidth, 
-            gridHorizontalStrokeDash: props.gridHorizontalStrokeDash}
-          ), 
-          React.createElement(DataSeries, {
-            xScale: scales.xScale, 
-            yScale: scales.yScale, 
-            xAccessor: props.xAccessor, 
-            yAccessor: props.yAccessor, 
-            hoverAnimation: props.hoverAnimation, 
-            circleRadius: props.circleRadius, 
-            data: props.data, 
-            value: allValues, 
-            interpolationType: props.interpolationType, 
-            colors: props.colors, 
-            colorAccessor: props.colorAccessor, 
-            width: innerWidth, 
-            height: innerHeight}
-            )
-        )
-      )
-    );
-  }
-
-});
-
-},{"../common":103,"../mixins":113,"../utils":130,"./DataSeries":105,"d3":114,"react":374}],108:[function(require,module,exports){
-'use strict';
-
-var React = require('react');
-var d3 = require('d3');
-
-module.exports = React.createClass({
-
-  displayName: 'VoronoiCircle',
-
-  getDefaultProps:function() {
-    return { 
-      circleRadius: 3,
-      circleFill: '#1f77b4',
-    };
-  },
-
-  render:function() {
-    return (
-      React.createElement("g", null, 
-        React.createElement("path", {
-          onMouseOver: this.props.handleMouseOver, 
-          onMouseLeave: this.props.handleMouseLeave, 
-          fill: "transparent", 
-          d: this.props.voronoiPath}
-        ), 
-        React.createElement("circle", {
-          onMouseOver: this.props.handleMouseOver, 
-          onMouseLeave: this.props.handleMouseLeave, 
-          cx: this.props.cx, 
-          cy: this.props.cy, 
-          r: this.props.circleRadius, 
-          fill: this.props.circleFill, 
-          className: "rd3-linechart-circle"}
-        )
-      )
-    );
-  },
-});
-
-},{"d3":114,"react":374}],109:[function(require,module,exports){
-'use strict';
-
-var React = require('react');
-var d3 = require('d3');
-var shade = require('../utils').shade;
-var VoronoiCircle = require('./VoronoiCircle');
-
-module.exports = React.createClass({
-
-  displayName: 'VornoiCircleContainer',
-
-  getDefaultProps:function() {
-    return { 
-      circleRadius: 3,
-      circleFill: '#1f77b4',
-      hoverAnimation: true
-    };
-  },
-
-  getInitialState:function() {
-    return { 
-      circleRadius: this.props.circleRadius,
-      circleFill: this.props.circleFill
-    };
-  },
-
-  render:function() {
-
-    var props = this.props;
-
-    // animation controller
-    var handleMouseOver, handleMouseLeave;
-    if(props.hoverAnimation) {
-      handleMouseOver = this._animateCircle;
-      handleMouseLeave = this._restoreCircle;
-    } else {
-      handleMouseOver = handleMouseLeave = null;
-    }
-
-    return (
-      React.createElement("g", null, 
-        React.createElement(VoronoiCircle, {
-            handleMouseOver: handleMouseOver, 
-            handleMouseLeave: handleMouseLeave, 
-            voronoiPath: this._drawPath(props.vnode), 
-            cx: props.cx, 
-            cy: props.cy, 
-            circleRadius: this.state.circleRadius, 
-            circleFill: this.state.circleFill}
-        )
-      )
-    );
-  },
-
-  _animateCircle:function() {
-    this.setState({ 
-      circleRadius: this.props.circleRadius * ( 5 / 4 ),
-      circleFill: shade(this.props.circleFill, 0.2)
-    });
-  },
-
-  _restoreCircle:function() {
-    this.setState({ 
-      circleRadius: this.props.circleRadius,
-      circleFill: this.props.circleFill
-    });
-  },
-
-  _drawPath: function(d) {
-    if(d === undefined) {
-      return; 
-    }  
-    return 'M' + d.join(',') + 'Z';
-  },
-});
-
-},{"../utils":130,"./VoronoiCircle":108,"d3":114,"react":374}],110:[function(require,module,exports){
-
-exports.LineChart = require('./LineChart');
-
-},{"./LineChart":107}],111:[function(require,module,exports){
-'use strict';
-
-var React = require('react');
-var d3 = require('d3');
-
-module.exports =  {
-
-  propTypes: {
-    axesColor:         React.PropTypes.string,
-    colors:            React.PropTypes.func,
-    colorAccessor:     React.PropTypes.func,
-    data:              React.PropTypes.array.isRequired,
-    height:            React.PropTypes.number,
-    legend:            React.PropTypes.bool,
-    legendOffset:      React.PropTypes.number,
-    title:             React.PropTypes.string,
-    width:             React.PropTypes.number,
-    xAccessor:         React.PropTypes.func,
-    xAxisFormatter:    React.PropTypes.func,
-    xAxisLabel:        React.PropTypes.string,
-    xAxisLabelOffset:  React.PropTypes.number,
-    xAxisTickCount:    React.PropTypes.number,
-    xAxisTickInterval: React.PropTypes.object,
-    xAxisTickValues:   React.PropTypes.array,
-    xOrient:           React.PropTypes.oneOf(['top', 'bottom']),
-    yAccessor:         React.PropTypes.func,
-    yAxisFormatter:    React.PropTypes.func,
-    yAxisLabel:        React.PropTypes.string,
-    yAxisLabelOffset:  React.PropTypes.number,
-    yAxisTickCount:    React.PropTypes.number,
-    yAxisTickInterval: React.PropTypes.object,
-    yAxisTickValues:   React.PropTypes.array,
-    yOrient:           React.PropTypes.oneOf(['left', 'right'])
-  },
-
-  getDefaultProps: function() {
-    return {
-      axesColor:        '#000',
-      colors:           d3.scale.category20c(),
-      colorAccessor:    function(d, idx)  {return idx;},
-      height:           200,
-      legend:           false,
-      legendOffset:     120,
-      title:            '',
-      width:            400,
-      xAccessor:        function(d)  {return d.x;},
-      // xAxisFormatter: no predefined value right now
-      xAxisLabel:       '',
-      xAxisLabelOffset: 38,
-      // xAxisTickCount: no predefined value right now
-      // xAxisTickInterval: no predefined value right now
-      // xAxisTickValues: no predefined value right now
-      xOrient:          'bottom',
-      yAccessor:        function(d)  {return d.y;},
-      // yAxisFormatter: no predefined value right now
-      yAxisLabel:       '',
-      yAxisLabelOffset: 35,
-      // yAxisTickCount: no predefined value right now
-      // yAxisTickInterval: no predefined value right now
-      // yAxisTickValues: no predefined value right now
-      yOrient:          'left'
-    };
-  }
+ChartSvg.defaultProps = _extends({
+  svgClassName: 'react-d3-core__container_svg'
+}, _commonProps2.default);
+ChartSvg.propTypes = {
+  id: _react.PropTypes.string,
+  width: _react.PropTypes.number.isRequired,
+  height: _react.PropTypes.number.isRequired,
+  margins: _react.PropTypes.object.isRequired,
+  svgClassName: _react.PropTypes.string.isRequired
 };
+exports.default = ChartSvg;
+},{"./commonProps":92,"react":350,"react-d3-core":85}],92:[function(require,module,exports){
+"use strict";
 
-},{"d3":114,"react":374}],112:[function(require,module,exports){
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.pieProps = undefined;
 
-'use strict';
+var _d3Scale = require('d3-scale');
 
-var React = require('react');
+var _d3Scale2 = _interopRequireDefault(_d3Scale);
 
-module.exports =  {
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-  propTypes: {
-    viewBox:           React.PropTypes.string,
-    viewBoxObject:     React.PropTypes.object
+var width = 960;
+var height = 500;
+var margins = { top: 80, right: 100, bottom: 80, left: 100 };
+
+exports.default = {
+  width: width,
+  height: height,
+  margins: margins,
+  y: function y(d) {
+    return +d;
   },
+  xScale: 'linear',
+  yScale: 'linear',
+  showXGrid: true,
+  showYGrid: true
+};
+var pieProps = exports.pieProps = {
+  width: width,
+  height: height,
+  margins: margins,
+  innerRadius: 0,
+  categoricalColors: _d3Scale2.default.scaleCategory10(),
+  pieSort: function pieSort() {},
+  pieTextShow: true
+};
+},{"d3-scale":52}],93:[function(require,module,exports){
+"use strict";
 
-  getViewBox:function() {
-    if (this.props.viewBoxObject) {
-      var v = this.props.viewBoxObject;
-      return [v.x, v.y, v.width, v.height].join(' ');
-    } else if (this.props.viewBox) {
-      return this.props.viewBox;
-    } 
-  },
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
 
-  getOuterDimensions:function() {
-    if (this.props.viewBoxObject) {
-      return {
-        width: this.props.viewBoxObject.width,
-        height: this.props.viewBoxObject.height
-      };
-    } else {
-      return {
-        width: this.props.width,
-        height: this.props.height
-      };
-    }
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = require('react');
+
+var _react2 = _interopRequireDefault(_react);
+
+var _d3Shape = require('d3-shape');
+
+var _d3Shape2 = _interopRequireDefault(_d3Shape);
+
+var _commonProps = require('../commonProps');
+
+var _commonProps2 = _interopRequireDefault(_commonProps);
+
+var _series = require('../utils/series');
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var Area = function (_Component) {
+  _inherits(Area, _Component);
+
+  function Area(props) {
+    _classCallCheck(this, Area);
+
+    return _possibleConstructorReturn(this, Object.getPrototypeOf(Area).call(this, props));
   }
 
+  _createClass(Area, [{
+    key: '_mkArea',
+    value: function _mkArea() {
+      var _props = this.props;
+      var areaClassName = _props.areaClassName;
+      var areaOpacity = _props.areaOpacity;
+
+
+      var dataset = (0, _series.series)(this.props);
+      var that = this;
+
+      return _react2.default.createElement(
+        'g',
+        null,
+        dataset.map(function (area, i) {
+          return _react2.default.createElement('path', {
+            className: areaClassName + ' area',
+            fill: area.color,
+            d: that._setAxes(area.data),
+            style: area.style,
+            key: i
+          });
+        })
+      );
+    }
+  }, {
+    key: '_setAxes',
+    value: function _setAxes(data) {
+      var _props2 = this.props;
+      var height = _props2.height;
+      var margins = _props2.margins;
+      var xScaleSet = _props2.xScaleSet;
+      var yScaleSet = _props2.yScaleSet;
+
+
+      var area = _d3Shape2.default.area().x(function (d) {
+        return xScaleSet(d.x);
+      }).y0(function (d) {
+        var domain = yScaleSet.domain();
+
+        if (domain[0] * domain[1] < 0) {
+          return yScaleSet(0);
+        } else if (domain[0] * domain[1] >= 0 && domain[0] >= 0) {
+          return yScaleSet.range()[0];
+        } else if (domain[0] * domain[1] >= 0 && domain[0] < 0) {
+          return yScaleSet.range()[1];
+        }
+      }).y1(function (d) {
+        return yScaleSet(d.y);
+      });
+
+      return area.call(this, data);
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      var area = this._mkArea();
+
+      return _react2.default.createElement(
+        'g',
+        null,
+        area
+      );
+    }
+  }]);
+
+  return Area;
+}(_react.Component);
+
+Area.defaultProps = _extends({
+  areaClassName: 'react-d3-basic__area'
+}, _commonProps2.default);
+exports.default = Area;
+},{"../commonProps":92,"../utils/series":105,"d3-shape":54,"react":350}],94:[function(require,module,exports){
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = require('react');
+
+var _react2 = _interopRequireDefault(_react);
+
+var _d3Shape = require('d3-shape');
+
+var _d3Shape2 = _interopRequireDefault(_d3Shape);
+
+var _commonProps = require('../commonProps');
+
+var _commonProps2 = _interopRequireDefault(_commonProps);
+
+var _series = require('../utils/series');
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var AreaStack = function (_Component) {
+  _inherits(AreaStack, _Component);
+
+  function AreaStack(props) {
+    _classCallCheck(this, AreaStack);
+
+    return _possibleConstructorReturn(this, Object.getPrototypeOf(AreaStack).call(this, props));
+  }
+
+  _createClass(AreaStack, [{
+    key: '_mkStack',
+    value: function _mkStack() {
+      var areaClassName = this.props.areaClassName;
+
+
+      var dataset = (0, _series.series)(this.props);
+
+      var _setStack = this._setStack();
+      var _setAxes = this._setAxes();
+
+      return _react2.default.createElement(
+        'g',
+        null,
+        _setStack(dataset).map(function (area) {
+          return _react2.default.createElement('path', {
+            className: areaClassName + ' area',
+            fill: area.color,
+            d: _setAxes(area.data),
+            style: area.style
+          });
+        })
+      );
+    }
+  }, {
+    key: '_setStack',
+    value: function _setStack() {
+      var chartSeries = this.props.chartSeries;
+
+
+      var buildOut = function buildOut(len) {
+        // baseline for positive and negative bars respectively.
+        var currentXOffsets = [];
+        var currentXIndex = 0;
+        return function (d, y0, y) {
+
+          if (currentXIndex++ % len === 0) {
+            currentXOffsets = [0, 0];
+          }
+
+          if (y >= 0) {
+            d.y0 = currentXOffsets[1];
+            d.y = y;
+            currentXOffsets[1] += y;
+          } else {
+            d.y0 = currentXOffsets[0] + y;
+            d.y = -y;
+            currentXOffsets[0] += y;
+          }
+        };
+      };
+      return d3.layout.stack().values(function (d) {
+        return d.data;
+      }).out(buildOut(chartSeries.length));
+    }
+  }, {
+    key: '_setAxes',
+    value: function _setAxes() {
+      var _props = this.props;
+      var xScaleSet = _props.xScaleSet;
+      var yScaleSet = _props.yScaleSet;
+
+
+      return _d3Shape2.default.area().x(function (d) {
+        return xScaleSet(d.x);
+      }).y0(function (d) {
+        return yScaleSet(d.y0);
+      }).y1(function (d) {
+        return yScaleSet(d.y0 + d.y);
+      });
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      var area = this._mkStack();
+
+      return _react2.default.createElement(
+        'g',
+        null,
+        area
+      );
+    }
+  }]);
+
+  return AreaStack;
+}(_react.Component);
+
+AreaStack.defaultProps = _extends({
+  areaClass: 'react-d3-basics__area_stack',
+  areaClassName: 'react-d3-basic__area_stack'
+}, _commonProps2.default);
+exports.default = AreaStack;
+},{"../commonProps":92,"../utils/series":105,"d3-shape":54,"react":350}],95:[function(require,module,exports){
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = require('react');
+
+var _react2 = _interopRequireDefault(_react);
+
+var _series = require('../utils/series');
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var Bar = function (_Component) {
+  _inherits(Bar, _Component);
+
+  function Bar(props) {
+    _classCallCheck(this, Bar);
+
+    return _possibleConstructorReturn(this, Object.getPrototypeOf(Bar).call(this, props));
+  }
+
+  _createClass(Bar, [{
+    key: 'triggerOver',
+    value: function triggerOver(data, e) {
+      this.props.onMouseOver(e, data);
+    }
+  }, {
+    key: 'triggerOut',
+    value: function triggerOut(data, e) {
+      this.props.onMouseOut(e, data);
+    }
+  }, {
+    key: 'triggerClick',
+    value: function triggerClick(data, e) {
+      this.props.onClick(e, data);
+    }
+  }, {
+    key: '_mkBar',
+    value: function _mkBar() {
+      var _this2 = this;
+
+      var _props = this.props;
+      var height = _props.height;
+      var width = _props.width;
+      var margins = _props.margins;
+      var barClassName = _props.barClassName;
+      var xScaleSet = _props.xScaleSet;
+      var yScaleSet = _props.yScaleSet;
+
+
+      var that = this;
+      var dataset = (0, _series.series)(this.props)[0];
+      var domain = yScaleSet.domain();
+      var zeroBase;
+
+      if (domain[0] * domain[1] < 0) {
+        zeroBase = yScaleSet(0);
+      } else if (domain[0] * domain[1] >= 0 && domain[0] >= 0) {
+        zeroBase = yScaleSet.range()[0];
+      } else if (domain[0] * domain[1] >= 0 && domain[0] < 0) {
+        zeroBase = yScaleSet.range()[1];
+      }
+
+      return _react2.default.createElement(
+        'g',
+        null,
+        dataset.data.map(function (bar, i) {
+          return _react2.default.createElement('rect', {
+            className: barClassName + ' bar',
+            x: xScaleSet(bar.x) || xScaleSet(bar.x) === 0 ? xScaleSet(bar.x) : -10000,
+            y: bar.y < 0 ? zeroBase : yScaleSet(bar.y),
+            width: xScaleSet.bandwidth(),
+            height: bar.y < domain[0] ? 0 : Math.abs(zeroBase - yScaleSet(bar.y)),
+            fill: bar._style.color ? bar._style.color : dataset.color,
+            style: Object.assign({}, dataset.style, bar._style),
+            onMouseOut: that.triggerOut.bind(_this2, bar),
+            onMouseOver: that.triggerOver.bind(_this2, bar),
+            onClick: that.triggerClick.bind(_this2, bar),
+            key: i
+          });
+        })
+      );
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      var bar = this._mkBar();
+
+      return _react2.default.createElement(
+        'g',
+        null,
+        bar
+      );
+    }
+  }]);
+
+  return Bar;
+}(_react.Component);
+
+Bar.defaultProps = {
+  onMouseOver: function onMouseOver(d) {},
+  onMouseOut: function onMouseOut(d) {},
+  onClick: function onClick(d) {},
+  barClassName: 'react-d3-basic__bar'
 };
+exports.default = Bar;
+},{"../utils/series":105,"react":350}],96:[function(require,module,exports){
+"use strict";
 
-},{"react":374}],113:[function(require,module,exports){
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
 
-exports.CartesianChartPropsMixin = require('./CartesianChartPropsMixin');
-exports.ViewBoxMixin = require('./ViewBoxMixin');
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-},{"./CartesianChartPropsMixin":111,"./ViewBoxMixin":112}],114:[function(require,module,exports){
+var _react = require('react');
+
+var _react2 = _interopRequireDefault(_react);
+
+var _d3Scale = require('d3-scale');
+
+var _d3Scale2 = _interopRequireDefault(_d3Scale);
+
+var _series = require('../utils/series');
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var BarGroup = function (_Component) {
+  _inherits(BarGroup, _Component);
+
+  function BarGroup(props) {
+    _classCallCheck(this, BarGroup);
+
+    return _possibleConstructorReturn(this, Object.getPrototypeOf(BarGroup).call(this, props));
+  }
+
+  _createClass(BarGroup, [{
+    key: 'triggerOver',
+    value: function triggerOver(data, e) {
+      this.props.onMouseOver(e, data);
+    }
+  }, {
+    key: 'triggerOut',
+    value: function triggerOut(data, e) {
+      this.props.onMouseOut(e, data);
+    }
+  }, {
+    key: '_mkBarGroup',
+    value: function _mkBarGroup(dom) {
+      var _this2 = this;
+
+      var _props = this.props;
+      var height = _props.height;
+      var margins = _props.margins;
+      var barClassName = _props.barClassName;
+      var xScaleSet = _props.xScaleSet;
+      var yScaleSet = _props.yScaleSet;
+
+
+      var that = this;
+      var dataset = (0, _series.series)(this.props);
+      var x1 = _d3Scale2.default.scaleBand();
+
+      // mapping x1, inner x axis
+      x1.domain(dataset.map(function (d) {
+        return d.field;
+      })).range([0, xScaleSet.bandwidth()]).padding(.1).round(true);
+
+      var domain = yScaleSet.domain();
+      var zeroBase;
+
+      if (domain[0] * domain[1] < 0) {
+        zeroBase = yScaleSet(0);
+      } else if (domain[0] * domain[1] >= 0 && domain[0] >= 0) {
+        zeroBase = yScaleSet.range()[0];
+      } else if (domain[0] * domain[1] >= 0 && domain[0] < 0) {
+        zeroBase = yScaleSet.range()[1];
+      }
+
+      return dataset.map(function (barGroup, i) {
+        return _react2.default.createElement(
+          'g',
+          { className: 'bargroup', key: i },
+          barGroup.data.map(function (bar, j) {
+            return _react2.default.createElement('rect', {
+              key: j,
+              className: barClassName + ' bar',
+              width: x1.bandwidth(),
+              x: xScaleSet(bar.x) || xScaleSet(bar.x) === 0 ? xScaleSet(bar.x) + x1.bandwidth() * i : -10000,
+              y: bar.y < 0 ? zeroBase : yScaleSet(bar.y),
+              height: bar.y < domain[0] ? 0 : Math.abs(zeroBase - yScaleSet(bar.y)),
+              fill: barGroup.color,
+              onMouseOut: that.triggerOut.bind(_this2, bar),
+              onMouseOver: that.triggerOver.bind(_this2, bar),
+              style: barGroup.style
+            });
+          })
+        );
+      });
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      var bar = this._mkBarGroup();
+
+      return _react2.default.createElement(
+        'g',
+        null,
+        bar
+      );
+    }
+  }]);
+
+  return BarGroup;
+}(_react.Component);
+
+BarGroup.defaultProps = {
+  onMouseOver: function onMouseOver(d) {},
+  onMouseOut: function onMouseOut(d) {},
+  barClassName: 'react-d3-basic__bar_group'
+};
+exports.default = BarGroup;
+},{"../utils/series":105,"d3-scale":52,"react":350}],97:[function(require,module,exports){
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = require('react');
+
+var _react2 = _interopRequireDefault(_react);
+
+var _d3Scale = require('d3-scale');
+
+var _d3Scale2 = _interopRequireDefault(_d3Scale);
+
+var _series = require('../utils/series');
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var BarGroupHorizontal = function (_Component) {
+  _inherits(BarGroupHorizontal, _Component);
+
+  function BarGroupHorizontal(props) {
+    _classCallCheck(this, BarGroupHorizontal);
+
+    return _possibleConstructorReturn(this, Object.getPrototypeOf(BarGroupHorizontal).call(this, props));
+  }
+
+  _createClass(BarGroupHorizontal, [{
+    key: 'triggerOver',
+    value: function triggerOver(data, e) {
+      this.props.onMouseOver(e, data);
+    }
+  }, {
+    key: 'triggerOut',
+    value: function triggerOut(data, e) {
+      this.props.onMouseOut(e, data);
+    }
+  }, {
+    key: '_mkBarGroup',
+    value: function _mkBarGroup() {
+      var _this2 = this;
+
+      var _props = this.props;
+      var height = _props.height;
+      var margins = _props.margins;
+      var barClassName = _props.barClassName;
+      var xScaleSet = _props.xScaleSet;
+      var yScaleSet = _props.yScaleSet;
+      var onMouseOut = _props.onMouseOut;
+      var onMouseOver = _props.onMouseOver;
+
+
+      var that = this;
+      var dataset = (0, _series.series)(this.props, true);
+      var y1 = _d3Scale2.default.scaleBand();
+
+      // mapping x1, inner x axis
+      y1.domain(dataset.map(function (d) {
+        return d.field;
+      })).range([0, yScaleSet.bandwidth()]).padding(.1).round(true);
+
+      var domain = xScaleSet.domain();
+      var zeroBase;
+
+      if (domain[0] * domain[1] < 0) {
+        zeroBase = xScaleSet(0);
+      } else if (domain[0] * domain[1] >= 0 && domain[0] >= 0) {
+        zeroBase = xScaleSet.range()[0];
+      } else if (domain[0] * domain[1] >= 0 && domain[0] < 0) {
+        zeroBase = xScaleSet.range()[1];
+      }
+
+      return _react2.default.createElement(
+        'g',
+        null,
+        dataset.map(function (barGroup, i) {
+          return _react2.default.createElement(
+            'g',
+            { className: 'bargroup', key: i },
+            barGroup.data.map(function (bar, j) {
+              return _react2.default.createElement('rect', {
+                className: barClassName + ' bar',
+                height: y1.bandwidth(),
+                y: yScaleSet(bar.y) || yScaleSet(bar.y) === 0 ? yScaleSet(bar.y) + y1.bandwidth() * i : -10000,
+                x: bar.x > 0 ? zeroBase : zeroBase - Math.abs(zeroBase - xScaleSet(bar.x)),
+                width: bar.x < domain[0] ? 0 : Math.abs(zeroBase - xScaleSet(bar.x)),
+                fill: barGroup.color,
+                onMouseOut: that.triggerOut.bind(_this2, bar),
+                onMouseOver: that.triggerOver.bind(_this2, bar),
+                style: barGroup.style,
+                key: j
+              });
+            })
+          );
+        })
+      );
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      var bar = this._mkBarGroup();
+
+      return _react2.default.createElement(
+        'g',
+        null,
+        bar
+      );
+    }
+  }]);
+
+  return BarGroupHorizontal;
+}(_react.Component);
+
+BarGroupHorizontal.defaultProps = {
+  onMouseOver: function onMouseOver(d) {},
+  onMouseOut: function onMouseOut(d) {},
+  barClassName: 'react-d3-basic__bar_group_horizontal'
+};
+exports.default = BarGroupHorizontal;
+},{"../utils/series":105,"d3-scale":52,"react":350}],98:[function(require,module,exports){
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = require('react');
+
+var _react2 = _interopRequireDefault(_react);
+
+var _series = require('../utils/series');
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var BarHorizontal = function (_Component) {
+  _inherits(BarHorizontal, _Component);
+
+  function BarHorizontal(props) {
+    _classCallCheck(this, BarHorizontal);
+
+    return _possibleConstructorReturn(this, Object.getPrototypeOf(BarHorizontal).call(this, props));
+  }
+
+  _createClass(BarHorizontal, [{
+    key: 'triggerOver',
+    value: function triggerOver(data, e) {
+      this.props.onMouseOver(e, data);
+    }
+  }, {
+    key: 'triggerOut',
+    value: function triggerOut(data, e) {
+      this.props.onMouseOut(e, data);
+    }
+  }, {
+    key: '_mkBar',
+    value: function _mkBar(dom) {
+      var _this2 = this;
+
+      var _props = this.props;
+      var height = _props.height;
+      var margins = _props.margins;
+      var barClassName = _props.barClassName;
+      var xScaleSet = _props.xScaleSet;
+      var yScaleSet = _props.yScaleSet;
+
+
+      var that = this;
+      var dataset = (0, _series.series)(this.props, true)[0];
+      var domain = xScaleSet.domain();
+      var zeroBase;
+
+      if (domain[0] * domain[1] < 0) {
+        zeroBase = xScaleSet(0);
+      } else if (domain[0] * domain[1] >= 0 && domain[0] >= 0) {
+        zeroBase = xScaleSet.range()[0];
+      } else if (domain[0] * domain[1] >= 0 && domain[0] < 0) {
+        zeroBase = xScaleSet.range()[1];
+      }
+
+      return _react2.default.createElement(
+        'g',
+        null,
+        dataset.data.map(function (bar, i) {
+          return _react2.default.createElement('rect', {
+            className: barClassName + ' bar',
+            y: yScaleSet(bar.y) || yScaleSet(bar.y) === 0 ? yScaleSet(bar.y) : -10000,
+            x: bar.x > 0 ? zeroBase : zeroBase - Math.abs(zeroBase - xScaleSet(bar.x)),
+            height: yScaleSet.bandwidth(),
+            width: bar.x < domain[0] ? 0 : Math.abs(zeroBase - xScaleSet(bar.x)),
+            fill: bar._style.color ? bar._style.color : dataset.color,
+            style: Object.assign({}, dataset.style, bar._style),
+            onMouseOut: that.triggerOut.bind(_this2, bar),
+            onMouseOver: that.triggerOver.bind(_this2, bar),
+            key: i
+          });
+        })
+      );
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      var bar = this._mkBar();
+
+      return _react2.default.createElement(
+        'g',
+        null,
+        bar
+      );
+    }
+  }]);
+
+  return BarHorizontal;
+}(_react.Component);
+
+BarHorizontal.defaultProps = {
+  onMouseOver: function onMouseOver(d) {},
+  onMouseOut: function onMouseOut(d) {},
+  barClassName: 'react-d3-basic__bar_horizontal'
+};
+exports.default = BarHorizontal;
+},{"../utils/series":105,"react":350}],99:[function(require,module,exports){
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = require('react');
+
+var _react2 = _interopRequireDefault(_react);
+
+var _d = require('d3');
+
+var _d2 = _interopRequireDefault(_d);
+
+var _series = require('../utils/series');
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var BarStack = function (_Component) {
+  _inherits(BarStack, _Component);
+
+  function BarStack(props) {
+    _classCallCheck(this, BarStack);
+
+    return _possibleConstructorReturn(this, Object.getPrototypeOf(BarStack).call(this, props));
+  }
+
+  _createClass(BarStack, [{
+    key: 'triggerOver',
+    value: function triggerOver(data, e) {
+      this.props.onMouseOver(e, data);
+    }
+  }, {
+    key: 'triggerOut',
+    value: function triggerOut(data, e) {
+      this.props.onMouseOut(e, data);
+    }
+  }, {
+    key: 'triggerClick',
+    value: function triggerClick(data, e) {
+      this.props.onClick(e, data);
+    }
+  }, {
+    key: '_mkBarStack',
+    value: function _mkBarStack() {
+      var _this2 = this;
+
+      var _props = this.props;
+      var height = _props.height;
+      var margins = _props.margins;
+      var barClassName = _props.barClassName;
+      var xScaleSet = _props.xScaleSet;
+      var yScaleSet = _props.yScaleSet;
+
+
+      var that = this;
+      var dataset = (0, _series.series)(this.props);
+      var _setStack = this._setStack();
+
+      var domain = yScaleSet.domain();
+      var zeroBase;
+
+      if (domain[0] * domain[1] < 0) {
+        zeroBase = yScaleSet(0);
+      } else if (domain[0] * domain[1] >= 0 && domain[0] >= 0) {
+        zeroBase = yScaleSet.range()[0];
+      } else if (domain[0] * domain[1] >= 0 && domain[0] < 0) {
+        zeroBase = yScaleSet.range()[1];
+      }
+
+      return _react2.default.createElement(
+        'g',
+        null,
+        _setStack(dataset).map(function (barGroup, i) {
+          return _react2.default.createElement(
+            'g',
+            {
+              key: i,
+              className: 'barGroup',
+              fill: barGroup.color,
+              style: barGroup.style },
+            barGroup.data.map(function (bar, j) {
+              return _react2.default.createElement('rect', {
+                className: barClassName + ' bar',
+                width: xScaleSet.bandwidth(),
+                x: xScaleSet(bar.x) || xScaleSet(bar.x) === 0 ? xScaleSet(bar.x) : -10000,
+                y: yScaleSet(bar.y0 + bar.y),
+                height: Math.abs(yScaleSet(bar.y) - yScaleSet(0)),
+                onMouseOut: that.triggerOut.bind(_this2, bar),
+                onMouseOver: that.triggerOver.bind(_this2, bar),
+                onClick: that.triggerClick.bind(_this2, bar),
+                key: j
+              });
+            })
+          );
+        })
+      );
+    }
+  }, {
+    key: '_setStack',
+    value: function _setStack() {
+      var chartSeries = this.props.chartSeries;
+
+
+      var buildOut = function buildOut(len) {
+        // baseline for positive and negative bars respectively.
+        var currentXOffsets = [];
+        var currentXIndex = 0;
+        return function (d, y0, y) {
+
+          if (currentXIndex++ % len === 0) {
+            currentXOffsets = [0, 0];
+          }
+
+          if (y >= 0) {
+            d.y0 = currentXOffsets[1];
+            d.y = y;
+            currentXOffsets[1] += y;
+          } else {
+            d.y0 = currentXOffsets[0] + y;
+            d.y = -y;
+            currentXOffsets[0] += y;
+          }
+        };
+      };
+      return _d2.default.layout.stack().values(function (d) {
+        return d.data;
+      }).out(buildOut(chartSeries.length));
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      var bar = this._mkBarStack();
+
+      return _react2.default.createElement(
+        'g',
+        null,
+        bar
+      );
+    }
+  }]);
+
+  return BarStack;
+}(_react.Component);
+
+BarStack.defaultProps = {
+  onMouseOver: function onMouseOver(d) {},
+  onMouseOut: function onMouseOut(d) {},
+  onClick: function onClick(d) {},
+  barClassName: 'react-d3-basic__bar_stack'
+};
+exports.default = BarStack;
+},{"../utils/series":105,"d3":106,"react":350}],100:[function(require,module,exports){
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = require('react');
+
+var _react2 = _interopRequireDefault(_react);
+
+var _d = require('d3');
+
+var _d2 = _interopRequireDefault(_d);
+
+var _series = require('../utils/series');
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var BarStackHorizontal = function (_Component) {
+  _inherits(BarStackHorizontal, _Component);
+
+  function BarStackHorizontal(props) {
+    _classCallCheck(this, BarStackHorizontal);
+
+    return _possibleConstructorReturn(this, Object.getPrototypeOf(BarStackHorizontal).call(this, props));
+  }
+
+  _createClass(BarStackHorizontal, [{
+    key: 'triggerOver',
+    value: function triggerOver(data, e) {
+      this.props.onMouseOver(e, data);
+    }
+  }, {
+    key: 'triggerOut',
+    value: function triggerOut(data, e) {
+      this.props.onMouseOut(e, data);
+    }
+  }, {
+    key: '_mkBarStack',
+    value: function _mkBarStack(dom) {
+      var _this2 = this;
+
+      var _props = this.props;
+      var height = _props.height;
+      var margins = _props.margins;
+      var barClassName = _props.barClassName;
+      var xScaleSet = _props.xScaleSet;
+      var yScaleSet = _props.yScaleSet;
+
+
+      var that = this;
+      var dataset = (0, _series.series)(this.props, true);
+      var _setStack = this._setStack();
+
+      // make areas
+      var chart = _d2.default.select(dom).attr("class", "g");
+
+      var domain = xScaleSet.domain();
+      var zeroBase;
+
+      if (domain[0] * domain[1] < 0) {
+        zeroBase = xScaleSet(0);
+      } else if (domain[0] * domain[1] >= 0 && domain[0] >= 0) {
+        zeroBase = xScaleSet.range()[0];
+      } else if (domain[0] * domain[1] >= 0 && domain[0] < 0) {
+        zeroBase = xScaleSet.range()[1];
+      }
+
+      return _react2.default.createElement(
+        'g',
+        null,
+        _setStack(dataset).map(function (barGroup, i) {
+          return _react2.default.createElement(
+            'g',
+            {
+              className: 'barGroup',
+              fill: barGroup.color,
+              style: barGroup.style,
+              key: i
+            },
+            barGroup.data.map(function (bar, j) {
+              return _react2.default.createElement('rect', {
+                className: barClassName + ' bar',
+                height: yScaleSet.bandwidth(),
+                y: yScaleSet(bar.y) || yScaleSet(bar.y) === 0 ? yScaleSet(bar.y) : -10000,
+                x: xScaleSet(bar.x0),
+                width: Math.abs(xScaleSet(bar.x) - xScaleSet(0)),
+                onMouseOut: that.triggerOut.bind(_this2, bar),
+                onMouseOver: that.triggerOver.bind(_this2, bar),
+                key: j
+              });
+            })
+          );
+        })
+      );
+    }
+  }, {
+    key: '_setStack',
+    value: function _setStack() {
+      var chartSeries = this.props.chartSeries;
+
+
+      var buildOut = function buildOut(len) {
+        // baseline for positive and negative bars respectively.
+        var currentXOffsets = [];
+        var currentXIndex = 0;
+        return function (d, x0, x) {
+
+          if (currentXIndex++ % len === 0) {
+            currentXOffsets = [0, 0];
+          }
+
+          if (x >= 0) {
+            d.x0 = currentXOffsets[1];
+            d.x = x;
+            currentXOffsets[1] += x;
+          } else {
+            d.x0 = currentXOffsets[0] + x;
+            d.x = -x;
+            currentXOffsets[0] += x;
+          }
+        };
+      };
+      return _d2.default.layout.stack().values(function (d) {
+        return d.data;
+      }).y(function (d) {
+        return d.x;
+      }).out(buildOut(chartSeries.length));
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      var bar = this._mkBarStack();
+
+      return _react2.default.createElement(
+        'g',
+        null,
+        bar
+      );
+    }
+  }]);
+
+  return BarStackHorizontal;
+}(_react.Component);
+
+BarStackHorizontal.defaultProps = {
+  onMouseOver: function onMouseOver(d) {},
+  onMouseOut: function onMouseOut(d) {},
+  barClassName: 'react-d3-basic__bar_stack_horizontal'
+};
+exports.default = BarStackHorizontal;
+},{"../utils/series":105,"d3":106,"react":350}],101:[function(require,module,exports){
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = require('react');
+
+var _react2 = _interopRequireDefault(_react);
+
+var _d3Shape = require('d3-shape');
+
+var _d3Shape2 = _interopRequireDefault(_d3Shape);
+
+var _commonProps = require('../commonProps');
+
+var _commonProps2 = _interopRequireDefault(_commonProps);
+
+var _series = require('../utils/series');
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var Line = function (_Component) {
+  _inherits(Line, _Component);
+
+  function Line(props) {
+    _classCallCheck(this, Line);
+
+    return _possibleConstructorReturn(this, Object.getPrototypeOf(Line).call(this, props));
+  }
+
+  _createClass(Line, [{
+    key: '_mkLine',
+    value: function _mkLine(dom) {
+      var lineClassName = this.props.lineClassName;
+
+
+      var dataset = (0, _series.series)(this.props);
+      var that = this;
+
+      return _react2.default.createElement(
+        'g',
+        null,
+        dataset.map(function (line, i) {
+          return _react2.default.createElement('path', {
+            stroke: line.color,
+            fill: 'none',
+            className: lineClassName + ' line',
+            d: that._setAxes(line.data),
+            style: line.style,
+            key: i });
+        })
+      );
+    }
+  }, {
+    key: '_setAxes',
+    value: function _setAxes(data) {
+      var _props = this.props;
+      var xScaleSet = _props.xScaleSet;
+      var yScaleSet = _props.yScaleSet;
+
+
+      var line = _d3Shape2.default.line().x(function (d) {
+        return xScaleSet(d.x);
+      }).y(function (d) {
+        return yScaleSet(d.y);
+      });
+
+      return line.call(this, data);
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      var line = this._mkLine();
+
+      return _react2.default.createElement(
+        'g',
+        null,
+        line
+      );
+    }
+  }]);
+
+  return Line;
+}(_react.Component);
+
+Line.defaultProps = _extends({
+  interpolate: null,
+  lineClassName: 'react-d3-basic__line'
+}, _commonProps2.default);
+exports.default = Line;
+},{"../commonProps":92,"../utils/series":105,"d3-shape":54,"react":350}],102:[function(require,module,exports){
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = require('react');
+
+var _react2 = _interopRequireDefault(_react);
+
+var _d3Shape = require('d3-shape');
+
+var _d3Shape2 = _interopRequireDefault(_d3Shape);
+
+var _commonProps = require('../commonProps');
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var Pie = function (_Component) {
+  _inherits(Pie, _Component);
+
+  function Pie(props) {
+    _classCallCheck(this, Pie);
+
+    return _possibleConstructorReturn(this, Object.getPrototypeOf(Pie).call(this, props));
+  }
+
+  _createClass(Pie, [{
+    key: 'triggerOver',
+    value: function triggerOver(data, e) {
+      this.props.onMouseOver(e, data);
+    }
+  }, {
+    key: 'triggerOut',
+    value: function triggerOut(data, e) {
+      this.props.onMouseOut(e, data);
+    }
+  }, {
+    key: 'mkSeries',
+    value: function mkSeries() {
+      var _props = this.props;
+      var data = _props.data;
+      var chartSeries = _props.chartSeries;
+      var value = _props.value;
+      var name = _props.name;
+      var categoricalColors = _props.categoricalColors;
+
+
+      var chartSeriesData = chartSeries.map(function (f, i) {
+
+        // set a color if not set
+        if (!f.color) f.color = categoricalColors(i);
+
+        // set name if not set
+        if (!f.name) f.name = f.field;
+
+        var val;
+
+        data.forEach(function (d) {
+          if (name(d) === f.field) val = d;
+        });
+
+        return Object.assign(f, { value: value(val) });
+      });
+
+      return chartSeriesData;
+    }
+  }, {
+    key: '_mkPie',
+    value: function _mkPie() {
+      var _this2 = this;
+
+      var _props2 = this.props;
+      var width = _props2.width;
+      var height = _props2.height;
+      var innerRadius = _props2.innerRadius;
+      var outerRadius = _props2.outerRadius;
+      var pieSort = _props2.pieSort;
+      var value = _props2.value;
+      var radius = _props2.radius;
+      var pieTextShow = _props2.pieTextShow;
+
+
+      var that = this;
+      var radius = this.props.radius || Math.min(width - 100, height - 100) / 2;
+      var outerRadius = outerRadius || radius - 10;
+      var labelr = radius + 10;
+
+      var chartSeriesData = this.mkSeries();
+
+      var arc = _d3Shape2.default.arc().outerRadius(outerRadius).innerRadius(innerRadius);
+
+      var arcOver = _d3Shape2.default.arc().outerRadius(outerRadius + 10).innerRadius(innerRadius);
+
+      var pie = _d3Shape2.default.pie().sort(function (a, b) {
+        return pieSort(a.value, b.value);
+      }).value(function (d) {
+        return d.value;
+      });
+
+      return _react2.default.createElement(
+        'g',
+        { className: 'arc' },
+        pie(chartSeriesData).map(function (slice, i) {
+          var textTransform = function textTransform(d) {
+            var c = arc.centroid(d),
+                x = c[0],
+                y = c[1],
+
+            // pythagorean theorem for hypotenuse
+            h = Math.sqrt(x * x + y * y);
+
+            return "translate(" + x / h * labelr + ',' + y / h * labelr + ")";
+          };
+
+          var textAnchor = function textAnchor(d) {
+            return (d.endAngle + d.startAngle) / 2 > Math.PI ? "end" : "start";
+          };
+
+          return _react2.default.createElement(
+            'g',
+            { key: i },
+            _react2.default.createElement('path', {
+              d: arc(slice),
+              style: _extends({ fill: slice.data.color, stroke: '#FFF' }, slice.data.style),
+              onMouseOut: that.triggerOut.bind(_this2, slice),
+              onMouseOver: that.triggerOver.bind(_this2, slice)
+            }),
+            pieTextShow ? _react2.default.createElement(
+              'text',
+              {
+                transform: textTransform(slice),
+                dy: '.35em',
+                textAnchor: textAnchor(slice)
+              },
+              slice.data.name
+            ) : null
+          );
+        })
+      );
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      var _props3 = this.props;
+      var width = _props3.width;
+      var height = _props3.height;
+      var margins = _props3.margins;
+
+
+      var t = 'translate(' + (width - margins.left - margins.right) / 2 + ',  ' + (height - margins.top - margins.bottom) / 2 + ')';
+      var pie = this._mkPie();
+
+      return _react2.default.createElement(
+        'g',
+        { transform: t },
+        pie
+      );
+    }
+  }]);
+
+  return Pie;
+}(_react.Component);
+
+Pie.defaultProps = _extends({
+  onMouseOver: function onMouseOver(d) {},
+  onMouseOut: function onMouseOut(d) {}
+}, _commonProps.pieProps);
+exports.default = Pie;
+},{"../commonProps":92,"d3-shape":54,"react":350}],103:[function(require,module,exports){
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = require('react');
+
+var _react2 = _interopRequireDefault(_react);
+
+var _d3Shape = require('d3-shape');
+
+var _d3Shape2 = _interopRequireDefault(_d3Shape);
+
+var _series = require('../utils/series');
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var Scatter = function (_Component) {
+  _inherits(Scatter, _Component);
+
+  function Scatter(props) {
+    _classCallCheck(this, Scatter);
+
+    return _possibleConstructorReturn(this, Object.getPrototypeOf(Scatter).call(this, props));
+  }
+
+  _createClass(Scatter, [{
+    key: '_mkScatter',
+    value: function _mkScatter(dataset) {
+      var _props = this.props;
+      var scatterClassName = _props.scatterClassName;
+      var defaultSymbol = _props.defaultSymbol;
+      var defaultSymbolSize = _props.defaultSymbolSize;
+      var brushSymbol = _props.brushSymbol;
+      var xScaleSet = _props.xScaleSet;
+      var yScaleSet = _props.yScaleSet;
+
+      // for building symbols in brush, set to circle and size to 4
+
+      if (brushSymbol) {
+        symbol = 'circle';
+        symbolSize = 4;
+      }
+
+      return _react2.default.createElement(
+        'g',
+        null,
+        dataset.map(function (dot) {
+          var symbol = dot.symbol ? dot.symbol : defaultSymbol;
+          var symbolSize = dot.symbolSize ? dot.symbolSize : defaultSymbolSize;
+
+          return dot.data.map(function (d) {
+            var symbolFunc = _d3Shape2.default.symbol().size(symbolSize * symbolSize).type(function () {
+              console.log(symbol);
+
+              if (symbol === 'circle') {
+                return _d3Shape2.default.symbolCircle;
+              } else if (symbol === 'cross') {
+                return _d3Shape2.default.symbolCross;
+              } else if (symbol === 'diamond') {
+                return _d3Shape2.default.symbolDiamond;
+              } else if (symbol === 'square') {
+                return _d3Shape2.default.symbolSquare;
+              } else if (symbol === 'star') {
+                return _d3Shape2.default.symbolStar;
+              } else if (symbol === 'triangle') {
+                return _d3Shape2.default.symbolTriangle;
+              } else if (symbol === 'wye') {
+                return _d3Shape2.default.symbolWye;
+              } else {
+                console.error('Symbol is not support ' + symbol + '.');
+              }
+            });
+
+            return _react2.default.createElement('path', {
+              className: 'react-d3-basic__scatter__path',
+              fill: d.color,
+              transform: "translate(" + xScaleSet(d.x) + "," + yScaleSet(d.y) + ")",
+              d: symbolFunc(),
+              style: dot.style
+            });
+          });
+        })
+      );
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      var d = (0, _series.series)(this.props);
+      var scatter = this._mkScatter(d);
+
+      return _react2.default.createElement(
+        'g',
+        null,
+        scatter
+      );
+    }
+  }]);
+
+  return Scatter;
+}(_react.Component);
+
+Scatter.defaultProps = {
+  defaultSymbol: 'circle',
+  defaultSymbolSize: 10,
+  scatterClassName: 'react-d3-basic__scatter'
+};
+exports.default = Scatter;
+},{"../utils/series":105,"d3-shape":54,"react":350}],104:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _series = require('./utils/series');
+
+Object.defineProperty(exports, 'series', {
+  enumerable: true,
+  get: function get() {
+    return _series.series;
+  }
+});
+
+var _chart = require('./chart');
+
+Object.defineProperty(exports, 'Chart', {
+  enumerable: true,
+  get: function get() {
+    return _interopRequireDefault(_chart).default;
+  }
+});
+
+var _chartpie = require('./chartpie');
+
+Object.defineProperty(exports, 'ChartPie', {
+  enumerable: true,
+  get: function get() {
+    return _interopRequireDefault(_chartpie).default;
+  }
+});
+
+var _line = require('./components/line');
+
+Object.defineProperty(exports, 'Line', {
+  enumerable: true,
+  get: function get() {
+    return _interopRequireDefault(_line).default;
+  }
+});
+
+var _area = require('./components/area');
+
+Object.defineProperty(exports, 'Area', {
+  enumerable: true,
+  get: function get() {
+    return _interopRequireDefault(_area).default;
+  }
+});
+
+var _area_stack = require('./components/area_stack');
+
+Object.defineProperty(exports, 'AreaStack', {
+  enumerable: true,
+  get: function get() {
+    return _interopRequireDefault(_area_stack).default;
+  }
+});
+
+var _bar = require('./components/bar');
+
+Object.defineProperty(exports, 'Bar', {
+  enumerable: true,
+  get: function get() {
+    return _interopRequireDefault(_bar).default;
+  }
+});
+
+var _bar_horizontal = require('./components/bar_horizontal');
+
+Object.defineProperty(exports, 'BarHorizontal', {
+  enumerable: true,
+  get: function get() {
+    return _interopRequireDefault(_bar_horizontal).default;
+  }
+});
+
+var _bar_group = require('./components/bar_group');
+
+Object.defineProperty(exports, 'BarGroup', {
+  enumerable: true,
+  get: function get() {
+    return _interopRequireDefault(_bar_group).default;
+  }
+});
+
+var _bar_group_horizontal = require('./components/bar_group_horizontal');
+
+Object.defineProperty(exports, 'BarGroupHorizontal', {
+  enumerable: true,
+  get: function get() {
+    return _interopRequireDefault(_bar_group_horizontal).default;
+  }
+});
+
+var _bar_stack = require('./components/bar_stack');
+
+Object.defineProperty(exports, 'BarStack', {
+  enumerable: true,
+  get: function get() {
+    return _interopRequireDefault(_bar_stack).default;
+  }
+});
+
+var _bar_stack_horizontal = require('./components/bar_stack_horizontal');
+
+Object.defineProperty(exports, 'BarStackHorizontal', {
+  enumerable: true,
+  get: function get() {
+    return _interopRequireDefault(_bar_stack_horizontal).default;
+  }
+});
+
+var _pie = require('./components/pie');
+
+Object.defineProperty(exports, 'Pie', {
+  enumerable: true,
+  get: function get() {
+    return _interopRequireDefault(_pie).default;
+  }
+});
+
+var _scatter = require('./components/scatter');
+
+Object.defineProperty(exports, 'Scatter', {
+  enumerable: true,
+  get: function get() {
+    return _interopRequireDefault(_scatter).default;
+  }
+});
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+},{"./chart":90,"./chartpie":91,"./components/area":93,"./components/area_stack":94,"./components/bar":95,"./components/bar_group":96,"./components/bar_group_horizontal":97,"./components/bar_horizontal":98,"./components/bar_stack":99,"./components/bar_stack_horizontal":100,"./components/line":101,"./components/pie":102,"./components/scatter":103,"./utils/series":105}],105:[function(require,module,exports){
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.series = series;
+
+var _d = require("d3");
+
+var _d2 = _interopRequireDefault(_d);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function series(props, horizontal) {
+  var data = props.data;
+  var chartSeries = props.chartSeries;
+  var x = props.x;
+  var y = props.y;
+  var categoricalColors = props.categoricalColors;
+
+
+  categoricalColors = categoricalColors || _d2.default.scale.category10();
+
+  var chartSeriesData = chartSeries.map(function (f, i) {
+
+    // set a color if not set
+    f.color = f.color || categoricalColors(i);
+
+    // set name if not set
+    f.name = f.name || f.field;
+
+    // mapping throught data set x, y data
+    var mapping = data.map(function (d) {
+      if (!d._style) d._style = {};
+
+      if (!horizontal) {
+        return {
+          x: x(d),
+          y: y(d[f.field]),
+          color: f.color,
+          name: f.name,
+          field: f.field,
+          _style: d._style
+        };
+      } else {
+        return {
+          y: y(d),
+          x: x(d[f.field]),
+          color: f.color,
+          name: f.name,
+          field: f.field,
+          _style: d._style
+        };
+      }
+    });
+
+    return Object.assign(f, { data: mapping });
+  });
+
+  return chartSeriesData;
+}
+},{"d3":106}],106:[function(require,module,exports){
 !function() {
   var d3 = {
     version: "3.5.17"
@@ -27592,1136 +30193,12 @@ exports.ViewBoxMixin = require('./ViewBoxMixin');
   });
   if (typeof define === "function" && define.amd) this.d3 = d3, define(d3); else if (typeof module === "object" && module.exports) module.exports = d3; else this.d3 = d3;
 }();
-},{}],115:[function(require,module,exports){
-'use strict';
-
-var React = require('react');
-var d3 = require('d3');
-
-
-module.exports = React.createClass({
-
-  displayName: 'Arc',
-
-  propTypes: {
-    fill: React.PropTypes.string,
-    d: React.PropTypes.string,
-    startAngle: React.PropTypes.number,
-    endAngle: React.PropTypes.number,
-    innerRadius: React.PropTypes.number,
-    outerRadius: React.PropTypes.number,
-    labelTextFill: React.PropTypes.string,
-    valueTextFill: React.PropTypes.string,
-    sectorBorderColor: React.PropTypes.string,
-    showInnerLabels: React.PropTypes.bool,
-    showOuterLabels: React.PropTypes.bool
-  },
-
-  getDefaultProps:function() {
-    return {
-      labelTextFill: 'black',
-      valueTextFill: 'white',
-      showInnerLabels: true,
-      showOuterLabels: true
-    };
-  },
-
-  render:function() {
-    var props = this.props;
-
-    var arc = d3.svg.arc()
-      .innerRadius(props.innerRadius)
-      .outerRadius(props.outerRadius)
-      .startAngle(props.startAngle)
-      .endAngle(props.endAngle);
-
-    return (
-      React.createElement("g", {className: "rd3-piechart-arc"}, 
-        React.createElement("path", {
-          d: arc(), 
-          fill: props.fill, 
-          stroke: props.sectorBorderColor, 
-          onMouseOver: props.handleMouseOver, 
-          onMouseLeave: props.handleMouseLeave}
-        ), 
-        props.showOuterLabels ? this.renderOuterLabel(props, arc) : null, 
-        props.showInnerLabels ? this.renderInnerLabel(props, arc) : null
-      )
-    );
-  },
-
-  renderInnerLabel:function(props, arc) {
-    // make value text can be formatted
-    var formattedValue = props.valueTextFormatter(props.value);
-    return (
-        React.createElement("text", {
-          className: "rd3-piechart-value", 
-          transform: ("translate(" + arc.centroid() + ")"), 
-          dy: ".35em", 
-          style: {
-            'shapeRendering': 'crispEdges',
-            'textAnchor': 'middle',
-            'fill': props.valueTextFill
-          }}, 
-           formattedValue 
-        )
-      );
-  },
-
-  renderOuterLabel:function(props, arc) {
-
-    var rotate = ("rotate(" + ( (props.startAngle+props.endAngle)/2 * (180/Math.PI)) + ")");
-    var positions = arc.centroid();
-    var radius = props.outerRadius;
-    var dist   = radius + 35;
-    var angle  = (props.startAngle + props.endAngle) / 2;
-    var x      = dist * (1.2 * Math.sin(angle));
-    var y      = -dist * Math.cos(angle);
-    var t = ("translate(" + x + "," + y + ")");
-
-    return  (
-      React.createElement("g", null, 
-        React.createElement("line", {
-          x1: "0", 
-          x2: "0", 
-          y1: -radius - 2, 
-          y2: -radius - 26, 
-          stroke: props.labelTextFill, 
-          transform: rotate, 
-          style: {
-            'fill': props.labelTextFill,
-            'strokeWidth': 2
-          }
-          }
-        ), 
-        React.createElement("text", {
-          className: "rd3-piechart-label", 
-          transform: t, 
-          dy: ".35em", 
-          style: {
-            'textAnchor': 'middle',
-            'fill': props.labelTextFill,
-            'shapeRendering': 'crispEdges'
-          }}, 
-          props.label
-        )
-      )
-    );
-  }
-});
-
-},{"d3":114,"react":374}],116:[function(require,module,exports){
-'use strict';
-
-var React = require('react');
-var shade = require('../utils').shade;
-var Arc = require('./Arc');
-
-module.exports = React.createClass({
-
-  displayName: 'ArcContainer',
-
-  propTypes: {
-    fill: React.PropTypes.string
-  },
-
-  getInitialState:function() {
-    return {
-      // fill is named as fill instead of initialFill to avoid
-      // confusion when passing down props from top parent
-      fill: this.props.fill
-    };
-  },
-
-  render:function() {
-
-    var props = this.props;
-    
-    return (
-      React.createElement(Arc, React.__spread({},  
-        this.props, 
-        {fill: this.state.fill, 
-        handleMouseOver: props.hoverAnimation ? this._animateArc : null, 
-        handleMouseLeave: props.hoverAnimation ? this._restoreArc : null})
-      )
-    );
-  },
-
-  _animateArc:function() {
-    this.setState({
-      fill: shade(this.props.fill, 0.2)
-    });
-  },
-
-  _restoreArc:function() {
-    this.setState({
-      fill: this.props.fill
-    });
-  }
-});
-
-},{"../utils":130,"./Arc":115,"react":374}],117:[function(require,module,exports){
-'use strict';
-
-var React = require('react');
-var d3 = require('d3');
-var ArcContainer = require('./ArcContainer');
-
-
-module.exports = React.createClass({
-
-  displayName: 'DataSeries',
-
-  propTypes: {
-    data:              React.PropTypes.array,
-    values:            React.PropTypes.array,
-    labels:            React.PropTypes.array,
-    transform:         React.PropTypes.string,
-    innerRadius:       React.PropTypes.number,
-    radius:            React.PropTypes.number,
-    colors:            React.PropTypes.func,
-    colorAccessor:     React.PropTypes.func,
-    showInnerLabels:   React.PropTypes.bool,
-    showOuterLabels:   React.PropTypes.bool,
-    sectorBorderColor: React.PropTypes.string
-  },
-
-  getDefaultProps:function() {
-    return {
-      data:          [],
-      innerRadius:   0,
-      colors:        d3.scale.category20c(),
-      colorAccessor: function(d, idx)  {return idx;}
-    };
-  },
-
-  render:function() {
-
-    var props = this.props;
-
-    var pie = d3.layout
-      .pie()
-      .sort(null);
-
-    var arcData = pie(props.values);
-
-    var arcs = arcData.map(function(arc, idx)  {
-      return (
-        React.createElement(ArcContainer, {
-          key: idx, 
-          startAngle: arc.startAngle, 
-          endAngle: arc.endAngle, 
-          outerRadius: props.radius, 
-          innerRadius: props.innerRadius, 
-          labelTextFill: props.labelTextFill, 
-          valueTextFill: props.valueTextFill, 
-          valueTextFormatter: props.valueTextFormatter, 
-          fill: props.colors(props.colorAccessor(props.data[idx], idx)), 
-          value: props.values[idx], 
-          label: props.labels[idx], 
-          width: props.width, 
-          showInnerLabels: props.showInnerLabels, 
-          showOuterLabels: props.showOuterLabels, 
-          sectorBorderColor: props.sectorBorderColor, 
-          hoverAnimation: props.hoverAnimation}
-        )
-      );
-    });
-    return (
-      React.createElement("g", {className: "rd3-piechart-pie", transform: props.transform}, 
-        arcs
-      )
-    );
-  }
-});
-
-},{"./ArcContainer":116,"d3":114,"react":374}],118:[function(require,module,exports){
-'use strict';
-
-var d3 = require('d3');
-var React = require('react');
-var DataSeries = require('./DataSeries');
-var Chart = require('../common').Chart;
-
-module.exports = React.createClass({
-
-  displayName: 'PieChart',
-
-  propTypes: {
-    data:               React.PropTypes.array,
-    radius:             React.PropTypes.number,
-    cx:                 React.PropTypes.number,
-    cy:                 React.PropTypes.number,
-    labelTextFill:      React.PropTypes.string,
-    valueTextFill:      React.PropTypes.string,
-    valueTextFormatter: React.PropTypes.func,
-    colors:             React.PropTypes.func,
-    colorAccessor:      React.PropTypes.func,
-    title:              React.PropTypes.string,
-    showInnerLabels:    React.PropTypes.bool,
-    showOuterLabels:    React.PropTypes.bool,
-    sectorBorderColor:  React.PropTypes.string,
-    hoverAnimation:     React.PropTypes.bool
-  },
-
-  getDefaultProps: function() {
-    return {
-      data:               [],
-      title:              '',
-      colors:             d3.scale.category20c(),
-      colorAccessor:      function(d, idx)  {return idx;},
-      valueTextFormatter: function(val)  {return ( val + "%");},
-      hoverAnimation:     true
-    };
-  },
-
-  render: function() {
-    var props = this.props;
-
-    var transform = ("translate(" + ( props.cx || props.width/2) + "," + ( props.cy || props.height/2) + ")");
-
-    var values = props.data.map( function(item)  {return item.value;} );
-    var labels = props.data.map( function(item)  {return item.label;} );
-
-    return (
-      React.createElement(Chart, {
-        width: props.width, 
-        height: props.height, 
-        title: props.title
-      }, 
-        React.createElement("g", {className: "rd3-piechart"}, 
-          React.createElement(DataSeries, {
-            labelTextFill: props.labelTextFill, 
-            valueTextFill: props.valueTextFill, 
-            valueTextFormatter: props.valueTextFormatter, 
-            data: props.data, 
-            values: values, 
-            labels: labels, 
-            colors: props.colors, 
-            colorAccessor: props.colorAccessor, 
-            transform: transform, 
-            width: props.width, 
-            height: props.height, 
-            radius: props.radius, 
-            innerRadius: props.innerRadius, 
-            showInnerLabels: props.showInnerLabels, 
-            showOuterLabels: props.showOuterLabels, 
-            sectorBorderColor: props.sectorBorderColor, 
-            hoverAnimation: props.hoverAnimation}
-          )
-        )
-      )
-    );
-  }
-
-});
-
-},{"../common":103,"./DataSeries":117,"d3":114,"react":374}],119:[function(require,module,exports){
-
-exports.PieChart = require('./PieChart');
-
-},{"./PieChart":118}],120:[function(require,module,exports){
-'use strict';
-
-var React = require('react');
-var d3 = require('d3');
-var VoronoiCircleContainer = require('./VoronoiCircleContainer');
-
-module.exports = React.createClass({
-
-  displayName: 'DataSeries',
-
-  propTypes: {
-    circleRadius:  React.PropTypes.number.isRequired,
-    className:     React.PropTypes.string,
-    colors:        React.PropTypes.func.isRequired,
-    colorAccessor: React.PropTypes.func.isRequired,
-    data:          React.PropTypes.array.isRequired,
-    height:        React.PropTypes.number.isRequired,
-    xAccessor:     React.PropTypes.func.isRequired,
-    xScale:        React.PropTypes.func.isRequired,
-    yAccessor:     React.PropTypes.func.isRequired,
-    yScale:        React.PropTypes.func.isRequired
-  },
-
-  getDefaultProps:function() {
-    return {
-      className: 'rd3-scatterchart-dataseries'
-    };
-  },
-
-  render: function() {
-    var props     = this.props;
-    var xScale    = props.xScale;
-    var yScale    = props.yScale;
-    var xAccessor = props.xAccessor;
-    var yAccessor = props.yAccessor;
-
-    var voronoi = d3.geom.voronoi()
-      .x(function(d){ return xScale(d.coord.x); })
-      .y(function(d){ return yScale(d.coord.y); })
-      .clipExtent([[0, 0], [ props.width , props.height]]);
-
-    var regions = voronoi(props.data).map(function(vnode, idx) {
-      var point = vnode.point;
-      var coord = point.coord;
-
-      var x = xAccessor(coord);
-      var y = yAccessor(coord);
-
-      // The circle coordinates
-      var cx, cy;
-
-      if (Object.prototype.toString.call(x) === '[object Date]') {
-        cx = xScale(x.getTime());
-      } else {
-        cx = xScale(x);
-      }
-
-      if (Object.prototype.toString.call(y) === '[object Date]') {
-        cy = yScale(y.getTime());
-      } else {
-        cy = yScale(y);
-      }
-
-      return (
-        React.createElement(VoronoiCircleContainer, {
-          key: idx, 
-          circleFill: props.colors(props.colorAccessor(point.d, point.seriesIndex)), 
-          circleRadius: props.circleRadius, 
-          cx: cx, 
-          cy: cy, 
-          vnode: vnode}
-        )
-      );
-    });
-
-    return (
-      React.createElement("g", {
-        className: props.className
-      }, 
-        regions
-      )
-    );
-  }
-
-});
-
-},{"./VoronoiCircleContainer":123,"d3":114,"react":374}],121:[function(require,module,exports){
-'use strict';
-
-var React = require('react');
-var d3 = require('d3');
-var $__0=      require('../common'),Chart=$__0.Chart,XAxis=$__0.XAxis,YAxis=$__0.YAxis;
-var DataSeries = require('./DataSeries');
-var utils = require('../utils');
-var $__1=     require('../mixins'),CartesianChartPropsMixin=$__1.CartesianChartPropsMixin,ViewBoxMixin=$__1.ViewBoxMixin;
-
-module.exports = React.createClass({
-
-  mixins: [ CartesianChartPropsMixin, ViewBoxMixin ],
-
-  displayName: 'ScatterChart',
-
-  propTypes: {
-    circleRadius:     React.PropTypes.number,
-    className:        React.PropTypes.string,
-    hoverAnimation:   React.PropTypes.bool,
-    margins:          React.PropTypes.object,
-    xAxisClassName:   React.PropTypes.string,
-    xAxisStrokeWidth: React.PropTypes.number,
-    yAxisClassName:   React.PropTypes.string,
-    yAxisStrokeWidth: React.PropTypes.number
- },
-
-  getDefaultProps:function() {
-    return {
-      circleRadius:     3,
-      className:        'rd3-scatterchart',
-      hoverAnimation:   true,
-      margins:          {top: 10, right: 20, bottom: 50, left: 45},
-      xAxisClassName:   'rd3-scatterchart-xaxis',
-      xAxisStrokeWidth: 1,
-      yAxisClassName:   'rd3-scatterchart-yaxis',
-      yAxisStrokeWidth: 1
-    };
-  },
-
-  _calculateScales: utils.calculateScales,
-
-  render:function() {
-
-    var props = this.props;
-    var data  = props.data;
-    var margins = props.margins;
-
-    if (!data || data.length < 1) {
-      return null;
-    }
-
-    // Calculate inner chart dimensions
-    var innerWidth  = this.getOuterDimensions().width - margins.left - margins.right;
-    var innerHeight = this.getOuterDimensions().height - margins.top - margins.bottom;
-
-    // Returns an object of flattened allValues, xValues, and yValues
-    var flattenedData = utils.flattenData(data, props.xAccessor, props.yAccessor);
-
-    var allValues = flattenedData.allValues,
-        xValues   = flattenedData.xValues,
-        yValues   = flattenedData.yValues;
-
-    var scales  = this._calculateScales(innerWidth, innerHeight, xValues, yValues);
-    var xScale  = scales.xScale;
-    var yScale  = scales.yScale;
-
-    var x = props.yAxisOffset < 0 ? (margins.left + Math.abs(props.yAxisOffset)) : margins.left;
-    var transform = ("translate(" + x + ", " + margins.top + ")");
-
-    return (
-      React.createElement(Chart, {
-        colors: props.colors, 
-        colorAccessor: props.colorAccessor, 
-        data: data, 
-        height: props.height, 
-        legend: props.legend, 
-        margins: margins, 
-        title: props.title, 
-        viewBox: this.getViewBox(), 
-        width: props.width
-      }, 
-        React.createElement("g", {
-          className: props.className, 
-          transform: transform
-        }, 
-          React.createElement(XAxis, {
-            data: data, 
-            height: innerHeight, 
-            margins: margins, 
-            stroke: props.axesColor, 
-            strokeWidth: props.xAxisStrokeWidth.toString(), 
-            tickFormatting: props.xAxisFormatter, 
-            width: innerWidth, 
-            xAxisClassName: props.xAxisClassName, 
-            xAxisLabel: props.xAxisLabel, 
-            xAxisLabelOffset: props.xAxisLabelOffset, 
-            xAxisOffset: props.xAxisOffset, 
-            xAxisTickInterval: props.xAxisTickInterval, 
-            xAxisTickValues: props.xAxisTickValues, 
-            xOrient: props.xOrient, 
-            yOrient: props.yOrient, 
-            xScale: xScale, 
-            gridVertical: props.gridVertical, 
-            gridVerticalStroke: props.gridVerticalStroke, 
-            gridVerticalStrokeWidth: props.gridVerticalStrokeWidth, 
-            gridVerticalStrokeDash: props.gridVerticalStrokeDash}
-          ), 
-          React.createElement(YAxis, {
-            data: data, 
-            width: innerWidth, 
-            height: innerHeight, 
-            margins: margins, 
-            stroke: props.axesColor, 
-            strokeWidth: props.yAxisStrokeWidth.toString(), 
-            tickFormatting: props.yAxisFormatter, 
-            yAxisClassName: props.yAxisClassName, 
-            yAxisLabel: props.yAxisLabel, 
-            yAxisLabelOffset: props.yAxisLabelOffset, 
-            yAxisOffset: props.yAxisOffset, 
-            yAxisTickValues: props.yAxisTickValues, 
-            yAxisTickCount: props.yAxisTickCount, 
-            yScale: yScale, 
-            xOrient: props.xOrient, 
-            yOrient: props.yOrient, 
-            gridHorizontal: props.gridHorizontal, 
-            gridHorizontalStroke: props.gridHorizontalStroke, 
-            gridHorizontalStrokeWidth: props.gridHorizontalStrokeWidth, 
-            gridHorizontalStrokeDash: props.gridHorizontalStrokeDash}
-          ), 
-          React.createElement(DataSeries, {
-            circleRadius: props.circleRadius, 
-            colors: props.colors, 
-            colorAccessor: props.colorAccessor, 
-            data: allValues, 
-            height: innerHeight, 
-            hoverAnimation: props.hoverAnimation, 
-            width: innerWidth, 
-            xAccessor: props.xAccessor, 
-            xScale: xScale, 
-            yAccessor: props.yAccessor, 
-            yScale: yScale}
-            )
-        )
-      )
-    );
-  }
-
-});
-
-},{"../common":103,"../mixins":113,"../utils":130,"./DataSeries":120,"d3":114,"react":374}],122:[function(require,module,exports){
-'use strict';
-
-var React = require('react');
-var d3 = require('d3');
-
-module.exports = React.createClass({
-
-  displayName: 'VoronoiCircle',
-
-  propTypes: {
-    circleFill:       React.PropTypes.string.isRequired,
-    circleRadius:     React.PropTypes.number.isRequired,
-    className:        React.PropTypes.string,
-    cx:               React.PropTypes.number.isRequired,
-    cy:               React.PropTypes.number.isRequired,
-    handleMouseLeave: React.PropTypes.func.isRequired,
-    handleMouseOver:  React.PropTypes.func.isRequired,
-    pathFill:         React.PropTypes.string,
-    voronoiPath:      React.PropTypes.string.isRequired
-  },
-
-  getDefaultProps:function() {
-    return {
-      className:    'rd3-scatterchart-voronoi-circle',
-      pathFill:     'transparent'
-    };
-  },
-
-  render:function() {
-    var props = this.props;
-
-    return (
-      React.createElement("g", null, 
-        React.createElement("path", {
-          d: props.voronoiPath, 
-          fill: props.pathFill, 
-          onMouseLeave: props.handleMouseLeave, 
-          onMouseOver: props.handleMouseOver}
-        ), 
-        React.createElement("circle", {
-          cx: props.cx, 
-          cy: props.cy, 
-          className: props.className, 
-          fill: props.circleFill, 
-          onMouseLeave: props.handleMouseLeave, 
-          onMouseOver: props.handleMouseOver, 
-          r: props.circleRadius}
-        )
-      )
-    );
-  },
-});
-
-},{"d3":114,"react":374}],123:[function(require,module,exports){
-'use strict';
-
-var React = require('react');
-var d3 = require('d3');
-var shade = require('../utils').shade;
-var VoronoiCircle = require('./VoronoiCircle');
-
-module.exports = React.createClass({
-
-  displayName: 'VornoiCircleContainer',
-
-  propTypes: {
-    circleFill:             React.PropTypes.string,
-    circleRadius:           React.PropTypes.number,
-    circleRadiusMultiplier: React.PropTypes.number,
-    className:              React.PropTypes.string,
-    hoverAnimation:         React.PropTypes.bool,
-    shadeMultiplier:        React.PropTypes.number,
-    vnode:                  React.PropTypes.array.isRequired
-  },
-
-  getDefaultProps:function() {
-    return {
-      circleFill:             '#1f77b4',
-      circleRadius:           3,
-      circleRadiusMultiplier: 1.25,
-      className:              'rd3-scatterchart-voronoi-circle-container',
-      hoverAnimation:         true,
-      shadeMultiplier:        0.2
-    };
-  },
-
-  getInitialState:function() {
-    return {
-      circleFill:   this.props.circleFill,
-      circleRadius: this.props.circleRadius
-    };
-  },
-
-  componentWillReceiveProps:function(nextProps) {
-    this.setState({
-      circleFill:   nextProps.circleFill,
-      circleRadius: nextProps.circleRadius
-    });
-  },
-
-  render:function() {
-
-    var props = this.props;
-    var state = this.state;
-
-    return (
-      React.createElement("g", {
-        className: props.className
-      }, 
-        React.createElement(VoronoiCircle, {
-          circleFill: state.circleFill, 
-          circleRadius: state.circleRadius, 
-          cx: props.cx, 
-          cy: props.cy, 
-          handleMouseLeave: this._restoreCircle, 
-          handleMouseOver: this._animateCircle, 
-          voronoiPath: this._drawPath(props.vnode)}
-        )
-      )
-    );
-  },
-
-  _animateCircle:function() {
-    var props = this.props;
-
-    if(props.hoverAnimation) {
-      this.setState({
-        circleFill:   shade(props.circleFill, props.shadeMultiplier),
-        circleRadius: props.circleRadius * props.circleRadiusMultiplier
-      });
-    }
-  },
-
-  _restoreCircle:function() {
-    var props = this.props;
-
-    if(props.hoverAnimation) {
-      this.setState({
-        circleFill:   props.circleFill,
-        circleRadius: props.circleRadius
-      });
-    }
-  },
-
-  _drawPath: function(d) {
-    if(typeof d === 'undefined') {
-      return 'M Z';
-    }
-
-    return 'M' + d.join(',') + 'Z';
-  },
-});
-
-},{"../utils":130,"./VoronoiCircle":122,"d3":114,"react":374}],124:[function(require,module,exports){
-
-exports.ScatterChart = require('./ScatterChart');
-
-},{"./ScatterChart":121}],125:[function(require,module,exports){
-'use strict';
-
-var React = require('react');
-var d3 = require('d3');
-
-
-module.exports = React.createClass({
-
-  displayName: 'Cell',
-
-  propTypes: {
-    fill: React.PropTypes.string,
-    width: React.PropTypes.number,
-    height: React.PropTypes.number,
-    label: React.PropTypes.string
-  },
-
-  render:function() {
-
-    var props = this.props;
-    
-    var textStyle = {
-      'textAnchor': 'middle',
-      'fill': props.textColor,
-      'fontSize': props.fontSize
-    };
-
-    var t = ("translate(" + props.x + ", " + props.y + "  )");
-
-    return (
-      React.createElement("g", {transform: t}, 
-        React.createElement("rect", {
-          className: "rd3-treemap-cell", 
-          width: props.width, 
-          height: props.height, 
-          fill: props.fill, 
-          onMouseOver: props.handleMouseOver, 
-          onMouseLeave: props.handleMouseLeave}
-        ), 
-        React.createElement("text", {
-          x: props.width / 2, 
-          y: props.height / 2, 
-          dy: ".35em", 
-          style: textStyle, 
-          className: "rd3-treemap-cell-text"
-        }, 
-          props.label
-        )
-      )
-    );
-  }
-});
-
-},{"d3":114,"react":374}],126:[function(require,module,exports){
-'use strict';
-
-var React = require('react');
-var shade = require('../utils').shade;
-var Cell = require('./Cell');
-
-
-module.exports = React.createClass({
-
-  displayName: 'CellContainer',
-
-  propTypes: {
-    fill: React.PropTypes.string,
-  },
-
-  getInitialState:function() {
-    return {
-      // fill is named as fill instead of initialFill to avoid
-      // confusion when passing down props from top parent
-      fill: this.props.fill
-    };
-  },
-
-
-  render:function() {
-
-    var props = this.props;
-
-    return (
-      React.createElement(Cell, React.__spread({},  
-        props, 
-        {fill: this.state.fill, 
-        handleMouseOver: props.hoverAnimation ? this._animateCell : null, 
-        handleMouseLeave: props.hoverAnimation ? this._restoreCell : null})
-      )
-    );
-  },
-
-  _animateCell:function() {
-    this.setState({
-      fill: shade(this.props.fill, 0.05)
-    });
-  },
-
-  _restoreCell:function() {
-    this.setState({
-      fill: this.props.fill
-    });
-  }
-});
-
-},{"../utils":130,"./Cell":125,"react":374}],127:[function(require,module,exports){
-'use strict';
-
-var React = require('react');
-var d3 = require('d3');
-var CellContainer = require('./CellContainer');
-
-
-module.exports = React.createClass({
-
-  displayName: 'DataSeries',
-
-  propTypes: {
-    data:          React.PropTypes.array,
-    colors:        React.PropTypes.func,
-    colorAccessor: React.PropTypes.func,
-    width:         React.PropTypes.number,
-    height:        React.PropTypes.number
-  },
-
-  getDefaultProps:function() {
-    return {
-      data:          [],
-      colors:        d3.scale.category20c(),
-      colorAccessor: function(d, idx)  {return idx;}
-    };
-  },
-
-  render:function() {
-
-    var props = this.props;
-
-    var treemap = d3.layout.treemap()
-                    // make sure calculation loop through all objects inside array
-                    .children( function(d)  {return d;})
-                    .size([props.width, props.height])
-                    .sticky(true)
-                    .value( function(d)  { return d.value; });
-
-    var tree = treemap(props.data);
-
-    var cells = tree.map( function(node, idx)  {
-      return (
-        React.createElement(CellContainer, {
-          key: idx, 
-          x: node.x, 
-          y: node.y, 
-          width: node.dx, 
-          height: node.dy, 
-          fill: props.colors(props.colorAccessor(node, idx)), 
-          label: node.label, 
-          fontSize: props.fontSize, 
-          textColor: props.textColor, 
-          hoverAnimation: props.hoverAnimation}
-        )
-      );
-    }, this);
-
-    return (
-      React.createElement("g", {transform: props.transform, className: "treemap"}, 
-        cells
-      )
-    );
-  }
-
-});
-
-},{"./CellContainer":126,"d3":114,"react":374}],128:[function(require,module,exports){
-'use strict';
-
-var d3 = require('d3');
-var React = require('react');
-var Chart = require('../common').Chart;
-var DataSeries = require('./DataSeries');
-
-module.exports = React.createClass({
-
-  displayName: 'Treemap',
-
-  propTypes: {
-    data:           React.PropTypes.array,
-    margins:        React.PropTypes.object,
-    width:          React.PropTypes.number,
-    height:         React.PropTypes.number,
-    title:          React.PropTypes.string,
-    textColor:      React.PropTypes.string,
-    fontSize:       React.PropTypes.oneOfType([
-                      React.PropTypes.string,
-                      React.PropTypes.number
-                    ]),
-    colors:         React.PropTypes.func,
-    colorAccessor:  React.PropTypes.func,
-    hoverAnimation: React.PropTypes.bool
-  },
-
-  getDefaultProps:function() {
-    return {
-      hoverAnimation: true,
-      data:           [],
-      width:          400,
-      heigth:         200,
-      title:          '',
-      textColor:      '#f7f7f7',
-      fontSize:       '0.85em',
-      colors:         d3.scale.category20c(),
-      colorAccessor:  function(d, idx)  {return idx;},
-    };
-  },
-
-  render:function() {
-
-    var props = this.props;
-
-    return (
-      React.createElement(Chart, {
-        title: props.title, 
-        width: props.width, 
-        height: props.height
-      }, 
-        React.createElement("g", {className: "rd3-treemap"}, 
-          React.createElement(DataSeries, {
-            data: props.data, 
-            width: props.width, 
-            height: props.height, 
-            colors: props.colors, 
-            colorAccessor: props.colorAccessor, 
-            textColor: props.textColor, 
-            fontSize: props.fontSize, 
-            hoverAnimation: props.hoverAnimation}
-          )
-        )
-      )
-    );
-  }
-
-});
-
-},{"../common":103,"./DataSeries":127,"d3":114,"react":374}],129:[function(require,module,exports){
-
-exports.Treemap = require('./Treemap');
-
-},{"./Treemap":128}],130:[function(require,module,exports){
-var d3 = require('d3');
-
-
-exports.calculateScales = function(chartWidth, chartHeight, xValues, yValues)  {
-
-  var xScale, yScale;
-
-  if (xValues.length > 0 && Object.prototype.toString.call(xValues[0]) === '[object Date]') {
-    xScale = d3.time.scale()
-      .range([0, chartWidth]);
-  } else {
-    xScale = d3.scale.linear()
-      .range([0, chartWidth]);
-  }
-  xScale.domain(d3.extent(xValues));
-
-  if (yValues.length > 0 && Object.prototype.toString.call(yValues[0]) === '[object Date]') {
-    yScale = d3.time.scale()
-      .range([chartHeight, 0]);
-  } else {
-    yScale = d3.scale.linear()
-      .range([chartHeight, 0]);
-  }
-
-  yScale.domain(d3.extent(yValues));
-
-  return {
-    xScale: xScale,
-    yScale: yScale
-  };
-
-};
-
-// debounce from Underscore.js
-// MIT License: https://raw.githubusercontent.com/jashkenas/underscore/master/LICENSE
-// Copyright (c) 2009-2014 Jeremy Ashkenas, DocumentCloud and Investigative
-// Reporters & Editors
-exports.debounce = function(func, wait, immediate) {
-  var timeout;
-  return function() {
-    var context = this, args = arguments;
-    var later = function() {
-      timeout = null;
-      if (!immediate) {
-        func.apply(context, args);
-      }
-    };
-    var callNow = immediate && !timeout;
-    clearTimeout(timeout);
-    timeout = setTimeout(later, wait);
-    if (callNow) func.apply(context, args);
-  };
-};
-
-exports.flattenData = function(data, xAccessor, yAccessor)  {
-
-  var allValues = [];
-  var xValues = [];
-  var yValues = [];
-  var coincidentCoordinateCheck = {};
-
-  data.forEach( function(series, i)  {
-    series.values.forEach( function(item, j)  {
-
-      var x = xAccessor(item);
-
-      // Check for NaN since d3's Voronoi cannot handle NaN values
-      // Go ahead and Proceed to next iteration since we don't want NaN
-      // in allValues or in xValues or yValues
-      if (isNaN(x)) {
-        return;
-      }
-      xValues.push(x);
-
-      var y = yAccessor(item);
-      // when yAccessor returns an object (as in the case of candlestick)
-      // iterate over the keys and push all the values to yValues array
-      var yNode;
-      if (typeof y === 'object' && Object.keys(y).length > 0) {
-        Object.keys(y).forEach(function (key) {
-          // Check for NaN since d3's Voronoi cannot handle NaN values
-          // Go ahead and Proceed to next iteration since we don't want NaN
-          // in allValues or in xValues or yValues
-          if (isNaN(y[key])) {
-            return;
-          }
-          yValues.push(y[key]);
-          // if multiple y points are to be plotted for a single x
-          // as in the case of candlestick, default to y value of 0
-          yNode = 0;
-        });
-      } else {
-        // Check for NaN since d3's Voronoi cannot handle NaN values
-        // Go ahead and Proceed to next iteration since we don't want NaN
-        // in allValues or in xValues or yValues
-        if (isNaN(y)) {
-          return;
-        }
-        yValues.push(y);
-        yNode = y;
-      }
-
-      var xyCoords = (x + "-" + yNode);
-      if (coincidentCoordinateCheck.hasOwnProperty(xyCoords)) {
-        // Proceed to next iteration if the x y pair already exists
-        // d3's Voronoi cannot handle NaN values or coincident coords
-        // But we push them into xValues and yValues above because
-        // we still may handle them there (labels, etc.)
-        return;
-      }
-      coincidentCoordinateCheck[xyCoords] = '';
-
-      var pointItem = {
-        coord: {
-          x: x,
-          y: yNode,
-        },
-        d: item,
-        id: series.name + j,
-        series: series,
-        seriesIndex: i
-      };
-      allValues.push(pointItem);
-    });
-  });
-
-  return {
-    allValues: allValues,
-    xValues: xValues,
-    yValues: yValues
-  };
-};
-
-
-exports.shade = function(hex, percent)  {
-
-  var R, G, B, red, green, blue, number;
-  var min = Math.min, round = Math.round;
-  if(hex.length !== 7) { return hex; }
-  number = parseInt(hex.slice(1), 16);
-  R = number >> 16;
-  G = number >> 8 & 0xFF;
-  B = number & 0xFF;
-  red = min( 255, round( ( 1 + percent ) * R )).toString(16);
-  if (red.length === 1) red = '0' + red;
-  green = min( 255, round( ( 1 + percent ) * G )).toString(16);
-  if (green.length === 1) green = '0' + green;
-  blue = min( 255, round( ( 1 + percent ) * B )).toString(16);
-  if (blue.length === 1) blue = '0' + blue;
-  return ("#" +  red +  green +  blue);
-
-};
-
-},{"d3":114}],131:[function(require,module,exports){
+},{}],107:[function(require,module,exports){
 'use strict';
 
 module.exports = require('react/lib/ReactDOM');
 
-},{"react/lib/ReactDOM":242}],132:[function(require,module,exports){
+},{"react/lib/ReactDOM":218}],108:[function(require,module,exports){
 var React = require('react')
 var styleAttr = require('style-attr')
 var querySelectorAll = require('query-selector')
@@ -29080,7 +30557,7 @@ namespaceMethods.forEach(function (name) {
 
 module.exports = Element
 
-},{"./utils/assign":137,"./utils/camelCase":138,"./utils/isString":139,"./utils/isUndefined":140,"./utils/mapValues":141,"./utils/styleCamelCase":142,"query-selector":55,"react":374,"style-attr":391}],133:[function(require,module,exports){
+},{"./utils/assign":113,"./utils/camelCase":114,"./utils/isString":115,"./utils/isUndefined":116,"./utils/mapValues":117,"./utils/styleCamelCase":118,"query-selector":57,"react":350,"style-attr":367}],109:[function(require,module,exports){
 var Element = require('./Element')
 var Window = require('./Window')
 var core = require('./mixins/core')
@@ -29110,7 +30587,7 @@ Element.prototype.ownerDocument = ReactFauxDOM
 
 module.exports = ReactFauxDOM
 
-},{"./Element":132,"./Window":134,"./mixins/anim":135,"./mixins/core":136}],134:[function(require,module,exports){
+},{"./Element":108,"./Window":110,"./mixins/anim":111,"./mixins/core":112}],110:[function(require,module,exports){
 var Window = {
   getComputedStyle: function (node) {
     return {
@@ -29121,7 +30598,7 @@ var Window = {
 
 module.exports = Window
 
-},{}],135:[function(require,module,exports){
+},{}],111:[function(require,module,exports){
 var anim = {
   animateFauxDOM: function (duration) {
     this.animateFauxDOMUntil = Math.max(Date.now() + duration, this.animateFauxDOMUntil)
@@ -29149,7 +30626,7 @@ var anim = {
 
 module.exports = anim
 
-},{}],136:[function(require,module,exports){
+},{}],112:[function(require,module,exports){
 var Element = require('../Element')
 var mapValues = require('../utils/mapValues')
 
@@ -29173,7 +30650,7 @@ var mixin = {
 
 module.exports = mixin
 
-},{"../Element":132,"../utils/mapValues":141}],137:[function(require,module,exports){
+},{"../Element":108,"../utils/mapValues":117}],113:[function(require,module,exports){
 function assign (dest) {
   var args = arguments
   var source
@@ -29191,7 +30668,7 @@ function assign (dest) {
 
 module.exports = assign
 
-},{}],138:[function(require,module,exports){
+},{}],114:[function(require,module,exports){
 var hyphenExpression = /\-+([a-z])/gi
 
 function upperCaseFirstMatch (match, c, offset) {
@@ -29210,21 +30687,21 @@ function camelCase (str) {
 
 module.exports = camelCase
 
-},{}],139:[function(require,module,exports){
+},{}],115:[function(require,module,exports){
 function isString (value) {
   return typeof value === 'string'
 }
 
 module.exports = isString
 
-},{}],140:[function(require,module,exports){
+},{}],116:[function(require,module,exports){
 function isUndefined (value) {
   return typeof value === 'undefined'
 }
 
 module.exports = isUndefined
 
-},{}],141:[function(require,module,exports){
+},{}],117:[function(require,module,exports){
 function mapValues (source, fn) {
   var destination = {}
 
@@ -29239,7 +30716,7 @@ function mapValues (source, fn) {
 
 module.exports = mapValues
 
-},{}],142:[function(require,module,exports){
+},{}],118:[function(require,module,exports){
 var camelCase = require('./camelCase')
 
 function styleCamelCase (name) {
@@ -29261,7 +30738,7 @@ function styleCamelCase (name) {
 
 module.exports = styleCamelCase
 
-},{"./camelCase":138}],143:[function(require,module,exports){
+},{"./camelCase":114}],119:[function(require,module,exports){
 "use strict";
 
 exports.__esModule = true;
@@ -29350,7 +30827,7 @@ function mapAsync(array, work, callback) {
     });
   });
 }
-},{}],144:[function(require,module,exports){
+},{}],120:[function(require,module,exports){
 (function (process){
 'use strict';
 
@@ -29382,7 +30859,7 @@ var History = {
 exports.default = History;
 module.exports = exports['default'];
 }).call(this,require('_process'))
-},{"./InternalPropTypes":148,"./routerWarning":177,"_process":44}],145:[function(require,module,exports){
+},{"./InternalPropTypes":124,"./routerWarning":153,"_process":44}],121:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -29411,7 +30888,7 @@ var IndexLink = _react2.default.createClass({
 
 exports.default = IndexLink;
 module.exports = exports['default'];
-},{"./Link":150,"react":374}],146:[function(require,module,exports){
+},{"./Link":126,"react":350}],122:[function(require,module,exports){
 (function (process){
 'use strict';
 
@@ -29477,7 +30954,7 @@ var IndexRedirect = _react2.default.createClass({
 exports.default = IndexRedirect;
 module.exports = exports['default'];
 }).call(this,require('_process'))
-},{"./InternalPropTypes":148,"./Redirect":153,"./routerWarning":177,"_process":44,"invariant":204,"react":374}],147:[function(require,module,exports){
+},{"./InternalPropTypes":124,"./Redirect":129,"./routerWarning":153,"_process":44,"invariant":180,"react":350}],123:[function(require,module,exports){
 (function (process){
 'use strict';
 
@@ -29540,7 +31017,7 @@ var IndexRoute = _react2.default.createClass({
 exports.default = IndexRoute;
 module.exports = exports['default'];
 }).call(this,require('_process'))
-},{"./InternalPropTypes":148,"./RouteUtils":156,"./routerWarning":177,"_process":44,"invariant":204,"react":374}],148:[function(require,module,exports){
+},{"./InternalPropTypes":124,"./RouteUtils":132,"./routerWarning":153,"_process":44,"invariant":180,"react":350}],124:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -29573,7 +31050,7 @@ var component = exports.component = oneOfType([func, string]);
 var components = exports.components = oneOfType([component, object]);
 var route = exports.route = oneOfType([object, element]);
 var routes = exports.routes = oneOfType([route, arrayOf(route)]);
-},{"react":374}],149:[function(require,module,exports){
+},{"react":350}],125:[function(require,module,exports){
 (function (process){
 'use strict';
 
@@ -29644,7 +31121,7 @@ var Lifecycle = {
 exports.default = Lifecycle;
 module.exports = exports['default'];
 }).call(this,require('_process'))
-},{"./routerWarning":177,"_process":44,"invariant":204,"react":374}],150:[function(require,module,exports){
+},{"./routerWarning":153,"_process":44,"invariant":180,"react":350}],126:[function(require,module,exports){
 (function (process){
 'use strict';
 
@@ -29818,7 +31295,7 @@ var Link = _react2.default.createClass({
 exports.default = Link;
 module.exports = exports['default'];
 }).call(this,require('_process'))
-},{"./PropTypes":152,"./routerWarning":177,"_process":44,"invariant":204,"react":374}],151:[function(require,module,exports){
+},{"./PropTypes":128,"./routerWarning":153,"_process":44,"invariant":180,"react":350}],127:[function(require,module,exports){
 (function (process){
 'use strict';
 
@@ -30033,7 +31510,7 @@ function formatPattern(pattern, params) {
   return pathname.replace(/\/+/g, '/');
 }
 }).call(this,require('_process'))
-},{"_process":44,"invariant":204}],152:[function(require,module,exports){
+},{"_process":44,"invariant":180}],128:[function(require,module,exports){
 (function (process){
 'use strict';
 
@@ -30137,7 +31614,7 @@ if (process.env.NODE_ENV !== 'production') {
 
 exports.default = defaultExport;
 }).call(this,require('_process'))
-},{"./InternalPropTypes":148,"./deprecateObjectProperties":168,"./routerWarning":177,"_process":44,"react":374}],153:[function(require,module,exports){
+},{"./InternalPropTypes":124,"./deprecateObjectProperties":144,"./routerWarning":153,"_process":44,"react":350}],129:[function(require,module,exports){
 (function (process){
 'use strict';
 
@@ -30242,7 +31719,7 @@ var Redirect = _react2.default.createClass({
 exports.default = Redirect;
 module.exports = exports['default'];
 }).call(this,require('_process'))
-},{"./InternalPropTypes":148,"./PatternUtils":151,"./RouteUtils":156,"_process":44,"invariant":204,"react":374}],154:[function(require,module,exports){
+},{"./InternalPropTypes":124,"./PatternUtils":127,"./RouteUtils":132,"_process":44,"invariant":180,"react":350}],130:[function(require,module,exports){
 (function (process){
 'use strict';
 
@@ -30302,7 +31779,7 @@ var Route = _react2.default.createClass({
 exports.default = Route;
 module.exports = exports['default'];
 }).call(this,require('_process'))
-},{"./InternalPropTypes":148,"./RouteUtils":156,"_process":44,"invariant":204,"react":374}],155:[function(require,module,exports){
+},{"./InternalPropTypes":124,"./RouteUtils":132,"_process":44,"invariant":180,"react":350}],131:[function(require,module,exports){
 (function (process){
 'use strict';
 
@@ -30350,7 +31827,7 @@ var RouteContext = {
 exports.default = RouteContext;
 module.exports = exports['default'];
 }).call(this,require('_process'))
-},{"./routerWarning":177,"_process":44,"react":374}],156:[function(require,module,exports){
+},{"./routerWarning":153,"_process":44,"react":350}],132:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -30444,7 +31921,7 @@ function createRoutes(routes) {
 
   return routes;
 }
-},{"react":374}],157:[function(require,module,exports){
+},{"react":350}],133:[function(require,module,exports){
 (function (process){
 'use strict';
 
@@ -30671,7 +32148,7 @@ var Router = _react2.default.createClass({
 exports.default = Router;
 module.exports = exports['default'];
 }).call(this,require('_process'))
-},{"./InternalPropTypes":148,"./RouteUtils":156,"./RouterContext":158,"./RouterUtils":159,"./createTransitionManager":167,"./routerWarning":177,"_process":44,"history/lib/createHashHistory":189,"history/lib/useQueries":196,"invariant":204,"react":374}],158:[function(require,module,exports){
+},{"./InternalPropTypes":124,"./RouteUtils":132,"./RouterContext":134,"./RouterUtils":135,"./createTransitionManager":143,"./routerWarning":153,"_process":44,"history/lib/createHashHistory":165,"history/lib/useQueries":172,"invariant":180,"react":350}],134:[function(require,module,exports){
 (function (process){
 'use strict';
 
@@ -30830,7 +32307,7 @@ var RouterContext = _react2.default.createClass({
 exports.default = RouterContext;
 module.exports = exports['default'];
 }).call(this,require('_process'))
-},{"./RouteUtils":156,"./deprecateObjectProperties":168,"./getRouteParams":170,"./routerWarning":177,"_process":44,"invariant":204,"react":374}],159:[function(require,module,exports){
+},{"./RouteUtils":132,"./deprecateObjectProperties":144,"./getRouteParams":146,"./routerWarning":153,"_process":44,"invariant":180,"react":350}],135:[function(require,module,exports){
 (function (process){
 'use strict';
 
@@ -30865,7 +32342,7 @@ function createRoutingHistory(history, transitionManager) {
   return history;
 }
 }).call(this,require('_process'))
-},{"./deprecateObjectProperties":168,"_process":44}],160:[function(require,module,exports){
+},{"./deprecateObjectProperties":144,"_process":44}],136:[function(require,module,exports){
 (function (process){
 'use strict';
 
@@ -30898,7 +32375,7 @@ var RoutingContext = _react2.default.createClass({
 exports.default = RoutingContext;
 module.exports = exports['default'];
 }).call(this,require('_process'))
-},{"./RouterContext":158,"./routerWarning":177,"_process":44,"react":374}],161:[function(require,module,exports){
+},{"./RouterContext":134,"./routerWarning":153,"_process":44,"react":350}],137:[function(require,module,exports){
 (function (process){
 'use strict';
 
@@ -31023,7 +32500,7 @@ function runLeaveHooks(routes, prevState) {
   }
 }
 }).call(this,require('_process'))
-},{"./AsyncUtils":143,"./routerWarning":177,"_process":44}],162:[function(require,module,exports){
+},{"./AsyncUtils":119,"./routerWarning":153,"_process":44}],138:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -31074,7 +32551,7 @@ exports.default = function () {
 };
 
 module.exports = exports['default'];
-},{"./RouterContext":158,"react":374}],163:[function(require,module,exports){
+},{"./RouterContext":134,"react":350}],139:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -31091,7 +32568,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 exports.default = (0, _createRouterHistory2.default)(_createBrowserHistory2.default);
 module.exports = exports['default'];
-},{"./createRouterHistory":166,"history/lib/createBrowserHistory":187}],164:[function(require,module,exports){
+},{"./createRouterHistory":142,"history/lib/createBrowserHistory":163}],140:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -31169,7 +32646,7 @@ function computeChangedRoutes(prevState, nextState) {
 
 exports.default = computeChangedRoutes;
 module.exports = exports['default'];
-},{"./PatternUtils":151}],165:[function(require,module,exports){
+},{"./PatternUtils":127}],141:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -31202,7 +32679,7 @@ function createMemoryHistory(options) {
   return history;
 }
 module.exports = exports['default'];
-},{"history/lib/createMemoryHistory":192,"history/lib/useBasename":195,"history/lib/useQueries":196}],166:[function(require,module,exports){
+},{"history/lib/createMemoryHistory":168,"history/lib/useBasename":171,"history/lib/useQueries":172}],142:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -31222,7 +32699,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var canUseDOM = !!(typeof window !== 'undefined' && window.document && window.document.createElement);
 
 module.exports = exports['default'];
-},{"./useRouterHistory":178}],167:[function(require,module,exports){
+},{"./useRouterHistory":154}],143:[function(require,module,exports){
 (function (process){
 'use strict';
 
@@ -31532,7 +33009,7 @@ function createTransitionManager(history, routes) {
 //export default useRoutes
 module.exports = exports['default'];
 }).call(this,require('_process'))
-},{"./TransitionUtils":161,"./computeChangedRoutes":164,"./getComponents":169,"./isActive":173,"./matchRoutes":176,"./routerWarning":177,"_process":44,"history/lib/Actions":181}],168:[function(require,module,exports){
+},{"./TransitionUtils":137,"./computeChangedRoutes":140,"./getComponents":145,"./isActive":149,"./matchRoutes":152,"./routerWarning":153,"_process":44,"history/lib/Actions":157}],144:[function(require,module,exports){
 (function (process){
 'use strict';
 
@@ -31610,7 +33087,7 @@ if (process.env.NODE_ENV !== 'production') {
 
 exports.default = deprecateObjectProperties;
 }).call(this,require('_process'))
-},{"./routerWarning":177,"_process":44}],169:[function(require,module,exports){
+},{"./routerWarning":153,"_process":44}],145:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -31657,7 +33134,7 @@ function getComponents(nextState, callback) {
 
 exports.default = getComponents;
 module.exports = exports['default'];
-},{"./AsyncUtils":143,"./makeStateWithLocation":174}],170:[function(require,module,exports){
+},{"./AsyncUtils":119,"./makeStateWithLocation":150}],146:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -31684,7 +33161,7 @@ function getRouteParams(route, params) {
 
 exports.default = getRouteParams;
 module.exports = exports['default'];
-},{"./PatternUtils":151}],171:[function(require,module,exports){
+},{"./PatternUtils":127}],147:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -31701,7 +33178,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 exports.default = (0, _createRouterHistory2.default)(_createHashHistory2.default);
 module.exports = exports['default'];
-},{"./createRouterHistory":166,"history/lib/createHashHistory":189}],172:[function(require,module,exports){
+},{"./createRouterHistory":142,"history/lib/createHashHistory":165}],148:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -31858,7 +33335,7 @@ exports.applyRouterMiddleware = _applyRouterMiddleware3.default;
 exports.browserHistory = _browserHistory3.default;
 exports.hashHistory = _hashHistory3.default;
 exports.createMemoryHistory = _createMemoryHistory3.default;
-},{"./History":144,"./IndexLink":145,"./IndexRedirect":146,"./IndexRoute":147,"./Lifecycle":149,"./Link":150,"./PatternUtils":151,"./PropTypes":152,"./Redirect":153,"./Route":154,"./RouteContext":155,"./RouteUtils":156,"./Router":157,"./RouterContext":158,"./RoutingContext":160,"./applyRouterMiddleware":162,"./browserHistory":163,"./createMemoryHistory":165,"./hashHistory":171,"./match":175,"./useRouterHistory":178,"./useRoutes":179,"./withRouter":180}],173:[function(require,module,exports){
+},{"./History":120,"./IndexLink":121,"./IndexRedirect":122,"./IndexRoute":123,"./Lifecycle":125,"./Link":126,"./PatternUtils":127,"./PropTypes":128,"./Redirect":129,"./Route":130,"./RouteContext":131,"./RouteUtils":132,"./Router":133,"./RouterContext":134,"./RoutingContext":136,"./applyRouterMiddleware":138,"./browserHistory":139,"./createMemoryHistory":141,"./hashHistory":147,"./match":151,"./useRouterHistory":154,"./useRoutes":155,"./withRouter":156}],149:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -32011,7 +33488,7 @@ function isActive(_ref, indexOnly, currentLocation, routes, params) {
   return queryIsActive(query, currentLocation.query);
 }
 module.exports = exports['default'];
-},{"./PatternUtils":151}],174:[function(require,module,exports){
+},{"./PatternUtils":127}],150:[function(require,module,exports){
 (function (process){
 'use strict';
 
@@ -32063,7 +33540,7 @@ function makeStateWithLocation(state, location) {
 }
 module.exports = exports['default'];
 }).call(this,require('_process'))
-},{"./deprecateObjectProperties":168,"./routerWarning":177,"_process":44}],175:[function(require,module,exports){
+},{"./deprecateObjectProperties":144,"./routerWarning":153,"_process":44}],151:[function(require,module,exports){
 (function (process){
 'use strict';
 
@@ -32147,7 +33624,7 @@ function match(_ref, callback) {
 exports.default = match;
 module.exports = exports['default'];
 }).call(this,require('_process'))
-},{"./RouteUtils":156,"./RouterUtils":159,"./createMemoryHistory":165,"./createTransitionManager":167,"_process":44,"invariant":204}],176:[function(require,module,exports){
+},{"./RouteUtils":132,"./RouterUtils":135,"./createMemoryHistory":141,"./createTransitionManager":143,"_process":44,"invariant":180}],152:[function(require,module,exports){
 (function (process){
 'use strict';
 
@@ -32401,7 +33878,7 @@ function matchRoutes(routes, location, callback, remainingPathname) {
 }
 module.exports = exports['default'];
 }).call(this,require('_process'))
-},{"./AsyncUtils":143,"./PatternUtils":151,"./RouteUtils":156,"./makeStateWithLocation":174,"./routerWarning":177,"_process":44}],177:[function(require,module,exports){
+},{"./AsyncUtils":119,"./PatternUtils":127,"./RouteUtils":132,"./makeStateWithLocation":150,"./routerWarning":153,"_process":44}],153:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -32438,7 +33915,7 @@ function routerWarning(falseToWarn, message) {
 function _resetWarned() {
   warned = {};
 }
-},{"warning":205}],178:[function(require,module,exports){
+},{"warning":181}],154:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -32462,7 +33939,7 @@ function useRouterHistory(createHistory) {
   };
 }
 module.exports = exports['default'];
-},{"history/lib/useBasename":195,"history/lib/useQueries":196}],179:[function(require,module,exports){
+},{"history/lib/useBasename":171,"history/lib/useQueries":172}],155:[function(require,module,exports){
 (function (process){
 'use strict';
 
@@ -32516,7 +33993,7 @@ function useRoutes(createHistory) {
 exports.default = useRoutes;
 module.exports = exports['default'];
 }).call(this,require('_process'))
-},{"./createTransitionManager":167,"./routerWarning":177,"_process":44,"history/lib/useQueries":196}],180:[function(require,module,exports){
+},{"./createTransitionManager":143,"./routerWarning":153,"_process":44,"history/lib/useQueries":172}],156:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -32557,7 +34034,7 @@ function withRouter(WrappedComponent) {
   return (0, _hoistNonReactStatics2.default)(WithRouter, WrappedComponent);
 }
 module.exports = exports['default'];
-},{"./PropTypes":152,"hoist-non-react-statics":203,"react":374}],181:[function(require,module,exports){
+},{"./PropTypes":128,"hoist-non-react-statics":179,"react":350}],157:[function(require,module,exports){
 /**
  * Indicates that navigation was caused by a call to history.push.
  */
@@ -32589,7 +34066,7 @@ exports['default'] = {
   REPLACE: REPLACE,
   POP: POP
 };
-},{}],182:[function(require,module,exports){
+},{}],158:[function(require,module,exports){
 "use strict";
 
 exports.__esModule = true;
@@ -32648,7 +34125,7 @@ function loopAsync(turns, work, callback) {
 
   next();
 }
-},{}],183:[function(require,module,exports){
+},{}],159:[function(require,module,exports){
 (function (process){
 /*eslint-disable no-empty */
 'use strict';
@@ -32724,7 +34201,7 @@ function readState(key) {
   return null;
 }
 }).call(this,require('_process'))
-},{"_process":44,"warning":202}],184:[function(require,module,exports){
+},{"_process":44,"warning":178}],160:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -32800,13 +34277,13 @@ function supportsGoWithoutReloadUsingHash() {
   var ua = navigator.userAgent;
   return ua.indexOf('Firefox') === -1;
 }
-},{}],185:[function(require,module,exports){
+},{}],161:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
 var canUseDOM = !!(typeof window !== 'undefined' && window.document && window.document.createElement);
 exports.canUseDOM = canUseDOM;
-},{}],186:[function(require,module,exports){
+},{}],162:[function(require,module,exports){
 (function (process){
 'use strict';
 
@@ -32856,7 +34333,7 @@ function parsePath(path) {
   };
 }
 }).call(this,require('_process'))
-},{"_process":44,"warning":202}],187:[function(require,module,exports){
+},{"_process":44,"warning":178}],163:[function(require,module,exports){
 (function (process){
 'use strict';
 
@@ -33039,7 +34516,7 @@ function createBrowserHistory() {
 exports['default'] = createBrowserHistory;
 module.exports = exports['default'];
 }).call(this,require('_process'))
-},{"./Actions":181,"./DOMStateStorage":183,"./DOMUtils":184,"./ExecutionEnvironment":185,"./PathUtils":186,"./createDOMHistory":188,"_process":44,"invariant":204}],188:[function(require,module,exports){
+},{"./Actions":157,"./DOMStateStorage":159,"./DOMUtils":160,"./ExecutionEnvironment":161,"./PathUtils":162,"./createDOMHistory":164,"_process":44,"invariant":180}],164:[function(require,module,exports){
 (function (process){
 'use strict';
 
@@ -33082,7 +34559,7 @@ function createDOMHistory(options) {
 exports['default'] = createDOMHistory;
 module.exports = exports['default'];
 }).call(this,require('_process'))
-},{"./DOMUtils":184,"./ExecutionEnvironment":185,"./createHistory":190,"_process":44,"invariant":204}],189:[function(require,module,exports){
+},{"./DOMUtils":160,"./ExecutionEnvironment":161,"./createHistory":166,"_process":44,"invariant":180}],165:[function(require,module,exports){
 (function (process){
 'use strict';
 
@@ -33331,7 +34808,7 @@ function createHashHistory() {
 exports['default'] = createHashHistory;
 module.exports = exports['default'];
 }).call(this,require('_process'))
-},{"./Actions":181,"./DOMStateStorage":183,"./DOMUtils":184,"./ExecutionEnvironment":185,"./PathUtils":186,"./createDOMHistory":188,"_process":44,"invariant":204,"warning":202}],190:[function(require,module,exports){
+},{"./Actions":157,"./DOMStateStorage":159,"./DOMUtils":160,"./ExecutionEnvironment":161,"./PathUtils":162,"./createDOMHistory":164,"_process":44,"invariant":180,"warning":178}],166:[function(require,module,exports){
 (function (process){
 'use strict';
 
@@ -33622,7 +35099,7 @@ function createHistory() {
 exports['default'] = createHistory;
 module.exports = exports['default'];
 }).call(this,require('_process'))
-},{"./Actions":181,"./AsyncUtils":182,"./PathUtils":186,"./createLocation":191,"./deprecate":193,"./runTransitionHook":194,"_process":44,"deep-equal":197,"warning":202}],191:[function(require,module,exports){
+},{"./Actions":157,"./AsyncUtils":158,"./PathUtils":162,"./createLocation":167,"./deprecate":169,"./runTransitionHook":170,"_process":44,"deep-equal":173,"warning":178}],167:[function(require,module,exports){
 (function (process){
 'use strict';
 
@@ -33676,7 +35153,7 @@ function createLocation() {
 exports['default'] = createLocation;
 module.exports = exports['default'];
 }).call(this,require('_process'))
-},{"./Actions":181,"./PathUtils":186,"_process":44,"warning":202}],192:[function(require,module,exports){
+},{"./Actions":157,"./PathUtils":162,"_process":44,"warning":178}],168:[function(require,module,exports){
 (function (process){
 'use strict';
 
@@ -33833,7 +35310,7 @@ function createMemoryHistory() {
 exports['default'] = createMemoryHistory;
 module.exports = exports['default'];
 }).call(this,require('_process'))
-},{"./Actions":181,"./PathUtils":186,"./createHistory":190,"_process":44,"invariant":204,"warning":202}],193:[function(require,module,exports){
+},{"./Actions":157,"./PathUtils":162,"./createHistory":166,"_process":44,"invariant":180,"warning":178}],169:[function(require,module,exports){
 (function (process){
 'use strict';
 
@@ -33855,7 +35332,7 @@ function deprecate(fn, message) {
 exports['default'] = deprecate;
 module.exports = exports['default'];
 }).call(this,require('_process'))
-},{"_process":44,"warning":202}],194:[function(require,module,exports){
+},{"_process":44,"warning":178}],170:[function(require,module,exports){
 (function (process){
 'use strict';
 
@@ -33882,7 +35359,7 @@ function runTransitionHook(hook, location, callback) {
 exports['default'] = runTransitionHook;
 module.exports = exports['default'];
 }).call(this,require('_process'))
-},{"_process":44,"warning":202}],195:[function(require,module,exports){
+},{"_process":44,"warning":178}],171:[function(require,module,exports){
 (function (process){
 'use strict';
 
@@ -34043,7 +35520,7 @@ function useBasename(createHistory) {
 exports['default'] = useBasename;
 module.exports = exports['default'];
 }).call(this,require('_process'))
-},{"./ExecutionEnvironment":185,"./PathUtils":186,"./deprecate":193,"./runTransitionHook":194,"_process":44,"warning":202}],196:[function(require,module,exports){
+},{"./ExecutionEnvironment":161,"./PathUtils":162,"./deprecate":169,"./runTransitionHook":170,"_process":44,"warning":178}],172:[function(require,module,exports){
 (function (process){
 'use strict';
 
@@ -34222,7 +35699,7 @@ function useQueries(createHistory) {
 exports['default'] = useQueries;
 module.exports = exports['default'];
 }).call(this,require('_process'))
-},{"./PathUtils":186,"./deprecate":193,"./runTransitionHook":194,"_process":44,"query-string":200,"warning":202}],197:[function(require,module,exports){
+},{"./PathUtils":162,"./deprecate":169,"./runTransitionHook":170,"_process":44,"query-string":176,"warning":178}],173:[function(require,module,exports){
 var pSlice = Array.prototype.slice;
 var objectKeys = require('./lib/keys.js');
 var isArguments = require('./lib/is_arguments.js');
@@ -34318,7 +35795,7 @@ function objEquiv(a, b, opts) {
   return typeof a === typeof b;
 }
 
-},{"./lib/is_arguments.js":198,"./lib/keys.js":199}],198:[function(require,module,exports){
+},{"./lib/is_arguments.js":174,"./lib/keys.js":175}],174:[function(require,module,exports){
 var supportsArgumentsClass = (function(){
   return Object.prototype.toString.call(arguments)
 })() == '[object Arguments]';
@@ -34340,7 +35817,7 @@ function unsupported(object){
     false;
 };
 
-},{}],199:[function(require,module,exports){
+},{}],175:[function(require,module,exports){
 exports = module.exports = typeof Object.keys === 'function'
   ? Object.keys : shim;
 
@@ -34351,7 +35828,7 @@ function shim (obj) {
   return keys;
 }
 
-},{}],200:[function(require,module,exports){
+},{}],176:[function(require,module,exports){
 'use strict';
 var strictUriEncode = require('strict-uri-encode');
 
@@ -34419,7 +35896,7 @@ exports.stringify = function (obj) {
 	}).join('&') : '';
 };
 
-},{"strict-uri-encode":201}],201:[function(require,module,exports){
+},{"strict-uri-encode":177}],177:[function(require,module,exports){
 'use strict';
 module.exports = function (str) {
 	return encodeURIComponent(str).replace(/[!'()*]/g, function (c) {
@@ -34427,7 +35904,7 @@ module.exports = function (str) {
 	});
 };
 
-},{}],202:[function(require,module,exports){
+},{}],178:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2014-2015, Facebook, Inc.
@@ -34491,7 +35968,7 @@ if (process.env.NODE_ENV !== 'production') {
 module.exports = warning;
 
 }).call(this,require('_process'))
-},{"_process":44}],203:[function(require,module,exports){
+},{"_process":44}],179:[function(require,module,exports){
 /**
  * Copyright 2015, Yahoo! Inc.
  * Copyrights licensed under the New BSD License. See the accompanying LICENSE file for terms.
@@ -34543,7 +36020,7 @@ module.exports = function hoistNonReactStatics(targetComponent, sourceComponent,
     return targetComponent;
 };
 
-},{}],204:[function(require,module,exports){
+},{}],180:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -34598,9 +36075,9 @@ var invariant = function(condition, format, a, b, c, d, e, f) {
 module.exports = invariant;
 
 }).call(this,require('_process'))
-},{"_process":44}],205:[function(require,module,exports){
-arguments[4][202][0].apply(exports,arguments)
-},{"_process":44,"dup":202}],206:[function(require,module,exports){
+},{"_process":44}],181:[function(require,module,exports){
+arguments[4][178][0].apply(exports,arguments)
+},{"_process":44,"dup":178}],182:[function(require,module,exports){
 /**
  * Copyright 2013-present, Facebook, Inc.
  * All rights reserved.
@@ -34625,7 +36102,7 @@ var AutoFocusUtils = {
 };
 
 module.exports = AutoFocusUtils;
-},{"./ReactDOMComponentTree":246,"fbjs/lib/focusNode":356}],207:[function(require,module,exports){
+},{"./ReactDOMComponentTree":222,"fbjs/lib/focusNode":332}],183:[function(require,module,exports){
 /**
  * Copyright 2013-present Facebook, Inc.
  * All rights reserved.
@@ -35014,7 +36491,7 @@ var BeforeInputEventPlugin = {
 };
 
 module.exports = BeforeInputEventPlugin;
-},{"./EventConstants":221,"./EventPropagators":225,"./FallbackCompositionState":226,"./SyntheticCompositionEvent":303,"./SyntheticInputEvent":307,"fbjs/lib/ExecutionEnvironment":348,"fbjs/lib/keyOf":366}],208:[function(require,module,exports){
+},{"./EventConstants":197,"./EventPropagators":201,"./FallbackCompositionState":202,"./SyntheticCompositionEvent":279,"./SyntheticInputEvent":283,"fbjs/lib/ExecutionEnvironment":324,"fbjs/lib/keyOf":342}],184:[function(require,module,exports){
 /**
  * Copyright 2013-present, Facebook, Inc.
  * All rights reserved.
@@ -35163,7 +36640,7 @@ var CSSProperty = {
 };
 
 module.exports = CSSProperty;
-},{}],209:[function(require,module,exports){
+},{}],185:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-present, Facebook, Inc.
@@ -35371,7 +36848,7 @@ var CSSPropertyOperations = {
 
 module.exports = CSSPropertyOperations;
 }).call(this,require('_process'))
-},{"./CSSProperty":208,"./ReactInstrumentation":278,"./dangerousStyleValue":321,"_process":44,"fbjs/lib/ExecutionEnvironment":348,"fbjs/lib/camelizeStyleName":350,"fbjs/lib/hyphenateStyleName":361,"fbjs/lib/memoizeStringOnly":368,"fbjs/lib/warning":372}],210:[function(require,module,exports){
+},{"./CSSProperty":184,"./ReactInstrumentation":254,"./dangerousStyleValue":297,"_process":44,"fbjs/lib/ExecutionEnvironment":324,"fbjs/lib/camelizeStyleName":326,"fbjs/lib/hyphenateStyleName":337,"fbjs/lib/memoizeStringOnly":344,"fbjs/lib/warning":348}],186:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-present, Facebook, Inc.
@@ -35480,7 +36957,7 @@ PooledClass.addPoolingTo(CallbackQueue);
 
 module.exports = CallbackQueue;
 }).call(this,require('_process'))
-},{"./PooledClass":230,"./reactProdInvariant":340,"_process":44,"fbjs/lib/invariant":362,"object-assign":373}],211:[function(require,module,exports){
+},{"./PooledClass":206,"./reactProdInvariant":316,"_process":44,"fbjs/lib/invariant":338,"object-assign":349}],187:[function(require,module,exports){
 /**
  * Copyright 2013-present, Facebook, Inc.
  * All rights reserved.
@@ -35806,7 +37283,7 @@ var ChangeEventPlugin = {
 };
 
 module.exports = ChangeEventPlugin;
-},{"./EventConstants":221,"./EventPluginHub":222,"./EventPropagators":225,"./ReactDOMComponentTree":246,"./ReactUpdates":296,"./SyntheticEvent":305,"./getEventTarget":329,"./isEventSupported":336,"./isTextInputElement":337,"fbjs/lib/ExecutionEnvironment":348,"fbjs/lib/keyOf":366}],212:[function(require,module,exports){
+},{"./EventConstants":197,"./EventPluginHub":198,"./EventPropagators":201,"./ReactDOMComponentTree":222,"./ReactUpdates":272,"./SyntheticEvent":281,"./getEventTarget":305,"./isEventSupported":312,"./isTextInputElement":313,"fbjs/lib/ExecutionEnvironment":324,"fbjs/lib/keyOf":342}],188:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-present, Facebook, Inc.
@@ -36003,7 +37480,7 @@ var DOMChildrenOperations = {
 
 module.exports = DOMChildrenOperations;
 }).call(this,require('_process'))
-},{"./DOMLazyTree":213,"./Danger":217,"./ReactDOMComponentTree":246,"./ReactInstrumentation":278,"./ReactMultiChildUpdateTypes":283,"./createMicrosoftUnsafeLocalFunction":320,"./setInnerHTML":342,"./setTextContent":343,"_process":44}],213:[function(require,module,exports){
+},{"./DOMLazyTree":189,"./Danger":193,"./ReactDOMComponentTree":222,"./ReactInstrumentation":254,"./ReactMultiChildUpdateTypes":259,"./createMicrosoftUnsafeLocalFunction":296,"./setInnerHTML":318,"./setTextContent":319,"_process":44}],189:[function(require,module,exports){
 /**
  * Copyright 2015-present, Facebook, Inc.
  * All rights reserved.
@@ -36122,7 +37599,7 @@ DOMLazyTree.queueHTML = queueHTML;
 DOMLazyTree.queueText = queueText;
 
 module.exports = DOMLazyTree;
-},{"./DOMNamespaces":214,"./createMicrosoftUnsafeLocalFunction":320,"./setInnerHTML":342,"./setTextContent":343}],214:[function(require,module,exports){
+},{"./DOMNamespaces":190,"./createMicrosoftUnsafeLocalFunction":296,"./setInnerHTML":318,"./setTextContent":319}],190:[function(require,module,exports){
 /**
  * Copyright 2013-present, Facebook, Inc.
  * All rights reserved.
@@ -36143,7 +37620,7 @@ var DOMNamespaces = {
 };
 
 module.exports = DOMNamespaces;
-},{}],215:[function(require,module,exports){
+},{}],191:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-present, Facebook, Inc.
@@ -36352,7 +37829,7 @@ var DOMProperty = {
 
 module.exports = DOMProperty;
 }).call(this,require('_process'))
-},{"./reactProdInvariant":340,"_process":44,"fbjs/lib/invariant":362}],216:[function(require,module,exports){
+},{"./reactProdInvariant":316,"_process":44,"fbjs/lib/invariant":338}],192:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-present, Facebook, Inc.
@@ -36583,7 +38060,7 @@ var DOMPropertyOperations = {
 
 module.exports = DOMPropertyOperations;
 }).call(this,require('_process'))
-},{"./DOMProperty":215,"./ReactDOMComponentTree":246,"./ReactDOMInstrumentation":254,"./ReactInstrumentation":278,"./quoteAttributeValueForBrowser":339,"_process":44,"fbjs/lib/warning":372}],217:[function(require,module,exports){
+},{"./DOMProperty":191,"./ReactDOMComponentTree":222,"./ReactDOMInstrumentation":230,"./ReactInstrumentation":254,"./quoteAttributeValueForBrowser":315,"_process":44,"fbjs/lib/warning":348}],193:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-present, Facebook, Inc.
@@ -36634,7 +38111,7 @@ var Danger = {
 
 module.exports = Danger;
 }).call(this,require('_process'))
-},{"./DOMLazyTree":213,"./reactProdInvariant":340,"_process":44,"fbjs/lib/ExecutionEnvironment":348,"fbjs/lib/createNodesFromMarkup":353,"fbjs/lib/emptyFunction":354,"fbjs/lib/invariant":362}],218:[function(require,module,exports){
+},{"./DOMLazyTree":189,"./reactProdInvariant":316,"_process":44,"fbjs/lib/ExecutionEnvironment":324,"fbjs/lib/createNodesFromMarkup":329,"fbjs/lib/emptyFunction":330,"fbjs/lib/invariant":338}],194:[function(require,module,exports){
 /**
  * Copyright 2013-present, Facebook, Inc.
  * All rights reserved.
@@ -36662,7 +38139,7 @@ var keyOf = require('fbjs/lib/keyOf');
 var DefaultEventPluginOrder = [keyOf({ ResponderEventPlugin: null }), keyOf({ SimpleEventPlugin: null }), keyOf({ TapEventPlugin: null }), keyOf({ EnterLeaveEventPlugin: null }), keyOf({ ChangeEventPlugin: null }), keyOf({ SelectEventPlugin: null }), keyOf({ BeforeInputEventPlugin: null })];
 
 module.exports = DefaultEventPluginOrder;
-},{"fbjs/lib/keyOf":366}],219:[function(require,module,exports){
+},{"fbjs/lib/keyOf":342}],195:[function(require,module,exports){
 /**
  * Copyright 2013-present, Facebook, Inc.
  * All rights reserved.
@@ -36713,7 +38190,7 @@ var DisabledInputUtils = {
 };
 
 module.exports = DisabledInputUtils;
-},{}],220:[function(require,module,exports){
+},{}],196:[function(require,module,exports){
 /**
  * Copyright 2013-present, Facebook, Inc.
  * All rights reserved.
@@ -36819,7 +38296,7 @@ var EnterLeaveEventPlugin = {
 };
 
 module.exports = EnterLeaveEventPlugin;
-},{"./EventConstants":221,"./EventPropagators":225,"./ReactDOMComponentTree":246,"./SyntheticMouseEvent":309,"fbjs/lib/keyOf":366}],221:[function(require,module,exports){
+},{"./EventConstants":197,"./EventPropagators":201,"./ReactDOMComponentTree":222,"./SyntheticMouseEvent":285,"fbjs/lib/keyOf":342}],197:[function(require,module,exports){
 /**
  * Copyright 2013-present, Facebook, Inc.
  * All rights reserved.
@@ -36917,7 +38394,7 @@ var EventConstants = {
 };
 
 module.exports = EventConstants;
-},{"fbjs/lib/keyMirror":365}],222:[function(require,module,exports){
+},{"fbjs/lib/keyMirror":341}],198:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-present, Facebook, Inc.
@@ -37161,7 +38638,7 @@ var EventPluginHub = {
 
 module.exports = EventPluginHub;
 }).call(this,require('_process'))
-},{"./EventPluginRegistry":223,"./EventPluginUtils":224,"./ReactErrorUtils":269,"./accumulateInto":316,"./forEachAccumulated":325,"./reactProdInvariant":340,"_process":44,"fbjs/lib/invariant":362}],223:[function(require,module,exports){
+},{"./EventPluginRegistry":199,"./EventPluginUtils":200,"./ReactErrorUtils":245,"./accumulateInto":292,"./forEachAccumulated":301,"./reactProdInvariant":316,"_process":44,"fbjs/lib/invariant":338}],199:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-present, Facebook, Inc.
@@ -37411,7 +38888,7 @@ var EventPluginRegistry = {
 
 module.exports = EventPluginRegistry;
 }).call(this,require('_process'))
-},{"./reactProdInvariant":340,"_process":44,"fbjs/lib/invariant":362}],224:[function(require,module,exports){
+},{"./reactProdInvariant":316,"_process":44,"fbjs/lib/invariant":338}],200:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-present, Facebook, Inc.
@@ -37643,7 +39120,7 @@ var EventPluginUtils = {
 
 module.exports = EventPluginUtils;
 }).call(this,require('_process'))
-},{"./EventConstants":221,"./ReactErrorUtils":269,"./reactProdInvariant":340,"_process":44,"fbjs/lib/invariant":362,"fbjs/lib/warning":372}],225:[function(require,module,exports){
+},{"./EventConstants":197,"./ReactErrorUtils":245,"./reactProdInvariant":316,"_process":44,"fbjs/lib/invariant":338,"fbjs/lib/warning":348}],201:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-present, Facebook, Inc.
@@ -37783,7 +39260,7 @@ var EventPropagators = {
 
 module.exports = EventPropagators;
 }).call(this,require('_process'))
-},{"./EventConstants":221,"./EventPluginHub":222,"./EventPluginUtils":224,"./accumulateInto":316,"./forEachAccumulated":325,"_process":44,"fbjs/lib/warning":372}],226:[function(require,module,exports){
+},{"./EventConstants":197,"./EventPluginHub":198,"./EventPluginUtils":200,"./accumulateInto":292,"./forEachAccumulated":301,"_process":44,"fbjs/lib/warning":348}],202:[function(require,module,exports){
 /**
  * Copyright 2013-present, Facebook, Inc.
  * All rights reserved.
@@ -37879,7 +39356,7 @@ _assign(FallbackCompositionState.prototype, {
 PooledClass.addPoolingTo(FallbackCompositionState);
 
 module.exports = FallbackCompositionState;
-},{"./PooledClass":230,"./getTextContentAccessor":333,"object-assign":373}],227:[function(require,module,exports){
+},{"./PooledClass":206,"./getTextContentAccessor":309,"object-assign":349}],203:[function(require,module,exports){
 /**
  * Copyright 2013-present, Facebook, Inc.
  * All rights reserved.
@@ -38088,7 +39565,7 @@ var HTMLDOMPropertyConfig = {
 };
 
 module.exports = HTMLDOMPropertyConfig;
-},{"./DOMProperty":215}],228:[function(require,module,exports){
+},{"./DOMProperty":191}],204:[function(require,module,exports){
 /**
  * Copyright 2013-present, Facebook, Inc.
  * All rights reserved.
@@ -38148,7 +39625,7 @@ var KeyEscapeUtils = {
 };
 
 module.exports = KeyEscapeUtils;
-},{}],229:[function(require,module,exports){
+},{}],205:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-present, Facebook, Inc.
@@ -38286,7 +39763,7 @@ var LinkedValueUtils = {
 
 module.exports = LinkedValueUtils;
 }).call(this,require('_process'))
-},{"./ReactPropTypeLocations":288,"./ReactPropTypes":289,"./reactProdInvariant":340,"_process":44,"fbjs/lib/invariant":362,"fbjs/lib/warning":372}],230:[function(require,module,exports){
+},{"./ReactPropTypeLocations":264,"./ReactPropTypes":265,"./reactProdInvariant":316,"_process":44,"fbjs/lib/invariant":338,"fbjs/lib/warning":348}],206:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-present, Facebook, Inc.
@@ -38410,7 +39887,7 @@ var PooledClass = {
 
 module.exports = PooledClass;
 }).call(this,require('_process'))
-},{"./reactProdInvariant":340,"_process":44,"fbjs/lib/invariant":362}],231:[function(require,module,exports){
+},{"./reactProdInvariant":316,"_process":44,"fbjs/lib/invariant":338}],207:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-present, Facebook, Inc.
@@ -38500,7 +39977,7 @@ var React = {
 
 module.exports = React;
 }).call(this,require('_process'))
-},{"./ReactChildren":234,"./ReactClass":235,"./ReactComponent":236,"./ReactDOMFactories":250,"./ReactElement":266,"./ReactElementValidator":267,"./ReactPropTypes":289,"./ReactVersion":297,"./onlyChild":338,"_process":44,"fbjs/lib/warning":372,"object-assign":373}],232:[function(require,module,exports){
+},{"./ReactChildren":210,"./ReactClass":211,"./ReactComponent":212,"./ReactDOMFactories":226,"./ReactElement":242,"./ReactElementValidator":243,"./ReactPropTypes":265,"./ReactVersion":273,"./onlyChild":314,"_process":44,"fbjs/lib/warning":348,"object-assign":349}],208:[function(require,module,exports){
 /**
  * Copyright 2013-present, Facebook, Inc.
  * All rights reserved.
@@ -38818,7 +40295,7 @@ var ReactBrowserEventEmitter = _assign({}, ReactEventEmitterMixin, {
 });
 
 module.exports = ReactBrowserEventEmitter;
-},{"./EventConstants":221,"./EventPluginRegistry":223,"./ReactEventEmitterMixin":270,"./ViewportMetrics":315,"./getVendorPrefixedEventName":334,"./isEventSupported":336,"object-assign":373}],233:[function(require,module,exports){
+},{"./EventConstants":197,"./EventPluginRegistry":199,"./ReactEventEmitterMixin":246,"./ViewportMetrics":291,"./getVendorPrefixedEventName":310,"./isEventSupported":312,"object-assign":349}],209:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2014-present, Facebook, Inc.
@@ -38955,7 +40432,7 @@ var ReactChildReconciler = {
 
 module.exports = ReactChildReconciler;
 }).call(this,require('_process'))
-},{"./KeyEscapeUtils":228,"./ReactComponentTreeDevtool":239,"./ReactReconciler":291,"./instantiateReactComponent":335,"./shouldUpdateReactComponent":344,"./traverseAllChildren":345,"_process":44,"fbjs/lib/warning":372}],234:[function(require,module,exports){
+},{"./KeyEscapeUtils":204,"./ReactComponentTreeDevtool":215,"./ReactReconciler":267,"./instantiateReactComponent":311,"./shouldUpdateReactComponent":320,"./traverseAllChildren":321,"_process":44,"fbjs/lib/warning":348}],210:[function(require,module,exports){
 /**
  * Copyright 2013-present, Facebook, Inc.
  * All rights reserved.
@@ -39147,7 +40624,7 @@ var ReactChildren = {
 };
 
 module.exports = ReactChildren;
-},{"./PooledClass":230,"./ReactElement":266,"./traverseAllChildren":345,"fbjs/lib/emptyFunction":354}],235:[function(require,module,exports){
+},{"./PooledClass":206,"./ReactElement":242,"./traverseAllChildren":321,"fbjs/lib/emptyFunction":330}],211:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-present, Facebook, Inc.
@@ -39875,7 +41352,7 @@ var ReactClass = {
 
 module.exports = ReactClass;
 }).call(this,require('_process'))
-},{"./ReactComponent":236,"./ReactElement":266,"./ReactNoopUpdateQueue":285,"./ReactPropTypeLocationNames":287,"./ReactPropTypeLocations":288,"./reactProdInvariant":340,"_process":44,"fbjs/lib/emptyObject":355,"fbjs/lib/invariant":362,"fbjs/lib/keyMirror":365,"fbjs/lib/keyOf":366,"fbjs/lib/warning":372,"object-assign":373}],236:[function(require,module,exports){
+},{"./ReactComponent":212,"./ReactElement":242,"./ReactNoopUpdateQueue":261,"./ReactPropTypeLocationNames":263,"./ReactPropTypeLocations":264,"./reactProdInvariant":316,"_process":44,"fbjs/lib/emptyObject":331,"fbjs/lib/invariant":338,"fbjs/lib/keyMirror":341,"fbjs/lib/keyOf":342,"fbjs/lib/warning":348,"object-assign":349}],212:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-present, Facebook, Inc.
@@ -39996,7 +41473,7 @@ if (process.env.NODE_ENV !== 'production') {
 
 module.exports = ReactComponent;
 }).call(this,require('_process'))
-},{"./ReactNoopUpdateQueue":285,"./canDefineProperty":318,"./reactProdInvariant":340,"_process":44,"fbjs/lib/emptyObject":355,"fbjs/lib/invariant":362,"fbjs/lib/warning":372}],237:[function(require,module,exports){
+},{"./ReactNoopUpdateQueue":261,"./canDefineProperty":294,"./reactProdInvariant":316,"_process":44,"fbjs/lib/emptyObject":331,"fbjs/lib/invariant":338,"fbjs/lib/warning":348}],213:[function(require,module,exports){
 /**
  * Copyright 2013-present, Facebook, Inc.
  * All rights reserved.
@@ -40036,7 +41513,7 @@ var ReactComponentBrowserEnvironment = {
 };
 
 module.exports = ReactComponentBrowserEnvironment;
-},{"./DOMChildrenOperations":212,"./ReactDOMIDOperations":252}],238:[function(require,module,exports){
+},{"./DOMChildrenOperations":188,"./ReactDOMIDOperations":228}],214:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2014-present, Facebook, Inc.
@@ -40092,7 +41569,7 @@ var ReactComponentEnvironment = {
 
 module.exports = ReactComponentEnvironment;
 }).call(this,require('_process'))
-},{"./reactProdInvariant":340,"_process":44,"fbjs/lib/invariant":362}],239:[function(require,module,exports){
+},{"./reactProdInvariant":316,"_process":44,"fbjs/lib/invariant":338}],215:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2016-present, Facebook, Inc.
@@ -40313,7 +41790,7 @@ var ReactComponentTreeDevtool = {
 
 module.exports = ReactComponentTreeDevtool;
 }).call(this,require('_process'))
-},{"./ReactCurrentOwner":241,"./reactProdInvariant":340,"_process":44,"fbjs/lib/invariant":362,"fbjs/lib/warning":372}],240:[function(require,module,exports){
+},{"./ReactCurrentOwner":217,"./reactProdInvariant":316,"_process":44,"fbjs/lib/invariant":338,"fbjs/lib/warning":348}],216:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-present, Facebook, Inc.
@@ -41209,7 +42686,7 @@ var ReactCompositeComponent = {
 
 module.exports = ReactCompositeComponent;
 }).call(this,require('_process'))
-},{"./ReactComponentEnvironment":238,"./ReactCurrentOwner":241,"./ReactElement":266,"./ReactErrorUtils":269,"./ReactInstanceMap":277,"./ReactInstrumentation":278,"./ReactNodeTypes":284,"./ReactPropTypeLocations":288,"./ReactReconciler":291,"./checkReactTypeSpec":319,"./reactProdInvariant":340,"./shouldUpdateReactComponent":344,"_process":44,"fbjs/lib/emptyObject":355,"fbjs/lib/invariant":362,"fbjs/lib/warning":372,"object-assign":373}],241:[function(require,module,exports){
+},{"./ReactComponentEnvironment":214,"./ReactCurrentOwner":217,"./ReactElement":242,"./ReactErrorUtils":245,"./ReactInstanceMap":253,"./ReactInstrumentation":254,"./ReactNodeTypes":260,"./ReactPropTypeLocations":264,"./ReactReconciler":267,"./checkReactTypeSpec":295,"./reactProdInvariant":316,"./shouldUpdateReactComponent":320,"_process":44,"fbjs/lib/emptyObject":331,"fbjs/lib/invariant":338,"fbjs/lib/warning":348,"object-assign":349}],217:[function(require,module,exports){
 /**
  * Copyright 2013-present, Facebook, Inc.
  * All rights reserved.
@@ -41241,7 +42718,7 @@ var ReactCurrentOwner = {
 };
 
 module.exports = ReactCurrentOwner;
-},{}],242:[function(require,module,exports){
+},{}],218:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-present, Facebook, Inc.
@@ -41345,7 +42822,7 @@ if (process.env.NODE_ENV !== 'production') {
 
 module.exports = React;
 }).call(this,require('_process'))
-},{"./ReactDOMComponentTree":246,"./ReactDefaultInjection":265,"./ReactMount":281,"./ReactReconciler":291,"./ReactUpdates":296,"./ReactVersion":297,"./findDOMNode":323,"./getHostComponentFromComposite":330,"./renderSubtreeIntoContainer":341,"_process":44,"fbjs/lib/ExecutionEnvironment":348,"fbjs/lib/warning":372}],243:[function(require,module,exports){
+},{"./ReactDOMComponentTree":222,"./ReactDefaultInjection":241,"./ReactMount":257,"./ReactReconciler":267,"./ReactUpdates":272,"./ReactVersion":273,"./findDOMNode":299,"./getHostComponentFromComposite":306,"./renderSubtreeIntoContainer":317,"_process":44,"fbjs/lib/ExecutionEnvironment":324,"fbjs/lib/warning":348}],219:[function(require,module,exports){
 /**
  * Copyright 2013-present, Facebook, Inc.
  * All rights reserved.
@@ -41370,7 +42847,7 @@ var ReactDOMButton = {
 };
 
 module.exports = ReactDOMButton;
-},{"./DisabledInputUtils":219}],244:[function(require,module,exports){
+},{"./DisabledInputUtils":195}],220:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-present, Facebook, Inc.
@@ -42376,7 +43853,7 @@ _assign(ReactDOMComponent.prototype, ReactDOMComponent.Mixin, ReactMultiChild.Mi
 
 module.exports = ReactDOMComponent;
 }).call(this,require('_process'))
-},{"./AutoFocusUtils":206,"./CSSPropertyOperations":209,"./DOMLazyTree":213,"./DOMNamespaces":214,"./DOMProperty":215,"./DOMPropertyOperations":216,"./EventConstants":221,"./EventPluginHub":222,"./EventPluginRegistry":223,"./ReactBrowserEventEmitter":232,"./ReactComponentBrowserEnvironment":237,"./ReactDOMButton":243,"./ReactDOMComponentFlags":245,"./ReactDOMComponentTree":246,"./ReactDOMInput":253,"./ReactDOMOption":256,"./ReactDOMSelect":257,"./ReactDOMTextarea":260,"./ReactInstrumentation":278,"./ReactMultiChild":282,"./ReactServerRenderingTransaction":293,"./escapeTextContentForBrowser":322,"./isEventSupported":336,"./reactProdInvariant":340,"./validateDOMNesting":346,"_process":44,"fbjs/lib/emptyFunction":354,"fbjs/lib/invariant":362,"fbjs/lib/keyOf":366,"fbjs/lib/shallowEqual":371,"fbjs/lib/warning":372,"object-assign":373}],245:[function(require,module,exports){
+},{"./AutoFocusUtils":182,"./CSSPropertyOperations":185,"./DOMLazyTree":189,"./DOMNamespaces":190,"./DOMProperty":191,"./DOMPropertyOperations":192,"./EventConstants":197,"./EventPluginHub":198,"./EventPluginRegistry":199,"./ReactBrowserEventEmitter":208,"./ReactComponentBrowserEnvironment":213,"./ReactDOMButton":219,"./ReactDOMComponentFlags":221,"./ReactDOMComponentTree":222,"./ReactDOMInput":229,"./ReactDOMOption":232,"./ReactDOMSelect":233,"./ReactDOMTextarea":236,"./ReactInstrumentation":254,"./ReactMultiChild":258,"./ReactServerRenderingTransaction":269,"./escapeTextContentForBrowser":298,"./isEventSupported":312,"./reactProdInvariant":316,"./validateDOMNesting":322,"_process":44,"fbjs/lib/emptyFunction":330,"fbjs/lib/invariant":338,"fbjs/lib/keyOf":342,"fbjs/lib/shallowEqual":347,"fbjs/lib/warning":348,"object-assign":349}],221:[function(require,module,exports){
 /**
  * Copyright 2015-present, Facebook, Inc.
  * All rights reserved.
@@ -42395,7 +43872,7 @@ var ReactDOMComponentFlags = {
 };
 
 module.exports = ReactDOMComponentFlags;
-},{}],246:[function(require,module,exports){
+},{}],222:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-present, Facebook, Inc.
@@ -42586,7 +44063,7 @@ var ReactDOMComponentTree = {
 
 module.exports = ReactDOMComponentTree;
 }).call(this,require('_process'))
-},{"./DOMProperty":215,"./ReactDOMComponentFlags":245,"./reactProdInvariant":340,"_process":44,"fbjs/lib/invariant":362}],247:[function(require,module,exports){
+},{"./DOMProperty":191,"./ReactDOMComponentFlags":221,"./reactProdInvariant":316,"_process":44,"fbjs/lib/invariant":338}],223:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-present, Facebook, Inc.
@@ -42622,7 +44099,7 @@ function ReactDOMContainerInfo(topLevelWrapper, node) {
 
 module.exports = ReactDOMContainerInfo;
 }).call(this,require('_process'))
-},{"./validateDOMNesting":346,"_process":44}],248:[function(require,module,exports){
+},{"./validateDOMNesting":322,"_process":44}],224:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-present, Facebook, Inc.
@@ -42692,7 +44169,7 @@ ReactDOMDebugTool.addDevtool(ReactDOMNullInputValuePropDevtool);
 
 module.exports = ReactDOMDebugTool;
 }).call(this,require('_process'))
-},{"./ReactDOMNullInputValuePropDevtool":255,"./ReactDOMUnknownPropertyDevtool":262,"./ReactDebugTool":263,"_process":44,"fbjs/lib/warning":372}],249:[function(require,module,exports){
+},{"./ReactDOMNullInputValuePropDevtool":231,"./ReactDOMUnknownPropertyDevtool":238,"./ReactDebugTool":239,"_process":44,"fbjs/lib/warning":348}],225:[function(require,module,exports){
 /**
  * Copyright 2014-present, Facebook, Inc.
  * All rights reserved.
@@ -42753,7 +44230,7 @@ _assign(ReactDOMEmptyComponent.prototype, {
 });
 
 module.exports = ReactDOMEmptyComponent;
-},{"./DOMLazyTree":213,"./ReactDOMComponentTree":246,"object-assign":373}],250:[function(require,module,exports){
+},{"./DOMLazyTree":189,"./ReactDOMComponentTree":222,"object-assign":349}],226:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-present, Facebook, Inc.
@@ -42932,7 +44409,7 @@ var ReactDOMFactories = mapObject({
 
 module.exports = ReactDOMFactories;
 }).call(this,require('_process'))
-},{"./ReactElement":266,"./ReactElementValidator":267,"_process":44,"fbjs/lib/mapObject":367}],251:[function(require,module,exports){
+},{"./ReactElement":242,"./ReactElementValidator":243,"_process":44,"fbjs/lib/mapObject":343}],227:[function(require,module,exports){
 /**
  * Copyright 2013-present, Facebook, Inc.
  * All rights reserved.
@@ -42951,7 +44428,7 @@ var ReactDOMFeatureFlags = {
 };
 
 module.exports = ReactDOMFeatureFlags;
-},{}],252:[function(require,module,exports){
+},{}],228:[function(require,module,exports){
 /**
  * Copyright 2013-present, Facebook, Inc.
  * All rights reserved.
@@ -42986,7 +44463,7 @@ var ReactDOMIDOperations = {
 };
 
 module.exports = ReactDOMIDOperations;
-},{"./DOMChildrenOperations":212,"./ReactDOMComponentTree":246}],253:[function(require,module,exports){
+},{"./DOMChildrenOperations":188,"./ReactDOMComponentTree":222}],229:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-present, Facebook, Inc.
@@ -43233,7 +44710,7 @@ function _handleChange(event) {
 
 module.exports = ReactDOMInput;
 }).call(this,require('_process'))
-},{"./DOMPropertyOperations":216,"./DisabledInputUtils":219,"./LinkedValueUtils":229,"./ReactDOMComponentTree":246,"./ReactUpdates":296,"./reactProdInvariant":340,"_process":44,"fbjs/lib/invariant":362,"fbjs/lib/warning":372,"object-assign":373}],254:[function(require,module,exports){
+},{"./DOMPropertyOperations":192,"./DisabledInputUtils":195,"./LinkedValueUtils":205,"./ReactDOMComponentTree":222,"./ReactUpdates":272,"./reactProdInvariant":316,"_process":44,"fbjs/lib/invariant":338,"fbjs/lib/warning":348,"object-assign":349}],230:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-present, Facebook, Inc.
@@ -43257,7 +44734,7 @@ if (process.env.NODE_ENV !== 'production') {
 
 module.exports = { debugTool: debugTool };
 }).call(this,require('_process'))
-},{"./ReactDOMDebugTool":248,"_process":44}],255:[function(require,module,exports){
+},{"./ReactDOMDebugTool":224,"_process":44}],231:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-present, Facebook, Inc.
@@ -43303,7 +44780,7 @@ var ReactDOMUnknownPropertyDevtool = {
 
 module.exports = ReactDOMUnknownPropertyDevtool;
 }).call(this,require('_process'))
-},{"./ReactComponentTreeDevtool":239,"_process":44,"fbjs/lib/warning":372}],256:[function(require,module,exports){
+},{"./ReactComponentTreeDevtool":215,"_process":44,"fbjs/lib/warning":348}],232:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-present, Facebook, Inc.
@@ -43429,7 +44906,7 @@ var ReactDOMOption = {
 
 module.exports = ReactDOMOption;
 }).call(this,require('_process'))
-},{"./ReactChildren":234,"./ReactDOMComponentTree":246,"./ReactDOMSelect":257,"_process":44,"fbjs/lib/warning":372,"object-assign":373}],257:[function(require,module,exports){
+},{"./ReactChildren":210,"./ReactDOMComponentTree":222,"./ReactDOMSelect":233,"_process":44,"fbjs/lib/warning":348,"object-assign":349}],233:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-present, Facebook, Inc.
@@ -43632,7 +45109,7 @@ function _handleChange(event) {
 
 module.exports = ReactDOMSelect;
 }).call(this,require('_process'))
-},{"./DisabledInputUtils":219,"./LinkedValueUtils":229,"./ReactDOMComponentTree":246,"./ReactUpdates":296,"_process":44,"fbjs/lib/warning":372,"object-assign":373}],258:[function(require,module,exports){
+},{"./DisabledInputUtils":195,"./LinkedValueUtils":205,"./ReactDOMComponentTree":222,"./ReactUpdates":272,"_process":44,"fbjs/lib/warning":348,"object-assign":349}],234:[function(require,module,exports){
 /**
  * Copyright 2013-present, Facebook, Inc.
  * All rights reserved.
@@ -43845,7 +45322,7 @@ var ReactDOMSelection = {
 };
 
 module.exports = ReactDOMSelection;
-},{"./getNodeForCharacterOffset":332,"./getTextContentAccessor":333,"fbjs/lib/ExecutionEnvironment":348}],259:[function(require,module,exports){
+},{"./getNodeForCharacterOffset":308,"./getTextContentAccessor":309,"fbjs/lib/ExecutionEnvironment":324}],235:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-present, Facebook, Inc.
@@ -44019,7 +45496,7 @@ _assign(ReactDOMTextComponent.prototype, {
 
 module.exports = ReactDOMTextComponent;
 }).call(this,require('_process'))
-},{"./DOMChildrenOperations":212,"./DOMLazyTree":213,"./ReactDOMComponentTree":246,"./ReactInstrumentation":278,"./escapeTextContentForBrowser":322,"./reactProdInvariant":340,"./validateDOMNesting":346,"_process":44,"fbjs/lib/invariant":362,"object-assign":373}],260:[function(require,module,exports){
+},{"./DOMChildrenOperations":188,"./DOMLazyTree":189,"./ReactDOMComponentTree":222,"./ReactInstrumentation":254,"./escapeTextContentForBrowser":298,"./reactProdInvariant":316,"./validateDOMNesting":322,"_process":44,"fbjs/lib/invariant":338,"object-assign":349}],236:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-present, Facebook, Inc.
@@ -44177,7 +45654,7 @@ function _handleChange(event) {
 
 module.exports = ReactDOMTextarea;
 }).call(this,require('_process'))
-},{"./DisabledInputUtils":219,"./LinkedValueUtils":229,"./ReactDOMComponentTree":246,"./ReactUpdates":296,"./reactProdInvariant":340,"_process":44,"fbjs/lib/invariant":362,"fbjs/lib/warning":372,"object-assign":373}],261:[function(require,module,exports){
+},{"./DisabledInputUtils":195,"./LinkedValueUtils":205,"./ReactDOMComponentTree":222,"./ReactUpdates":272,"./reactProdInvariant":316,"_process":44,"fbjs/lib/invariant":338,"fbjs/lib/warning":348,"object-assign":349}],237:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2015-present, Facebook, Inc.
@@ -44316,7 +45793,7 @@ module.exports = {
   traverseEnterLeave: traverseEnterLeave
 };
 }).call(this,require('_process'))
-},{"./reactProdInvariant":340,"_process":44,"fbjs/lib/invariant":362}],262:[function(require,module,exports){
+},{"./reactProdInvariant":316,"_process":44,"fbjs/lib/invariant":338}],238:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-present, Facebook, Inc.
@@ -44431,7 +45908,7 @@ var ReactDOMUnknownPropertyDevtool = {
 
 module.exports = ReactDOMUnknownPropertyDevtool;
 }).call(this,require('_process'))
-},{"./DOMProperty":215,"./EventPluginRegistry":223,"./ReactComponentTreeDevtool":239,"_process":44,"fbjs/lib/warning":372}],263:[function(require,module,exports){
+},{"./DOMProperty":191,"./EventPluginRegistry":199,"./ReactComponentTreeDevtool":215,"_process":44,"fbjs/lib/warning":348}],239:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2016-present, Facebook, Inc.
@@ -44737,7 +46214,7 @@ if (/[?&]react_perf\b/.test(url)) {
 
 module.exports = ReactDebugTool;
 }).call(this,require('_process'))
-},{"./ReactComponentTreeDevtool":239,"./ReactHostOperationHistoryDevtool":274,"./ReactInvalidSetStateWarningDevTool":279,"_process":44,"fbjs/lib/ExecutionEnvironment":348,"fbjs/lib/performanceNow":370,"fbjs/lib/warning":372}],264:[function(require,module,exports){
+},{"./ReactComponentTreeDevtool":215,"./ReactHostOperationHistoryDevtool":250,"./ReactInvalidSetStateWarningDevTool":255,"_process":44,"fbjs/lib/ExecutionEnvironment":324,"fbjs/lib/performanceNow":346,"fbjs/lib/warning":348}],240:[function(require,module,exports){
 /**
  * Copyright 2013-present, Facebook, Inc.
  * All rights reserved.
@@ -44806,7 +46283,7 @@ var ReactDefaultBatchingStrategy = {
 };
 
 module.exports = ReactDefaultBatchingStrategy;
-},{"./ReactUpdates":296,"./Transaction":314,"fbjs/lib/emptyFunction":354,"object-assign":373}],265:[function(require,module,exports){
+},{"./ReactUpdates":272,"./Transaction":290,"fbjs/lib/emptyFunction":330,"object-assign":349}],241:[function(require,module,exports){
 /**
  * Copyright 2013-present, Facebook, Inc.
  * All rights reserved.
@@ -44891,7 +46368,7 @@ function inject() {
 module.exports = {
   inject: inject
 };
-},{"./BeforeInputEventPlugin":207,"./ChangeEventPlugin":211,"./DefaultEventPluginOrder":218,"./EnterLeaveEventPlugin":220,"./HTMLDOMPropertyConfig":227,"./ReactComponentBrowserEnvironment":237,"./ReactDOMComponent":244,"./ReactDOMComponentTree":246,"./ReactDOMEmptyComponent":249,"./ReactDOMTextComponent":259,"./ReactDOMTreeTraversal":261,"./ReactDefaultBatchingStrategy":264,"./ReactEventListener":271,"./ReactInjection":275,"./ReactReconcileTransaction":290,"./SVGDOMPropertyConfig":298,"./SelectEventPlugin":299,"./SimpleEventPlugin":300}],266:[function(require,module,exports){
+},{"./BeforeInputEventPlugin":183,"./ChangeEventPlugin":187,"./DefaultEventPluginOrder":194,"./EnterLeaveEventPlugin":196,"./HTMLDOMPropertyConfig":203,"./ReactComponentBrowserEnvironment":213,"./ReactDOMComponent":220,"./ReactDOMComponentTree":222,"./ReactDOMEmptyComponent":225,"./ReactDOMTextComponent":235,"./ReactDOMTreeTraversal":237,"./ReactDefaultBatchingStrategy":240,"./ReactEventListener":247,"./ReactInjection":251,"./ReactReconcileTransaction":266,"./SVGDOMPropertyConfig":274,"./SelectEventPlugin":275,"./SimpleEventPlugin":276}],242:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2014-present, Facebook, Inc.
@@ -45246,7 +46723,7 @@ ReactElement.REACT_ELEMENT_TYPE = REACT_ELEMENT_TYPE;
 
 module.exports = ReactElement;
 }).call(this,require('_process'))
-},{"./ReactCurrentOwner":241,"./canDefineProperty":318,"_process":44,"fbjs/lib/warning":372,"object-assign":373}],267:[function(require,module,exports){
+},{"./ReactCurrentOwner":217,"./canDefineProperty":294,"_process":44,"fbjs/lib/warning":348,"object-assign":349}],243:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2014-present, Facebook, Inc.
@@ -45475,7 +46952,7 @@ var ReactElementValidator = {
 
 module.exports = ReactElementValidator;
 }).call(this,require('_process'))
-},{"./ReactComponentTreeDevtool":239,"./ReactCurrentOwner":241,"./ReactElement":266,"./ReactPropTypeLocations":288,"./canDefineProperty":318,"./checkReactTypeSpec":319,"./getIteratorFn":331,"_process":44,"fbjs/lib/warning":372}],268:[function(require,module,exports){
+},{"./ReactComponentTreeDevtool":215,"./ReactCurrentOwner":217,"./ReactElement":242,"./ReactPropTypeLocations":264,"./canDefineProperty":294,"./checkReactTypeSpec":295,"./getIteratorFn":307,"_process":44,"fbjs/lib/warning":348}],244:[function(require,module,exports){
 /**
  * Copyright 2014-present, Facebook, Inc.
  * All rights reserved.
@@ -45506,7 +46983,7 @@ var ReactEmptyComponent = {
 ReactEmptyComponent.injection = ReactEmptyComponentInjection;
 
 module.exports = ReactEmptyComponent;
-},{}],269:[function(require,module,exports){
+},{}],245:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-present, Facebook, Inc.
@@ -45585,7 +47062,7 @@ if (process.env.NODE_ENV !== 'production') {
 
 module.exports = ReactErrorUtils;
 }).call(this,require('_process'))
-},{"_process":44}],270:[function(require,module,exports){
+},{"_process":44}],246:[function(require,module,exports){
 /**
  * Copyright 2013-present, Facebook, Inc.
  * All rights reserved.
@@ -45619,7 +47096,7 @@ var ReactEventEmitterMixin = {
 };
 
 module.exports = ReactEventEmitterMixin;
-},{"./EventPluginHub":222}],271:[function(require,module,exports){
+},{"./EventPluginHub":198}],247:[function(require,module,exports){
 /**
  * Copyright 2013-present, Facebook, Inc.
  * All rights reserved.
@@ -45777,7 +47254,7 @@ var ReactEventListener = {
 };
 
 module.exports = ReactEventListener;
-},{"./PooledClass":230,"./ReactDOMComponentTree":246,"./ReactUpdates":296,"./getEventTarget":329,"fbjs/lib/EventListener":347,"fbjs/lib/ExecutionEnvironment":348,"fbjs/lib/getUnboundedScrollPosition":359,"object-assign":373}],272:[function(require,module,exports){
+},{"./PooledClass":206,"./ReactDOMComponentTree":222,"./ReactUpdates":272,"./getEventTarget":305,"fbjs/lib/EventListener":323,"fbjs/lib/ExecutionEnvironment":324,"fbjs/lib/getUnboundedScrollPosition":335,"object-assign":349}],248:[function(require,module,exports){
 /**
  * Copyright 2013-present, Facebook, Inc.
  * All rights reserved.
@@ -45800,7 +47277,7 @@ var ReactFeatureFlags = {
 };
 
 module.exports = ReactFeatureFlags;
-},{}],273:[function(require,module,exports){
+},{}],249:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2014-present, Facebook, Inc.
@@ -45879,7 +47356,7 @@ var ReactHostComponent = {
 
 module.exports = ReactHostComponent;
 }).call(this,require('_process'))
-},{"./reactProdInvariant":340,"_process":44,"fbjs/lib/invariant":362,"object-assign":373}],274:[function(require,module,exports){
+},{"./reactProdInvariant":316,"_process":44,"fbjs/lib/invariant":338,"object-assign":349}],250:[function(require,module,exports){
 /**
  * Copyright 2016-present, Facebook, Inc.
  * All rights reserved.
@@ -45917,7 +47394,7 @@ var ReactHostOperationHistoryDevtool = {
 };
 
 module.exports = ReactHostOperationHistoryDevtool;
-},{}],275:[function(require,module,exports){
+},{}],251:[function(require,module,exports){
 /**
  * Copyright 2013-present, Facebook, Inc.
  * All rights reserved.
@@ -45954,7 +47431,7 @@ var ReactInjection = {
 };
 
 module.exports = ReactInjection;
-},{"./DOMProperty":215,"./EventPluginHub":222,"./EventPluginUtils":224,"./ReactBrowserEventEmitter":232,"./ReactClass":235,"./ReactComponentEnvironment":238,"./ReactEmptyComponent":268,"./ReactHostComponent":273,"./ReactUpdates":296}],276:[function(require,module,exports){
+},{"./DOMProperty":191,"./EventPluginHub":198,"./EventPluginUtils":200,"./ReactBrowserEventEmitter":208,"./ReactClass":211,"./ReactComponentEnvironment":214,"./ReactEmptyComponent":244,"./ReactHostComponent":249,"./ReactUpdates":272}],252:[function(require,module,exports){
 /**
  * Copyright 2013-present, Facebook, Inc.
  * All rights reserved.
@@ -46079,7 +47556,7 @@ var ReactInputSelection = {
 };
 
 module.exports = ReactInputSelection;
-},{"./ReactDOMSelection":258,"fbjs/lib/containsNode":351,"fbjs/lib/focusNode":356,"fbjs/lib/getActiveElement":357}],277:[function(require,module,exports){
+},{"./ReactDOMSelection":234,"fbjs/lib/containsNode":327,"fbjs/lib/focusNode":332,"fbjs/lib/getActiveElement":333}],253:[function(require,module,exports){
 /**
  * Copyright 2013-present, Facebook, Inc.
  * All rights reserved.
@@ -46128,7 +47605,7 @@ var ReactInstanceMap = {
 };
 
 module.exports = ReactInstanceMap;
-},{}],278:[function(require,module,exports){
+},{}],254:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2016-present, Facebook, Inc.
@@ -46152,7 +47629,7 @@ if (process.env.NODE_ENV !== 'production') {
 
 module.exports = { debugTool: debugTool };
 }).call(this,require('_process'))
-},{"./ReactDebugTool":263,"_process":44}],279:[function(require,module,exports){
+},{"./ReactDebugTool":239,"_process":44}],255:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2016-present, Facebook, Inc.
@@ -46191,7 +47668,7 @@ var ReactInvalidSetStateWarningDevTool = {
 
 module.exports = ReactInvalidSetStateWarningDevTool;
 }).call(this,require('_process'))
-},{"_process":44,"fbjs/lib/warning":372}],280:[function(require,module,exports){
+},{"_process":44,"fbjs/lib/warning":348}],256:[function(require,module,exports){
 /**
  * Copyright 2013-present, Facebook, Inc.
  * All rights reserved.
@@ -46242,7 +47719,7 @@ var ReactMarkupChecksum = {
 };
 
 module.exports = ReactMarkupChecksum;
-},{"./adler32":317}],281:[function(require,module,exports){
+},{"./adler32":293}],257:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-present, Facebook, Inc.
@@ -46744,7 +48221,7 @@ var ReactMount = {
 
 module.exports = ReactMount;
 }).call(this,require('_process'))
-},{"./DOMLazyTree":213,"./DOMProperty":215,"./ReactBrowserEventEmitter":232,"./ReactCurrentOwner":241,"./ReactDOMComponentTree":246,"./ReactDOMContainerInfo":247,"./ReactDOMFeatureFlags":251,"./ReactElement":266,"./ReactFeatureFlags":272,"./ReactInstanceMap":277,"./ReactInstrumentation":278,"./ReactMarkupChecksum":280,"./ReactReconciler":291,"./ReactUpdateQueue":295,"./ReactUpdates":296,"./instantiateReactComponent":335,"./reactProdInvariant":340,"./setInnerHTML":342,"./shouldUpdateReactComponent":344,"_process":44,"fbjs/lib/emptyObject":355,"fbjs/lib/invariant":362,"fbjs/lib/warning":372}],282:[function(require,module,exports){
+},{"./DOMLazyTree":189,"./DOMProperty":191,"./ReactBrowserEventEmitter":208,"./ReactCurrentOwner":217,"./ReactDOMComponentTree":222,"./ReactDOMContainerInfo":223,"./ReactDOMFeatureFlags":227,"./ReactElement":242,"./ReactFeatureFlags":248,"./ReactInstanceMap":253,"./ReactInstrumentation":254,"./ReactMarkupChecksum":256,"./ReactReconciler":267,"./ReactUpdateQueue":271,"./ReactUpdates":272,"./instantiateReactComponent":311,"./reactProdInvariant":316,"./setInnerHTML":318,"./shouldUpdateReactComponent":320,"_process":44,"fbjs/lib/emptyObject":331,"fbjs/lib/invariant":338,"fbjs/lib/warning":348}],258:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-present, Facebook, Inc.
@@ -47197,7 +48674,7 @@ var ReactMultiChild = {
 
 module.exports = ReactMultiChild;
 }).call(this,require('_process'))
-},{"./ReactChildReconciler":233,"./ReactComponentEnvironment":238,"./ReactCurrentOwner":241,"./ReactInstanceMap":277,"./ReactInstrumentation":278,"./ReactMultiChildUpdateTypes":283,"./ReactReconciler":291,"./flattenChildren":324,"./reactProdInvariant":340,"_process":44,"fbjs/lib/emptyFunction":354,"fbjs/lib/invariant":362}],283:[function(require,module,exports){
+},{"./ReactChildReconciler":209,"./ReactComponentEnvironment":214,"./ReactCurrentOwner":217,"./ReactInstanceMap":253,"./ReactInstrumentation":254,"./ReactMultiChildUpdateTypes":259,"./ReactReconciler":267,"./flattenChildren":300,"./reactProdInvariant":316,"_process":44,"fbjs/lib/emptyFunction":330,"fbjs/lib/invariant":338}],259:[function(require,module,exports){
 /**
  * Copyright 2013-present, Facebook, Inc.
  * All rights reserved.
@@ -47230,7 +48707,7 @@ var ReactMultiChildUpdateTypes = keyMirror({
 });
 
 module.exports = ReactMultiChildUpdateTypes;
-},{"fbjs/lib/keyMirror":365}],284:[function(require,module,exports){
+},{"fbjs/lib/keyMirror":341}],260:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-present, Facebook, Inc.
@@ -47273,7 +48750,7 @@ var ReactNodeTypes = {
 
 module.exports = ReactNodeTypes;
 }).call(this,require('_process'))
-},{"./ReactElement":266,"./reactProdInvariant":340,"_process":44,"fbjs/lib/invariant":362}],285:[function(require,module,exports){
+},{"./ReactElement":242,"./reactProdInvariant":316,"_process":44,"fbjs/lib/invariant":338}],261:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2015-present, Facebook, Inc.
@@ -47372,7 +48849,7 @@ var ReactNoopUpdateQueue = {
 
 module.exports = ReactNoopUpdateQueue;
 }).call(this,require('_process'))
-},{"_process":44,"fbjs/lib/warning":372}],286:[function(require,module,exports){
+},{"_process":44,"fbjs/lib/warning":348}],262:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-present, Facebook, Inc.
@@ -47469,7 +48946,7 @@ var ReactOwner = {
 
 module.exports = ReactOwner;
 }).call(this,require('_process'))
-},{"./reactProdInvariant":340,"_process":44,"fbjs/lib/invariant":362}],287:[function(require,module,exports){
+},{"./reactProdInvariant":316,"_process":44,"fbjs/lib/invariant":338}],263:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-present, Facebook, Inc.
@@ -47496,7 +48973,7 @@ if (process.env.NODE_ENV !== 'production') {
 
 module.exports = ReactPropTypeLocationNames;
 }).call(this,require('_process'))
-},{"_process":44}],288:[function(require,module,exports){
+},{"_process":44}],264:[function(require,module,exports){
 /**
  * Copyright 2013-present, Facebook, Inc.
  * All rights reserved.
@@ -47519,7 +48996,7 @@ var ReactPropTypeLocations = keyMirror({
 });
 
 module.exports = ReactPropTypeLocations;
-},{"fbjs/lib/keyMirror":365}],289:[function(require,module,exports){
+},{"fbjs/lib/keyMirror":341}],265:[function(require,module,exports){
 /**
  * Copyright 2013-present, Facebook, Inc.
  * All rights reserved.
@@ -47923,7 +49400,7 @@ function getClassName(propValue) {
 }
 
 module.exports = ReactPropTypes;
-},{"./ReactElement":266,"./ReactPropTypeLocationNames":287,"./getIteratorFn":331,"fbjs/lib/emptyFunction":354}],290:[function(require,module,exports){
+},{"./ReactElement":242,"./ReactPropTypeLocationNames":263,"./getIteratorFn":307,"fbjs/lib/emptyFunction":330}],266:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-present, Facebook, Inc.
@@ -48104,7 +49581,7 @@ PooledClass.addPoolingTo(ReactReconcileTransaction);
 
 module.exports = ReactReconcileTransaction;
 }).call(this,require('_process'))
-},{"./CallbackQueue":210,"./PooledClass":230,"./ReactBrowserEventEmitter":232,"./ReactInputSelection":276,"./ReactInstrumentation":278,"./ReactUpdateQueue":295,"./Transaction":314,"_process":44,"object-assign":373}],291:[function(require,module,exports){
+},{"./CallbackQueue":186,"./PooledClass":206,"./ReactBrowserEventEmitter":208,"./ReactInputSelection":252,"./ReactInstrumentation":254,"./ReactUpdateQueue":271,"./Transaction":290,"_process":44,"object-assign":349}],267:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-present, Facebook, Inc.
@@ -48283,7 +49760,7 @@ var ReactReconciler = {
 
 module.exports = ReactReconciler;
 }).call(this,require('_process'))
-},{"./ReactInstrumentation":278,"./ReactRef":292,"./reactProdInvariant":340,"_process":44,"fbjs/lib/invariant":362}],292:[function(require,module,exports){
+},{"./ReactInstrumentation":254,"./ReactRef":268,"./reactProdInvariant":316,"_process":44,"fbjs/lib/invariant":338}],268:[function(require,module,exports){
 /**
  * Copyright 2013-present, Facebook, Inc.
  * All rights reserved.
@@ -48362,7 +49839,7 @@ ReactRef.detachRefs = function (instance, element) {
 };
 
 module.exports = ReactRef;
-},{"./ReactOwner":286}],293:[function(require,module,exports){
+},{"./ReactOwner":262}],269:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2014-present, Facebook, Inc.
@@ -48455,7 +49932,7 @@ PooledClass.addPoolingTo(ReactServerRenderingTransaction);
 
 module.exports = ReactServerRenderingTransaction;
 }).call(this,require('_process'))
-},{"./PooledClass":230,"./ReactInstrumentation":278,"./ReactServerUpdateQueue":294,"./Transaction":314,"_process":44,"object-assign":373}],294:[function(require,module,exports){
+},{"./PooledClass":206,"./ReactInstrumentation":254,"./ReactServerUpdateQueue":270,"./Transaction":290,"_process":44,"object-assign":349}],270:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2015-present, Facebook, Inc.
@@ -48599,7 +50076,7 @@ var ReactServerUpdateQueue = function () {
 
 module.exports = ReactServerUpdateQueue;
 }).call(this,require('_process'))
-},{"./ReactUpdateQueue":295,"./Transaction":314,"_process":44,"fbjs/lib/warning":372}],295:[function(require,module,exports){
+},{"./ReactUpdateQueue":271,"./Transaction":290,"_process":44,"fbjs/lib/warning":348}],271:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2015-present, Facebook, Inc.
@@ -48827,7 +50304,7 @@ var ReactUpdateQueue = {
 
 module.exports = ReactUpdateQueue;
 }).call(this,require('_process'))
-},{"./ReactCurrentOwner":241,"./ReactInstanceMap":277,"./ReactInstrumentation":278,"./ReactUpdates":296,"./reactProdInvariant":340,"_process":44,"fbjs/lib/invariant":362,"fbjs/lib/warning":372}],296:[function(require,module,exports){
+},{"./ReactCurrentOwner":217,"./ReactInstanceMap":253,"./ReactInstrumentation":254,"./ReactUpdates":272,"./reactProdInvariant":316,"_process":44,"fbjs/lib/invariant":338,"fbjs/lib/warning":348}],272:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-present, Facebook, Inc.
@@ -49081,7 +50558,7 @@ var ReactUpdates = {
 
 module.exports = ReactUpdates;
 }).call(this,require('_process'))
-},{"./CallbackQueue":210,"./PooledClass":230,"./ReactFeatureFlags":272,"./ReactReconciler":291,"./Transaction":314,"./reactProdInvariant":340,"_process":44,"fbjs/lib/invariant":362,"object-assign":373}],297:[function(require,module,exports){
+},{"./CallbackQueue":186,"./PooledClass":206,"./ReactFeatureFlags":248,"./ReactReconciler":267,"./Transaction":290,"./reactProdInvariant":316,"_process":44,"fbjs/lib/invariant":338,"object-assign":349}],273:[function(require,module,exports){
 /**
  * Copyright 2013-present, Facebook, Inc.
  * All rights reserved.
@@ -49096,7 +50573,7 @@ module.exports = ReactUpdates;
 'use strict';
 
 module.exports = '15.2.1';
-},{}],298:[function(require,module,exports){
+},{}],274:[function(require,module,exports){
 /**
  * Copyright 2013-present, Facebook, Inc.
  * All rights reserved.
@@ -49397,7 +50874,7 @@ Object.keys(ATTRS).forEach(function (key) {
 });
 
 module.exports = SVGDOMPropertyConfig;
-},{}],299:[function(require,module,exports){
+},{}],275:[function(require,module,exports){
 /**
  * Copyright 2013-present, Facebook, Inc.
  * All rights reserved.
@@ -49594,7 +51071,7 @@ var SelectEventPlugin = {
 };
 
 module.exports = SelectEventPlugin;
-},{"./EventConstants":221,"./EventPropagators":225,"./ReactDOMComponentTree":246,"./ReactInputSelection":276,"./SyntheticEvent":305,"./isTextInputElement":337,"fbjs/lib/ExecutionEnvironment":348,"fbjs/lib/getActiveElement":357,"fbjs/lib/keyOf":366,"fbjs/lib/shallowEqual":371}],300:[function(require,module,exports){
+},{"./EventConstants":197,"./EventPropagators":201,"./ReactDOMComponentTree":222,"./ReactInputSelection":252,"./SyntheticEvent":281,"./isTextInputElement":313,"fbjs/lib/ExecutionEnvironment":324,"fbjs/lib/getActiveElement":333,"fbjs/lib/keyOf":342,"fbjs/lib/shallowEqual":347}],276:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-present, Facebook, Inc.
@@ -50226,7 +51703,7 @@ var SimpleEventPlugin = {
 
 module.exports = SimpleEventPlugin;
 }).call(this,require('_process'))
-},{"./EventConstants":221,"./EventPropagators":225,"./ReactDOMComponentTree":246,"./SyntheticAnimationEvent":301,"./SyntheticClipboardEvent":302,"./SyntheticDragEvent":304,"./SyntheticEvent":305,"./SyntheticFocusEvent":306,"./SyntheticKeyboardEvent":308,"./SyntheticMouseEvent":309,"./SyntheticTouchEvent":310,"./SyntheticTransitionEvent":311,"./SyntheticUIEvent":312,"./SyntheticWheelEvent":313,"./getEventCharCode":326,"./reactProdInvariant":340,"_process":44,"fbjs/lib/EventListener":347,"fbjs/lib/emptyFunction":354,"fbjs/lib/invariant":362,"fbjs/lib/keyOf":366}],301:[function(require,module,exports){
+},{"./EventConstants":197,"./EventPropagators":201,"./ReactDOMComponentTree":222,"./SyntheticAnimationEvent":277,"./SyntheticClipboardEvent":278,"./SyntheticDragEvent":280,"./SyntheticEvent":281,"./SyntheticFocusEvent":282,"./SyntheticKeyboardEvent":284,"./SyntheticMouseEvent":285,"./SyntheticTouchEvent":286,"./SyntheticTransitionEvent":287,"./SyntheticUIEvent":288,"./SyntheticWheelEvent":289,"./getEventCharCode":302,"./reactProdInvariant":316,"_process":44,"fbjs/lib/EventListener":323,"fbjs/lib/emptyFunction":330,"fbjs/lib/invariant":338,"fbjs/lib/keyOf":342}],277:[function(require,module,exports){
 /**
  * Copyright 2013-present, Facebook, Inc.
  * All rights reserved.
@@ -50266,7 +51743,7 @@ function SyntheticAnimationEvent(dispatchConfig, dispatchMarker, nativeEvent, na
 SyntheticEvent.augmentClass(SyntheticAnimationEvent, AnimationEventInterface);
 
 module.exports = SyntheticAnimationEvent;
-},{"./SyntheticEvent":305}],302:[function(require,module,exports){
+},{"./SyntheticEvent":281}],278:[function(require,module,exports){
 /**
  * Copyright 2013-present, Facebook, Inc.
  * All rights reserved.
@@ -50305,7 +51782,7 @@ function SyntheticClipboardEvent(dispatchConfig, dispatchMarker, nativeEvent, na
 SyntheticEvent.augmentClass(SyntheticClipboardEvent, ClipboardEventInterface);
 
 module.exports = SyntheticClipboardEvent;
-},{"./SyntheticEvent":305}],303:[function(require,module,exports){
+},{"./SyntheticEvent":281}],279:[function(require,module,exports){
 /**
  * Copyright 2013-present, Facebook, Inc.
  * All rights reserved.
@@ -50342,7 +51819,7 @@ function SyntheticCompositionEvent(dispatchConfig, dispatchMarker, nativeEvent, 
 SyntheticEvent.augmentClass(SyntheticCompositionEvent, CompositionEventInterface);
 
 module.exports = SyntheticCompositionEvent;
-},{"./SyntheticEvent":305}],304:[function(require,module,exports){
+},{"./SyntheticEvent":281}],280:[function(require,module,exports){
 /**
  * Copyright 2013-present, Facebook, Inc.
  * All rights reserved.
@@ -50379,7 +51856,7 @@ function SyntheticDragEvent(dispatchConfig, dispatchMarker, nativeEvent, nativeE
 SyntheticMouseEvent.augmentClass(SyntheticDragEvent, DragEventInterface);
 
 module.exports = SyntheticDragEvent;
-},{"./SyntheticMouseEvent":309}],305:[function(require,module,exports){
+},{"./SyntheticMouseEvent":285}],281:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-present, Facebook, Inc.
@@ -50642,7 +52119,7 @@ function getPooledWarningPropertyDefinition(propName, getVal) {
   }
 }
 }).call(this,require('_process'))
-},{"./PooledClass":230,"_process":44,"fbjs/lib/emptyFunction":354,"fbjs/lib/warning":372,"object-assign":373}],306:[function(require,module,exports){
+},{"./PooledClass":206,"_process":44,"fbjs/lib/emptyFunction":330,"fbjs/lib/warning":348,"object-assign":349}],282:[function(require,module,exports){
 /**
  * Copyright 2013-present, Facebook, Inc.
  * All rights reserved.
@@ -50679,7 +52156,7 @@ function SyntheticFocusEvent(dispatchConfig, dispatchMarker, nativeEvent, native
 SyntheticUIEvent.augmentClass(SyntheticFocusEvent, FocusEventInterface);
 
 module.exports = SyntheticFocusEvent;
-},{"./SyntheticUIEvent":312}],307:[function(require,module,exports){
+},{"./SyntheticUIEvent":288}],283:[function(require,module,exports){
 /**
  * Copyright 2013-present, Facebook, Inc.
  * All rights reserved.
@@ -50717,7 +52194,7 @@ function SyntheticInputEvent(dispatchConfig, dispatchMarker, nativeEvent, native
 SyntheticEvent.augmentClass(SyntheticInputEvent, InputEventInterface);
 
 module.exports = SyntheticInputEvent;
-},{"./SyntheticEvent":305}],308:[function(require,module,exports){
+},{"./SyntheticEvent":281}],284:[function(require,module,exports){
 /**
  * Copyright 2013-present, Facebook, Inc.
  * All rights reserved.
@@ -50802,7 +52279,7 @@ function SyntheticKeyboardEvent(dispatchConfig, dispatchMarker, nativeEvent, nat
 SyntheticUIEvent.augmentClass(SyntheticKeyboardEvent, KeyboardEventInterface);
 
 module.exports = SyntheticKeyboardEvent;
-},{"./SyntheticUIEvent":312,"./getEventCharCode":326,"./getEventKey":327,"./getEventModifierState":328}],309:[function(require,module,exports){
+},{"./SyntheticUIEvent":288,"./getEventCharCode":302,"./getEventKey":303,"./getEventModifierState":304}],285:[function(require,module,exports){
 /**
  * Copyright 2013-present, Facebook, Inc.
  * All rights reserved.
@@ -50875,7 +52352,7 @@ function SyntheticMouseEvent(dispatchConfig, dispatchMarker, nativeEvent, native
 SyntheticUIEvent.augmentClass(SyntheticMouseEvent, MouseEventInterface);
 
 module.exports = SyntheticMouseEvent;
-},{"./SyntheticUIEvent":312,"./ViewportMetrics":315,"./getEventModifierState":328}],310:[function(require,module,exports){
+},{"./SyntheticUIEvent":288,"./ViewportMetrics":291,"./getEventModifierState":304}],286:[function(require,module,exports){
 /**
  * Copyright 2013-present, Facebook, Inc.
  * All rights reserved.
@@ -50921,7 +52398,7 @@ function SyntheticTouchEvent(dispatchConfig, dispatchMarker, nativeEvent, native
 SyntheticUIEvent.augmentClass(SyntheticTouchEvent, TouchEventInterface);
 
 module.exports = SyntheticTouchEvent;
-},{"./SyntheticUIEvent":312,"./getEventModifierState":328}],311:[function(require,module,exports){
+},{"./SyntheticUIEvent":288,"./getEventModifierState":304}],287:[function(require,module,exports){
 /**
  * Copyright 2013-present, Facebook, Inc.
  * All rights reserved.
@@ -50961,7 +52438,7 @@ function SyntheticTransitionEvent(dispatchConfig, dispatchMarker, nativeEvent, n
 SyntheticEvent.augmentClass(SyntheticTransitionEvent, TransitionEventInterface);
 
 module.exports = SyntheticTransitionEvent;
-},{"./SyntheticEvent":305}],312:[function(require,module,exports){
+},{"./SyntheticEvent":281}],288:[function(require,module,exports){
 /**
  * Copyright 2013-present, Facebook, Inc.
  * All rights reserved.
@@ -51021,7 +52498,7 @@ function SyntheticUIEvent(dispatchConfig, dispatchMarker, nativeEvent, nativeEve
 SyntheticEvent.augmentClass(SyntheticUIEvent, UIEventInterface);
 
 module.exports = SyntheticUIEvent;
-},{"./SyntheticEvent":305,"./getEventTarget":329}],313:[function(require,module,exports){
+},{"./SyntheticEvent":281,"./getEventTarget":305}],289:[function(require,module,exports){
 /**
  * Copyright 2013-present, Facebook, Inc.
  * All rights reserved.
@@ -51076,7 +52553,7 @@ function SyntheticWheelEvent(dispatchConfig, dispatchMarker, nativeEvent, native
 SyntheticMouseEvent.augmentClass(SyntheticWheelEvent, WheelEventInterface);
 
 module.exports = SyntheticWheelEvent;
-},{"./SyntheticMouseEvent":309}],314:[function(require,module,exports){
+},{"./SyntheticMouseEvent":285}],290:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-present, Facebook, Inc.
@@ -51312,7 +52789,7 @@ var Transaction = {
 
 module.exports = Transaction;
 }).call(this,require('_process'))
-},{"./reactProdInvariant":340,"_process":44,"fbjs/lib/invariant":362}],315:[function(require,module,exports){
+},{"./reactProdInvariant":316,"_process":44,"fbjs/lib/invariant":338}],291:[function(require,module,exports){
 /**
  * Copyright 2013-present, Facebook, Inc.
  * All rights reserved.
@@ -51340,7 +52817,7 @@ var ViewportMetrics = {
 };
 
 module.exports = ViewportMetrics;
-},{}],316:[function(require,module,exports){
+},{}],292:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2014-present, Facebook, Inc.
@@ -51401,7 +52878,7 @@ function accumulateInto(current, next) {
 
 module.exports = accumulateInto;
 }).call(this,require('_process'))
-},{"./reactProdInvariant":340,"_process":44,"fbjs/lib/invariant":362}],317:[function(require,module,exports){
+},{"./reactProdInvariant":316,"_process":44,"fbjs/lib/invariant":338}],293:[function(require,module,exports){
 /**
  * Copyright 2013-present, Facebook, Inc.
  * All rights reserved.
@@ -51446,7 +52923,7 @@ function adler32(data) {
 }
 
 module.exports = adler32;
-},{}],318:[function(require,module,exports){
+},{}],294:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-present, Facebook, Inc.
@@ -51473,7 +52950,7 @@ if (process.env.NODE_ENV !== 'production') {
 
 module.exports = canDefineProperty;
 }).call(this,require('_process'))
-},{"_process":44}],319:[function(require,module,exports){
+},{"_process":44}],295:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-present, Facebook, Inc.
@@ -51549,7 +53026,7 @@ function checkReactTypeSpec(typeSpecs, values, location, componentName, element,
 
 module.exports = checkReactTypeSpec;
 }).call(this,require('_process'))
-},{"./ReactComponentTreeDevtool":239,"./ReactPropTypeLocationNames":287,"./reactProdInvariant":340,"_process":44,"fbjs/lib/invariant":362,"fbjs/lib/warning":372}],320:[function(require,module,exports){
+},{"./ReactComponentTreeDevtool":215,"./ReactPropTypeLocationNames":263,"./reactProdInvariant":316,"_process":44,"fbjs/lib/invariant":338,"fbjs/lib/warning":348}],296:[function(require,module,exports){
 /**
  * Copyright 2013-present, Facebook, Inc.
  * All rights reserved.
@@ -51582,7 +53059,7 @@ var createMicrosoftUnsafeLocalFunction = function (func) {
 };
 
 module.exports = createMicrosoftUnsafeLocalFunction;
-},{}],321:[function(require,module,exports){
+},{}],297:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-present, Facebook, Inc.
@@ -51664,7 +53141,7 @@ function dangerousStyleValue(name, value, component) {
 
 module.exports = dangerousStyleValue;
 }).call(this,require('_process'))
-},{"./CSSProperty":208,"_process":44,"fbjs/lib/warning":372}],322:[function(require,module,exports){
+},{"./CSSProperty":184,"_process":44,"fbjs/lib/warning":348}],298:[function(require,module,exports){
 /**
  * Copyright 2016-present, Facebook, Inc.
  * All rights reserved.
@@ -51787,7 +53264,7 @@ function escapeTextContentForBrowser(text) {
 }
 
 module.exports = escapeTextContentForBrowser;
-},{}],323:[function(require,module,exports){
+},{}],299:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-present, Facebook, Inc.
@@ -51850,7 +53327,7 @@ function findDOMNode(componentOrElement) {
 
 module.exports = findDOMNode;
 }).call(this,require('_process'))
-},{"./ReactCurrentOwner":241,"./ReactDOMComponentTree":246,"./ReactInstanceMap":277,"./getHostComponentFromComposite":330,"./reactProdInvariant":340,"_process":44,"fbjs/lib/invariant":362,"fbjs/lib/warning":372}],324:[function(require,module,exports){
+},{"./ReactCurrentOwner":217,"./ReactDOMComponentTree":222,"./ReactInstanceMap":253,"./getHostComponentFromComposite":306,"./reactProdInvariant":316,"_process":44,"fbjs/lib/invariant":338,"fbjs/lib/warning":348}],300:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-present, Facebook, Inc.
@@ -51914,7 +53391,7 @@ function flattenChildren(children, selfDebugID) {
 
 module.exports = flattenChildren;
 }).call(this,require('_process'))
-},{"./KeyEscapeUtils":228,"./ReactComponentTreeDevtool":239,"./traverseAllChildren":345,"_process":44,"fbjs/lib/warning":372}],325:[function(require,module,exports){
+},{"./KeyEscapeUtils":204,"./ReactComponentTreeDevtool":215,"./traverseAllChildren":321,"_process":44,"fbjs/lib/warning":348}],301:[function(require,module,exports){
 /**
  * Copyright 2013-present, Facebook, Inc.
  * All rights reserved.
@@ -51946,7 +53423,7 @@ function forEachAccumulated(arr, cb, scope) {
 }
 
 module.exports = forEachAccumulated;
-},{}],326:[function(require,module,exports){
+},{}],302:[function(require,module,exports){
 /**
  * Copyright 2013-present, Facebook, Inc.
  * All rights reserved.
@@ -51997,7 +53474,7 @@ function getEventCharCode(nativeEvent) {
 }
 
 module.exports = getEventCharCode;
-},{}],327:[function(require,module,exports){
+},{}],303:[function(require,module,exports){
 /**
  * Copyright 2013-present, Facebook, Inc.
  * All rights reserved.
@@ -52100,7 +53577,7 @@ function getEventKey(nativeEvent) {
 }
 
 module.exports = getEventKey;
-},{"./getEventCharCode":326}],328:[function(require,module,exports){
+},{"./getEventCharCode":302}],304:[function(require,module,exports){
 /**
  * Copyright 2013-present, Facebook, Inc.
  * All rights reserved.
@@ -52144,7 +53621,7 @@ function getEventModifierState(nativeEvent) {
 }
 
 module.exports = getEventModifierState;
-},{}],329:[function(require,module,exports){
+},{}],305:[function(require,module,exports){
 /**
  * Copyright 2013-present, Facebook, Inc.
  * All rights reserved.
@@ -52180,7 +53657,7 @@ function getEventTarget(nativeEvent) {
 }
 
 module.exports = getEventTarget;
-},{}],330:[function(require,module,exports){
+},{}],306:[function(require,module,exports){
 /**
  * Copyright 2013-present, Facebook, Inc.
  * All rights reserved.
@@ -52211,7 +53688,7 @@ function getHostComponentFromComposite(inst) {
 }
 
 module.exports = getHostComponentFromComposite;
-},{"./ReactNodeTypes":284}],331:[function(require,module,exports){
+},{"./ReactNodeTypes":260}],307:[function(require,module,exports){
 /**
  * Copyright 2013-present, Facebook, Inc.
  * All rights reserved.
@@ -52253,7 +53730,7 @@ function getIteratorFn(maybeIterable) {
 }
 
 module.exports = getIteratorFn;
-},{}],332:[function(require,module,exports){
+},{}],308:[function(require,module,exports){
 /**
  * Copyright 2013-present, Facebook, Inc.
  * All rights reserved.
@@ -52328,7 +53805,7 @@ function getNodeForCharacterOffset(root, offset) {
 }
 
 module.exports = getNodeForCharacterOffset;
-},{}],333:[function(require,module,exports){
+},{}],309:[function(require,module,exports){
 /**
  * Copyright 2013-present, Facebook, Inc.
  * All rights reserved.
@@ -52362,7 +53839,7 @@ function getTextContentAccessor() {
 }
 
 module.exports = getTextContentAccessor;
-},{"fbjs/lib/ExecutionEnvironment":348}],334:[function(require,module,exports){
+},{"fbjs/lib/ExecutionEnvironment":324}],310:[function(require,module,exports){
 /**
  * Copyright 2013-present, Facebook, Inc.
  * All rights reserved.
@@ -52464,7 +53941,7 @@ function getVendorPrefixedEventName(eventName) {
 }
 
 module.exports = getVendorPrefixedEventName;
-},{"fbjs/lib/ExecutionEnvironment":348}],335:[function(require,module,exports){
+},{"fbjs/lib/ExecutionEnvironment":324}],311:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-present, Facebook, Inc.
@@ -52613,7 +54090,7 @@ function instantiateReactComponent(node, shouldHaveDebugID) {
 
 module.exports = instantiateReactComponent;
 }).call(this,require('_process'))
-},{"./ReactCompositeComponent":240,"./ReactEmptyComponent":268,"./ReactHostComponent":273,"./ReactInstrumentation":278,"./reactProdInvariant":340,"_process":44,"fbjs/lib/invariant":362,"fbjs/lib/warning":372,"object-assign":373}],336:[function(require,module,exports){
+},{"./ReactCompositeComponent":216,"./ReactEmptyComponent":244,"./ReactHostComponent":249,"./ReactInstrumentation":254,"./reactProdInvariant":316,"_process":44,"fbjs/lib/invariant":338,"fbjs/lib/warning":348,"object-assign":349}],312:[function(require,module,exports){
 /**
  * Copyright 2013-present, Facebook, Inc.
  * All rights reserved.
@@ -52674,7 +54151,7 @@ function isEventSupported(eventNameSuffix, capture) {
 }
 
 module.exports = isEventSupported;
-},{"fbjs/lib/ExecutionEnvironment":348}],337:[function(require,module,exports){
+},{"fbjs/lib/ExecutionEnvironment":324}],313:[function(require,module,exports){
 /**
  * Copyright 2013-present, Facebook, Inc.
  * All rights reserved.
@@ -52726,7 +54203,7 @@ function isTextInputElement(elem) {
 }
 
 module.exports = isTextInputElement;
-},{}],338:[function(require,module,exports){
+},{}],314:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-present, Facebook, Inc.
@@ -52767,7 +54244,7 @@ function onlyChild(children) {
 
 module.exports = onlyChild;
 }).call(this,require('_process'))
-},{"./ReactElement":266,"./reactProdInvariant":340,"_process":44,"fbjs/lib/invariant":362}],339:[function(require,module,exports){
+},{"./ReactElement":242,"./reactProdInvariant":316,"_process":44,"fbjs/lib/invariant":338}],315:[function(require,module,exports){
 /**
  * Copyright 2013-present, Facebook, Inc.
  * All rights reserved.
@@ -52794,7 +54271,7 @@ function quoteAttributeValueForBrowser(value) {
 }
 
 module.exports = quoteAttributeValueForBrowser;
-},{"./escapeTextContentForBrowser":322}],340:[function(require,module,exports){
+},{"./escapeTextContentForBrowser":298}],316:[function(require,module,exports){
 /**
  * Copyright (c) 2013-present, Facebook, Inc.
  * All rights reserved.
@@ -52834,7 +54311,7 @@ function reactProdInvariant(code) {
 }
 
 module.exports = reactProdInvariant;
-},{}],341:[function(require,module,exports){
+},{}],317:[function(require,module,exports){
 /**
  * Copyright 2013-present, Facebook, Inc.
  * All rights reserved.
@@ -52851,7 +54328,7 @@ module.exports = reactProdInvariant;
 var ReactMount = require('./ReactMount');
 
 module.exports = ReactMount.renderSubtreeIntoContainer;
-},{"./ReactMount":281}],342:[function(require,module,exports){
+},{"./ReactMount":257}],318:[function(require,module,exports){
 /**
  * Copyright 2013-present, Facebook, Inc.
  * All rights reserved.
@@ -52950,7 +54427,7 @@ if (ExecutionEnvironment.canUseDOM) {
 }
 
 module.exports = setInnerHTML;
-},{"./DOMNamespaces":214,"./createMicrosoftUnsafeLocalFunction":320,"fbjs/lib/ExecutionEnvironment":348}],343:[function(require,module,exports){
+},{"./DOMNamespaces":190,"./createMicrosoftUnsafeLocalFunction":296,"fbjs/lib/ExecutionEnvironment":324}],319:[function(require,module,exports){
 /**
  * Copyright 2013-present, Facebook, Inc.
  * All rights reserved.
@@ -52999,7 +54476,7 @@ if (ExecutionEnvironment.canUseDOM) {
 }
 
 module.exports = setTextContent;
-},{"./escapeTextContentForBrowser":322,"./setInnerHTML":342,"fbjs/lib/ExecutionEnvironment":348}],344:[function(require,module,exports){
+},{"./escapeTextContentForBrowser":298,"./setInnerHTML":318,"fbjs/lib/ExecutionEnvironment":324}],320:[function(require,module,exports){
 /**
  * Copyright 2013-present, Facebook, Inc.
  * All rights reserved.
@@ -53042,7 +54519,7 @@ function shouldUpdateReactComponent(prevElement, nextElement) {
 }
 
 module.exports = shouldUpdateReactComponent;
-},{}],345:[function(require,module,exports){
+},{}],321:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-present, Facebook, Inc.
@@ -53205,7 +54682,7 @@ function traverseAllChildren(children, callback, traverseContext) {
 
 module.exports = traverseAllChildren;
 }).call(this,require('_process'))
-},{"./KeyEscapeUtils":228,"./ReactCurrentOwner":241,"./ReactElement":266,"./getIteratorFn":331,"./reactProdInvariant":340,"_process":44,"fbjs/lib/invariant":362,"fbjs/lib/warning":372}],346:[function(require,module,exports){
+},{"./KeyEscapeUtils":204,"./ReactCurrentOwner":217,"./ReactElement":242,"./getIteratorFn":307,"./reactProdInvariant":316,"_process":44,"fbjs/lib/invariant":338,"fbjs/lib/warning":348}],322:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2015-present, Facebook, Inc.
@@ -53577,7 +55054,7 @@ if (process.env.NODE_ENV !== 'production') {
 
 module.exports = validateDOMNesting;
 }).call(this,require('_process'))
-},{"_process":44,"fbjs/lib/emptyFunction":354,"fbjs/lib/warning":372,"object-assign":373}],347:[function(require,module,exports){
+},{"_process":44,"fbjs/lib/emptyFunction":330,"fbjs/lib/warning":348,"object-assign":349}],323:[function(require,module,exports){
 (function (process){
 'use strict';
 
@@ -53663,7 +55140,7 @@ var EventListener = {
 
 module.exports = EventListener;
 }).call(this,require('_process'))
-},{"./emptyFunction":354,"_process":44}],348:[function(require,module,exports){
+},{"./emptyFunction":330,"_process":44}],324:[function(require,module,exports){
 /**
  * Copyright (c) 2013-present, Facebook, Inc.
  * All rights reserved.
@@ -53699,7 +55176,7 @@ var ExecutionEnvironment = {
 };
 
 module.exports = ExecutionEnvironment;
-},{}],349:[function(require,module,exports){
+},{}],325:[function(require,module,exports){
 "use strict";
 
 /**
@@ -53731,7 +55208,7 @@ function camelize(string) {
 }
 
 module.exports = camelize;
-},{}],350:[function(require,module,exports){
+},{}],326:[function(require,module,exports){
 /**
  * Copyright (c) 2013-present, Facebook, Inc.
  * All rights reserved.
@@ -53771,7 +55248,7 @@ function camelizeStyleName(string) {
 }
 
 module.exports = camelizeStyleName;
-},{"./camelize":349}],351:[function(require,module,exports){
+},{"./camelize":325}],327:[function(require,module,exports){
 'use strict';
 
 /**
@@ -53811,7 +55288,7 @@ function containsNode(outerNode, innerNode) {
 }
 
 module.exports = containsNode;
-},{"./isTextNode":364}],352:[function(require,module,exports){
+},{"./isTextNode":340}],328:[function(require,module,exports){
 (function (process){
 'use strict';
 
@@ -53940,7 +55417,7 @@ function createArrayFromMixed(obj) {
 
 module.exports = createArrayFromMixed;
 }).call(this,require('_process'))
-},{"./invariant":362,"_process":44}],353:[function(require,module,exports){
+},{"./invariant":338,"_process":44}],329:[function(require,module,exports){
 (function (process){
 'use strict';
 
@@ -54026,7 +55503,7 @@ function createNodesFromMarkup(markup, handleScript) {
 
 module.exports = createNodesFromMarkup;
 }).call(this,require('_process'))
-},{"./ExecutionEnvironment":348,"./createArrayFromMixed":352,"./getMarkupWrap":358,"./invariant":362,"_process":44}],354:[function(require,module,exports){
+},{"./ExecutionEnvironment":324,"./createArrayFromMixed":328,"./getMarkupWrap":334,"./invariant":338,"_process":44}],330:[function(require,module,exports){
 "use strict";
 
 /**
@@ -54065,7 +55542,7 @@ emptyFunction.thatReturnsArgument = function (arg) {
 };
 
 module.exports = emptyFunction;
-},{}],355:[function(require,module,exports){
+},{}],331:[function(require,module,exports){
 (function (process){
 /**
  * Copyright (c) 2013-present, Facebook, Inc.
@@ -54087,7 +55564,7 @@ if (process.env.NODE_ENV !== 'production') {
 
 module.exports = emptyObject;
 }).call(this,require('_process'))
-},{"_process":44}],356:[function(require,module,exports){
+},{"_process":44}],332:[function(require,module,exports){
 /**
  * Copyright (c) 2013-present, Facebook, Inc.
  * All rights reserved.
@@ -54114,7 +55591,7 @@ function focusNode(node) {
 }
 
 module.exports = focusNode;
-},{}],357:[function(require,module,exports){
+},{}],333:[function(require,module,exports){
 'use strict';
 
 /**
@@ -54149,7 +55626,7 @@ function getActiveElement() /*?DOMElement*/{
 }
 
 module.exports = getActiveElement;
-},{}],358:[function(require,module,exports){
+},{}],334:[function(require,module,exports){
 (function (process){
 'use strict';
 
@@ -54246,7 +55723,7 @@ function getMarkupWrap(nodeName) {
 
 module.exports = getMarkupWrap;
 }).call(this,require('_process'))
-},{"./ExecutionEnvironment":348,"./invariant":362,"_process":44}],359:[function(require,module,exports){
+},{"./ExecutionEnvironment":324,"./invariant":338,"_process":44}],335:[function(require,module,exports){
 /**
  * Copyright (c) 2013-present, Facebook, Inc.
  * All rights reserved.
@@ -54285,7 +55762,7 @@ function getUnboundedScrollPosition(scrollable) {
 }
 
 module.exports = getUnboundedScrollPosition;
-},{}],360:[function(require,module,exports){
+},{}],336:[function(require,module,exports){
 'use strict';
 
 /**
@@ -54318,7 +55795,7 @@ function hyphenate(string) {
 }
 
 module.exports = hyphenate;
-},{}],361:[function(require,module,exports){
+},{}],337:[function(require,module,exports){
 /**
  * Copyright (c) 2013-present, Facebook, Inc.
  * All rights reserved.
@@ -54357,7 +55834,7 @@ function hyphenateStyleName(string) {
 }
 
 module.exports = hyphenateStyleName;
-},{"./hyphenate":360}],362:[function(require,module,exports){
+},{"./hyphenate":336}],338:[function(require,module,exports){
 (function (process){
 /**
  * Copyright (c) 2013-present, Facebook, Inc.
@@ -54409,7 +55886,7 @@ function invariant(condition, format, a, b, c, d, e, f) {
 
 module.exports = invariant;
 }).call(this,require('_process'))
-},{"_process":44}],363:[function(require,module,exports){
+},{"_process":44}],339:[function(require,module,exports){
 'use strict';
 
 /**
@@ -54432,7 +55909,7 @@ function isNode(object) {
 }
 
 module.exports = isNode;
-},{}],364:[function(require,module,exports){
+},{}],340:[function(require,module,exports){
 'use strict';
 
 /**
@@ -54457,7 +55934,7 @@ function isTextNode(object) {
 }
 
 module.exports = isTextNode;
-},{"./isNode":363}],365:[function(require,module,exports){
+},{"./isNode":339}],341:[function(require,module,exports){
 (function (process){
 /**
  * Copyright (c) 2013-present, Facebook, Inc.
@@ -54507,7 +55984,7 @@ var keyMirror = function keyMirror(obj) {
 
 module.exports = keyMirror;
 }).call(this,require('_process'))
-},{"./invariant":362,"_process":44}],366:[function(require,module,exports){
+},{"./invariant":338,"_process":44}],342:[function(require,module,exports){
 "use strict";
 
 /**
@@ -54542,7 +56019,7 @@ var keyOf = function keyOf(oneKeyObj) {
 };
 
 module.exports = keyOf;
-},{}],367:[function(require,module,exports){
+},{}],343:[function(require,module,exports){
 /**
  * Copyright (c) 2013-present, Facebook, Inc.
  * All rights reserved.
@@ -54593,7 +56070,7 @@ function mapObject(object, callback, context) {
 }
 
 module.exports = mapObject;
-},{}],368:[function(require,module,exports){
+},{}],344:[function(require,module,exports){
 /**
  * Copyright (c) 2013-present, Facebook, Inc.
  * All rights reserved.
@@ -54623,7 +56100,7 @@ function memoizeStringOnly(callback) {
 }
 
 module.exports = memoizeStringOnly;
-},{}],369:[function(require,module,exports){
+},{}],345:[function(require,module,exports){
 /**
  * Copyright (c) 2013-present, Facebook, Inc.
  * All rights reserved.
@@ -54646,7 +56123,7 @@ if (ExecutionEnvironment.canUseDOM) {
 }
 
 module.exports = performance || {};
-},{"./ExecutionEnvironment":348}],370:[function(require,module,exports){
+},{"./ExecutionEnvironment":324}],346:[function(require,module,exports){
 'use strict';
 
 /**
@@ -54680,7 +56157,7 @@ if (performance.now) {
 }
 
 module.exports = performanceNow;
-},{"./performance":369}],371:[function(require,module,exports){
+},{"./performance":345}],347:[function(require,module,exports){
 /**
  * Copyright (c) 2013-present, Facebook, Inc.
  * All rights reserved.
@@ -54747,7 +56224,7 @@ function shallowEqual(objA, objB) {
 }
 
 module.exports = shallowEqual;
-},{}],372:[function(require,module,exports){
+},{}],348:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2014-2015, Facebook, Inc.
@@ -54806,7 +56283,7 @@ if (process.env.NODE_ENV !== 'production') {
 
 module.exports = warning;
 }).call(this,require('_process'))
-},{"./emptyFunction":354,"_process":44}],373:[function(require,module,exports){
+},{"./emptyFunction":330,"_process":44}],349:[function(require,module,exports){
 'use strict';
 /* eslint-disable no-unused-vars */
 var hasOwnProperty = Object.prototype.hasOwnProperty;
@@ -54891,12 +56368,12 @@ module.exports = shouldUseNative() ? Object.assign : function (target, source) {
 	return to;
 };
 
-},{}],374:[function(require,module,exports){
+},{}],350:[function(require,module,exports){
 'use strict';
 
 module.exports = require('./lib/React');
 
-},{"./lib/React":231}],375:[function(require,module,exports){
+},{"./lib/React":207}],351:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -54970,7 +56447,7 @@ if (typeof window !== 'undefined') {
 }
 module.exports = exports['default'];
 
-},{"./reactable/sort":383,"./reactable/table":384,"./reactable/td":385,"./reactable/tfoot":386,"./reactable/th":387,"./reactable/thead":388,"./reactable/tr":389,"./reactable/unsafe":390,"react":374}],376:[function(require,module,exports){
+},{"./reactable/sort":359,"./reactable/table":360,"./reactable/td":361,"./reactable/tfoot":362,"./reactable/th":363,"./reactable/thead":364,"./reactable/tr":365,"./reactable/unsafe":366,"react":350}],352:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -55064,7 +56541,7 @@ var Filterer = (function (_React$Component2) {
 exports.Filterer = Filterer;
 ;
 
-},{"react":374,"react-dom":131}],377:[function(require,module,exports){
+},{"react":350,"react-dom":107}],353:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -55089,7 +56566,7 @@ function extractDataFrom(key, column) {
     return (0, _stringable.stringable)(value) ? value : '';
 }
 
-},{"./stringable":380}],378:[function(require,module,exports){
+},{"./stringable":356}],354:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -55122,7 +56599,7 @@ function filterPropsFrom(baseProps) {
     return props;
 }
 
-},{}],379:[function(require,module,exports){
+},{}],355:[function(require,module,exports){
 // this is a bit hacky - it'd be nice if React exposed an API for this
 'use strict';
 
@@ -55135,7 +56612,7 @@ function isReactComponent(thing) {
     return thing !== null && typeof thing === 'object' && typeof thing.props !== 'undefined';
 }
 
-},{}],380:[function(require,module,exports){
+},{}],356:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -55147,7 +56624,7 @@ function stringable(thing) {
     return thing !== null && typeof thing !== 'undefined' && typeof (thing.toString === 'function');
 }
 
-},{}],381:[function(require,module,exports){
+},{}],357:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -55164,7 +56641,7 @@ function toArray(obj) {
     return ret;
 }
 
-},{}],382:[function(require,module,exports){
+},{}],358:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -55323,7 +56800,7 @@ var Paginator = (function (_React$Component) {
 exports.Paginator = Paginator;
 ;
 
-},{"react":374}],383:[function(require,module,exports){
+},{"react":350}],359:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -55412,7 +56889,7 @@ var Sort = {
 };
 exports.Sort = Sort;
 
-},{}],384:[function(require,module,exports){
+},{}],360:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -55984,7 +57461,7 @@ Table.defaultProps = {
     hideFilterInput: false
 };
 
-},{"./lib/extract_data_from":377,"./lib/filter_props_from":378,"./paginator":382,"./tfoot":386,"./th":387,"./thead":388,"./tr":389,"./unsafe":390,"react":374}],385:[function(require,module,exports){
+},{"./lib/extract_data_from":353,"./lib/filter_props_from":354,"./paginator":358,"./tfoot":362,"./th":363,"./thead":364,"./tr":365,"./unsafe":366,"react":350}],361:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -56074,7 +57551,7 @@ var Td = (function (_React$Component) {
 exports.Td = Td;
 ;
 
-},{"./lib/is_react_component":379,"./lib/stringable":380,"./unsafe":390,"react":374}],386:[function(require,module,exports){
+},{"./lib/is_react_component":355,"./lib/stringable":356,"./unsafe":366,"react":350}],362:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -56116,7 +57593,7 @@ var Tfoot = (function (_React$Component) {
 
 exports.Tfoot = Tfoot;
 
-},{"react":374}],387:[function(require,module,exports){
+},{"react":350}],363:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -56176,7 +57653,7 @@ var Th = (function (_React$Component) {
 exports.Th = Th;
 ;
 
-},{"./lib/filter_props_from":378,"./unsafe":390,"react":374}],388:[function(require,module,exports){
+},{"./lib/filter_props_from":354,"./unsafe":366,"react":350}],364:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -56336,7 +57813,7 @@ var Thead = (function (_React$Component) {
 exports.Thead = Thead;
 ;
 
-},{"./filterer":376,"./lib/filter_props_from":378,"./th":387,"react":374}],389:[function(require,module,exports){
+},{"./filterer":352,"./lib/filter_props_from":354,"./th":363,"react":350}],365:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {
@@ -56421,7 +57898,7 @@ exports.Tr = Tr;
 Tr.childNode = _td.Td;
 Tr.dataType = 'object';
 
-},{"./lib/filter_props_from":378,"./lib/to_array":381,"./td":385,"react":374}],390:[function(require,module,exports){
+},{"./lib/filter_props_from":354,"./lib/to_array":357,"./td":361,"react":350}],366:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -56464,7 +57941,7 @@ function isUnsafe(obj) {
 
 ;
 
-},{}],391:[function(require,module,exports){
+},{}],367:[function(require,module,exports){
 
 
 /*:: type Attr = { [key: string]: string } */
@@ -56572,7 +58049,7 @@ function normalize(str) {
 module.exports.parse = parse;
 module.exports.stringify = stringify;
 module.exports.normalize = normalize;
-},{}],392:[function(require,module,exports){
+},{}],368:[function(require,module,exports){
 //     Underscore.js 1.8.3
 //     http://underscorejs.org
 //     (c) 2009-2015 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors

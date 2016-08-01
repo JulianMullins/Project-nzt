@@ -1,36 +1,50 @@
 var React = require('react');
 var ReactDOM = require('react-dom');
-var rd3 = require('react-d3');
+var rd3 = require('react-d3-basic');
 var LineChart = rd3.LineChart;
 var AreaChart = rd3.AreaChart;
-var axios = require('axios')
 var _=require('underscore')
+var axios=require('axios')
 var stats;
 var dates=[];
 // var lineData1 = [{name: 'scores', values:[]}];
 // var lineData2 = [{name: 'reaction times', values:[]}];
-var Legend = require('react-d3-core').Legend;
+//var Legend = require('react-d3-core').Legend;
 
-  // setting you svg width
-  var width = 500
-    // setting your svg height
-  var height = 100
-    // setting your margins of your svg
-  var margins = {top: 20, right: 50, bottom: 20, left: 50}
-    // your x Axis accessor
-  // var x = function(d) {
-  //     return parseDate(d.month);
-  //   },
-    // set your x domain
-  //var xDomain = d3.extent(chartData, function(d){ return x(d) }),
-    // set your x range
-    var xDomain=[0,1]
-    var xRange = [0, 10]
-    // your scale type 'linear', 'ordinal', 'time'... etc.
-    var xScale = 'time'
-    // set your label name
-    var xLabel = "Month";
-
+      var data = [
+          {
+              "age": 0,
+              "index": 0
+          },
+          {
+              "age": .2,
+              "index": 1
+          },
+          {
+              "age": .7,
+              "index": 2
+          },
+          {
+              "age": .4,
+              "index": 3
+          }
+      ];
+ 
+      var chartSeries = [
+          {
+            field: 'age',
+            name: 'Age',
+            color: '#ff7f0e',
+            style: {
+              "stroke-width": 2,
+              "stroke-opacity": .2,
+              "fill-opacity": .2
+            }
+          }
+        ]
+ var x = function(d) {
+      return d.index;
+    }
 
 var MyComponent = React.createClass({
   getInitialState: function(){
@@ -41,61 +55,62 @@ var MyComponent = React.createClass({
   },
 componentDidMount: function(){
  // console.log(this.state, 'state')
-axios.get('/taco', {withCredentials: true})
-.then(function(responseJson){
-    this.state.lineData1[0].values=[];
-    this.state.lineData2[0].values=[];
-    this.state.lineData2[1].values=[];
-    this.state.lineData2[2].values=[];
-    stats=responseJson.data.stats;
-    _.map(stats, function(item, index){
-      if(item.score===0 || item.reactionTimes[0]===0){
-        return
-      }
-      this.state.lineData1[0].values.push({x: index, y:item.score})
-      this.state.lineData2[0].values.push({x: index, y:item.reactionTimes[0]*1.2/1000})
-      this.state.lineData2[1].values.push({x: index, y:item.reactionTimes[0]/1000})
-      this.state.lineData2[2].values.push({x: index, y:(item.reactionTimes[0]*.8/1000)})
-      var date=item.dateAchieved.split('Z');
-      date=date[0].split('T');
-      date=date[0].split('-')
-      dates.push({full: item.dateAchieved, splitDate: date})
-    }.bind(this))
-   // console.log(dates,'dates')
-   // console.log(this.state.lineData2[2].values)
-  }.bind(this))
-  .then(function(){
-    this.setState({
-      lineData1: this.state.lineData1,
-      lineData2: this.state.lineData2
-    })
-}.bind(this))
+// axios.get('/taco', {withCredentials: true})
+// .then(function(responseJson){
+//     this.state.lineData1[0].values=[];
+//     this.state.lineData2[0].values=[];
+//     this.state.lineData2[1].values=[];
+//     this.state.lineData2[2].values=[];
+//     stats=responseJson.data.stats;
+//     _.map(stats, function(item, index){
+//       if(item.score===0 || item.reactionTimes[0]===0){
+//         return
+//       }
+//       this.state.lineData1[0].values.push({x: index, y:item.score})
+//       this.state.lineData2[0].values.push({x: index, y:item.reactionTimes[0]*1.2/1000})
+//       this.state.lineData2[1].values.push({x: index, y:item.reactionTimes[0]/1000})
+//       this.state.lineData2[2].values.push({x: index, y:(item.reactionTimes[0]*.8/1000)})
+//       var date=item.dateAchieved.split('Z');
+//       date=date[0].split('T');
+//       date=date[0].split('-')
+//       dates.push({full: item.dateAchieved, splitDate: date})
+//     }.bind(this))
+//    // console.log(dates,'dates')
+//    // console.log(this.state.lineData2[2].values)
+//   }.bind(this))
+//   .then(function(){
+//     this.setState({
+//       lineData1: this.state.lineData1,
+//       lineData2: this.state.lineData2
+//     })
+// }.bind(this))
 },
   render: function() {
-   return ( <div><Legend
-      width= {width}
-      height= {height}
-      margins= {margins}
-      legendClassName= {legendClassName}
-      legendPosition= {legendPosition}
-      legendOffset= {legendOffset}
-      chartSeries = {chartSeries}
-    /></div>)
+   return ( <div> <LineChart
+        className='topStatsGraph'
+        data={data}
+        chartSeries={chartSeries}
+        width={1100}
+        height={400}
+        x={x}
+        /></div>)
   }
 });
 
 module.exports = MyComponent
 
- // <LineChart
- //        className='topStatsGraph'
- //        data={this.state.lineData1}
- //        width={1100}
- //        height={400}
- //        title="Score Trends"
- //        yAxisLabel="Altitude"
- //        xAxisLabel="Elapsed Time (sec)"
 
- //        />
+// <Legend
+//       width= {width}
+//       height= {height}
+//       margins= {margins}
+//       legendClassName= {legendClassName}
+//       legendPosition= {legendPosition}
+//       legendOffset= {legendOffset}
+//       chartSeries = {chartSeries}
+//     />
+
+
  //        <AreaChart
  //        className='bottomStatsGraph'
  //        data={this.state.lineData2}
