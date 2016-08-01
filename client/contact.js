@@ -37,9 +37,8 @@ var Contact = React.createClass({
 							<p>Back-End</p>
 							<img src="images/profiles/ruth.jpg" />
 							<span className="socialMedia">
-								<a target="_blank" href="" className="fa fa-linkedin-square fa-2x"></a>
-								<a target="_blank" href="" className="fa fa-envelope fa-2x"></a>
-								<a target="_blank" href="" className="fa fa-globe fa-2x"></a>
+								<a target="_blank" href="https://www.linkedin.com/in/ruth-bagley-24781996" className="fa fa-linkedin-square fa-2x"></a>
+								<a target="_blank" href="mailto:ruthbagley16@gmail.com" className="fa fa-envelope fa-2x"></a>
 							</span>
 						</div>
 
@@ -48,9 +47,8 @@ var Contact = React.createClass({
 							<p>Back-End</p>
 							<img src="images/profiles/taylor.jpg" />
 							<span className="socialMedia">
-								<a target="_blank" href="" className="fa fa-linkedin-square fa-2x"></a>
-								<a target="_blank" href="" className="fa fa-envelope fa-2x"></a>
-								<a target="_blank" href="" className="fa fa-globe fa-2x"></a>
+								<a target="_blank" href="https://www.linkedin.com/in/taylor-concannon-b2706097" className="fa fa-linkedin-square fa-2x"></a>
+								<a target="_blank" href="mailto:taycon@seas.upenn.edu" className="fa fa-envelope fa-2x"></a>
 							</span>
 						</div>
 
@@ -59,9 +57,8 @@ var Contact = React.createClass({
 							<p>Designer</p>
 							<img src="images/profiles/virginia.jpg" />
 							<span className="socialMedia">
-								<a target="_blank" href="" className="fa fa-linkedin-square fa-2x"></a>
-								<a target="_blank" href="" className="fa fa-envelope fa-2x"></a>
-								<a target="_blank" href="" className="fa fa-globe fa-2x"></a>
+								<a target="_blank" href="https://www.linkedin.com/in/virginiavankeuren" className="fa fa-linkedin-square fa-2x"></a>
+								<a target="_blank" href="mailto:virginiavk@u.northwestern.edu" className="fa fa-envelope fa-2x"></a>
 							</span>
 						</div>
 					</div>

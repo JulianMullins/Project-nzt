@@ -1,7 +1,9 @@
 var React = require('react');
 var GameTimer = require('./gameTimer');
 var ClassicStartOverlay = require('./gameStartOverlay').ClassicStartOverlay;
-var axios = require('axios')
+var axios = require('axios');
+import { Link } from 'react-router'
+
 var fullScore = 0;
 var currentScore;
 var matchCount = 0; //total matches in game
@@ -91,10 +93,10 @@ var ClassicMode = React.createClass({
     var soundQueue = [];
     var timeTilPositionMatch = parseInt((Math.random() * 5) + this.state.N);
     var timeTilSoundMatch = parseInt((Math.random() * 5) + this.state.N);
-    var timeKeeper = 0;
+    var timeKeeper = 44;
 
     iterations = setInterval(function() {
-      timeKeeper++;
+      timeKeeper--;
       if (this.state.keepScore && !(this.state.soundMatch || this.state.positionMatch)) {
         reactionTimes.push(reactionEnd - reactionStart);
         currentScore = ((2000 - reactionTimes[reactionTimes.length - 1]) / 100).toFixed(2);
@@ -215,7 +217,7 @@ var ClassicMode = React.createClass({
       ////////////////////////////////////////////////////////////////////////////////////////
       ////////////////////////////////////////////////////////////////////////////////////
       //RUTH THIS IS WHERE THE GAME ENDS///////////////////////////////////////////
-      if (timeKeeper === 60) {
+      if (timeKeeper === 0) {
         clearInterval(iterations);
         setTimeout(function() {
           console.log(reactionTimes, 'reaction times')
@@ -275,7 +277,7 @@ var ClassicMode = React.createClass({
   },
   render: function() {
     var overlay = this.state.overlay
-      ? (<ClassicStartOverlay click={this.startGame}/>)
+      ? (<ClassicStartOverlay nLevel={this.state.N} click={this.startGame}/>)
       : '';
 
     var scoreAlert;
@@ -322,41 +324,46 @@ var ClassicMode = React.createClass({
       );
 
     return (
-      <div className="gameContainer">
-        {overlay}
-        <div className="gameFullHeader">
-          <span className="gameTitle">
-            <h1 className="classic modeTitle">Classic</h1>
-            <h1 className="classic nTitle">(N={this.state.N})</h1>
-          </span>
-          <div className="gameHeading">
-            <div className="gameScore classic">
-              <h2>Score: {this.state.score}</h2>
-              {scoreUpdate}
+      <div className="fullGameView">
+        <div className="gameContainer">
+          {overlay}
+          <div className="gameFullHeader">
+            <span className="gameTitle">
+              <h1 className="classic modeTitle">Classic</h1>
+              <h1 className="classic nTitle">(N={this.state.N})</h1>
+            </span>
+            <div className="gameHeading">
+              <div className="gameScore classic">
+                <h2>Score: {this.state.score}</h2>
+                {scoreUpdate}
+              </div>
+              {gameTimer}
             </div>
-            {gameTimer}
+          </div>
+          <div className="gameBoard">
+            <div className="gameSquare" style={this.state.style[0]}></div>
+            <div className="gameSquare" style={this.state.style[1]}></div>
+            <div className="gameSquare" style={this.state.style[2]}></div>
+            <div className="gameSquare" style={this.state.style[3]}></div>
+            <div className="gameSquare" style={this.state.style[4]}></div>
+            <div className="gameSquare" style={this.state.style[5]}></div>
+            <div className="gameSquare" style={this.state.style[6]}></div>
+            <div className="gameSquare" style={this.state.style[7]}></div>
+            <div className="gameSquare" style={this.state.style[8]}></div>
+          </div>
+          <div className="gameFullFooter">
+            <div className="scoreAlert">
+              {scoreAlert}
+            </div>
+            <div className="gameButtonsContainer">
+              <a onClick={this.positionMatch} style={this.state.posStyle} className="classicButton">POSITION</a>
+              <a onClick={this.soundMatch} style={this.state.soundStyle} className="classicButton">SOUND</a>
+            </div>
           </div>
         </div>
-        <div className="gameBoard">
-          <div className="gameSquare" style={this.state.style[0]}></div>
-          <div className="gameSquare" style={this.state.style[1]}></div>
-          <div className="gameSquare" style={this.state.style[2]}></div>
-          <div className="gameSquare" style={this.state.style[3]}></div>
-          <div className="gameSquare" style={this.state.style[4]}></div>
-          <div className="gameSquare" style={this.state.style[5]}></div>
-          <div className="gameSquare" style={this.state.style[6]}></div>
-          <div className="gameSquare" style={this.state.style[7]}></div>
-          <div className="gameSquare" style={this.state.style[8]}></div>
-        </div>
-        <div className="gameFullFooter">
-          <div className="scoreAlert">
-            {scoreAlert}
-          </div>
-          <div className="gameButtonsContainer">
-            <a onClick={this.positionMatch} style={this.state.posStyle} className="classicButton">POSITION</a>
-            <a onClick={this.soundMatch} style={this.state.soundStyle} className="classicButton">SOUND</a>
-          </div>
-        </div>
+
+        <Link className="gameHomeBtn" to="/home"><span className="fa fa-home fa-4x classic">
+        </span></Link>        
       </div>
     );
   }
