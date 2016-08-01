@@ -30,6 +30,12 @@ var Contact = React.createClass({
 						<div className="aboutProfile">
 							<h2>Adam He</h2>
 							<p>Front-End</p>
+							<img src="images/profiles/adam.jpg" />
+							<span className="socialMedia">
+								<a target="_blank" href="https://www.linkedin.com/in/shuaihe" className="fa fa-linkedin-square fa-2x"></a>
+								<a target="_blank" href="mailto:shuaihe2018@u.northwestern.edu" className="fa fa-envelope fa-2x"></a>
+								<a target="_blank" href="http://www.adamhe.me/" className="fa fa-globe fa-2x"></a>
+							</span>
 						</div>
 
 						<div className="aboutProfile">

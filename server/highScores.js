@@ -44,22 +44,8 @@ router.get('/myHighScores', function(req, res, next) {
 
 //modes: classic,relaxed,silent,advanced
 
-
-
 //ADAM
-
-
 router.get('/allHighScores', function(req, res, next) {
-  // var hs = new HS({
-  //   user: '5797d0a4d398ed61377bc618',
-  //   dateAchieved: new Date(),
-  //   score: 70,
-  //   nLevel: 2,
-  //   mode: 'Classic',
-  //   reactionTimes: []
-  // });
-  // hs.save();
-
   Leaderboard.findById(serverLeaderboardId)
     .populate('scores')
     .exec(function(err, leaderboard) {
@@ -84,7 +70,5 @@ router.get('/allHighScores', function(req, res, next) {
       }
     });
 });
-
-
 
 module.exports = router;

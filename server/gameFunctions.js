@@ -152,20 +152,20 @@ router.post('/startGame/:mode/:nLevel',function(req,res,next){
                     userId: user._id
                   })
                 });
-                
+
               }
             })
 
 
 
-            //createGame(req,res,user.temp)    
+            //createGame(req,res,user.temp)
           }
         }.bind(this))
 
       })
     }
-    
-   //console.log(req.user); 
+
+   //console.log(req.user);
 });
 
 // var createGame = function(req,res,userTemp){
@@ -222,7 +222,7 @@ router.post('/gameEnd',function(req,res,next){
         game.passedLevel=true;
         console.log("If statement passed level: ", game.passedLevel)
       }
-      
+
       game.reactionTimes=req.body.reactionTimes;
       console.log(game.passedLevel)
       game.save(function(err,game){
@@ -239,7 +239,7 @@ router.post('/gameEnd',function(req,res,next){
             gameId:game._id
           })
 
-          //post to gameOver
+          // post to gameOver
           // axios.post('/gameOver',{
           //   userId: req.body.userId
           // })

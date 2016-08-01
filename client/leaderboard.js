@@ -24,6 +24,41 @@ var Leaderboard = React.createClass({
     }.bind(this));
   },
   render: function() {
+    var table = this.state.global
+      ? <Table columns={[
+          {
+            key: 'username',
+            label: 'Username'
+          }, {
+            key: 'score',
+            label: 'score'
+          }, {
+            key: 'mode',
+            label: 'mode'
+          }, {
+            key: 'level',
+            label: 'Level'
+          }
+        ]} data={this.state.allScores} currentPage={0} itemsPerPage={10} pageButtonLimit={5} sortable={true} defaultSort={{
+          column: 'score',
+          direction: 'desc'
+        }} filterable={['mode', 'username']}/>
+      : <Table columns={[
+        {
+          key: 'score',
+          label: 'score'
+        }, {
+          key: 'mode',
+          label: 'mode'
+        }, {
+          key: 'level',
+          label: 'Level'
+        }
+      ]} data={this.state.myScores} currentPage={0} itemsPerPage={10} pageButtonLimit={5} sortable={true} defaultSort={{
+        column: 'score',
+        direction: 'desc'
+      }} filterable={['mode', 'username']}/>;
+
     return (
       <div className="leaderboardPage">
         <div className="boardSide">
@@ -41,26 +76,7 @@ var Leaderboard = React.createClass({
                 ? selectedStyle
                 : {}}>Personal</a>
             </div>
-            <Table columns={[
-              {
-                key: 'username',
-                label: 'Username'
-              }, {
-                key: 'mode',
-                label: 'Mode'
-              }, {
-                key: 'score',
-                label: 'Score'
-              }, {
-                key: 'level',
-                label: 'Level'
-              }
-            ]} data={this.state.global
-              ? this.state.allScores
-              : this.state.myScores} currentPage={0} itemsPerPage={10} pageButtonLimit={5} sortable={true} defaultSort={{
-              column: 'score',
-              direction: 'desc'
-            }} filterable={['mode', 'username']}/>
+            {table}
           </section>
         </div>
       </div>
@@ -69,8 +85,8 @@ var Leaderboard = React.createClass({
 });
 
 var selectedStyle = {
-  backgroundColor: 'white',
-  color: '#f1ba03'
+  backgroundColor: '#01b6a7',
+  color: 'white'
 }
 
 module.exports = Leaderboard
