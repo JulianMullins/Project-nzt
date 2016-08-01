@@ -4326,6 +4326,14 @@ var dates = [];
 var xScale = 'time';
 var yLabel = 'age';
 //var parseDate = d3.time.format("%YM%m").parse;
+var dayA = ' ';
+var monthA = ' ';
+var dateA = ' ';
+var yearA = ' ';
+var dayB = ' ';
+var monthB = ' ';
+var dateB = ' ';
+var yearB = ' ';
 
 var margins = { left: 100, right: 100, top: 50, bottom: 50 };
 var MyComponent = React.createClass({
@@ -4363,7 +4371,14 @@ var MyComponent = React.createClass({
           return a + b;
         }) / item.reactionTimes.length).toFixed(2);
       }.bind(this));
-      console.log(this.state.data, 'new state');
+      dayA = this.state.data[0].dateAchieved.toString().split(' ')[0];
+      monthA = this.state.data[0].dateAchieved.toString().split(' ')[1];
+      dateA = this.state.data[0].dateAchieved.toString().split(' ')[2];
+      yearA = this.state.data[0].dateAchieved.toString().split(' ')[3];
+      dayB = this.state.data[this.state.data.length - 1].dateAchieved.toString().split(' ')[0];
+      monthB = this.state.data[this.state.data.length - 1].dateAchieved.toString().split(' ')[1];
+      dateB = this.state.data[this.state.data.length - 1].dateAchieved.toString().split(' ')[2];
+      yearB = this.state.data[this.state.data.length - 1].dateAchieved.toString().split(' ')[3];
       // console.log(dates,'dates')
       // console.log(this.state.lineData2[2].values)
     }.bind(this)).then(function () {
@@ -4386,21 +4401,22 @@ var MyComponent = React.createClass({
         margins: margins,
         chartSeries: this.state.chartSeries1,
         width: 1100,
-        height: 400,
+        height: 500,
         x: x,
         xScale: xScale,
         yLabel: 'Scores',
-        xLabel: 'Gameplay from A to B'
+        xLabel: 'Gameplay from ' + dayA + ', ' + monthA + ' ' + dateA + ', ' + yearA + ' to ' + dayB + ', ' + monthB + ' ' + dateB + ', ' + yearB
       }),
-      React.createElement(AreaChart, {
-        data: this.state.data,
+      React.createElement(AreaChart
+      //console.log(this.state.data[0].dateAchieved.toString().split(' '),'date')
+      , { data: this.state.data,
         width: 1100,
-        height: 400,
+        height: 500,
         chartSeries: this.state.chartSeries2,
         x: x,
         xScale: xScale,
         yLabel: 'Reaction Times (ms)',
-        xLabel: 'Gameplay from A to B'
+        xLabel: 'Gameplay from ' + dayA + ', ' + monthA + ' ' + dateA + ', ' + yearA + ' to ' + dayB + ', ' + monthB + ' ' + dateB + ', ' + yearB
       })
     );
   }
