@@ -92,8 +92,6 @@ axios.get('/taco', {withCredentials: true})
   }
 });
 
-<<<<<<< HEAD
-
 //  //        <AreaChart
 //  //        className='bottomStatsGraph'
 //  //        data={this.state.lineData2}
@@ -103,6 +101,4 @@ axios.get('/taco', {withCredentials: true})
 //  //        yAxisLabel="Altitude"
 //  //        xAxisLabel="Elapsed Time (sec)"
 //  //        />
-=======
 module.exports = MyComponent
->>>>>>> refs/remotes/origin/master
