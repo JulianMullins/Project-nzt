@@ -11,6 +11,8 @@ var serverData = require('./serverData');
 //console.log(serverData);
 var serverLeaderboard = require('./serverData').serverLeaderboard;
 var leaderboardSize = require('./serverData').leaderboardSize;
+var tempGame = {}; //RUTH I ADDED THIS BECAUSE I KEPT GETTING ERRORS WHEN TESTING OTHER STUFF
+tempGame.score = 0; // AND THIS
 
 //functions for save game
 

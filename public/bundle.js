@@ -2360,24 +2360,124 @@ var Contact = React.createClass({
 				'div',
 				{ className: 'contactTop' },
 				React.createElement(
-					'h1',
-					null,
-					'Contact Us'
+					'div',
+					{ className: 'contactTopHeading' },
+					React.createElement(
+						'h1',
+						null,
+						'About Us'
+					),
+					React.createElement(
+						'p',
+						null,
+						'We are a team of college students from the Horizons School of Technology who came together to create a fun and intuitive method for increasing intelligence. We hope you enjoy playing this game as much as we enjoyed making it!'
+					)
 				),
 				React.createElement(
-					'p',
-					null,
-					'We\'d love to hear from you'
-				),
-				React.createElement(
-					'a',
-					{ target: '_blank', href: 'https://github.com/JulianMullins/Project-nzt' },
-					'Github'
-				),
-				React.createElement(
-					'a',
-					_defineProperty({ target: '_blank', href: 'https://cortexgame.typeform.com/to/xK1GK6' }, 'target', '_blank'),
-					'Feedback Form'
+					'div',
+					{ className: 'profiles' },
+					React.createElement(
+						'div',
+						{ className: 'aboutProfile' },
+						React.createElement(
+							'h2',
+							null,
+							'Julian Mullins'
+						),
+						React.createElement(
+							'p',
+							null,
+							'Front-End'
+						),
+						React.createElement('img', { src: 'images/profiles/julian.jpg' }),
+						React.createElement(
+							'span',
+							{ className: 'socialMedia' },
+							React.createElement('a', { target: '_blank', href: 'https://www.linkedin.com/in/mullinsjulian', className: 'fa fa-linkedin-square fa-2x' }),
+							React.createElement('a', { target: '_blank', href: 'mailto:mullinsjulian@gmail.com', className: 'fa fa-envelope fa-2x' }),
+							React.createElement('a', { target: '_blank', href: 'http://www.mullinsjulian.com', className: 'fa fa-globe fa-2x' })
+						)
+					),
+					React.createElement(
+						'div',
+						{ className: 'aboutProfile' },
+						React.createElement(
+							'h2',
+							null,
+							'Adam He'
+						),
+						React.createElement(
+							'p',
+							null,
+							'Front-End'
+						)
+					),
+					React.createElement(
+						'div',
+						{ className: 'aboutProfile' },
+						React.createElement(
+							'h2',
+							null,
+							'Ruth Bagley'
+						),
+						React.createElement(
+							'p',
+							null,
+							'Back-End'
+						),
+						React.createElement('img', { src: 'images/profiles/ruth.jpg' }),
+						React.createElement(
+							'span',
+							{ className: 'socialMedia' },
+							React.createElement('a', { target: '_blank', href: '', className: 'fa fa-linkedin-square fa-2x' }),
+							React.createElement('a', { target: '_blank', href: '', className: 'fa fa-envelope fa-2x' }),
+							React.createElement('a', { target: '_blank', href: '', className: 'fa fa-globe fa-2x' })
+						)
+					),
+					React.createElement(
+						'div',
+						{ className: 'aboutProfile' },
+						React.createElement(
+							'h2',
+							null,
+							'Taylor Concannon'
+						),
+						React.createElement(
+							'p',
+							null,
+							'Back-End'
+						),
+						React.createElement('img', { src: 'images/profiles/taylor.jpg' }),
+						React.createElement(
+							'span',
+							{ className: 'socialMedia' },
+							React.createElement('a', { target: '_blank', href: '', className: 'fa fa-linkedin-square fa-2x' }),
+							React.createElement('a', { target: '_blank', href: '', className: 'fa fa-envelope fa-2x' }),
+							React.createElement('a', { target: '_blank', href: '', className: 'fa fa-globe fa-2x' })
+						)
+					),
+					React.createElement(
+						'div',
+						{ className: 'aboutProfile' },
+						React.createElement(
+							'h2',
+							null,
+							'Virginia Van Keuren'
+						),
+						React.createElement(
+							'p',
+							null,
+							'Designer'
+						),
+						React.createElement('img', { src: 'images/profiles/virginia.jpg' }),
+						React.createElement(
+							'span',
+							{ className: 'socialMedia' },
+							React.createElement('a', { target: '_blank', href: '', className: 'fa fa-linkedin-square fa-2x' }),
+							React.createElement('a', { target: '_blank', href: '', className: 'fa fa-envelope fa-2x' }),
+							React.createElement('a', { target: '_blank', href: '', className: 'fa fa-globe fa-2x' })
+						)
+					)
 				)
 			),
 			React.createElement(
@@ -2386,12 +2486,17 @@ var Contact = React.createClass({
 				React.createElement(
 					'h1',
 					null,
-					'About Us'
+					'Contact Us'
 				),
 				React.createElement(
 					'p',
 					null,
-					'We\'re a team of college students from Horizons School of Technology who came together to create beautifully designed products that puts people\'s needs first. Cortex is the brain child of five people who want to improve the memories of people in a fun and easy way. Check out our work on Github and other projects!'
+					'We\'d love to hear from you!'
+				),
+				React.createElement(
+					'a',
+					_defineProperty({ target: '_blank', href: 'https://cortexgame.typeform.com/to/xK1GK6' }, 'target', '_blank'),
+					'Feedback Form'
 				)
 			)
 		);
@@ -2486,6 +2591,8 @@ var GameOverOverlay = React.createClass({
       mode: null,
       nLevel: 1,
       gameOverMessage: React.createElement('div', null),
+      gameOverInform: React.createElement('h2', null),
+      gameOverCongrats: React.createElement('h1', null),
       nextLevelLink: React.createElement('div', null),
       anonUserName: null,
       isHighScore: false,
@@ -2497,10 +2604,6 @@ var GameOverOverlay = React.createClass({
 
     this.setScore();
     this.getData();
-    this.unlockLevel();
-    this.anonHighScore();
-    this.renderLogin();
-    this.nextLevelBtn();
     //this.setState({firstRender: false})
   },
   setScore: function setScore() {
@@ -2510,30 +2613,32 @@ var GameOverOverlay = React.createClass({
   },
   getData: function getData() {
     axios.all([getUser(), getGame()]).then(axios.spread(function (userData, gameData) {
+      console.log("gameData: ", gameData);
+      console.log("userData: ", userData);
       this.setState({
         //username:userData.data.username,
         isAnon: !userData.data.alreadyLoggedIn,
         score: Math.floor(gameData.data.game.score),
         mode: gameData.data.game.mode,
         nLevel: gameData.data.game.nLevel,
-        passedLevel: gameData.data.game.passedLevel,
+        scoreToPass: gameData.data.scoreToPass,
+        passedLevel: gameData.data.passedLevel,
         isHighScore: gameData.data.game.isHighScore,
         modeMultiplier: gameData.data.modeMultiplier,
         start: 0
       });
     }.bind(this))).then(function () {
       this.renderLogin();
-      //console.log(this.state,'this.state')
+      this.unlockLevel();
+      this.anonHighScore();
+      this.renderLogin();
+      this.nextLevelBtn();
       score = parseFloat(this.state.score);
-      console.log(score, 'score');
       var n = parseInt(this.state.nLevel);
-      console.log(n, 'n');
       var modeM = parseInt(this.state.modeMultiplier);
-      console.log(modeM, 'modeM');
       var totalScore = parseInt(score * n * modeM);
-      console.log(totalScore, 'totalScore');
       this.setState({
-        start: this.countUp(totalScore)
+        countUp: this.countUp(totalScore)
       });
     }.bind(this));
   },
@@ -2554,15 +2659,38 @@ var GameOverOverlay = React.createClass({
 
   },
   unlockLevel: function unlockLevel() {
-    if (this.state.isHighScore) {
+    if (this.state.passedLevel) {
       this.setState({
-        gameOverMessage: React.createElement(
+        gameOverInform: React.createElement(
+          'h2',
+          { className: 'classic' },
+          'You have unlocked level ',
+          this.state.nLevel + 1
+        ),
+        gameOverCongrats: React.createElement(
           'h1',
-          { className: 'gameOverInform classic' },
-          'You have unlocked level 2'
+          null,
+          'Congrats!'
+        )
+      });
+    } else {
+      this.setState({
+        gameOverInform: React.createElement(
+          'h2',
+          { className: 'classic' },
+          'You need ',
+          this.state.scoreToPass * this.state.nLevel * this.state.modeMultiplier,
+          ' points to unlock level ',
+          this.state.nLevel + 1
+        ),
+        gameOverCongrats: React.createElement(
+          'h1',
+          null,
+          'Nice try!'
         )
       });
     }
+    console.log("state: ", this.state);
   },
   anonHighScore: function anonHighScore() {
     //if anon get high score, can save with tempusername, or login
@@ -2571,7 +2699,7 @@ var GameOverOverlay = React.createClass({
         gameOverMessage: React.createElement(
           'p',
           null,
-          'You earned a high score on our overall leaderboards. If you wish to be added to the leaderboard and without logging in, provide a name below to display with your score',
+          'You earned a high score on our overall leaderboards. If you wish to be added to the leaderboard without logging in, provide a name below to display with your score',
           React.createElement(
             'form',
             null,
@@ -2626,6 +2754,10 @@ var GameOverOverlay = React.createClass({
           )
         )
       });
+    } else {
+      this.setState({
+        gameOverMessage: React.createElement('div', { className: 'gameOverPromptDefault' })
+      });
     }
   },
   update: function update(e) {
@@ -2647,10 +2779,18 @@ var GameOverOverlay = React.createClass({
   nextLevelBtn: function nextLevelBtn() {
     if (this.state.passedLevel) {
       this.setState({
-        nextLevel: React.createElement(
+        nextOrReplay: React.createElement(
           'h2',
           { className: 'levelButton', onClick: this.nextLevelLink },
           'next level'
+        )
+      });
+    } else {
+      this.setState({
+        nextOrReplay: React.createElement(
+          'h2',
+          { className: 'levelButton', onClick: this.repeatLevel },
+          'replay level'
         )
       });
     }
@@ -2693,17 +2833,8 @@ var GameOverOverlay = React.createClass({
       React.createElement(
         'div',
         { className: 'gameOverHeader' },
-        React.createElement(
-          'h1',
-          null,
-          'Congrats!'
-        ),
-        React.createElement(
-          'h2',
-          { className: 'classic' },
-          'You have unlocked level ',
-          n + 1
-        )
+        this.state.gameOverCongrats,
+        this.state.gameOverInform
       ),
       React.createElement(
         'div',
@@ -2769,7 +2900,7 @@ var GameOverOverlay = React.createClass({
               React.createElement(
                 'td',
                 { className: 'count scoreValue' },
-                this.state.start
+                this.state.countUp
               )
             )
           )
@@ -2789,12 +2920,7 @@ var GameOverOverlay = React.createClass({
             'home'
           )
         ),
-        this.state.nextLevel,
-        React.createElement(
-          'h2',
-          { className: 'levelButton', onClick: this.repeatLevel },
-          'replay level'
-        ),
+        this.state.nextOrReplay,
         React.createElement(
           'div',
           null,
@@ -3897,15 +4023,15 @@ var RegisterOverlay = React.createClass({
         React.createElement(
           'form',
           null,
-          React.createElement('input', { type: 'text', placeholder: 'name', name: 'name', id: 'name', value: this.state.name, onChange: this.update }),
+          React.createElement('input', { type: 'text', placeholder: 'Name', name: 'name', id: 'name', value: this.state.name, onChange: this.update }),
           React.createElement('br', null),
-          React.createElement('input', { type: 'text', placeholder: 'username', name: 'username', id: 'username', value: this.state.username, onChange: this.update }),
+          React.createElement('input', { type: 'text', placeholder: 'Username', name: 'username', id: 'username', value: this.state.username, onChange: this.update }),
           React.createElement('br', null),
-          React.createElement('input', { type: 'text', placeholder: 'email', name: 'email', id: 'email', value: this.state.email, onChange: this.update }),
+          React.createElement('input', { type: 'text', placeholder: 'Email', name: 'email', id: 'email', value: this.state.email, onChange: this.update }),
           React.createElement('br', null),
-          React.createElement('input', { type: 'password', placeholder: 'password', name: 'password', id: 'password', value: this.state.password, onChange: this.update }),
+          React.createElement('input', { type: 'password', placeholder: 'Password', name: 'password', id: 'password', value: this.state.password, onChange: this.update }),
           React.createElement('br', null),
-          React.createElement('input', { type: 'password', placeholder: 'confirm password', name: 'passwordConfirm', id: 'passwordConfirm', value: this.state.passwordConfirm, onChange: this.update }),
+          React.createElement('input', { type: 'password', placeholder: 'Confirm password', name: 'passwordConfirm', id: 'passwordConfirm', value: this.state.passwordConfirm, onChange: this.update }),
           React.createElement(
             'div',
             { className: 'buttongroup' },

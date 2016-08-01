@@ -24,7 +24,6 @@
 }
 
 .contactTop, .contactBottom {
-  height: 50vh;
   width: 100vw;
   transition-duration: .8s;
   text-align: center;
@@ -32,20 +31,78 @@
 }
 
 .contactTop {
+  height: 60vh;
   display: flex;
+  background-color: #008a7e;
   flex-direction: column;
-  background-color: #7CD9D2;
   align-items: center;
 }
+
+.contactTop p {
+ width: 75vw;
+}
+
+.contactTopHeading {
+  height: 40%;
+  margin-bottom: 10px;
+}
+
+.profiles {
+  display: flex;
+  flex-direction: row;
+  height: 60%;
+  width: 100vw;
+}
+
+.aboutProfile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 20vw;
+  margin: 0 auto;
+}
+
+.aboutProfile h2 {
+  color: white;
+  font-size: calc(18px + .25vw);
+}
+
+.aboutProfile img {
+  border-radius: 50%;
+  width: 75%;
+  max-width: 175px;
+  transition-duration: .5s;
+}
+
+.aboutProfile p {
+  width: 100%;
+}
+
+.socialMedia {
+}
+
+.socialMedia a {
+  padding: 5px 10px;
+  text-decoration: none;
+  color: white;
+  transition-duration: .5s;
+}
+
+.socialMedia a:hover {
+  opacity: 0.7;
+  transition-duration: .5s;
+}
+
 .contactBottom {
-  background-color: #008a7e;
+  height: 40vh;
+  background-color: #7CD9D2;
   padding: 0vw 5vw 0vw 10vw;
 }
-.contactTop:hover, .contactBottom:hover{
+/*.contactTop:hover, .contactBottom:hover{
   height: 60vh;
   transition-duration: 1s;
-}
-.contactPage a {
+}*/
+.contactBottom a {
   text-decoration: none;
   color: #7CD9D2;
   background-color: white;
@@ -57,7 +114,7 @@
   border: 1px solid white;
 }
 
-.contactPage a:hover {
+.contactBottom a:hover {
   background-color: transparent;
   color: white;
   transition-duration: .8s;

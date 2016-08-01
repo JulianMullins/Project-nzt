@@ -32,6 +32,8 @@ var GameOverOverlay = React.createClass({
       mode: null,
       nLevel: 1,
       gameOverMessage: <div></div>,
+      gameOverInform: <h2></h2>,
+      gameOverCongrats: <h1></h1>,
       nextLevelLink: <div></div>,
       anonUserName: null,
       isHighScore: false,
@@ -43,12 +45,7 @@ var GameOverOverlay = React.createClass({
 
     this.setScore();
     this.getData();
-    this.unlockLevel();
-    this.anonHighScore();
-    this.renderLogin();
-    this.nextLevelBtn();
     //this.setState({firstRender: false})
-
   },
   setScore() {
     axios.get('/getScore').then(function(response) {
@@ -57,30 +54,32 @@ var GameOverOverlay = React.createClass({
   },
   getData() {
     axios.all([getUser(), getGame()]).then(axios.spread(function(userData, gameData) {
+      console.log("gameData: ", gameData);
+      console.log("userData: ", userData);
       this.setState({
         //username:userData.data.username,
         isAnon: !userData.data.alreadyLoggedIn,
         score: Math.floor(gameData.data.game.score),
         mode: gameData.data.game.mode,
         nLevel: gameData.data.game.nLevel,
-        passedLevel: gameData.data.game.passedLevel,
+        scoreToPass: gameData.data.scoreToPass,
+        passedLevel: gameData.data.passedLevel,
         isHighScore: gameData.data.game.isHighScore,
         modeMultiplier: gameData.data.modeMultiplier,
         start: 0
       })
     }.bind(this))).then(function() {
-      this.renderLogin()
-    //console.log(this.state,'this.state')
+    this.renderLogin();
+    this.unlockLevel();
+    this.anonHighScore();
+    this.renderLogin();
+    this.nextLevelBtn();
     score = parseFloat(this.state.score);
-    console.log(score,'score')
     var n = parseInt(this.state.nLevel);
-    console.log(n,'n')
     var modeM = parseInt(this.state.modeMultiplier);
-    console.log(modeM,'modeM')
     var totalScore = parseInt(score*n*modeM);
-    console.log(totalScore,'totalScore')
     this.setState({
-      start: this.countUp(totalScore)
+      countUp: this.countUp(totalScore)
     })
     }.bind(this))
   },
@@ -100,17 +99,25 @@ var GameOverOverlay = React.createClass({
 
   },
   unlockLevel() {
-    if (this.state.isHighScore) {
+    if (this.state.passedLevel) {
       this.setState({
-        gameOverMessage: <h1 className="gameOverInform classic">You have unlocked level 2</h1>
+        gameOverInform: <h2 className="classic">You have unlocked level {this.state.nLevel + 1}</h2>,
+        gameOverCongrats: <h1>Congrats!</h1>
       })
     }
+    else {
+      this.setState({
+        gameOverInform: <h2 className="classic">You need {this.state.scoreToPass * this.state.nLevel * this.state.modeMultiplier} points to unlock level {this.state.nLevel + 1}</h2>,
+        gameOverCongrats: <h1>Nice try!</h1>
+      })
+    }
+    console.log("state: ", this.state);
   },
   anonHighScore() {
     //if anon get high score, can save with tempusername, or login
     if (this.state.isAnon && this.state.isHighScore) {
       this.setState({
-        gameOverMessage: <p>You earned a high score on our overall leaderboards. If you wish to be added to the leaderboard and without logging in, provide a name below to display with your score
+        gameOverMessage: <p>You earned a high score on our overall leaderboards. If you wish to be added to the leaderboard without logging in, provide a name below to display with your score
             <form>
               <input type='text' name="anonUserName" onChange={this.update}/>
               <Link onClick={this.anonLeaderboard} to="/leaderboard" type="button">Submit</Link>
@@ -140,6 +147,13 @@ var GameOverOverlay = React.createClass({
           </div>
       })
     }
+    else {
+      this.setState({
+        gameOverMessage:
+          <div className="gameOverPromptDefault">
+          </div>
+      })
+    }
   },
   update(e) {
 
@@ -161,7 +175,12 @@ var GameOverOverlay = React.createClass({
   nextLevelBtn() {
     if (this.state.passedLevel) {
       this.setState({
-        nextLevel: <h2 className="levelButton" onClick={this.nextLevelLink}>next level</h2>
+        nextOrReplay: <h2 className="levelButton" onClick={this.nextLevelLink}>next level</h2>
+      })
+    }
+    else {
+      this.setState({
+        nextOrReplay: <h2 className="levelButton" onClick={this.repeatLevel}>replay level</h2>
       })
     }
   },
@@ -200,8 +219,8 @@ var GameOverOverlay = React.createClass({
     return (
       <div className="gameOver" id="gameover">
           <div className="gameOverHeader">
-              <h1>Congrats!</h1>
-              <h2 className="classic">You have unlocked level {n+1}</h2>
+              {this.state.gameOverCongrats}
+              {this.state.gameOverInform}
           </div>
           <div className="scoreTable">
             <table>
@@ -220,7 +239,7 @@ var GameOverOverlay = React.createClass({
                 </tr>
                 <tr className="totalScore">
                   <td>total score: </td>
-                  <td className="count scoreValue">{this.state.start}</td>
+                  <td className="count scoreValue">{this.state.countUp}</td>
                 </tr>
               </tbody>
             </table>
@@ -231,8 +250,7 @@ var GameOverOverlay = React.createClass({
               <span className="fa fa-home fa-5x"></span>
               <h2>home</h2>
             </Link>
-            {this.state.nextLevel}
-            <h2 className="levelButton" onClick={this.repeatLevel}>replay level</h2>
+              {this.state.nextOrReplay}
             <div>
               <Link onClick={this.gameOver} to="/leaderboard">
                 <span className="lbChart">

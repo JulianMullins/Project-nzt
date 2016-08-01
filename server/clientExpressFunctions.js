@@ -101,18 +101,31 @@ router.get('/getUser',function(req,res,next){
 
 //get game data at end of game (gameOver)
 router.get('/getGame',function(req,res,next){
-  //console.log(req.user)
+  var allScoresToPass = serverData.scoresToPass;
+  var scoreToPass;
+  var passedLevel;
+
   Game.findById(req.user.currentGame[0],function(err,game){
     if(err){
       console.log(err)
       res.json({success:false})
     }
     else{
-      console.log(game)
+      console.log("game: ", game);
+      scoreToPass = allScoresToPass[game.mode][game.nLevel];
+
+      if(game.score >= scoreToPass) {
+        passedLevel = true;
+      } else {
+        passedLevel = false;
+      }
+
       res.json({
         modeMultiplier:modeMultiplier[game.mode],
         game:game,
-        success:true
+        success:true,
+        scoreToPass: scoreToPass,
+        passedLevel: passedLevel
       })
     }
   })
