@@ -1,7 +1,8 @@
 var React = require('react');
 var GameTimer = require('./gameTimer');
 var SilentStartOverlay = require('./gameStartOverlay').SilentStartOverlay;
-var axios = require('axios')
+var axios = require('axios');
+import { Link } from 'react-router'
 
 var endGameFunction = require('./serverFunctions').endGameFunction;
 var startGameFunction = require('./serverFunctions').startGameFunction;
@@ -93,10 +94,10 @@ var SilentMode = React.createClass({
     var colorQueue = [];
     var timeTilPositionMatch = parseInt((Math.random() * 5) + this.state.N);
     var timeTilColorMatch = parseInt((Math.random() * 5) + this.state.N);
-    var timeKeeper = 0;
+    var timeKeeper = 44;
 
     iterations = setInterval(function() {
-      timeKeeper++;
+      timeKeeper--;
       if (this.state.keepScore && !(this.state.colorMatch || this.state.positionMatch)) {
         matchCount += 1;
         matchHit += 1;
@@ -224,7 +225,7 @@ var SilentMode = React.createClass({
       ////////////////////////////////////////////////////////////////////////////////////////
       ////////////////////////////////////////////////////////////////////////////////////
       //RUTH THIS IS WHERE THE GAME ENDS////////////////
-      if (timeKeeper === 60) {
+      if (timeKeeper === 0) {
         clearInterval(iterations);
         setTimeout(function() {
           //console.log(reactionTimes, 'reaction times')
@@ -282,7 +283,7 @@ var SilentMode = React.createClass({
   },
   render: function() {
     var overlay = this.state.overlay
-      ? (<SilentStartOverlay click={this.startGame}/>)
+      ? (<SilentStartOverlay nLevel={this.state.N} click={this.startGame}/>)
       : '';
 
     var posButtonStyle = this.state.posPressed
@@ -340,41 +341,46 @@ var SilentMode = React.createClass({
       );
 
     return (
-      <div className="gameContainer">
-        {overlay}
-        <div className="gameFullHeader">
-          <span className="gameTitle">
-            <h1 className="silent modeTitle">Silent</h1>
-            <h1 className="silent nTitle">(N={this.state.N})</h1>
-          </span>
-          <div className="gameHeading">
-            <div className="gameScore silent">
-              <h2>Score: {this.state.score}</h2>
-              {scoreUpdate}
+      <div className="fullGameView">
+        <div className="gameContainer">
+          {overlay}
+          <div className="gameFullHeader">
+            <span className="gameTitle">
+              <h1 className="silent modeTitle">Silent</h1>
+              <h1 className="silent nTitle">(N={this.state.N})</h1>
+            </span>
+            <div className="gameHeading">
+              <div className="gameScore silent">
+                <h2>Score: {this.state.score}</h2>
+                {scoreUpdate}
+              </div>
+              {gameTimer}
             </div>
-            {gameTimer}
+          </div>
+          <div className="gameBoard">
+            <div className="gameSquare" style={this.state.style[0]}></div>
+            <div className="gameSquare" style={this.state.style[1]}></div>
+            <div className="gameSquare" style={this.state.style[2]}></div>
+            <div className="gameSquare" style={this.state.style[3]}></div>
+            <div className="gameSquare" style={this.state.style[4]}></div>
+            <div className="gameSquare" style={this.state.style[5]}></div>
+            <div className="gameSquare" style={this.state.style[6]}></div>
+            <div className="gameSquare" style={this.state.style[7]}></div>
+            <div className="gameSquare" style={this.state.style[8]}></div>
+          </div>
+          <div className="gameFullFooter">
+            <div className="scoreAlert">
+              {scoreAlert}
+            </div>
+            <div className="gameButtonsContainer">
+              <a onClick={this.positionMatch} style={this.state.posStyle} className="silentButton">POSITION</a>
+              <a onClick={this.colorMatch} style={this.state.colorStyle} className="silentButton">COLOR</a>
+            </div>
           </div>
         </div>
-        <div className="gameBoard">
-          <div className="gameSquare" style={this.state.style[0]}></div>
-          <div className="gameSquare" style={this.state.style[1]}></div>
-          <div className="gameSquare" style={this.state.style[2]}></div>
-          <div className="gameSquare" style={this.state.style[3]}></div>
-          <div className="gameSquare" style={this.state.style[4]}></div>
-          <div className="gameSquare" style={this.state.style[5]}></div>
-          <div className="gameSquare" style={this.state.style[6]}></div>
-          <div className="gameSquare" style={this.state.style[7]}></div>
-          <div className="gameSquare" style={this.state.style[8]}></div>
-        </div>
-        <div className="gameFullFooter">
-          <div className="scoreAlert">
-            {scoreAlert}
-          </div>
-          <div className="gameButtonsContainer">
-            <a onClick={this.positionMatch} style={this.state.posStyle} className="silentButton">POSITION</a>
-            <a onClick={this.colorMatch} style={this.state.colorStyle} className="silentButton">COLOR</a>
-          </div>
-        </div>
+
+        <Link className="gameHomeBtn" to="/home"><span className="fa fa-home fa-4x silent">
+        </span></Link>
       </div>
     );
   }

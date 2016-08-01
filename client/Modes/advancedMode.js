@@ -1,6 +1,8 @@
 var React = require('react');
 var GameTimer = require('./gameTimer');
 var axios = require('axios');
+import { Link } from 'react-router'
+
 var AdvancedStartOverlay = require('./gameStartOverlay').AdvancedStartOverlay;
 var fullScore = 0;
 var currentScore;
@@ -100,10 +102,10 @@ var AdvancedMode = React.createClass({
     var timeTilPositionMatch = parseInt((Math.random() * 5) + this.state.N);
     var timeTilColorMatch = parseInt((Math.random() * 5) + this.state.N);
     var timeTilSoundMatch = parseInt((Math.random() * 5) + this.state.N);
-    var timeKeeper = 0;
+    var timeKeeper = 44;
     //console.log(timekeeper)
     iterations = setInterval(function() {
-      timeKeeper++;
+      timeKeeper--;
       if (!this.state.correct[0] && !this.state.correct[1] && !this.state.correct[2]) {
         if (!this.state.colorMatch && !this.state.positionMatch && !this.state.soundMatch) {
           //console.log('no matches')
@@ -290,7 +292,7 @@ var AdvancedMode = React.createClass({
       ////////////////////////////////////////////////////////////////////////////////////
       //RUTH THIS IS WHERE THE GAME ENDS///////////////////////////////////////////
 
-      if (timeKeeper === 60) {
+      if (timeKeeper === 0) {
         clearInterval(iterations);
         setTimeout(function() {
           gameScore = this.state.score;
@@ -338,7 +340,7 @@ var AdvancedMode = React.createClass({
   },
   render: function() {
     var overlay = this.state.overlay
-      ? (<AdvancedStartOverlay click={this.startGame}/>)
+      ? (<AdvancedStartOverlay nLevel={this.state.N} click={this.startGame}/>)
       : '';
 
     var scoreAlert;
@@ -385,42 +387,47 @@ var AdvancedMode = React.createClass({
       );
 
     return (
-      <div className="gameContainer">
-        {overlay}
-        <div className="gameFullHeader">
-          <span className="gameTitle">
-            <h1 className="advanced modeTitle">Advanced</h1>
-            <h1 className="advanced nTitle">(N={this.state.N})</h1>
-          </span>
-          <div className="gameHeading">
-            <div className="gameScore advanced">
-              <h2>Score: {this.state.score}</h2>
-              {scoreUpdate}
+      <div className="fullGameView">
+        <div className="gameContainer">
+          {overlay}
+          <div className="gameFullHeader">
+            <span className="gameTitle">
+              <h1 className="advanced modeTitle">Advanced</h1>
+              <h1 className="advanced nTitle">(N={this.state.N})</h1>
+            </span>
+            <div className="gameHeading">
+              <div className="gameScore advanced">
+                <h2>Score: {this.state.score}</h2>
+                {scoreUpdate}
+              </div>
+              {gameTimer}
             </div>
-            {gameTimer}
+          </div>
+          <div className="gameBoard">
+            <div className="gameSquare" style={this.state.style[0]}></div>
+            <div className="gameSquare" style={this.state.style[1]}></div>
+            <div className="gameSquare" style={this.state.style[2]}></div>
+            <div className="gameSquare" style={this.state.style[3]}></div>
+            <div className="gameSquare" style={this.state.style[4]}></div>
+            <div className="gameSquare" style={this.state.style[5]}></div>
+            <div className="gameSquare" style={this.state.style[6]}></div>
+            <div className="gameSquare" style={this.state.style[7]}></div>
+            <div className="gameSquare" style={this.state.style[8]}></div>
+          </div>
+          <div className="gameFullFooter">
+            <div className="scoreAlert">
+              {scoreAlert}
+            </div>
+            <div className="gameButtonsContainer" onKeyPress={this.handleKeyPres}>
+              <a onClick={this.soundMatch} style={this.state.soundPressed} className='advancedButton'>SOUND</a>
+              <a onClick={this.positionMatch} style={this.state.positionPressed} className='advancedButton'>POSITION</a>
+              <a onClick={this.colorMatch} style={this.state.colorPressed} className='advancedButton'>COLOR</a>
+            </div>
           </div>
         </div>
-        <div className="gameBoard">
-          <div className="gameSquare" style={this.state.style[0]}></div>
-          <div className="gameSquare" style={this.state.style[1]}></div>
-          <div className="gameSquare" style={this.state.style[2]}></div>
-          <div className="gameSquare" style={this.state.style[3]}></div>
-          <div className="gameSquare" style={this.state.style[4]}></div>
-          <div className="gameSquare" style={this.state.style[5]}></div>
-          <div className="gameSquare" style={this.state.style[6]}></div>
-          <div className="gameSquare" style={this.state.style[7]}></div>
-          <div className="gameSquare" style={this.state.style[8]}></div>
-        </div>
-        <div className="gameFullFooter">
-          <div className="scoreAlert">
-            {scoreAlert}
-          </div>
-          <div className="gameButtonsContainer" onKeyPress={this.handleKeyPres}>
-            <a onClick={this.soundMatch} style={this.state.soundPressed} className='advancedButton'>SOUND</a>
-            <a onClick={this.positionMatch} style={this.state.positionPressed} className='advancedButton'>POSITION</a>
-            <a onClick={this.colorMatch} style={this.state.colorPressed} className='advancedButton'>COLOR</a>
-          </div>
-        </div>
+
+        <Link className="gameHomeBtn" to="/home"><span className="fa fa-home fa-4x advanced">
+        </span></Link>
       </div>
     );
   }
