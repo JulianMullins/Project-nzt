@@ -64,13 +64,14 @@
 
 .aboutProfile h2 {
   color: white;
-  font-size: 28px;
+  font-size: calc(18px + .25vw);
 }
 
 .aboutProfile img {
   border-radius: 50%;
   width: 75%;
   max-width: 175px;
+  transition-duration: .5s;
 }
 
 .aboutProfile p {

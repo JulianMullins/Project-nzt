@@ -35,16 +35,34 @@ var Contact = React.createClass({
 						<div className="aboutProfile">
 							<h2>Ruth Bagley</h2>
 							<p>Back-End</p>
+							<img src="images/profiles/ruth.jpg" />
+							<span className="socialMedia">
+								<a target="_blank" href="" className="fa fa-linkedin-square fa-2x"></a>
+								<a target="_blank" href="" className="fa fa-envelope fa-2x"></a>
+								<a target="_blank" href="" className="fa fa-globe fa-2x"></a>
+							</span>
 						</div>
 
 						<div className="aboutProfile">
 						<h2>Taylor Concannon</h2>
 							<p>Back-End</p>
+							<img src="images/profiles/taylor.jpg" />
+							<span className="socialMedia">
+								<a target="_blank" href="" className="fa fa-linkedin-square fa-2x"></a>
+								<a target="_blank" href="" className="fa fa-envelope fa-2x"></a>
+								<a target="_blank" href="" className="fa fa-globe fa-2x"></a>
+							</span>
 						</div>
 
 						<div className="aboutProfile">
 							<h2>Virginia Van Keuren</h2>
 							<p>Designer</p>
+							<img src="images/profiles/virginia.jpg" />
+							<span className="socialMedia">
+								<a target="_blank" href="" className="fa fa-linkedin-square fa-2x"></a>
+								<a target="_blank" href="" className="fa fa-envelope fa-2x"></a>
+								<a target="_blank" href="" className="fa fa-globe fa-2x"></a>
+							</span>
 						</div>
 					</div>
 				</div>

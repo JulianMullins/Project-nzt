@@ -2545,6 +2545,14 @@ var Contact = React.createClass({
 							'p',
 							null,
 							'Back-End'
+						),
+						React.createElement('img', { src: 'images/profiles/ruth.jpg' }),
+						React.createElement(
+							'span',
+							{ className: 'socialMedia' },
+							React.createElement('a', { target: '_blank', href: '', className: 'fa fa-linkedin-square fa-2x' }),
+							React.createElement('a', { target: '_blank', href: '', className: 'fa fa-envelope fa-2x' }),
+							React.createElement('a', { target: '_blank', href: '', className: 'fa fa-globe fa-2x' })
 						)
 					),
 					React.createElement(
@@ -2559,6 +2567,14 @@ var Contact = React.createClass({
 							'p',
 							null,
 							'Back-End'
+						),
+						React.createElement('img', { src: 'images/profiles/taylor.jpg' }),
+						React.createElement(
+							'span',
+							{ className: 'socialMedia' },
+							React.createElement('a', { target: '_blank', href: '', className: 'fa fa-linkedin-square fa-2x' }),
+							React.createElement('a', { target: '_blank', href: '', className: 'fa fa-envelope fa-2x' }),
+							React.createElement('a', { target: '_blank', href: '', className: 'fa fa-globe fa-2x' })
 						)
 					),
 					React.createElement(
@@ -2573,6 +2589,14 @@ var Contact = React.createClass({
 							'p',
 							null,
 							'Designer'
+						),
+						React.createElement('img', { src: 'images/profiles/virginia.jpg' }),
+						React.createElement(
+							'span',
+							{ className: 'socialMedia' },
+							React.createElement('a', { target: '_blank', href: '', className: 'fa fa-linkedin-square fa-2x' }),
+							React.createElement('a', { target: '_blank', href: '', className: 'fa fa-envelope fa-2x' }),
+							React.createElement('a', { target: '_blank', href: '', className: 'fa fa-globe fa-2x' })
 						)
 					)
 				)
