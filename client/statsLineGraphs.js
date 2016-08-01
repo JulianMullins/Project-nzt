@@ -9,6 +9,28 @@ var stats;
 var dates=[];
 // var lineData1 = [{name: 'scores', values:[]}];
 // var lineData2 = [{name: 'reaction times', values:[]}];
+var Legend = require('react-d3-core').Legend;
+
+  // setting you svg width
+  var width = 500
+    // setting your svg height
+  var height = 100
+    // setting your margins of your svg
+  var margins = {top: 20, right: 50, bottom: 20, left: 50}
+    // your x Axis accessor
+  // var x = function(d) {
+  //     return parseDate(d.month);
+  //   },
+    // set your x domain
+  //var xDomain = d3.extent(chartData, function(d){ return x(d) }),
+    // set your x range
+    var xDomain=[0,1]
+    var xRange = [0, 10]
+    // your scale type 'linear', 'ordinal', 'time'... etc.
+    var xScale = 'time'
+    // set your label name
+    var xLabel = "Month";
+
 
 var MyComponent = React.createClass({
   getInitialState: function(){
@@ -39,8 +61,8 @@ axios.get('/taco', {withCredentials: true})
       date=date[0].split('-')
       dates.push({full: item.dateAchieved, splitDate: date})
     }.bind(this))
-    console.log(dates,'dates')
-    console.log(this.state.lineData2[2].values)
+   // console.log(dates,'dates')
+   // console.log(this.state.lineData2[2].values)
   }.bind(this))
   .then(function(){
     this.setState({
@@ -50,26 +72,36 @@ axios.get('/taco', {withCredentials: true})
 }.bind(this))
 },
   render: function() {
-   return (<div><LineChart
-        className='topStatsGraph'
-        data={this.state.lineData1}
-        width={1100}
-        height={400}
-        title="Score Trends"
-        yAxisLabel="Altitude"
-        xAxisLabel="Elapsed Time (sec)"
-
-        />
-        <AreaChart
-        className='bottomStatsGraph'
-        data={this.state.lineData2}
-        width={1100}
-        height={400}
-        title="Reaction Time Trends"
-        yAxisLabel="Altitude"
-        xAxisLabel="Elapsed Time (sec)"
-        /></div>)
+   return ( <div><Legend
+      width= {width}
+      height= {height}
+      margins= {margins}
+      legendClassName= {legendClassName}
+      legendPosition= {legendPosition}
+      legendOffset= {legendOffset}
+      chartSeries = {chartSeries}
+    /></div>)
   }
 });
 
 module.exports = MyComponent
+
+ // <LineChart
+ //        className='topStatsGraph'
+ //        data={this.state.lineData1}
+ //        width={1100}
+ //        height={400}
+ //        title="Score Trends"
+ //        yAxisLabel="Altitude"
+ //        xAxisLabel="Elapsed Time (sec)"
+
+ //        />
+ //        <AreaChart
+ //        className='bottomStatsGraph'
+ //        data={this.state.lineData2}
+ //        width={1100}
+ //        height={400}
+ //        title="Reaction Time Trends"
+ //        yAxisLabel="Altitude"
+ //        xAxisLabel="Elapsed Time (sec)"
+ //        />
