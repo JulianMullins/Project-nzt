@@ -6,14 +6,14 @@
   /*  min-width: 640px;*/
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: space-around;
   align-items: center;
   margin-top: 20px;
   background-color: rgba(255, 255, 255, 0.5);
 }
 .gameBoard {
   display: flex;
-  width: 60vh;
+  width: 54vh;
   height: 60vh;
   flex-wrap: wrap;
   justify-content: center;
@@ -21,8 +21,8 @@
 }
 .gameSquare {
   background-color: #BFBFBF;
-  width: 27%;
-  height: 30%;
+  width: 31%;
+  height: 31%;
   margin: .5vh;
   border: 2px solid rgba(109, 110, 113, 0.5);
 }
