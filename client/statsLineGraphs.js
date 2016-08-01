@@ -57,7 +57,16 @@ axios.get('/taco', {withCredentials: true})
         className='topStatsGraph'
         data={this.state.data}
         margins={margins}
-        chartSeries={this.state.chartSeries}
+        chartSeries={this.state.chartSeries1}
+        width={1100}
+        height={400}
+        x={x}
+        />
+        <AreaStackChart
+        className='topStatsGraph'
+        data={this.state.data}
+        margins={margins}
+        chartSeries={this.state.chartSeries2}
         width={1100}
         height={400}
         x={x}
