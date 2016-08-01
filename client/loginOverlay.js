@@ -7,7 +7,12 @@ import {Link} from 'react-router';
 var LoginOverlay = React.createClass({
   getInitialState: function() {
     console.log(this)
-    return {username: '', password: '', gameEnded: false, games: null}
+    return {
+      username: '', 
+      password: '', 
+      gameEnded: false, 
+      games: null
+    }
   },
   // componentDidMount(){
 
@@ -28,6 +33,9 @@ var LoginOverlay = React.createClass({
   //     }.bind(this))
 
   // },
+  componentDidMount(){
+    
+  },
   update(e) {
     this.setState({
       [e.target.name]: e.target.value

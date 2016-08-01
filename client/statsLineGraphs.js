@@ -1,75 +1,90 @@
 var React = require('react');
 var ReactDOM = require('react-dom');
-var rd3 = require('react-d3');
+var rd3 = require('react-d3-basic');
 var LineChart = rd3.LineChart;
-var AreaChart = rd3.AreaChart;
-var axios = require('axios')
+var AreaStackChart = rd3.AreaStackChart;
 var _=require('underscore')
+var axios=require('axios')
 var stats;
 var dates=[];
-// var lineData1 = [{name: 'scores', values:[]}];
-// var lineData2 = [{name: 'reaction times', values:[]}];
-
+    
+ 
+var margins = {left: 100, right: 100, top: 50, bottom: 50}
 var MyComponent = React.createClass({
   getInitialState: function(){
     return{
-      lineData1: [{name: 'scores', values:[{x:0,y:0}]}],
-      lineData2: [{name: 'max reaction time', values:[{x:0,y:0}]},{name: 'avg reaction time', values:[{x:0,y:0}]},{name: 'min reaction time', values:[{x:0,y:0}]}]
-    }
-  },
+      data: [{"score": 0, "index": 0, avgR:0, maxR:0, minR:0}],
+      chartSeries1: [{field: 'score', name: 'Score', color: '#ff7f0e',
+            style: {"strokeWidth": 2, "fillOpacity": .2}}]
+          },
+      chartSeries2: [{field: 'avgR', name: 'Average Reaction Time', color: '#ff7f0e',
+            style: {"strokeWidth": 2, "fillOpacity": .2}},
+            {field: 'maxR', name: 'Max Reaction Time', color: '#ff7f0e',
+            style: {"strokeWidth": 2, "fillOpacity": .2}},
+            {field: 'minR', name: 'Min Reaction Time', color: '#ff7f0e',
+            style: {"strokeWidth": 2, "fillOpacity": .2}}]
+          },
+    },
 componentDidMount: function(){
- // console.log(this.state, 'state')
+ console.log(this.state, 'state')
 axios.get('/taco', {withCredentials: true})
 .then(function(responseJson){
-    this.state.lineData1[0].values=[];
-    this.state.lineData2[0].values=[];
-    this.state.lineData2[1].values=[];
-    this.state.lineData2[2].values=[];
     stats=responseJson.data.stats;
-    _.map(stats, function(item, index){
-      if(item.score===0 || item.reactionTimes[0]===0){
+    //console.log(stats, 'stats')
+    this.state.data=[];
+   _.map(stats, function(item, index){
+      if(item.score===0 || !item.reactionTimes[0]){
         return
-      }
-      this.state.lineData1[0].values.push({x: index, y:item.score})
-      this.state.lineData2[0].values.push({x: index, y:item.reactionTimes[0]*1.2/1000})
-      this.state.lineData2[1].values.push({x: index, y:item.reactionTimes[0]/1000})
-      this.state.lineData2[2].values.push({x: index, y:(item.reactionTimes[0]*.8/1000)})
-      var date=item.dateAchieved.split('Z');
-      date=date[0].split('T');
-      date=date[0].split('-')
-      dates.push({full: item.dateAchieved, splitDate: date})
-    }.bind(this))
-    console.log(dates,'dates')
-    console.log(this.state.lineData2[2].values)
+       }
+      this.state.data.push(item)
+      this.state.data[this.state.data.length-1].index=index;
+   }.bind(this))
+   //console.log(this.state.data,'new state')
+   // console.log(dates,'dates')
+   // console.log(this.state.lineData2[2].values)
   }.bind(this))
   .then(function(){
     this.setState({
-      lineData1: this.state.lineData1,
-      lineData2: this.state.lineData2
+      data: this.state.data
     })
 }.bind(this))
 },
   render: function() {
-   return (<div><LineChart
+    var x = function(d) {
+      return d.index;
+    }
+   return ( <div> <LineChart
         className='topStatsGraph'
-        data={this.state.lineData1}
+        data={this.state.data}
+        margins={margins}
+        chartSeries={this.state.chartSeries1}
         width={1100}
         height={400}
-        title="Score Trends"
-        yAxisLabel="Altitude"
-        xAxisLabel="Elapsed Time (sec)"
-
+        x={x}
         />
-        <AreaChart
-        className='bottomStatsGraph'
-        data={this.state.lineData2}
+        <AreaStackChart
+        className='topStatsGraph'
+        data={this.state.data}
+        margins={margins}
+        chartSeries={this.state.chartSeries2}
         width={1100}
         height={400}
-        title="Reaction Time Trends"
-        yAxisLabel="Altitude"
-        xAxisLabel="Elapsed Time (sec)"
+        x={x}
         /></div>)
   }
 });
 
 module.exports = MyComponent
+
+
+
+
+ //        <AreaChart
+ //        className='bottomStatsGraph'
+ //        data={this.state.lineData2}
+ //        width={1100}
+ //        height={400}
+ //        title="Reaction Time Trends"
+ //        yAxisLabel="Altitude"
+ //        xAxisLabel="Elapsed Time (sec)"
+ //        />

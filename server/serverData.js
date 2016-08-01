@@ -61,9 +61,9 @@ var scoresToPass={
 
 
 var modeMultiplier = {
-  classic: 5,
-  relaxed: 10,
-  silent: 15,
+  relaxed: 5,
+  silent: 10,
+  classic: 15,
   advanced: 20
 }
 
