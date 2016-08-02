@@ -26,11 +26,11 @@
     "passport": "^0.3.2",
     "passport-facebook": "^2.1.1",
     "passport-local": "^1.0.0",
-    "react": "^15.2.1",
+    "react": "^15.3.0",
     "react-chartjs": "^0.7.3",
     "react-d3": "^0.4.0",
     "react-d3-basic": "^1.6.11",
-    "react-dom": "^15.2.1",
+    "react-dom": "^15.3.0",
     "react-router": "^2.6.0",
     "reactable": "^0.13.2",
     "serve-favicon": "^2.3.0",
@@ -43,5 +43,8 @@
     "watchify": "^3.7.0",
     "eslint-plugin-react": "^5.2.2",
     "nodemon": "^1.9.2"
+  },
+  "engines": {
+    "node": ">=6.2.1"
   }
 }
