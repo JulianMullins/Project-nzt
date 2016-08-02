@@ -91,7 +91,7 @@ var LoginOverlay = React.createClass({
           <h1>New?</h1>
           <div className="pa">Register here</div>
           <h3>See your stats,
-            <br></br>track your progress,
+            <br></br>track your progress
             <br></br>and improve your IQ.</h3>
           <form>
             <div className="buttongroup">

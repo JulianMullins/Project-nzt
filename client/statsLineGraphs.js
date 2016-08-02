@@ -7,7 +7,7 @@ var _=require('underscore');
 var axios=require('axios');
 
 //global variables for changing state below
-var stats;
+var stats=[];
 var dates=[];
 
 var xScale='time'
@@ -33,7 +33,8 @@ var MyComponent = React.createClass({
             style: {"strokeWidth": 2, "fillOpacity": .2}}],
       chartSeries2: [{field: 'maxR', name: 'Max Reaction Time'},
                       {field: 'avgR', name: 'Average Reaction Time'},
-                      {field: 'minR', name: 'Min Reaction Time'}]
+                      {field: 'minR', name: 'Min Reaction Time'}],
+      alert: "Play some games to view your progress!"
                     }
     },
 componentDidMount: function(){
@@ -41,7 +42,9 @@ axios.get('/taco', {withCredentials: true})
 .then(function(responseJson){
     stats=responseJson.data.stats;
     this.state.data=[];
-   _.map(stats, function(item, index){
+    console.log(stats,'stats')
+    if(stats[0]){
+      _.map(stats, function(item, index){
       if(item.score===0 || !item.reactionTimes[0]){
         return
        }
@@ -57,10 +60,14 @@ axios.get('/taco', {withCredentials: true})
       //average reaction time
       this.state.data[this.state.data.length-1].avgR=(item.reactionTimes.reduce(function(a,b){
         return a+b
-      })/(item.reactionTimes.length)).toFixed(2)
-   }.bind(this))
+      })/(item.reactionTimes.length)).toFixed(2) 
+    }.bind(this))
+    }
+   
+  
    //pull first and last data objects and parse for axes
-   dayA = this.state.data[0].dateAchieved.toString().split(' ')[0]
+   if(stats[0]){
+    dayA = this.state.data[0].dateAchieved.toString().split(' ')[0]
    monthA=this.state.data[0].dateAchieved.toString().split(' ')[1]
    dateA=this.state.data[0].dateAchieved.toString().split(' ')[2]
    yearA=this.state.data[0].dateAchieved.toString().split(' ')[3]
@@ -68,11 +75,17 @@ axios.get('/taco', {withCredentials: true})
    monthB=this.state.data[this.state.data.length-1].dateAchieved.toString().split(' ')[1]
    dateB=this.state.data[this.state.data.length-1].dateAchieved.toString().split(' ')[2]
    yearB=this.state.data[this.state.data.length-1].dateAchieved.toString().split(' ')[3]
+   }
+   
   }.bind(this))
   .then(function(){
-    this.setState({
-      data: this.state.data
+    if(stats[0]){
+      this.setState({
+      data: this.state.data,
+      alert: ' '
     })
+    }
+    
 }.bind(this))
 },
   render: function() {
@@ -80,7 +93,14 @@ axios.get('/taco', {withCredentials: true})
       return d.dateAchieved;
     }
     var title = "Stack Area Chart"
-   return (<div> <LineChart
+    if(!stats[0]){
+      return(<div><div className='statsAlert'>{this.state.alert}</div>
+        <a href='#/home'><span className='fa fa-home fa-5x' aria-hidden='true'/><h2>Home</h2></a>
+        </div>)
+    }
+    else{
+      return (<div>
+       <LineChart
         className='StatsScoreGraph'
         data={this.state.data}
         margins={margins}
@@ -113,6 +133,8 @@ axios.get('/taco', {withCredentials: true})
       xLabel={'Gameplay from '+dayA+', '+ monthA + ' '+ dateA+ ', ' +yearA + ' to ' +dayB+', '+ monthB + ' '+ dateB+ ', ' +yearB}
     />
    </div>)
+    }
+   
   }
 });
 
