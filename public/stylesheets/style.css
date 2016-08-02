@@ -146,8 +146,8 @@ h3 {
 }
 
 .whiteLogo {
-  width: 5vw;
-  max-width: 50px;
+  width: 15vw;
+  max-width: 150px;
   position: fixed;
   right: 15px;
   bottom: 10px;
@@ -157,7 +157,7 @@ h3 {
 
 .whiteLogo:hover {
   transition-duration: 1s;
-  width: 5.25vw;
+  width: 17vw;
 }
 
 @media (max-width: 760px) {

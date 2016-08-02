@@ -80,7 +80,7 @@ var Leaderboard = React.createClass({
             {table}
           </section>
         </div>
-          <Link to="/home"><img className="whiteLogo" src="./images/CortexIconRelaxed.png" /></Link>
+          <Link to="/home"><img className="whiteLogo" src="./images/CortexLogo3.png" /></Link>
       </div>
     )
   }
