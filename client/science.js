@@ -8,6 +8,7 @@ var Science = React.createClass({
 			<div className="sciencePage">
 				<div className="scienceTop">
 					<h1>The Science</h1>
+					<img src="./images/brain.png" />
 					<p>What is dual n-back? N-back tests command a user to keep track of a
 					continuously changing pattern n steps back. For example, n=1 means that a user
 					should remember 1 step back to see if the next stimulus matches the previous,
@@ -35,11 +36,16 @@ var Science = React.createClass({
 					improve over time. We believe that brain improvement works best when it&#39;s a
 					fun experience. This is our mission at Cortex. 
 					</p>
+
 				</div>
 
 				<div className="scienceBottom">
 					<h1>Learn More</h1>
-					<a href="http://www.gwern.net/DNB%20FAQ" target="_blank">DUAL N-BACK FAQ</a>
+					<div className="scienceLinks">
+						<a href="http://www.gwern.net/DNB%20FAQ" target="_blank">Dual N-Back FAQ</a>
+						<p>|</p>
+						<a href="http://www.pnas.org/content/105/19/6829.full" target="_blank">PNAS Study</a>
+					</div>
 				</div>
 				<Link to="/home"><img className="whiteLogo" src="./images/CortexIconWhite.png" /></Link>
 			</div>

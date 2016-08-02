@@ -160,8 +160,8 @@ h3 {
   width: 17vw;
 }
 
-@media (max-width: 760px) {
+@media (max-width: 960px) {
   .whiteLogo {
-    position: initial;
+    display: none;
   }
 }
