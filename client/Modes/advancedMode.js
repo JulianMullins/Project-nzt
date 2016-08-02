@@ -1,7 +1,7 @@
 var React = require('react');
 var GameTimer = require('./gameTimer');
 var axios = require('axios');
-import { Link } from 'react-router'
+import {Link} from 'react-router'
 
 var AdvancedStartOverlay = require('./gameStartOverlay').AdvancedStartOverlay;
 var fullScore = 0;
@@ -59,9 +59,9 @@ var AdvancedMode = React.createClass({
     }
   },
   componentDidMount: function() {
-    startGameFunction(this.state.mode,this.state.N,function(err,obj){
-      if(err){
-        this.props.history.push('/levels/'+this.state.mode);
+    startGameFunction(this.state.mode, this.state.N, function(err, obj) {
+      if (err) {
+        this.props.history.push('/levels/' + this.state.mode);
       }
       this.setState({
         tempUser: obj.tempUser,
@@ -271,8 +271,7 @@ var AdvancedMode = React.createClass({
 
       reactionStart = Date.now()
       this.state.style[nextPosition] = newStyle[nextColor];
-      var audio = new Audio('./audio/' + (nextSound + 1) + '.wav');
-      audio.play();
+      audios[nextSound].play();
       this.setState({style: this.state.style});
       setTimeout(function() {
         this.state.style[nextPosition] = standardStyle;
@@ -426,8 +425,9 @@ var AdvancedMode = React.createClass({
           </div>
         </div>
 
-        <Link className="gameHomeBtn" to="/home"><span className="fa fa-home fa-4x advanced">
-        </span></Link>
+        <Link className="gameHomeBtn" to="/home">
+          <span className="fa fa-home fa-4x advanced"></span>
+        </Link>
       </div>
     );
   }
@@ -468,5 +468,10 @@ var newStyle = [
     backgroundColor: '#cc3333' //red
   }
 ]
+
+var audios = [];
+for (var i = 1; i <= 9; i++) {
+  audios.push(new Audio('./audio/' + i + '.wav '));
+}
 
 module.exports = AdvancedMode

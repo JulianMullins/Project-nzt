@@ -23,6 +23,21 @@ table {
 }
 .reactable-filter-input {
   border-bottom: 1px solid #01b6a7;
+  color: #01b6a7;
+}
+.reactable-filter-input::-webkit-input-placeholder {
+  color: #01b6a7;
+}
+.reactable-filter-input:-moz-placeholder {
+  color: #01b6a7;
+  opacity: 1;
+}
+.reactable-filter-input::-moz-placeholder {
+  color: #01b6a7;
+  opacity: 1;
+}
+.reactable-filter-input:-ms-input-placeholder {
+  color: #01b6a7;
 }
 th {
   padding: 20px 15px;

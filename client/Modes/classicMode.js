@@ -2,7 +2,7 @@ var React = require('react');
 var GameTimer = require('./gameTimer');
 var ClassicStartOverlay = require('./gameStartOverlay').ClassicStartOverlay;
 var axios = require('axios');
-import { Link } from 'react-router'
+import {Link} from 'react-router'
 
 var fullScore = 0;
 var currentScore;
@@ -55,9 +55,9 @@ var ClassicMode = React.createClass({
     }
   },
   componentDidMount: function() {
-    startGameFunction(this.state.mode,this.state.N,function(err,obj){
-      if(err){
-        this.props.history.push('/levels/'+this.state.mode);
+    startGameFunction(this.state.mode, this.state.N, function(err, obj) {
+      if (err) {
+        this.props.history.push('/levels/' + this.state.mode);
       }
       this.setState({
         tempUser: obj.tempUser,
@@ -198,8 +198,7 @@ var ClassicMode = React.createClass({
         }
       }
       reactionStart = Date.now()
-      var audio = new Audio('./audio/' + (nextSound + 1) + '.wav ');
-      audio.play();
+      audios[nextSound].play();
       this.state.style[nextPosition] = newStyle;
       this.setState({style: this.state.style});
       setTimeout(function() {
@@ -211,12 +210,6 @@ var ClassicMode = React.createClass({
         pMatch = false;
       }.bind(this), 800);
 
-      ////////////////////////////////////////////////////////////////////////////////////
-      ///////////////////////////////////////////////////////////////////////////////////
-      ///////////////////////////////////////////////////////////////////////////////////
-      ////////////////////////////////////////////////////////////////////////////////////////
-      ////////////////////////////////////////////////////////////////////////////////////
-      //RUTH THIS IS WHERE THE GAME ENDS///////////////////////////////////////////
       if (timeKeeper === 0) {
         clearInterval(iterations);
         setTimeout(function() {
@@ -229,22 +222,11 @@ var ClassicMode = React.createClass({
               this.props.history.push('/gameOver')
             }
           }.bind(this))
-
         }.bind(this), 2000)
-
-        ////////////////////////////////////////////////////////////////////////////////////
-        //////////////////////////////////////////////////////////////////////////////////
-        /////////////////////////////////////////////////////////////////////////////////
-        ///////////////////////////////////////////////////////////////////////////////
-        ///////////////////////////////////////////////////////////////////////////////
-
       }
 
     }.bind(this), 2000)
   },
-  //}
-  //}.bind(this), 2000);
-  //},
   positionMatch: function() {
     if (this.state.pressed) {
       return;
@@ -362,8 +344,9 @@ var ClassicMode = React.createClass({
           </div>
         </div>
 
-        <Link className="gameHomeBtn" to="/home"><span className="fa fa-home fa-4x classic">
-        </span></Link>        
+        <Link className="gameHomeBtn" to="/home">
+          <span className="fa fa-home fa-4x classic"></span>
+        </Link>
       </div>
     );
   }
@@ -383,6 +366,11 @@ var standardStyle = {
 
 var newStyle = {
   backgroundColor: "#F13542"
+}
+
+var audios = [];
+for (var i = 1; i <= 9; i++) {
+  audios.push(new Audio('./audio/' + i + '.wav '));
 }
 
 module.exports = ClassicMode

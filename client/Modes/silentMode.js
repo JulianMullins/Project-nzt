@@ -2,7 +2,7 @@ var React = require('react');
 var GameTimer = require('./gameTimer');
 var SilentStartOverlay = require('./gameStartOverlay').SilentStartOverlay;
 var axios = require('axios');
-import { Link } from 'react-router'
+import {Link} from 'react-router'
 
 var endGameFunction = require('./serverFunctions').endGameFunction;
 var startGameFunction = require('./serverFunctions').startGameFunction;
@@ -379,8 +379,9 @@ var SilentMode = React.createClass({
           </div>
         </div>
 
-        <Link className="gameHomeBtn" to="/home"><span className="fa fa-home fa-4x silent">
-        </span></Link>
+        <Link className="gameHomeBtn" to="/home">
+          <span className="fa fa-home fa-4x silent"></span>
+        </Link>
       </div>
     );
   }
