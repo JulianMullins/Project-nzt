@@ -41,8 +41,9 @@ var Mainmenu = React.createClass({
             userWelcome: React.createElement(
               'h3',
               { className: 'advanced userWelcome' },
-              'Welcome: ',
-              this.state.name
+              'Welcome ',
+              this.state.name,
+              '!'
             )
           });
         }
@@ -3710,7 +3711,7 @@ var LoginOverlay = React.createClass({
           null,
           'See your stats,\u0003',
           React.createElement('br', null),
-          'track your progress,',
+          'track your progress',
           React.createElement('br', null),
           'and improve your IQ.'
         ),
@@ -4162,7 +4163,13 @@ var Science = React.createClass({
 				React.createElement(
 					'p',
 					null,
-					'What is dual n-back? N-back tests command a user to keep track of a continuously changing pattern n steps back. For example, n=1 means that a user should remember 1 step back to see if the next stimulus matches the previous, n=2 means keeping track of matching stimuli two steps back, and so on. The "dual" in dual n-back refers to the different types of stimulus that the user must keep track of, for example position (a visual input) and sound (an auditory input). Combining the two would therefore require a user to keep track of changing positions and sounds at different levels of pattern history. In cognitive studies, these tests have been shown to improve working memory and fluid intelligence (i.e. reasoning and problem-solving skills). In other words, playing these games can improve one\'s IQ! In a study presented in the Proceedings of the National Academy of Sciences of the United States of America, fluid intelligence increased significantly after just 19 days of n-back training, regardless of one\'s level of intelligence beforehand.'
+					'What is dual n-back? N-back tests command a user to keep track of a continuously changing pattern n steps back. For example, n=1 means that a user should remember 1 step back to see if the next stimulus matches the previous, n=2 means keeping track of matching stimuli two steps back, and so on. The "dual" in dual n-back refers to the different types of stimulus that the user must keep track of, for example position (a visual input) and sound (an auditory input). Combining the two would therefore require a user to keep track of changing positions and sounds at different levels of pattern history. In cognitive studies, these tests have been shown to improve working memory and fluid intelligence (i.e. reasoning and problem-solving skills). In other words, ',
+					React.createElement(
+						'b',
+						null,
+						'playing these games can improve one\'s IQ!'
+					),
+					' In a study presented in the Proceedings of the National Academy of Sciences of the United States of America, fluid intelligence increased significantly after just 19 days of n-back training, regardless of one\'s level of intelligence beforehand.'
 				),
 				React.createElement(
 					'p',
