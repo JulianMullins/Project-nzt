@@ -549,8 +549,7 @@ var AdvancedMode = React.createClass({
 
       reactionStart = Date.now();
       this.state.style[nextPosition] = newStyle[nextColor];
-      var audio = new Audio('./audio/' + (nextSound + 1) + '.wav');
-      audio.play();
+      audios[nextSound].play();
       this.setState({ style: this.state.style });
       setTimeout(function () {
         this.state.style[nextPosition] = standardStyle;
@@ -745,8 +744,8 @@ var AdvancedMode = React.createClass({
       ),
       React.createElement(
         _reactRouter.Link,
-        { className: 'gameHomeBtn', to: '/home' },
-        React.createElement('span', { className: 'fa fa-home fa-4x advanced' })
+        { to: '/home' },
+        React.createElement('img', { className: 'whiteLogo', src: './images/CortexLogo3.png' })
       )
     );
   }
@@ -785,6 +784,11 @@ var newStyle = [{
 }, {
   backgroundColor: '#cc3333' //red
 }];
+
+var audios = [];
+for (var i = 1; i <= 9; i++) {
+  audios.push(new Audio('./audio/' + i + '.wav '));
+}
 
 module.exports = AdvancedMode;
 
@@ -985,8 +989,7 @@ var ClassicMode = React.createClass({
         }
       }
       reactionStart = Date.now();
-      var audio = new Audio('./audio/' + (nextSound + 1) + '.wav ');
-      audio.play();
+      audios[nextSound].play();
       this.state.style[nextPosition] = newStyle;
       this.setState({ style: this.state.style });
       setTimeout(function () {
@@ -998,12 +1001,6 @@ var ClassicMode = React.createClass({
         pMatch = false;
       }.bind(this), 800);
 
-      ////////////////////////////////////////////////////////////////////////////////////
-      ///////////////////////////////////////////////////////////////////////////////////
-      ///////////////////////////////////////////////////////////////////////////////////
-      ////////////////////////////////////////////////////////////////////////////////////////
-      ////////////////////////////////////////////////////////////////////////////////////
-      //RUTH THIS IS WHERE THE GAME ENDS///////////////////////////////////////////
       if (timeKeeper === 0) {
         clearInterval(iterations);
         setTimeout(function () {
@@ -1017,18 +1014,9 @@ var ClassicMode = React.createClass({
             }
           }.bind(this));
         }.bind(this), 2000);
-
-        ////////////////////////////////////////////////////////////////////////////////////
-        //////////////////////////////////////////////////////////////////////////////////
-        /////////////////////////////////////////////////////////////////////////////////
-        ///////////////////////////////////////////////////////////////////////////////
-        ///////////////////////////////////////////////////////////////////////////////
       }
     }.bind(this), 2000);
   },
-  //}
-  //}.bind(this), 2000);
-  //},
   positionMatch: function positionMatch() {
     if (this.state.pressed) {
       return;
@@ -1185,8 +1173,8 @@ var ClassicMode = React.createClass({
       ),
       React.createElement(
         _reactRouter.Link,
-        { className: 'gameHomeBtn', to: '/home' },
-        React.createElement('span', { className: 'fa fa-home fa-4x classic' })
+        { to: '/home' },
+        React.createElement('img', { className: 'whiteLogo', src: './images/CortexLogo3.png' })
       )
     );
   }
@@ -1207,6 +1195,11 @@ var standardStyle = {
 var newStyle = {
   backgroundColor: "#F13542"
 };
+
+var audios = [];
+for (var i = 1; i <= 9; i++) {
+  audios.push(new Audio('./audio/' + i + '.wav '));
+}
 
 module.exports = ClassicMode;
 
@@ -1874,12 +1867,7 @@ var RelaxedMode = React.createClass({
         }.bind(this), 800);
       }
 
-      ////////////////////////////////////////////////////////////////////////////////////
-      ///////////////////////////////////////////////////////////////////////////////////
-      ///////////////////////////////////////////////////////////////////////////////////
-      ////////////////////////////////////////////////////////////////////////////////////////
-      ////////////////////////////////////////////////////////////////////////////////////
-      //RUTH THIS IS WHERE THE GAME ENDS///////////////////////////////////////////
+      // Game end
       if (timeKeeper === 0) {
         //give gameScore variable the final score
         clearInterval(iterations);
@@ -1917,11 +1905,6 @@ var RelaxedMode = React.createClass({
 
         // }.bind(this))
       }
-      ////////////////////////////////////////////////////////////////////////////////////
-      //////////////////////////////////////////////////////////////////////////////////
-      /////////////////////////////////////////////////////////////////////////////////
-      ///////////////////////////////////////////////////////////////////////////////
-      ///////////////////////////////////////////////////////////////////////////////
     }.bind(this), 2000);
   },
   posMatch: function posMatch() {
@@ -2060,8 +2043,8 @@ var RelaxedMode = React.createClass({
       ),
       React.createElement(
         _reactRouter.Link,
-        { className: 'gameHomeBtn', to: '/home' },
-        React.createElement('span', { className: 'fa fa-home fa-4x relaxed' })
+        { to: '/home' },
+        React.createElement('img', { className: 'whiteLogo', src: './images/CortexLogo3.png' })
       )
     );
   }
@@ -2560,8 +2543,8 @@ var SilentMode = React.createClass({
       ),
       React.createElement(
         _reactRouter.Link,
-        { className: 'gameHomeBtn', to: '/home' },
-        React.createElement('span', { className: 'fa fa-home fa-4x silent' })
+        { to: '/home' },
+        React.createElement('img', { className: 'gameHomeBtn whiteLogo', src: './images/CortexLogo3.png' })
       )
     );
   }
@@ -2768,6 +2751,11 @@ var Contact = React.createClass({
 					_defineProperty({ target: '_blank', href: 'https://cortexgame.typeform.com/to/xK1GK6' }, 'target', '_blank'),
 					'Feedback Form'
 				)
+			),
+			React.createElement(
+				_reactRouter.Link,
+				{ to: '/home' },
+				React.createElement('img', { className: 'whiteLogo', src: './images/CortexIconWhite.png' })
 			)
 		);
 	}
@@ -2841,12 +2829,10 @@ axios.defaults.baseURL = process.env.url;
 var loginOverlay = require('./loginOverlay');
 
 var getUser = function getUser() {
-
   return axios.get('/getUser');
 };
 
 var getGame = function getGame() {
-
   return axios.get('/getGame');
 };
 
@@ -2907,9 +2893,7 @@ var GameOverOverlay = React.createClass({
       var n = parseInt(this.state.nLevel);
       var modeM = parseInt(this.state.modeMultiplier);
       var totalScore = parseInt(score * n * modeM);
-      this.setState({
-        countUp: this.countUp(totalScore)
-      });
+      this.setState({ countUp: this.countUp(totalScore) });
     }.bind(this));
   },
 
@@ -2924,7 +2908,7 @@ var GameOverOverlay = React.createClass({
     //   data: {
     //     inputUsername:this.state.username,
     //     alreadyLoggedIn:this.state.isAnon
-    //   } 
+    //   }
     // })
 
   },
@@ -2950,7 +2934,7 @@ var GameOverOverlay = React.createClass({
           { className: 'classic' },
           'You need ',
           this.state.scoreToPass * this.state.nLevel * this.state.modeMultiplier,
-          ' points to unlock level ',
+          'points to unlock level ',
           this.state.nLevel + 1
         ),
         gameOverCongrats: React.createElement(
@@ -2998,7 +2982,6 @@ var GameOverOverlay = React.createClass({
     }
   },
   renderLogin: function renderLogin() {
-
     //if not logged in, option to login to save
     if (this.state.isAnon && !this.state.isHighScore) {
       this.setState({
@@ -3012,15 +2995,15 @@ var GameOverOverlay = React.createClass({
             React.createElement(
               _reactRouter.Link,
               { to: '/gameOver/login' },
-              ' Sign in'
+              'Sign in'
             ),
-            ' or ',
+            'or',
             React.createElement(
               _reactRouter.Link,
               { to: '/gameOver/register' },
               'sign up'
             ),
-            ' to save your progress, view statistics and compete with friends!'
+            'to save your progress, view statistics and compete with friends!'
           )
         )
       });
@@ -3031,14 +3014,11 @@ var GameOverOverlay = React.createClass({
     }
   },
   update: function update(e) {
-
     //update anonusername field
     this.setState({ anonUserName: e.target.value });
   },
   anonLeaderboard: function anonLeaderboard() {
-
     //save anon score
-
     axios.post('/postAnonScore', {
       withCredentials: true,
       data: {
@@ -3121,7 +3101,7 @@ var GameOverOverlay = React.createClass({
               React.createElement(
                 'td',
                 null,
-                'game score: '
+                'game score:'
               ),
               React.createElement(
                 'td',
@@ -3135,7 +3115,7 @@ var GameOverOverlay = React.createClass({
               React.createElement(
                 'td',
                 null,
-                'n-level: '
+                'n-level:'
               ),
               React.createElement(
                 'td',
@@ -3150,7 +3130,7 @@ var GameOverOverlay = React.createClass({
               React.createElement(
                 'td',
                 null,
-                'mode: '
+                'mode:'
               ),
               React.createElement(
                 'td',
@@ -3165,7 +3145,7 @@ var GameOverOverlay = React.createClass({
               React.createElement(
                 'td',
                 null,
-                'total score: '
+                'total score:'
               ),
               React.createElement(
                 'td',
@@ -3336,10 +3316,13 @@ ReactDOM.render(React.createElement(
 },{"./Mainmenu":2,"./Modes/advancedMode":3,"./Modes/classicMode":4,"./Modes/relaxedMode":7,"./Modes/silentMode":9,"./contact":10,"./facebookLogin":11,"./gameOver":12,"./leaderboard":14,"./levels":15,"./loginOverlay":16,"./logout":17,"./navBar":18,"./registerOverlay":19,"./science":20,"./statsLineGraphs":21,"./tutorial":22,"_process":1,"axios":23,"react":365,"react-dom":174,"react-router":215}],14:[function(require,module,exports){
 'use strict';
 
+var _reactRouter = require('react-router');
+
 var React = require('react');
 var Reactable = require('reactable');
 var Table = Reactable.Table;
 var axios = require('axios');
+
 
 var Leaderboard = React.createClass({
   displayName: 'Leaderboard',
@@ -3353,18 +3336,19 @@ var Leaderboard = React.createClass({
   },
   getAllScores: function getAllScores() {
     axios.get('/allHighScores').then(function (response) {
-      console.log('all scores', response.data);
       this.setState({ allScores: response.data });
     }.bind(this));
   },
   getMyScores: function getMyScores() {
     axios.get('/myHighScores').then(function (response) {
-      console.log('my scores', response.data);
       this.setState({ myScores: response.data });
     }.bind(this));
   },
   render: function render() {
     var table = this.state.global ? React.createElement(Table, { columns: [{
+        key: 'rank',
+        label: 'rank'
+      }, {
         key: 'username',
         label: 'Username'
       }, {
@@ -3377,9 +3361,11 @@ var Leaderboard = React.createClass({
         key: 'level',
         label: 'Level'
       }], data: this.state.allScores, currentPage: 0, itemsPerPage: 10, pageButtonLimit: 5, sortable: true, defaultSort: {
-        column: 'score',
-        direction: 'desc'
-      }, filterable: ['mode', 'username'] }) : React.createElement(Table, { columns: [{
+        column: 'rank',
+        direction: 'asc'
+      }, filterable: ['username'] }) : React.createElement(Table, { style: {
+        paddingTop: '6vh'
+      }, columns: [{
         key: 'score',
         label: 'score'
       }, {
@@ -3391,7 +3377,7 @@ var Leaderboard = React.createClass({
       }], data: this.state.myScores, currentPage: 0, itemsPerPage: 10, pageButtonLimit: 5, sortable: true, defaultSort: {
         column: 'score',
         direction: 'desc'
-      }, filterable: ['mode', 'username'] });
+      } });
 
     return React.createElement(
       'div',
@@ -3427,6 +3413,11 @@ var Leaderboard = React.createClass({
           ),
           table
         )
+      ),
+      React.createElement(
+        _reactRouter.Link,
+        { to: '/home' },
+        React.createElement('img', { className: 'whiteLogo', src: './images/CortexLogo3.png' })
       )
     );
   }
@@ -3439,7 +3430,7 @@ var selectedStyle = {
 
 module.exports = Leaderboard;
 
-},{"axios":23,"react":365,"reactable":366}],15:[function(require,module,exports){
+},{"axios":23,"react":365,"react-router":215,"reactable":366}],15:[function(require,module,exports){
 (function (process){
 'use strict';
 
@@ -3968,6 +3959,11 @@ var LoginOverlay = React.createClass({
               )
             )
           )
+        ),
+        React.createElement(
+          _reactRouter.Link,
+          { to: '/home' },
+          React.createElement('img', { className: 'whiteLogo', src: './images/CortexIconWhite.png' })
         )
       )
     );
@@ -4366,6 +4362,11 @@ var RegisterOverlay = React.createClass({
             )
           )
         )
+      ),
+      React.createElement(
+        _reactRouter.Link,
+        { to: '/home' },
+        React.createElement('img', { className: 'whiteLogo', src: './images/CortexIconWhite.png' })
       )
     );
   }
@@ -4427,45 +4428,17 @@ var Science = React.createClass({
 					{ href: 'http://www.gwern.net/DNB%20FAQ', target: '_blank' },
 					'DUAL N-BACK FAQ'
 				)
+			),
+			React.createElement(
+				_reactRouter.Link,
+				{ to: '/home' },
+				React.createElement('img', { className: 'whiteLogo', src: './images/CortexIconWhite.png' })
 			)
 		);
 	}
 });
 
 module.exports = Science;
-
-// <div className="contactPage">
-// 	<h1 className="cHeader">The Sciences</h1>                     <pl>
-// <h3>What is dual n-back?</h3> N-back tests command a user to keep track of a
-// continuously changing pattern n steps back. For example, n=1 means that a user
-// should remember 1 step back to see if the next stimulus matches the previous,
-// n=2 means keeping track of matching stimuli two steps back, and so on. The
-// "dual" in dual n-back refers to the different types of stimulus that the user
-// must keep track of, for example position (a visual input) and sound (an
-// auditory input). Combining the two would therefore require a user to keep
-// track of changing positions and sounds at different levels of pattern history.
-// In cognitive studies, these tests have been shown to improve working memory
-// and fluid intelligence (i.e. reasoning and problem-solving skills). In other
-// words, playing these games can improve one&#39s IQ! In a study presented in the
-// Proceedings of the National Academy of Sciences of the United States of
-// America, fluid intelligence increased significantly after just 19 days of
-// n-back training, regardless of one&#39s level of intelligence beforehand.
-// 	<br></br> <br></br>
-
-// <h3>What does Cortex do?</h3>Most currently implementations of dual
-// n-back training are poorly designed and tedious to play. Our mission is to
-// make cognitive training less of a chore through an interactive and gamified
-// experience. Users are able to choose their desired level of challenge through
-// various modes that range from basic position play all the way to triple n-back
-// with three different stimuli to keep track of. Through continuous play, users
-// can unlock new n-levels and compete against players around the world for high
-// scores and faster reaction times, all while watching their own progress
-// improve over time. We believe that brain improvement works best when it&#39s a
-// fun experience. This is our mission at Cortex. </pl>             </div>
-// 	<div className="contactPage2"><h1 className="cHeader">Learn
-// 	More.</h1>                 <a href="http://www.gwern.net/DNB%20FAQ"
-// 	target="_blank">DUAL N-BACK FAQ</a>
-// </div>
 
 },{"react":365,"react-dom":174,"react-router":215}],21:[function(require,module,exports){
 'use strict';
@@ -4558,6 +4531,7 @@ var MyComponent = React.createClass({
     }.bind(this));
   },
   render: function render() {
+    console.log(stats, 'stats');
     var x = function x(d) {
       return d.dateAchieved;
     };
@@ -4574,7 +4548,7 @@ var MyComponent = React.createClass({
         React.createElement(
           'a',
           { href: '#/home' },
-          React.createElement('span', { className: 'fa fa-home fa-5x', 'aria-hidden': 'true' }),
+          React.createElement('span', { className: 'fa fa-home fa-5x taylorsHome', 'aria-hidden': 'true' }),
           React.createElement(
             'h2',
             null,

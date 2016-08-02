@@ -75,6 +75,7 @@ var Contact = React.createClass({
 					<p>We&#39;d love to hear from you!</p>
 					<a target="_blank" href="https://cortexgame.typeform.com/to/xK1GK6" target="_blank">Feedback Form</a>
 				</div>
+				<Link to="/home"><img className="whiteLogo" src="./images/CortexIconWhite.png" /></Link>
 			</div>
 		)
 	}
