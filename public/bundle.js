@@ -3384,7 +3384,9 @@ var getSquareArr = function getSquareArr(square, mode) {
     }
     arr.push(React.createElement(
       _reactRouter.Link,
-      { to: link, className: sqClass, key: i, style: colorStyle },
+      { to: link, onMouseDown: function onMouseDown(e) {
+          e.target.click();
+        }, className: sqClass, key: i, style: colorStyle },
       React.createElement(
         'div',
         { className: 'front face' },
@@ -3410,11 +3412,7 @@ var ClassicLevels = React.createClass({
 
   getInitialState: function getInitialState() {
     console.log(this.props);
-    return {
-      maxN: 1,
-      mode: 'classic',
-      error: this.props.params.error
-    };
+    return { maxN: 1, mode: 'classic', error: this.props.params.error };
   },
   componentDidMount: function componentDidMount() {
     this.setMaxN();
@@ -3481,11 +3479,7 @@ var RelaxedLevels = React.createClass({
 
   getInitialState: function getInitialState() {
     console.log(this.props);
-    return {
-      maxN: 1,
-      mode: 'relaxed',
-      error: this.props.params.error
-    };
+    return { maxN: 1, mode: 'relaxed', error: this.props.params.error };
   },
   componentDidMount: function componentDidMount() {
     this.setMaxN();
@@ -3549,11 +3543,7 @@ var SilentLevels = React.createClass({
   displayName: 'SilentLevels',
 
   getInitialState: function getInitialState() {
-    return {
-      maxN: 1,
-      mode: 'silent',
-      error: this.props.params.error
-    };
+    return { maxN: 1, mode: 'silent', error: this.props.params.error };
   },
   setMaxN: function setMaxN() {
     getMaxN(this.state.mode, function (maxN) {
@@ -3617,11 +3607,7 @@ var AdvancedLevels = React.createClass({
   displayName: 'AdvancedLevels',
 
   getInitialState: function getInitialState() {
-    return {
-      maxN: 1,
-      mode: 'advanced',
-      error: this.props.params.error
-    };
+    return { maxN: 1, mode: 'advanced', error: this.props.params.error };
   },
   setMaxN: function setMaxN() {
     getMaxN(this.state.mode, function (maxN) {
