@@ -364,7 +364,7 @@ var RelaxedMode = React.createClass({
           </div>
         </div>
 
-          <Link to="/home"><img className="whiteLogo" src="./images/CortexIconRelaxed.png" /></Link>
+          <Link to="/home"><img className="whiteLogo" src="./images/CortexLogo3.png" /></Link>
       </div>
     );
   }

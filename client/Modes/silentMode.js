@@ -379,7 +379,7 @@ var SilentMode = React.createClass({
           </div>
         </div>
 
-        <Link to="/home"><img className="gameHomeBtn whiteLogo" src="./images/CortexIconSilent.png" /></Link>
+        <Link to="/home"><img className="gameHomeBtn whiteLogo" src="./images/CortexLogo3.png" /></Link>
       </div>
     );
   }
