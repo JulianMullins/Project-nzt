@@ -625,7 +625,7 @@ var AdvancedMode = React.createClass({
       React.createElement(
         _reactRouter.Link,
         { to: '/home' },
-        React.createElement('img', { className: 'whiteLogo', src: './images/CortexIconAdvanced.png' })
+        React.createElement('img', { className: 'whiteLogo', src: './images/CortexLogo3.png' })
       )
     );
   }
@@ -1065,7 +1065,7 @@ var ClassicMode = React.createClass({
       React.createElement(
         _reactRouter.Link,
         { to: '/home' },
-        React.createElement('img', { className: 'whiteLogo', src: './images/CortexIconClassic.png' })
+        React.createElement('img', { className: 'whiteLogo', src: './images/CortexLogo3.png' })
       )
     );
   }
@@ -1940,7 +1940,7 @@ var RelaxedMode = React.createClass({
       React.createElement(
         _reactRouter.Link,
         { to: '/home' },
-        React.createElement('img', { className: 'whiteLogo', src: './images/CortexIconRelaxed.png' })
+        React.createElement('img', { className: 'whiteLogo', src: './images/CortexLogo3.png' })
       )
     );
   }
@@ -2440,7 +2440,7 @@ var SilentMode = React.createClass({
       React.createElement(
         _reactRouter.Link,
         { to: '/home' },
-        React.createElement('img', { className: 'gameHomeBtn whiteLogo', src: './images/CortexIconSilent.png' })
+        React.createElement('img', { className: 'gameHomeBtn whiteLogo', src: './images/CortexLogo3.png' })
       )
     );
   }

@@ -362,7 +362,7 @@ var ClassicMode = React.createClass({
           </div>
         </div>
 
-          <Link to="/home"><img className="whiteLogo" src="./images/CortexIconClassic.png" /></Link>      
+          <Link to="/home"><img className="whiteLogo" src="./images/CortexLogo3.png" /></Link>      
       </div>
     );
   }

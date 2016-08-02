@@ -150,7 +150,7 @@ h3 {
   max-width: 150px;
   position: fixed;
   right: 15px;
-  bottom: 10px;
+  bottom: 30px;
   cursor: pointer;
   transition-duration: 1s;
 }
