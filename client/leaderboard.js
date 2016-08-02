@@ -2,6 +2,7 @@ var React = require('react');
 var Reactable = require('reactable');
 var Table = Reactable.Table;
 var axios = require('axios');
+import {Link} from 'react-router';
 
 var Leaderboard = React.createClass({
   getInitialState: function() {
@@ -79,6 +80,7 @@ var Leaderboard = React.createClass({
             {table}
           </section>
         </div>
+          <Link to="/home"><img className="whiteLogo" src="./images/CortexIconWhite.png" /></Link>
       </div>
     )
   }
