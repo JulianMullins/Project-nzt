@@ -9,12 +9,12 @@ var tempGame = null;
 
 router.get('/taco',function(req, res, next){
    //return res.json({stats: req.user.stats})
-  Highscores.find({user: '579a80e63a9316c80c2a6c30'}, function(err,stats){
+   //console.log(req.user, 'taylor')
+  Highscores.find({user: req.user.stats}, function(err,stats){
     if(err){
       console.log(err)
     }
     else{
-      console.log('foud')
       res.json({stats: stats})
     }
   })
