@@ -16,7 +16,7 @@ var Logout = React.createClass({
 	      withCredentials: true
 	    }).then(function(response){
 	    	if(response.data.success){
-	    		this.props.history.push('/home')
+	    		this.props.history.push('/login')
 	    	}
 	    }.bind(this))
 	    // this.props.history.push('/home');

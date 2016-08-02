@@ -22,7 +22,24 @@ var Mainmenu = React.createClass({
       userWelcome:<div></div>
     }
   },
-  componentDidMount(){
+  componentWillReceiveProps: function(nextProps) {
+    if (nextProps.location.pathname === "/home") {
+      axios.get('/getUser')
+        .then(function(response){
+          this.setState({
+            hasUsername:response.data.isUser,
+            name:response.data.name,
+          })
+        }.bind(this)).then(function() {
+          if(this.state.hasUsername){
+            this.setState({
+              userWelcome: <h3 className="advanced userWelcome">Welcome: {this.state.name}</h3>
+            })
+        }
+      }.bind(this))
+    }
+  },
+  componentDidMount: function(){
     axios.get('/getUser')
       .then(function(response){
         this.setState({
