@@ -138,6 +138,7 @@ var RegisterOverlay = React.createClass({
             </div>
           </form>
         </div>
+                <Link to="/home"><img className="whiteLogo" src="./images/CortexIconWhite.png" /></Link>
       </div>
     )
   }
