@@ -4,7 +4,7 @@ var RelaxedStartOverlay = require('./gameStartOverlay').RelaxedStartOverlay;
 
 var axios = require('axios');
 axios.defaults.baseURL = process.env.url;
-import { Link } from 'react-router'
+import {Link} from 'react-router'
 
 var endGameFunction = require('./serverFunctions').endGameFunction;
 var startGameFunction = require('./serverFunctions').startGameFunction;
@@ -77,11 +77,9 @@ var RelaxedMode = React.createClass({
 
     // }.bind(this))
 
-
-
-    startGameFunction(this.state.mode,this.state.N,function(err,obj){
-      if(err){
-        this.props.history.push('/levels/'+this.state.mode+'/unauthorized');
+    startGameFunction(this.state.mode, this.state.N, function(err, obj) {
+      if (err) {
+        this.props.history.push('/levels/' + this.state.mode + '/unauthorized');
         return;
 
       }
@@ -212,12 +210,7 @@ var RelaxedMode = React.createClass({
         }.bind(this), 800);
       }
 
-      ////////////////////////////////////////////////////////////////////////////////////
-      ///////////////////////////////////////////////////////////////////////////////////
-      ///////////////////////////////////////////////////////////////////////////////////
-      ////////////////////////////////////////////////////////////////////////////////////////
-      ////////////////////////////////////////////////////////////////////////////////////
-      //RUTH THIS IS WHERE THE GAME ENDS///////////////////////////////////////////
+      // Game end
       if (timeKeeper === 0) {
         //give gameScore variable the final score
         clearInterval(iterations);
@@ -256,11 +249,6 @@ var RelaxedMode = React.createClass({
         // }.bind(this))
 
       }
-      ////////////////////////////////////////////////////////////////////////////////////
-      //////////////////////////////////////////////////////////////////////////////////
-      /////////////////////////////////////////////////////////////////////////////////
-      ///////////////////////////////////////////////////////////////////////////////
-      ///////////////////////////////////////////////////////////////////////////////
     }.bind(this), 2000);
   },
   posMatch: function() {
@@ -363,8 +351,7 @@ var RelaxedMode = React.createClass({
             </div>
           </div>
         </div>
-
-          <Link to="/home"><img className="whiteLogo" src="./images/CortexLogo3.png" /></Link>
+        <Link to="/home"><img className="whiteLogo" src="./images/CortexLogo3.png"/></Link>
       </div>
     );
   }
