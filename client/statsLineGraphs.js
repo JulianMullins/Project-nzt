@@ -89,13 +89,14 @@ axios.get('/taco', {withCredentials: true})
 }.bind(this))
 },
   render: function() {
+    console.log(stats,'stats')
     var x = function(d) {
       return d.dateAchieved;
     }
     var title = "Stack Area Chart"
     if(!stats[0]){
       return(<div><div className='statsAlert'>{this.state.alert}</div>
-        <a href='#/home'><span className='fa fa-home fa-5x' aria-hidden='true'/><h2>Home</h2></a>
+        <a href='#/home'><span className='fa fa-home fa-5x taylorsHome' aria-hidden='true'/><h2>Home</h2></a>
         </div>)
     }
     else{
