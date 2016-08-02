@@ -50,20 +50,6 @@
   height: 20vh;
 }
 
-.gameHomeBtn {
-  text-decoration: none;
-  position: absolute;
-  right: 3vw;
-  bottom: 3vh;
-  transition-duration: 0.5s;
-}
-
-@media (max-width: 800px) {
-  .gameHomeBtn {
-    position: initial;
-  }
-}
-
 .gameHomeBtn:hover {
   opacity: 0.7;
   transition-duration: 0.5s;
