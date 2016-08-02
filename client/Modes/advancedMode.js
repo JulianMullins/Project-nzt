@@ -426,8 +426,7 @@ var AdvancedMode = React.createClass({
           </div>
         </div>
 
-        <Link className="gameHomeBtn" to="/home"><span className="fa fa-home fa-4x advanced">
-        </span></Link>
+          <Link to="/home"><img className="whiteLogo" src="./images/CortexIconAdvanced.png" /></Link>
       </div>
     );
   }

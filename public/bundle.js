@@ -624,8 +624,8 @@ var AdvancedMode = React.createClass({
       ),
       React.createElement(
         _reactRouter.Link,
-        { className: 'gameHomeBtn', to: '/home' },
-        React.createElement('span', { className: 'fa fa-home fa-4x advanced' })
+        { to: '/home' },
+        React.createElement('img', { className: 'whiteLogo', src: './images/CortexIconAdvanced.png' })
       )
     );
   }
@@ -1064,8 +1064,8 @@ var ClassicMode = React.createClass({
       ),
       React.createElement(
         _reactRouter.Link,
-        { className: 'gameHomeBtn', to: '/home' },
-        React.createElement('span', { className: 'fa fa-home fa-4x classic' })
+        { to: '/home' },
+        React.createElement('img', { className: 'whiteLogo', src: './images/CortexIconClassic.png' })
       )
     );
   }
@@ -1939,8 +1939,8 @@ var RelaxedMode = React.createClass({
       ),
       React.createElement(
         _reactRouter.Link,
-        { className: 'gameHomeBtn', to: '/home' },
-        React.createElement('span', { className: 'fa fa-home fa-4x relaxed' })
+        { to: '/home' },
+        React.createElement('img', { className: 'whiteLogo', src: './images/CortexIconRelaxed.png' })
       )
     );
   }
@@ -2439,8 +2439,8 @@ var SilentMode = React.createClass({
       ),
       React.createElement(
         _reactRouter.Link,
-        { className: 'gameHomeBtn', to: '/home' },
-        React.createElement('span', { className: 'fa fa-home fa-4x silent' })
+        { to: '/home' },
+        React.createElement('img', { className: 'gameHomeBtn whiteLogo', src: './images/CortexIconSilent.png' })
       )
     );
   }
@@ -3202,7 +3202,7 @@ var Leaderboard = React.createClass({
       React.createElement(
         _reactRouter.Link,
         { to: '/home' },
-        React.createElement('img', { className: 'whiteLogo', src: './images/CortexIconWhite.png' })
+        React.createElement('img', { className: 'whiteLogo', src: './images/CortexIconRelaxed.png' })
       )
     );
   }
@@ -4344,6 +4344,7 @@ var MyComponent = React.createClass({
     }.bind(this));
   },
   render: function render() {
+    console.log(stats, 'stats');
     var x = function x(d) {
       return d.dateAchieved;
     };
@@ -4360,7 +4361,7 @@ var MyComponent = React.createClass({
         React.createElement(
           'a',
           { href: '#/home' },
-          React.createElement('span', { className: 'fa fa-home fa-5x', 'aria-hidden': 'true' }),
+          React.createElement('span', { className: 'fa fa-home fa-5x taylorsHome', 'aria-hidden': 'true' }),
           React.createElement(
             'h2',
             null,

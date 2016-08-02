@@ -1,6 +1,11 @@
 div {
   display: block;
 }
+
+b {
+  font-weight: 400;
+}
+
 /*Our Colors*/
 .classic {
   color: #F13542;
@@ -142,9 +147,9 @@ h3 {
 
 .whiteLogo {
   width: 5vw;
-  max-width: 75px;
-  position: absolute;
-  right: 10px;
+  max-width: 50px;
+  position: fixed;
+  right: 15px;
   bottom: 10px;
   cursor: pointer;
   transition-duration: 1s;
@@ -153,4 +158,10 @@ h3 {
 .whiteLogo:hover {
   transition-duration: 1s;
   width: 5.25vw;
+}
+
+@media (max-width: 760px) {
+  .whiteLogo {
+    position: initial;
+  }
 }

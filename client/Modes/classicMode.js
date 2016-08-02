@@ -362,8 +362,7 @@ var ClassicMode = React.createClass({
           </div>
         </div>
 
-        <Link className="gameHomeBtn" to="/home"><span className="fa fa-home fa-4x classic">
-        </span></Link>        
+          <Link to="/home"><img className="whiteLogo" src="./images/CortexIconClassic.png" /></Link>      
       </div>
     );
   }
