@@ -41,6 +41,7 @@ var Science = React.createClass({
 					<h1>Learn More</h1>
 					<a href="http://www.gwern.net/DNB%20FAQ" target="_blank">DUAL N-BACK FAQ</a>
 				</div>
+				<Link to="/home"><img className="whiteLogo" src="./images/CortexIconWhite.png" /></Link>
 			</div>
 
 		)

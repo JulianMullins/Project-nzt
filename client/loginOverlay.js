@@ -102,6 +102,7 @@ var LoginOverlay = React.createClass({
               </Link>
             </div>
           </form>
+            <Link to="/home"><img className="whiteLogo" src="./images/CortexIconWhite.png" /></Link>
         </div>
       </div>
     )

@@ -2646,6 +2646,11 @@ var Contact = React.createClass({
 					_defineProperty({ target: '_blank', href: 'https://cortexgame.typeform.com/to/xK1GK6' }, 'target', '_blank'),
 					'Feedback Form'
 				)
+			),
+			React.createElement(
+				_reactRouter.Link,
+				{ to: '/home' },
+				React.createElement('img', { className: 'whiteLogo', src: './images/CortexIconWhite.png' })
 			)
 		);
 	}
@@ -3098,10 +3103,13 @@ module.exports = GameOverOverlay;
 },{"./loginOverlay":14,"_process":43,"axios":21,"react":354,"react-dom":119,"react-router":149}],12:[function(require,module,exports){
 'use strict';
 
+var _reactRouter = require('react-router');
+
 var React = require('react');
 var Reactable = require('reactable');
 var Table = Reactable.Table;
 var axios = require('axios');
+
 
 var Leaderboard = React.createClass({
   displayName: 'Leaderboard',
@@ -3189,6 +3197,11 @@ var Leaderboard = React.createClass({
           ),
           table
         )
+      ),
+      React.createElement(
+        _reactRouter.Link,
+        { to: '/home' },
+        React.createElement('img', { className: 'whiteLogo', src: './images/CortexIconWhite.png' })
       )
     );
   }
@@ -3201,7 +3214,7 @@ var selectedStyle = {
 
 module.exports = Leaderboard;
 
-},{"axios":21,"react":354,"reactable":355}],13:[function(require,module,exports){
+},{"axios":21,"react":354,"react-router":149,"reactable":355}],13:[function(require,module,exports){
 (function (process){
 'use strict';
 
@@ -3730,6 +3743,11 @@ var LoginOverlay = React.createClass({
               )
             )
           )
+        ),
+        React.createElement(
+          _reactRouter.Link,
+          { to: '/home' },
+          React.createElement('img', { className: 'whiteLogo', src: './images/CortexIconWhite.png' })
         )
       )
     );
@@ -4183,6 +4201,11 @@ var Science = React.createClass({
 					{ href: 'http://www.gwern.net/DNB%20FAQ', target: '_blank' },
 					'DUAL N-BACK FAQ'
 				)
+			),
+			React.createElement(
+				_reactRouter.Link,
+				{ to: '/home' },
+				React.createElement('img', { className: 'whiteLogo', src: './images/CortexIconWhite.png' })
 			)
 		);
 	}
