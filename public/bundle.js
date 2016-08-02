@@ -4237,7 +4237,7 @@ var _ = require('underscore');
 var axios = require('axios');
 
 //global variables for changing state below
-var stats;
+var stats = [];
 var dates = [];
 
 var xScale = 'time';
@@ -4263,44 +4263,54 @@ var MyComponent = React.createClass({
       data: [{ "score": 0, "index": 0, avgR: 0, maxR: 0, minR: 0 }],
       chartSeries1: [{ field: 'score', name: 'Score', color: '#ff7f0e',
         style: { "strokeWidth": 2, "fillOpacity": .2 } }],
-      chartSeries2: [{ field: 'maxR', name: 'Max Reaction Time' }, { field: 'avgR', name: 'Average Reaction Time' }, { field: 'minR', name: 'Min Reaction Time' }]
+      chartSeries2: [{ field: 'maxR', name: 'Max Reaction Time' }, { field: 'avgR', name: 'Average Reaction Time' }, { field: 'minR', name: 'Min Reaction Time' }],
+      alert: "Play some games to view your progress!"
     };
   },
   componentDidMount: function componentDidMount() {
     axios.get('/taco', { withCredentials: true }).then(function (responseJson) {
       stats = responseJson.data.stats;
       this.state.data = [];
-      _.map(stats, function (item, index) {
-        if (item.score === 0 || !item.reactionTimes[0]) {
-          return;
-        }
-        this.state.data.push(item);
-        //standard date format
-        this.state.data[this.state.data.length - 1].dateAchieved = new Date(item.dateAchieved);
-        //indexing array (temporary)
-        this.state.data[this.state.data.length - 1].index = index;
-        //max reaction time
-        this.state.data[this.state.data.length - 1].maxR = Math.max.apply(Math, _toConsumableArray(item.reactionTimes));
-        //min reaction time
-        this.state.data[this.state.data.length - 1].minR = Math.min.apply(Math, _toConsumableArray(item.reactionTimes));
-        //average reaction time
-        this.state.data[this.state.data.length - 1].avgR = (item.reactionTimes.reduce(function (a, b) {
-          return a + b;
-        }) / item.reactionTimes.length).toFixed(2);
-      }.bind(this));
+      console.log(stats, 'stats');
+      if (stats[0]) {
+        _.map(stats, function (item, index) {
+          if (item.score === 0 || !item.reactionTimes[0]) {
+            return;
+          }
+          this.state.data.push(item);
+          //standard date format
+          this.state.data[this.state.data.length - 1].dateAchieved = new Date(item.dateAchieved);
+          //indexing array (temporary)
+          this.state.data[this.state.data.length - 1].index = index;
+          //max reaction time
+          this.state.data[this.state.data.length - 1].maxR = Math.max.apply(Math, _toConsumableArray(item.reactionTimes));
+          //min reaction time
+          this.state.data[this.state.data.length - 1].minR = Math.min.apply(Math, _toConsumableArray(item.reactionTimes));
+          //average reaction time
+          this.state.data[this.state.data.length - 1].avgR = (item.reactionTimes.reduce(function (a, b) {
+            return a + b;
+          }) / item.reactionTimes.length).toFixed(2);
+        }.bind(this));
+      }
+
       //pull first and last data objects and parse for axes
-      dayA = this.state.data[0].dateAchieved.toString().split(' ')[0];
-      monthA = this.state.data[0].dateAchieved.toString().split(' ')[1];
-      dateA = this.state.data[0].dateAchieved.toString().split(' ')[2];
-      yearA = this.state.data[0].dateAchieved.toString().split(' ')[3];
-      dayB = this.state.data[this.state.data.length - 1].dateAchieved.toString().split(' ')[0];
-      monthB = this.state.data[this.state.data.length - 1].dateAchieved.toString().split(' ')[1];
-      dateB = this.state.data[this.state.data.length - 1].dateAchieved.toString().split(' ')[2];
-      yearB = this.state.data[this.state.data.length - 1].dateAchieved.toString().split(' ')[3];
+      if (stats[0]) {
+        dayA = this.state.data[0].dateAchieved.toString().split(' ')[0];
+        monthA = this.state.data[0].dateAchieved.toString().split(' ')[1];
+        dateA = this.state.data[0].dateAchieved.toString().split(' ')[2];
+        yearA = this.state.data[0].dateAchieved.toString().split(' ')[3];
+        dayB = this.state.data[this.state.data.length - 1].dateAchieved.toString().split(' ')[0];
+        monthB = this.state.data[this.state.data.length - 1].dateAchieved.toString().split(' ')[1];
+        dateB = this.state.data[this.state.data.length - 1].dateAchieved.toString().split(' ')[2];
+        yearB = this.state.data[this.state.data.length - 1].dateAchieved.toString().split(' ')[3];
+      }
     }.bind(this)).then(function () {
-      this.setState({
-        data: this.state.data
-      });
+      if (stats[0]) {
+        this.setState({
+          data: this.state.data,
+          alert: ' '
+        });
+      }
     }.bind(this));
   },
   render: function render() {
@@ -4308,43 +4318,64 @@ var MyComponent = React.createClass({
       return d.dateAchieved;
     };
     var title = "Stack Area Chart";
-    return React.createElement(
-      'div',
-      null,
-      ' ',
-      React.createElement(LineChart, {
-        className: 'StatsScoreGraph',
-        data: this.state.data,
-        margins: margins,
-        chartSeries: this.state.chartSeries1,
-        width: 1100,
-        height: 500,
-        title: 'Score History',
-        x: x,
-        xScale: xScale,
-        yAxisClassName: 'lineY',
-        xAxisClassName: 'lineX',
-        yLabel: 'Scores'
-        //x axis includes first and last day of play (for time range)
-        , xLabel: 'Gameplay from ' + dayA + ', ' + monthA + ' ' + dateA + ', ' + yearA + ' to ' + dayB + ', ' + monthB + ' ' + dateB + ', ' + yearB
-      }),
-      React.createElement(AreaChart, {
-        width: 1100,
-        height: 500,
-        title: 'TITLE',
-        data: this.state.data,
-        className: 'StatsReactionGraph',
-        margins: margins,
-        chartSeries: this.state.chartSeries2,
-        yAxisClassName: 'areaY',
-        xAxisClassName: 'areaX',
-        x: x,
-        xScale: xScale,
-        yLabel: 'Reaction Times (ms)'
-        //x axis includes first and last day of play (for time range)
-        , xLabel: 'Gameplay from ' + dayA + ', ' + monthA + ' ' + dateA + ', ' + yearA + ' to ' + dayB + ', ' + monthB + ' ' + dateB + ', ' + yearB
-      })
-    );
+    if (!stats[0]) {
+      return React.createElement(
+        'div',
+        null,
+        React.createElement(
+          'div',
+          { className: 'statsAlert' },
+          this.state.alert
+        ),
+        React.createElement(
+          'a',
+          { href: '#/home' },
+          React.createElement('span', { className: 'fa fa-home fa-5x', 'aria-hidden': 'true' }),
+          React.createElement(
+            'h2',
+            null,
+            'Home'
+          )
+        )
+      );
+    } else {
+      return React.createElement(
+        'div',
+        null,
+        React.createElement(LineChart, {
+          className: 'StatsScoreGraph',
+          data: this.state.data,
+          margins: margins,
+          chartSeries: this.state.chartSeries1,
+          width: 1100,
+          height: 500,
+          title: 'Score History',
+          x: x,
+          xScale: xScale,
+          yAxisClassName: 'lineY',
+          xAxisClassName: 'lineX',
+          yLabel: 'Scores'
+          //x axis includes first and last day of play (for time range)
+          , xLabel: 'Gameplay from ' + dayA + ', ' + monthA + ' ' + dateA + ', ' + yearA + ' to ' + dayB + ', ' + monthB + ' ' + dateB + ', ' + yearB
+        }),
+        React.createElement(AreaChart, {
+          width: 1100,
+          height: 500,
+          title: 'TITLE',
+          data: this.state.data,
+          className: 'StatsReactionGraph',
+          margins: margins,
+          chartSeries: this.state.chartSeries2,
+          yAxisClassName: 'areaY',
+          xAxisClassName: 'areaX',
+          x: x,
+          xScale: xScale,
+          yLabel: 'Reaction Times (ms)'
+          //x axis includes first and last day of play (for time range)
+          , xLabel: 'Gameplay from ' + dayA + ', ' + monthA + ' ' + dateA + ', ' + yearA + ' to ' + dayB + ', ' + monthB + ' ' + dateB + ', ' + yearB
+        })
+      );
+    }
   }
 });
 
