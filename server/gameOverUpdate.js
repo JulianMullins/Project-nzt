@@ -40,10 +40,15 @@ var checkOverall = function(newHighScore, callback) {
       // console.log(leaderboard.scores.length < leaderboardSize);
       // console.log(leaderboard.scores.length);
       // console.log(leaderboardSize)
+      if(err||!leaderboard){
+        console.log(err)
+        return;
+      }
 
       var overallHighScores = leaderboard.scores;
       overallHighScores.sort(sortScores);
-      console.log(newHighScore.score, overallHighScores[leaderboard.scores.length-1].score);
+      //console.log(overallHighScores)
+      console.log(newHighScore.score, overallHighScores[overallHighScores.length-1].score);
 
       if (overallHighScores.length < leaderboardSize) {
         console.log("leaderboard undersize")
@@ -159,18 +164,12 @@ var sortScores = function(a, b) {
 //save game
 router.post('/gameOver', function(req, res, next) {
 
-  //check if tempUser
-  if(req.body.userId){
-    
 
-  }
-
-  //check if full user
   User.findById(req.session.user._id)
     .populate('currentGame stats')
     .exec(function(err, user) {
 
-      console.log(req.session.user.stats)
+      //console.log(req.session.user.stats)
       console.log(user);
       console.log(user.stats)
 
@@ -178,9 +177,10 @@ router.post('/gameOver', function(req, res, next) {
         console.log(err)
       }
 
-      if (user) {
+      else if (user) {
 
         var tempGame = user.currentGame[0];
+        console.log(tempGame);
 
         //make score
         var newHighScore = new HighScore({
@@ -229,14 +229,27 @@ router.post('/gameOver', function(req, res, next) {
             checkOverall(newHighScore, function(isOverallHighScore) {
               isOverallHighScore = isOverallHighScore;
 
-              if (isMyHighScore || isOverallHighScore) {
+              if(user.temp){
+                if (isOverallHighScore) {
 
-                tempGame.isHighScore = true;
-                tempGame.save(function(err, game) {
-                  console.log("isHighScore")
+                  tempGame.isHighScore = true;
+                  tempGame.save(function(err, game) {
+                    console.log("isHighScore")
+                    console.log(req.session.user.stats)
+
+                    user.save(function(err, user) {
+                      if (!err) {
+                        console.log("about to res.json success in isOverallHighScore")
+                        res.json({
+                          success: true
+                        })
+                      }
+                    })
+                  });
+
+                } 
+                else {
                   console.log("about to res.json success")
-                  console.log(req.session.user.stats)
-
                   user.save(function(err, user) {
                     if (!err) {
                       res.json({
@@ -244,19 +257,45 @@ router.post('/gameOver', function(req, res, next) {
                       })
                     }
                   })
-                });
+                }
+              }
+              else{
+                checkMine(newHighScore,user.stats,function(isMyHighScore){
+                  isMyHighScore = isMyHighScore;
 
-              } 
-              else {
-                console.log("about to res.json success")
-                user.save(function(err, user) {
-                  if (!err) {
-                    res.json({
-                      success: true
+                  if (isMyHighScore || isOverallHighScore) {
+
+                    tempGame.isHighScore = true;
+                    tempGame.save(function(err, game) {
+                      console.log("isHighScore")
+                      console.log("about to res.json success")
+                      console.log(req.session.user.stats)
+
+                      user.save(function(err, user) {
+                        if (!err) {
+                          res.json({
+                            success: true
+                          })
+                        }
+                      })
+                    });
+
+                  } 
+                  else {
+                    console.log("about to res.json success")
+                    user.save(function(err, user) {
+                      if (!err) {
+                        res.json({
+                          success: true
+                        })
+                      }
                     })
                   }
+
                 })
               }
+
+              
 
             })
             

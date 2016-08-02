@@ -147,6 +147,11 @@ passport.use(new LocalStrategy({
   }
 ));
 
+
+function genRand() {
+  return Math.floor(Math.random()*8999+1000);
+}
+
 // Facebook callback
 passport.use(new FacebookStrategy({
     clientID: process.env.FACEBOOK_clientID,
@@ -172,8 +177,11 @@ passport.use(new FacebookStrategy({
       //console.log(profile.emails[0].value)
 
 
-        var email = profile._json.email;
-        var username = profile._json.first_name + ' '+profile._json.last_name;
+        // var email = profile._json.email;
+        // var name = profile._json.first_name + ' '+profile._json.last_name;
+        // var username = profile._json.first_name[0]+profile._json.last_name;
+        // username.toLowerCase();
+
 
 
       if (err) {
@@ -182,18 +190,25 @@ passport.use(new FacebookStrategy({
       }
 
       else if (!user) {
-        // req.user.update({
-        //   facebookId:profile.id,
-        //   email:email,
-        //   name:username,
-        //   temp:false
-        // })
+       
+        var email = profile._json.email;
+        var name = profile._json.first_name + ' '+profile._json.last_name;
+        var username = profile._json.first_name[0]+profile._json.last_name;
+        username.toLowerCase();
+        
+        User.find({username:username},function(err,users){
+          if(users){
+            username+=(users.length+1)
+          }
+        }).exec(function(err,users){ 
+
         if(req.session.user && !req.session.fullUser){
           
           var newUser = new User({
-            name:req.user.name,
-            email:req.user.email,
+            name:name,
+            email:email,
             facebookId: profile.id,
+            username:username,
             maxN: req.session.user.maxN,
             stats: req.session.user.stats,
             temp:false,
@@ -239,6 +254,7 @@ passport.use(new FacebookStrategy({
             }
           })
         }
+      })
       }
 
     
@@ -285,6 +301,7 @@ passport.use(new FacebookStrategy({
         }
       }
       
+    
     });
 }));
 
@@ -292,13 +309,13 @@ passport.use(new FacebookStrategy({
 
 
 app.use('/', auth(passport));
-app.use('/',clientExpressFunctions);
+app.use('/', clientExpressFunctions);
 app.use('/', routes);
 app.use('/', highScores);
 
 app.use('/', gameOverUpdate);
-app.use('/',gameFunctions);
-app.use('/',statsFunctions);
+app.use('/', gameFunctions);
+app.use('/', statsFunctions);
 
 
 // catch 404 and forward to error handler
