@@ -58,7 +58,7 @@ app.use(session({
     store: new MongoStore({ mongooseConnection: mongoose.connection }),
     proxy: true,
     resave: true,
-    saveUninitialized: true
+    saveUninitialized: false
 }));
 
 app.use(passport.initialize());

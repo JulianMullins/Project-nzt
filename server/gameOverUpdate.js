@@ -11,8 +11,9 @@ var serverData = require('./serverData');
 //console.log(serverData);
 var serverLeaderboard = require('./serverData').serverLeaderboard;
 var leaderboardSize = require('./serverData').leaderboardSize;
-var tempGame = {}; //RUTH I ADDED THIS BECAUSE I KEPT GETTING ERRORS WHEN TESTING OTHER STUFF
-tempGame.score = 0; // AND THIS
+
+// var tempGame = {}; //RUTH I ADDED THIS BECAUSE I KEPT GETTING ERRORS WHEN TESTING OTHER STUFF
+// tempGame.score = 0; // AND THIS
 
 //functions for save game
 
@@ -154,6 +155,7 @@ var sortScores = function(a, b) {
   return b.score - a.score
 };
 
+
 //save game
 router.post('/gameOver', function(req, res, next) {
 
@@ -164,11 +166,13 @@ router.post('/gameOver', function(req, res, next) {
   }
 
   //check if full user
-  User.findById(req.user._id)
+  User.findById(req.session.user._id)
     .populate('currentGame stats')
     .exec(function(err, user) {
 
-      console.log(req.user.stats)
+      console.log(req.session.user.stats)
+      console.log(user);
+      console.log(user.stats)
 
       if (err) {
         console.log(err)
@@ -195,53 +199,44 @@ router.post('/gameOver', function(req, res, next) {
         if (newHighScore.nLevel === user.maxN[newHighScore.mode] && req.body.passedLevel) {
           user.maxN[newHighScore.mode]++;
           console.log("advanced nLevel!")
+          user.save();
         }
 
         //check how scores compare on personal level;
         newHighScore.save(function(err, newHighScore) {
           console.log(user.stats)
 
-          var stats = user.stats;
+          //var stats = user.stats;
 
           //update Stats
 
-          console.log(stats.totalPoints, newHighScore.score)
-          stats.totalPoints += newHighScore.score;
-          stats.progress.push(newHighScore._id);
+          console.log(user.stats.totalPoints, newHighScore.score)
+          user.stats.totalPoints += newHighScore.score;
+          user.stats.progress.push(newHighScore._id);
 
-          stats.save(function(err, stats) {
+          user.stats.save(function(err, stats) {
+            if(err){
+              console.log(err);
+            }
             console.log('updated user stats', stats)
 
             //update personal and overall leaderboards
             var isMyHighScore = null;
             var isOverallHighScore = null;
 
-            checkMine(newHighScore, user.stats, function(isHighScore) {
-              isMyHighScore = isHighScore;
+            
 
-              checkOverall(newHighScore, function(isOverallHighScore) {
-                isOverallHighScore = isOverallHighScore;
+            checkOverall(newHighScore, function(isOverallHighScore) {
+              isOverallHighScore = isOverallHighScore;
 
-                if (isMyHighScore || isOverallHighScore) {
-                  tempGame.isHighScore = true;
-                  tempGame.save(function(err, game) {
-                    console.log("isHighScore")
-                    console.log("about to res.json success")
-                    console.log(req.user.stats)
+              if (isMyHighScore || isOverallHighScore) {
 
-
-                    user.save(function(err, user) {
-                      if (!err) {
-                        res.json({
-                          success: true
-                        })
-                      }
-                    })
-
-
-                  });
-                } else {
+                tempGame.isHighScore = true;
+                tempGame.save(function(err, game) {
+                  console.log("isHighScore")
                   console.log("about to res.json success")
+                  console.log(req.session.user.stats)
+
                   user.save(function(err, user) {
                     if (!err) {
                       res.json({
@@ -249,10 +244,22 @@ router.post('/gameOver', function(req, res, next) {
                       })
                     }
                   })
-                }
+                });
 
-              })
+              } 
+              else {
+                console.log("about to res.json success")
+                user.save(function(err, user) {
+                  if (!err) {
+                    res.json({
+                      success: true
+                    })
+                  }
+                })
+              }
+
             })
+            
 
             //return if user highscore, overall high score, new nLevel
 
@@ -273,7 +280,7 @@ router.post('/gameOver/finish', function(req, res) {
   //req.body: gameId,userId,scoreId
 
   //if don't want to login, use temp username
-  if (req.user && !req.user.temp) {
+  if (req.session.user && !req.session.user.temp) {
 
 
 //update temp user stats

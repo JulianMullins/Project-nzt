@@ -15,13 +15,20 @@ var Stats = require('../models/Stats')
 var tempGame = null;
 
 
+
+router.get('/getUserOnLoad',function(req,res,next){
+  if(req.session.user && req.session.user.temp){
+    req.session.destroy();
+  }
+})
+
+
 //check if user at all, check if tempuser/full user  
     // navBar, relaxedMode
     //(sort of in client/index.js, but commented out)
 router.get('/isUser',function(req,res,next){
-  //console.log(req.user)
-  if(req.user){
-    res.json({isloggedin:true,isUser:req.user.temp})
+  if(req.session.user){
+    res.json({isloggedin:true,isUser:req.session.user.temp})
   }
   else{
     res.json({isUser:false,isloggedin:false})
@@ -33,14 +40,13 @@ router.get('/isUser',function(req,res,next){
 //check if logged in ---- not in use
 router.get('/isLoggedIn',function(req,res,next){
   var isloggedin = false;
-  //console.log(req.user)
-  if(req.user && !req.user.temp){
+  if(req.session.user && !req.session.user.temp){
     isloggedin = true;
   }
   console.log("logged in: "+isloggedin)
   res.json({
     'loggedIn': isloggedin
-    // 'username': req.user.username
+    // 'username': req.session.user.username
   })
 });
 
@@ -52,16 +58,16 @@ router.get('/getMaxN',function(req,res,next){
               silent:1,
               advanced:1
             };
-            //console.log(req.user)
-  if(req.user){
-    maxN= req.user.maxN
+            //console.log(req.session.user)
+  if(req.session.user){
+    maxN= req.session.user.maxN
   }
   res.json({maxN:maxN})
 })
 
 //get data for game (not in use)
 router.get("/getGameData",function(req,res,next){
-  Game.findById(req.user.currentGame[0],function(err,game){
+  Game.findById(req.session.user.currentGame[0],function(err,game){
     res.json({
       score:game.score,
       mode:game.mode,
@@ -76,23 +82,23 @@ router.get('/getUser',function(req,res,next){
   var isUser = false;
   var username=null;
   var name=null;
-  if(req.user && !req.user.temp){
+  if(req.session.user && !req.session.user.temp){
     isUser=true
-    username=req.user.username,
-    name=req.user.name
+    username=req.session.user.username,
+    name=req.session.user.name
   }
-  if(req.user && req.user.currentGame){
-    games = req.user.currentGame
+  if(req.session.user && req.session.user.currentGame){
+    games = req.session.user.currentGame
   }
-  if(req.user){
+  if(req.session.user){
     console.log("real user, here are stats:")
-    Stats.findById(req.user.stats,function(err,stats){
+    Stats.findById(req.session.user.stats,function(err,stats){
       console.log(stats);
     })
   }
   
   res.json({
-    alreadyLoggedIn: !!req.user,
+    alreadyLoggedIn: !!req.session.user,
     isUser: isUser,
     username:username,
     name:name
@@ -105,7 +111,7 @@ router.get('/getGame',function(req,res,next){
   var scoreToPass;
   var passedLevel;
 
-  Game.findById(req.user.currentGame[0],function(err,game){
+  Game.findById(req.session.user.currentGame[0],function(err,game){
     if(err){
       console.log(err)
       res.json({success:false})
@@ -132,7 +138,7 @@ router.get('/getGame',function(req,res,next){
 })
 
 router.get('/getScore',function(req,res){
-  Game.findById(req.user.currentGame[0],function(err,game){
+  Game.findById(req.session.user.currentGame[0],function(err,game){
     if(game){
       res.json({score:game.score});
     }

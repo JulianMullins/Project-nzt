@@ -23,15 +23,14 @@ var tempGame = null;
 //post start game
 router.post('/startGame/:mode/:nLevel',function(req,res,next){
   console.log("trying to post game");
-  //console.log(req.user);
-
+  console.log(req.session.user);
   //if user, create game, save game, add to user.currentGame
   if(req.session.user){
-    //console.log(req.user);
     if(req.session.user.maxN[req.params.mode]<req.params.nLevel){
       res.json({authorized:false});
       return;
     }
+    var user = req.session.user;
     var tempGame = new Game({
       user:req.session.user,
       mode:req.params.mode,
@@ -44,9 +43,9 @@ router.post('/startGame/:mode/:nLevel',function(req,res,next){
         console.log(err);
       }
       else{
-        req.session.user.currentGame.unshift(game);
-        req.session.user.save();
-        console.log(req.user, "game posted")
+        user.currentGame.unshift(game);
+        user.save();
+        console.log(req.session.user, user, "game posted")
         res.json({
           authorized:true,
           gameId: game._id,
@@ -63,8 +62,9 @@ router.post('/startGame/:mode/:nLevel',function(req,res,next){
     //if no user, make tempUser then do above (create game, add to tempUser, etc.)
     
     
-    console.log("no req.user")
+    console.log("no user")
     var tempUser = new User({
+        username:null,
         stats:null,
         currentGame:[],
         maxN:{
@@ -73,7 +73,9 @@ router.post('/startGame/:mode/:nLevel',function(req,res,next){
             silent:1,
             advanced:1
           },
-        temp:true
+        temp:true,
+        leaderboard:null,
+        email:null
       })
 
       var leaderboard = new Leaderboard({user:tempUser._id});
@@ -81,6 +83,9 @@ router.post('/startGame/:mode/:nLevel',function(req,res,next){
       var userStats = new Stats({user:tempUser._id,leaderboard:leaderboard._id});
       userStats.save();
       tempUser.stats = userStats._id;
+
+      tempUser.username = tempUser._id;
+      tempUser.email = tempUser._id;
 
       console.log("saving tempUser")
       tempUser.save(function(err,user){
@@ -91,6 +96,7 @@ router.post('/startGame/:mode/:nLevel',function(req,res,next){
         console.log(user)
 
         req.session.user = user;
+        req.session.user.save();
         req.fullUser = false;
 
 
@@ -126,16 +132,15 @@ router.post('/startGame/:mode/:nLevel',function(req,res,next){
               }
             })
 
-
+            req.session.user.save();
 
             //createGame(req,res,user.temp)
-          }
+          
         }.bind(this))
 
-      })
-    }
+      }
+    
 
-   //console.log(req.user);
 });
 
 
@@ -143,7 +148,6 @@ router.post('/startGame/:mode/:nLevel',function(req,res,next){
 //game end - posted from mode files; find game, update game stats
 router.post('/gameEnd',function(req,res,next){
   console.log("game ended")
-  //console.log(req.user)
   console.log(req.body)
   Game.findById(req.body.gameId,function(err,game){
     if(err){
