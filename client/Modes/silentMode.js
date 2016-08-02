@@ -2,7 +2,7 @@ var React = require('react');
 var GameTimer = require('./gameTimer');
 var SilentStartOverlay = require('./gameStartOverlay').SilentStartOverlay;
 var axios = require('axios');
-import { Link } from 'react-router'
+import {Link} from 'react-router'
 
 var endGameFunction = require('./serverFunctions').endGameFunction;
 var startGameFunction = require('./serverFunctions').startGameFunction;
@@ -378,8 +378,7 @@ var SilentMode = React.createClass({
             </div>
           </div>
         </div>
-
-        <Link to="/home"><img className="gameHomeBtn whiteLogo" src="./images/CortexLogo3.png" /></Link>
+        <Link to="/home"><img className="gameHomeBtn whiteLogo" src="./images/CortexLogo3.png"/></Link>
       </div>
     );
   }

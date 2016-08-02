@@ -13,7 +13,6 @@ table {
 .boardSide {
   height: 100vh;
   width: 100vw;
-  /*background-color: #F1BA03;*/
   color: #01b6a7;
   padding-top: 10vh;
 }
@@ -24,6 +23,20 @@ table {
 }
 .reactable-filter-input {
   border-bottom: 1px solid #01b6a7;
+  color: #01b6a7;
+}
+.reactable-filter-input::-webkit-input-placeholder {
+  color: #01b6a7;
+}
+.reactable-filter-input:-moz-placeholder {
+  color: #01b6a7;
+  opacity: 1;
+}
+.reactable-filter-input::-moz-placeholder {
+  color: #01b6a7;
+  opacity: 1;
+}
+.reactable-filter-input:-ms-input-placeholder {
   color: #01b6a7;
 }
 th {

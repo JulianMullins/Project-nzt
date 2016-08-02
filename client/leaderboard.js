@@ -14,13 +14,11 @@ var Leaderboard = React.createClass({
   },
   getAllScores: function() {
     axios.get('/allHighScores').then(function(response) {
-      console.log('all scores', response.data);
       this.setState({allScores: response.data});
     }.bind(this));
   },
   getMyScores: function() {
     axios.get('/myHighScores').then(function(response) {
-      console.log('my scores', response.data);
       this.setState({myScores: response.data});
     }.bind(this));
   },
@@ -28,6 +26,9 @@ var Leaderboard = React.createClass({
     var table = this.state.global
       ? <Table columns={[
           {
+            key: 'rank',
+            label: 'rank'
+          }, {
             key: 'username',
             label: 'Username'
           }, {
@@ -41,10 +42,12 @@ var Leaderboard = React.createClass({
             label: 'Level'
           }
         ]} data={this.state.allScores} currentPage={0} itemsPerPage={10} pageButtonLimit={5} sortable={true} defaultSort={{
-          column: 'score',
-          direction: 'desc'
-        }} filterable={['mode', 'username']}/>
-      : <Table columns={[
+          column: 'rank',
+          direction: 'asc'
+        }} filterable={['username']}/>
+      : <Table style={{
+        paddingTop: '6vh'
+      }} columns={[
         {
           key: 'score',
           label: 'score'
@@ -58,7 +61,7 @@ var Leaderboard = React.createClass({
       ]} data={this.state.myScores} currentPage={0} itemsPerPage={10} pageButtonLimit={5} sortable={true} defaultSort={{
         column: 'score',
         direction: 'desc'
-      }} filterable={['mode', 'username']}/>;
+      }}/>;
 
     return (
       <div className="leaderboardPage">
@@ -80,7 +83,7 @@ var Leaderboard = React.createClass({
             {table}
           </section>
         </div>
-          <Link to="/home"><img className="whiteLogo" src="./images/CortexLogo3.png" /></Link>
+        <Link to="/home"><img className="whiteLogo" src="./images/CortexLogo3.png"/></Link>
       </div>
     )
   }
