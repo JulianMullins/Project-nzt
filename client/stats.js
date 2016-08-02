@@ -1,6 +1,8 @@
 var React = require('react');
 var Chart = require('chart.js')
 var LineChart = require("react-chartjs").Line;
+import {Link} from 'react-router';
+
 //get funciton, res.json()
 //use req.user
 var data = {
@@ -60,7 +62,12 @@ var MyComponent = React.createClass({
 
   },
   render: function() {
-    return <LineChart data={data} width="600" height="250"/>
+      return (
+        <div>
+          <LineChart data={data} width="600" height="250"/>
+          <Link to="/home"><img className="whiteLogo" src="./images/CortexIconWhite.png" /></Link>
+        </div>
+      )
   }
 });
 
