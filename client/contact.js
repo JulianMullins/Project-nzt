@@ -17,8 +17,10 @@ var Contact = React.createClass({
 
 					<div className="profiles">
 						<div className="aboutProfile">
-							<h2>Julian Mullins</h2>
-							<p>Front-End</p>
+							<div className="profileInfo">
+								<h2>Julian Mullins</h2>
+								<p>Front-End</p>
+							</div>
 							<img src="images/profiles/julian.jpg" />
 							<span className="socialMedia">
 								<a target="_blank" href="https://www.linkedin.com/in/mullinsjulian" className="fa fa-linkedin-square fa-2x"></a>
@@ -28,8 +30,10 @@ var Contact = React.createClass({
 						</div>
 
 						<div className="aboutProfile">
-							<h2>Adam He</h2>
-							<p>Front-End</p>
+							<div className="profileInfo">
+								<h2>Adam He</h2>
+								<p>Front-End</p>
+							</div>
 							<img src="images/profiles/adam.jpg" />
 							<span className="socialMedia">
 								<a target="_blank" href="https://www.linkedin.com/in/shuaihe" className="fa fa-linkedin-square fa-2x"></a>
@@ -39,8 +43,10 @@ var Contact = React.createClass({
 						</div>
 
 						<div className="aboutProfile">
-							<h2>Ruth Bagley</h2>
-							<p>Back-End</p>
+							<div className="profileInfo">
+								<h2>Ruth Bagley</h2>
+								<p>Back-End</p>
+							</div>
 							<img src="images/profiles/ruth.jpg" />
 							<span className="socialMedia">
 								<a target="_blank" href="https://www.linkedin.com/in/ruth-bagley-24781996" className="fa fa-linkedin-square fa-2x"></a>
@@ -49,8 +55,10 @@ var Contact = React.createClass({
 						</div>
 
 						<div className="aboutProfile">
-						<h2>Taylor Concannon</h2>
-							<p>Back-End</p>
+							<div className="profileInfo">
+								<h2>Taylor Concannon</h2>
+								<p>Back-End</p>
+							</div>
 							<img src="images/profiles/taylor.jpg" />
 							<span className="socialMedia">
 								<a target="_blank" href="https://www.linkedin.com/in/taylor-concannon-b2706097" className="fa fa-linkedin-square fa-2x"></a>
@@ -59,8 +67,10 @@ var Contact = React.createClass({
 						</div>
 
 						<div className="aboutProfile">
-							<h2>Virginia Van Keuren</h2>
-							<p>Design</p>
+							<div className="profileInfo">
+								<h2>Virginia Van Keuren</h2>
+								<p>Design</p>
+							</div>
 							<img src="images/profiles/virginia.jpg" />
 							<span className="socialMedia">
 								<a target="_blank" href="https://www.linkedin.com/in/virginiavankeuren" className="fa fa-linkedin-square fa-2x"></a>
@@ -73,7 +83,10 @@ var Contact = React.createClass({
 				<div className="contactBottom">
 					<h1>Contact Us</h1>
 					<p>We&#39;d love to hear from you!</p>
-					<a target="_blank" href="https://cortexgame.typeform.com/to/xK1GK6" target="_blank">Feedback Form</a>
+					<div className="contactLinks">
+						<a target="_blank" href="https://cortexgame.typeform.com/to/xK1GK6">Feedback Form</a>
+						<a target="_blank" href="mailto:contactcortexgame@gmail.com">Email Us</a>
+					</div>
 				</div>
 				<Link to="/home"><img className="whiteLogo" src="./images/CortexIconWhite.png" /></Link>
 			</div>

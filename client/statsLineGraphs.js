@@ -5,6 +5,7 @@ var LineChart = require('react-d3-basic').LineChart;
 var AreaChart = require('react-d3-basic').AreaChart;
 var _=require('underscore');
 var axios=require('axios');
+import { Link } from 'react-router'
 
 //global variables for changing state below
 var stats=[];
@@ -95,9 +96,12 @@ axios.get('/taco', {withCredentials: true})
     }
     var title = "Stack Area Chart"
     if(!stats[0]){
-      return(<div><div className='statsAlert'>{this.state.alert}</div>
-        <a href='#/home'><span className='fa fa-home fa-5x taylorsHome' aria-hidden='true'/><h2>Home</h2></a>
-        </div>)
+      return(
+        <div className="statsAlertContainer">
+          <div className='statsAlert'>{this.state.alert}</div>
+          <Link to='/home'><span className='fa fa-home fa-5x relaxed' aria-hidden='true'/></Link>
+        </div>
+      )
     }
     else{
       return (<div>
