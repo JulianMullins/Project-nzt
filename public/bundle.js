@@ -2591,8 +2591,6 @@ module.exports = SilentMode;
 
 var _reactRouter = require('react-router');
 
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
 var React = require('react');
 var ReactDOM = require('react-dom');
 
@@ -2628,14 +2626,18 @@ var Contact = React.createClass({
 						'div',
 						{ className: 'aboutProfile' },
 						React.createElement(
-							'h2',
-							null,
-							'Julian Mullins'
-						),
-						React.createElement(
-							'p',
-							null,
-							'Front-End'
+							'div',
+							{ className: 'profileInfo' },
+							React.createElement(
+								'h2',
+								null,
+								'Julian Mullins'
+							),
+							React.createElement(
+								'p',
+								null,
+								'Front-End'
+							)
 						),
 						React.createElement('img', { src: 'images/profiles/julian.jpg' }),
 						React.createElement(
@@ -2650,14 +2652,18 @@ var Contact = React.createClass({
 						'div',
 						{ className: 'aboutProfile' },
 						React.createElement(
-							'h2',
-							null,
-							'Adam He'
-						),
-						React.createElement(
-							'p',
-							null,
-							'Front-End'
+							'div',
+							{ className: 'profileInfo' },
+							React.createElement(
+								'h2',
+								null,
+								'Adam He'
+							),
+							React.createElement(
+								'p',
+								null,
+								'Front-End'
+							)
 						),
 						React.createElement('img', { src: 'images/profiles/adam.jpg' }),
 						React.createElement(
@@ -2672,14 +2678,18 @@ var Contact = React.createClass({
 						'div',
 						{ className: 'aboutProfile' },
 						React.createElement(
-							'h2',
-							null,
-							'Ruth Bagley'
-						),
-						React.createElement(
-							'p',
-							null,
-							'Back-End'
+							'div',
+							{ className: 'profileInfo' },
+							React.createElement(
+								'h2',
+								null,
+								'Ruth Bagley'
+							),
+							React.createElement(
+								'p',
+								null,
+								'Back-End'
+							)
 						),
 						React.createElement('img', { src: 'images/profiles/ruth.jpg' }),
 						React.createElement(
@@ -2693,14 +2703,18 @@ var Contact = React.createClass({
 						'div',
 						{ className: 'aboutProfile' },
 						React.createElement(
-							'h2',
-							null,
-							'Taylor Concannon'
-						),
-						React.createElement(
-							'p',
-							null,
-							'Back-End'
+							'div',
+							{ className: 'profileInfo' },
+							React.createElement(
+								'h2',
+								null,
+								'Taylor Concannon'
+							),
+							React.createElement(
+								'p',
+								null,
+								'Back-End'
+							)
 						),
 						React.createElement('img', { src: 'images/profiles/taylor.jpg' }),
 						React.createElement(
@@ -2714,14 +2728,18 @@ var Contact = React.createClass({
 						'div',
 						{ className: 'aboutProfile' },
 						React.createElement(
-							'h2',
-							null,
-							'Virginia Van Keuren'
-						),
-						React.createElement(
-							'p',
-							null,
-							'Design'
+							'div',
+							{ className: 'profileInfo' },
+							React.createElement(
+								'h2',
+								null,
+								'Virginia Van Keuren'
+							),
+							React.createElement(
+								'p',
+								null,
+								'Design'
+							)
 						),
 						React.createElement('img', { src: 'images/profiles/virginia.jpg' }),
 						React.createElement(
@@ -2747,9 +2765,18 @@ var Contact = React.createClass({
 					'We\'d love to hear from you!'
 				),
 				React.createElement(
-					'a',
-					_defineProperty({ target: '_blank', href: 'https://cortexgame.typeform.com/to/xK1GK6' }, 'target', '_blank'),
-					'Feedback Form'
+					'div',
+					{ className: 'contactLinks' },
+					React.createElement(
+						'a',
+						{ target: '_blank', href: 'https://cortexgame.typeform.com/to/xK1GK6' },
+						'Feedback Form'
+					),
+					React.createElement(
+						'a',
+						{ target: '_blank', href: 'mailto:contactcortexgame@gmail.com' },
+						'Email Us'
+					)
 				)
 			),
 			React.createElement(
@@ -4398,6 +4425,7 @@ var Science = React.createClass({
 					null,
 					'The Science'
 				),
+				React.createElement('img', { src: './images/brain.png' }),
 				React.createElement(
 					'p',
 					null,
@@ -4424,9 +4452,23 @@ var Science = React.createClass({
 					'Learn More'
 				),
 				React.createElement(
-					'a',
-					{ href: 'http://www.gwern.net/DNB%20FAQ', target: '_blank' },
-					'DUAL N-BACK FAQ'
+					'div',
+					{ className: 'scienceLinks' },
+					React.createElement(
+						'a',
+						{ href: 'http://www.gwern.net/DNB%20FAQ', target: '_blank' },
+						'Dual N-Back FAQ'
+					),
+					React.createElement(
+						'p',
+						null,
+						'|'
+					),
+					React.createElement(
+						'a',
+						{ href: 'http://www.pnas.org/content/105/19/6829.full', target: '_blank' },
+						'PNAS Study'
+					)
 				)
 			),
 			React.createElement(
@@ -4443,6 +4485,8 @@ module.exports = Science;
 },{"react":365,"react-dom":174,"react-router":215}],21:[function(require,module,exports){
 'use strict';
 
+var _reactRouter = require('react-router');
+
 function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
 
 var React = require('react');
@@ -4452,6 +4496,7 @@ var LineChart = require('react-d3-basic').LineChart;
 var AreaChart = require('react-d3-basic').AreaChart;
 var _ = require('underscore');
 var axios = require('axios');
+
 
 //global variables for changing state below
 var stats = [];
@@ -4539,21 +4584,16 @@ var MyComponent = React.createClass({
     if (!stats[0]) {
       return React.createElement(
         'div',
-        null,
+        { className: 'statsAlertContainer' },
         React.createElement(
           'div',
           { className: 'statsAlert' },
           this.state.alert
         ),
         React.createElement(
-          'a',
-          { href: '#/home' },
-          React.createElement('span', { className: 'fa fa-home fa-5x taylorsHome', 'aria-hidden': 'true' }),
-          React.createElement(
-            'h2',
-            null,
-            'Home'
-          )
+          _reactRouter.Link,
+          { to: '/home' },
+          React.createElement('span', { className: 'fa fa-home fa-5x relaxed', 'aria-hidden': 'true' })
         )
       );
     } else {
@@ -4599,7 +4639,11 @@ var MyComponent = React.createClass({
 
 module.exports = MyComponent;
 
+<<<<<<< HEAD
 },{"axios":23,"d3":45,"react":365,"react-d3-basic":109,"react-dom":174,"underscore":384}],22:[function(require,module,exports){
+=======
+},{"axios":21,"d3":44,"react":354,"react-d3-basic":54,"react-dom":119,"react-router":149,"underscore":371}],20:[function(require,module,exports){
+>>>>>>> refs/remotes/origin/Julian-Mullins
 'use strict';
 
 var _reactRouter = require('react-router');
@@ -4755,7 +4799,7 @@ var Tutorial = React.createClass({
                     React.createElement(
                       _reactRouter.Link,
                       { to: '/science', className: 'tutorialLink' },
-                      'scientifically supported and backed by numerous research studies'
+                      ' scientifically supported and backed by numerous research studies'
                     ),
                     '. While the game can be tricky to grasp at first and increases in difficulty rather quickly, we have tried to make this game as fun and as easy to learn as possible. We hope that you’ll enjoy simply playing the game and that the cognitive benefits will follow along as you progress.'
                   ),
@@ -4764,7 +4808,7 @@ var Tutorial = React.createClass({
                     null,
                     'Let\'s get started!'
                   ),
-                  React.createElement('img', { src: './images/brain.png', alt: 'BRAIN' })
+                  React.createElement('img', { src: './images/brain.png', alt: 'brain' })
                 )
               )
             ),
@@ -4789,7 +4833,7 @@ var Tutorial = React.createClass({
                   )
                 )
               ),
-              React.createElement('img', { src: './images/colorPosition.gif', alt: 'Mountain View' })
+              React.createElement('img', { src: './images/colorPosition.gif', alt: 'Color & Position' })
             ),
             React.createElement(
               'div',

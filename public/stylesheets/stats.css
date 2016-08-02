@@ -20,6 +20,14 @@ text{
 	font-size: 25px;
 	width: 100%;
 } 
+
+.statsAlertContainer {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+
 .statsAlert{
 	font-size: 50px;
 }

@@ -129,12 +129,13 @@ var Tutorial = React.createClass({
               <div className="rulemode2">
                 <div className="rules2">
                   <h2>Welcome to Cortex!</h2>
-                  <p>Cortex is a game designed to exercise your working memory and increase fluid-intelligence (directly tied to IQ). This method of increasing IQ is
-                    <Link to="/science" className="tutorialLink">
-                      scientifically supported and backed by numerous research studies</Link>. While the game can be tricky to grasp at first and increases in difficulty rather quickly, we have tried to make this game as fun and as easy to learn as possible. We hope that you’ll enjoy simply playing the game and that the cognitive benefits will follow along as you progress.</p>
+                  <p>Cortex is a game designed to exercise your working memory and increase fluid-intelligence (directly tied to IQ). This method of increasing IQ is 
+                    <Link to="/science" className="tutorialLink"> scientifically supported and backed by numerous research studies</Link>. 
+                    While the game can be tricky to grasp at first and increases in difficulty rather quickly, we have tried to make this game as fun and as easy to 
+                    learn as possible. We hope that you’ll enjoy simply playing the game and that the cognitive benefits will follow along as you progress.</p>
                   <h3>Let&#39;s get started!
                   </h3>
-                  <img src="./images/brain.png" alt="BRAIN"></img>
+                  <img src="./images/brain.png" alt="brain"></img>
                 </div>
                 {/* rules2 */}
               </div>
@@ -150,7 +151,7 @@ var Tutorial = React.createClass({
                 </div>
               </div>
               {/* rulemode2 */}
-              <img src="./images/colorPosition.gif" alt="Mountain View"></img>
+              <img src="./images/colorPosition.gif" alt="Color & Position"></img>
             </div>
             {/* slide */}
 
