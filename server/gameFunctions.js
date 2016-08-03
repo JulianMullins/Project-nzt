@@ -77,7 +77,7 @@ router.post('/startGame/:mode/:nLevel',function(req,res,next){
     
     console.log("no user")
     var tempUser = new User({
-        username:null,
+        username:'Anonymous',
         stats:null,
         currentGame:[],
         maxN:{

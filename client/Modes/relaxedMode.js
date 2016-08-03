@@ -189,6 +189,7 @@ var RelaxedMode = React.createClass({
       //////////////////////////////////////
 
       // Game end
+
       if (timeKeeper === 0) {
       // if (timeKeeper === 35) {
         //give gameScore variable the final score

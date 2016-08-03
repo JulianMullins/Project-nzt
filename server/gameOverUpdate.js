@@ -11,6 +11,7 @@ var serverData = require('./serverData');
 //console.log(serverData);
 var serverLeaderboard = require('./serverData').serverLeaderboard;
 var leaderboardSize = require('./serverData').leaderboardSize;
+var modeMultiplier = require('./serverData').modeMultiplier;
 
 // var tempGame = {}; //RUTH I ADDED THIS BECAUSE I KEPT GETTING ERRORS WHEN TESTING OTHER STUFF
 // tempGame.score = 0; // AND THIS
@@ -181,12 +182,14 @@ router.post('/gameOver', function(req, res, next) {
 
         var tempGame = user.currentGame[0];
         console.log(tempGame);
+        var baseScore = tempGame.score;
+        var score = baseScore*tempGame.nLevel*modeMultiplier[tempGame.mode];
 
         //make score
         var newHighScore = new HighScore({
           user: user._id,
           dateAchieved: new Date(),
-          score: tempGame.score,
+          score: score,
           nLevel: tempGame.nLevel,
           mode: tempGame.mode,
           reactionTimes: tempGame.reactionTimes

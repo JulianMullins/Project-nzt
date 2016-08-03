@@ -11,6 +11,7 @@ var FacebookStrategy = require('passport-facebook');
 var MongoStore = require('connect-mongo')(session);
 var mongoose = require('mongoose');
 var bcrypt = require('bcryptjs');
+var back = require('express-back');
 
 var routes = require('./server/index');
 var auth = require('./server/auth');
@@ -61,6 +62,7 @@ app.use(session({
     saveUninitialized: false
 }));
 
+app.use(back());
 app.use(passport.initialize());
 app.use(passport.session());
 
@@ -95,7 +97,9 @@ passport.use(new LocalStrategy({
     console.log("PASSPORT DATA: ", username, password,req.body)
     
     // Find the user with the given username
-    User.findOne({$or: [{username: username},{email:username}] }, function (err, user) {
+    User.findOne({$or: [{username: username},{email:username}] })
+      .populate('stats')
+      .exec(function (err, user) {
       if (err) {
         console.error(err);
         return done(err);
@@ -194,9 +198,9 @@ passport.use(new FacebookStrategy({
         var email = profile._json.email;
         var name = profile._json.first_name + ' '+profile._json.last_name;
         var username = profile._json.first_name[0]+profile._json.last_name;
-        username.toLowerCase();
+        username = username.toLowerCase();
         
-        User.find({username:username},function(err,users){
+        User.find({username: {$regex: username}},function(err,users){
           if(users){
             username+=(users.length+1)
           }
