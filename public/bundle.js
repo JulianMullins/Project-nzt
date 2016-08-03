@@ -2805,7 +2805,7 @@ var GameOverOverlay = React.createClass({
           { className: 'classic' },
           'You need ',
           this.state.scoreToPass * this.state.nLevel * this.state.modeMultiplier,
-          'points to unlock level ',
+          ' points to unlock level ',
           this.state.nLevel + 1
         ),
         gameOverCongrats: React.createElement(

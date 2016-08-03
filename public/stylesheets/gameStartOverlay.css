@@ -19,14 +19,7 @@
   align-items: center;
   justify-content: center;
   width: 50vw;
-  min-height: 75vh;
-  max-height: 90vh;
-}
-
-@media (max-width: 960px) {
-  .overlayContent {
-    width: 75vw;
-  }
+  height: 100vh;
 }
 
 .overlayContent p {
@@ -181,4 +174,21 @@
 
 .keyBlank {
   visibility: hidden;
+}
+
+@media (max-width: 1024px) {
+  .overlayContent {
+    width: 75vw;
+  }
+}
+
+@media (max-width: 768px) {
+  .overlay {
+    padding: 0;
+    justify-content: center;
+  }
+
+  .overlayContent {
+    width: 80vw;
+  }
 }
