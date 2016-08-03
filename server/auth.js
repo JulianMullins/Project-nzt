@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 var bcrypt = require('bcryptjs');
 var axios = require('axios');
+var back = require('express-back');
 
 var User = require('../models/User');
 var Stats = require('../models/Stats');
@@ -180,7 +181,8 @@ module.exports = function(passport) {
     req.session.fullUser = true;
       console.log("login success")
       console.log(req.user)
-      res.json({success:true,user:req.user})
+      res.json({success:true});
+      res.back();
       console.log(req.user +" after json-ing");
 
 	});
@@ -199,8 +201,9 @@ module.exports = function(passport) {
       req.session.user = req.user;
       req.session.fullUser = true;
 
-      console.log("success",req.user)
-      res.redirect('/#/home');
+      console.log("success",req.session.user)
+
+      res.json({success:true});
     });
 
 

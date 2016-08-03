@@ -14,25 +14,7 @@ var LoginOverlay = React.createClass({
       games: null
     }
   },
-  // componentDidMount(){
 
-  //     fetch('/getUser',{
-  //       method:'get'
-  //     }).then(function(response){
-  //         console.log("about to response.json")
-  //         return response.json();
-  //     }).then(function(response){
-  //       console.log('responded')
-  //       if(response.games){
-  //         console.log('about to set state')
-  //         this.setState({
-  //           games:response.games
-  //         })
-  //         console.log('state set')
-  //       }
-  //     }.bind(this))
-
-  // },
   componentDidMount(){
     
   },
@@ -61,7 +43,7 @@ var LoginOverlay = React.createClass({
     }).then(function(response) {
       console.log(response)
       if (response.data.success) {
-        this.props.history.push('/home');
+        this.props.history.goBack();
       }
     }.bind(this))
   },

@@ -1853,7 +1853,7 @@ var RelaxedMode = React.createClass({
 
       // Game end
       //if (timeKeeper === 0) {
-      if (timeKeeper === 35) {
+      if (timeKeeper === 36) {
         //give gameScore variable the final score
         clearInterval(iterations);
         console.log(fullScore);
@@ -2865,7 +2865,7 @@ var GameOverOverlay = React.createClass({
       console.log("userData: ", userData);
       this.setState({
         //username:userData.data.username,
-        isAnon: userData.data.alreadyLoggedIn,
+        isAnon: userData.data.isAnon,
         score: Math.floor(gameData.data.game.score),
         mode: gameData.data.game.mode,
         nLevel: gameData.data.game.nLevel,
@@ -2879,7 +2879,6 @@ var GameOverOverlay = React.createClass({
       this.renderLogin();
       this.unlockLevel();
       this.anonHighScore();
-      this.renderLogin();
       this.nextLevelBtn();
       score = parseFloat(this.state.score);
       var n = parseInt(this.state.nLevel);
@@ -2975,7 +2974,7 @@ var GameOverOverlay = React.createClass({
   },
   renderLogin: function renderLogin() {
     //if not logged in, option to login to save
-    if (this.state.isAnon) {
+    if (this.state.isAnon && !this.state.isHighScore) {
       this.setState({
         gameOverMessage: React.createElement(
           'div',
@@ -2987,9 +2986,11 @@ var GameOverOverlay = React.createClass({
             React.createElement(
               _reactRouter.Link,
               { to: '/gameOver/login' },
-              'Sign in'
+              'Sign in '
             ),
+            ' ',
             'or',
+            ' ',
             React.createElement(
               _reactRouter.Link,
               { to: '/gameOver/register' },
@@ -3817,25 +3818,7 @@ var LoginOverlay = React.createClass({
       games: null
     };
   },
-  // componentDidMount(){
 
-  //     fetch('/getUser',{
-  //       method:'get'
-  //     }).then(function(response){
-  //         console.log("about to response.json")
-  //         return response.json();
-  //     }).then(function(response){
-  //       console.log('responded')
-  //       if(response.games){
-  //         console.log('about to set state')
-  //         this.setState({
-  //           games:response.games
-  //         })
-  //         console.log('state set')
-  //       }
-  //     }.bind(this))
-
-  // },
   componentDidMount: function componentDidMount() {},
   update: function update(e) {
     this.setState(_defineProperty({}, e.target.name, e.target.value));
@@ -3861,7 +3844,7 @@ var LoginOverlay = React.createClass({
     }).then(function (response) {
       console.log(response);
       if (response.data.success) {
-        this.props.history.push('/home');
+        this.props.history.goBack();
       }
     }.bind(this));
   },
@@ -4283,12 +4266,12 @@ var RegisterOverlay = React.createClass({
         //this.props.history.push('/login')
 
         axios.post('/login', {
-          username: this.state.username,
+          username: this.state.email,
           password: this.state.password
         }).then(function (response) {
           console.log(response);
           if (response.data.success) {
-            this.props.history.push('/home');
+            this.props.history.goBack();
           } else {
             this.props.history.push('/login');
           }
@@ -4600,11 +4583,7 @@ var MyComponent = React.createClass({
 
 module.exports = MyComponent;
 
-<<<<<<< HEAD
-},{"axios":23,"d3":45,"react":365,"react-d3-basic":109,"react-dom":174,"underscore":384}],22:[function(require,module,exports){
-=======
-},{"axios":21,"d3":44,"react":354,"react-d3-basic":54,"react-dom":119,"react-router":149,"underscore":371}],20:[function(require,module,exports){
->>>>>>> refs/remotes/origin/Julian-Mullins
+},{"axios":23,"d3":45,"react":365,"react-d3-basic":109,"react-dom":174,"react-router":215,"underscore":384}],22:[function(require,module,exports){
 'use strict';
 
 var _reactRouter = require('react-router');

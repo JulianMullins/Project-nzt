@@ -83,28 +83,41 @@ router.get('/getUser',function(req,res,next){
   var isUser = false;
   var username=null;
   var name=null;
-  if(req.session.user && !req.session.user.temp){
-    isUser=true
-    username=req.session.user.username,
-    name=req.session.user.name
-  }
-  if(req.session.user && req.session.user.currentGame){
-    games = req.session.user.currentGame
-  }
-  if(req.session.user){
-    console.log("here are stats from /getUser:")
-    Stats.findById(req.session.user.stats,function(err,stats){
-      console.log(stats);
-      console.log(req.session.user);
+
+  if(!req.session.user){
+    res.json({
+      isAnon: null,
+      alreadyLoggedIn: false,
+      isUser: false,
+      username:null,
+      name:null
     })
   }
-  
-  res.json({
-    alreadyLoggedIn: !req.session.user.temp,
-    isUser: isUser,
-    username:username,
-    name:name
-  })
+  else{
+    if(req.session.user && !req.session.user.temp){
+      isUser=true
+      username=req.session.user.username,
+      name=req.session.user.name
+    }
+    if(req.session.user && req.session.user.currentGame){
+      games = req.session.user.currentGame
+    }
+    if(req.session.user){
+      console.log("here are stats from /getUser:")
+      Stats.findById(req.session.user.stats,function(err,stats){
+        console.log(stats);
+        console.log(req.session.user);
+      })
+    }
+    
+    res.json({
+      isAnon: req.session.user.temp,
+      alreadyLoggedIn: !req.session.user.temp,
+      isUser: isUser,
+      username:username,
+      name:name
+    })
+  }
 })
 
 //get game data at end of game (gameOver)

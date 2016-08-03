@@ -95,12 +95,12 @@ var RegisterOverlay = React.createClass({
 
 
         axios.post('/login', {
-          username: this.state.username,
+          username: this.state.email,
           password: this.state.password
         }).then(function(response){
           console.log(response)
           if(response.data.success){
-            this.props.history.push('/home')
+            this.props.history.goBack();
           }
           else{
             this.props.history.push('/login')
