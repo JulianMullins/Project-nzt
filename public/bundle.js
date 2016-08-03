@@ -1590,29 +1590,10 @@ var RelaxedMode = React.createClass({
       mode: 'relaxed',
       modeMultiplier: 1,
       penalty: 0,
-      positivePoints: 0,
-      userId: null
+      positivePoints: 0
     };
   },
   componentDidMount: function componentDidMount() {
-    // axios.post('/startGame/' + this.state.mode + '/' + this.state.N).then(function(response) {
-    //   console.log("start game posted", response)
-    //   this.setState({
-    //     tempUser: response.data.tempUser,
-    //     gameId: response.data.gameId,
-    //     modeMultiplier: response.data.modeMultiplier,
-    //     penalty: response.data.penalty,
-    //     positivePoints: response.data.positivePoints,
-    //     userId: response.data.userId
-    //   });
-    //   console.log(this.state)
-    //   console.log("game posted")
-
-    //   axios.get('/isUser').then(function(response) {
-    //     console.log("isuser data: " + response.data)
-    //   })
-
-    // }.bind(this))
 
     startGameFunction(this.state.mode, this.state.N, function (err, obj) {
       if (err) {
@@ -1625,8 +1606,7 @@ var RelaxedMode = React.createClass({
         gameId: obj.gameId,
         modeMultiplier: obj.modeMultiplier,
         penalty: obj.penalty,
-        positivePoints: obj.positivePoints,
-        userId: obj.userId
+        positivePoints: obj.positivePoints
       });
     }.bind(this));
     console.log("component mounted");
@@ -1746,43 +1726,28 @@ var RelaxedMode = React.createClass({
         }.bind(this), 800);
       }
 
+      //////////////////////////////////////
+      //////////////////////////////////////
+      //////////////////////////////////////
+
       // Game end
-      if (timeKeeper === 0) {
+      //if (timeKeeper === 0) {
+      if (timeKeeper === 35) {
         //give gameScore variable the final score
         clearInterval(iterations);
         console.log(fullScore);
-        console.log(matchHit / matchCount, 'accuracy');
+        var accuracy = matchHit / matchCount;
+        console.log(accuracy, 'accuracy');
 
-        endGameFunction(fullScore, reactionTimes, this.state.gameId, this.state.userId, function (success) {
+        endGameFunction(fullScore, reactionTimes, this.state.gameId, accuracy, function (success) {
           if (success) {
             this.props.history.push('/gameOver');
           }
         }.bind(this));
 
-        // axios.post('/gameEnd', {
-        //   gameId: this.state.gameId,
-        //   score: fullScore,
-        //   reactionTimes: reactionTimes,
-        //   userId: this.state.userId
-
-        // }).then(function(response) {
-        //   console.log('end game posted')
-        //   // if(response.data.success){
-        //   //   this.props.history.push('/gameOver');
-        //   // }
-
-        //   axios.post('/gameOver',{
-        //     userId: response.data.userId,
-        //     passedLevel:response.data.passedLevel,
-        //     gameId:response.data.gameId
-        //   }).then(function(response){
-        //     if(response.data.success){
-        //       this.props.history.push('/gameOver');
-        //     }
-        //     this.props.history.push('/gameOver');
-        //   }.bind(this))
-
-        // }.bind(this))
+        //////////////////////////////////////
+        //////////////////////////////////////
+        //////////////////////////////////////
       }
     }.bind(this), 2000);
   },
@@ -1967,8 +1932,7 @@ var startGameFunction = function startGameFunction(mode, N, callback) {
       gameId: response.data.gameId,
       modeMultiplier: response.data.modeMultiplier,
       penalty: response.data.penalty,
-      positivePoints: response.data.positivePoints,
-      userId: response.data.userId
+      positivePoints: response.data.positivePoints
     });
     console.log(this.state);
     console.log("game posted");
@@ -1979,30 +1943,31 @@ var startGameFunction = function startGameFunction(mode, N, callback) {
   }.bind(this));
 };
 
-var endGameFunction = function endGameFunction(fullScore, reactionTimes, gameId, userId, callback) {
+var endGameFunction = function endGameFunction(fullScore, reactionTimes, gameId, accuracy, callback) {
   axios.post('/gameEnd', {
     gameId: gameId,
     score: fullScore,
     reactionTimes: reactionTimes,
-    userId: userId
-
+    accuracy: accuracy
   }).then(function (response) {
-    console.log('end game posted');
-    // if(response.data.success){
-    //   this.props.history.push('/gameOver');
-    // }
-
-    axios.post('/gameOver', {
-      userId: response.data.userId,
-      passedLevel: response.data.passedLevel,
-      gameId: response.data.gameId
-    }).then(function (response) {
+    if (response.data.success) {
+      console.log('end game posted');
       // if(response.data.success){
       //   this.props.history.push('/gameOver');
       // }
-      // this.props.history.push('/gameOver');
-      return callback(response.data.success);
-    }.bind(this));
+
+      axios.post('/gameOver', {
+        passedLevel: response.data.passedLevel,
+        gameId: response.data.gameId,
+        accuracy: response.data.accuracy
+      }).then(function (response) {
+        // if(response.data.success){
+        //   this.props.history.push('/gameOver');
+        // }
+        // this.props.history.push('/gameOver');
+        return callback(response.data.success);
+      }.bind(this));
+    }
   }.bind(this));
 };
 
