@@ -10,7 +10,16 @@ var gameSchema = mongoose.Schema({
 	mode:String,
 	score:Number,
 	nLevel:Number,
-	reactionTimes:Array
+	reactionTimes:Array,
+	accuracy:{
+		type: Number,
+		min:0,
+		max:1
+	},
+	finalScore:{
+		type:mongoose.Schema.Types.ObjectId,
+		ref:'HighScore'
+	}
 })
 
 

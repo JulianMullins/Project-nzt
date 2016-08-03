@@ -186,16 +186,6 @@
   -webkit-transition: color 0.2s;
   transition: color 0.2s;
 }
-/*.bt-menu ul:first-of-type li a a {
-  padding: 0 20px;
-  box-shadow: inset 0 1px rgba(0, 0, 0, 0.2);
-  color: #fff;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  font-size: 1em;
-  -webkit-transition: color 0.2s;
-  transition: color 0.2s;
-}*/
 .bt-menu ul:first-of-type li:last-child a {
   box-shadow: inset 0 1px rgba(0, 0, 0, 0.2), inset 0 -1px rgba(0, 0, 0, 0.2);
 }
@@ -215,4 +205,24 @@
 .bt-menu ul:first-of-type li a:hover, .bt-menu ul:nth-of-type(2) li a:hover, .bt-menu ul:nth-of-type(2) li a:focus, .bt-menu ul:first-of-type li a:focus, .bt-menu ul li a:hover:before, .bt-menu ul li a:focus:before {
   color: #01B6A7;
   cursor: pointer;
+}
+@media all and (max-width: 640px) {
+  .bt-menu-trigger {
+    width: 50px;
+    height: 50px;
+  }
+  .bt-menu ul:first-of-type {
+    top: 75px;
+    width: 160px;
+  }
+  .bt-menu ul:first-of-type li {
+    width: 100%;
+  }
+  .bt-menu ul:first-of-type li a {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
 }

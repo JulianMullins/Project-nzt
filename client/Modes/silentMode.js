@@ -1,7 +1,11 @@
 var React = require('react');
 var GameTimer = require('./gameTimer');
 var SilentStartOverlay = require('./gameStartOverlay').SilentStartOverlay;
-var axios = require('axios')
+var axios = require('axios');
+import {Link} from 'react-router'
+
+var endGameFunction = require('./serverFunctions').endGameFunction;
+var startGameFunction = require('./serverFunctions').startGameFunction;
 
 //COLLECTION OF GLOBAL VARIABLES TO MAKE EVERYONES LIFE EASIER
 //create global variable for reaction counter
@@ -13,6 +17,10 @@ var reactionTimes = [];
 var gameScore;
 var reactionEnd = null;
 var iterations;
+var fullScore = 0;
+var currentScore;
+var matchCount = 0; //total matches in game
+var matchHit = 0; ///ones user gets
 
 var SilentMode = React.createClass({
   getInitialState: function() {
@@ -45,23 +53,19 @@ var SilentMode = React.createClass({
     }
   },
   componentDidMount: function() {
-    axios.post('/startGame/'+this.state.mode+'/'+this.state.N)
-    .then(function(response){
-      console.log("start game posted",response)
+    startGameFunction(this.state.mode, this.state.N, function(err, obj) {
+      if (err) {
+        this.props.history.push('/levels/' + this.state.mode);
+      }
       this.setState({
-        tempUser:response.data.tempUser,
-        gameId: response.data.gameId,
-        modeMultiplier:response.data.modeMultiplier,
-        penalty:response.data.penalty,
-        positivePoints:response.data.positivePoints
+        tempUser: obj.tempUser,
+        gameId: obj.gameId,
+        modeMultiplier: obj.modeMultiplier,
+        penalty: obj.penalty,
+        positivePoints: obj.positivePoints,
+        userId: obj.userId
       })
-      console.log(this.state, '57')
-      //console.log("game posted")
-    }.bind(this))
-    //console.log("component mounted")
-    // fetch('/startGame/'+this.state.mode+'/'+this.state.N, {
-    //  method: 'post'
-    // });
+    }.bind(this));
   },
   componentWillUnmount: function() {
     clearInterval(iterations);
@@ -76,48 +80,67 @@ var SilentMode = React.createClass({
     }.bind(this);
   },
   startGame: function() {
-      this.setState({overlay: false});
-      this.positionAndColor();
-      this.enableKeys();
+    this.setState({overlay: false});
+    this.positionAndColor();
+    this.enableKeys();
   },
   positionAndColor: function() {
+    console.log(this.state, 'state')
     var positionQueue = [];
     var colorQueue = [];
-    var timeTilPositionMatch = parseInt((Math.random() * 5) + 2 + this.state.N);
-    var timeTilColorMatch = parseInt((Math.random() * 5) + 2 + this.state.N);
-    var timeKeeper = 0;
+    var timeTilPositionMatch = parseInt((Math.random() * 5) + this.state.N);
+    var timeTilColorMatch = parseInt((Math.random() * 5) + this.state.N);
+    var timeKeeper = 44;
 
     iterations = setInterval(function() {
-      timeKeeper++;
-
+      timeKeeper--;
       if (this.state.keepScore && !(this.state.colorMatch || this.state.positionMatch)) {
+        matchCount += 1;
+        matchHit += 1;
         reactionTimes.push(reactionEnd - reactionStart);
+        currentScore = ((2000 - reactionTimes[reactionTimes.length - 1]) / 100).toFixed(2);
+        fullScore += parseFloat(currentScore);
+        console.log(fullScore)
         reactionEnd = null;
         this.setState({
-          score: this.state.score + this.state.positivePoints,
+          score: this.state.score + parseInt(currentScore),
           alert: 'Good job',
           posStyle: noStyle,
           colorStyle: noStyle
         });
       } else if (!this.state.keepScore && (this.state.posPressed || this.state.colorPressed)) {
         this.setState({alert: "Not a match"})
+        matchHit -= 1;
         reactionEnd = null;
-        if (this.state.score !== 0) {
+        if ((this.state.score - 5) >= 0) {
+          fullScore -= 5;
+          currentScore = 5;
           this.setState({
-            score: this.state.score - this.state.penalty,
+            score: this.state.score - 5,
             posStyle: noStyle,
             colorStyle: noStyle
           });
+        } else {
+          fullScore = 0;
+          currentScore = this.state.score;
+          this.setState({score: 0});
         }
       } else if (this.state.keepScore && (this.state.colorMatch || this.state.positionMatch)) {
         this.setState({alert: "Missed a match"});
+        matchCount += 1;
         reactionEnd = null;
-        if (this.state.score !== 0) {
+        if ((this.state.score - 5) >= 0) {
+          fullScore -= 5;
+          currentScore = 5;
           this.setState({
-            score: this.state.score - this.state.penalty,
+            score: this.state.score - 5,
             posStyle: noStyle,
             colorStyle: noStyle
           });
+        } else {
+          fullScore = 0;
+          currentScore = this.state.score;
+          this.setState({score: 0});
         }
       }
       this.setState({
@@ -191,24 +214,22 @@ var SilentMode = React.createClass({
         cMatch = false;
         pMatch = false;
       }.bind(this), 800);
-      if (timeKeeper === 60) {
+      //RUTH THIS IS WHERE THE GAME ENDS////////////////
+      if (timeKeeper === 0) {
         clearInterval(iterations);
         setTimeout(function() {
-          gameScore = this.state.score;
-          console.log(gameScore, 'game score')
-          console.log(reactionTimes, 'reaction times')
-          console.log(this.state)
-          axios.post('/gameEnd',{
-              gameId: this.state.gameId,
-              score: gameScore,
-              reactionTimes: reactionTimes
-          }).then(function(response){
-            console.log('end game posted')
-              this.props.history.push('/gameOver');
+          //console.log(reactionTimes, 'reaction times')
+          //console.log(this.state)
+          console.log(matchHit / matchCount, 'accuracy')
+
+          endGameFunction(fullScore, reactionTimes, this.state.gameId, this.state.userId, function(success) {
+            if (success) {
+              this.props.history.push('/gameOver')
+            }
           }.bind(this))
 
-    }.bind(this),2000);
-  }
+        }.bind(this), 2000);
+      }
     }.bind(this), 2000);
   },
   positionMatch: function() {
@@ -245,9 +266,7 @@ var SilentMode = React.createClass({
   },
   render: function() {
     var overlay = this.state.overlay
-      ? (
-        <SilentStartOverlay click={this.startGame}/>
-      )
+      ? (<SilentStartOverlay nLevel={this.state.N} click={this.startGame}/>)
       : '';
 
     var posButtonStyle = this.state.posPressed
@@ -272,7 +291,7 @@ var SilentMode = React.createClass({
       scoreUpdate = (
         <h2 style={{
           color: 'green'
-        }}>+10</h2>
+        }}>+{parseInt(currentScore)}</h2>
       )
     } else if (this.state.alert === "Not a match" || this.state.alert === "Missed a match") {
       scoreAlert = (
@@ -280,11 +299,11 @@ var SilentMode = React.createClass({
           {this.state.alert}
         </div>
       )
-      if (this.state.score > 0) {
+      if (currentScore !== 0) {
         scoreUpdate = (
           <h2 style={{
             color: 'red'
-          }}>-5</h2>
+          }}>-{currentScore}</h2>
         )
       }
     } else {
@@ -297,45 +316,52 @@ var SilentMode = React.createClass({
     }
 
     var gameTimer = this.state.overlay
-    ? ""
-    : (<GameTimer timeStyle={{'color': "#7CD9D2"}}></GameTimer>);
+      ? ""
+      : (
+        <GameTimer timeStyle={{
+          'color': "#7CD9D2"
+        }}></GameTimer>
+      );
 
     return (
-      <div className="gameContainer">
-        {overlay}
-        <div className="gameFullHeader">
-          <span className="gameTitle">
-            <h1 className="silent modeTitle">Silent</h1>
-            <h1 className="silent nTitle">(N={this.state.N})</h1>
-          </span>
-          <div className="gameHeading">
-            <div className="gameScore silent">
-              <h2>Score: {this.state.score}</h2>
-              {scoreUpdate}
+      <div className="fullGameView">
+        <div className="gameContainer">
+          {overlay}
+          <div className="gameFullHeader">
+            <span className="gameTitle">
+              <h1 className="silent modeTitle">Silent</h1>
+              <h1 className="silent nTitle">(N={this.state.N})</h1>
+            </span>
+            <div className="gameHeading">
+              <div className="gameScore silent">
+                <h2>Score: {this.state.score}</h2>
+                {scoreUpdate}
+              </div>
+              {gameTimer}
             </div>
-            {gameTimer}
+          </div>
+          <div className="gameBoard">
+            <div className="gameSquare" style={this.state.style[0]}></div>
+            <div className="gameSquare" style={this.state.style[1]}></div>
+            <div className="gameSquare" style={this.state.style[2]}></div>
+            <div className="gameSquare" style={this.state.style[3]}></div>
+            <div className="gameSquare" style={this.state.style[4]}></div>
+            <div className="gameSquare" style={this.state.style[5]}></div>
+            <div className="gameSquare" style={this.state.style[6]}></div>
+            <div className="gameSquare" style={this.state.style[7]}></div>
+            <div className="gameSquare" style={this.state.style[8]}></div>
+          </div>
+          <div className="gameFullFooter">
+            <div className="scoreAlert">
+              {scoreAlert}
+            </div>
+            <div className="gameButtonsContainer">
+              <a onClick={this.positionMatch} style={this.state.posStyle} className="silentButton">POSITION</a>
+              <a onClick={this.colorMatch} style={this.state.colorStyle} className="silentButton">COLOR</a>
+            </div>
           </div>
         </div>
-        <div className="gameBoard">
-          <div className="gameSquare" style={this.state.style[0]}></div>
-          <div className="gameSquare" style={this.state.style[1]}></div>
-          <div className="gameSquare" style={this.state.style[2]}></div>
-          <div className="gameSquare" style={this.state.style[3]}></div>
-          <div className="gameSquare" style={this.state.style[4]}></div>
-          <div className="gameSquare" style={this.state.style[5]}></div>
-          <div className="gameSquare" style={this.state.style[6]}></div>
-          <div className="gameSquare" style={this.state.style[7]}></div>
-          <div className="gameSquare" style={this.state.style[8]}></div>
-        </div>
-        <div className="gameFullFooter">
-          <div className="scoreAlert">
-            {scoreAlert}
-          </div>
-          <div className="gameButtonsContainer silentBackground">
-            <a onClick={this.positionMatch} style={this.state.posStyle}>POSITION</a>
-            <a onClick={this.colorMatch} style={this.state.colorStyle}>COLOR</a>
-          </div>
-        </div>
+        <Link to="/home"><img className="gameHomeBtn whiteLogo" src="./images/CortexLogo3.png"/></Link>
       </div>
     );
   }
@@ -343,7 +369,9 @@ var SilentMode = React.createClass({
 
 var noStyle = {}
 var pushStyle = {
-  color: 'black'
+  backgroundColor: '#319B93',
+  boxShadow: '0px 0px',
+  color: 'white'
 }
 
 var standardStyle = {

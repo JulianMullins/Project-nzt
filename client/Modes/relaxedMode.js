@@ -4,6 +4,10 @@ var RelaxedStartOverlay = require('./gameStartOverlay').RelaxedStartOverlay;
 
 var axios = require('axios');
 axios.defaults.baseURL = process.env.url;
+import {Link} from 'react-router'
+
+var endGameFunction = require('./serverFunctions').endGameFunction;
+var startGameFunction = require('./serverFunctions').startGameFunction;
 
 //COLLECTION OF GLOBAL VARIABLES TO MAKE EVERYONES LIFE EASIER
 //create global variable for reaction counter
@@ -14,6 +18,10 @@ var reactionTimes = [];
 //global variable for game score (saved once time runs out)
 var gameScore;
 var iterations;
+var fullScore = 0;
+var currentScore;
+var matchCount = 0; //total matches in game
+var matchHit = 0; ///ones user gets
 
 var RelaxedMode = React.createClass({
   getInitialState: function() {
@@ -49,11 +57,16 @@ var RelaxedMode = React.createClass({
     }
   },
   componentDidMount: function() {
-    axios.post('/startGame/' + this.state.mode + '/' + this.state.N).then(function(response) {
-      console.log("start game posted", response)
-      this.setState({tempUser: response.data.tempUser, gameId: response.data.gameId, modeMultiplier: response.data.modeMultiplier, penalty: response.data.penalty, positivePoints: response.data.positivePoints});
-      console.log("game posted")
-    }.bind(this))
+
+    startGameFunction(this.state.mode, this.state.N, function(err, obj) {
+      if (err) {
+        this.props.history.push('/levels/' + this.state.mode + '/unauthorized');
+        return;
+
+      }
+      console.log(obj)
+      this.setState({tempUser: obj.tempUser, gameId: obj.gameId, modeMultiplier: obj.modeMultiplier, penalty: obj.penalty, positivePoints: obj.positivePoints})
+    }.bind(this));
     console.log("component mounted")
   },
   componentWillUnmount: function() {
@@ -67,39 +80,58 @@ var RelaxedMode = React.createClass({
     }.bind(this);
   },
   startGame: function() {
+
+    axios.get('/isUser').then(function(response) {
+      console.log(response.data)
+    })
+
     this.setState({overlay: false});
     this.position();
     this.enableKeys();
   },
   position: function() {
     var posQueue = [];
-    var timeTilPosMatch = parseInt((Math.random() * 5) + 2 + this.state.N);
-    var timeKeeper = 60;
+    var timeTilPosMatch = parseInt((Math.random() * 5) + this.state.N);
+    var timeKeeper = 44;
 
     iterations = setInterval(function() {
       timeKeeper--;
 
       if (this.state.keepScore && !this.state.posMatch) {
+        currentScore = ((2000 - reactionTimes[reactionTimes.length - 1]) / 100).toFixed(2);
+        fullScore += parseFloat(currentScore);
+        matchCount += 1;
+        matchHit += 1;
         this.setState({
           alert: "Good job",
-          score: this.state.score + this.state.positivePoints,
+          score: this.state.score + parseInt(currentScore),
           posStle: noStyle
         });
       } else if (!this.state.keepScore && this.state.posPressed) {
         this.setState({alert: 'Not a match'});
-        if (this.state.score > 0) {
+        if ((this.state.score - 5) >= 0) {
+          matchHit -= 1;
+          currentScore = 5;
           this.setState({
-            score: this.state.score - this.state.penalty,
+            score: this.state.score - 5,
             posStyle: noStyle
           });
+        } else {
+          currentScore = this.state.score
+          this.setState({score: 0});
         }
       } else if (this.state.keepScore && this.state.posMatch) {
         this.setState({alert: "Missed a match"});
-        if (this.state.score !== 0) {
+        if ((this.state.score - 5) >= 0) {
+          matchCount += 1;
+          currentScore = 5
           this.setState({
-            score: this.state.score - this.state.penalty,
+            score: this.state.score - 5,
             posStyle: noStyle
           });
+        } else {
+          currentScore = this.state.score;
+          this.setState({score: 0});
         }
       }
 
@@ -152,37 +184,31 @@ var RelaxedMode = React.createClass({
         }.bind(this), 800);
       }
 
-      ////////////////////////////////////////////////////////////////////////////////////
-      ///////////////////////////////////////////////////////////////////////////////////
-      ///////////////////////////////////////////////////////////////////////////////////
-      ////////////////////////////////////////////////////////////////////////////////////////
-      ////////////////////////////////////////////////////////////////////////////////////
-      //RUTH THIS IS WHERE THE GAME ENDS///////////////////////////////////////////
+      //////////////////////////////////////
+      //////////////////////////////////////
+      //////////////////////////////////////
+
+      // Game end
+
       if (timeKeeper === 0) {
+      // if (timeKeeper === 35) {
         //give gameScore variable the final score
-        gameScore = this.state.score;
-        console.log(gameScore, 'game score')
-        console.log(reactionTimes, 'reaction times')
         clearInterval(iterations);
-        console.log(this.state)
-        axios.post('/gameEnd', {
-          gameId: this.state.gameId,
-          score: gameScore,
-          reactionTimes: reactionTimes
-        }).then(function(response) {
-          console.log('end game posted')
-          // if(response.data.success){
-          //   this.props.history.push('/gameOver');
-          // }
-          this.props.history.push('/gameOver');
+        console.log(fullScore)
+        var accuracy = matchHit / matchCount;
+        console.log(accuracy, 'accuracy')
+
+        endGameFunction(fullScore, reactionTimes, this.state.gameId, accuracy, function(success) {
+          if (success) {
+            this.props.history.push('/gameOver')
+          }
         }.bind(this))
 
+        //////////////////////////////////////
+        //////////////////////////////////////
+        //////////////////////////////////////
+
       }
-      ////////////////////////////////////////////////////////////////////////////////////
-      //////////////////////////////////////////////////////////////////////////////////
-      /////////////////////////////////////////////////////////////////////////////////
-      ///////////////////////////////////////////////////////////////////////////////
-      ///////////////////////////////////////////////////////////////////////////////
     }.bind(this), 2000);
   },
   posMatch: function() {
@@ -202,7 +228,7 @@ var RelaxedMode = React.createClass({
   },
   render: function() {
     var overlay = this.state.overlay
-      ? (<RelaxedStartOverlay click={this.startGame}/>)
+      ? (<RelaxedStartOverlay nLevel={this.state.N} click={this.startGame}/>)
       : '';
 
     var scoreAlert;
@@ -216,7 +242,7 @@ var RelaxedMode = React.createClass({
       scoreUpdate = (
         <h2 style={{
           color: '#01B6A7'
-        }}>+10</h2>
+        }}>+{parseInt(currentScore)}</h2>
       )
     } else if (this.state.alert === "Not a match" || this.state.alert === "Missed a match") {
       scoreAlert = (
@@ -224,11 +250,11 @@ var RelaxedMode = React.createClass({
           {this.state.alert}
         </div>
       )
-      if (this.state.score > 0) {
+      if (currentScore !== 0) {
         scoreUpdate = (
           <h2 style={{
             color: '#F13542'
-          }}>-5</h2>
+          }}>-{currentScore}</h2>
         )
       }
     } else {
@@ -249,40 +275,43 @@ var RelaxedMode = React.createClass({
       );
 
     return (
-      <div className="gameContainer">
-        {overlay}
-        <div className="gameFullHeader">
-          <span className="gameTitle">
-            <h1 className="relaxed modeTitle">Relaxed</h1>
-            <h1 className="relaxed nTitle">(N={this.state.N})</h1>
-          </span>
-          <div className="gameHeading">
-            <div className="gameScore relaxed">
-              <h2>Score: {this.state.score}</h2>
-              {scoreUpdate}
+      <div className="fullGameView">
+        <div className="gameContainer">
+          {overlay}
+          <div className="gameFullHeader">
+            <span className="gameTitle">
+              <h1 className="relaxed modeTitle">Relaxed</h1>
+              <h1 className="relaxed nTitle">(N={this.state.N})</h1>
+            </span>
+            <div className="gameHeading">
+              <div className="gameScore relaxed">
+                <h2>Score: {this.state.score}</h2>
+                {scoreUpdate}
+              </div>
+              {gameTimer}
             </div>
-            {gameTimer}
+          </div>
+          <div className="gameBoard">
+            <div className="gameSquare" style={this.state.style[0]}></div>
+            <div className="gameSquare" style={this.state.style[1]}></div>
+            <div className="gameSquare" style={this.state.style[2]}></div>
+            <div className="gameSquare" style={this.state.style[3]}></div>
+            <div className="gameSquare" style={this.state.style[4]}></div>
+            <div className="gameSquare" style={this.state.style[5]}></div>
+            <div className="gameSquare" style={this.state.style[6]}></div>
+            <div className="gameSquare" style={this.state.style[7]}></div>
+            <div className="gameSquare" style={this.state.style[8]}></div>
+          </div>
+          <div className="gameFullFooter">
+            <div className="scoreAlert">
+              {scoreAlert}
+            </div>
+            <div className="gameButtonsContainer">
+              <a onClick={this.posMatch} style={this.state.posStyle} className='relaxedButton'>POSITION</a>
+            </div>
           </div>
         </div>
-        <div className="gameBoard">
-          <div className="gameSquare" style={this.state.style[0]}></div>
-          <div className="gameSquare" style={this.state.style[1]}></div>
-          <div className="gameSquare" style={this.state.style[2]}></div>
-          <div className="gameSquare" style={this.state.style[3]}></div>
-          <div className="gameSquare" style={this.state.style[4]}></div>
-          <div className="gameSquare" style={this.state.style[5]}></div>
-          <div className="gameSquare" style={this.state.style[6]}></div>
-          <div className="gameSquare" style={this.state.style[7]}></div>
-          <div className="gameSquare" style={this.state.style[8]}></div>
-        </div>
-        <div className="gameFullFooter">
-          <div className="scoreAlert">
-            {scoreAlert}
-          </div>
-          <div className="gameButtonsContainer relaxedBackground">
-            <a onClick={this.posMatch} style={this.state.posStyle}>POSITION</a>
-          </div>
-        </div>
+        <Link to="/home"><img className="whiteLogo" src="./images/CortexLogo3.png"/></Link>
       </div>
     );
   }
@@ -291,8 +320,9 @@ var RelaxedMode = React.createClass({
 var noStyle = {}
 
 var pushStyle = {
-  color: 'rgba(0, 0, 0, .65)',
-  boxShadow: '0 0'
+  backgroundColor: '#006D65',
+  boxShadow: '0px 0px',
+  color: 'white'
 }
 
 var standardStyle = {

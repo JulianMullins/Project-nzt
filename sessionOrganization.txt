@@ -1,0 +1,6 @@
+fields:
+	fullUser
+	user
+		games
+		stats
+		maxN

@@ -10,35 +10,50 @@ table {
   height: 100vh;
   width: 100vw;
 }
-.userSide {
-  height: 100vh;
-  width: 100vw;
-  background-color: #7CD9D2;
-  padding-top: 10vh;
-}
 .boardSide {
   height: 100vh;
   width: 100vw;
-  background-color: #F1BA03;
-  color: white;
+  color: #01b6a7;
   padding-top: 10vh;
 }
 .lbHeader {
-  color: white;
-  font-size: 48px;
+  color: #01b6a7;
+  font-size: 60px;
   text-align: center;
+}
+.reactable-filter-input {
+  border-bottom: 1px solid #01b6a7;
+  color: #01b6a7;
+}
+.reactable-filter-input::-webkit-input-placeholder {
+  color: #01b6a7;
+}
+.reactable-filter-input:-moz-placeholder {
+  color: #01b6a7;
+  opacity: 1;
+}
+.reactable-filter-input::-moz-placeholder {
+  color: #01b6a7;
+  opacity: 1;
+}
+.reactable-filter-input:-ms-input-placeholder {
+  color: #01b6a7;
 }
 th {
   padding: 20px 15px;
   text-align: left;
   font-weight: 500;
   font-size: 12px;
-  color: #fff;
+  color: white;
+  background-color: #01b6a7;
   text-transform: uppercase;
-  font-size: 1rem;
+  font-size: 1.2rem;
 }
 th:hover {
   cursor: pointer;
+}
+.reactable-data tr:hover {
+  background-color: rgba(1, 182, 167, 0.1);
 }
 .reactable-header-sort-desc:after {
   content: '\25B2';
@@ -49,17 +64,17 @@ th:hover {
   padding-left: 5px;
 }
 .reactable-data td {
-  padding: 15px;
+  padding: 12px;
   text-align: left;
   vertical-align: middle;
   font-weight: 300;
-  font-size: 12px;
-  color: #fff;
-  border-bottom: solid 1px rgba(255, 255, 255, 0.3);
-  font-size: .8rem;
+  color: #01b6a7;
+  /*border-bottom: solid 1px #01b6a7;*/
+  font-size: 1rem;
+  font-weight: 300;
 }
 section {
-  margin: 50px;
+  margin: 30px;
 }
 .reactable-column-header {
   background-color: rgba(255, 255, 255, 0.2);
@@ -71,8 +86,46 @@ section {
 .reactable-page-button, .reactable-next-page, .reactable-previous-page {
   padding: 2px 6px;
   margin: 0 4px;
-  border-radius: 3px;
+  border: 2px solid #01b6a7;
   text-decoration: none;
+  color: #01b6a7;
+  width: 0;
+}
+.reactable-page-button:hover, .reactable-next-page:hover, .reactable-previous-page:hover {
   color: white;
-  background-color: rgba(255, 255, 255, 0.15);
+  background-color: #01b6a7;
+}
+.reactable-page-button:target {
+  background-color: #01b6a7;
+  color: white;
+}
+.reactable-current-page {
+  background-color: #01b6a7;
+  color: white;
+}
+.leaderboardButtons {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 10px;
+}
+.leaderboardButtons a {
+  width: 120px;
+  text-align: center;
+  padding: 5px 0;
+  margin: 0 30px;
+  border: 2px solid #01b6a7;
+  font-size: 20px;
+}
+.leaderboardButtons a:hover {
+  cursor: pointer;
+  background-color: #01b6a7;
+  color: white;
+}
+.leaderboardButtons a:active {
+  background-color: #01b6a7;
+  color: white;
+}
+.leaderboardButtons a:target {
+  background-color: #01b6a7;
+  color: white;
 }

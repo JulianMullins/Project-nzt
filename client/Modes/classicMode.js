@@ -1,7 +1,16 @@
 var React = require('react');
 var GameTimer = require('./gameTimer');
 var ClassicStartOverlay = require('./gameStartOverlay').ClassicStartOverlay;
-var axios = require('axios')
+var axios = require('axios');
+import {Link} from 'react-router'
+
+var fullScore = 0;
+var currentScore;
+var matchCount = 0; //total matches in game
+var matchHit = 0; ///ones user gets
+
+var endGameFunction = require('./serverFunctions').endGameFunction;
+var startGameFunction = require('./serverFunctions').startGameFunction;
 
 //COLLECTION OF GLOBAL VARIABLES TO MAKE EVERYONES LIFE EASIER
 //create global variable for reaction counter
@@ -13,6 +22,7 @@ var reactionTimes = [];
 var gameScore;
 var reactionEnd = null;
 var iterations;
+var fullScore = 0;
 
 var ClassicMode = React.createClass({
   getInitialState: function() {
@@ -45,18 +55,19 @@ var ClassicMode = React.createClass({
     }
   },
   componentDidMount: function() {
-    axios.post('/startGame/'+this.state.mode+'/'+this.state.N)
-    .then(function(response){
-      console.log("start game posted",response)
+    startGameFunction(this.state.mode, this.state.N, function(err, obj) {
+      if (err) {
+        this.props.history.push('/levels/' + this.state.mode);
+      }
       this.setState({
-        tempUser:response.data.tempUser,
-        gameId: response.data.gameId,
-        modeMultiplier:response.data.modeMultiplier,
-        penalty:response.data.penalty,
-        positivePoints:response.data.positivePoints
+        tempUser: obj.tempUser,
+        gameId: obj.gameId,
+        modeMultiplier: obj.modeMultiplier,
+        penalty: obj.penalty,
+        positivePoints: obj.positivePoints,
+        userId: obj.userId
       })
-      console.log("game posted")
-    }.bind(this))
+    }.bind(this));
     console.log("component mounted")
   },
   componentWillUnmount: function() {
@@ -73,44 +84,58 @@ var ClassicMode = React.createClass({
     }.bind(this)
   },
   startGame: function() {
-      this.setState({overlay: false});
-      this.positionAndSound();
-      this.enableKeys();
+    this.setState({overlay: false});
+    this.positionAndSound();
+    this.enableKeys();
   },
   positionAndSound: function() {
     var positionQueue = [];
     var soundQueue = [];
-    var timeTilPositionMatch = parseInt((Math.random() * 5) + 2 + this.state.N);
-    var timeTilSoundMatch = parseInt((Math.random() * 5) + 2 + this.state.N);
-    var timeKeeper = 0;
+    var timeTilPositionMatch = parseInt((Math.random() * 5) + this.state.N);
+    var timeTilSoundMatch = parseInt((Math.random() * 5) + this.state.N);
+    var timeKeeper = 44;
 
     iterations = setInterval(function() {
-        timeKeeper++;
-        if (this.state.keepScore && !(this.state.soundMatch || this.state.positionMatch)) {
+      timeKeeper--;
+      if (this.state.keepScore && !(this.state.soundMatch || this.state.positionMatch)) {
         reactionTimes.push(reactionEnd - reactionStart);
+        currentScore = ((2000 - reactionTimes[reactionTimes.length - 1]) / 100).toFixed(2);
+        fullScore += parseFloat(currentScore);
         reactionEnd = null;
+        matchCount += 1;
+        matchHit += 1;
         this.setState({
-          score: this.state.score + this.state.positivePoints,
+          score: this.state.score + parseInt(currentScore),
           alert: 'Good job'
         });
       } else if (!this.state.keepScore && (this.state.posPressed || this.state.soundPressed)) {
         this.setState({alert: "Not a match"})
         reactionEnd = null;
-        if (this.state.score !== 0) {
+        matchHit -= 1;
+        if ((this.state.score - 5) >= 0) {
+          currentScore = 5;
           this.setState({
-            score: this.state.score - this.state.penalty
+            score: this.state.score - 5
           });
+        } else {
+          currentScore = this.state.score;
+          this.setState({score: 0});
         }
       } else if (this.state.soundMatch || this.state.positionMatch) {
         this.setState({alert: "Missed a match"});
         reactionEnd = null;
-        if (this.state.score !== 0) {
+        matchCount += 1;
+        if ((this.state.score - 5) >= 0) {
+          currentScore = 5;
           this.setState({
             score: this.state.score - this.state.penalty
           });
+        } else {
+          currentScore = this.state.score;
+          this.setState({score: 0});
         }
       }
-        this.setState({
+      this.setState({
         keepScore: false,
         positionMatch: false,
         soundMatch: false,
@@ -123,19 +148,18 @@ var ClassicMode = React.createClass({
         this.setState({alert: ' '});
       }.bind(this), 800);
 
-
       if (timeTilPositionMatch === 0) {
         this.setState({positionMatch: true, keepScore: true})
         //reset position portion
         timeTilPositionMatch = parseInt((Math.random() * 5) + 2);
         //set up new position queue
         var nextPosition = positionQueue[0];
-       positionQueue.push(nextPosition);
+        positionQueue.push(nextPosition);
         positionQueue.splice(0, 1);
         var pMatch = true;
       }
 
-            //case 2: color match
+      //case 2: color match
       if (timeTilSoundMatch === 0) {
         this.setState({soundMatch: true, keepScore: true})
         //reset position portion
@@ -146,7 +170,6 @@ var ClassicMode = React.createClass({
         soundQueue.splice(0, 1);
         var sMatch = true;
       }
-
 
       // // pick a non-matching next number while interval is not 0
       //position:
@@ -162,7 +185,6 @@ var ClassicMode = React.createClass({
         }
       }
 
-
       //sound:
       if (!sMatch) {
         var nextSound = parseInt(Math.random() * 9);
@@ -175,43 +197,36 @@ var ClassicMode = React.createClass({
           soundQueue.splice(0, 1);
         }
       }
-            reactionStart = Date.now()
-      var audio = new Audio('./audio/' + (nextSound + 1) + '.wav ');
-      audio.play();
+      reactionStart = Date.now()
+      audios[nextSound].play();
       this.state.style[nextPosition] = newStyle;
       this.setState({style: this.state.style});
       setTimeout(function() {
         this.state.style[nextPosition] = standardStyle;
         this.setState({style: this.state.style});
         timeTilPositionMatch--;
-       timeTilSoundMatch--;
-      sMatch = false;
+        timeTilSoundMatch--;
+        sMatch = false;
         pMatch = false;
       }.bind(this), 800);
-     if (timeKeeper === 60) {
-          clearInterval(iterations);
-        setTimeout(function() {
-          gameScore = this.state.score;
-          console.log(gameScore, 'game score')
-           console.log(reactionTimes, 'reaction times')
-           console.log(this.state)
-        axios.post('/gameEnd',{
-               gameId: this.state.gameId,
-             score: gameScore,
-            reactionTimes: reactionTimes
-          }).then(function(response){
-            console.log('end game posted')
-              this.props.history.push('/gameOver');
-          }.bind(this))
 
+      if (timeKeeper === 0) {
+        clearInterval(iterations);
+        setTimeout(function() {
+          console.log(reactionTimes, 'reaction times')
+          console.log(matchHit / matchCount, 'accuracy')
+          console.log(this.state)
+
+          endGameFunction(fullScore, reactionTimes, this.state.gameId, this.state.userId, function(success) {
+            if (success) {
+              this.props.history.push('/gameOver')
+            }
+          }.bind(this))
         }.bind(this), 2000)
       }
 
-      }.bind(this),2000)
+    }.bind(this), 2000)
   },
-      //}
-    //}.bind(this), 2000);
-  //},
   positionMatch: function() {
     if (this.state.pressed) {
       return;
@@ -244,9 +259,7 @@ var ClassicMode = React.createClass({
   },
   render: function() {
     var overlay = this.state.overlay
-      ? (
-        <ClassicStartOverlay click={this.startGame}/>
-      )
+      ? (<ClassicStartOverlay nLevel={this.state.N} click={this.startGame}/>)
       : '';
 
     var scoreAlert;
@@ -260,7 +273,7 @@ var ClassicMode = React.createClass({
       scoreUpdate = (
         <h2 style={{
           color: 'green'
-        }}>+10</h2>
+        }}>+{parseInt(currentScore)}</h2>
       )
     } else if (this.state.alert === "Not a match" || this.state.alert === "Missed a match") {
       scoreAlert = (
@@ -268,11 +281,11 @@ var ClassicMode = React.createClass({
           {this.state.alert}
         </div>
       )
-      if (this.state.score > 0) {
+      if (currentScore !== 0) {
         scoreUpdate = (
           <h2 style={{
             color: 'red'
-          }}>-5</h2>
+          }}>-{currentScore}</h2>
         )
       }
     } else {
@@ -285,46 +298,52 @@ var ClassicMode = React.createClass({
     }
 
     var gameTimer = this.state.overlay
-    ? ""
-    : (<GameTimer timeStyle={{'color': "#F13542"}}></GameTimer>);
-
+      ? ""
+      : (
+        <GameTimer timeStyle={{
+          'color': "#F13542"
+        }}></GameTimer>
+      );
 
     return (
-      <div className="gameContainer">
-        {overlay}
-        <div className="gameFullHeader">
-          <span className="gameTitle">
-            <h1 className="classic modeTitle">Classic</h1>
-            <h1 className="classic nTitle">(N={this.state.N})</h1>
-          </span>
-          <div className="gameHeading">
-            <div className="gameScore classic">
-              <h2>Score: {this.state.score}</h2>
-              {scoreUpdate}
+      <div className="fullGameView">
+        <div className="gameContainer">
+          {overlay}
+          <div className="gameFullHeader">
+            <span className="gameTitle">
+              <h1 className="classic modeTitle">Classic</h1>
+              <h1 className="classic nTitle">(N={this.state.N})</h1>
+            </span>
+            <div className="gameHeading">
+              <div className="gameScore classic">
+                <h2>Score: {this.state.score}</h2>
+                {scoreUpdate}
+              </div>
+              {gameTimer}
             </div>
-            {gameTimer}
+          </div>
+          <div className="gameBoard">
+            <div className="gameSquare" style={this.state.style[0]}></div>
+            <div className="gameSquare" style={this.state.style[1]}></div>
+            <div className="gameSquare" style={this.state.style[2]}></div>
+            <div className="gameSquare" style={this.state.style[3]}></div>
+            <div className="gameSquare" style={this.state.style[4]}></div>
+            <div className="gameSquare" style={this.state.style[5]}></div>
+            <div className="gameSquare" style={this.state.style[6]}></div>
+            <div className="gameSquare" style={this.state.style[7]}></div>
+            <div className="gameSquare" style={this.state.style[8]}></div>
+          </div>
+          <div className="gameFullFooter">
+            <div className="scoreAlert">
+              {scoreAlert}
+            </div>
+            <div className="gameButtonsContainer">
+              <a onClick={this.positionMatch} style={this.state.posStyle} className="classicButton">POSITION</a>
+              <a onClick={this.soundMatch} style={this.state.soundStyle} className="classicButton">SOUND</a>
+            </div>
           </div>
         </div>
-        <div className="gameBoard">
-          <div className="gameSquare" style={this.state.style[0]}></div>
-          <div className="gameSquare" style={this.state.style[1]}></div>
-          <div className="gameSquare" style={this.state.style[2]}></div>
-          <div className="gameSquare" style={this.state.style[3]}></div>
-          <div className="gameSquare" style={this.state.style[4]}></div>
-          <div className="gameSquare" style={this.state.style[5]}></div>
-          <div className="gameSquare" style={this.state.style[6]}></div>
-          <div className="gameSquare" style={this.state.style[7]}></div>
-          <div className="gameSquare" style={this.state.style[8]}></div>
-        </div>
-        <div className="gameFullFooter">
-          <div className="scoreAlert">
-            {scoreAlert}
-          </div>
-          <div className="gameButtonsContainer classicBackground">
-            <a onClick={this.positionMatch} style={this.state.posStyle}>POSITION</a>
-            <a onClick={this.soundMatch} style={this.state.soundStyle}>SOUND</a>
-          </div>
-        </div>
+        <Link to="/home"><img className="whiteLogo" src="./images/CortexLogo3.png"/></Link>
       </div>
     );
   }
@@ -333,7 +352,9 @@ var ClassicMode = React.createClass({
 var noStyle = {}
 
 var pushStyle = {
-  color: 'black'
+  backgroundColor: '#A8020F',
+  boxShadow: '0px 0px',
+  color: 'white'
 }
 
 var standardStyle = {
@@ -342,6 +363,11 @@ var standardStyle = {
 
 var newStyle = {
   backgroundColor: "#F13542"
+}
+
+var audios = [];
+for (var i = 1; i <= 9; i++) {
+  audios.push(new Audio('./audio/' + i + '.wav '));
 }
 
 module.exports = ClassicMode

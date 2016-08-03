@@ -11,12 +11,17 @@ var FacebookStrategy = require('passport-facebook');
 var MongoStore = require('connect-mongo')(session);
 var mongoose = require('mongoose');
 var bcrypt = require('bcryptjs');
+var back = require('express-back');
 
 var routes = require('./server/index');
 var auth = require('./server/auth');
 var clientExpressFunctions = require('./server/clientExpressFunctions');
 var highScores = require('./server/highScores');
 var serverData = require('./server/serverData');
+var gameOverUpdate = require('./server/gameOverUpdate');
+var gameFunctions = require('./server/gameFunctions');
+var statsFunctions = require('./server/taylorsDataFile');
+
 
 
 var User = require('./models/User');
@@ -54,9 +59,10 @@ app.use(session({
     store: new MongoStore({ mongooseConnection: mongoose.connection }),
     proxy: true,
     resave: true,
-    saveUninitialized: true
+    saveUninitialized: false
 }));
 
+app.use(back());
 app.use(passport.initialize());
 app.use(passport.session());
 
@@ -76,16 +82,24 @@ passport.use(new LocalStrategy({
   passReqToCallback:true
   },
   function(req, username, password, done) {
-    console.log(req.user)
-    if(req.user && !req.user.temp){
+    console.log("PASSPORT INITIALIZED ", req.user)
+
+    //check if already logged in
+    if(req.user && req.session.fullUser){
       console.log("already logged in")
       return done(null,req.user);
     }
 
-    // Find the user with the given username
+    //login tempuser
+      //don't need to now since data's in session, not user    
+
+    //log in real users
     console.log("PASSPORT DATA: ", username, password,req.body)
-    User.findOne({$or: [{username: username},{email:username}] }, function (err, user) {
-      // if there's an error, finish trying to authenticate (auth failed)
+    
+    // Find the user with the given username
+    User.findOne({$or: [{username: username},{email:username}] })
+      .populate('stats')
+      .exec(function (err, user) {
       if (err) {
         console.error(err);
         return done(err);
@@ -96,23 +110,39 @@ passport.use(new LocalStrategy({
         //console.log(user);
         return done(null, false, { message: 'Incorrect username.' });
       }
-      bcrypt.compare(password,user.password,function(err,res){
+
+      //check hashed passwords
+      bcrypt.compare(password,user.password,function(err,response){
         if(err){
           return done(err)
         }
-        else if(!res){
-          return done(null,null);
+        else if(!response){
+          return done(null,false,{message:"Incorrect password"});
         }
         else{
-          if(req.user){
-            user.currentGame = req.user.currentGame;
-            user.stats.combineStats(req.user.stats);
-            user.combineMaxN(req.user.maxN);
-            user.save();
+          console.log("passwords hashed")
+          //check if tempUser exists
+          if(req.session.user){
+            console.log("already req.session.user")
+            user.currentGame = req.session.user.currentGame;
+            user.stats.combineStats(req.session.user.stats);
+            user.combineMaxN(req.session.user.maxN);
+            user.save(function(err,user){
+              if(err){
+                return done(err);
+              }
+              else{
+                return done(null,user)
+              }
+            });
             //User.findById(req.user._id).remove();
           }
           //user.currentGame = games.concat(user.currentGame);
-          return done(null,user)
+          
+          //tempUser doesn't exist, just log in
+          else{
+            return done(null,user);
+          }
         }
       })
     });
@@ -120,6 +150,11 @@ passport.use(new LocalStrategy({
 
   }
 ));
+
+
+function genRand() {
+  return Math.floor(Math.random()*8999+1000);
+}
 
 // Facebook callback
 passport.use(new FacebookStrategy({
@@ -131,10 +166,14 @@ passport.use(new FacebookStrategy({
     passReqToCallback:true
   },
   function(req,accessToken, refreshToken, profile, done) {
-   console.log(profile)
-   if(req.user && req.user.facebookId && !req.user.temp){
-    return done(null,req.user);
-   }
+    console.log(profile)
+
+    if(req.user && req.user.facebookId && req.session.fullUser){
+      return done(null,req.user);
+    }
+   // if(req.user && req.user.facebookId && !req.user.temp){
+   //  return done(null,req.user);
+   // }
     User.findOne({$or:[{facebookId: profile.id},{email:profile._json.email}] })
       .populate('stats')
       .exec(function (err, user) {
@@ -142,8 +181,11 @@ passport.use(new FacebookStrategy({
       //console.log(profile.emails[0].value)
 
 
-        var email = profile._json.email;
-        var username = profile._json.first_name + ' '+profile._json.last_name;
+        // var email = profile._json.email;
+        // var name = profile._json.first_name + ' '+profile._json.last_name;
+        // var username = profile._json.first_name[0]+profile._json.last_name;
+        // username.toLowerCase();
+
 
 
       if (err) {
@@ -152,90 +194,132 @@ passport.use(new FacebookStrategy({
       }
 
       else if (!user) {
+       
+        var email = profile._json.email;
+        var name = profile._json.first_name + ' '+profile._json.last_name;
+        var username = profile._json.first_name[0]+profile._json.last_name;
+        username = username.toLowerCase();
+        
+        User.find({username: {$regex: username}},function(err,users){
+          if(users){
+            username+=(users.length+1)
+          }
+        }).exec(function(err,users){ 
 
-        req.user.update({
-          facebookId:profile.id,
-          email:email,
-          username:username,
-          temp:false
-        })
-        var user = req.user;
-        req.logout();
-        return done(null,user);
+        if(req.session.user && !req.session.fullUser){
+          
+          var newUser = new User({
+            name:name,
+            email:email,
+            facebookId: profile.id,
+            username:username,
+            maxN: req.session.user.maxN,
+            stats: req.session.user.stats,
+            temp:false,
+            currentGame: req.session.user.currentGame
+          })
+
+          
+          newUser.save(function(err,user){
+            return done(null,user);
+          })
+        }
+        else{
+
+          var u = new User({
+            facebookId:profile.id,
+            email:email,
+            name:username,
+            temp:false,
+            username:username,
+            stats: null,
+            temp:false,
+            maxN:{
+              classic: 1,
+              relaxed: 1,
+              silent: 1,
+              advanced: 1
+            },
+            currentGame:[]
+          })
+
+          var leaderboard = new Leaderboard({user:u._id});
+          leaderboard.save();
+          var userStats = new Stats({user:u._id,leaderboard:leaderboard._id});
+          userStats.save();
+          u.stats = userStats._id;
+
+          u.save(function(err,user){
+            if(err){
+              return done(err);
+            }
+            else{
+              return done(null,user);
+            }
+          })
+        }
+      })
       }
 
-
-      else if(req.user){
-        console.log("req.user and user", user, user.stats)
-        user.currentGame = req.user.currentGame;
-        user.stats.combineStats(req.user.stats);
-        user.combineMaxN(req.user.maxN);
-        user.save();
-      }
-
-
-      if(!user.facebookId){
-        console.log("no facebook id")
-        user.facebookId = profile.id
-        //console.log("facebook id added")
-        user.save(function(err){
-          if(err){done(err)}
-        })
-        return done(null, user);
-      }
-      // auth has has succeeded
+    
       else{
-        //console.log("success")
-        console.log("returning done user")
-        return done(null, user);
+        if(req.session.user){
+          console.log("req.session.user and user", user, user.stats)
+          user.currentGame = req.session.user.currentGame;
+          user.stats.combineStats(req.session.user.stats);
+          user.combineMaxN(req.session.user.maxN);
+          user.save(function(err,user){
+            if(!user.facebookId){
+          console.log("no facebook id")
+          user.facebookId = profile.id
+          //console.log("facebook id added")
+          user.save(function(err){
+            if(err){done(err)}
+              })
+              return done(null, user);
+            }
+            // auth has has succeeded
+            else{
+              //console.log("success")
+              console.log("returning done user")
+              return done(null, user);
+            }
+          });
+        }
+        else{
+          if(!user.facebookId){
+            console.log("no facebook id")
+            user.facebookId = profile.id
+            //console.log("facebook id added")
+            user.save(function(err){
+              if(err){done(err)}
+            })
+            return done(null, user);
+          }
+          // auth has has succeeded
+          else{
+            //console.log("success")
+            console.log("returning done user")
+            return done(null, user);
+          }
+        }
       }
+      
+    
     });
 }));
 
 
 
-// var registerFacebookUser = function(facebookId,email,username,currentUser){
-
-//     var user = new User({
-//       facebookId:facebookId,
-//       email:email,
-//       name:username,
-//       stats:null,
-//       temp:false,
-//       maxN:{
-//         classic:1,
-//         relaxed:1,
-//         silent:1,
-//         advanced:1
-//       },
-//       currentGame:[]
-//     });
-
-//     if(currentUser){
-//       user.stats = currentUser.stats;
-//       user.currentGame = currentUser.currentGame;
-//       user.maxN = currentUser.maxN;
-//       //User.findById(currentUser._id).remove();
-//     }
-//     else{
-//       var leaderboard = new Leaderboard({user:user._id});
-//       leaderboard.save();
-//       var newStats = new Stats({
-//         user:user._id,
-//         leaderboard: leaderboard._id
-//       });
-//       newStats.save();
-//       user.stats = newStats._id;
-//     }
-
-//     return user;
-// }
-
 
 app.use('/', auth(passport));
-app.use('/',clientExpressFunctions);
+app.use('/', clientExpressFunctions);
 app.use('/', routes);
 app.use('/', highScores);
+
+app.use('/', gameOverUpdate);
+app.use('/', gameFunctions);
+app.use('/', statsFunctions);
 
 
 // catch 404 and forward to error handler

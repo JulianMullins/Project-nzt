@@ -1,20 +1,26 @@
 /* game page css */
 
+.fullGameView {
+  width: 100vw;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+}
+
 .gameContainer {
   height: 90vh;
   width: 640px;
-/*  min-width: 640px;*/
+  /*  min-width: 640px;*/
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: space-around;
   align-items: center;
   margin-top: 20px;
   background-color: rgba(255, 255, 255, 0.5);
 }
-
 .gameBoard {
   display: flex;
-  width: 70vh;
+  width: 54vh;
   height: 60vh;
   flex-wrap: wrap;
   justify-content: center;
@@ -22,12 +28,11 @@
 }
 .gameSquare {
   background-color: #BFBFBF;
-  width: 25%;
-  height: 33%;
+  width: 31%;
+  height: 31%;
   margin: .5vh;
   border: 2px solid rgba(109, 110, 113, 0.5);
 }
-
 .gameFullHeader {
   display: flex;
   flex-direction: column;
@@ -36,37 +41,70 @@
   width: 100%;
   height: 20vh;
 }
-
 .gameFullFooter {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: flex-end;
+  justify-content: space-around;
   width: 100%;
   height: 20vh;
+}
+
+.gameHomeBtn:hover {
+  opacity: 0.7;
+  transition-duration: 0.5s;
 }
 
 .gameButtonsContainer {
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 95%;
+  width: 60vh;
   height: 40%;
   margin-bottom: 1vh;
 }
 .gameButtonsContainer a {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   margin: 0 25px;
-  padding: 10px;
+  height: 80%;
+  width: 20vh;
   text-align: center;
-  color: white;
-  font-size: 24px;
+  color: rgba(255, 255, 255, .85);
+  font-size: 3vh;
   font-weight: bold;
   cursor: default;
   border: 2px solid rgba(0, 0, 0, .15);
-  box-shadow: 2px 2px rgba(0, 0, 0, .15);
+  transition-duration: .3s;
 }
-.gameButtonsContainer a:active {
-  box-shadow: 0px 0px;
+.silentButton {
+  background-color: #7CD9D2;
+  transition-duration: .3s;
+}
+.silentButton:active {
+  background-color: #52BDB5;
+  transition-duration: .3s;
+}
+.relaxedButton {
+  background-color: #01B6A7;
+  transition-duration: .3s;
+}
+.relaxedButton:active {
+  background-color: #008C82;
+  transition-duration: .3s;
+}
+.classicButton {
+  background-color: #F13542;
+}
+.classicButton:active {
+  background-color: #D80D1B;
+}
+.advancedButton {
+  background-color: #F1BA03;
+}
+.advancedButton:active {
+  background-color: #BE9300;
 }
 .gameButtonsContainer a:hover {
   cursor: pointer;
@@ -77,7 +115,6 @@
   justify-content: flex-end;
   width: 50%;
 }
-
 .gameTitle {
   display: flex;
   flex-direction: row;
@@ -85,29 +122,24 @@
   justify-content: center;
   width: 100%;
 }
-
 .modeTitle {
   padding: 0 10px;
   font-size: 50px;
 }
-
 .nTitle {
   font-size: 24px !important;
   font-weight: normal !important;
 }
-
 .gameHeading {
   display: flex;
   flex-direction: row;
   width: 85%;
   margin-bottom: 10px;
 }
-
 .gameContainer h2 {
   font-size: 40px;
   font-weight: normal;
 }
-
 .gameTimer {
   font-size: 64px;
 }
@@ -119,19 +151,18 @@
   width: 50%;
 }
 .scoreAlert {
-  display: flex;
-  height: 70px;
   width: 95%;
   height: 40%;
-  align-items: center;
-  justify-content: center;
 }
 .scoreAlertNegative {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   background-color: transparent;
   color: transparent;
   font-size: 28px;
   margin: 10px auto;
-  height: 5vh;
+  height: 80%;
   width: 50%;
   padding: 5px;
   text-align: center;
@@ -141,11 +172,14 @@
   animation-duration: 5s;
 }
 .scoreAlertPositive {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   background-color: transparent;
   color: transparent;
   font-size: 28px;
   margin: 10px auto;
-  height: 5vh;
+  height: 80%;
   width: 50%;
   padding: 5px;
   text-align: center;
@@ -238,5 +272,52 @@
   to {
     background-color: transparent;
     color: transparent;
+  }
+}
+
+@media (max-width: 768px) {
+  .fullGameView {
+    align-items: flex-start;
+    height: 100vh;
+    width: 100vw;
+    background-color: rgb(255, 255, 255);
+  }
+  .gameContainer{
+    height: 100vh;
+    width: 100vw;
+    margin-top: 0;
+  }
+
+  .gameFullHeader {
+    justify-content: flex-end;
+  }
+
+  .gameBoard {
+    width: 82vw;
+    height: 100vw;
+  }
+
+  .gameButtonsContainer {
+    width: 100vw;
+    height: 50%;
+    margin-bottom: 0;
+    justify-content: space-around;
+  }
+
+  .gameButtonsContainer a {
+    height: 90%;
+    width: 35vw;
+  }
+
+  .scoreAlertPositive {
+    width: 90%;
+    height: 90%;
+    margin: 0 auto;
+  }
+
+  .scoreAlertNegative {
+    width: 90%;
+    height: 90%;
+    margin: 0 auto;
   }
 }

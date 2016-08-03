@@ -8,32 +8,16 @@ var LoginOverlay = React.createClass({
   getInitialState: function() {
     console.log(this)
     return {
-      username: '',
-      password: '',
-      gameEnded:false,
-      games:null
+      username: '', 
+      password: '', 
+      gameEnded: false, 
+      games: null
     }
   },
-  // componentDidMount(){
 
-  //     fetch('/getUser',{
-  //       method:'get'
-  //     }).then(function(response){
-  //         console.log("about to response.json")
-  //         return response.json();
-  //     }).then(function(response){
-  //       console.log('responded')
-  //       if(response.games){
-  //         console.log('about to set state')
-  //         this.setState({
-  //           games:response.games
-  //         })
-  //         console.log('state set')
-  //       }
-  //     }.bind(this))
-
-
-  // },
+  componentDidMount(){
+    
+  },
   update(e) {
     this.setState({
       [e.target.name]: e.target.value
@@ -47,48 +31,26 @@ var LoginOverlay = React.createClass({
 
     //ajax post
     axios.post('/login', {
-     //withCredentials:true,
-      // headers: {
-      //   'Accept': 'application/json',
-      //   'Content-Type': 'application/json'
-      // },
-      
-        username: this.state.username,
-        password: this.state.password
-      
+      withCredentials:true,
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+
+      username: this.state.username,
+      password: this.state.password
+
     }).then(function(response) {
       console.log(response)
       if (response.data.success) {
-        this.props.history.push('/home');
-      } 
+        this.props.history.goBack();
+      }
     }.bind(this))
   },
-  // facebook: function(e) {
-  //   e.preventDefault();
 
-  //   ajax facebook get
-
-  //   fetch('/login/facebook',{method:'get'
-  //   }).then(function(response) {
-  //     console.log(response);
-  //       return response.json();
-  //     }).then(function(response) {
-  //       console.log(response);
-  //       if (response.success) {
-  //         this.props.history.push('/home');
-  //       }
-  //     }.bind(this))
-
-  //   axios({
-  //     url:'/login/facebook',
-  //     withCredentials:true
-  //   })
-
-  // },
   render: function() {
     return (
       <div className="screen">
-
 
         <div className="login" id="login">
           <h1>Hey you!</h1>
@@ -99,19 +61,19 @@ var LoginOverlay = React.createClass({
             <input type="password" placeholder="Password" name="password" id="password" value={this.state.password} onChange={this.update}></input>
             <div className="buttongroup">
 
-              <Link to="/home"><button className="form-btn dx" onClick={this.login}>Login</button></Link>
-              <a className="fb" href="/login/facebook" >Login with Facebook</a>
+              <Link to="/home">
+                <button className="form-btn dx" onClick={this.login}>Login</button>
+              </Link>
+              <a className="fb" href="/login/facebook">Login with Facebook</a>
             </div>
 
           </form>
         </div>
         <div className="register-log">
           <h1>New?</h1>
-          <div className="pa">
-            <Link to="/register">Register here.</Link>
-          </div>
+          <div className="pa">Register here</div>
           <h3>See your stats,
-            <br></br>track your progress,
+            <br></br>track your progress
             <br></br>and improve your IQ.</h3>
           <form>
             <div className="buttongroup">
@@ -122,6 +84,7 @@ var LoginOverlay = React.createClass({
               </Link>
             </div>
           </form>
+            <Link to="/home"><img className="whiteLogo" src="./images/CortexIconWhite.png" /></Link>
         </div>
       </div>
     )

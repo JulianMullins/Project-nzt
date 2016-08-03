@@ -1,0 +1,33 @@
+.react-d3-core__legend{
+	background-color: rgba(255,255,255,0) !important;
+	text-align: center !important;
+	font-size: 20px !important;
+}
+.react-d3-core__axis__yAxis{
+	margin: 20px !important;
+}
+.tick{
+	margin-left: 30px !important;
+}
+
+text{
+	font-size: 15px ;
+	margin: 10px !important;
+}
+.react-d3-core__label{
+	margin-right: 20px !important;
+	text-anchor: none !important;
+	font-size: 25px;
+	width: 100%;
+} 
+
+.statsAlertContainer {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+
+.statsAlert{
+	font-size: 50px;
+}

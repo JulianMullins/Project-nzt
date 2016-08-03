@@ -15,103 +15,21 @@ var Stats = require('../models/Stats')
 var tempGame = null;
 
 
-router.post('/startGame/:mode/:nLevel',function(req,res,next){
-  console.log("trying to post game");
-  // if(!req.user){
-  //     var tempUserStats = new Stats();
-  //     tempUserStats.save();
-  //     var tempUser = new User({
-  //       username:null,
-  //       stats:tempUserStats._id,
-  //       temp:true,
-  //       currentGame:[],
-  //       maxN:{
-  //           classic:1,
-  //           relaxed:1,
-  //           silent:1,
-  //           advanced:1
-  //         }
-  //     })
-  //     tempUser.save(function(err,user){
-  //       if(err){
-  //         console.log(err);
-  //       }
-  //     })
 
-  //     fetch('/login',{
-  //       method:'POST',
-  //       credentials: 'include',
-  //       headers: {
-  //         'Accept': 'application/json',
-  //         'Content-Type': 'application/json'
-  //       },
-  //       body: JSON.stringify({
-  //         username:null,
-  //         password:{
-  //           password:null,
-  //           user: tempUser._id
-  //         }
-  //       })
-  //     }).then(function(response) {
-  //       return response.json();
-  //     }).then(function(response) {
-  //       if (response.success) {
-          
-  //         tempGame = new Game({
-  //           user:req.user,
-  //           mode:req.params.mode,
-  //           score:0,
-  //           nLevel:req.params.nLevel,
-  //           tempUser:req.user.temp
-  //         })
-  //         tempGame.save(function(err,game){
-  //           if(err){
-  //             console.log(err);
-  //           }
-  //           else{
-  //             req.user.currentGame.unshift(game);
-  //             res.json({gameId: game._id,tempUser:tempUser})
-  //           }
-  //         })
+router.get('/getUserOnLoad',function(req,res,next){
+  if(req.session.user && req.session.user.temp){
+    req.session.destroy();
+  }
+  res.json({success:true})
+})
 
-  //       }
-  //     }.bind(this))
 
-  //   }
-    // else{
-      console.log(req.user);
-    var tempGame = new Game({
-        user:req.user,
-        mode:req.params.mode,
-        score:0,
-        nLevel:req.params.nLevel,
-        tempUser:req.user.temp
-      })
-      tempGame.save(function(err,game){
-        if(err){
-          console.log(err);
-        }
-        else{
-          req.user.currentGame.unshift(game);
-          req.user.save();
-          console.log(req.user, "game posted")
-          res.json({
-            gameId: game._id,
-            tempUser: false,
-            modeMultiplier: modeMultiplier,
-            penalty: penalty,
-            positivePoints: positivePoints
-          })
-        }
-      })
-    // }
-});
-
-  
+//check if user at all, check if tempuser/full user  
+    // navBar, relaxedMode
+    //(sort of in client/index.js, but commented out)
 router.get('/isUser',function(req,res,next){
-  console.log(req.user)
-  if(req.user){
-    res.json({isloggedin:true,isUser:req.user.temp})
+  if(req.session.user){
+    res.json({isloggedin:true,isUser:req.session.user.temp})
   }
   else{
     res.json({isUser:false,isloggedin:false})
@@ -119,20 +37,21 @@ router.get('/isUser',function(req,res,next){
   
 });
 
+
+//check if logged in ---- not in use
 router.get('/isLoggedIn',function(req,res,next){
   var isloggedin = false;
-  console.log(req.user)
-  if(req.user && !req.user.temp){
+  if(req.session.user && !req.session.user.temp){
     isloggedin = true;
   }
   console.log("logged in: "+isloggedin)
   res.json({
     'loggedIn': isloggedin
-    // 'username': req.user.username
+    // 'username': req.session.user.username
   })
 });
 
-
+//get max N (default 1) for level display
 router.get('/getMaxN',function(req,res,next){
   var maxN={
               classic:1,
@@ -140,16 +59,16 @@ router.get('/getMaxN',function(req,res,next){
               silent:1,
               advanced:1
             };
-            //console.log(req.user)
-  if(req.user){
-    maxN= req.user.maxN
+            //console.log(req.session.user)
+  if(req.session.user){
+    maxN= req.session.user.maxN
   }
   res.json({maxN:maxN})
 })
 
-
+//get data for game (not in use)
 router.get("/getGameData",function(req,res,next){
-  Game.findById(req.user.currentGame[0],function(err,game){
+  Game.findById(req.session.user.currentGame[0],function(err,game){
     res.json({
       score:game.score,
       mode:game.mode,
@@ -158,74 +77,89 @@ router.get("/getGameData",function(req,res,next){
   })
 })
 
+//get various user data (gameOver, Mainmenu)
 router.get('/getUser',function(req,res,next){
   var games = null;
   var isUser = false;
   var username=null;
   var name=null;
-  if(req.user && req.user.currentGame){
-    games = req.user.currentGame
-    isUser=true
-    username=req.user.username,
-    name=req.user.name
+
+  if(!req.session.user){
+    res.json({
+      isAnon: null,
+      alreadyLoggedIn: false,
+      isUser: false,
+      username:null,
+      name:null
+    })
   }
-  res.json({
-    alreadyLoggedIn: !!req.user,
-    isUser: isUser,
-    username:username,
-    name:name
-  })
+  else{
+    if(req.session.user && !req.session.user.temp){
+      isUser=true
+      username=req.session.user.username,
+      name=req.session.user.name
+    }
+    if(req.session.user && req.session.user.currentGame){
+      games = req.session.user.currentGame
+    }
+    if(req.session.user){
+      console.log("here are stats from /getUser:")
+      Stats.findById(req.session.user.stats,function(err,stats){
+        console.log(stats);
+        console.log(req.session.user);
+      })
+    }
+    
+    res.json({
+      isAnon: req.session.user.temp,
+      alreadyLoggedIn: !req.session.user.temp,
+      isUser: isUser,
+      username:username,
+      name:name
+    })
+  }
 })
 
-
+//get game data at end of game (gameOver)
 router.get('/getGame',function(req,res,next){
-  console.log(req.user)
-  Game.findById(req.user.currentGame[0],function(err,game){
+  var allScoresToPass = serverData.scoresToPass;
+  var scoreToPass;
+  var passedLevel;
+
+  Game.findById(req.session.user.currentGame[0],function(err,game){
     if(err){
       console.log(err)
       res.json({success:false})
     }
     else{
-      console.log(game)
-      res.json({game:game,success:true})
+      console.log("game: ", game);
+      scoreToPass = allScoresToPass[game.mode][game.nLevel];
+
+      if(game.score >= scoreToPass) {
+        passedLevel = true;
+      } else {
+        passedLevel = false;
+      }
+
+      res.json({
+        modeMultiplier:modeMultiplier[game.mode],
+        game:game,
+        success:true,
+        scoreToPass: scoreToPass,
+        passedLevel: passedLevel
+      })
     }
   })
 })
 
-router.post('/gameEnd',function(req,res,next){
-  console.log("game ended")
-  console.log(req.user)
-  console.log(req.body)
-  Game.findById(req.user.currentGame[0],function(err,game){
-    if(err){
-      console.log(err);
-    }
-    else if(!game) {
-      console.log("no game")
-    }
-    else{
-      game.score = req.body.score;
-      game.reactionTimes=req.body.reactionTimes;
-      game.save();
-      console.log("game ended successfully",game)
-      res.json({success:true,score:req.body.score})
+router.get('/getScore',function(req,res){
+  Game.findById(req.session.user.currentGame[0],function(err,game){
+    if(game){
+      res.json({score:game.score});
     }
   })
 })
 
-router.get('/taco',function(req, res, next){
- //return res.json({stats: [123]})
-  //console.log("lolololololololol")
-   console.log(req.user.stats,'170')
-  Stats.findById(req.user.stats, function(err,stats){
-    if(err){
-      console.log(err)
-    }
-    else{
-      res.json({stats: req.user.stats})
-    }
-  })
-})
 
 
 module.exports=router;

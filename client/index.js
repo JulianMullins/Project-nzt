@@ -50,13 +50,9 @@ var App = React.createClass({
     
     console.log("app mounted")
 
-    // axios.get('/isUser')
-    //   .then(function(response){
-    //     this.setState({
-    //       isUser: response.data.isUser,
-    //       isloggedin: response.data.isloggedin
-    //     })
-    //   }.bind(this))
+    axios.get('/getUserOnLoad')
+      // .then(function(response){
+      // }.bind(this))
 
   },
   updateState(){
@@ -82,6 +78,7 @@ var App = React.createClass({
   }
 });
 
+
 ReactDOM.render((
   <Router history={hashHistory}>
     <Route path="/" component={App}>
@@ -98,16 +95,16 @@ ReactDOM.render((
       <Route path="register" component={Register}/>
       <Route path="gameOver" component={GameOver}/>
       <Route path="leaderboard" component={Leaderboard}/>
-      <Route path="statss" component={Stats}/>
+      <Route path="stats" component={Stats}/>
       <Route path="contact" component={Contact}/>
       <Route path="science" component={Science}/>
 
       <Route path="tutorial" component={Tutorial}/>
 
-      <Route path="levels/classic" component={ClassicLevels}/>
-      <Route path="levels/relaxed" component={RelaxedLevels}/>
-      <Route path="levels/silent" component={SilentLevels}/>
-      <Route path="levels/advanced" component={AdvancedLevels}/>
+      <Route path="levels/classic(/:error)" component={ClassicLevels}/>
+      <Route path="levels/relaxed(/:error)" component={RelaxedLevels}/>
+      <Route path="levels/silent(/:error)" component={SilentLevels}/>
+      <Route path="levels/advanced(/:error)" component={AdvancedLevels}/>
       <Route path="game/classic/:n" component={ClassicGame}/>
       <Route path="game/relaxed/:n" component={RelaxedGame}/>
       <Route path="game/silent/:n" component={SilentGame}/>

@@ -1,22 +1,24 @@
-// var express = require('express');
-// var router = express.Router();
-// var User = require('../models/User');
-// var Leaderboard = require('../models/Leaderboard');
-// var HighScore = require('../models/HighScore');
-// var Game = require('../models/Game');
+var express = require('express');
+var router = express.Router();
+var User = require('../models/User');
+var Stats=require('../models/Stats')
+var Leaderboards=require('../models/Leaderboard')
+var Highscores=require('../models/HighScore')
 
-// var tempGame = null;
+var tempGame = null;
+
+router.get('/taco',function(req, res, next){
+   //return res.json({stats: req.user.stats})
+   //console.log(req.user, 'taylor')
+  Highscores.find({user: req.session.user.stats}, function(err,stats){
+    if(err){
+      console.log(err)
+    }
+    else{
+      res.json({stats: stats})
+    }
+  })
+});
 
 
-// router.get('/getstats',function(req, res, user){
-//   console.log(req.user.stats,'170')
-//   Stats.findById(req.user.stats, function(err,stats){
-//     if(err){
-//       console.log(err)
-//     }
-//     else{
-//       res.json({stats: stats})
-//     }
-//   })
-
-//   module.exports=router;
+  module.exports=router;

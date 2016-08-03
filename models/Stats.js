@@ -10,7 +10,10 @@ var statsSchema = mongoose.Schema({
 		type: mongoose.Schema.Types.ObjectId,
 		ref: 'Leaderboard'
 	},
-	totalPoints: Number,
+	totalPoints: {
+		type:Number,
+		default:0
+	},
 	progress:[{
 			type: mongoose.Schema.Types.ObjectId,
 			ref: 'HighScore'

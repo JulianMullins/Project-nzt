@@ -6,6 +6,8 @@ var highScoreSchema = mongoose.Schema({
 		type: mongoose.Schema.Types.ObjectId,
 		ref: 'User'
 	},
+	tempUser:Boolean,
+	tempUserName:String,
 	dateAchieved:Date,
 	score:Number,
 	nLevel:Number,
