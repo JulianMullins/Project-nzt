@@ -193,7 +193,7 @@ input {
   text-align: center;
 }
 
-@media all and (max-width: 500px) {
+@media all and (max-width: 640px) {
   .screen {
     display: flex;
     flex-direction: column;

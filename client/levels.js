@@ -62,7 +62,9 @@ var getSquareArr = function(square, mode) {
       }
     }
     arr.push(
-      <Link to={link} onMouseDown={function(e) {e.target.click()}} className={sqClass} key={i} style={colorStyle}>
+      <Link to={link} onMouseDown={function(e) {
+        e.target.click()
+      }} className={sqClass} key={i} style={colorStyle}>
         <div className="front face">{i}</div>
         <div className="side face" style={opacityStyle}></div>
         <div className="back face"></div>
