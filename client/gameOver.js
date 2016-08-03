@@ -54,7 +54,7 @@ var GameOverOverlay = React.createClass({
       console.log("userData: ", userData);
       this.setState({
         //username:userData.data.username,
-        isAnon: !userData.data.alreadyLoggedIn,
+        isAnon: userData.data.alreadyLoggedIn,
         score: Math.floor(gameData.data.game.score),
         mode: gameData.data.game.mode,
         nLevel: gameData.data.game.nLevel,
@@ -129,7 +129,7 @@ var GameOverOverlay = React.createClass({
   },
   renderLogin() {
     //if not logged in, option to login to save
-    if (this.state.isAnon && !this.state.isHighScore) {
+    if (this.state.isAnon) {
       this.setState({
         gameOverMessage: <div className="gameOverPrompt">
             <p>It looks like you are not currently logged in.
@@ -140,10 +140,6 @@ var GameOverOverlay = React.createClass({
               to save your progress, view statistics and compete with friends!
             </p>
           </div>
-      })
-    } else {
-      this.setState({
-        gameOverMessage: <div className="gameOverPromptDefault"></div>
       })
     }
   },
@@ -216,7 +212,7 @@ var GameOverOverlay = React.createClass({
               <tr>
                 <td>game score:
                 </td>
-                <td className="scoreValue">{score}</td>
+                <td className="scoreValue">{this.state.score}</td>
               </tr>
               <tr>
                 <td>n-level:

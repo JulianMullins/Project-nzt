@@ -14,44 +14,44 @@ var startGameFunction = function(mode, N, callback) {
       gameId: response.data.gameId,
       modeMultiplier: response.data.modeMultiplier,
       penalty: response.data.penalty,
-      positivePoints: response.data.positivePoints,
-      userId: response.data.userId
+      positivePoints: response.data.positivePoints
     });
     console.log(this.state)
     console.log("game posted")
 
-    axios.get('/isUser').then(function(response) {
+    axios.get('/isUser')
+    .then(function(response) {
       console.log("isuser data: " + response.data)
     })
 
   }.bind(this))
 }
 
-var endGameFunction = function(fullScore, reactionTimes, gameId, userId, callback) {
+var endGameFunction = function(fullScore, reactionTimes, gameId, accuracy, callback) {
   axios.post('/gameEnd', {
     gameId: gameId,
     score: fullScore,
     reactionTimes: reactionTimes,
-    userId: userId
-
+    accuracy: accuracy
   }).then(function(response) {
-    console.log('end game posted')
-    // if(response.data.success){
-    //   this.props.history.push('/gameOver');
-    // }
-
-    axios.post('/gameOver', {
-      userId: response.data.userId,
-      passedLevel: response.data.passedLevel,
-      gameId: response.data.gameId
-    }).then(function(response) {
+    if(response.data.success){
+      console.log('end game posted')
       // if(response.data.success){
       //   this.props.history.push('/gameOver');
       // }
-      // this.props.history.push('/gameOver');
-      return callback(response.data.success)
-    }.bind(this))
 
+      axios.post('/gameOver', {
+        passedLevel: response.data.passedLevel,
+        gameId: response.data.gameId,
+        accuracy: response.data.accuracy
+      }).then(function(response) {
+        // if(response.data.success){
+        //   this.props.history.push('/gameOver');
+        // }
+        // this.props.history.push('/gameOver');
+        return callback(response.data.success)
+      }.bind(this))
+    }
   }.bind(this))
 }
 

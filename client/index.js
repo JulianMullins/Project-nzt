@@ -50,13 +50,9 @@ var App = React.createClass({
     
     console.log("app mounted")
 
-    // axios.get('/isUser')
-    //   .then(function(response){
-    //     this.setState({
-    //       isUser: response.data.isUser,
-    //       isloggedin: response.data.isloggedin
-    //     })
-    //   }.bind(this))
+    axios.get('/getUserOnLoad')
+      // .then(function(response){
+      // }.bind(this))
 
   },
   updateState(){

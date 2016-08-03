@@ -7,7 +7,7 @@ var express = require('express');
 var router = express.Router();
 
 router.get('/myHighScores', function(req, res, next) {
-  User.findById(req.user._id)
+  User.findById(req.session.user._id)
     .populate('stats')
     .exec(function(err, user) {
       if (err) {
