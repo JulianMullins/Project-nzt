@@ -3084,7 +3084,7 @@ var Leaderboard = React.createClass({
         label: 'rank'
       }, {
         key: 'username',
-        label: 'Username'
+        label: 'user'
       }, {
         key: 'score',
         label: 'score'
@@ -3542,14 +3542,8 @@ var LoginOverlay = React.createClass({
 
   getInitialState: function getInitialState() {
     console.log(this);
-    return {
-      username: '',
-      password: '',
-      gameEnded: false,
-      games: null
-    };
+    return { username: '', password: '', gameEnded: false, games: null };
   },
-
   componentDidMount: function componentDidMount() {},
   update: function update(e) {
     this.setState(_defineProperty({}, e.target.name, e.target.value));
@@ -3588,37 +3582,41 @@ var LoginOverlay = React.createClass({
         'div',
         { className: 'login', id: 'login' },
         React.createElement(
-          'h1',
-          null,
-          'Hey you!'
-        ),
-        React.createElement(
           'div',
-          { className: 'pa' },
-          'Login here.'
-        ),
-        React.createElement(
-          'form',
-          null,
-          React.createElement('input', { type: 'text', placeholder: 'Name or Email', name: 'username', id: 'username', value: this.state.username, onChange: this.update, autoFocus: focus }),
-          React.createElement('br', null),
-          React.createElement('input', { type: 'password', placeholder: 'Password', name: 'password', id: 'password', value: this.state.password, onChange: this.update }),
+          { className: 'loginContent' },
+          React.createElement(
+            'h1',
+            null,
+            'Hey you!'
+          ),
           React.createElement(
             'div',
-            { className: 'buttongroup' },
+            { className: 'pa' },
+            'Login here.'
+          ),
+          React.createElement(
+            'form',
+            null,
+            React.createElement('input', { type: 'text', placeholder: 'Name or Email', name: 'username', id: 'username', value: this.state.username, onChange: this.update, autoFocus: focus }),
+            React.createElement('br', null),
+            React.createElement('input', { type: 'password', placeholder: 'Password', name: 'password', id: 'password', value: this.state.password, onChange: this.update }),
             React.createElement(
-              _reactRouter.Link,
-              { to: '/home' },
+              'div',
+              { className: 'buttongroup' },
               React.createElement(
-                'button',
-                { className: 'form-btn dx', onClick: this.login },
-                'Login'
+                _reactRouter.Link,
+                { to: '/home' },
+                React.createElement(
+                  'button',
+                  { className: 'form-btn dx', onClick: this.login },
+                  'Login'
+                )
+              ),
+              React.createElement(
+                'a',
+                { className: 'fb', href: '/login/facebook' },
+                'Login with Facebook'
               )
-            ),
-            React.createElement(
-              'a',
-              { className: 'fb', href: '/login/facebook' },
-              'Login with Facebook'
             )
           )
         )
@@ -3627,45 +3625,49 @@ var LoginOverlay = React.createClass({
         'div',
         { className: 'register-log' },
         React.createElement(
-          'h1',
-          null,
-          'New?'
-        ),
-        React.createElement(
           'div',
-          { className: 'pa' },
-          'Register here'
-        ),
-        React.createElement(
-          'h3',
-          null,
-          'See your stats,\u0003',
-          React.createElement('br', null),
-          'track your progress',
-          React.createElement('br', null),
-          'and improve your IQ.'
-        ),
-        React.createElement(
-          'form',
-          null,
+          { className: 'registerContent' },
+          React.createElement(
+            'h1',
+            null,
+            'New?'
+          ),
           React.createElement(
             'div',
-            { className: 'buttongroup' },
+            { className: 'pa' },
+            'Register here'
+          ),
+          React.createElement(
+            'h3',
+            null,
+            'See your stats,\u0003',
+            React.createElement('br', null),
+            'track your progress',
+            React.createElement('br', null),
+            'and improve your IQ.'
+          ),
+          React.createElement(
+            'form',
+            null,
             React.createElement(
-              _reactRouter.Link,
-              { to: '/register' },
+              'div',
+              { className: 'buttongroup' },
               React.createElement(
-                'button',
-                { className: 'form-btn dx' },
-                'Register'
+                _reactRouter.Link,
+                { to: '/register' },
+                React.createElement(
+                  'button',
+                  { className: 'form-btn dx' },
+                  'Register'
+                )
               )
             )
+          ),
+          React.createElement(
+            _reactRouter.Link,
+            { to: '/home' },
+            React.createElement('img', { className: 'whiteLogo', src: './images/CortexIconWhite.png' })
           )
-        ),
-        React.createElement(
-          _reactRouter.Link,
-          { to: '/home' },
-          React.createElement('img', { className: 'whiteLogo', src: './images/CortexIconWhite.png' })
         )
       )
     );
