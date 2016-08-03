@@ -63,7 +63,7 @@ router.get('/allHighScores', function(req, res, next) {
             rank: i
           };
           User.findById(score.user, function(err, u) {
-            if (err) {
+            if (err || !u) {
               return;
             } else {
               tmp['mode'] = score.mode;
