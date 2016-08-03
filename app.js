@@ -62,7 +62,6 @@ app.use(session({
     saveUninitialized: false
 }));
 
-app.use(back());
 app.use(passport.initialize());
 app.use(passport.session());
 
@@ -125,17 +124,29 @@ passport.use(new LocalStrategy({
           if(req.session.user){
             console.log("already req.session.user")
             console.log(user.stats);
+            console.log(req.session.user);
             user.currentGame = req.session.user.currentGame;
-            user.stats.combineStats(req.session.user.stats);
-            user.combineMaxN(req.session.user.maxN);
-            user.save(function(err,user){
-              if(err){
-                return done(err);
-              }
-              else{
-                return done(null,user)
-              }
+            
+            Stats.findById(req.session.user.stats,function(err,sessionStats){
+              user.stats.combineStats(sessionStats);
+              user.combineMaxN(req.session.user.maxN);
+              user.stats.leaderboard = combineLeaderboards(user.stats.leaderboard,sessionStats.leaderboard,function(leaderboard){
+                user.stats.save(function(err,stats){
+                  user.save(function(err,user){
+                    if(err){
+                      return done(err);
+                    }
+                    else{
+                      req.session.user = user;
+                      return done(null,user)
+                    }
+                  });
+                })
+              })
+              
             });
+
+
             //User.findById(req.user._id).remove();
           }
           //user.currentGame = games.concat(user.currentGame);
@@ -152,10 +163,22 @@ passport.use(new LocalStrategy({
   }
 ));
 
+var combineLeaderboards = function(leaderboard1,leaderboard2,callback){
+  Leaderboard.findById(leaderboard1)
+    .populate('scores')
+    .exec(function(err,leaderboard1){
+    Leaderboard.findById(leaderboard2)
+      .populate('scores')
+      .exec(function(err,leaderboard2){
 
-function genRand() {
-  return Math.floor(Math.random()*8999+1000);
+        console.log(leaderboard1,leaderboard2)
+
+      return callback(leaderboard1.mergeScoresArrays(leaderboard1.scores,leaderboard2.scores));
+
+    })
+  })
 }
+
 
 // Facebook callback
 passport.use(new FacebookStrategy({
@@ -267,17 +290,38 @@ passport.use(new FacebookStrategy({
         if(req.session.user){
           console.log("req.session.user and user", user, user.stats)
           user.currentGame = req.session.user.currentGame;
+          
+          Stats.findById(req.session.user.stats,function(err,sessionStats){
+              user.stats.combineStats(sessionStats);
+              user.combineMaxN(req.session.user.maxN);
+              user.save(function(err,user){
+                if(err){
+                  return done(err);
+                }
+                else{
+                  req.session.user = user;
+                  return done(null,user)
+                }
+              });
+            });
+
+
           user.stats.combineStats(req.session.user.stats);
           user.combineMaxN(req.session.user.maxN);
           user.save(function(err,user){
-            if(!user.facebookId){
-          console.log("no facebook id")
-          user.facebookId = profile.id
-          //console.log("facebook id added")
-          user.save(function(err){
-            if(err){done(err)}
-              })
-              return done(null, user);
+          if(!user.facebookId){
+            console.log("no facebook id")
+            user.facebookId = profile.id
+            //console.log("facebook id added")
+            user.save(function(err){
+              if(err){
+                done(err)
+              }
+              else{
+                req.session.user = user;
+                return done(null, user);
+              }
+            })
             }
             // auth has has succeeded
             else{
@@ -293,9 +337,14 @@ passport.use(new FacebookStrategy({
             user.facebookId = profile.id
             //console.log("facebook id added")
             user.save(function(err){
-              if(err){done(err)}
+              if(err){
+                done(err)
+              }
+              else{
+                req.session.user = user;
+                return done(null, user);
+              }
             })
-            return done(null, user);
           }
           // auth has has succeeded
           else{

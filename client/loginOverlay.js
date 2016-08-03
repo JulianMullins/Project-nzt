@@ -11,7 +11,8 @@ var LoginOverlay = React.createClass({
       username: '', 
       password: '', 
       gameEnded: false, 
-      games: null
+      games: null,
+      error:this.props.params.error
     }
   },
 
@@ -56,6 +57,7 @@ var LoginOverlay = React.createClass({
           <h1>Hey you!</h1>
           <div className="pa">Login here.</div>
           <form>
+            {this.state.error}
             <input type="text" placeholder="Name or Email" name="username" id="username" value={this.state.username} onChange={this.update} autoFocus={focus}></input>
             <br></br>
             <input type="password" placeholder="Password" name="password" id="password" value={this.state.password} onChange={this.update}></input>

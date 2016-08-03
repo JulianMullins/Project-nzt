@@ -171,19 +171,17 @@ module.exports = function(passport) {
 
   router.get('/login/failure',function(req,res,next){
     //res.status(401).json({success:false})
-    res.send({success:false,error:"login failure"})
+    res.json({success:false,error:"login failure"})
   })
 
   // POST Login page
   router.post('/login', passport.authenticate('local',{failureRedirect: '/login/failure'}), function(req,res,next){
       
-    req.session.user = req.user;
+    //req.session.user = req.user;
     req.session.fullUser = true;
-      console.log("login success")
-      console.log(req.user)
-      res.json({success:true});
-      res.back();
-      console.log(req.user +" after json-ing");
+    console.log("login success")
+    console.log(req.session.user)
+    res.json({success:true});
 
 	});
 
@@ -209,13 +207,40 @@ module.exports = function(passport) {
 
   // reset user currentgame and logout (or err if !req.user)
   router.get('/logout', function(req, res,next) {
-    if(req.user){
-      req.user.currentGame=[];
-      req.user.save(function(err,user){
-        req.logout();
-        req.session.destroy();
-        res.json({success:true});
+    console.log("logging out ", req.session.user)
+    if(req.session.user){
+      req.session.user.currentGame=[];
+
+      req.logout();
+      req.session.destroy(function(err){
+        if(err){
+          res.json({success:false})
+        }
+        else{
+          res.json({success:true});
+        }
       });
+
+      
+      // console.log("before save", req.session.user);
+      // req.session.user.save(function(err,user){
+      //   if(err){
+      //     console.log(err);
+      //   }
+      //   else{
+      //     console.log("after save", user);
+      //     req.logout();
+      //     req.session.destroy(function(err){
+      //       if(err){
+      //         res.json({success:false})
+      //       }
+      //       else{
+      //         res.json({success:true});
+      //       }
+      //     });
+      //   }
+        
+      // });
     }
     else{
       res.status(400).json({success:false})

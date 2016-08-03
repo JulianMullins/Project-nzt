@@ -3258,11 +3258,11 @@ ReactDOM.render(React.createElement(
     React.createElement(_reactRouter.IndexRedirect, { to: '/home' }),
     React.createElement(_reactRouter.Route, { path: 'home', component: Home }),
     React.createElement(_reactRouter.Route, { path: 'login/facebook', component: FacebookLogin }),
-    React.createElement(_reactRouter.Route, { path: 'gameOver/login', component: Login }),
-    React.createElement(_reactRouter.Route, { path: 'gameOver/register', component: Register }),
-    React.createElement(_reactRouter.Route, { path: 'login', component: Login }),
+    React.createElement(_reactRouter.Route, { path: 'gameOver/login(/:error)', component: Login }),
+    React.createElement(_reactRouter.Route, { path: 'gameOver/register(/:error)', component: Register }),
+    React.createElement(_reactRouter.Route, { path: 'login(/:error)', component: Login }),
     React.createElement(_reactRouter.Route, { path: 'logout', component: Logout }),
-    React.createElement(_reactRouter.Route, { path: 'register', component: Register }),
+    React.createElement(_reactRouter.Route, { path: 'register(/:error)', component: Register }),
     React.createElement(_reactRouter.Route, { path: 'gameOver', component: GameOver }),
     React.createElement(_reactRouter.Route, { path: 'leaderboard', component: Leaderboard }),
     React.createElement(_reactRouter.Route, { path: 'stats', component: Stats }),
@@ -3784,7 +3784,8 @@ var LoginOverlay = React.createClass({
       username: '',
       password: '',
       gameEnded: false,
-      games: null
+      games: null,
+      error: this.props.params.error
     };
   },
 
@@ -3838,6 +3839,7 @@ var LoginOverlay = React.createClass({
         React.createElement(
           'form',
           null,
+          this.state.error,
           React.createElement('input', { type: 'text', placeholder: 'Name or Email', name: 'username', id: 'username', value: this.state.username, onChange: this.update, autoFocus: focus }),
           React.createElement('br', null),
           React.createElement('input', { type: 'password', placeholder: 'Password', name: 'password', id: 'password', value: this.state.password, onChange: this.update }),
@@ -4151,31 +4153,20 @@ var RegisterOverlay = React.createClass({
       email: '',
       password: '',
       passwordConfirm: '',
-      name: ''
+      name: '',
+      gameEnded: false,
+      error: this.props.params.error
     };
   },
+  componentDidMount: function componentDidMount() {
+    if (this.props.location.pathname == '/gameOver/register') {
 
-  // componentDidMount(){
-  //   if(this.props.location.pathname =='/gameOver/register'){
+      this.setState({
+        gameEnded: true
+      });
+    }
+  },
 
-  //     this.setState({
-  //       gameEnded:true
-  //     })
-
-  //     fetch('/getUser',{
-  //       method:'get'
-  //     }).then(function(response){
-  //         return response.json();
-  //     }).then(function(response){
-  //       if(response.games){
-  //         this.setState({
-  //           gameId:response.games
-  //         })
-  //       }
-  //     }.bind(this))
-  //   }
-
-  // },
   // click(e){
   //   e.preventDefault();
   //   if(this.state.gameEnded){
@@ -4240,13 +4231,17 @@ var RegisterOverlay = React.createClass({
         }).then(function (response) {
           console.log(response);
           if (response.data.success) {
-            this.props.history.goBack();
+            if (!this.state.gameEnded) {
+              this.props.history.push('/home');
+            } else {
+              this.props.history.goBack();
+            }
           } else {
-            this.props.history.push('/login');
+            this.props.history.push('/login/error');
           }
         }.bind(this));
       } else {
-        this.props.history.push('/register');
+        this.props.history.push('/register/error');
       }
     }.bind(this));
   },
@@ -4270,6 +4265,7 @@ var RegisterOverlay = React.createClass({
         React.createElement(
           'form',
           null,
+          this.state.error,
           React.createElement('input', { type: 'text', placeholder: 'Name', name: 'name', id: 'name', value: this.state.name, onChange: this.update }),
           React.createElement('br', null),
           React.createElement('input', { type: 'text', placeholder: 'Username', name: 'username', id: 'username', value: this.state.username, onChange: this.update }),
