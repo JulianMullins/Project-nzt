@@ -2744,7 +2744,7 @@ var GameOverOverlay = React.createClass({
       console.log("userData: ", userData);
       this.setState({
         //username:userData.data.username,
-        isAnon: !userData.data.alreadyLoggedIn,
+        isAnon: userData.data.alreadyLoggedIn,
         score: Math.floor(gameData.data.game.score),
         mode: gameData.data.game.mode,
         nLevel: gameData.data.game.nLevel,
@@ -2854,7 +2854,7 @@ var GameOverOverlay = React.createClass({
   },
   renderLogin: function renderLogin() {
     //if not logged in, option to login to save
-    if (this.state.isAnon && !this.state.isHighScore) {
+    if (this.state.isAnon) {
       this.setState({
         gameOverMessage: React.createElement(
           'div',
@@ -2877,10 +2877,6 @@ var GameOverOverlay = React.createClass({
             'to save your progress, view statistics and compete with friends!'
           )
         )
-      });
-    } else {
-      this.setState({
-        gameOverMessage: React.createElement('div', { className: 'gameOverPromptDefault' })
       });
     }
   },
@@ -2977,7 +2973,7 @@ var GameOverOverlay = React.createClass({
               React.createElement(
                 'td',
                 { className: 'scoreValue' },
-                score
+                this.state.score
               )
             ),
             React.createElement(
@@ -76264,9 +76260,9 @@ var App = React.createClass({
 
     console.log("app mounted");
 
-    axios.get('/getUserOnLoad').then(function (response) {
-      this.setState({});
-    }.bind(this));
+    axios.get('/getUserOnLoad');
+    // .then(function(response){
+    // }.bind(this))
   },
   updateState: function updateState() {
     // axios.get('/isUser')

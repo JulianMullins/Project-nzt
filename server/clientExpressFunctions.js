@@ -20,6 +20,7 @@ router.get('/getUserOnLoad',function(req,res,next){
   if(req.session.user && req.session.user.temp){
     req.session.destroy();
   }
+  res.json({success:true})
 })
 
 
@@ -91,14 +92,15 @@ router.get('/getUser',function(req,res,next){
     games = req.session.user.currentGame
   }
   if(req.session.user){
-    console.log("real user, here are stats:")
+    console.log("here are stats from /getUser:")
     Stats.findById(req.session.user.stats,function(err,stats){
       console.log(stats);
+      console.log(req.session.user);
     })
   }
   
   res.json({
-    alreadyLoggedIn: !!req.session.user,
+    alreadyLoggedIn: !req.session.user.temp,
     isUser: isUser,
     username:username,
     name:name

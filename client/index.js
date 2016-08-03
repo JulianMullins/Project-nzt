@@ -51,14 +51,8 @@ var App = React.createClass({
     console.log("app mounted")
 
     axios.get('/getUserOnLoad')
-      .then(function(response){
-        this.setState({
-          
-
-
-          
-        })
-      }.bind(this))
+      // .then(function(response){
+      // }.bind(this))
 
   },
   updateState(){

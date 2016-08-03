@@ -26,36 +26,49 @@ router.post('/startGame/:mode/:nLevel',function(req,res,next){
   console.log(req.session.user);
   //if user, create game, save game, add to user.currentGame
   if(req.session.user){
-    if(req.session.user.maxN[req.params.mode]<req.params.nLevel){
-      res.json({authorized:false});
-      return;
-    }
-    var user = req.session.user;
-    var tempGame = new Game({
-      user:req.session.user,
-      mode:req.params.mode,
-      score:0,
-      nLevel:req.params.nLevel,
-      tempUser:req.session.user.temp
-    })
-    tempGame.save(function(err,game){
+    User.findById(req.session.user._id).exec(function(err,user){
       if(err){
-        console.log(err);
+        res.json({success:false});
       }
       else{
-        user.currentGame.unshift(game);
-        user.save();
-        console.log(req.session.user, user, "game posted")
-        res.json({
-          authorized:true,
-          gameId: game._id,
-          tempUser: false,
-          modeMultiplier: modeMultiplier,
-          penalty: penalty,
-          positivePoints: positivePoints,
-          userId:null
+        if(user.maxN[req.params.mode]<req.params.nLevel){
+          res.json({authorized:false})
+          return;
+        }
+        var tempGame = new Game({
+          user:user._id,
+          mode:req.params.mode,
+          score:0,
+          nLevel:req.params.nLevel,
+          tempUser:user.temp
+        })
+        tempGame.save(function(err,game){
+          if(err){
+            console.log(err);
+          }
+          else{
+            user.currentGame.unshift(game);
+            user.save(function(err,user){
+              if(err){
+                res.json({success:false});
+              }
+              else{
+                console.log(req.session.user, user, "game posted")
+                res.json({
+                  authorized:true,
+                  gameId: game._id,
+                  tempUser: false,
+                  modeMultiplier: modeMultiplier,
+                  penalty: penalty,
+                  positivePoints: positivePoints
+                })
+              }
+            });
+            
+          }
         })
       }
+
     })
   }
   else{
@@ -84,8 +97,6 @@ router.post('/startGame/:mode/:nLevel',function(req,res,next){
       userStats.save();
       tempUser.stats = userStats._id;
 
-      tempUser.username = tempUser._id;
-      tempUser.email = tempUser._id;
 
       console.log("saving tempUser")
       tempUser.save(function(err,user){
@@ -171,6 +182,7 @@ router.post('/gameEnd',function(req,res,next){
       }
 
       game.reactionTimes=req.body.reactionTimes;
+      game.accuracy = req.body.accuracy;
       console.log(game.passedLevel)
       game.save(function(err,game){
         if(err){
@@ -181,9 +193,9 @@ router.post('/gameEnd',function(req,res,next){
           res.json({
             success:true,
             score:game.score,
-            userId:req.body.userId,
             passedLevel:game.passedLevel,
-            gameId:game._id
+            gameId:game._id,
+            accuracy:game.accuracy
           })
 
           // post to gameOver

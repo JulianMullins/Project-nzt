@@ -2,16 +2,9 @@ var mongoose = require('mongoose')
 
 
 var userSchema = mongoose.Schema({
-	// username: {
-	// 	type:String,
-	// 	unique:true
-	// },
+
 	username:String,
 	name:String,
-	// email: {
-	// 	type:String,
-	// 	unique:true
-	// },
 	email:String,
 	password: String,
 	facebookId: String,
