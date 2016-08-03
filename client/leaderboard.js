@@ -30,7 +30,7 @@ var Leaderboard = React.createClass({
             label: 'rank'
           }, {
             key: 'username',
-            label: 'Username'
+            label: 'user'
           }, {
             key: 'score',
             label: 'score'
