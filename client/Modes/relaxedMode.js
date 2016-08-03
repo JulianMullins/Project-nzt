@@ -58,7 +58,6 @@ var RelaxedMode = React.createClass({
   },
   componentDidMount: function() {
 
-
     startGameFunction(this.state.mode, this.state.N, function(err, obj) {
       if (err) {
         this.props.history.push('/levels/' + this.state.mode + '/unauthorized');
@@ -66,13 +65,7 @@ var RelaxedMode = React.createClass({
 
       }
       console.log(obj)
-      this.setState({
-        tempUser: obj.tempUser,
-        gameId: obj.gameId,
-        modeMultiplier: obj.modeMultiplier,
-        penalty: obj.penalty,
-        positivePoints: obj.positivePoints
-      })
+      this.setState({tempUser: obj.tempUser, gameId: obj.gameId, modeMultiplier: obj.modeMultiplier, penalty: obj.penalty, positivePoints: obj.positivePoints})
     }.bind(this));
     console.log("component mounted")
   },
@@ -191,14 +184,13 @@ var RelaxedMode = React.createClass({
         }.bind(this), 800);
       }
 
-
-//////////////////////////////////////
-//////////////////////////////////////
-//////////////////////////////////////
+      //////////////////////////////////////
+      //////////////////////////////////////
+      //////////////////////////////////////
 
       // Game end
-      //if (timeKeeper === 0) {
-              if (timeKeeper === 35) {
+      if (timeKeeper === 0) {
+      // if (timeKeeper === 35) {
         //give gameScore variable the final score
         clearInterval(iterations);
         console.log(fullScore)
@@ -211,9 +203,9 @@ var RelaxedMode = React.createClass({
           }
         }.bind(this))
 
-//////////////////////////////////////
-//////////////////////////////////////
-//////////////////////////////////////
+        //////////////////////////////////////
+        //////////////////////////////////////
+        //////////////////////////////////////
 
       }
     }.bind(this), 2000);

@@ -62,7 +62,9 @@ var getSquareArr = function(square, mode) {
       }
     }
     arr.push(
-      <Link to={link} className={sqClass} key={i} style={colorStyle}>
+      <Link to={link} onMouseDown={function(e) {
+        e.target.click()
+      }} className={sqClass} key={i} style={colorStyle}>
         <div className="front face">{i}</div>
         <div className="side face" style={opacityStyle}></div>
         <div className="back face"></div>
@@ -83,11 +85,7 @@ var getMaxN = function(mode, cb) {
 var ClassicLevels = React.createClass({
   getInitialState: function() {
     console.log(this.props)
-    return {
-      maxN: 1, 
-      mode: 'classic',
-      error:this.props.params.error
-    }
+    return {maxN: 1, mode: 'classic', error: this.props.params.error}
   },
   componentDidMount() {
     this.setMaxN();
@@ -109,7 +107,9 @@ var ClassicLevels = React.createClass({
     return (
       <div className="levelBox">
         <h1 id="classic" className="classic">Classic</h1>
-        {this.state.error ? <div>Unauthorized!</div> :''}
+        {this.state.error
+          ? <div>Unauthorized!</div>
+          : ''}
         <div className="grid">
           {squareArr.map(function(square) {
             return square;
@@ -129,11 +129,7 @@ var ClassicLevels = React.createClass({
 var RelaxedLevels = React.createClass({
   getInitialState: function() {
     console.log(this.props)
-    return {
-      maxN: 1, 
-      mode: 'relaxed',
-      error:this.props.params.error
-    }
+    return {maxN: 1, mode: 'relaxed', error: this.props.params.error}
   },
   componentDidMount() {
     this.setMaxN();
@@ -152,7 +148,9 @@ var RelaxedLevels = React.createClass({
     return (
       <div className="levelBox">
         <h1 id="relaxed" className="relaxed">Relaxed</h1>
-        {this.state.error ? <div>Unauthorized!</div> :''}
+        {this.state.error
+          ? <div>Unauthorized!</div>
+          : ''}
         <div className="grid">
           {squareArr.map(function(square) {
             return square;
@@ -171,11 +169,7 @@ var RelaxedLevels = React.createClass({
 
 var SilentLevels = React.createClass({
   getInitialState: function() {
-    return {
-      maxN: 1, 
-      mode: 'silent',
-      error:this.props.params.error
-    }
+    return {maxN: 1, mode: 'silent', error: this.props.params.error}
   },
   setMaxN: function() {
     getMaxN(this.state.mode, function(maxN) {
@@ -194,7 +188,9 @@ var SilentLevels = React.createClass({
     return (
       <div className="levelBox">
         <h1 id="silent" className="silent">Silent</h1>
-        {this.state.error ? <div>Unauthorized!</div> :''}
+        {this.state.error
+          ? <div>Unauthorized!</div>
+          : ''}
         <div className="grid">
           {squareArr.map(function(square) {
             return square;
@@ -213,11 +209,7 @@ var SilentLevels = React.createClass({
 
 var AdvancedLevels = React.createClass({
   getInitialState: function() {
-    return {
-      maxN: 1, 
-      mode: 'advanced',
-      error:this.props.params.error
-    }
+    return {maxN: 1, mode: 'advanced', error: this.props.params.error}
   },
   setMaxN: function() {
     getMaxN(this.state.mode, function(maxN) {
@@ -236,7 +228,9 @@ var AdvancedLevels = React.createClass({
     return (
       <div className="levelBox">
         <h1 id="advanced" className="advanced">Advanced</h1>
-        {this.state.error ? <div>Unauthorized!</div> :''}
+        {this.state.error
+          ? <div>Unauthorized!</div>
+          : ''}
         <div className="grid">
           {squareArr.map(function(square) {
             return square;
