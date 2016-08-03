@@ -112,7 +112,7 @@ var RelaxedStartOverlay = React.createClass({
       <div className="overlay">
         <div className="overlayContent">
           <h2 className="relaxed">Relaxed Mode</h2>
-          <h3 className="relaxed">(position &amp; sound)</h3>
+          <h3 className="relaxed">(position)</h3>
           <p>Use the up arrow key or press the corresponding button to select a position match.</p>
           <div className="key-wrapper">
             <ul className="row">
@@ -155,7 +155,7 @@ var AdvancedStartOverlay = React.createClass({
       <div className="overlay">
         <div className="overlayContent">
           <h2 className="advanced">Advanced Mode</h2>
-          <h3 className="advanced">(position &amp; sound)</h3>
+          <h3 className="advanced">(position, color &amp; sound)</h3>
           <p className="advanced">Use the left, right and up arrow keys or press the corresponding buttons to select a match. If there is a match of two (or all three) of the stimuli at the same time, select two or three options simultaneously.</p>
           <div className="key-wrapper">
             <ul className="row">
