@@ -97,7 +97,7 @@
 
 .previous_btn, .next_btn {
   cursor: pointer;
-  height: 65px;
+  height: 85px;
   opacity: 0.4;
   font-size: 75px;
   -webkit-transition: opacity 0.4s ease-in-out;
@@ -112,11 +112,13 @@
   opacity: 1;
 }
 
-@media only screen and (max-width: 767px) {
+@media all and (max-width: 768px) {
   .previous_btn {
-    left: 50px;
+    left: 5px;
+    width: 30px;
   }
   .next_btn {
-    right: 50px;
+    right: 5px;
+    width: 30px;
   }
 }

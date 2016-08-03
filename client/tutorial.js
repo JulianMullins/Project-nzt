@@ -1,6 +1,7 @@
 var React = require('react');
 var ReactDOM = require('react-dom');
-import {Link} from 'react-router'
+var MediaQuery = require('react-responsive');
+import {Link} from 'react-router';
 
 var Tutorial = React.createClass({
   getInitialState: function() {
@@ -114,7 +115,10 @@ var Tutorial = React.createClass({
       $('.previous_btn').css('display', 'block');
     }
 
-    if (this.state.currentIndex == 4) {
+    console.log(window.matchMedia('(max-width: 768px)').matches);
+    if (this.state.currentIndex == 3 && window.matchMedia('(max-width: 768px)').matches) {
+      $('.next_btn').css('display', 'none');
+    } else if (this.state.currentIndex == 4) {
       $('.next_btn').css('display', 'none');
     } else {
       $('.next_btn').css('display', 'block');
@@ -129,10 +133,9 @@ var Tutorial = React.createClass({
               <div className="rulemode2">
                 <div className="rules2">
                   <h2>Welcome to Cortex!</h2>
-                  <p>Cortex is a game designed to exercise your working memory and increase fluid-intelligence (directly tied to IQ). This method of increasing IQ is 
-                    <Link to="/science" className="tutorialLink"> scientifically supported and backed by numerous research studies</Link>. 
-                    While the game can be tricky to grasp at first and increases in difficulty rather quickly, we have tried to make this game as fun and as easy to 
-                    learn as possible. We hope that you’ll enjoy simply playing the game and that the cognitive benefits will follow along as you progress.</p>
+                  <p>Cortex is a game designed to exercise your working memory and increase fluid-intelligence (directly tied to IQ). This method of increasing IQ is
+                    <Link to="/science" className="tutorialLink">
+                      scientifically supported and backed by numerous research studies</Link>. While the game can be tricky to grasp at first and increases in difficulty rather quickly, we have tried to make this game as fun and as easy to learn as possible. We hope that you’ll enjoy simply playing the game and that the cognitive benefits will follow along as you progress.</p>
                   <h3>Let&#39;s get started!
                   </h3>
                   <img src="./images/brain.png" alt="brain"></img>
@@ -167,77 +170,78 @@ var Tutorial = React.createClass({
               <img src="./images/nback.gif" alt="Gameplay Pattern"></img>
             </div>
             {/* slide */}
+            <MediaQuery minWidth='768px'>
+              <div className="slide">
+                <div className="key-wrapper">
+                  <h2>Key Tips (keyboard only!)</h2>
+                  <p>Once a button is pressed, you cannot undo the action. For a double match, you need to press both keys</p>
+                  <div className="rulemode">
+                    <div className="rules2">
+                      <h3>RELAXED</h3>
+                      <p>Keep track of changing position.
+                        <br></br>(mono n-back)</p>
+                      <ul className="row">
+                        <li className="key keyRelaxed k38">POSITION</li>
+                      </ul>
+                      <ul className="row">
+                        <li className="key keyRelaxed k37">←</li>
+                        <li className="key keyRelaxed k40">↓</li>
+                        <li className="key keyRelaxed k39">→</li>
+                      </ul>
+                    </div>
+                    <div className="rules2">
+                      <h3>CLASSIC</h3>
+                      <p>Keep track of position and sounds.
+                        <br></br>
+                        (dual n-back)</p>
+                      <ul className="row">
+                        <li className="key keyClassic k38">↑</li>
+                      </ul>
+                      <ul className="row">
+                        <li className="key keyClassic k37">POSITION</li>
+                        <li className="key keyClassic k40">↓</li>
+                        <li className="key keyClassic k39">SOUND</li>
+                      </ul>
+                    </div>
+                    {/* rules2 */}
+                  </div>
+                  {/* rulemode */}
 
-            <div className="slide">
-              <div className="key-wrapper">
-                <h2>Key Tips</h2>
-                <p>Once a button is pressed, you cannot undo the action. For a double match, you need to press both keys</p>
-                <div className="rulemode">
-                  <div className="rules2">
-                    <h3>RELAXED</h3>
-                    <p>Keep track of changing position.
-                      <br></br>(mono n-back)</p>
-                    <ul className="row">
-                      <li className="key keyRelaxed k38">POSITION</li>
-                    </ul>
-                    <ul className="row">
-                      <li className="key keyRelaxed k37">←</li>
-                      <li className="key keyRelaxed k40">↓</li>
-                      <li className="key keyRelaxed k39">→</li>
-                    </ul>
+                  <div className="rulemode">
+                    <div className="rules2">
+                      <h3>SILENT</h3>
+                      <p>Keep track of both position and colors.
+                        <br></br>(dual n-back)</p>
+                      <ul className="row">
+                        <li className="key keySilent k38">↑</li>
+                      </ul>
+                      <ul className="row">
+                        <li className="key keySilent k37">POSITION</li>
+                        <li className="key keySilent k40">↓</li>
+                        <li className="key keySilent k39">COLOR</li>
+                      </ul>
+                    </div>
+                    <div className="rules2">
+                      <h3>ADVANCED</h3>
+                      <p>Keep track of position, color and sound
+                        <br></br>(triple n-back)</p>
+                      <ul className="row">
+                        <li className="key keyAdvanced k38">POSITION</li>
+                      </ul>
+                      <ul className="row">
+                        <li className="key keyAdvanced k37">SOUND</li>
+                        <li className="key keyAdvanced k40">↓</li>
+                        <li className="key keyAdvanced k39">COLOR</li>
+                      </ul>
+                    </div>
+                    {/* rules2 */}
                   </div>
-                  <div className="rules2">
-                    <h3>CLASSIC</h3>
-                    <p>Keep track of position and sounds.
-                      <br></br>
-                      (dual n-back)</p>
-                    <ul className="row">
-                      <li className="key keyClassic k38">↑</li>
-                    </ul>
-                    <ul className="row">
-                      <li className="key keyClassic k37">POSITION</li>
-                      <li className="key keyClassic k40">↓</li>
-                      <li className="key keyClassic k39">SOUND</li>
-                    </ul>
-                  </div>
-                  {/* rules2 */}
+                  {/* rulemode */}
                 </div>
-                {/* rulemode */}
-
-                <div className="rulemode">
-                  <div className="rules2">
-                    <h3>SILENT</h3>
-                    <p>Keep track of both position and colors.
-                      <br></br>(dual n-back)</p>
-                    <ul className="row">
-                      <li className="key keySilent k38">↑</li>
-                    </ul>
-                    <ul className="row">
-                      <li className="key keySilent k37">POSITION</li>
-                      <li className="key keySilent k40">↓</li>
-                      <li className="key keySilent k39">COLOR</li>
-                    </ul>
-                  </div>
-                  <div className="rules2">
-                    <h3>ADVANCED</h3>
-                    <p>Keep track of position, color and sound
-                      <br></br>(triple n-back)</p>
-                    <ul className="row">
-                      <li className="key keyAdvanced k38">POSITION</li>
-                    </ul>
-                    <ul className="row">
-                      <li className="key keyAdvanced k37">SOUND</li>
-                      <li className="key keyAdvanced k40">↓</li>
-                      <li className="key keyAdvanced k39">COLOR</li>
-                    </ul>
-                  </div>
-                  {/* rules2 */}
-                </div>
-                {/* rulemode */}
+                {/* key-wrapper */}
               </div>
-              {/* key-wrapper */}
-            </div>
-            {/* slide */}
+              {/* slide */}
+            </MediaQuery>
 
             <div className="slide">
               <div className="rulemode2">
