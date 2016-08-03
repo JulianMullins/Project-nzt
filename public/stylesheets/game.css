@@ -1,5 +1,12 @@
 /* game page css */
 
+@media (max-width: 640px) {
+  .fullGameView {
+    width: 100vw;
+    height: 100vh;
+  }
+}
+
 .fullGameView {
   width: 100vw;
   display: flex;
