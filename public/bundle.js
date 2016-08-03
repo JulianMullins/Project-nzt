@@ -1558,7 +1558,7 @@ var startGameFunction = require('./serverFunctions').startGameFunction;
 //create global variable for reaction counter
 var reactionStart;
 //global variable for keeping reaction times
-//note: all reactin times for correct hits stored as array for stats (max,min,avg)
+//note: all reaction times for correct hits stored as array for stats (max,min,avg)
 var reactionTimes = [];
 //global variable for game score (saved once time runs out)
 var gameScore;
@@ -1725,9 +1725,8 @@ var RelaxedMode = React.createClass({
       //////////////////////////////////////
 
       // Game end
-
-      if (timeKeeper === 0) {
-        // if (timeKeeper === 35) {
+      //if (timeKeeper === 0) {
+      if (timeKeeper === 36) {
         //give gameScore variable the final score
         clearInterval(iterations);
         console.log(fullScore);
@@ -1960,6 +1959,7 @@ var endGameFunction = function endGameFunction(fullScore, reactionTimes, gameId,
         //   this.props.history.push('/gameOver');
         // }
         // this.props.history.push('/gameOver');
+        console.log("gameOver response: " + response.data.success);
         return callback(response.data.success);
       }.bind(this));
     }
@@ -2036,10 +2036,6 @@ var SilentMode = React.createClass({
         userId: obj.userId
       });
     }.bind(this));
-    //console.log("component mounted")
-    // fetch('/startGame/'+this.state.mode+'/'+this.state.N, {
-    //  method: 'post'
-    // });
   },
   componentWillUnmount: function componentWillUnmount() {
     clearInterval(iterations);
@@ -2188,12 +2184,6 @@ var SilentMode = React.createClass({
         cMatch = false;
         pMatch = false;
       }.bind(this), 800);
-
-      ////////////////////////////////////////////////////////////////////////////////////
-      ///////////////////////////////////////////////////////////////////////////////////
-      ///////////////////////////////////////////////////////////////////////////////////
-      ////////////////////////////////////////////////////////////////////////////////////////
-      ////////////////////////////////////////////////////////////////////////////////////
       //RUTH THIS IS WHERE THE GAME ENDS////////////////
       if (timeKeeper === 0) {
         clearInterval(iterations);
@@ -2208,12 +2198,6 @@ var SilentMode = React.createClass({
             }
           }.bind(this));
         }.bind(this), 2000);
-
-        ////////////////////////////////////////////////////////////////////////////////////
-        ///////////////////////////////////////////////////////////////////////////////////
-        ///////////////////////////////////////////////////////////////////////////////////
-        ////////////////////////////////////////////////////////////////////////////////////////
-        /////////////////////////////////////////////////////////////////////
       }
     }.bind(this), 2000);
   },
@@ -2709,7 +2693,8 @@ var GameOverOverlay = React.createClass({
     return {
       //username:null,
       isAnon: false,
-      score: 0,
+      baseScore: 0,
+      fullScore: 0,
       mode: null,
       nLevel: 1,
       gameOverMessage: React.createElement('div', null),
@@ -2730,7 +2715,10 @@ var GameOverOverlay = React.createClass({
   },
   setScore: function setScore() {
     axios.get('/getScore').then(function (response) {
-      this.setState({ score: response.data.score });
+      this.setState({
+        baseScore: Math.floor(response.data.baseScore),
+        fullScore: Math.floor(response.data.fullScore)
+      });
     }.bind(this));
   },
   getData: function getData() {
@@ -2740,7 +2728,6 @@ var GameOverOverlay = React.createClass({
       this.setState({
         //username:userData.data.username,
         isAnon: userData.data.isAnon,
-        score: Math.floor(gameData.data.game.score),
         mode: gameData.data.game.mode,
         nLevel: gameData.data.game.nLevel,
         scoreToPass: gameData.data.scoreToPass,
@@ -2969,7 +2956,7 @@ var GameOverOverlay = React.createClass({
               React.createElement(
                 'td',
                 { className: 'scoreValue' },
-                this.state.score
+                this.state.baseScore
               )
             ),
             React.createElement(
@@ -3013,7 +3000,7 @@ var GameOverOverlay = React.createClass({
               React.createElement(
                 'td',
                 { className: 'count scoreValue' },
-                this.state.countUp
+                this.countUp(this.state.fullScore)
               )
             )
           )

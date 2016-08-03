@@ -8,7 +8,8 @@ var gameSchema = mongoose.Schema({
 	},
   	tempUser:Boolean,
 	mode:String,
-	score:Number,
+	baseScore:Number,
+	fullScore:Number,
 	nLevel:Number,
 	reactionTimes:Array,
 	accuracy:{
@@ -16,6 +17,7 @@ var gameSchema = mongoose.Schema({
 		min:0,
 		max:1
 	},
+	isHighScore:Boolean,
 	finalScore:{
 		type:mongoose.Schema.Types.ObjectId,
 		ref:'HighScore'

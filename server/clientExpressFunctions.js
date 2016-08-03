@@ -72,7 +72,8 @@ router.get("/getGameData",function(req,res,next){
     res.json({
       score:game.score,
       mode:game.mode,
-      nLevel:game.nLevel
+      nLevel:game.nLevel,
+      game:game
     })
   })
 })
@@ -135,7 +136,7 @@ router.get('/getGame',function(req,res,next){
       console.log("game: ", game);
       scoreToPass = allScoresToPass[game.mode][game.nLevel];
 
-      if(game.score >= scoreToPass) {
+      if(game.fullScore >= scoreToPass) {
         passedLevel = true;
       } else {
         passedLevel = false;
@@ -155,7 +156,10 @@ router.get('/getGame',function(req,res,next){
 router.get('/getScore',function(req,res){
   Game.findById(req.session.user.currentGame[0],function(err,game){
     if(game){
-      res.json({score:game.score});
+      res.json({
+        baseScore:game.baseScore,
+        fullScore:game.fullScore
+      });
     }
   })
 })

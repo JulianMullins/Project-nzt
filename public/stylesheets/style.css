@@ -52,11 +52,11 @@ body {
   align-items: center;
 }
 h1 {
-  font-size: calc(16px+ 10vw);
+  font-size: calc(16px + 10vw);
   font-weight: 700;
 }
 h2 {
-  font-size: calc(16px+ 1.5vw);
+  font-size: calc(16px + 1.5vw);
   font-weight: 500;
 }
 h3 {
@@ -156,7 +156,7 @@ h3 {
     display: none;
   }
 }
-@media all and (max-width: 640px) {
+@media all and (max-width: 768px) {
   .heading {
     justify-content: center;
     padding-top: 75px;
@@ -171,8 +171,9 @@ h3 {
   .menu-panel {
     display: flex;
     float: left;
-    width: 50vw;
-    height: 50%;
+    margin: 2px;
+    width: calc(50vw - 4px);
+    height: calc(50% - 4px);
     transition-duration: 0s;
   }
   .menu-panel:hover {

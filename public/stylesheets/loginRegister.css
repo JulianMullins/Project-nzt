@@ -154,11 +154,14 @@ button.form-btn.dx a, button.form-btn.dx2 a {
   background-color: #7cd9d2;
   color: white;
   text-decoration: none;
+  transition-duration: .8s;
+}
+.loginContent, .registerContent {
+  width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  transition-duration: .8s;
 }
 
 input {
@@ -193,7 +196,7 @@ input {
   text-align: center;
 }
 
-@media all and (max-width: 640px) {
+@media all and (max-width: 768px) {
   .screen {
     display: flex;
     flex-direction: column;
@@ -201,20 +204,39 @@ input {
     width: 100vw;
   }
   .login, .register-log {
-    height: 50vh;
+    height: 55vh;
     width: 100vw;
     color: white;
     text-decoration: none;
     display: flex;
     justify-content: center;
-    align-items: center;
     flex-direction: column;
+    transition-duration: 0s;
+  }
+  .register-log {
+    height: 45vh;
+    width: 100vw;
+    color: white;
+    text-decoration: none;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    transition-duration: 0s;
+  }
+  .loginContent {
+    height: 100%;
+  }
+  .loginContent form input {
+    width: 70%;
   }
   .login:hover, .register-log:hover{
     width: 100vw;
   }
   .login h1, .register-log h1{
-    font-size:calc(16px + 15vw);
+    font-size: calc(16px + 10vw);
+  }
+  .pa {
+    font-size: calc(16px + 4vw);
   }
   form {
     text-align: center;
@@ -223,16 +245,40 @@ input {
     padding: 30px 20px 0 20px;
     box-sizing: border-box;
   }
-  .register-log form{
-    width: 90vw;
-  }
-  .buttongroup {
+  .loginContent .buttongroup {
     display: flex;
-    width:100%;
-    justify-content: center;
+    width: 100%;
+    justify-content: space-between;
+  }
+  .loginContent .buttongroup a {
+    width: 45%;
+  }
+  button.form-btn.dx {
+    width: 100%;
+    padding: 0;
+    margin: 0;
+    font-size: calc(10px + .8vw);
   }
   .fb {
-    padding: 20px 0 20px;
-    font-size: calc(10px + .5vw)
+    font-size: calc(10px + .8vw);
+    margin: 0;
+  }
+  .registerContent {
+    height: 100%;
+  }
+  .registerContent h3 {
+    font-size: calc(10px + 2vw);
+  }
+  .register-log form{
+    width: 90vw;
+    padding-top: 5vw;
+    display: flex;
+    align-items: center;
+  }
+  .registerContent .buttongroup {
+    width: 100%;
+  }
+  .registerContent .buttongroup a {
+    width: 50%;
   }
 }

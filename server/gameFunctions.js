@@ -136,7 +136,8 @@ router.post('/startGame/:mode/:nLevel',function(req,res,next){
                     modeMultiplier: modeMultiplier,
                     penalty: penalty,
                     positivePoints: positivePoints,
-                    userId: user._id
+                    userId: user._id,
+                    isHighScore:null
                   })
                 });
 
@@ -168,17 +169,17 @@ router.post('/gameEnd',function(req,res,next){
       console.log("no game")
     }
     else{
-      game.score = req.body.score;
-
+      game.baseScore = req.body.score;
+      game.fullScore = req.body.score*modeMultiplier[game.mode]*game.nLevel;
       game.passedLevel = false;
       console.log(game)
       //console.log(scoresToPass)
       console.log(scoresToPass[game.mode][game.nLevel])
-      console.log(game.score);
-      console.log(game.score>= scoresToPass[game.mode][game.nLevel]);
-      if(game.score>= scoresToPass[game.mode][game.nLevel]){
+      console.log(game.baseScore, game.fullScore);
+      console.log(game.fullScore>= scoresToPass[game.mode][game.nLevel]);
+      if(game.fullScore>= scoresToPass[game.mode][game.nLevel]){
         game.passedLevel=true;
-        console.log("If statement passed level: ", game.passedLevel)
+        console.log("Passed level in /gameEnd: ", game.passedLevel)
       }
 
       game.reactionTimes=req.body.reactionTimes;
@@ -192,7 +193,7 @@ router.post('/gameEnd',function(req,res,next){
           console.log("game ended successfully",game)
           res.json({
             success:true,
-            score:game.score,
+            score:game.baseScore,
             passedLevel:game.passedLevel,
             gameId:game._id,
             accuracy:game.accuracy
