@@ -2064,24 +2064,60 @@ var SilentMode = React.createClass({
 
     iterations = setInterval(function () {
       timeKeeper--;
-      if (this.state.keepScore && !(this.state.colorMatch || this.state.positionMatch)) {
-        matchCount += 1;
-        matchHit += 1;
-        reactionTimes.push(reactionEnd - reactionStart);
-        currentScore = ((2000 - reactionTimes[reactionTimes.length - 1]) / 100).toFixed(2);
-        fullScore += parseFloat(currentScore);
-        console.log(fullScore);
-        reactionEnd = null;
-        this.setState({
-          score: this.state.score + parseInt(currentScore),
-          alert: 'Good job',
-          posStyle: noStyle,
-          colorStyle: noStyle
-        });
-      } else if (!this.state.keepScore && (this.state.posPressed || this.state.colorPressed)) {
+      if (this.state.keepScore) {
+        if (!this.state.colorMatch && !this.state.positionMatch && this.state.colorPressed && this.state.posPressed) {
+          matchHit += 2;
+          reactionTimes.push(reactionEnd - reactionStart);
+          currentScore = ((2000 - reactionTimes[reactionTimes.length - 1]) / 100 * 2).toFixed(2);
+          fullScore += parseFloat(currentScore);
+          console.log(fullScore);
+          //reactionEnd = null;
+          this.setState({
+            score: this.state.score + parseInt(currentScore),
+            alert: 'Good job',
+            posStyle: noStyle,
+            colorStyle: noStyle,
+            colorPressed: false,
+            colorMatch: false,
+            keepScore: false
+          });
+        } else if (!this.state.colorMatch && this.state.colorPressed) {
+          matchHit += 1;
+          reactionTimes.push(reactionEnd - reactionStart);
+          currentScore = ((2000 - reactionTimes[reactionTimes.length - 1]) / 100).toFixed(2);
+          fullScore += parseFloat(currentScore);
+          console.log(fullScore);
+          //reactionEnd = null;
+          this.setState({
+            score: this.state.score + parseInt(currentScore),
+            alert: 'Good job',
+            posStyle: noStyle,
+            colorStyle: noStyle,
+            colorPressed: false,
+            colorMatch: false,
+            keepScore: false
+          });
+        } else if (!this.state.positionMatch && this.state.posPressed) {
+          matchHit += 1;
+          reactionTimes.push(reactionEnd - reactionStart);
+          currentScore = ((2000 - reactionTimes[reactionTimes.length - 1]) / 100).toFixed(2);
+          fullScore += parseFloat(currentScore);
+          console.log(fullScore);
+          //reactionEnd = null;
+          this.setState({
+            score: this.state.score + parseInt(currentScore),
+            alert: 'Good job',
+            posStyle: noStyle,
+            colorStyle: noStyle,
+            posPressed: false,
+            positionMatch: false,
+            keepScore: false
+          });
+        }
+      }
+      if (!this.state.keepScore && (this.state.posPressed || this.state.colorPressed)) {
         this.setState({ alert: "Not a match" });
         matchHit -= 1;
-        reactionEnd = null;
         if (this.state.score - 5 >= 0) {
           fullScore -= 5;
           currentScore = 5;
@@ -2095,10 +2131,9 @@ var SilentMode = React.createClass({
           currentScore = this.state.score;
           this.setState({ score: 0 });
         }
-      } else if (this.state.keepScore && (this.state.colorMatch || this.state.positionMatch)) {
+      }
+      if (this.state.keepScore && (this.state.colorMatch || this.state.positionMatch)) {
         this.setState({ alert: "Missed a match" });
-        matchCount += 1;
-        reactionEnd = null;
         if (this.state.score - 5 >= 0) {
           fullScore -= 5;
           currentScore = 5;
@@ -2127,6 +2162,7 @@ var SilentMode = React.createClass({
       }.bind(this), 800);
 
       if (timeTilPositionMatch === 0) {
+        matchCount += 1;
         this.setState({ positionMatch: true, keepScore: true });
         //reset position portion
         timeTilPositionMatch = parseInt(Math.random() * 5 + 2);
@@ -2138,6 +2174,7 @@ var SilentMode = React.createClass({
       }
       //case 2: color match
       if (timeTilColorMatch === 0) {
+        matchCount += 1;
         this.setState({ colorMatch: true, keepScore: true });
         //reset position portion
         timeTilColorMatch = parseInt(Math.random() * 5 + 2);
@@ -2173,6 +2210,7 @@ var SilentMode = React.createClass({
         }
       }
 
+      reactionEnd = null;
       reactionStart = Date.now();
       this.state.style[nextPosition] = newStyle[nextColor];
       this.setState({ style: this.state.style });
@@ -2192,11 +2230,15 @@ var SilentMode = React.createClass({
           //console.log(this.state)
           console.log(matchHit / matchCount, 'accuracy');
 
-          endGameFunction(fullScore, reactionTimes, this.state.gameId, this.state.userId, function (success) {
-            if (success) {
-              this.props.history.push('/gameOver');
-            }
-          }.bind(this));
+          ////////////////////////////////////////////////////////////////////////////
+          /////////////////////////////////////////////////////////////////////////////
+          /////////////////////////////////////////////////////////////////////////////
+          ////////////////////REMEMBER TO ADD THIS BACK IN/////////////////////////////
+          // endGameFunction(fullScore, reactionTimes, this.state.gameId, this.state.userId, function(success) {
+          //   if (success) {
+          //     this.props.history.push('/gameOver')
+          //   }
+          //}.bind(this))
         }.bind(this), 2000);
       }
     }.bind(this), 2000);
