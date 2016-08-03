@@ -99,8 +99,7 @@ var GameOverOverlay = React.createClass({
       })
     } else {
       this.setState({
-        gameOverInform: <h2 className="classic">You need {this.state.scoreToPass * this.state.nLevel * this.state.modeMultiplier}
-          points to unlock level {this.state.nLevel + 1}</h2>,
+        gameOverInform: <h2 className="classic">You need {this.state.scoreToPass * this.state.nLevel * this.state.modeMultiplier} points to unlock level {this.state.nLevel + 1}</h2>,
         gameOverCongrats: <h1>Nice try!</h1>
       })
     }

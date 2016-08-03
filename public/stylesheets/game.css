@@ -274,3 +274,50 @@
     color: transparent;
   }
 }
+
+@media (max-width: 768px) {
+  .fullGameView {
+    align-items: flex-start;
+    height: 100vh;
+    width: 100vw;
+    background-color: rgb(255, 255, 255);
+  }
+  .gameContainer{
+    height: 100vh;
+    width: 100vw;
+    margin-top: 0;
+  }
+
+  .gameFullHeader {
+    justify-content: flex-end;
+  }
+
+  .gameBoard {
+    width: 82vw;
+    height: 100vw;
+  }
+
+  .gameButtonsContainer {
+    width: 100vw;
+    height: 50%;
+    margin-bottom: 0;
+    justify-content: space-around;
+  }
+
+  .gameButtonsContainer a {
+    height: 90%;
+    width: 35vw;
+  }
+
+  .scoreAlertPositive {
+    width: 90%;
+    height: 90%;
+    margin: 0 auto;
+  }
+
+  .scoreAlertNegative {
+    width: 90%;
+    height: 90%;
+    margin: 0 auto;
+  }
+}

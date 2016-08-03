@@ -15,8 +15,7 @@
   font-weight: 700;
   margin: 0;
 }
-
-.levelBox > h3 {
+.levelBox> h3 {
   font-size: 1.3rem;
   font-weight: 100;
   color: gray;
@@ -30,17 +29,11 @@
 }
 .grid a {
   display: inline-block;
-  position: inline-block; /* Or absolute, inline-block, inline */
 }
 .levelSquare {
   display: inline-block;
   float: left;
 }
-/*.grid1 {
-  width: 99%;
-  height: 99%;
-  margin: .5%;
-}*/
 .grid4 {
   width: 48%;
   height: 48%;
@@ -53,25 +46,21 @@
   margin: calc(10% / 6);
   font-size: 7vh;
 }
-
-.grid16{
+.grid16 {
   width: 22%;
   height: 22%;
   margin: calc(12% / 8);
   font-size: 5vh;
 }
-
-.grid25{
+.grid25 {
   width: 16%;
   height: 16%;
   margin: calc(20% / 10);
   font-size: 4vh;
 }
-
-.levelSquareLast{
-  background-color: rgba(255,255,255,.5);
+.levelSquareLast {
+  background-color: rgba(255, 255, 255, .5);
 }
-
 .levelSquare {
   transform: rotate3d(0, 1, 0, 0deg);
   transform-style: preserve-3d;
@@ -110,24 +99,54 @@
 .back.face {
   transform: translate3d(0, 0, -50px) rotate3d(0, 1, 0, 180deg);
 }
-
 .levelsFooter {
   display: flex;
   flex-direction: column;
   align-items: center;
 }
-
 .levelsFooter h3 {
   font-weight: 500;
   padding: 5px 0;
 }
-
 .levelsFooter a {
   text-decoration: none;
 }
-
 .returnBtn {
   color: white;
   width: 25vw;
   padding: 5px 0;
+}
+@media all and (max-width: 640px) {
+  .levelBox {
+    height: 90vh;
+    margin-top: 10vh;
+  }
+  .levelBox h1 {
+    font-size: 4em;
+  }
+  .grid {
+    width: 100%;
+    padding: 0 10px;
+  }
+  .levelSquare:hover {
+    transform: rotate3d(0, 1, 0, 180deg);
+  }
+  .levelsFooter {
+    height: 15em;
+    padding-top: 3em;
+  }
+  .levelsFooter > h3 {
+    font-size: 3em;
+    margin-bottom: .5em;
+  }
+  .returnBtn {
+    height: 2em;
+    width: 10em;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .levelsFooter a h3 {
+    font-size: 3em;
+  }
 }
