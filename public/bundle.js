@@ -1318,7 +1318,7 @@ var RelaxedStartOverlay = React.createClass({
         React.createElement(
           'h3',
           { className: 'relaxed' },
-          '(position & sound)'
+          '(position)'
         ),
         React.createElement(
           'p',
@@ -1408,7 +1408,7 @@ var AdvancedStartOverlay = React.createClass({
         React.createElement(
           'h3',
           { className: 'advanced' },
-          '(position & sound)'
+          '(position, color & sound)'
         ),
         React.createElement(
           'p',
@@ -3243,7 +3243,7 @@ var Leaderboard = React.createClass({
         label: 'rank'
       }, {
         key: 'username',
-        label: 'Username'
+        label: 'user'
       }, {
         key: 'score',
         label: 'score'
@@ -3701,14 +3701,8 @@ var LoginOverlay = React.createClass({
 
   getInitialState: function getInitialState() {
     console.log(this);
-    return {
-      username: '',
-      password: '',
-      gameEnded: false,
-      games: null
-    };
+    return { username: '', password: '', gameEnded: false, games: null };
   },
-
   componentDidMount: function componentDidMount() {},
   update: function update(e) {
     this.setState(_defineProperty({}, e.target.name, e.target.value));
@@ -3747,37 +3741,41 @@ var LoginOverlay = React.createClass({
         'div',
         { className: 'login', id: 'login' },
         React.createElement(
-          'h1',
-          null,
-          'Hey you!'
-        ),
-        React.createElement(
           'div',
-          { className: 'pa' },
-          'Login here.'
-        ),
-        React.createElement(
-          'form',
-          null,
-          React.createElement('input', { type: 'text', placeholder: 'Name or Email', name: 'username', id: 'username', value: this.state.username, onChange: this.update, autoFocus: focus }),
-          React.createElement('br', null),
-          React.createElement('input', { type: 'password', placeholder: 'Password', name: 'password', id: 'password', value: this.state.password, onChange: this.update }),
+          { className: 'loginContent' },
+          React.createElement(
+            'h1',
+            null,
+            'Hey you!'
+          ),
           React.createElement(
             'div',
-            { className: 'buttongroup' },
+            { className: 'pa' },
+            'Login here.'
+          ),
+          React.createElement(
+            'form',
+            null,
+            React.createElement('input', { type: 'text', placeholder: 'Name or Email', name: 'username', id: 'username', value: this.state.username, onChange: this.update, autoFocus: focus }),
+            React.createElement('br', null),
+            React.createElement('input', { type: 'password', placeholder: 'Password', name: 'password', id: 'password', value: this.state.password, onChange: this.update }),
             React.createElement(
-              _reactRouter.Link,
-              { to: '/home' },
+              'div',
+              { className: 'buttongroup' },
               React.createElement(
-                'button',
-                { className: 'form-btn dx', onClick: this.login },
-                'Login'
+                _reactRouter.Link,
+                { to: '/home' },
+                React.createElement(
+                  'button',
+                  { className: 'form-btn dx', onClick: this.login },
+                  'Login'
+                )
+              ),
+              React.createElement(
+                'a',
+                { className: 'fb', href: '/login/facebook' },
+                'Login with Facebook'
               )
-            ),
-            React.createElement(
-              'a',
-              { className: 'fb', href: '/login/facebook' },
-              'Login with Facebook'
             )
           )
         )
@@ -3786,45 +3784,49 @@ var LoginOverlay = React.createClass({
         'div',
         { className: 'register-log' },
         React.createElement(
-          'h1',
-          null,
-          'New?'
-        ),
-        React.createElement(
           'div',
-          { className: 'pa' },
-          'Register here'
-        ),
-        React.createElement(
-          'h3',
-          null,
-          'See your stats,\u0003',
-          React.createElement('br', null),
-          'track your progress',
-          React.createElement('br', null),
-          'and improve your IQ.'
-        ),
-        React.createElement(
-          'form',
-          null,
+          { className: 'registerContent' },
+          React.createElement(
+            'h1',
+            null,
+            'New?'
+          ),
           React.createElement(
             'div',
-            { className: 'buttongroup' },
+            { className: 'pa' },
+            'Register here'
+          ),
+          React.createElement(
+            'h3',
+            null,
+            'See your stats,\u0003',
+            React.createElement('br', null),
+            'track your progress',
+            React.createElement('br', null),
+            'and improve your IQ.'
+          ),
+          React.createElement(
+            'form',
+            null,
             React.createElement(
-              _reactRouter.Link,
-              { to: '/register' },
+              'div',
+              { className: 'buttongroup' },
               React.createElement(
-                'button',
-                { className: 'form-btn dx' },
-                'Register'
+                _reactRouter.Link,
+                { to: '/register' },
+                React.createElement(
+                  'button',
+                  { className: 'form-btn dx' },
+                  'Register'
+                )
               )
             )
+          ),
+          React.createElement(
+            _reactRouter.Link,
+            { to: '/home' },
+            React.createElement('img', { className: 'whiteLogo', src: './images/CortexIconWhite.png' })
           )
-        ),
-        React.createElement(
-          _reactRouter.Link,
-          { to: '/home' },
-          React.createElement('img', { className: 'whiteLogo', src: './images/CortexIconWhite.png' })
         )
       )
     );
@@ -4257,27 +4259,31 @@ var Science = React.createClass({
 				'div',
 				{ className: 'scienceTop' },
 				React.createElement(
-					'h1',
-					null,
-					'The Science'
-				),
-				React.createElement('img', { src: './images/brain.png' }),
-				React.createElement(
-					'p',
-					null,
-					'What is dual n-back? N-back tests command a user to keep track of a continuously changing pattern n steps back. For example, n=1 means that a user should remember 1 step back to see if the next stimulus matches the previous, n=2 means keeping track of matching stimuli two steps back, and so on. The "dual" in dual n-back refers to the different types of stimulus that the user must keep track of, for example position (a visual input) and sound (an auditory input). Combining the two would therefore require a user to keep track of changing positions and sounds at different levels of pattern history. In cognitive studies, these tests have been shown to improve working memory and fluid intelligence (i.e. reasoning and problem-solving skills). In other words, ',
+					'div',
+					{ className: 'scienceTopText' },
 					React.createElement(
-						'b',
+						'h1',
 						null,
-						'playing these games can improve one\'s IQ!'
+						'The Science'
 					),
-					' In a study presented in the Proceedings of the National Academy of Sciences of the United States of America, fluid intelligence increased significantly after just 19 days of n-back training, regardless of one\'s level of intelligence beforehand.'
+					React.createElement(
+						'p',
+						null,
+						'What is dual n-back? N-back tests command a user to keep track of a continuously changing pattern n steps back. For example, n=1 means that a user should remember 1 step back to see if the next stimulus matches the previous, n=2 means keeping track of matching stimuli two steps back, and so on. The "dual" in dual n-back refers to the different types of stimulus that the user must keep track of, for example position (a visual input) and sound (an auditory input). Combining the two would therefore require a user to keep track of changing positions and sounds at different levels of pattern history. In cognitive studies, these tests have been shown to improve working memory and fluid intelligence (i.e. reasoning and problem-solving skills). In other words, ',
+						React.createElement(
+							'b',
+							null,
+							'playing these games can improve one\'s IQ!'
+						),
+						' In a study presented in the Proceedings of the National Academy of Sciences of the United States of America, fluid intelligence increased significantly after just 19 days of n-back training, regardless of one\'s level of intelligence beforehand.'
+					),
+					React.createElement(
+						'p',
+						null,
+						'What does Cortex do? Most currently implementations of dual n-back training are poorly designed and tedious to play. Our mission is to make cognitive training less of a chore through an interactive and gamified experience. Users are able to choose their desired level of challenge through various modes that range from basic position play all the way to triple n-back with three different stimuli to keep track of. Through continuous play, users can unlock new n-levels and compete against players around the world for high scores and faster reaction times, all while watching their own progress improve over time. We believe that brain improvement works best when it\'s a fun experience. This is our mission at Cortex.'
+					)
 				),
-				React.createElement(
-					'p',
-					null,
-					'What does Cortex do? Most currently implementations of dual n-back training are poorly designed and tedious to play. Our mission is to make cognitive training less of a chore through an interactive and gamified experience. Users are able to choose their desired level of challenge through various modes that range from basic position play all the way to triple n-back with three different stimuli to keep track of. Through continuous play, users can unlock new n-levels and compete against players around the world for high scores and faster reaction times, all while watching their own progress improve over time. We believe that brain improvement works best when it\'s a fun experience. This is our mission at Cortex.'
-				)
+				React.createElement('img', { src: './images/brain.png' })
 			),
 			React.createElement(
 				'div',

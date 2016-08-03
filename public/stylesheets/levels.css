@@ -25,7 +25,6 @@
   width: 55vh;
   min-width: 400px;
   margin: 0 auto;
-  align-items: left;
 }
 .grid a {
   display: inline-block;
@@ -116,37 +115,38 @@
   width: 25vw;
   padding: 5px 0;
 }
-@media all and (max-width: 640px) {
+@media all and (max-width: 768px) {
   .levelBox {
     height: 90vh;
     margin-top: 10vh;
+    width: 100vw;
   }
   .levelBox h1 {
-    font-size: 4em;
+    font-size: 4em !important;
+    margin-bottom: 10px;
   }
   .grid {
-    width: 100%;
-    padding: 0 10px;
+    width: 95vw;
+    height: 95vw;
+    min-width: 0;
   }
   .levelSquare:hover {
-    transform: rotate3d(0, 1, 0, 180deg);
+    transform: rotate3d(0, 1, 0, 0deg);
   }
   .levelsFooter {
-    height: 15em;
-    padding-top: 3em;
+    margin-top: 1em;
   }
-  .levelsFooter > h3 {
-    font-size: 3em;
-    margin-bottom: .5em;
+  .levelsFooter> h3 {
+    font-size: 2em;
   }
   .returnBtn {
-    height: 2em;
-    width: 10em;
+    height: 1.5em;
+    width: 6em;
     display: flex;
     flex-direction: column;
     justify-content: center;
   }
   .levelsFooter a h3 {
-    font-size: 3em;
+    font-size: 1.5em;
   }
 }

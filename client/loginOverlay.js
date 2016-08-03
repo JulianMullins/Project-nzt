@@ -7,17 +7,9 @@ import {Link} from 'react-router';
 var LoginOverlay = React.createClass({
   getInitialState: function() {
     console.log(this)
-    return {
-      username: '', 
-      password: '', 
-      gameEnded: false, 
-      games: null
-    }
+    return {username: '', password: '', gameEnded: false, games: null}
   },
-
-  componentDidMount(){
-    
-  },
+  componentDidMount() {},
   update(e) {
     this.setState({
       [e.target.name]: e.target.value
@@ -31,7 +23,7 @@ var LoginOverlay = React.createClass({
 
     //ajax post
     axios.post('/login', {
-      withCredentials:true,
+      withCredentials: true,
       headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json'
@@ -53,38 +45,42 @@ var LoginOverlay = React.createClass({
       <div className="screen">
 
         <div className="login" id="login">
-          <h1>Hey you!</h1>
-          <div className="pa">Login here.</div>
-          <form>
-            <input type="text" placeholder="Name or Email" name="username" id="username" value={this.state.username} onChange={this.update} autoFocus={focus}></input>
-            <br></br>
-            <input type="password" placeholder="Password" name="password" id="password" value={this.state.password} onChange={this.update}></input>
-            <div className="buttongroup">
+          <div className="loginContent">
+            <h1>Hey you!</h1>
+            <div className="pa">Login here.</div>
+            <form>
+              <input type="text" placeholder="Name or Email" name="username" id="username" value={this.state.username} onChange={this.update} autoFocus={focus}></input>
+              <br></br>
+              <input type="password" placeholder="Password" name="password" id="password" value={this.state.password} onChange={this.update}></input>
+              <div className="buttongroup">
 
-              <Link to="/home">
-                <button className="form-btn dx" onClick={this.login}>Login</button>
-              </Link>
-              <a className="fb" href="/login/facebook">Login with Facebook</a>
-            </div>
+                <Link to="/home">
+                  <button className="form-btn dx" onClick={this.login}>Login</button>
+                </Link>
+                <a className="fb" href="/login/facebook">Login with Facebook</a>
+              </div>
 
-          </form>
+            </form>
+          </div>
         </div>
         <div className="register-log">
-          <h1>New?</h1>
-          <div className="pa">Register here</div>
-          <h3>See your stats,
-            <br></br>track your progress
-            <br></br>and improve your IQ.</h3>
-          <form>
-            <div className="buttongroup">
-              <Link to="/register">
-                <button className="form-btn dx">
-                  Register
-                </button>
-              </Link>
-            </div>
-          </form>
-            <Link to="/home"><img className="whiteLogo" src="./images/CortexIconWhite.png" /></Link>
+          <div className="registerContent">
+            <h1>New?</h1>
+            <div className="pa">Register here</div>
+            <h3>See your stats,
+              <br></br>track your progress
+              <br></br>and improve your IQ.</h3>
+            <form>
+              <div className="buttongroup">
+                <Link to="/register">
+                  <button className="form-btn dx">
+                    Register
+                  </button>
+                </Link>
+              </div>
+            </form>
+            <Link to="/home"><img className="whiteLogo" src="./images/CortexIconWhite.png"/></Link>
+          </div>
         </div>
       </div>
     )

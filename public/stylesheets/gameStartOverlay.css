@@ -191,4 +191,31 @@
   .overlayContent {
     width: 80vw;
   }
+
+  .overlayContent .key {
+    width: auto;
+  }
+}
+
+@media (max-height: 768px) {
+  .overlayContent p {
+    line-height: 1;
+  }
+
+  .overlayContent i {
+    line-height: 1;
+  }
+
+  .overlayContent .key {
+    line-height: 45px;
+  }
+
+  .tutorialBtn {
+    padding: 3px;
+  }
+
+  .gameStartBtn {
+    padding: 2px;
+    margin: 10px;
+  }
 }
