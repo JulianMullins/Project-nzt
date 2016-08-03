@@ -124,6 +124,7 @@ passport.use(new LocalStrategy({
           //check if tempUser exists
           if(req.session.user){
             console.log("already req.session.user")
+            console.log(user.stats);
             user.currentGame = req.session.user.currentGame;
             user.stats.combineStats(req.session.user.stats);
             user.combineMaxN(req.session.user.maxN);
