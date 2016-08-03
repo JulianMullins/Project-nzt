@@ -13,7 +13,7 @@ var startGameFunction = require('./serverFunctions').startGameFunction;
 //create global variable for reaction counter
 var reactionStart;
 //global variable for keeping reaction times
-//note: all reactin times for correct hits stored as array for stats (max,min,avg)
+//note: all reaction times for correct hits stored as array for stats (max,min,avg)
 var reactionTimes = [];
 //global variable for game score (saved once time runs out)
 var gameScore;
@@ -190,8 +190,8 @@ var RelaxedMode = React.createClass({
 
       // Game end
 
-      if (timeKeeper === 0) {
-      // if (timeKeeper === 35) {
+      //if (timeKeeper === 0) {
+      if (timeKeeper === 36) {
         //give gameScore variable the final score
         clearInterval(iterations);
         console.log(fullScore)

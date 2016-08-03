@@ -24,7 +24,8 @@ var GameOverOverlay = React.createClass({
     return {
       //username:null,
       isAnon: false,
-      score: 0,
+      baseScore: 0,
+      fullScore:0,
       mode: null,
       nLevel: 1,
       gameOverMessage: <div></div>,
@@ -45,7 +46,10 @@ var GameOverOverlay = React.createClass({
   },
   setScore() {
     axios.get('/getScore').then(function(response) {
-      this.setState({score: response.data.score})
+      this.setState({
+        baseScore: Math.floor(response.data.baseScore),
+        fullScore: Math.floor(response.data.fullScore)
+      })
     }.bind(this))
   },
   getData() {
@@ -55,7 +59,6 @@ var GameOverOverlay = React.createClass({
       this.setState({
         //username:userData.data.username,
         isAnon: userData.data.isAnon,
-        score: Math.floor(gameData.data.game.score),
         mode: gameData.data.game.mode,
         nLevel: gameData.data.game.nLevel,
         scoreToPass: gameData.data.scoreToPass,
@@ -210,7 +213,7 @@ var GameOverOverlay = React.createClass({
               <tr>
                 <td>game score:
                 </td>
-                <td className="scoreValue">{this.state.score}</td>
+                <td className="scoreValue">{this.state.baseScore}</td>
               </tr>
               <tr>
                 <td>n-level:
@@ -225,7 +228,7 @@ var GameOverOverlay = React.createClass({
               <tr className="totalScore">
                 <td>total score:
                 </td>
-                <td className="count scoreValue">{this.state.countUp}</td>
+                <td className="count scoreValue">{this.countUp(this.state.fullScore)}</td>
               </tr>
             </tbody>
           </table>

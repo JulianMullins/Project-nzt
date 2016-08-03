@@ -1679,7 +1679,7 @@ var startGameFunction = require('./serverFunctions').startGameFunction;
 //create global variable for reaction counter
 var reactionStart;
 //global variable for keeping reaction times
-//note: all reactin times for correct hits stored as array for stats (max,min,avg)
+//note: all reaction times for correct hits stored as array for stats (max,min,avg)
 var reactionTimes = [];
 //global variable for game score (saved once time runs out)
 var gameScore;
@@ -1722,13 +1722,7 @@ var RelaxedMode = React.createClass({
         return;
       }
       console.log(obj);
-      this.setState({
-        tempUser: obj.tempUser,
-        gameId: obj.gameId,
-        modeMultiplier: obj.modeMultiplier,
-        penalty: obj.penalty,
-        positivePoints: obj.positivePoints
-      });
+      this.setState({ tempUser: obj.tempUser, gameId: obj.gameId, modeMultiplier: obj.modeMultiplier, penalty: obj.penalty, positivePoints: obj.positivePoints });
     }.bind(this));
     console.log("component mounted");
   },
@@ -1852,6 +1846,7 @@ var RelaxedMode = React.createClass({
       //////////////////////////////////////
 
       // Game end
+
       //if (timeKeeper === 0) {
       if (timeKeeper === 36) {
         //give gameScore variable the final score
@@ -2086,6 +2081,7 @@ var endGameFunction = function endGameFunction(fullScore, reactionTimes, gameId,
         //   this.props.history.push('/gameOver');
         // }
         // this.props.history.push('/gameOver');
+        console.log("gameOver response: " + response.data.success);
         return callback(response.data.success);
       }.bind(this));
     }
@@ -2835,7 +2831,8 @@ var GameOverOverlay = React.createClass({
     return {
       //username:null,
       isAnon: false,
-      score: 0,
+      baseScore: 0,
+      fullScore: 0,
       mode: null,
       nLevel: 1,
       gameOverMessage: React.createElement('div', null),
@@ -2856,7 +2853,10 @@ var GameOverOverlay = React.createClass({
   },
   setScore: function setScore() {
     axios.get('/getScore').then(function (response) {
-      this.setState({ score: response.data.score });
+      this.setState({
+        baseScore: Math.floor(response.data.baseScore),
+        fullScore: Math.floor(response.data.fullScore)
+      });
     }.bind(this));
   },
   getData: function getData() {
@@ -2866,7 +2866,6 @@ var GameOverOverlay = React.createClass({
       this.setState({
         //username:userData.data.username,
         isAnon: userData.data.isAnon,
-        score: Math.floor(gameData.data.game.score),
         mode: gameData.data.game.mode,
         nLevel: gameData.data.game.nLevel,
         scoreToPass: gameData.data.scoreToPass,
@@ -2925,7 +2924,7 @@ var GameOverOverlay = React.createClass({
           { className: 'classic' },
           'You need ',
           this.state.scoreToPass * this.state.nLevel * this.state.modeMultiplier,
-          'points to unlock level ',
+          ' points to unlock level ',
           this.state.nLevel + 1
         ),
         gameOverCongrats: React.createElement(
@@ -3095,7 +3094,7 @@ var GameOverOverlay = React.createClass({
               React.createElement(
                 'td',
                 { className: 'scoreValue' },
-                this.state.score
+                this.state.baseScore
               )
             ),
             React.createElement(
@@ -3139,7 +3138,7 @@ var GameOverOverlay = React.createClass({
               React.createElement(
                 'td',
                 { className: 'count scoreValue' },
-                this.state.countUp
+                this.countUp(this.state.fullScore)
               )
             )
           )
@@ -3490,7 +3489,9 @@ var getSquareArr = function getSquareArr(square, mode) {
     }
     arr.push(React.createElement(
       _reactRouter.Link,
-      { to: link, className: sqClass, key: i, style: colorStyle },
+      { to: link, onMouseDown: function onMouseDown(e) {
+          e.target.click();
+        }, className: sqClass, key: i, style: colorStyle },
       React.createElement(
         'div',
         { className: 'front face' },
@@ -3516,11 +3517,7 @@ var ClassicLevels = React.createClass({
 
   getInitialState: function getInitialState() {
     console.log(this.props);
-    return {
-      maxN: 1,
-      mode: 'classic',
-      error: this.props.params.error
-    };
+    return { maxN: 1, mode: 'classic', error: this.props.params.error };
   },
   componentDidMount: function componentDidMount() {
     this.setMaxN();
@@ -3587,11 +3584,7 @@ var RelaxedLevels = React.createClass({
 
   getInitialState: function getInitialState() {
     console.log(this.props);
-    return {
-      maxN: 1,
-      mode: 'relaxed',
-      error: this.props.params.error
-    };
+    return { maxN: 1, mode: 'relaxed', error: this.props.params.error };
   },
   componentDidMount: function componentDidMount() {
     this.setMaxN();
@@ -3655,11 +3648,7 @@ var SilentLevels = React.createClass({
   displayName: 'SilentLevels',
 
   getInitialState: function getInitialState() {
-    return {
-      maxN: 1,
-      mode: 'silent',
-      error: this.props.params.error
-    };
+    return { maxN: 1, mode: 'silent', error: this.props.params.error };
   },
   setMaxN: function setMaxN() {
     getMaxN(this.state.mode, function (maxN) {
@@ -3723,11 +3712,7 @@ var AdvancedLevels = React.createClass({
   displayName: 'AdvancedLevels',
 
   getInitialState: function getInitialState() {
-    return {
-      maxN: 1,
-      mode: 'advanced',
-      error: this.props.params.error
-    };
+    return { maxN: 1, mode: 'advanced', error: this.props.params.error };
   },
   setMaxN: function setMaxN() {
     getMaxN(this.state.mode, function (maxN) {
