@@ -129,3 +129,26 @@ section {
   background-color: #01b6a7;
   color: white;
 }
+@media all and (max-width: 768px) {
+  .boardSide {
+    padding-top: 50px;
+  }
+  .lbHeader {
+    font-size: calc(10px + 12vw);
+  }
+  .boardSide section {
+    margin: 10px 10px 0;
+  }
+  .reactable-filter-input {
+    margin-bottom: 10px;
+  }
+  th {
+    text-align: center;
+    font-size: 1em;
+    padding: 5px 0;
+  }
+  .reactable-data tr td {
+    padding: 2px 0;
+    text-align: center;
+  }
+}
