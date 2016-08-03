@@ -137,3 +137,30 @@
   background-color: white;
   transition-duration: .8s;
 }
+
+@media (max-width: 768px) {
+  .profiles {
+    flex-direction: column;
+    height: auto;
+  }
+
+  .aboutProfile {
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+  }
+
+  .profileInfo {
+    width: 30%;
+  }
+
+  .aboutProfile img {
+    width: 30%;
+    max-width: 75px;
+  }
+
+  .socialMedia {
+    width: 30%;
+  }
+}
