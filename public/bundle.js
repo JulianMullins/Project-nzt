@@ -3826,15 +3826,8 @@ var LoginOverlay = React.createClass({
 
     //ajax post
     axios.post('/login', {
-      withCredentials: true,
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      },
-
       username: this.state.username,
       password: this.state.password
-
     }).then(function (response) {
       console.log(response);
       if (response.data.success) {
@@ -4070,8 +4063,8 @@ var NavBar = React.createClass({
 	},
 
 	render: function render() {
-		var logInOutLink = this.state.isloggedIn ? '/logout' : '/login';
-		var logInOrOut = this.state.isloggedIn ? 'Logout' : 'Login';
+		var logInOutLink = this.state.isUser ? '/logout' : '/login';
+		var logInOrOut = this.state.isUser ? 'Logout' : 'Login';
 		return React.createElement(
 			'div',
 			null,
@@ -4214,28 +4207,6 @@ var RegisterOverlay = React.createClass({
     this.setState(_defineProperty({}, e.target.name, e.target.value));
   },
 
-  // gameEnded(){
-  //   //ajax post
-  //   fetch('/register', {
-  //     method: 'post',
-  //     headers: {
-  //       'Accept': 'application/json',
-  //       'Content-Type': 'application/json'
-  //     },
-  //     body: JSON.stringify({
-  //       username: this.state.username,
-  //       email: this.state.email,
-  //       password: this.state.password,
-  //       passwordConfirm: this.state.passwordConfirm}),
-  //       games:this.state.games
-  //   }).then(function(response){
-  //     return response.json();
-  //   }).then(function(response){
-  //     if(response.success){
-  //       this.props.history.push('/gameOver')
-  //     }
-  //   });
-  // },
   register: function register(e) {
     e.preventDefault();
     //ajax post
@@ -4275,7 +4246,7 @@ var RegisterOverlay = React.createClass({
           }
         }.bind(this));
       } else {
-        this.setState({ error: 'error' });
+        this.setState({ error: response.data.message || 'error' });
       }
     }.bind(this));
   },
@@ -4477,7 +4448,7 @@ var MyComponent = React.createClass({
     };
   },
   componentDidMount: function componentDidMount() {
-    axios.get('/taco', { withCredentials: true }).then(function (responseJson) {
+    axios.get('/getStats', { withCredentials: true }).then(function (responseJson) {
       stats = responseJson.data.stats;
       this.state.data = [];
       console.log(stats, 'stats');

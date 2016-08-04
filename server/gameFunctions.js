@@ -36,9 +36,9 @@ router.post('/startGame/:mode/:nLevel',function(req,res,next){
           return;
         }
         var tempGame = new Game({
-          user:user._id,
+          gameUser:user._id,
           mode:req.params.mode,
-          score:0,
+          baseScore:0,
           nLevel:req.params.nLevel,
           tempUser:user.temp
         })
@@ -77,81 +77,84 @@ router.post('/startGame/:mode/:nLevel',function(req,res,next){
     
     console.log("no user")
     var tempUser = new User({
-        username:'Anonymous',
-        stats:null,
-        currentGame:[],
-        maxN:{
-            classic:1,
-            relaxed:1,
-            silent:1,
-            advanced:1
-          },
-        temp:true,
-        leaderboard:null,
-        email:null
+      username:'Anonymous',
+      stats:null,
+      currentGame:[],
+      maxN:{
+          classic:1,
+          relaxed:1,
+          silent:1,
+          advanced:1
+        },
+      temp:true,
+      leaderboard:null,
+      email:null
+    })
+
+    var leaderboard = new Leaderboard({user:tempUser.username});
+    console.log("leaderboard created");
+    var userStats = new Stats({statsUser:tempUser._id,leaderboard:leaderboard._id});
+    console.log("stats created")
+    userStats.save(function(err,stats){console.log("stats saved",err)});
+    leaderboard.leaderboardBelongsToStats = userStats._id;
+    leaderboard.save(function(err,leaderboard){console.log("leaderboard saved",err)});
+    tempUser.stats = userStats._id;
+
+
+    console.log("saving tempUser")
+    tempUser.save(function(err,user){
+      if(err){
+        console.log(err);
+        return;
+      }
+      console.log(user)
+
+      req.session.user = user;
+      req.session.user.save();
+      req.fullUser = false;
+
+
+      //create game
+      console.log("creating game for " + user);
+      var tempGame = new Game({
+        gameUser:user._id,
+        mode:req.params.mode,
+        baseScore:0,
+        nLevel:req.params.nLevel,
+        tempUser:user.temp
       })
-
-      var leaderboard = new Leaderboard({userId:tempUser._id,user:tempUser.username});
-      leaderboard.save();
-      var userStats = new Stats({user:tempUser._id,leaderboard:leaderboard._id});
-      userStats.save();
-      tempUser.stats = userStats._id;
-
-
-      console.log("saving tempUser")
-      tempUser.save(function(err,user){
+      console.log("tempGame saved");
+      tempGame.save(function(err,game){
         if(err){
           console.log(err);
-          return;
         }
-        console.log(user)
-
-        req.session.user = user;
-        req.session.user.save();
-        req.fullUser = false;
-
-
-            //create game
-            console.log("creating game for " + user);
-            var tempGame = new Game({
-              user:user._id,
-              mode:req.params.mode,
-              score:0,
-              nLevel:req.params.nLevel,
-              tempUser:user.temp
+        else{
+          user.currentGame.unshift(game._id);
+          user.save(function(err,user){
+            console.log(user, "game posted")
+            res.json({
+              authorized:true,
+              gameId: game._id,
+              tempUser: user.temp,
+              modeMultiplier: modeMultiplier,
+              penalty: penalty,
+              positivePoints: positivePoints,
+              userId: user._id,
+              isHighScore:null
             })
-            console.log("tempGame saved");
-            tempGame.save(function(err,game){
-              if(err){
-                console.log(err);
-              }
-              else{
-                user.currentGame.unshift(game._id);
-                user.save(function(err,user){
-                  console.log(user, "game posted")
-                  res.json({
-                    authorized:true,
-                    gameId: game._id,
-                    tempUser: user.temp,
-                    modeMultiplier: modeMultiplier,
-                    penalty: penalty,
-                    positivePoints: positivePoints,
-                    userId: user._id,
-                    isHighScore:null
-                  })
-                });
+          });
 
-              }
-            })
+        }
+      })
 
-            req.session.user.save();
+      req.session.user.save();
 
-            //createGame(req,res,user.temp)
-          
-        }.bind(this))
-
-      }
+      //createGame(req,res,user.temp)
     
+  }.bind(this))
+
+}
+
 
 });
 

@@ -1,8 +1,9 @@
 var mongoose = require('mongoose');
+var autoref = require('mongoose-autorefs');
 
 
 var statsSchema = mongoose.Schema({
-	user:{
+	statsUser:{
 		type: mongoose.Schema.Types.ObjectId,
 		ref: 'User'
 	},
@@ -30,5 +31,10 @@ statsSchema.methods.combineStats=function(stats2){
 		
 }
 
+statsSchema.plugin(autoref,[
+	'statsUser.stats',
+	'leaderboard.leaderboardBelongsToStats',
+	'progress.scoreToStats'
+])
 
 module.exports = mongoose.model('Stats',statsSchema)

@@ -81,10 +81,10 @@ var NavBar = React.createClass({
 
 	},
 	render: function(){
-		var logInOutLink = this.state.isloggedIn
+		var logInOutLink = this.state.isUser
 			? '/logout'
 			: '/login'
-		var logInOrOut = this.state.isloggedIn
+		var logInOrOut = this.state.isUser
 			? 'Logout'
 			: 'Login';
 		return(

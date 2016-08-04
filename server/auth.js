@@ -95,26 +95,20 @@ module.exports = function(passport) {
                     currentGame:[]
                   });
 
-                  var leaderboard = new Leaderboard({userId:u._id,user:u.username});
-                  leaderboard.save();
+                  var leaderboard = new Leaderboard({user:u.username});
                   var userStats = new Stats({user:u._id,leaderboard:leaderboard._id});
                   userStats.save();
+                  leaderboard.leaderboardBelongsToStats = userStats._id;
+                  leaderboard.save();
                   u.stats = userStats._id;
 
-                  if(req.user){
-                    u.currentGame=req.user.currentGame;
-                    u.stats = req.user.stats;
-                    u.maxN = req.user.maxN;
+                  if(req.session.user){
+                    u.currentGame=req.session.user.currentGame;
+                    u.stats = req.session.user.stats;
+                    u.maxN = req.session.user.maxN;
                   }
-                  u.save(function(err,u){
-                    if(err){
-                      next(err);
-                    }
-                    else{
-                      console.log("success register")
-                      res.json({success:true,username:u.email,password:req.body.password})
-                    }
-                  });
+                  saveUserRemoveAnonymous(req,res,u);
+                  
                 }
 
                 //update user account (have facebook account already)
@@ -125,22 +119,15 @@ module.exports = function(passport) {
                   }
 
                   user.username = req.body.username;
-                  if(req.user){
-                    user.currentGame = req.user.currentGame;
-                    user.stats.combineStats(req.user.stats);
-                    user.combineMaxN(req.user.maxN);
+                  if(req.session.user){
+                    user.currentGame = req.session.user.currentGame;
+                    user.stats.combineStats(req.session.user.stats);
+                    user.combineMaxN(req.session.user.maxN);
                   }
                   console.log(user);
-                  user.save(function(err, user) {
-                    if (err) {
-                      next(err);
-                    }
-                    else{
-                      console.log(user);
-                      console.log("success register")
-                      res.json({success:true,username:user.email,password:req.body.password})
-                    }
-                  })
+                  
+                  saveUserRemoveAnonymous(req,res,user);
+
                 }
               })
            });
@@ -152,15 +139,43 @@ module.exports = function(passport) {
 
   });
 
- 
+ var saveUserRemoveAnonymous = function(req,res,user){
+  if(req.session.user){
+    User.remove({_id:req.session.user._id},function(err,reqUser){
+      if(!err){
+        user.save(function(err,u){
+          if(err){
+            next(err);
+          }
+          else{
+            console.log("success register")
+            res.json({success:true,username:u.email,password:req.body.password})
+          }
+        });
+      }
+    })
+  }
+  else{
+    user.save(function(err,u){
+      if(err){
+        next(err);
+      }
+      else{
+        console.log("success register")
+        res.json({success:true,username:u.email,password:req.body.password})
+      }
+    });
+  }
+    
+ }
 
   router.get('/login/failure',function(req,res,next){
     //res.status(401).json({success:false})
-    res.json({success:false,error:"login failure"})
+    return res.json({success:false,error:"login failure"})
   })
 
   // POST Login page
-  router.post('/login', passport.authenticate('local',{failureRedirect: '/login/failure'}), function(req,res,next){
+  router.post('/login', passport.authenticate('local',{failureRedirect: '/#/login/error'}), function(req,res,next){
       
     //req.session.user = req.user;
     req.session.fullUser = true;

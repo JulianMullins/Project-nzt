@@ -39,28 +39,6 @@ var RegisterOverlay = React.createClass({
       [e.target.name]: e.target.value
     })
   },
-  // gameEnded(){
-  //   //ajax post
-  //   fetch('/register', {
-  //     method: 'post',
-  //     headers: {
-  //       'Accept': 'application/json',
-  //       'Content-Type': 'application/json'
-  //     },
-  //     body: JSON.stringify({
-  //       username: this.state.username,
-  //       email: this.state.email,
-  //       password: this.state.password,
-  //       passwordConfirm: this.state.passwordConfirm}),
-  //       games:this.state.games
-  //   }).then(function(response){
-  //     return response.json();
-  //   }).then(function(response){
-  //     if(response.success){
-  //       this.props.history.push('/gameOver')
-  //     }
-  //   });
-  // },
   register: function(e) {
     e.preventDefault();
     //ajax post
@@ -106,7 +84,7 @@ var RegisterOverlay = React.createClass({
 
       }
       else{
-        this.setState({error:'error'})
+        this.setState({error:response.data.message || 'error'})
       }
     }.bind(this));
 

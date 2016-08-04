@@ -29,7 +29,7 @@ router.get('/getUserOnLoad',function(req,res,next){
     //(sort of in client/index.js, but commented out)
 router.get('/isUser',function(req,res,next){
   if(req.session.user){
-    res.json({isloggedin:true,isUser:req.session.user.temp})
+    res.json({isloggedin:true,isUser:!req.session.user.temp})
   }
   else{
     res.json({isUser:false,isloggedin:false})

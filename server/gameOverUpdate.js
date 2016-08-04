@@ -263,12 +263,15 @@ router.post('/gameOver', function(req, res, next) {
 
         //make score
         var newHighScore = new HighScore({
-          user: user._id,
+          scoreToStats:user.stats._id,
           dateAchieved: new Date(),
           score: tempGame.fullScore,
           nLevel: tempGame.nLevel,
           mode: tempGame.mode,
-          reactionTimes: tempGame.reactionTimes
+          reactionTimes: tempGame.reactionTimes,
+          fromGameId: tempGame._id,
+          scoreBoard:user.stats.leaderboard,
+          tempUser:user.temp
         })
 
         //update maxN

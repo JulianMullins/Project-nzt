@@ -125,31 +125,17 @@ passport.use(new LocalStrategy({
             console.log("already req.session.user")
             console.log(user.stats);
             console.log(req.session.user);
-            user.currentGame = req.session.user.currentGame;
             
             Stats.findById(req.session.user.stats,function(err,sessionStats){
               console.log(sessionStats)
               user.stats.combineStats(sessionStats);
-              user.combineMaxNCurrentGame(req.session.user.maxN);
+              user.combineMaxNCurrentGame(req.session.user.maxN,req.session.user.currentGame);
               console.log("about to combine leaderboards")
               combineLeaderboards(user.stats.leaderboard,sessionStats.leaderboard,
                 req.session.user._id,req.session.user.username,
                    function(leaderboard){
-                    console.log("leaderboards combined")
-                    leaderboard.save(function(err,leaderboard){
-                      user.stats.save(function(err,stats){
-                        console.log("combine leaderboard callback")
-                        user.save(function(err,user){
-                          if(err){
-                            return done(err);
-                          }
-                          else{
-                            req.session.user = user;
-                            return done(null,user)
-                          }
-                        });
-                      })
-                    })
+                    
+                    return combineLeaderboardsCallback(req,req.session.user,user,user.stats,leaderboard,done);
                       
                   })
               
@@ -167,10 +153,31 @@ passport.use(new LocalStrategy({
         }
       })
     });
-
-
   }
 ));
+
+var combineLeaderboardsCallback=function(req,oldUser,newUser,newUserStats,leaderboard,done){
+  console.log("leaderboards combined")
+  leaderboard.save(function(err,leaderboard){
+    newUserStats.save(function(err,stats){
+      console.log("combine leaderboard callback")
+      User.remove({_id:oldUser._id},function(err,oldUser){
+        if(!err){
+          newUser.save(function(err,user){
+            if(err){
+              return done(err);
+            }
+            else{
+              req.session.user = user;
+              return done(null,user)
+            }
+          });
+        }
+      })
+      
+    })
+  })
+}
 
 var combineLeaderboards = function(leaderboard1,leaderboard2,userId, username, callback){
   console.log("combining leaderboards in combineLeaderboards")
@@ -196,19 +203,10 @@ var combineLeaderboards = function(leaderboard1,leaderboard2,userId, username, c
           return callback(leaderboard1);
         }
         else{
-          for(var i=0;i<leaderboard2.scores.length;i++){
-            leaderboard2.scores[i].user = userId;
-            if(i==leaderboard2.scores.length-1){
-
-
-
-
-              leaderboard1.scores = leaderboard1.mergeScoresArrays(leaderboard1.scores,leaderboard2.scores);
-              leaderboard1.save(function(err,leaderboard){
-                return callback(leaderboard)
-              })
-            }
-          }
+          leaderboard1.scores = leaderboard1.mergeScoresArrays(leaderboard1.scores,leaderboard2.scores);
+          leaderboard1.save(function(err,leaderboard){
+            return callback(leaderboard)
+          })
         }
         
     })
@@ -279,10 +277,15 @@ passport.use(new FacebookStrategy({
             currentGame: req.session.user.currentGame
           })
 
-          
-          newUser.save(function(err,user){
-            return done(null,user);
+          User.remove({_id:req.session.user._id},function(err,reqUser){
+            if(!err){
+              newUser.save(function(err,user){
+                return done(null,user);
+              })
+            }
           })
+          
+          
         }
         else{
 
@@ -303,10 +306,12 @@ passport.use(new FacebookStrategy({
             currentGame:[]
           })
 
-          var leaderboard = new Leaderboard({userId:u._id,user:username});
-          leaderboard.save();
-          var userStats = new Stats({user:u._id,leaderboard:leaderboard._id});
+          //removed userId
+          var leaderboard = new Leaderboard({user:username});
+          var userStats = new Stats({statsUser:u._id,leaderboard:leaderboard._id});
           userStats.save();
+          leaderboard.leaderboardBelongsToStats = userStats._id;
+          leaderboard.save();
           u.stats = userStats._id;
 
           u.save(function(err,user){
@@ -329,43 +334,72 @@ passport.use(new FacebookStrategy({
           
           Stats.findById(req.session.user.stats,function(err,sessionStats){
               user.stats.combineStats(sessionStats);
-              user.combineMaxN(req.session.user.maxN);
-              user.save(function(err,user){
-                if(err){
-                  return done(err);
+              sessionStats.remove(function(err,sessionStats){
+                if(!err){
+                  user.combineMaxN(req.session.user.maxN);
+                  
+
+                  User.remove({_id:req.session.user._id},function(err){
+                    
+
+
+
+                    user.save(function(err,user){
+                      if(!user.facebookId){
+                        console.log("no facebook id")
+                        user.facebookId = profile.id
+                        //console.log("facebook id added")
+                        user.save(function(err){
+                          if(err){
+                            done(err)
+                          }
+                          else{
+                            req.session.user = user;
+                            return done(null, user);
+                          }
+                        })
+                      }
+                      // auth has has succeeded
+                      else{
+                        //console.log("success")
+                        console.log("returning done user")
+                        return done(null, user);
+                      }
+                    });
+
+
+
+                  })
+                  
                 }
-                else{
-                  req.session.user = user;
-                  return done(null,user)
-                }
-              });
+              })
+              
             });
 
 
-          user.stats.combineStats(req.session.user.stats);
-          user.combineMaxN(req.session.user.maxN);
-          user.save(function(err,user){
-          if(!user.facebookId){
-            console.log("no facebook id")
-            user.facebookId = profile.id
-            //console.log("facebook id added")
-            user.save(function(err){
-              if(err){
-                done(err)
-              }
-              else{
-                req.session.user = user;
-                return done(null, user);
-              }
-            })
-            }
-            // auth has has succeeded
-            else{
-              //console.log("success")
-              console.log("returning done user")
-              return done(null, user);
-            }
-          });
+          
+          // user.save(function(err,user){
+          //   if(!user.facebookId){
+          //     console.log("no facebook id")
+          //     user.facebookId = profile.id
+          //     //console.log("facebook id added")
+          //     user.save(function(err){
+          //       if(err){
+          //         done(err)
+          //       }
+          //       else{
+          //         req.session.user = user;
+          //         return done(null, user);
+          //       }
+          //     })
+          //   }
+          //   // auth has has succeeded
+          //   else{
+          //     //console.log("success")
+          //     console.log("returning done user")
+          //     return done(null, user);
+          //   }
+          // });
         }
         else{
           if(!user.facebookId){

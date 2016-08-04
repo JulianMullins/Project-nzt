@@ -1,17 +1,22 @@
 var mongoose = require('mongoose')
-
+var autoref = require('mongoose-autorefs');
 
 var leaderboardSchema = mongoose.Schema({
 	user:String,
-	userId:{
-		type:mongoose.Schema.Types.ObjectId,
-		ref:'User'
-	},
 	scores: [{
 		type: mongoose.Schema.Types.ObjectId,
 		ref: 'HighScore'
-	}]
+	}],
+	leaderboardBelongsToStats:{
+		type:mongoose.Schema.Types.ObjectId,
+		ref:'Stats'
+	}
 })
+
+leaderboardSchema.plugin(autoref,[
+	'scores.scoreBoard',
+	'leaderboardBelongsToStats.leaderboard'
+])
 
 leaderboardSchema.methods.mergeScoresArrays=function(scores1,scores2){
 	var newScores=[];

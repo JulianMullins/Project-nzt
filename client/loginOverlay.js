@@ -31,15 +31,8 @@ var LoginOverlay = React.createClass({
 
     //ajax post
     axios.post('/login', {
-      withCredentials: true,
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      },
-
       username: this.state.username,
       password: this.state.password
-
     }).then(function(response) {
       console.log(response)
       if (response.data.success) {

@@ -7,16 +7,18 @@ var Highscores=require('../models/HighScore')
 
 var tempGame = null;
 
-router.get('/taco',function(req, res, next){
+router.get('/getStats',function(req, res, next){
    //return res.json({stats: req.user.stats})
    //console.log(req.user, 'taylor')
-  Highscores.find({user: req.session.user.stats}, function(err,stats){
-    if(err){
-      console.log(err)
-    }
-    else{
-      res.json({stats: stats})
-    }
+  Stats.findbyId(req.session.user._id)
+    .populate('progress')
+    .exec(function(err,stats){
+      if(err){
+        console.log(err)
+      }
+      else{
+        res.json({stats: stats.progress})
+      }
   })
 });
 

@@ -1,10 +1,10 @@
 var mongoose = require('mongoose')
-
+var autoref = require('mongoose-autorefs');
 
 var highScoreSchema = mongoose.Schema({
-	user:{
+	scoreToStats:{
 		type: mongoose.Schema.Types.ObjectId,
-		ref: 'User'
+		ref: 'Stats'
 	},
 	tempUser:Boolean,
 	tempUserName:String,
@@ -12,8 +12,22 @@ var highScoreSchema = mongoose.Schema({
 	score:Number,
 	nLevel:Number,
 	mode:String,
-	reactionTimes:Array
+	reactionTimes:Array,
+	fromGameId:{
+		type: mongoose.Schema.Types.ObjectId,
+		ref: 'Game'
+	},
+	scoreBoard:{
+		type: mongoose.Schema.Types.ObjectId,
+		ref: 'Leaderboard'
+	}
 })
 
+
+highScoreSchema.plugin(autoref,[
+	'scoreToStats.progress',
+	'fromGameId.finalScore',
+	'scoreboard.scores'
+])
 
 module.exports = mongoose.model('HighScore',highScoreSchema)
