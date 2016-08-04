@@ -189,10 +189,18 @@ var SilentMode = React.createClass({
           })
           //if have double when single match
           if(currentScore){
+            this.setState({
+            alert: 'Not a double match!',
+            alertType: 'halfPos'
+          })
             //delete 5 from preassigned score
             currentScore-=5;
             //if overall negative score
             if(currentScore<0){
+               this.setState({
+            alert: 'Not a double match!',
+            alertType: 'halfNeg'
+          })
               //if remaining score is positive or 0 just deduct points
               if (this.state.score-currentScore>=0){
                 this.state.score-=currentScore;
@@ -263,8 +271,16 @@ var SilentMode = React.createClass({
            if(currentScore){
             //delete 5 from preassigned score
             currentScore-=5;
+            this.setState({
+            alert: 'Not a double match!',
+            alertType: 'halfPos'
+          })
             //if overall negative score
             if(currentScore<0){
+              this.setState({
+            alert: 'Not a double match!',
+            alertType: 'halfNeg'
+          })
               //if remaining score is positive or 0 just deduct points
               if (this.state.score-currentScore>=0){
                 this.state.score-=currentScore;
@@ -280,11 +296,19 @@ var SilentMode = React.createClass({
           else if(this.state.score>=5){
             currentScore=5;
             this.state.score=this.state.score-5
+            this.setState({
+            alert: 'Not a match!',
+            alertType: 'none'
+          })
           }
           //otherwise take whatever is left
           else{
             currentScore=this.state.score;
             this.state.score=0;
+            this.setState({
+            alert: 'Not a match!',
+            alertType: 'none'
+          })
           }
         }
         this.setState({
@@ -325,7 +349,7 @@ var SilentMode = React.createClass({
       }
 
       setTimeout(function() {
-        this.setState({alert: ' '});
+        this.setState({alert: ' ', alertType: ' '});
       }.bind(this), 800);
 
     //case 1: position match
@@ -479,7 +503,50 @@ var SilentMode = React.createClass({
           }}>-{currentScore}</h2>
         )
       }
-    } else {
+    } 
+  else if (this.state.alertType === 'halfPos') {
+      scoreAlert = (
+        <div className="scoreAlertHalf">
+          {this.state.alert}
+        </div>
+      )
+      if (currentScore !== 0) {
+        scoreUpdate = (
+          <h2 style={{
+            color: 'yellow'
+          }}>+{currentScore}</h2>
+        )
+      }
+    }
+    else if (this.state.alertType === 'halfNeg') {
+      scoreAlert = (
+        <div className="scoreAlertHalf">
+          {this.state.alert}
+        </div>
+      )
+      if (currentScore !== 0) {
+        scoreUpdate = (
+          <h2 style={{
+            color: 'yellow'
+          }}>-{currentScore}</h2>
+        )
+      }
+    }
+  else if (this.state.alertType === 'none') {
+      scoreAlert = (
+        <div className="scoreAlertNegative">
+          {this.state.alert}
+        </div>
+      )
+      if (currentScore !== 0) {
+        scoreUpdate = (
+          <h2 style={{
+            color: 'red'
+          }}>-{currentScore}</h2>
+        )
+      }
+    }
+    else {
       scoreAlert = (
         <div></div>
       )
