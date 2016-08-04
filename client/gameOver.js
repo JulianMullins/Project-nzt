@@ -25,7 +25,7 @@ var GameOverOverlay = React.createClass({
       //username:null,
       isAnon: false,
       baseScore: 0,
-      fullScore:0,
+      fullScore: 0,
       mode: null,
       nLevel: 1,
       gameOverMessage: <div></div>,
@@ -42,6 +42,9 @@ var GameOverOverlay = React.createClass({
 
     this.setScore();
     this.getData();
+    if (this.state.baseScore === 0) {
+      this.setState({fullScore: 0})
+    }
     //this.setState({firstRender: false})
   },
   setScore() {
@@ -71,7 +74,7 @@ var GameOverOverlay = React.createClass({
       this.unlockLevel();
       this.anonHighScore();
       this.nextLevelBtn();
-      score = parseFloat(this.state.score);
+      score = parseFloat(this.state.fullScore);
       var n = parseInt(this.state.nLevel);
       var modeM = parseInt(this.state.modeMultiplier);
       var totalScore = parseInt(score * n * modeM);
@@ -101,7 +104,8 @@ var GameOverOverlay = React.createClass({
       })
     } else {
       this.setState({
-        gameOverInform: <h2 className="classic">You need {this.state.scoreToPass * this.state.nLevel * this.state.modeMultiplier} points to unlock level {this.state.nLevel + 1}</h2>,
+        gameOverInform: <h2 className="classic">You need {this.state.scoreToPass * this.state.nLevel * this.state.modeMultiplier} points 
+        to unlock level {this.state.nLevel + 1}</h2>,
         gameOverCongrats: <h1>Nice try!</h1>
       })
     }
@@ -110,43 +114,30 @@ var GameOverOverlay = React.createClass({
   anonHighScore() {
     //if anon get high score, prompt to login
     if (this.state.isAnon && this.state.isHighScore) {
-      this.setState({
-        gameOverMessage: (
+      this.setState({gameOverMessage: (
           <div className="gameOverPrompt">
             <p>You have earned a high score on the global leaderboard!</p>
-            <p><Link to="/gameOver/login">Login</Link> or
-              <Link to="/gameOver/register"> sign up </Link>
+            <p><Link to="/gameOver/login">Login </Link>or<Link to="/gameOver/register"> Sign Up </Link>
               to save your progress, view statistics and compete with friends!</p>
           </div>
-        )
-      })
-    }
-    else if (this.state.isAnon && !this.state.isHighScore) {
-      this.setState({
-        gameOverMessage: (
+        )})
+    } else if (this.state.isAnon && !this.state.isHighScore) {
+      this.setState({gameOverMessage: (
           <div className="gameOverPrompt">
-            <p><Link to="/gameOver/login">Login</Link> or
-              <Link to="/gameOver/register"> sign up </Link>
-              to save your progress, view statistics and compete with friends!</p>            
+            <p><Link to="/gameOver/login">Login </Link>or<Link to="/gameOver/register"> Sign Up </Link>
+              to save your progress, view statistics and compete with friends!</p>
           </div>
-        )
-      })
-    }
-    else if (!this.state.isAnon && this.state.isHighScore) {
-      this.setState({
-        gameOverMessage: (
+        )})
+    } else if (!this.state.isAnon && this.state.isHighScore) {
+      this.setState({gameOverMessage: (
           <div className="gameOverPrompt">
-            <p>You have earned a high score on the global leaderboard!</p>            
+            <p>You have earned a high score on the global leaderboard!</p>
           </div>
-        )
-      })      
-    }
-    else if (!this.state.isAnon && !this.state.isHighScore) {
-      this.setState({
-        gameOverMessage: (
+        )})
+    } else if (!this.state.isAnon && !this.state.isHighScore) {
+      this.setState({gameOverMessage: (
           <div></div>
-        )
-      })
+        )})
     }
 
   },
@@ -185,7 +176,6 @@ var GameOverOverlay = React.createClass({
   },
   countUp: function(count) {
     var div_by = 100;
-    console.log(count, 'count')
     //count=parseInt(count)
     var speed = parseFloat(count / div_by);
     //console.log('ini speed', speed);
@@ -234,7 +224,9 @@ var GameOverOverlay = React.createClass({
               <tr className="totalScore">
                 <td>total score:
                 </td>
-                <td className="count scoreValue">{this.countUp(this.state.fullScore)}</td>
+                <td className="count scoreValue">{!this.state.fullscore
+                    ? 0
+                    : this.countUp(this.state.fullScore)}</td>
               </tr>
             </tbody>
           </table>

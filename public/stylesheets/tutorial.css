@@ -171,23 +171,11 @@ ul.row {
     margin: 0;
   }
   .slide:first-of-type img {
-    width: 50vw;
+    width: 20vh;
   }
   .slide img {
-    width: 60vw;
+    width: 25vh;
   }
-
-  /*.key-wrapper p {
-    margin-bottom: 0;
-  }
-  .rulemode {
-    width: 75%;
-    margin: 0 auto;
-  }
-  .rules2 ul li {
-    width: auto;
-  }*/
-
   .slide_buttons {
     width: 100%;
     left: 0;
