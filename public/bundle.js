@@ -1102,22 +1102,18 @@ var _reactRouter = require('react-router');
 
 var React = require('react');
 var axios = require('axios');
+var MediaQuery = require('react-responsive');
 
 
 var SilentStartOverlay = React.createClass({
   displayName: 'SilentStartOverlay',
 
   getInitialState: function getInitialState() {
-    return {
-      nLevel: this.props.nLevel,
-      moves: "moves"
-    };
+    return { nLevel: this.props.nLevel, moves: "moves" };
   },
   componentDidMount: function componentDidMount() {
     if (this.state.nLevel === 1) {
-      this.setState({
-        moves: "move"
-      });
+      this.setState({ moves: "move" });
     }
   },
   render: function render() {
@@ -1138,30 +1134,34 @@ var SilentStartOverlay = React.createClass({
           '(position & color)'
         ),
         React.createElement(
-          'p',
-          { className: 'silent' },
-          'Use the left and right arrow keys or press the corresponding buttons to select a match. If there is a position and color match at the same time, select both options simultaneously.'
-        ),
-        React.createElement(
-          'div',
-          { className: 'key-wrapper' },
+          MediaQuery,
+          { minWidth: '768px' },
           React.createElement(
-            'ul',
-            { className: 'row' },
+            'p',
+            { className: 'silent' },
+            'Use the left and right arrow keys or press the corresponding buttons to select a match. If there is a position and color match at the same time, select both options simultaneously.'
+          ),
+          React.createElement(
+            'div',
+            { className: 'key-wrapper' },
             React.createElement(
-              'li',
-              { className: 'key keySilent k37' },
-              '←'
-            ),
-            React.createElement(
-              'li',
-              { className: 'key keyBlank k40' },
-              '↓'
-            ),
-            React.createElement(
-              'li',
-              { className: 'key keySilent k39' },
-              '→'
+              'ul',
+              { className: 'row' },
+              React.createElement(
+                'li',
+                { className: 'key keySilent k37' },
+                '←'
+              ),
+              React.createElement(
+                'li',
+                { className: 'key keyBlank k40' },
+                '↓'
+              ),
+              React.createElement(
+                'li',
+                { className: 'key keySilent k39' },
+                '→'
+              )
             )
           )
         ),
@@ -1172,9 +1172,8 @@ var SilentStartOverlay = React.createClass({
           this.state.nLevel,
           ', therefore a match occurs when a position/color stimulus from ',
           this.state.nLevel,
-          ' ',
           this.state.moves,
-          ' back matches the current position/color.'
+          'back matches the current position/color.'
         ),
         React.createElement(
           _reactRouter.Link,
@@ -1208,16 +1207,11 @@ var ClassicStartOverlay = React.createClass({
   displayName: 'ClassicStartOverlay',
 
   getInitialState: function getInitialState() {
-    return {
-      nLevel: this.props.nLevel,
-      moves: "moves"
-    };
+    return { nLevel: this.props.nLevel, moves: "moves" };
   },
   componentDidMount: function componentDidMount() {
     if (this.state.nLevel === 1) {
-      this.setState({
-        moves: "move"
-      });
+      this.setState({ moves: "move" });
     }
   },
   render: function render() {
@@ -1238,26 +1232,30 @@ var ClassicStartOverlay = React.createClass({
           '(position & sound)'
         ),
         React.createElement(
-          'p',
-          { className: 'classic' },
-          'Use the left and right arrow keys or press the corresponding buttons to select a match. If there is a position and sound match at the same time, select both options simultaneously.'
-        ),
-        React.createElement(
-          'div',
-          { className: 'key-wrapper' },
+          MediaQuery,
+          { minWidth: '768px' },
           React.createElement(
-            'ul',
-            { className: 'row' },
+            'p',
+            { className: 'classic' },
+            'Use the left and right arrow keys or press the corresponding buttons to select a match. If there is a position and sound match at the same time, select both options simultaneously.'
+          ),
+          React.createElement(
+            'div',
+            { className: 'key-wrapper' },
             React.createElement(
-              'li',
-              { className: 'key keyClassic k37' },
-              '←'
-            ),
-            React.createElement('li', { className: 'key k40 keyBlank' }),
-            React.createElement(
-              'li',
-              { className: 'key keyClassic k39' },
-              '→'
+              'ul',
+              { className: 'row' },
+              React.createElement(
+                'li',
+                { className: 'key keyClassic k37' },
+                '←'
+              ),
+              React.createElement('li', { className: 'key k40 keyBlank' }),
+              React.createElement(
+                'li',
+                { className: 'key keyClassic k39' },
+                '→'
+              )
             )
           )
         ),
@@ -1268,9 +1266,8 @@ var ClassicStartOverlay = React.createClass({
           this.state.nLevel,
           ', therefore a match occurs when a position/sound stimulus from ',
           this.state.nLevel,
-          ' ',
           this.state.moves,
-          ' back matches the current position/sound.'
+          'back matches the current position/sound.'
         ),
         React.createElement(
           _reactRouter.Link,
@@ -1304,16 +1301,11 @@ var RelaxedStartOverlay = React.createClass({
   displayName: 'RelaxedStartOverlay',
 
   getInitialState: function getInitialState() {
-    return {
-      nLevel: this.props.nLevel,
-      moves: "moves"
-    };
+    return { nLevel: this.props.nLevel, moves: "moves" };
   },
   componentDidMount: function componentDidMount() {
     if (this.state.nLevel === 1) {
-      this.setState({
-        moves: "move"
-      });
+      this.setState({ moves: "move" });
     }
   },
   render: function render() {
@@ -1334,20 +1326,24 @@ var RelaxedStartOverlay = React.createClass({
           '(position)'
         ),
         React.createElement(
-          'p',
-          null,
-          'Use the up arrow key or press the corresponding button to select a position match.'
-        ),
-        React.createElement(
-          'div',
-          { className: 'key-wrapper' },
+          MediaQuery,
+          { minWidth: '768px' },
           React.createElement(
-            'ul',
-            { className: 'row' },
+            'p',
+            null,
+            'Use the up arrow key or press the corresponding button to select a position match.'
+          ),
+          React.createElement(
+            'div',
+            { className: 'key-wrapper' },
             React.createElement(
-              'li',
-              { className: 'key k38 relaxed keyRelaxed' },
-              '↑'
+              'ul',
+              { className: 'row' },
+              React.createElement(
+                'li',
+                { className: 'key k38 relaxed keyRelaxed' },
+                '↑'
+              )
             )
           )
         ),
@@ -1358,9 +1354,8 @@ var RelaxedStartOverlay = React.createClass({
           this.state.nLevel,
           ', therefore a match occurs when a position stimulus from ',
           this.state.nLevel,
-          ' ',
           this.state.moves,
-          ' back matches the current position.'
+          'back matches the current position.'
         ),
         React.createElement(
           _reactRouter.Link,
@@ -1394,16 +1389,11 @@ var AdvancedStartOverlay = React.createClass({
   displayName: 'AdvancedStartOverlay',
 
   getInitialState: function getInitialState() {
-    return {
-      nLevel: this.props.nLevel,
-      moves: "moves"
-    };
+    return { nLevel: this.props.nLevel, moves: "moves" };
   },
   componentDidMount: function componentDidMount() {
     if (this.state.nLevel === 1) {
-      this.setState({
-        moves: "move"
-      });
+      this.setState({ moves: "move" });
     }
   },
   render: function render() {
@@ -1424,39 +1414,43 @@ var AdvancedStartOverlay = React.createClass({
           '(position, color & sound)'
         ),
         React.createElement(
-          'p',
-          { className: 'advanced' },
-          'Use the left, right and up arrow keys or press the corresponding buttons to select a match. If there is a match of two (or all three) of the stimuli at the same time, select two or three options simultaneously.'
-        ),
-        React.createElement(
-          'div',
-          { className: 'key-wrapper' },
+          MediaQuery,
+          { minWidth: '768px' },
           React.createElement(
-            'ul',
-            { className: 'row' },
-            React.createElement(
-              'li',
-              { className: 'key keyAdvanced k38' },
-              '↑'
-            )
+            'p',
+            { className: 'advanced' },
+            'Use the left, right and up arrow keys or press the corresponding buttons to select a match. If there is a match of two (or all three) of the stimuli at the same time, select two or three options simultaneously.'
           ),
           React.createElement(
-            'ul',
-            { className: 'row' },
+            'div',
+            { className: 'key-wrapper' },
             React.createElement(
-              'li',
-              { className: 'key keyAdvanced k37' },
-              '←'
+              'ul',
+              { className: 'row' },
+              React.createElement(
+                'li',
+                { className: 'key keyAdvanced k38' },
+                '↑'
+              )
             ),
             React.createElement(
-              'li',
-              { className: 'key k40 keyBlank' },
-              '↓'
-            ),
-            React.createElement(
-              'li',
-              { className: 'key keyAdvanced k39' },
-              '→'
+              'ul',
+              { className: 'row' },
+              React.createElement(
+                'li',
+                { className: 'key keyAdvanced k37' },
+                '←'
+              ),
+              React.createElement(
+                'li',
+                { className: 'key k40 keyBlank' },
+                '↓'
+              ),
+              React.createElement(
+                'li',
+                { className: 'key keyAdvanced k39' },
+                '→'
+              )
             )
           )
         ),
@@ -1467,9 +1461,8 @@ var AdvancedStartOverlay = React.createClass({
           this.state.nLevel,
           ', therefore a match occurs when a position/sound/color stimulus from ',
           this.state.nLevel,
-          ' ',
           this.state.moves,
-          ' back matches the current position/sound/color.'
+          'back matches the current position/sound/color.'
         ),
         React.createElement(
           _reactRouter.Link,
@@ -1506,7 +1499,7 @@ module.exports = {
   AdvancedStartOverlay: AdvancedStartOverlay
 };
 
-},{"axios":22,"react":355,"react-router":205}],5:[function(require,module,exports){
+},{"axios":22,"react":355,"react-responsive":173,"react-router":205}],5:[function(require,module,exports){
 "use strict";
 
 var React = require('react');

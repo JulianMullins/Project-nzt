@@ -261,6 +261,7 @@ input {
   .fb {
     font-size: calc(10px + .8vw);
     margin: 0;
+    padding: 0 5px;
   }
   .registerContent {
     height: 100%;
