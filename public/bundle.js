@@ -1499,7 +1499,15 @@ module.exports = {
   AdvancedStartOverlay: AdvancedStartOverlay
 };
 
+<<<<<<< HEAD
 },{"axios":22,"react":374,"react-responsive":189,"react-router":221}],5:[function(require,module,exports){
+=======
+<<<<<<< HEAD
+},{"axios":22,"react":374,"react-router":221}],5:[function(require,module,exports){
+=======
+},{"axios":21,"react":361,"react-responsive":124,"react-router":156}],5:[function(require,module,exports){
+>>>>>>> refs/remotes/origin/master
+>>>>>>> refs/remotes/origin/tconcannon
 "use strict";
 
 var React = require('react');
@@ -2019,14 +2027,15 @@ var SilentMode = React.createClass({
       alert: " ",
       overlay: true,
       N: parseInt(this.props.params.n),
-      posPressed: false,
+      positionPressed: false,
       colorPressed: false,
       colorStyle: noStyle,
       posStyle: noStyle,
       keepScore: false,
       tempUser: true,
       gameId: null,
-      mode: 'silent'
+      mode: 'silent',
+      alertType: ' '
     };
   },
   componentDidMount: function componentDidMount() {
@@ -2071,103 +2080,288 @@ var SilentMode = React.createClass({
 
     iterations = setInterval(function () {
       timeKeeper--;
-      if (this.state.keepScore) {
-        if (!this.state.colorMatch && !this.state.positionMatch && this.state.colorPressed && this.state.posPressed) {
+
+      //all double match cases
+      if (this.state.positionMatch && this.state.colorMatch) {
+        //only hit position
+        if (this.state.positionPressed && !this.state.colorPressed) {
+          matchHit += 1;
+          reactionTimes.push(reactionEnd - reactionStart);
+          currentScore = ((2000 - reactionTimes[reactionTimes.length - 1]) / 100).toFixed(2) + 1;
+          fullScore += parseFloat(currentScore);
+          this.state.score += Math.floor(currentScore);
+          this.setState({
+            alert: 'Half match',
+            alertType: 'halfPos'
+          });
+        }
+        //only hit color
+        if (this.state.colorPressed && !this.state.positionPressed) {
+          matchHit += 1;
+          reactionTimes.push(reactionEnd - reactionStart);
+          currentScore = ((2000 - reactionTimes[reactionTimes.length - 1]) / 100).toFixed(2) + 1;
+          fullScore += parseFloat(currentScore);
+          this.state.score += Math.floor(currentScore);
+          this.setState({
+            alert: 'Half match',
+            alertType: 'halfPos'
+          });
+        }
+        if (this.state.colorPressed && this.state.positionPressed) {
           matchHit += 2;
           reactionTimes.push(reactionEnd - reactionStart);
-          currentScore = ((2000 - reactionTimes[reactionTimes.length - 1]) / 100 * 2).toFixed(2);
+          currentScore = ((2000 - reactionTimes[reactionTimes.length - 1]) * 2 / 100).toFixed(2) + 1;
           fullScore += parseFloat(currentScore);
-          console.log(fullScore);
-          //reactionEnd = null;
+          this.state.score += Math.floor(currentScore);
           this.setState({
-            score: this.state.score + parseInt(currentScore),
-            alert: 'Good job',
-            posStyle: noStyle,
-            colorStyle: noStyle,
-            colorPressed: false,
-            colorMatch: false,
-            keepScore: false
-          });
-        } else if (!this.state.colorMatch && this.state.colorPressed) {
-          matchHit += 1;
-          reactionTimes.push(reactionEnd - reactionStart);
-          currentScore = ((2000 - reactionTimes[reactionTimes.length - 1]) / 100).toFixed(2);
-          fullScore += parseFloat(currentScore);
-          console.log(fullScore);
-          //reactionEnd = null;
-          this.setState({
-            score: this.state.score + parseInt(currentScore),
-            alert: 'Good job',
-            posStyle: noStyle,
-            colorStyle: noStyle,
-            colorPressed: false,
-            colorMatch: false,
-            keepScore: false
-          });
-        } else if (!this.state.positionMatch && this.state.posPressed) {
-          matchHit += 1;
-          reactionTimes.push(reactionEnd - reactionStart);
-          currentScore = ((2000 - reactionTimes[reactionTimes.length - 1]) / 100).toFixed(2);
-          fullScore += parseFloat(currentScore);
-          console.log(fullScore);
-          //reactionEnd = null;
-          this.setState({
-            score: this.state.score + parseInt(currentScore),
-            alert: 'Good job',
-            posStyle: noStyle,
-            colorStyle: noStyle,
-            posPressed: false,
-            positionMatch: false,
-            keepScore: false
+            alert: 'Double Match!',
+            alertType: 'full'
           });
         }
+        //complete miss= only way to lose points in this case
+        if (!this.state.colorPressed && !this.state.positionPressed) {
+          this.setState({
+            alert: 'Missed two matches',
+            alertType: 'none'
+          });
+          if (this.state.score >= 5) {
+            currentScore = 5;
+            fullScore -= parseFloat(currentScore);
+            this.state.score = this.state.score - 5;
+          } else {
+            currentScore = this.state.score;
+            fullScore -= parseFloat(currentScore);
+            this.state.score = 0;
+          }
+        }
+        this.setState({
+          positionMatch: false,
+          colorMatch: false,
+          positionPressed: false,
+          colorPressed: false,
+          posStyle: noStyle,
+          colorStyle: noStyle,
+          score: this.state.score
+        });
       }
-      if (!this.state.keepScore && (this.state.posPressed || this.state.colorPressed)) {
-        this.setState({ alert: "Not a match" });
+
+      ///color match cases
+      if (this.state.colorMatch) {
+        //color match
+        if (this.state.colorPressed) {
+          matchHit += 1;
+          this.setState({
+            alert: 'Match!',
+            alertType: 'full'
+          });
+          reactionTimes.push(reactionEnd - reactionStart);
+          currentScore = ((2000 - reactionTimes[reactionTimes.length - 1]) / 100).toFixed(2) + 1;
+          fullScore += parseFloat(currentScore);
+          this.state.score += Math.floor(currentScore);
+        }
+        //missed color match
+        if (!this.state.colorPressed) {
+          this.setState({
+            alert: 'Missed a match!',
+            alertType: 'none'
+          });
+          if (this.state.score >= 5) {
+            currentScore = 5;
+            fullScore -= parseFloat(currentScore);
+            this.state.score = this.state.score - 5;
+          } else {
+            currentScore = this.state.score;
+            this.state.score = 0;
+          }
+        }
+        //incorrect match
+        if (this.state.posPressed) {
+          matchHit -= 1;
+          this.setState({
+            alert: 'Not a match!',
+            alertType: 'none'
+          });
+          //if have double when single match
+          if (currentScore) {
+            //delete 5 from preassigned score
+            currentScore -= 5;
+            this.setState({
+              alert: 'Not a double match!',
+              alertType: 'halfPos'
+            });
+            //if overall negative score
+            if (currentScore < 0) {
+              this.setState({
+                alert: 'Not a double match!',
+                alertType: 'halfNeg'
+              });
+              //if remaining score is positive or 0 just deduct points
+              if (this.state.score + currentScore >= 0) {
+                fullScore += parseFloat(currentScore);
+                this.state.score += Math.floor(currentScore);
+              }
+              //otherwise take off whatever will get user to 0
+              else {
+                  currentScore = this.state.score;
+                  fullScore += parseFloat(currentScore);
+                  this.state.score = 0;
+                }
+            } else {
+              fullScore -= parseFloat(currentScore);
+            }
+          }
+          //if no preexisting score see if all 5 points can be removed
+          else if (this.state.score >= 5) {
+              currentScore = 5;
+              fullScore -= parseFloat(currentScore);
+              this.state.score = this.state.score - 5;
+            }
+            //otherwise take whatever is left
+            else {
+                currentScore = this.state.score;
+                fullScore -= parseFloat(currentScore);
+                this.state.score = 0;
+              }
+        }
+        this.setState({
+          positionMatch: false,
+          colorMatch: false,
+          positionPressed: false,
+          colorPressed: false,
+          posStyle: noStyle,
+          colorStyle: noStyle,
+          score: this.state.score
+        });
+      }
+
+      ///position match cases
+      if (this.state.positionMatch) {
+        //got position match
+        if (this.state.positionPressed) {
+          matchHit += 1;
+          this.setState({
+            alert: 'Match!',
+            alertType: 'full'
+          });
+          reactionTimes.push(reactionEnd - reactionStart);
+          currentScore = ((2000 - reactionTimes[reactionTimes.length - 1]) / 100).toFixed(2) + 1;
+          fullScore += parseFloat(currentScore);
+          this.state.score += Math.floor(currentScore);
+        }
+        //missed position match
+        if (!this.state.positionPressed) {
+          this.setState({
+            alert: 'Missed a match!',
+            alertType: 'none'
+          });
+          if (this.state.score >= 5) {
+            currentScore = 5;
+            fullScore -= parseFloat(currentScore);
+            this.state.score = this.state.score - 5;
+          } else {
+            currentScore = this.state.score;
+            fullScore -= parseFloat(currentScore);
+            this.state.score = 0;
+          }
+        }
+        //incorrect match
+        if (this.state.colorPressed) {
+          matchHit -= 1;
+          this.setState({
+            alert: 'Not a match!',
+            alertType: 'none'
+          });
+          if (currentScore) {
+            //delete 5 from preassigned score
+            currentScore -= 5;
+            this.setState({
+              alert: 'Not a double match!',
+              alertType: 'halfPos'
+            });
+            //if overall negative score
+            if (currentScore < 0) {
+              this.setState({
+                alert: 'Not a double match!',
+                alertType: 'halfNeg'
+              });
+              //if remaining score is positive or 0 just deduct points
+              if (this.state.score + currentScore >= 0) {
+                fullScore += parseFloat(currentScore);
+                this.state.score -= Math.floor(currentScore);
+              }
+              //otherwise take off whatever will get user to 0
+              else {
+                  currentScore = this.state.score;
+                  fullScore -= parseFloat(currentScore);
+                  this.state.score = 0;
+                }
+            } else {
+              fullScore -= parseFloat(currentScore);
+            }
+          }
+          //if no preexisting score see if all 5 points can be removed
+          else if (this.state.score >= 5) {
+              currentScore = 5;
+              fullScore -= parseFloat(currentScore);
+              this.state.score = this.state.score - 5;
+              this.setState({
+                alert: 'Not a match!',
+                alertType: 'none'
+              });
+            }
+            //otherwise take whatever is left
+            else {
+                currentScore = this.state.score;
+                fullScore -= parseFloat(currentScore);
+                this.state.score = 0;
+                this.setState({
+                  alert: 'Not a match!',
+                  alertType: 'none'
+                });
+              }
+        }
+        this.setState({
+          positionMatch: false,
+          colorMatch: false,
+          positionPressed: false,
+          colorPressed: false,
+          posStyle: noStyle,
+          colorStyle: noStyle,
+          score: this.state.score
+        });
+      }
+      //hit match when none
+      if (this.state.colorPressed || this.state.positionPressed) {
         matchHit -= 1;
-        if (this.state.score - 5 >= 0) {
-          fullScore -= 5;
+        this.setState({
+          alert: 'Not a match!',
+          alertType: 'none'
+        });
+        if (this.state.score >= 5) {
           currentScore = 5;
-          this.setState({
-            score: this.state.score - 5,
-            posStyle: noStyle,
-            colorStyle: noStyle
-          });
+          fullScore -= parseFloat(currentScore);
+          this.state.score = this.state.score - 5;
         } else {
-          fullScore = 0;
           currentScore = this.state.score;
-          this.setState({ score: 0 });
+          fullScore -= parseFloat(currentScore);
+          this.state.score = 0;
         }
+        this.setState({
+          positionMatch: false,
+          colorMatch: false,
+          positionPressed: false,
+          colorPressed: false,
+          posStyle: noStyle,
+          colorStyle: noStyle,
+          score: this.state.score
+        });
       }
-      if (this.state.keepScore && (this.state.colorMatch || this.state.positionMatch)) {
-        this.setState({ alert: "Missed a match" });
-        if (this.state.score - 5 >= 0) {
-          fullScore -= 5;
-          currentScore = 5;
-          this.setState({
-            score: this.state.score - 5,
-            posStyle: noStyle,
-            colorStyle: noStyle
-          });
-        } else {
-          fullScore = 0;
-          currentScore = this.state.score;
-          this.setState({ score: 0 });
-        }
-      }
-      this.setState({
-        keepScore: false,
-        positionMatch: false,
-        colorMatch: false,
-        posPressed: false,
-        colorPressed: false,
-        posStyle: noStyle,
-        colorStyle: noStyle
-      });
+
       setTimeout(function () {
-        this.setState({ alert: ' ' });
+        this.setState({ alert: ' ', alertType: ' ' });
       }.bind(this), 800);
 
+      //case 1: position match
       if (timeTilPositionMatch === 0) {
         matchCount += 1;
         this.setState({ positionMatch: true, keepScore: true });
@@ -2233,14 +2427,7 @@ var SilentMode = React.createClass({
       if (timeKeeper === 0) {
         clearInterval(iterations);
         setTimeout(function () {
-          //console.log(reactionTimes, 'reaction times')
-          //console.log(this.state)
           console.log(matchHit / matchCount, 'accuracy');
-
-          ////////////////////////////////////////////////////////////////////////////
-          /////////////////////////////////////////////////////////////////////////////
-          /////////////////////////////////////////////////////////////////////////////
-          ////////////////////REMEMBER TO ADD THIS BACK IN/////////////////////////////
           endGameFunction(fullScore, reactionTimes, this.state.gameId, this.state.userId, function (success) {
             if (success) {
               this.props.history.push('/gameOver');
@@ -2261,8 +2448,8 @@ var SilentMode = React.createClass({
       }
     }
     this.setState({
-      positionMatch: !this.state.positionMatch,
-      posPressed: true,
+      //positionMatch: !this.state.positionMatch,
+      positionPressed: true,
       posStyle: pushStyle
     });
   },
@@ -2277,7 +2464,7 @@ var SilentMode = React.createClass({
       }
     }
     this.setState({
-      colorMatch: !this.state.colorMatch,
+      //colorMatch: !this.state.colorMatch,
       colorPressed: true,
       colorStyle: pushStyle
     });
@@ -2294,7 +2481,7 @@ var SilentMode = React.createClass({
 
     var scoreAlert;
     var scoreUpdate;
-    if (this.state.alert === "Good job") {
+    if (this.state.alertType === 'full') {
       scoreAlert = React.createElement(
         'div',
         { className: 'scoreAlertPositive' },
@@ -2306,9 +2493,57 @@ var SilentMode = React.createClass({
             color: 'green'
           } },
         '+',
-        parseInt(currentScore)
+        Math.ceil(currentScore)
       );
-    } else if (this.state.alert === "Not a match" || this.state.alert === "Missed a match") {
+    } else if (this.state.alertType === 'none') {
+      scoreAlert = React.createElement(
+        'div',
+        { className: 'scoreAlertNegative' },
+        this.state.alert
+      );
+      if (currentScore !== 0) {
+        scoreUpdate = React.createElement(
+          'h2',
+          { style: {
+              color: 'red'
+            } },
+          '-',
+          currentScore
+        );
+      }
+    } else if (this.state.alertType === 'halfPos') {
+      scoreAlert = React.createElement(
+        'div',
+        { className: 'scoreAlertHalf' },
+        this.state.alert
+      );
+      if (currentScore !== 0) {
+        scoreUpdate = React.createElement(
+          'h2',
+          { style: {
+              color: 'yellow'
+            } },
+          '+',
+          currentScore
+        );
+      }
+    } else if (this.state.alertType === 'halfNeg') {
+      scoreAlert = React.createElement(
+        'div',
+        { className: 'scoreAlertHalf' },
+        this.state.alert
+      );
+      if (currentScore !== 0) {
+        scoreUpdate = React.createElement(
+          'h2',
+          { style: {
+              color: 'yellow'
+            } },
+          '-',
+          currentScore
+        );
+      }
+    } else if (this.state.alertType === 'none') {
       scoreAlert = React.createElement(
         'div',
         { className: 'scoreAlertNegative' },
@@ -22696,6 +22931,7 @@ function objEquiv(a, b, opts) {
   for (i = ka.length - 1; i >= 0; i--) {
     if (ka[i] != kb[i])
       return false;
+<<<<<<< HEAD
   }
   //equivalent values for every corresponding key, and
   //~~~possibly expensive deep test
@@ -22703,6 +22939,15 @@ function objEquiv(a, b, opts) {
     key = ka[i];
     if (!deepEqual(a[key], b[key], opts)) return false;
   }
+=======
+  }
+  //equivalent values for every corresponding key, and
+  //~~~possibly expensive deep test
+  for (i = ka.length - 1; i >= 0; i--) {
+    key = ka[i];
+    if (!deepEqual(a[key], b[key], opts)) return false;
+  }
+>>>>>>> refs/remotes/origin/tconcannon
   return typeof a === typeof b;
 }
 
