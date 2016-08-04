@@ -101,17 +101,20 @@ var SilentMode = React.createClass({
         if(this.state.positionPressed){
           reactionTimes.push(reactionEnd-reactionStart);
           currentScore = ((2000 - reactionTimes[reactionTimes.length - 1]) / 100).toFixed(2);
+          fullScore+=currentScore;
+          console.log(fullScore,'fullScore')
           this.state.score+=Math.ceil(currentScore);
           this.setState({
             alert: 'Half match',
-            alertType: 'half'
+            alertType: 'halfPos'
           })
         }
         if(this.state.colorPressed){
           if(currentScore){
+            fullScore+=currentScore;
+            console.log(fullScore,'fullScore')
             currentScore=2*currentScore;
-            console.log(currentScore, 'current score')
-            this.state.score+=currentScore;
+            this.state.score+=Math.ceil(currentScore);
             this.setState({
               alert: 'Double match!',
               alertType: 'full'
@@ -120,10 +123,12 @@ var SilentMode = React.createClass({
           else{
             reactionTimes.push(reactionEnd-reactionStart);
             currentScore = ((2000 - reactionTimes[reactionTimes.length - 1]) / 100).toFixed(2);
+            fullScore+=currentScore;
+            console.log(fullScore,'fullScore')
             this.state.score+=Math.ceil(currentScore);
             this.setState({
               alert: 'Half match',
-              alertType: 'half'
+              alertType: 'halfPos'
             })
           }      
         }
@@ -135,10 +140,14 @@ var SilentMode = React.createClass({
           })
           if(this.state.score>=5){
             currentScore=5;
+            fullscore-=currentScore;
+            console.log(fullScore,'fullScore')
             this.state.score=this.state.score-5
           }
           else{
             currentScore=this.state.score;
+            fullScore-=currentScore;
+            console.log(fullScore,'fullScore')
             this.state.score=0;
           }
         }
@@ -151,7 +160,6 @@ var SilentMode = React.createClass({
           colorStyle: noStyle, 
           score: this.state.score
         })
-        console.log(this.state.score,'current score')
       }
 
       ///color match cases
@@ -164,6 +172,8 @@ var SilentMode = React.createClass({
           })
           reactionTimes.push(reactionEnd-reactionStart);
           currentScore = ((2000 - reactionTimes[reactionTimes.length - 1]) / 100).toFixed(2)
+          fullScore+=currentScore;
+          console.log(fullScore,'fullScore')
           this.state.score+=Math.ceil(currentScore);
         }
         //missed color match
@@ -174,10 +184,14 @@ var SilentMode = React.createClass({
           })
            if(this.state.score>=5){
             currentScore=5;
+            fullScore-=currentScore;
+            console.log(fullScore,'fullScore')
             this.state.score=this.state.score-5
           }
           else{
             currentScore=this.state.score;
+            fullScore-=currentScore;
+            console.log(fullScore,'fullScore')
             this.state.score=0;
           }
         }
@@ -203,11 +217,15 @@ var SilentMode = React.createClass({
           })
               //if remaining score is positive or 0 just deduct points
               if (this.state.score-currentScore>=0){
-                this.state.score-=currentScore;
+                fullScore-=currentScore;
+                console.log(fullScore,'fullScore')
+                this.state.score-=Math.ceil(currentScore);
               }
               //otherwise take off whatever will get user to 0
               else{
                 currentScore=this.state.score;
+                fullScore-=currentScore;
+                console.log(fullScore,'fullScore')
                 this.state.score=0;
               }
             }
@@ -215,11 +233,15 @@ var SilentMode = React.createClass({
           //if no preexisting score see if all 5 points can be removed
           else if(this.state.score>=5){
             currentScore=5;
+            fullScore-=currentScore;
+            console.log(fullScore,'fullScore')
             this.state.score=this.state.score-5
           }
           //otherwise take whatever is left
           else{
             currentScore=this.state.score;
+            fullScore-=currentScore;
+            console.log(fullScore,'fullScore')
             this.state.score=0;
           }
         }
@@ -232,7 +254,6 @@ var SilentMode = React.createClass({
           colorStyle: noStyle, 
           score: this.state.score
         })
-        console.log(this.state.score,'current score')
       }
 
       ///position match cases
@@ -244,7 +265,9 @@ var SilentMode = React.createClass({
             alertType: 'full'
           })
           reactionTimes.push(reactionEnd-reactionStart);
-          currentScore = ((2000 - reactionTimes[reactionTimes.length - 1]) / 100).toFixed(2)
+          currentScore = ((2000 - reactionTimes[reactionTimes.length - 1]) / 100).toFixed(2)];
+          fullScore+=currentScore;
+          console.log(fullScore,'fullScore')
           this.state.score+=Math.ceil(currentScore);
         }
         //missed position match
@@ -255,10 +278,14 @@ var SilentMode = React.createClass({
           })
            if(this.state.score>=5){
             currentScore=5;
+            fullScore-=currentScore;
+            console.log(fullScore,'fullScore')
             this.state.score=this.state.score-5
           }
           else{
             currentScore=this.state.score;
+            fullScore-=currentScore;
+            console.log(fullScore,'fullScore')
             this.state.score=0;
           }
         }
@@ -282,12 +309,16 @@ var SilentMode = React.createClass({
             alertType: 'halfNeg'
           })
               //if remaining score is positive or 0 just deduct points
-              if (this.state.score-currentScore>=0){
-                this.state.score-=currentScore;
+              if (this.state.score+currentScore>=0){
+                fullScore+=currentScore;
+                console.log(fullScore,'fullScore')
+                this.state.score-=Math.ceil(currentScore);
               }
               //otherwise take off whatever will get user to 0
               else{
                 currentScore=this.state.score;
+                fullScore-=currentScore;
+                console.log(fullScore,'fullScore')
                 this.state.score=0;
               }
             }
@@ -320,7 +351,6 @@ var SilentMode = React.createClass({
           colorStyle: noStyle, 
           score: this.state.score
         })
-        console.log(this.state.score,'current score')
       }
       //hit match when none
       if(this.state.colorPressed || this.state.positionPressed){
@@ -345,7 +375,6 @@ var SilentMode = React.createClass({
           colorStyle: noStyle, 
           score: this.state.score
         })
-        console.log(this.state.score,'current score')
       }
 
       setTimeout(function() {
