@@ -94,101 +94,185 @@ var SilentMode = React.createClass({
 
     iterations = setInterval(function() {
       timeKeeper--;
-      if(this.state.keepScore){
-      if(!this.state.colorMatch && !this.state.positionMatch && this.state.colorPressed && this.state.posPressed){
+        ///case 1: double match
+        if(this.state.colorMatch && this.state.colorPresed && this.state.positionMatch && this.state.posPressed){
+        console.log('double match')
         matchHit += 2;
         reactionTimes.push(reactionEnd - reactionStart);
         currentScore = ((2000 - reactionTimes[reactionTimes.length - 1]) / 100*2).toFixed(2);
         fullScore += parseFloat(currentScore);
         console.log(fullScore)
-        //reactionEnd = null;
+        }
+        //case 2: color match but pressed both
+        else if(this.state.colorMatch && this.state.colorPresed && !this.state.positionMatch && this.state.posPressed){
+          console.log('color match, pressed both')
+          //no match hit because add one, deduct one
+        reactionTimes.push(reactionEnd - reactionStart);
+        //points for correct color match, deducting 5 for wrong score
+        currentScore = ((2000 - reactionTimes[reactionTimes.length - 1]) / 100).toFixed(2)-5;
+        //if net points added:
+        if(currentScore>=0){
+          fullScore += parseFloat(currentScore);
+        }
+        //if points deducted: 
+        else{
+          //if can remove all points
+          if(this.state.score-currentScore>=0){
+            this.state.score=this.state.score-currentScore
+          }
+          //if can only remove some points and user will have 0 score
+          else{
+            currentScore=this.state.score //reassign current score for display purposes
+            this.state.score=0 //total score is now 0
+          }
+        }   
+        }
+        //case 3: position match and pressed color when no match
+        else if(!this.state.colorMatch && this.state.colorPresed && this.state.positionMatch && this.state.posPressed){
+          console.log('position match, pressed both')
+          //no match hit because add one, deduct one
+        reactionTimes.push(reactionEnd - reactionStart);
+        //points for correct color match, deducting 5 for wrong score
+        currentScore = ((2000 - reactionTimes[reactionTimes.length - 1]) / 100).toFixed(2)-5;
+        //if net points added:
+        if(currentScore>=0){
+          fullScore += parseFloat(currentScore);
+        }
+        //if points deducted: 
+        else{
+          //if can remove all points
+          if(this.state.score-currentScore>=0){
+            this.state.score=this.state.score-currentScore
+          }
+          //if can only remove some points and user will have 0 score
+          else{
+            currentScore=this.state.score //reassign current score for display purposes
+            this.state.score=0 //total score is now 0
+          }
+        }
+        //case 4: correctly hit single match, other may or may not have 
+        else if((this.state.colorMatch && this.state.colorPressed && !this.state.posPressed) || (this.state.positionMatch &&
+          this.state.posPressed && !this.state.colorPressed)){
+          console.log('single match correct')
+          currentScore = ((2000 - reactionTimes[reactionTimes.length - 1]) / 100).toFixed(2) //standard add score
+        }
+        else if(this.state.colorPressed || this.state.posPressed){
+          console.log('complete miss')
+          //can deduct all 5 points
+          if(this.state.score>=5){ 
+            currentScore=5;
+            this.state.score=this.state.score-5;
+          }
+          //otherwise get score to 0
+          else{
+            currentScore=this.state.score;
+            this.state.score=0
+          }
+        }
+        //case 5: incorrect answer for single hit
+        if(this.state.colorPressed || this.state.posPressed){
+          console.log('complete incorrect')
+          //can deduct all 5 points
+          if(this.state.score>=5){ 
+            currentScore=5;
+            this.state.score=this.state.score-5;
+          }
+          //otherwise get score to 0
+          else{
+            currentScore=this.state.score;
+            this.state.score=0
+          }
+        }
         this.setState({
-          score: this.state.score + parseInt(currentScore),
-          alert: 'Good job',
+          score: this.state.score, //created more general term because score state always changed above
+          alert: 'Good job', //WILL RESET ALERTS ASAP
           posStyle: noStyle,
           colorStyle: noStyle,
           colorPressed: false,
           colorMatch: false,
-          keepScore: false
-        });
-      }
-      else if (!this.state.colorMatch && this.state.colorPressed) {
-        matchHit += 1;
-        reactionTimes.push(reactionEnd - reactionStart);
-        currentScore = ((2000 - reactionTimes[reactionTimes.length - 1]) / 100).toFixed(2);
-        fullScore += parseFloat(currentScore);
-        console.log(fullScore)
-        //reactionEnd = null;
-        this.setState({
-          score: this.state.score + parseInt(currentScore),
-          alert: 'Good job',
-          posStyle: noStyle,
-          colorStyle: noStyle,
-          colorPressed: false,
-          colorMatch: false,
-          keepScore: false
-        });
-      } 
-      else if (!this.state.positionMatch && this.state.posPressed) {
-        matchHit += 1;
-        reactionTimes.push(reactionEnd - reactionStart);
-        currentScore = ((2000 - reactionTimes[reactionTimes.length - 1]) / 100).toFixed(2);
-        fullScore += parseFloat(currentScore);
-        console.log(fullScore)
-        //reactionEnd = null;
-        this.setState({
-          score: this.state.score + parseInt(currentScore),
-          alert: 'Good job',
-          posStyle: noStyle,
-          colorStyle: noStyle,
           posPressed: false,
           positionMatch: false,
           keepScore: false
-        });
-      } 
-      }
-      if (!this.state.keepScore && (this.state.posPressed || this.state.colorPressed)) {
-        this.setState({alert: "Not a match"})
-        matchHit -= 1;
-        if ((this.state.score - 5) >= 0) {
-          fullScore -= 5;
-          currentScore = 5;
-          this.setState({
-            score: this.state.score - 5,
-            posStyle: noStyle,
-            colorStyle: noStyle
-          });
-        } else {
-          fullScore = 0;
-          currentScore = this.state.score;
-          this.setState({score: 0});
+        });  
         }
-      } 
-      if (this.state.keepScore && (this.state.colorMatch || this.state.positionMatch)) {
-        this.setState({alert: "Missed a match"});
-        if ((this.state.score - 5) >= 0) {
-          fullScore -= 5;
-          currentScore = 5;
-          this.setState({
-            score: this.state.score - 5,
-            posStyle: noStyle,
-            colorStyle: noStyle
-          });
-        } else {
-          fullScore = 0;
-          currentScore = this.state.score;
-          this.setState({score: 0});
-        }
-      }
-      this.setState({
-        keepScore: false,
-        positionMatch: false,
-        colorMatch: false,
-        posPressed: false,
-        colorPressed: false,
-        posStyle: noStyle,
-        colorStyle: noStyle
-      });
+
+      // else if (!this.state.colorMatch && this.state.colorPressed) {
+      //   matchHit += 1;
+      //   reactionTimes.push(reactionEnd - reactionStart);
+      //   currentScore = ((2000 - reactionTimes[reactionTimes.length - 1]) / 100).toFixed(2);
+      //   fullScore += parseFloat(currentScore);
+      //   console.log(fullScore)
+      //   //reactionEnd = null;
+      //   this.setState({
+      //     score: this.state.score + parseInt(currentScore),
+      //     alert: 'Good job',
+      //     posStyle: noStyle,
+      //     colorStyle: noStyle,
+      //     colorPressed: false,
+      //     colorMatch: false,
+      //     keepScore: false
+      //   });
+      // } 
+     //  else if (!this.state.positionMatch && this.state.posPressed) {
+     //    matchHit += 1;
+     //    reactionTimes.push(reactionEnd - reactionStart);
+     //    currentScore = ((2000 - reactionTimes[reactionTimes.length - 1]) / 100).toFixed(2);
+     //    fullScore += parseFloat(currentScore);
+     //    console.log(fullScore)
+     //    //reactionEnd = null;
+     //    this.setState({
+     //      score: this.state.score + parseInt(currentScore),
+     //      alert: 'Good job',
+     //      posStyle: noStyle,
+     //      colorStyle: noStyle,
+     //      posPressed: false,
+     //      positionMatch: false,
+     //      keepScore: false
+     //    });
+     //  } 
+     // // }
+      // if (!this.state.keepScore && (this.state.posPressed || this.state.colorPressed)) {
+      //   this.setState({alert: "Not a match"})
+      //   matchHit -= 1;
+      //   if ((this.state.score - 5) >= 0) {
+      //     fullScore -= 5;
+      //     currentScore = 5;
+      //     this.setState({
+      //       score: this.state.score - 5,
+      //       posStyle: noStyle,
+      //       colorStyle: noStyle
+      //     });
+      //   } else {
+      //     fullScore = 0;
+      //     currentScore = this.state.score;
+      //     this.setState({score: 0});
+      //   }
+      // } 
+      // if (this.state.keepScore && (this.state.colorMatch || this.state.positionMatch)) {
+      //   this.setState({alert: "Missed a match"});
+      //   if ((this.state.score - 5) >= 0) {
+      //     fullScore -= 5;
+      //     currentScore = 5;
+      //     this.setState({
+      //       score: this.state.score - 5,
+      //       posStyle: noStyle,
+      //       colorStyle: noStyle
+      //     });
+      //   } else {
+      //     fullScore = 0;
+      //     currentScore = this.state.score;
+      //     this.setState({score: 0});
+      //   }
+      // }
+      // this.setState({
+      //   keepScore: false,
+      //   positionMatch: false,
+      //   colorMatch: false,
+      //   posPressed: false,
+      //   colorPressed: false,
+      //   posStyle: noStyle,
+      //   colorStyle: noStyle
+      // });
       setTimeout(function() {
         this.setState({alert: ' '});
       }.bind(this), 800);
@@ -261,11 +345,6 @@ var SilentMode = React.createClass({
           //console.log(reactionTimes, 'reaction times')
           //console.log(this.state)
           console.log(matchHit / matchCount, 'accuracy')
-
-////////////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////
-////////////////////REMEMBER TO ADD THIS BACK IN/////////////////////////////
           endGameFunction(fullScore, reactionTimes, this.state.gameId, this.state.userId, function(success) {
             if (success) {
               this.props.history.push('/gameOver')
@@ -287,7 +366,7 @@ var SilentMode = React.createClass({
       }
     }
     this.setState({
-      positionMatch: !this.state.positionMatch,
+      //positionMatch: !this.state.positionMatch,
       posPressed: true,
       posStyle: pushStyle
     });
@@ -303,7 +382,7 @@ var SilentMode = React.createClass({
       }
     }
     this.setState({
-      colorMatch: !this.state.colorMatch,
+      //colorMatch: !this.state.colorMatch,
       colorPressed: true,
       colorStyle: pushStyle
     });
