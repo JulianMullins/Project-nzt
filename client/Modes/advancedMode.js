@@ -92,6 +92,9 @@ var AdvancedMode = React.createClass({
   },
   startGame: function() {
     this.setState({overlay: false});
+    var empty = new Audio('./audio/empty.mp3');
+    console.log(empty);
+    empty.play();
     this.playGame();
     this.enableKeys();
   },
