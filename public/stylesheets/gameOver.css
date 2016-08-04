@@ -52,7 +52,7 @@
 
 .scoreTable {
   display: flex;
-  align-items: flex-end;
+  align-items: center;
   justify-content: center;
   height: 30vh;
   width: 100vw;
@@ -80,6 +80,7 @@
 
 .gameOverPrompt {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   color: white;
@@ -136,4 +137,44 @@
   align-items: flex-end;
   justify-content: flex-end;
   margin-bottom: 10px;
+}
+
+@media (max-width: 768px) {
+  .gameOverHeader {
+    justify-content: center;
+    padding: 0;
+  }
+
+  .gameOverPrompt {
+    width: 100vw;
+  }
+
+  .scoreTable table {
+    width: 95%;
+  }
+
+  .scoreTable td {
+    font-size: 24px;
+  }
+
+  .gameOver p {
+    font-size: 24px;
+  }
+
+  .gameOver h2 {
+    font-size: 28px;
+  }
+
+  .gameOverActions {
+    margin: 0;
+    justify-content: center;
+  }
+
+  .homeLink {
+    display: none;
+  }
+
+  .leaderLink {
+    display: none;
+  }
 }
