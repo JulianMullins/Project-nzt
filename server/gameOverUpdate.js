@@ -271,7 +271,8 @@ router.post('/gameOver', function(req, res, next) {
           reactionTimes: tempGame.reactionTimes,
           fromGameId: tempGame._id,
           scoreBoard:user.stats.leaderboard,
-          tempUser:user.temp
+          tempUser:user.temp,
+          username: user.username
         })
 
         //update maxN

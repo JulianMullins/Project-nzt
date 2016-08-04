@@ -170,13 +170,25 @@ module.exports = function(passport) {
  }
 
   router.get('/login/failure',function(req,res,next){
-    //res.status(401).json({success:false})
-    return res.json({success:false,error:"login failure"})
+    res.status(401).json({success:false})
+    //res.json({success:false,error:"login failure"})
   })
 
   // POST Login page
-  router.post('/login', passport.authenticate('local',{failureRedirect: '/#/login/error'}), function(req,res,next){
+  router.post('/login', passport.authenticate('local',{failureRedirect:'/login/failure'}), function(req,res,next){
       
+    Stats.findById(req.session.user.stats)
+      .populate('leaderboard progress')
+      .exec(function(err,stats){
+        stats.leaderboard.user = req.session.user.username;
+        stats.leaderboard.save();
+        stats.progress.forEach(function(highScore){
+          highScore.userName = req.session.user.username;
+          highScore.save();
+        })
+      })
+
+
     //req.session.user = req.user;
     req.session.fullUser = true;
     console.log("login success")

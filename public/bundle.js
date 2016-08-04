@@ -3804,7 +3804,10 @@ var LoginOverlay = React.createClass({
 
   getInitialState: function getInitialState() {
     console.log(this);
-
+    // var error = null;
+    // if(this.props.params.error){
+    //   error = decodeURIComponent(this.props.params.error)
+    // }
     return {
       username: '',
       password: '',
@@ -3831,9 +3834,10 @@ var LoginOverlay = React.createClass({
     }).then(function (response) {
       console.log(response);
       if (response.data.success) {
+        console.log("success");
         this.props.history.goBack();
       } else {
-        this.setState({ error: "error" });
+        this.props.history.push('/login/error');
       }
     }.bind(this));
   },

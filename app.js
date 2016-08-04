@@ -107,7 +107,7 @@ passport.use(new LocalStrategy({
       
       if (!user) {
         //console.log(user);
-        return done(null, false, { message: 'Incorrect username.' });
+        return done('user does not exist', false, { message: 'Incorrect username.' });
       }
 
       //check hashed passwords
@@ -116,7 +116,7 @@ passport.use(new LocalStrategy({
           return done(err)
         }
         else if(!response){
-          return done(null,false,{message:"Incorrect password"});
+          return done('incorrect password',false,{message:"Incorrect password"});
         }
         else{
           console.log("passwords hashed")
@@ -265,7 +265,7 @@ passport.use(new FacebookStrategy({
         }).exec(function(err,users){ 
 
         if(req.session.user && !req.session.fullUser){
-          
+
           var newUser = new User({
             name:name,
             email:email,
@@ -456,10 +456,13 @@ app.use(function(req, res, next) {
 if (app.get('env') === 'development') {
   app.use(function(err, req, res, next) {
     res.status(err.status || 500);
-    res.render('error', {
-      message: err.message,
-      error: err
-    });
+    // res.render('error', {
+    //   message: err.message,
+    //   error: {}
+    // });
+    console.log(err);
+    console.log('/#'+req.url+'/'+encodeURIComponent(err))
+    res.redirect('/#'+req.url+'/'+encodeURIComponent(err))
   });
 }
 
@@ -467,10 +470,15 @@ if (app.get('env') === 'development') {
 // no stacktraces leaked to user
 app.use(function(err, req, res, next) {
   res.status(err.status || 500);
-  res.render('error', {
-    message: err.message,
-    error: {}
-  });
+  // res.render('error', {
+  //   message: err.message,
+  //   error: {}
+  // });
+  return res.json({
+    success:false,
+    error:'ERROR IN APP.USE',
+    message:err.message
+  })
 });
 
 
