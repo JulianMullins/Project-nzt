@@ -85,7 +85,7 @@
   align-items: center;
   color: white;
   background-color: #F13542;
-  width: 75vw;
+  width: 90vw;
   height: 20vh;
   padding: 10px;
 }
@@ -195,7 +195,7 @@
   }
 
   .scoreTable {
-    height: 40%;
+    height: 30%;
   }
 
   .scoreTable td {
@@ -203,11 +203,11 @@
   }
 
   .gameOverPrompt {
-    height: 20%;
+    height: 30%;
   }
 
   .gameOverPrompt p {
-    font-size: 24px;
+    font-size: 20px;
   }
 
   .gameOverActions {
