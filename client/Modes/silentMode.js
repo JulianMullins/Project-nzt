@@ -460,7 +460,7 @@ var SilentMode = React.createClass({
     }.bind(this), 2000);
   },
   positionMatch: function() {
-    if (this.state.posPressed) {
+    if (this.state.positionPressed) {
       return;
     }
     if (this.state.positionMatch) {
@@ -496,7 +496,7 @@ var SilentMode = React.createClass({
       ? (<SilentStartOverlay nLevel={this.state.N} click={this.startGame}/>)
       : '';
 
-    var posButtonStyle = this.state.posPressed
+    var posButtonStyle = this.state.positionPressed
       ? {
         backgroundColor: 'black'
       }
@@ -518,7 +518,7 @@ var SilentMode = React.createClass({
       scoreUpdate = (
         <h2 style={{
           color: 'green'
-        }}>+{Math.ceil(currentScore)}</h2>
+        }}>+{parseInt(currentScore)}</h2>
       )
     } else if (this.state.alertType === 'none') {
       scoreAlert = (
@@ -530,7 +530,7 @@ var SilentMode = React.createClass({
         scoreUpdate = (
           <h2 style={{
             color: 'red'
-          }}>-{currentScore}</h2>
+          }}>-{parseInt(currentScore)}</h2>
         )
       }
     } 
@@ -544,7 +544,7 @@ var SilentMode = React.createClass({
         scoreUpdate = (
           <h2 style={{
             color: 'yellow'
-          }}>+{currentScore}</h2>
+          }}>+{parseInt(currentScore)}</h2>
         )
       }
     }
@@ -558,7 +558,7 @@ var SilentMode = React.createClass({
         scoreUpdate = (
           <h2 style={{
             color: 'yellow'
-          }}>-{currentScore}</h2>
+          }}>-{parseInt(currentScore)}</h2>
         )
       }
     }
@@ -572,7 +572,7 @@ var SilentMode = React.createClass({
         scoreUpdate = (
           <h2 style={{
             color: 'red'
-          }}>-{currentScore}</h2>
+          }}>-{parseInt(currentScore)}</h2>
         )
       }
     }
