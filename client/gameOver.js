@@ -25,7 +25,7 @@ var GameOverOverlay = React.createClass({
       //username:null,
       isAnon: false,
       baseScore: 0,
-      fullScore:0,
+      fullScore: 0,
       mode: null,
       nLevel: 1,
       gameOverMessage: <div></div>,
@@ -42,6 +42,9 @@ var GameOverOverlay = React.createClass({
 
     this.setScore();
     this.getData();
+    if (this.state.baseScore === 0) {
+      this.setState({fullScore: 0})
+    }
     //this.setState({firstRender: false})
   },
   setScore() {
@@ -68,11 +71,10 @@ var GameOverOverlay = React.createClass({
         start: 0
       })
     }.bind(this))).then(function() {
-      this.renderLogin();
       this.unlockLevel();
       this.anonHighScore();
       this.nextLevelBtn();
-      score = parseFloat(this.state.score);
+      score = parseFloat(this.state.fullScore);
       var n = parseInt(this.state.nLevel);
       var modeM = parseInt(this.state.modeMultiplier);
       var totalScore = parseInt(score * n * modeM);
@@ -102,47 +104,52 @@ var GameOverOverlay = React.createClass({
       })
     } else {
       this.setState({
-        gameOverInform: <h2 className="classic">You need {this.state.scoreToPass * this.state.nLevel * this.state.modeMultiplier} points to unlock level {this.state.nLevel + 1}</h2>,
+        gameOverInform: <h2 className="classic">You need {this.state.scoreToPass * this.state.nLevel * this.state.modeMultiplier}
+          points to unlock level {this.state.nLevel + 1}</h2>,
         gameOverCongrats: <h1>Nice try!</h1>
       })
     }
     console.log("state: ", this.state);
   },
   anonHighScore() {
-    //if anon get high score, can save with tempusername, or login
+    //if anon get high score, prompt to login
     if (this.state.isAnon && this.state.isHighScore) {
-      this.setState({
-        gameOverMessage: <p>You earned a high score on our overall leaderboards. If you wish to be added to the leaderboard without logging in, provide a name below to display with your score
-            <form>
-              <input type='text' name="anonUserName" onChange={this.update}/>
-              <Link onClick={this.anonLeaderboard} to="/leaderboard" type="button">Submit</Link>
-            </form>
-            Or, you can
-            <Link to="/gameOver/login">
-              login</Link>
-            or
-            <Link to="/gameOver/register">sign up</Link>
-            to save your progress, view statistics and compete with friends!
-          </p>
-      })
+      this.setState({gameOverMessage: (
+          <div className="gameOverPrompt">
+            <p>You have earned a high score on the global leaderboard!</p>
+            <p>
+              <Link to="/gameOver/login">Login</Link>
+              or
+              <Link to="/gameOver/register">
+                sign up
+              </Link>
+              to save your progress, view statistics and compete with friends!</p>
+          </div>
+        )})
+    } else if (this.state.isAnon && !this.state.isHighScore) {
+      this.setState({gameOverMessage: (
+          <div className="gameOverPrompt">
+            <p>
+              <Link to="/gameOver/login">Login</Link>
+              or
+              <Link to="/gameOver/register">
+                sign up
+              </Link>
+              to save your progress, view statistics and compete with friends!</p>
+          </div>
+        )})
+    } else if (!this.state.isAnon && this.state.isHighScore) {
+      this.setState({gameOverMessage: (
+          <div className="gameOverPrompt">
+            <p>You have earned a high score on the global leaderboard!</p>
+          </div>
+        )})
+    } else if (!this.state.isAnon && !this.state.isHighScore) {
+      this.setState({gameOverMessage: (
+          <div></div>
+        )})
     }
 
-  },
-  renderLogin() {
-    //if not logged in, option to login to save
-    if (this.state.isAnon && !this.state.isHighScore) {
-      this.setState({
-        gameOverMessage: <div className="gameOverPrompt">
-            <p>It looks like you are not currently logged in.
-              <Link to="/gameOver/login">
-                Sign in </Link>
-              {' '}or{' '}
-              <Link to="/gameOver/register">sign up</Link>
-              to save your progress, view statistics and compete with friends!
-            </p>
-          </div>
-      })
-    }
   },
   update(e) {
     //update anonusername field
@@ -180,6 +187,7 @@ var GameOverOverlay = React.createClass({
   countUp: function(count) {
     var div_by = 100;
     console.log(count, 'count')
+    console.log(!this.state.fullScore);
     //count=parseInt(count)
     var speed = parseFloat(count / div_by);
     //console.log('ini speed', speed);
@@ -228,20 +236,20 @@ var GameOverOverlay = React.createClass({
               <tr className="totalScore">
                 <td>total score:
                 </td>
-                <td className="count scoreValue">{this.countUp(this.state.fullScore)}</td>
+                <td className="count scoreValue">{!this.state.fullscore ? 0 : this.countUp(this.state.fullScore)}</td>
               </tr>
             </tbody>
           </table>
         </div>
         {this.state.gameOverMessage}
         <div className="gameOverActions">
-          <Link onClick={this.gameOver} to="/home">
+          <Link onClick={this.gameOver} className="homeLink" to="/home">
             <span className="fa fa-home fa-5x"></span>
             <h2>home</h2>
           </Link>
           {this.state.nextOrReplay}
           <div>
-            <Link onClick={this.gameOver} to="/leaderboard">
+            <Link onClick={this.gameOver} className="leaderLink" to="/leaderboard">
               <span className="lbChart">
                 <span className="fa fa-signal fa-5x"></span>
                 <h2>leaderboard</h2>

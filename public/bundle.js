@@ -721,21 +721,25 @@ var ClassicMode = React.createClass({
       keepScore: false,
       tempUser: true,
       gameId: null,
-      mode: 'classic'
+      mode: 'classic',
+      modeMultiplier: 1,
+      penalty: 0,
+      positivePoints: 0
     };
   },
   componentDidMount: function componentDidMount() {
     startGameFunction(this.state.mode, this.state.N, function (err, obj) {
       if (err) {
-        this.props.history.push('/levels/' + this.state.mode);
+        this.props.history.push('/levels/' + this.state.mode + '/unauthorized');
+        return;
       }
+      console.log(obj);
       this.setState({
         tempUser: obj.tempUser,
         gameId: obj.gameId,
         modeMultiplier: obj.modeMultiplier,
         penalty: obj.penalty,
-        positivePoints: obj.positivePoints,
-        userId: obj.userId
+        positivePoints: obj.positivePoints
       });
     }.bind(this));
     console.log("component mounted");
@@ -883,15 +887,24 @@ var ClassicMode = React.createClass({
       if (timeKeeper === 0) {
         clearInterval(iterations);
         setTimeout(function () {
-          console.log(reactionTimes, 'reaction times');
-          console.log(matchHit / matchCount, 'accuracy');
-          console.log(this.state);
 
-          endGameFunction(fullScore, reactionTimes, this.state.gameId, this.state.userId, function (success) {
+          //////////////////////////////////////
+          //////////////////////////////////////
+          ////////////////////////////////////// 
+
+          console.log(reactionTimes, 'reaction times');
+          var accuracy = matchHit / matchCount;
+          console.log(accuracy, 'accuracy');
+
+          endGameFunction(fullScore, reactionTimes, this.state.gameId, accuracy, function (success) {
             if (success) {
               this.props.history.push('/gameOver');
             }
           }.bind(this));
+
+          //////////////////////////////////////
+          //////////////////////////////////////
+          //////////////////////////////////////
         }.bind(this), 2000);
       }
     }.bind(this), 2000);
@@ -1089,22 +1102,18 @@ var _reactRouter = require('react-router');
 
 var React = require('react');
 var axios = require('axios');
+var MediaQuery = require('react-responsive');
 
 
 var SilentStartOverlay = React.createClass({
   displayName: 'SilentStartOverlay',
 
   getInitialState: function getInitialState() {
-    return {
-      nLevel: this.props.nLevel,
-      moves: "moves"
-    };
+    return { nLevel: this.props.nLevel, moves: "moves" };
   },
   componentDidMount: function componentDidMount() {
     if (this.state.nLevel === 1) {
-      this.setState({
-        moves: "move"
-      });
+      this.setState({ moves: "move" });
     }
   },
   render: function render() {
@@ -1125,30 +1134,34 @@ var SilentStartOverlay = React.createClass({
           '(position & color)'
         ),
         React.createElement(
-          'p',
-          { className: 'silent' },
-          'Use the left and right arrow keys or press the corresponding buttons to select a match. If there is a position and color match at the same time, select both options simultaneously.'
-        ),
-        React.createElement(
-          'div',
-          { className: 'key-wrapper' },
+          MediaQuery,
+          { minWidth: '768px' },
           React.createElement(
-            'ul',
-            { className: 'row' },
+            'p',
+            { className: 'silent' },
+            'Use the left and right arrow keys or press the corresponding buttons to select a match. If there is a position and color match at the same time, select both options simultaneously.'
+          ),
+          React.createElement(
+            'div',
+            { className: 'key-wrapper' },
             React.createElement(
-              'li',
-              { className: 'key keySilent k37' },
-              '←'
-            ),
-            React.createElement(
-              'li',
-              { className: 'key keyBlank k40' },
-              '↓'
-            ),
-            React.createElement(
-              'li',
-              { className: 'key keySilent k39' },
-              '→'
+              'ul',
+              { className: 'row' },
+              React.createElement(
+                'li',
+                { className: 'key keySilent k37' },
+                '←'
+              ),
+              React.createElement(
+                'li',
+                { className: 'key keyBlank k40' },
+                '↓'
+              ),
+              React.createElement(
+                'li',
+                { className: 'key keySilent k39' },
+                '→'
+              )
             )
           )
         ),
@@ -1159,9 +1172,8 @@ var SilentStartOverlay = React.createClass({
           this.state.nLevel,
           ', therefore a match occurs when a position/color stimulus from ',
           this.state.nLevel,
-          ' ',
           this.state.moves,
-          ' back matches the current position/color.'
+          'back matches the current position/color.'
         ),
         React.createElement(
           _reactRouter.Link,
@@ -1195,16 +1207,11 @@ var ClassicStartOverlay = React.createClass({
   displayName: 'ClassicStartOverlay',
 
   getInitialState: function getInitialState() {
-    return {
-      nLevel: this.props.nLevel,
-      moves: "moves"
-    };
+    return { nLevel: this.props.nLevel, moves: "moves" };
   },
   componentDidMount: function componentDidMount() {
     if (this.state.nLevel === 1) {
-      this.setState({
-        moves: "move"
-      });
+      this.setState({ moves: "move" });
     }
   },
   render: function render() {
@@ -1225,26 +1232,30 @@ var ClassicStartOverlay = React.createClass({
           '(position & sound)'
         ),
         React.createElement(
-          'p',
-          { className: 'classic' },
-          'Use the left and right arrow keys or press the corresponding buttons to select a match. If there is a position and sound match at the same time, select both options simultaneously.'
-        ),
-        React.createElement(
-          'div',
-          { className: 'key-wrapper' },
+          MediaQuery,
+          { minWidth: '768px' },
           React.createElement(
-            'ul',
-            { className: 'row' },
+            'p',
+            { className: 'classic' },
+            'Use the left and right arrow keys or press the corresponding buttons to select a match. If there is a position and sound match at the same time, select both options simultaneously.'
+          ),
+          React.createElement(
+            'div',
+            { className: 'key-wrapper' },
             React.createElement(
-              'li',
-              { className: 'key keyClassic k37' },
-              '←'
-            ),
-            React.createElement('li', { className: 'key k40 keyBlank' }),
-            React.createElement(
-              'li',
-              { className: 'key keyClassic k39' },
-              '→'
+              'ul',
+              { className: 'row' },
+              React.createElement(
+                'li',
+                { className: 'key keyClassic k37' },
+                '←'
+              ),
+              React.createElement('li', { className: 'key k40 keyBlank' }),
+              React.createElement(
+                'li',
+                { className: 'key keyClassic k39' },
+                '→'
+              )
             )
           )
         ),
@@ -1255,9 +1266,8 @@ var ClassicStartOverlay = React.createClass({
           this.state.nLevel,
           ', therefore a match occurs when a position/sound stimulus from ',
           this.state.nLevel,
-          ' ',
           this.state.moves,
-          ' back matches the current position/sound.'
+          'back matches the current position/sound.'
         ),
         React.createElement(
           _reactRouter.Link,
@@ -1291,16 +1301,11 @@ var RelaxedStartOverlay = React.createClass({
   displayName: 'RelaxedStartOverlay',
 
   getInitialState: function getInitialState() {
-    return {
-      nLevel: this.props.nLevel,
-      moves: "moves"
-    };
+    return { nLevel: this.props.nLevel, moves: "moves" };
   },
   componentDidMount: function componentDidMount() {
     if (this.state.nLevel === 1) {
-      this.setState({
-        moves: "move"
-      });
+      this.setState({ moves: "move" });
     }
   },
   render: function render() {
@@ -1321,20 +1326,24 @@ var RelaxedStartOverlay = React.createClass({
           '(position)'
         ),
         React.createElement(
-          'p',
-          null,
-          'Use the up arrow key or press the corresponding button to select a position match.'
-        ),
-        React.createElement(
-          'div',
-          { className: 'key-wrapper' },
+          MediaQuery,
+          { minWidth: '768px' },
           React.createElement(
-            'ul',
-            { className: 'row' },
+            'p',
+            null,
+            'Use the up arrow key or press the corresponding button to select a position match.'
+          ),
+          React.createElement(
+            'div',
+            { className: 'key-wrapper' },
             React.createElement(
-              'li',
-              { className: 'key k38 relaxed keyRelaxed' },
-              '↑'
+              'ul',
+              { className: 'row' },
+              React.createElement(
+                'li',
+                { className: 'key k38 relaxed keyRelaxed' },
+                '↑'
+              )
             )
           )
         ),
@@ -1345,9 +1354,8 @@ var RelaxedStartOverlay = React.createClass({
           this.state.nLevel,
           ', therefore a match occurs when a position stimulus from ',
           this.state.nLevel,
-          ' ',
           this.state.moves,
-          ' back matches the current position.'
+          'back matches the current position.'
         ),
         React.createElement(
           _reactRouter.Link,
@@ -1381,16 +1389,11 @@ var AdvancedStartOverlay = React.createClass({
   displayName: 'AdvancedStartOverlay',
 
   getInitialState: function getInitialState() {
-    return {
-      nLevel: this.props.nLevel,
-      moves: "moves"
-    };
+    return { nLevel: this.props.nLevel, moves: "moves" };
   },
   componentDidMount: function componentDidMount() {
     if (this.state.nLevel === 1) {
-      this.setState({
-        moves: "move"
-      });
+      this.setState({ moves: "move" });
     }
   },
   render: function render() {
@@ -1411,39 +1414,43 @@ var AdvancedStartOverlay = React.createClass({
           '(position, color & sound)'
         ),
         React.createElement(
-          'p',
-          { className: 'advanced' },
-          'Use the left, right and up arrow keys or press the corresponding buttons to select a match. If there is a match of two (or all three) of the stimuli at the same time, select two or three options simultaneously.'
-        ),
-        React.createElement(
-          'div',
-          { className: 'key-wrapper' },
+          MediaQuery,
+          { minWidth: '768px' },
           React.createElement(
-            'ul',
-            { className: 'row' },
-            React.createElement(
-              'li',
-              { className: 'key keyAdvanced k38' },
-              '↑'
-            )
+            'p',
+            { className: 'advanced' },
+            'Use the left, right and up arrow keys or press the corresponding buttons to select a match. If there is a match of two (or all three) of the stimuli at the same time, select two or three options simultaneously.'
           ),
           React.createElement(
-            'ul',
-            { className: 'row' },
+            'div',
+            { className: 'key-wrapper' },
             React.createElement(
-              'li',
-              { className: 'key keyAdvanced k37' },
-              '←'
+              'ul',
+              { className: 'row' },
+              React.createElement(
+                'li',
+                { className: 'key keyAdvanced k38' },
+                '↑'
+              )
             ),
             React.createElement(
-              'li',
-              { className: 'key k40 keyBlank' },
-              '↓'
-            ),
-            React.createElement(
-              'li',
-              { className: 'key keyAdvanced k39' },
-              '→'
+              'ul',
+              { className: 'row' },
+              React.createElement(
+                'li',
+                { className: 'key keyAdvanced k37' },
+                '←'
+              ),
+              React.createElement(
+                'li',
+                { className: 'key k40 keyBlank' },
+                '↓'
+              ),
+              React.createElement(
+                'li',
+                { className: 'key keyAdvanced k39' },
+                '→'
+              )
             )
           )
         ),
@@ -1454,9 +1461,8 @@ var AdvancedStartOverlay = React.createClass({
           this.state.nLevel,
           ', therefore a match occurs when a position/sound/color stimulus from ',
           this.state.nLevel,
-          ' ',
           this.state.moves,
-          ' back matches the current position/sound/color.'
+          'back matches the current position/sound/color.'
         ),
         React.createElement(
           _reactRouter.Link,
@@ -1493,7 +1499,7 @@ module.exports = {
   AdvancedStartOverlay: AdvancedStartOverlay
 };
 
-},{"axios":22,"react":374,"react-router":221}],5:[function(require,module,exports){
+},{"axios":22,"react":374,"react-responsive":189,"react-router":221}],5:[function(require,module,exports){
 "use strict";
 
 var React = require('react');
@@ -2754,6 +2760,9 @@ var GameOverOverlay = React.createClass({
 
     this.setScore();
     this.getData();
+    if (this.state.baseScore === 0) {
+      this.setState({ fullScore: 0 });
+    }
     //this.setState({firstRender: false})
   },
   setScore: function setScore() {
@@ -2780,11 +2789,10 @@ var GameOverOverlay = React.createClass({
         start: 0
       });
     }.bind(this))).then(function () {
-      this.renderLogin();
       this.unlockLevel();
       this.anonHighScore();
       this.nextLevelBtn();
-      score = parseFloat(this.state.score);
+      score = parseFloat(this.state.fullScore);
       var n = parseInt(this.state.nLevel);
       var modeM = parseInt(this.state.modeMultiplier);
       var totalScore = parseInt(score * n * modeM);
@@ -2829,7 +2837,7 @@ var GameOverOverlay = React.createClass({
           { className: 'classic' },
           'You need ',
           this.state.scoreToPass * this.state.nLevel * this.state.modeMultiplier,
-          ' points to unlock level ',
+          'points to unlock level ',
           this.state.nLevel + 1
         ),
         gameOverCongrats: React.createElement(
@@ -2842,59 +2850,25 @@ var GameOverOverlay = React.createClass({
     console.log("state: ", this.state);
   },
   anonHighScore: function anonHighScore() {
-    //if anon get high score, can save with tempusername, or login
+    //if anon get high score, prompt to login
     if (this.state.isAnon && this.state.isHighScore) {
-      this.setState({
-        gameOverMessage: React.createElement(
-          'p',
-          null,
-          'You earned a high score on our overall leaderboards. If you wish to be added to the leaderboard without logging in, provide a name below to display with your score',
-          React.createElement(
-            'form',
-            null,
-            React.createElement('input', { type: 'text', name: 'anonUserName', onChange: this.update }),
-            React.createElement(
-              _reactRouter.Link,
-              { onClick: this.anonLeaderboard, to: '/leaderboard', type: 'button' },
-              'Submit'
-            )
-          ),
-          'Or, you can',
-          React.createElement(
-            _reactRouter.Link,
-            { to: '/gameOver/login' },
-            'login'
-          ),
-          'or',
-          React.createElement(
-            _reactRouter.Link,
-            { to: '/gameOver/register' },
-            'sign up'
-          ),
-          'to save your progress, view statistics and compete with friends!'
-        )
-      });
-    }
-  },
-  renderLogin: function renderLogin() {
-    //if not logged in, option to login to save
-    if (this.state.isAnon && !this.state.isHighScore) {
-      this.setState({
-        gameOverMessage: React.createElement(
+      this.setState({ gameOverMessage: React.createElement(
           'div',
           { className: 'gameOverPrompt' },
           React.createElement(
             'p',
             null,
-            'It looks like you are not currently logged in.',
+            'You have earned a high score on the global leaderboard!'
+          ),
+          React.createElement(
+            'p',
+            null,
             React.createElement(
               _reactRouter.Link,
               { to: '/gameOver/login' },
-              'Sign in '
+              'Login'
             ),
-            ' ',
             'or',
-            ' ',
             React.createElement(
               _reactRouter.Link,
               { to: '/gameOver/register' },
@@ -2902,8 +2876,40 @@ var GameOverOverlay = React.createClass({
             ),
             'to save your progress, view statistics and compete with friends!'
           )
-        )
-      });
+        ) });
+    } else if (this.state.isAnon && !this.state.isHighScore) {
+      this.setState({ gameOverMessage: React.createElement(
+          'div',
+          { className: 'gameOverPrompt' },
+          React.createElement(
+            'p',
+            null,
+            React.createElement(
+              _reactRouter.Link,
+              { to: '/gameOver/login' },
+              'Login'
+            ),
+            'or',
+            React.createElement(
+              _reactRouter.Link,
+              { to: '/gameOver/register' },
+              'sign up'
+            ),
+            'to save your progress, view statistics and compete with friends!'
+          )
+        ) });
+    } else if (!this.state.isAnon && this.state.isHighScore) {
+      this.setState({ gameOverMessage: React.createElement(
+          'div',
+          { className: 'gameOverPrompt' },
+          React.createElement(
+            'p',
+            null,
+            'You have earned a high score on the global leaderboard!'
+          )
+        ) });
+    } else if (!this.state.isAnon && !this.state.isHighScore) {
+      this.setState({ gameOverMessage: React.createElement('div', null) });
     }
   },
   update: function update(e) {
@@ -2950,6 +2956,7 @@ var GameOverOverlay = React.createClass({
   countUp: function countUp(count) {
     var div_by = 100;
     console.log(count, 'count');
+    console.log(!this.state.fullScore);
     //count=parseInt(count)
     var speed = parseFloat(count / div_by);
     //console.log('ini speed', speed);
@@ -3043,7 +3050,7 @@ var GameOverOverlay = React.createClass({
               React.createElement(
                 'td',
                 { className: 'count scoreValue' },
-                this.countUp(this.state.fullScore)
+                !this.state.fullscore ? 0 : this.countUp(this.state.fullScore)
               )
             )
           )
@@ -3055,7 +3062,7 @@ var GameOverOverlay = React.createClass({
         { className: 'gameOverActions' },
         React.createElement(
           _reactRouter.Link,
-          { onClick: this.gameOver, to: '/home' },
+          { onClick: this.gameOver, className: 'homeLink', to: '/home' },
           React.createElement('span', { className: 'fa fa-home fa-5x' }),
           React.createElement(
             'h2',
@@ -3069,7 +3076,7 @@ var GameOverOverlay = React.createClass({
           null,
           React.createElement(
             _reactRouter.Link,
-            { onClick: this.gameOver, to: '/leaderboard' },
+            { onClick: this.gameOver, className: 'leaderLink', to: '/leaderboard' },
             React.createElement(
               'span',
               { className: 'lbChart' },
@@ -3179,11 +3186,11 @@ ReactDOM.render(React.createElement(
     React.createElement(_reactRouter.IndexRedirect, { to: '/home' }),
     React.createElement(_reactRouter.Route, { path: 'home', component: Home }),
     React.createElement(_reactRouter.Route, { path: 'login/facebook', component: FacebookLogin }),
-    React.createElement(_reactRouter.Route, { path: 'gameOver/login', component: Login }),
-    React.createElement(_reactRouter.Route, { path: 'gameOver/register', component: Register }),
-    React.createElement(_reactRouter.Route, { path: 'login', component: Login }),
+    React.createElement(_reactRouter.Route, { path: 'gameOver/login(/:error)', component: Login }),
+    React.createElement(_reactRouter.Route, { path: 'gameOver/register(/:error)', component: Register }),
+    React.createElement(_reactRouter.Route, { path: 'login(/:error)', component: Login }),
     React.createElement(_reactRouter.Route, { path: 'logout', component: Logout }),
-    React.createElement(_reactRouter.Route, { path: 'register', component: Register }),
+    React.createElement(_reactRouter.Route, { path: 'register(/:error)', component: Register }),
     React.createElement(_reactRouter.Route, { path: 'gameOver', component: GameOver }),
     React.createElement(_reactRouter.Route, { path: 'leaderboard', component: Leaderboard }),
     React.createElement(_reactRouter.Route, { path: 'stats', component: Stats }),
@@ -3701,7 +3708,8 @@ var LoginOverlay = React.createClass({
 
   getInitialState: function getInitialState() {
     console.log(this);
-    return { username: '', password: '', gameEnded: false, games: null };
+
+    return { username: '', password: '', gameEnded: false, games: null, error: this.props.params.error };
   },
   componentDidMount: function componentDidMount() {},
   update: function update(e) {
@@ -3756,7 +3764,8 @@ var LoginOverlay = React.createClass({
           React.createElement(
             'form',
             null,
-            React.createElement('input', { type: 'text', placeholder: 'Name or Email', name: 'username', id: 'username', value: this.state.username, onChange: this.update, autoFocus: focus }),
+            this.state.error,
+            React.createElement('input', { type: 'text', placeholder: 'Name or Email', name: 'username', id: 'username', value: this.state.username, onChange: this.update }),
             React.createElement('br', null),
             React.createElement('input', { type: 'password', placeholder: 'Password', name: 'password', id: 'password', value: this.state.password, onChange: this.update }),
             React.createElement(
@@ -4075,31 +4084,20 @@ var RegisterOverlay = React.createClass({
       email: '',
       password: '',
       passwordConfirm: '',
-      name: ''
+      name: '',
+      gameEnded: false,
+      error: this.props.params.error
     };
   },
+  componentDidMount: function componentDidMount() {
+    if (this.props.location.pathname == '/gameOver/register') {
 
-  // componentDidMount(){
-  //   if(this.props.location.pathname =='/gameOver/register'){
+      this.setState({
+        gameEnded: true
+      });
+    }
+  },
 
-  //     this.setState({
-  //       gameEnded:true
-  //     })
-
-  //     fetch('/getUser',{
-  //       method:'get'
-  //     }).then(function(response){
-  //         return response.json();
-  //     }).then(function(response){
-  //       if(response.games){
-  //         this.setState({
-  //           gameId:response.games
-  //         })
-  //       }
-  //     }.bind(this))
-  //   }
-
-  // },
   // click(e){
   //   e.preventDefault();
   //   if(this.state.gameEnded){
@@ -4165,13 +4163,17 @@ var RegisterOverlay = React.createClass({
         }).then(function (response) {
           console.log(response);
           if (response.data.success) {
-            this.props.history.goBack();
+            if (!this.state.gameEnded) {
+              this.props.history.push('/home');
+            } else {
+              this.props.history.goBack();
+            }
           } else {
-            this.props.history.push('/login');
+            this.props.history.push('/login/error');
           }
         }.bind(this));
       } else {
-        this.props.history.push('/register');
+        this.props.history.push('/register/error');
       }
     }.bind(this));
   },
@@ -4195,6 +4197,7 @@ var RegisterOverlay = React.createClass({
         React.createElement(
           'form',
           null,
+          this.state.error,
           React.createElement('input', { type: 'text', placeholder: 'Name', name: 'name', id: 'name', value: this.state.name, onChange: this.update }),
           React.createElement('br', null),
           React.createElement('input', { type: 'text', placeholder: 'Username', name: 'username', id: 'username', value: this.state.username, onChange: this.update }),
