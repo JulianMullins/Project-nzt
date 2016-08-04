@@ -1499,11 +1499,7 @@ module.exports = {
   AdvancedStartOverlay: AdvancedStartOverlay
 };
 
-<<<<<<< HEAD
-},{"axios":22,"react":374,"react-router":221}],5:[function(require,module,exports){
-=======
-},{"axios":21,"react":361,"react-responsive":124,"react-router":156}],5:[function(require,module,exports){
->>>>>>> refs/remotes/origin/master
+},{"axios":22,"react":374,"react-responsive":189,"react-router":221}],5:[function(require,module,exports){
 "use strict";
 
 var React = require('react');
