@@ -182,7 +182,7 @@
   }
 }
 
-@media (max-width: 768px) {
+@media all and (max-width: 768px) {
   .overlay {
     padding: 0;
     justify-content: center;
@@ -190,6 +190,8 @@
 
   .overlayContent {
     width: 80vw;
+    height: 70vh;
+    justify-content: space-around;
   }
 
   .overlayContent .key {
@@ -197,7 +199,7 @@
   }
 }
 
-@media (max-height: 768px) {
+@media all and (max-height: 768px) {
   .overlayContent p {
     font-size: 20px;
     line-height: 1;
