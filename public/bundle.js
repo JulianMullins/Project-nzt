@@ -3064,7 +3064,7 @@ var GameOverOverlay = React.createClass({
           { className: 'classic' },
           'You need ',
           this.state.scoreToPass * this.state.nLevel * this.state.modeMultiplier,
-          'points to unlock level ',
+          ' points to unlock level ',
           this.state.nLevel + 1
         ),
         gameOverCongrats: React.createElement(
@@ -3093,13 +3093,13 @@ var GameOverOverlay = React.createClass({
             React.createElement(
               _reactRouter.Link,
               { to: '/gameOver/login' },
-              'Login'
+              'Login '
             ),
             'or',
             React.createElement(
               _reactRouter.Link,
               { to: '/gameOver/register' },
-              'sign up'
+              ' Sign Up '
             ),
             'to save your progress, view statistics and compete with friends!'
           )
@@ -3114,13 +3114,13 @@ var GameOverOverlay = React.createClass({
             React.createElement(
               _reactRouter.Link,
               { to: '/gameOver/login' },
-              'Login'
+              'Login '
             ),
             'or',
             React.createElement(
               _reactRouter.Link,
               { to: '/gameOver/register' },
-              'sign up'
+              ' Sign Up '
             ),
             'to save your progress, view statistics and compete with friends!'
           )
