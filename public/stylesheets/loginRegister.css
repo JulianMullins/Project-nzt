@@ -280,4 +280,26 @@ input {
   .registerContent .buttongroup a {
     width: 50%;
   }
+
+  .register {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  .register form input {
+    width: 70vw;
+  }
+  .register .buttongroup {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+    height: 20vh;
+  }
+  .register .buttongroup button {
+    width: 80%;
+    height: 48%;
+  }
 }
