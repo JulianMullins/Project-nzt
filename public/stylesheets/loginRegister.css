@@ -41,13 +41,11 @@
   font-size: 3em;
   font-family: "proxima-nova", sans-serif;
 }
-
 .pa a {
   text-decoration: none;
-  color:white;
+  color: white;
 }
-
-.register-log > h3 {
+.register-log> h3 {
   font-weight: 300;
   text-align: center;
   margin: 1em 1em 0;
@@ -76,13 +74,13 @@ input, button {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-	border: none;
-	background: #3b5998;
-	width: 20vw;
-	height: 60px;
-  font-size:calc(12px + .5vw);
-	color: #fff;
-	text-transform: uppercase;
+  border: none;
+  background: #3b5998;
+  width: 20vw;
+  height: 60px;
+  font-size: calc(12px + .5vw);
+  color: #fff;
+  text-transform: uppercase;
   text-decoration: none;
   padding: 20px 0 20px;
   cursor: pointer;
@@ -94,12 +92,12 @@ input, button {
   background-color: white;
 }
 button.form-btn {
-	width: 50vw;
-	height: 60px;
-	bottom: 0;
-	border: 0;
-  font-size:calc(12px + .5vw);
-	text-transform: uppercase;
+  width: 50vw;
+  height: 60px;
+  bottom: 0;
+  border: 0;
+  font-size: calc(12px + .5vw);
+  text-transform: uppercase;
   margin: 2vw;
 }
 button.form-btn.sx {
@@ -109,9 +107,9 @@ button.form-btn.sx {
   transition: all 0.3s linear;
 }
 button.form-btn.dx:hover {
-	background-color:rgba(255, 125, 0, 0.65);
-  cursor:pointer;
-	color: #fff;
+  background-color: rgba(255, 125, 0, 0.65);
+  cursor: pointer;
+  color: #fff;
 }
 button.form-btn.dx {
   right: 0;
@@ -120,9 +118,9 @@ button.form-btn.dx {
   width: 20vw;
 }
 button.form-btn.dx2:hover {
-	background-color:rgba(203,14,27,0.65);
-  cursor:pointer;
-	color: #fff;
+  background-color: rgba(203, 14, 27, 0.65);
+  cursor: pointer;
+  color: #fff;
 }
 button.form-btn.dx2 {
   right: 0;
@@ -134,12 +132,11 @@ button.form-btn.dx a, button.form-btn.dx2 a {
   text-decoration: none;
   color: white;
 }
-
 .register-log button.form-btn.dx {
   background-color: #f13542;
 }
 .register-log button.form-btn.dx:hover {
-	background-color: rgba(203,14,27,0.65);
+  background-color: rgba(203, 14, 27, 0.65);
   color: white;
 }
 .register-log button.form-btn.dx a {
@@ -148,6 +145,7 @@ button.form-btn.dx a, button.form-btn.dx2 a {
 }
 
 /*register page*/
+
 .register {
   height: 100%;
   width: 100%;
@@ -163,7 +161,6 @@ button.form-btn.dx a, button.form-btn.dx2 a {
   align-items: center;
   flex-direction: column;
 }
-
 input {
   border: none;
   border-bottom: 1px solid white;
@@ -195,7 +192,6 @@ input {
   font-weight: 100;
   text-align: center;
 }
-
 @media all and (max-width: 768px) {
   .screen {
     display: flex;
@@ -203,7 +199,7 @@ input {
     height: 100vh;
     width: 100vw;
   }
-  .login, .register-log {
+  .login {
     height: 55vh;
     width: 100vw;
     color: white;
@@ -223,16 +219,19 @@ input {
     flex-direction: column;
     transition-duration: 0s;
   }
+  .login:hover, .register-log:hover {
+    transition-duration: 0s;
+  }
   .loginContent {
     height: 100%;
   }
   .loginContent form input {
     width: 70%;
   }
-  .login:hover, .register-log:hover{
+  .login:hover, .register-log:hover {
     width: 100vw;
   }
-  .login h1, .register-log h1{
+  .login h1, .register-log h1 {
     font-size: calc(16px + 10vw);
   }
   .pa {
@@ -269,7 +268,7 @@ input {
   .registerContent h3 {
     font-size: calc(10px + 2vw);
   }
-  .register-log form{
+  .register-log form {
     width: 90vw;
     padding-top: 5vw;
     display: flex;
