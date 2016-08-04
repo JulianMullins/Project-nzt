@@ -186,8 +186,6 @@ var GameOverOverlay = React.createClass({
   },
   countUp: function(count) {
     var div_by = 100;
-    console.log(count, 'count')
-    console.log(!this.state.fullScore);
     //count=parseInt(count)
     var speed = parseFloat(count / div_by);
     //console.log('ini speed', speed);
@@ -236,7 +234,9 @@ var GameOverOverlay = React.createClass({
               <tr className="totalScore">
                 <td>total score:
                 </td>
-                <td className="count scoreValue">{!this.state.fullscore ? 0 : this.countUp(this.state.fullScore)}</td>
+                <td className="count scoreValue">{!this.state.fullscore
+                    ? 0
+                    : this.countUp(this.state.fullScore)}</td>
               </tr>
             </tbody>
           </table>
