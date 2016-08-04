@@ -721,21 +721,25 @@ var ClassicMode = React.createClass({
       keepScore: false,
       tempUser: true,
       gameId: null,
-      mode: 'classic'
+      mode: 'classic',
+      modeMultiplier: 1,
+      penalty: 0,
+      positivePoints: 0
     };
   },
   componentDidMount: function componentDidMount() {
     startGameFunction(this.state.mode, this.state.N, function (err, obj) {
       if (err) {
-        this.props.history.push('/levels/' + this.state.mode);
+        this.props.history.push('/levels/' + this.state.mode + '/unauthorized');
+        return;
       }
+      console.log(obj);
       this.setState({
         tempUser: obj.tempUser,
         gameId: obj.gameId,
         modeMultiplier: obj.modeMultiplier,
         penalty: obj.penalty,
-        positivePoints: obj.positivePoints,
-        userId: obj.userId
+        positivePoints: obj.positivePoints
       });
     }.bind(this));
     console.log("component mounted");
@@ -883,15 +887,24 @@ var ClassicMode = React.createClass({
       if (timeKeeper === 0) {
         clearInterval(iterations);
         setTimeout(function () {
-          console.log(reactionTimes, 'reaction times');
-          console.log(matchHit / matchCount, 'accuracy');
-          console.log(this.state);
 
-          endGameFunction(fullScore, reactionTimes, this.state.gameId, this.state.userId, function (success) {
+          //////////////////////////////////////
+          //////////////////////////////////////
+          ////////////////////////////////////// 
+
+          console.log(reactionTimes, 'reaction times');
+          var accuracy = matchHit / matchCount;
+          console.log(accuracy, 'accuracy');
+
+          endGameFunction(fullScore, reactionTimes, this.state.gameId, accuracy, function (success) {
             if (success) {
               this.props.history.push('/gameOver');
             }
           }.bind(this));
+
+          //////////////////////////////////////
+          //////////////////////////////////////
+          //////////////////////////////////////
         }.bind(this), 2000);
       }
     }.bind(this), 2000);
