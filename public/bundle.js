@@ -3229,6 +3229,11 @@ var GameOverOverlay = React.createClass({
     }, int_speed);
   },
   render: function render() {
+    if (this.state.baseScore === 0) {
+      this.setState({
+        fullScore: 0
+      });
+    }
     return React.createElement(
       'div',
       { className: 'gameOver', id: 'gameover' },
