@@ -128,21 +128,30 @@ passport.use(new LocalStrategy({
             user.currentGame = req.session.user.currentGame;
             
             Stats.findById(req.session.user.stats,function(err,sessionStats){
+              console.log(sessionStats)
               user.stats.combineStats(sessionStats);
-              user.combineMaxN(req.session.user.maxN);
-              user.stats.leaderboard = combineLeaderboards(user.stats.leaderboard,sessionStats.leaderboard,function(leaderboard){
-                user.stats.save(function(err,stats){
-                  user.save(function(err,user){
-                    if(err){
-                      return done(err);
-                    }
-                    else{
-                      req.session.user = user;
-                      return done(null,user)
-                    }
-                  });
-                })
-              })
+              user.combineMaxNCurrentGame(req.session.user.maxN);
+              console.log("about to combine leaderboards")
+              combineLeaderboards(user.stats.leaderboard,sessionStats.leaderboard,
+                req.session.user._id,req.session.user.username,
+                   function(leaderboard){
+                    console.log("leaderboards combined")
+                    leaderboard.save(function(err,leaderboard){
+                      user.stats.save(function(err,stats){
+                        console.log("combine leaderboard callback")
+                        user.save(function(err,user){
+                          if(err){
+                            return done(err);
+                          }
+                          else{
+                            req.session.user = user;
+                            return done(null,user)
+                          }
+                        });
+                      })
+                    })
+                      
+                  })
               
             });
 
@@ -163,18 +172,45 @@ passport.use(new LocalStrategy({
   }
 ));
 
-var combineLeaderboards = function(leaderboard1,leaderboard2,callback){
+var combineLeaderboards = function(leaderboard1,leaderboard2,userId, username, callback){
+  console.log("combining leaderboards in combineLeaderboards")
+  console.log(leaderboard1,leaderboard2)
   Leaderboard.findById(leaderboard1)
     .populate('scores')
     .exec(function(err,leaderboard1){
+      console.log("leaderboard1 found")
     Leaderboard.findById(leaderboard2)
       .populate('scores')
       .exec(function(err,leaderboard2){
+        if(err){
+          console.log(err)
+        }
+        else{
+          console.log("leaderboard2: ",leaderboard2)
+        }
 
         console.log(leaderboard1,leaderboard2)
+        leaderboard2.userId = userId;
+        
+        if(leaderboard2.scores.length==0){
+          return callback(leaderboard1);
+        }
+        else{
+          for(var i=0;i<leaderboard2.scores.length;i++){
+            leaderboard2.scores[i].user = userId;
+            if(i==leaderboard2.scores.length-1){
 
-      return callback(leaderboard1.mergeScoresArrays(leaderboard1.scores,leaderboard2.scores));
 
+
+
+              leaderboard1.scores = leaderboard1.mergeScoresArrays(leaderboard1.scores,leaderboard2.scores);
+              leaderboard1.save(function(err,leaderboard){
+                return callback(leaderboard)
+              })
+            }
+          }
+        }
+        
     })
   })
 }
@@ -267,7 +303,7 @@ passport.use(new FacebookStrategy({
             currentGame:[]
           })
 
-          var leaderboard = new Leaderboard({user:u._id});
+          var leaderboard = new Leaderboard({userId:u._id,user:username});
           leaderboard.save();
           var userStats = new Stats({user:u._id,leaderboard:leaderboard._id});
           userStats.save();

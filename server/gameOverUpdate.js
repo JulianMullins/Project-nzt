@@ -68,6 +68,9 @@ var checkOverall = function(newHighScore, callback) {
           if (leaderboard && !err) {
             return callback(isHighScore);
           }
+          else{
+            console.log(err);
+          }
         });
       } else if (newHighScore.score > overallHighScores[leaderboard.scores.length - 1].score) {
         console.log("leaderboard full, but highscore")
@@ -82,10 +85,15 @@ var checkOverall = function(newHighScore, callback) {
           }
         }
         isHighScore = true;
-        console.log("leaderboard about to save")
+        console.log("overall leaderboard about to save")
         leaderboard.save(function(err, leaderboard) {
+          console.log("saving")
           if (leaderboard && !err) {
+            console.log("leaderboard save succeeded")
             return callback(isHighScore);
+          }
+          else{
+            console.log(err);
           }
         });
 
@@ -165,11 +173,9 @@ var checkLeaderboards = function(req,res,user,tempGame,newHighScore){
 
     //update personal and overall leaderboards
   var isMyHighScore = null;
-  var isOverallHighScore = null;
 
   
   checkOverall(newHighScore, function(isOverallHighScore) {
-    isOverallHighScore = isOverallHighScore;
 
     if(user.temp){
       if (isOverallHighScore) {

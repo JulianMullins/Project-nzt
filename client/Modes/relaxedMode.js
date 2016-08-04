@@ -62,10 +62,15 @@ var RelaxedMode = React.createClass({
       if (err) {
         this.props.history.push('/levels/' + this.state.mode + '/unauthorized');
         return;
-
       }
       console.log(obj)
-      this.setState({tempUser: obj.tempUser, gameId: obj.gameId, modeMultiplier: obj.modeMultiplier, penalty: obj.penalty, positivePoints: obj.positivePoints})
+      this.setState({
+        tempUser: obj.tempUser, 
+        gameId: obj.gameId, 
+        modeMultiplier: obj.modeMultiplier, 
+        penalty: obj.penalty, 
+        positivePoints: obj.positivePoints
+      })
     }.bind(this));
     console.log("component mounted")
   },

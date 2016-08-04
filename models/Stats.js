@@ -26,6 +26,7 @@ statsSchema.methods.combineStats=function(stats2){
 	this.totalPoints+=stats2.totalPoints;
 	this.progress = this.progress.concat(stats2.progress);
 	this.save();
+	console.log("stats combined");
 		
 }
 

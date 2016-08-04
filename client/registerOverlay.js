@@ -106,7 +106,7 @@ var RegisterOverlay = React.createClass({
 
       }
       else{
-        this.props.history.push('/register/error')
+        this.setState({error:'error'})
       }
     }.bind(this));
 

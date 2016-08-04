@@ -95,7 +95,7 @@ module.exports = function(passport) {
                     currentGame:[]
                   });
 
-                  var leaderboard = new Leaderboard({user:u._id});
+                  var leaderboard = new Leaderboard({userId:u._id,user:u.username});
                   leaderboard.save();
                   var userStats = new Stats({user:u._id,leaderboard:leaderboard._id});
                   userStats.save();
@@ -152,22 +152,7 @@ module.exports = function(passport) {
 
   });
 
-
-  //not in use right now
-  var loginAfterRegister =function(username,password){
-    axios.post('/login', {
-      username: this.state.username,
-      password: this.state.password
-    }).then(function(response) {
-      console.log("response")
-      if (response.data.success) {
-        res.json({success:true})
-      } 
-    }.bind(this))
-    
-  };
-
-  
+ 
 
   router.get('/login/failure',function(req,res,next){
     //res.status(401).json({success:false})
@@ -221,7 +206,7 @@ module.exports = function(passport) {
         }
       });
 
-      
+
       // console.log("before save", req.session.user);
       // req.session.user.save(function(err,user){
       //   if(err){

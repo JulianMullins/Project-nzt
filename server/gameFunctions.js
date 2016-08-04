@@ -91,7 +91,7 @@ router.post('/startGame/:mode/:nLevel',function(req,res,next){
         email:null
       })
 
-      var leaderboard = new Leaderboard({user:tempUser._id});
+      var leaderboard = new Leaderboard({userId:tempUser._id,user:tempUser.username});
       leaderboard.save();
       var userStats = new Stats({user:tempUser._id,leaderboard:leaderboard._id});
       userStats.save();

@@ -45,6 +45,9 @@ var LoginOverlay = React.createClass({
       if (response.data.success) {
         this.props.history.goBack();
       }
+      else{
+        this.setState({error:"error"})
+      }
     }.bind(this))
   },
 
