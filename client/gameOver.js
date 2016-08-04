@@ -207,6 +207,11 @@ var GameOverOverlay = React.createClass({
 
   },
   render: function() {
+    if (this.state.baseScore === 0) {
+      this.setState({
+        fullScore: 0
+      })
+    }
     return (
       <div className="gameOver" id="gameover">
         <div className="gameOverHeader">
