@@ -178,3 +178,53 @@
     display: none;
   }
 }
+
+@media (max-height: 768px) {
+  .gameOver h2 {
+    font-size: 28px;
+  }
+
+  .gameOverHeader {
+    justify-content: center;
+    height: 20%;
+    padding: 0;
+  }
+
+  .gameOverHeader h1 {
+    font-size: 36px;
+  }
+
+  .scoreTable {
+    height: 40%;
+  }
+
+  .scoreTable td {
+    font-size: 24px;
+  }
+
+  .gameOverPrompt {
+    height: 20%;
+  }
+
+  .gameOverPrompt p {
+    font-size: 24px;
+  }
+
+  .gameOverActions {
+    height: 20%;
+    margin: 0;
+    justify-content: center;
+  }
+
+  .levelButton {
+    padding: 5px;
+  }
+
+  .homeLink {
+    display: none;
+  }
+
+  .leaderLink {
+    display: none;
+  }
+}
