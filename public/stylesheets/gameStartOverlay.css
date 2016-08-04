@@ -199,6 +199,7 @@
 
 @media (max-height: 768px) {
   .overlayContent p {
+    font-size: 20px;
     line-height: 1;
   }
 
