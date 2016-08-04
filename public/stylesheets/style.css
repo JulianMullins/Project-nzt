@@ -177,7 +177,7 @@ h3 {
     transition-duration: 0s;
   }
   .menu-panel:hover {
-    width: 50vw;
+    width: calc(50vw - 4px);
     transition-duration: 0s;
   }
   .menu-panel> h2 {

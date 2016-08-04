@@ -206,7 +206,7 @@
   color: #01B6A7;
   cursor: pointer;
 }
-@media all and (max-width: 640px) {
+@media all and (max-width: 768px) {
   .bt-menu-trigger {
     width: 10vw;
     height: 10vw;

@@ -7,7 +7,15 @@ import {Link} from 'react-router';
 var LoginOverlay = React.createClass({
   getInitialState: function() {
     console.log(this)
-    return {username: '', password: '', gameEnded: false, games: null}
+
+    return {
+      username: '', 
+      password: '', 
+      gameEnded: false, 
+      games: null,
+      error:this.props.params.error
+    }
+
   },
   componentDidMount() {},
   update(e) {
@@ -45,14 +53,17 @@ var LoginOverlay = React.createClass({
       <div className="screen">
 
         <div className="login" id="login">
+
           <div className="loginContent">
             <h1>Hey you!</h1>
             <div className="pa">Login here.</div>
             <form>
+            {this.state.error}
               <input type="text" placeholder="Name or Email" name="username" id="username" value={this.state.username} onChange={this.update} autoFocus={focus}></input>
               <br></br>
               <input type="password" placeholder="Password" name="password" id="password" value={this.state.password} onChange={this.update}></input>
               <div className="buttongroup">
+
 
                 <Link to="/home">
                   <button className="form-btn dx" onClick={this.login}>Login</button>

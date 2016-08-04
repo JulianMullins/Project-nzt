@@ -87,12 +87,12 @@ ReactDOM.render((
       <Route path="home" component={Home} />
 
       <Route path="login/facebook" component={FacebookLogin}/>
-      <Route path="gameOver/login" component={Login}/>
-      <Route path="gameOver/register" component={Register}/>
-      <Route path="login" component={Login}/>
+      <Route path="gameOver/login(/:error)" component={Login}/>
+      <Route path="gameOver/register(/:error)" component={Register}/>
+      <Route path="login(/:error)" component={Login}/>
       <Route path="logout" component={Logout}/>
-
-      <Route path="register" component={Register}/>
+      <Route path="register(/:error)" component={Register}/>
+      
       <Route path="gameOver" component={GameOver}/>
       <Route path="leaderboard" component={Leaderboard}/>
       <Route path="stats" component={Stats}/>

@@ -10,30 +10,21 @@ var RegisterOverlay = React.createClass({
       email:'',
       password:'',
       passwordConfirm:'',
-      name:''
+      name:'',
+      gameEnded:false,
+      error:this.props.params.error
     }
   },
-  // componentDidMount(){
-  //   if(this.props.location.pathname =='/gameOver/register'){
+  componentDidMount(){
+    if(this.props.location.pathname =='/gameOver/register'){
 
-  //     this.setState({
-  //       gameEnded:true
-  //     })
+      this.setState({
+        gameEnded:true
+      })
 
-  //     fetch('/getUser',{
-  //       method:'get'
-  //     }).then(function(response){
-  //         return response.json();
-  //     }).then(function(response){
-  //       if(response.games){
-  //         this.setState({
-  //           gameId:response.games
-  //         })
-  //       }
-  //     }.bind(this))
-  //   }
+    }
 
-  // },
+  },
   // click(e){
   //   e.preventDefault();
   //   if(this.state.gameEnded){
@@ -100,17 +91,22 @@ var RegisterOverlay = React.createClass({
         }).then(function(response){
           console.log(response)
           if(response.data.success){
-            this.props.history.goBack();
+            if(!this.state.gameEnded){
+              this.props.history.push('/home')
+            }
+            else{
+              this.props.history.goBack();
+            }
           }
           else{
-            this.props.history.push('/login')
+            this.props.history.push('/login/error')
           }
         }.bind(this))
 
 
       }
       else{
-        this.props.history.push('/register')
+        this.props.history.push('/register/error')
       }
     }.bind(this));
 
@@ -123,6 +119,7 @@ var RegisterOverlay = React.createClass({
           <h1>Welcome</h1>
           <div className="pa">Create an account to get started.</div>
           <form>
+            {this.state.error}
             <input type="text" placeholder="Name" name="name" id="name" value={this.state.name} onChange={this.update}></input>
             <br></br>
             <input type="text" placeholder="Username" name="username" id="username" value={this.state.username} onChange={this.update}></input>
