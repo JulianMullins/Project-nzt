@@ -182,7 +182,7 @@
   }
 }
 
-@media (max-width: 768px) {
+@media all and (max-width: 768px) {
   .overlay {
     padding: 0;
     justify-content: center;

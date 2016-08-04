@@ -2718,6 +2718,9 @@ var GameOverOverlay = React.createClass({
 
     this.setScore();
     this.getData();
+    if (this.state.baseScore === 0) {
+      this.setState({ fullScore: 0 });
+    }
     //this.setState({firstRender: false})
   },
   setScore: function setScore() {
@@ -2747,7 +2750,7 @@ var GameOverOverlay = React.createClass({
       this.unlockLevel();
       this.anonHighScore();
       this.nextLevelBtn();
-      score = parseFloat(this.state.score);
+      score = parseFloat(this.state.fullScore);
       var n = parseInt(this.state.nLevel);
       var modeM = parseInt(this.state.modeMultiplier);
       var totalScore = parseInt(score * n * modeM);
@@ -2792,7 +2795,7 @@ var GameOverOverlay = React.createClass({
           { className: 'classic' },
           'You need ',
           this.state.scoreToPass * this.state.nLevel * this.state.modeMultiplier,
-          ' points to unlock level ',
+          'points to unlock level ',
           this.state.nLevel + 1
         ),
         gameOverCongrats: React.createElement(
@@ -2807,8 +2810,7 @@ var GameOverOverlay = React.createClass({
   anonHighScore: function anonHighScore() {
     //if anon get high score, prompt to login
     if (this.state.isAnon && this.state.isHighScore) {
-      this.setState({
-        gameOverMessage: React.createElement(
+      this.setState({ gameOverMessage: React.createElement(
           'div',
           { className: 'gameOverPrompt' },
           React.createElement(
@@ -2824,19 +2826,17 @@ var GameOverOverlay = React.createClass({
               { to: '/gameOver/login' },
               'Login'
             ),
-            ' or',
+            'or',
             React.createElement(
               _reactRouter.Link,
               { to: '/gameOver/register' },
-              ' sign up '
+              'sign up'
             ),
             'to save your progress, view statistics and compete with friends!'
           )
-        )
-      });
+        ) });
     } else if (this.state.isAnon && !this.state.isHighScore) {
-      this.setState({
-        gameOverMessage: React.createElement(
+      this.setState({ gameOverMessage: React.createElement(
           'div',
           { className: 'gameOverPrompt' },
           React.createElement(
@@ -2847,19 +2847,17 @@ var GameOverOverlay = React.createClass({
               { to: '/gameOver/login' },
               'Login'
             ),
-            ' or',
+            'or',
             React.createElement(
               _reactRouter.Link,
               { to: '/gameOver/register' },
-              ' sign up '
+              'sign up'
             ),
             'to save your progress, view statistics and compete with friends!'
           )
-        )
-      });
+        ) });
     } else if (!this.state.isAnon && this.state.isHighScore) {
-      this.setState({
-        gameOverMessage: React.createElement(
+      this.setState({ gameOverMessage: React.createElement(
           'div',
           { className: 'gameOverPrompt' },
           React.createElement(
@@ -2867,12 +2865,9 @@ var GameOverOverlay = React.createClass({
             null,
             'You have earned a high score on the global leaderboard!'
           )
-        )
-      });
+        ) });
     } else if (!this.state.isAnon && !this.state.isHighScore) {
-      this.setState({
-        gameOverMessage: React.createElement('div', null)
-      });
+      this.setState({ gameOverMessage: React.createElement('div', null) });
     }
   },
   update: function update(e) {
@@ -2919,6 +2914,7 @@ var GameOverOverlay = React.createClass({
   countUp: function countUp(count) {
     var div_by = 100;
     console.log(count, 'count');
+    console.log(!this.state.fullScore);
     //count=parseInt(count)
     var speed = parseFloat(count / div_by);
     //console.log('ini speed', speed);
@@ -2939,11 +2935,6 @@ var GameOverOverlay = React.createClass({
     }, int_speed);
   },
   render: function render() {
-    if (this.state.baseScore === 0) {
-      this.setState({
-        fullScore: 0
-      });
-    }
     return React.createElement(
       'div',
       { className: 'gameOver', id: 'gameover' },
@@ -3017,7 +3008,7 @@ var GameOverOverlay = React.createClass({
               React.createElement(
                 'td',
                 { className: 'count scoreValue' },
-                this.countUp(this.state.fullScore)
+                !this.state.fullscore ? 0 : this.countUp(this.state.fullScore)
               )
             )
           )
