@@ -104,9 +104,9 @@ var ClassicMode = React.createClass({
       timeKeeper--;
 
  //all double match cases
-      if(this.state.positionMatch && this.state.colorMatch){
+      if(this.state.positionMatch && this.state.soundMatch){
         //only hit position
-        if(this.state.positionPressed && !this.state.colorPressed){
+        if(this.state.positionPressed && !this.state.soundPressed){
           matchHit+=1;
           reactionTimes.push(reactionEnd-reactionStart);
           currentScore = ((2000 - reactionTimes[reactionTimes.length - 1]) / 100).toFixed(2)+1;
@@ -117,8 +117,8 @@ var ClassicMode = React.createClass({
             alertType: 'halfPos'
           })
         }
-        //only hit color
-        if(this.state.colorPressed && !this.state.positionPressed){
+        //only hit sound
+        if(this.state.soundPressed && !this.state.positionPressed){
           matchHit+=1;
           reactionTimes.push(reactionEnd-reactionStart);
           currentScore = ((2000 - reactionTimes[reactionTimes.length - 1]) / 100).toFixed(2)+1;
@@ -129,7 +129,7 @@ var ClassicMode = React.createClass({
             alertType: 'halfPos'
           })
           }
-          if(this.state.colorPressed && this.state.positionPressed){
+          if(this.state.soundPressed && this.state.positionPressed){
           matchHit+=2;
           reactionTimes.push(reactionEnd-reactionStart);
           currentScore = ((2000 - reactionTimes[reactionTimes.length - 1])*2 / 100).toFixed(2)+1;
@@ -141,7 +141,7 @@ var ClassicMode = React.createClass({
           })
           }     
         //complete miss= only way to lose points in this case
-        if(!this.state.colorPressed && !this.state.positionPressed){
+        if(!this.state.soundPressed && !this.state.positionPressed){
           this.setState({
             alert: 'Missed two matches',
             alertType: 'none'
@@ -149,7 +149,7 @@ var ClassicMode = React.createClass({
           if(this.state.score>=5){
             currentScore=5;
             fullScore-=parseFloat(currentScore);
-            this.state.score=this.state.score-5
+            this.state.score=this.state.score-5;
           }
           else{
             currentScore=this.state.score;
@@ -159,19 +159,19 @@ var ClassicMode = React.createClass({
         }
         this.setState({
           positionMatch: false,
-          colorMatch: false,
+          soundMatch: false,
           positionPressed: false,
-          colorPressed: false,
+          soundPressed: false,
           posStyle: noStyle,
-          colorStyle: noStyle, 
+          soundStyle: noStyle, 
           score: this.state.score
         })
       }
 
-      ///color match cases
-      if(this.state.colorMatch){
-        //color match
-        if(this.state.colorPressed){
+      ///sound match cases
+      if(this.state.soundMatch){
+        //sound match
+        if(this.state.soundPressed){
           matchHit+=1
           this.setState({
             alert: 'Match!',
@@ -182,8 +182,8 @@ var ClassicMode = React.createClass({
           fullScore+=parseFloat(currentScore);
           this.state.score+=Math.floor(currentScore);
         }
-        //missed color match
-        if(!this.state.colorPressed){
+        //missed sound match
+        if(!this.state.soundPressed){
           this.setState({
             alert: 'Missed a match!',
             alertType: 'none'
@@ -199,7 +199,7 @@ var ClassicMode = React.createClass({
           }
         }
         //incorrect match
-        if(this.state.posPressed){
+        if(this.state.positionPressed){
           matchHit-=1;
           this.setState({
             alert: 'Not a match!',
@@ -250,11 +250,11 @@ var ClassicMode = React.createClass({
         }
         this.setState({
           positionMatch: false,
-          colorMatch: false,
+          soundMatch: false,
           positionPressed: false,
-          colorPressed: false,
+          soundPressed: false,
           posStyle: noStyle,
-          colorStyle: noStyle, 
+          soundStyle: noStyle, 
           score: this.state.score
         })
       }
@@ -291,7 +291,7 @@ var ClassicMode = React.createClass({
           }
         }
         //incorrect match
-        if(this.state.colorPressed){
+        if(this.state.soundPressed){
           matchHit-=1;
           this.setState({
             alert: 'Not a match!',
@@ -349,16 +349,16 @@ var ClassicMode = React.createClass({
         }
         this.setState({
           positionMatch: false,
-          colorMatch: false,
+          soundMatch: false,
           positionPressed: false,
-          colorPressed: false,
+          soundPressed: false,
           posStyle: noStyle,
-          colorStyle: noStyle, 
+          soundStyle: noStyle, 
           score: this.state.score
         })
       }
       //hit match when none
-      if(this.state.colorPressed || this.state.positionPressed){
+      if(this.state.soundPressed || this.state.positionPressed){
         matchHit-=1;
         this.setState({
             alert: 'Not a match!',
@@ -376,15 +376,17 @@ var ClassicMode = React.createClass({
           }
           this.setState({
           positionMatch: false,
-          colorMatch: false,
+          soundMatch: false,
           positionPressed: false,
-          colorPressed: false,
+          soundPressed: false,
           posStyle: noStyle,
-          colorStyle: noStyle, 
+          soundStyle: noStyle, 
           score: this.state.score
         })
       }
 
+      reactionStart= new Date();
+      reactionEnd=null;
       setTimeout(function() {
         this.setState({alert: ' ', alertType: ' '});
       }.bind(this), 800);
@@ -401,7 +403,7 @@ var ClassicMode = React.createClass({
         var pMatch = true;
       }
 
-      //case 2: color match
+      //case 2: sound match
       if (timeTilSoundMatch === 0) {
         matchCount+=1;
         this.setState({soundMatch: true, keepScore: true})
@@ -421,7 +423,7 @@ var ClassicMode = React.createClass({
         while (nextPosition == positionQueue[0]) {
           nextPosition = parseInt(Math.random() * 9);
         }
-        // resize array to N: color
+        // resize array to N: sound
         positionQueue.push(nextPosition);
         if (positionQueue.length > this.state.N) {
           positionQueue.splice(0, 1);
@@ -434,7 +436,7 @@ var ClassicMode = React.createClass({
         while (nextSound == soundQueue[0]) {
           nextSound = parseInt(Math.random() * 9);
         }
-        // resize array to N: color
+        // resize array to N: sound
         soundQueue.push(nextSound);
         if (soundQueue.length > this.state.N) {
           soundQueue.splice(0, 1);
@@ -490,7 +492,6 @@ var ClassicMode = React.createClass({
       }
     }
     this.setState({
-      positionMatch: !this.state.positionMatch,
       positionPressed: true,
       posStyle: pushStyle
     });
@@ -505,7 +506,6 @@ var ClassicMode = React.createClass({
       }
     }
     this.setState({
-      soundMatch: !this.state.soundMatch,
       soundPressed: true,
       soundStyle: pushStyle
     });
@@ -517,7 +517,7 @@ var ClassicMode = React.createClass({
 
     var scoreAlert;
     var scoreUpdate;
-    if (this.state.alert === "Good job") {
+if (this.state.alertType === 'full') {
       scoreAlert = (
         <div className="scoreAlertPositive">
           {this.state.alert}
@@ -528,7 +528,7 @@ var ClassicMode = React.createClass({
           color: 'green'
         }}>+{parseInt(currentScore)}</h2>
       )
-    } else if (this.state.alert === "Not a match" || this.state.alert === "Missed a match") {
+    } else if (this.state.alertType === 'none') {
       scoreAlert = (
         <div className="scoreAlertNegative">
           {this.state.alert}
@@ -538,10 +538,53 @@ var ClassicMode = React.createClass({
         scoreUpdate = (
           <h2 style={{
             color: 'red'
-          }}>-{currentScore}</h2>
+          }}>-{parseInt(currentScore)}</h2>
         )
       }
-    } else {
+    } 
+  else if (this.state.alertType === 'halfPos') {
+      scoreAlert = (
+        <div className="scoreAlertHalf">
+          {this.state.alert}
+        </div>
+      )
+      if (currentScore !== 0) {
+        scoreUpdate = (
+          <h2 style={{
+            color: 'yellow'
+          }}>+{parseInt(currentScore)}</h2>
+        )
+      }
+    }
+    else if (this.state.alertType === 'halfNeg') {
+      scoreAlert = (
+        <div className="scoreAlertHalf">
+          {this.state.alert}
+        </div>
+      )
+      if (currentScore !== 0) {
+        scoreUpdate = (
+          <h2 style={{
+            color: 'yellow'
+          }}>-{parseInt(currentScore)}</h2>
+        )
+      }
+    }
+  else if (this.state.alertType === 'none') {
+      scoreAlert = (
+        <div className="scoreAlertNegative">
+          {this.state.alert}
+        </div>
+      )
+      if (currentScore !== 0) {
+        scoreUpdate = (
+          <h2 style={{
+            color: 'red'
+          }}>-{parseInt(currentScore)}</h2>
+        )
+      }
+    }
+    else {
       scoreAlert = (
         <div></div>
       )
@@ -549,7 +592,6 @@ var ClassicMode = React.createClass({
         <h2></h2>
       )
     }
-
     var gameTimer = this.state.overlay
       ? ""
       : (
