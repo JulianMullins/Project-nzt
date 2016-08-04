@@ -2878,7 +2878,6 @@ var GameOverOverlay = React.createClass({
         start: 0
       });
     }.bind(this))).then(function () {
-      this.renderLogin();
       this.unlockLevel();
       this.anonHighScore();
       this.nextLevelBtn();
@@ -2940,43 +2939,8 @@ var GameOverOverlay = React.createClass({
     console.log("state: ", this.state);
   },
   anonHighScore: function anonHighScore() {
-    //if anon get high score, can save with tempusername, or login
+    //if anon get high score, prompt to login
     if (this.state.isAnon && this.state.isHighScore) {
-      this.setState({
-        gameOverMessage: React.createElement(
-          'p',
-          null,
-          'You earned a high score on our overall leaderboards. If you wish to be added to the leaderboard without logging in, provide a name below to display with your score',
-          React.createElement(
-            'form',
-            null,
-            React.createElement('input', { type: 'text', name: 'anonUserName', onChange: this.update }),
-            React.createElement(
-              _reactRouter.Link,
-              { onClick: this.anonLeaderboard, to: '/leaderboard', type: 'button' },
-              'Submit'
-            )
-          ),
-          'Or, you can',
-          React.createElement(
-            _reactRouter.Link,
-            { to: '/gameOver/login' },
-            'login'
-          ),
-          'or',
-          React.createElement(
-            _reactRouter.Link,
-            { to: '/gameOver/register' },
-            'sign up'
-          ),
-          'to save your progress, view statistics and compete with friends!'
-        )
-      });
-    }
-  },
-  renderLogin: function renderLogin() {
-    //if not logged in, option to login to save
-    if (this.state.isAnon && !this.state.isHighScore) {
       this.setState({
         gameOverMessage: React.createElement(
           'div',
@@ -2984,23 +2948,64 @@ var GameOverOverlay = React.createClass({
           React.createElement(
             'p',
             null,
-            'It looks like you are not currently logged in.',
+            'You have earned a high score on the global leaderboard!'
+          ),
+          React.createElement(
+            'p',
+            null,
             React.createElement(
               _reactRouter.Link,
               { to: '/gameOver/login' },
-              'Sign in '
+              'Login'
             ),
-            ' ',
-            'or',
-            ' ',
+            ' or',
             React.createElement(
               _reactRouter.Link,
               { to: '/gameOver/register' },
-              'sign up'
+              ' sign up '
             ),
             'to save your progress, view statistics and compete with friends!'
           )
         )
+      });
+    } else if (this.state.isAnon && !this.state.isHighScore) {
+      this.setState({
+        gameOverMessage: React.createElement(
+          'div',
+          { className: 'gameOverPrompt' },
+          React.createElement(
+            'p',
+            null,
+            React.createElement(
+              _reactRouter.Link,
+              { to: '/gameOver/login' },
+              'Login'
+            ),
+            ' or',
+            React.createElement(
+              _reactRouter.Link,
+              { to: '/gameOver/register' },
+              ' sign up '
+            ),
+            'to save your progress, view statistics and compete with friends!'
+          )
+        )
+      });
+    } else if (!this.state.isAnon && this.state.isHighScore) {
+      this.setState({
+        gameOverMessage: React.createElement(
+          'div',
+          { className: 'gameOverPrompt' },
+          React.createElement(
+            'p',
+            null,
+            'You have earned a high score on the global leaderboard!'
+          )
+        )
+      });
+    } else if (!this.state.isAnon && !this.state.isHighScore) {
+      this.setState({
+        gameOverMessage: React.createElement('div', null)
       });
     }
   },
@@ -3153,7 +3158,7 @@ var GameOverOverlay = React.createClass({
         { className: 'gameOverActions' },
         React.createElement(
           _reactRouter.Link,
-          { onClick: this.gameOver, to: '/home' },
+          { onClick: this.gameOver, className: 'homeLink', to: '/home' },
           React.createElement('span', { className: 'fa fa-home fa-5x' }),
           React.createElement(
             'h2',
@@ -3167,7 +3172,7 @@ var GameOverOverlay = React.createClass({
           null,
           React.createElement(
             _reactRouter.Link,
-            { onClick: this.gameOver, to: '/leaderboard' },
+            { onClick: this.gameOver, className: 'leaderLink', to: '/leaderboard' },
             React.createElement(
               'span',
               { className: 'lbChart' },
