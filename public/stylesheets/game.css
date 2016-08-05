@@ -335,6 +335,7 @@
     height: 90vh;
     width: 100vw;
     margin-top: 5vh;
+    background-color: transparent;
     justify-content: space-around;;
   }
   .gameFullHeader {
