@@ -226,10 +226,3 @@
     justify-content: center;
   }
 }
-
-@media all and (max-height: 550px) {
-  .bt-menu-trigger {
-    width: 8vw;
-    height: 8vw;
-  }
-}

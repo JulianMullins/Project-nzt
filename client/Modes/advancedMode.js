@@ -92,6 +92,8 @@ var AdvancedMode = React.createClass({
   },
   startGame: function() {
     this.setState({overlay: false});
+    audios[0].play();
+    setInterval(function() {audios[0].play()}, 1);
     this.playGame();
     this.enableKeys();
   },
@@ -351,9 +353,7 @@ var AdvancedMode = React.createClass({
         </div>
       )
       scoreUpdate = (
-        <h2 style={{
-          color: 'green'
-        }}>+{parseInt(currentScore)}</h2>
+        <h2 className="scoreUpdate scoreUpdatePos">+{parseInt(currentScore)}</h2>
       )
     } else if (this.state.alert === "Not a match" || this.state.alert === "Missed a match") {
       scoreAlert = (
@@ -363,9 +363,7 @@ var AdvancedMode = React.createClass({
       )
       if (this.state.score > 0) {
         scoreUpdate = (
-          <h2 style={{
-            color: 'red'
-          }}>-{currentScore}</h2>
+          <h2 className="scoreUpdate scoreUpdateNeg">-{currentScore}</h2>
         )
       }
     } else {
