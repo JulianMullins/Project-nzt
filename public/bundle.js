@@ -197,6 +197,9 @@ var reactionEnd = null;
 var iterations;
 var fullScore = 0;
 
+var nextSound;
+var soundInterval;
+
 var AdvancedMode = React.createClass({
   displayName: 'AdvancedMode',
 
@@ -239,6 +242,7 @@ var AdvancedMode = React.createClass({
   },
   componentWillUnmount: function componentWillUnmount() {
     clearInterval(iterations);
+    clearInterval(soundInterval);
   },
   enableKeys: function enableKeys() {
     window.onkeyup = function (e) {
@@ -255,9 +259,11 @@ var AdvancedMode = React.createClass({
   },
   startGame: function startGame() {
     this.setState({ overlay: false });
-    audios[0].play();
+    var aud = new Audio('./audio/empty.mp3');
+    aud.play();
     setInterval(function () {
-      audios[0].play();
+      aud.src = './audio/' + (nextSound + 1) + '.wav';
+      aud.play();
     }, 2000);
     this.playGame();
     this.enableKeys();
@@ -454,6 +460,7 @@ var AdvancedMode = React.createClass({
 
       if (timeKeeper === 0) {
         clearInterval(iterations);
+        clearInterval(soundInterval);
         setTimeout(function () {
           gameScore = this.state.score;
           console.log(gameScore, 'game score');
@@ -765,6 +772,20 @@ var ClassicMode = React.createClass({
   },
   startGame: function startGame() {
     this.setState({ overlay: false });
+    for (var i = 0; i < 9; i++) {
+      audios[i].volume = 0.0;
+    }
+    setTimeout(function () {
+      for (var i = 0; i < 9; i++) {
+        console.log(audios[i], audios[i].volume);
+        audios[i].play();
+      }
+    }, 300);
+    setTimeout(function () {
+      for (var i = 0; i < 9; i++) {
+        audios[i].volume = 1.0;
+      }
+    }, 1500);
     setTimeout(function () {
       soundInterval = setInterval(function () {
         audios[nextSound].play();
@@ -2299,7 +2320,7 @@ var SilentMode = React.createClass({
     var colorQueue = [];
     var timeTilPositionMatch = parseInt(Math.random() * 5 + this.state.N);
     var timeTilColorMatch = parseInt(Math.random() * 5 + this.state.N);
-    var timeKeeper = 44;
+    var timeKeeper = 9;
 
     iterations = setInterval(function () {
       timeKeeper--;
@@ -4060,10 +4081,10 @@ var LoginOverlay = React.createClass({
 
   getInitialState: function getInitialState() {
     console.log(this);
-    // var error = null;
-    // if(this.props.params.error){
-    //   error = decodeURIComponent(this.props.params.error)
-    // }
+    var error = null;
+    if (this.props.params.error) {
+      error = decodeURIComponent(this.props.params.error);
+    }
     return {
       username: '',
       password: '',
@@ -4099,7 +4120,7 @@ var LoginOverlay = React.createClass({
           this.props.history.push('/home');
         }
       } else {
-        this.props.history.push('/login/error');
+        this.props.history.push('/login/' + encodeURI(response.data.message));
       }
     }.bind(this));
   },
@@ -4495,6 +4516,10 @@ var axios = require('axios');
 var RegisterOverlay = React.createClass({
   displayName: 'RegisterOverlay',
   getInitialState: function getInitialState() {
+    var error = null;
+    if (this.props.params.error) {
+      error = decodeURIComponent(this.props.params.error);
+    }
     return {
       username: '',
       email: '',
@@ -4502,7 +4527,7 @@ var RegisterOverlay = React.createClass({
       passwordConfirm: '',
       name: '',
       gameEnded: false,
-      error: this.props.params.error
+      error: error
     };
   },
   componentDidMount: function componentDidMount() {},
@@ -4555,11 +4580,11 @@ var RegisterOverlay = React.createClass({
               this.props.history.push('/home');
             }
           } else {
-            this.props.history.push('/login/error');
+            this.props.history.push('/login/' + encodeURIComponent(response.data.message));
           }
         }.bind(this));
       } else {
-        this.setState({ error: response.data.message || 'error' });
+        this.setState({ error: response.data.message });
       }
     }.bind(this));
   },

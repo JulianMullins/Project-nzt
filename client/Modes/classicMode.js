@@ -88,6 +88,20 @@ var ClassicMode = React.createClass({
   },
   startGame: function() {
     this.setState({overlay: false});
+    for (var i = 0; i < 9; i++) {
+      audios[i].volume = 0.0;
+    }
+    setTimeout(function() {
+      for (var i = 0; i < 9; i++) {
+        console.log(audios[i], audios[i].volume);
+        audios[i].play();
+      }
+    }, 300);
+    setTimeout(function() {
+      for (var i = 0; i < 9; i++) {
+        audios[i].volume = 1.0;
+      }
+    }, 1500);
     setTimeout(function() {
       soundInterval = setInterval(function() {
         audios[nextSound].play();

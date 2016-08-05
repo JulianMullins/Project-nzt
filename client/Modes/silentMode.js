@@ -91,7 +91,7 @@ var SilentMode = React.createClass({
     var colorQueue = [];
     var timeTilPositionMatch = parseInt((Math.random() * 5) + this.state.N);
     var timeTilColorMatch = parseInt((Math.random() * 5) + this.state.N);
-    var timeKeeper = 44;
+    var timeKeeper = 9;
 
     iterations = setInterval(function() {
       timeKeeper--;
@@ -132,7 +132,7 @@ var SilentMode = React.createClass({
             alert: 'Double Match!',
             alertType: 'full'
           })
-          }     
+          }
         //complete miss= only way to lose points in this case
         if(!this.state.colorPressed && !this.state.positionPressed){
           this.setState({
@@ -156,7 +156,7 @@ var SilentMode = React.createClass({
           positionPressed: false,
           colorPressed: false,
           posStyle: noStyle,
-          colorStyle: noStyle, 
+          colorStyle: noStyle,
           score: this.state.score
         })
       }
@@ -247,7 +247,7 @@ var SilentMode = React.createClass({
           positionPressed: false,
           colorPressed: false,
           posStyle: noStyle,
-          colorStyle: noStyle, 
+          colorStyle: noStyle,
           score: this.state.score
         })
       }
@@ -346,7 +346,7 @@ var SilentMode = React.createClass({
           positionPressed: false,
           colorPressed: false,
           posStyle: noStyle,
-          colorStyle: noStyle, 
+          colorStyle: noStyle,
           score: this.state.score
         })
       }
@@ -373,7 +373,7 @@ var SilentMode = React.createClass({
           positionPressed: false,
           colorPressed: false,
           posStyle: noStyle,
-          colorStyle: noStyle, 
+          colorStyle: noStyle,
           score: this.state.score
         })
       }
@@ -529,7 +529,7 @@ var SilentMode = React.createClass({
           <h2 className="scoreUpdate scoreUpdateNeg">-{parseInt(currentScore)}</h2>
         )
       }
-    } 
+    }
   else if (this.state.alertType === 'halfPos') {
       scoreAlert = (
         <div className="scoreAlertHalf">
