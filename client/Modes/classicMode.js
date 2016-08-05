@@ -88,6 +88,7 @@ var ClassicMode = React.createClass({
   },
   startGame: function() {
     this.setState({overlay: false});
+    audios[0].play();
     setTimeout(function() {
       soundInterval = setInterval(function() {
         audios[nextSound].play();
