@@ -43,7 +43,8 @@ var LoginOverlay = React.createClass({
       if (response.data.success) {
         
         if(this.props.location.pathname.includes('gameOver/login')){
-          this.props.history.goBack();
+          console.log("gameOver login");
+          this.props.history.push('/gameOver');
         }
         else{
           this.props.history.push('/home')

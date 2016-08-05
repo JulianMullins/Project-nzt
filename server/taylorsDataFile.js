@@ -10,16 +10,21 @@ var tempGame = null;
 router.get('/getStats',function(req, res, next){
    //return res.json({stats: req.user.stats})
    //console.log(req.user, 'taylor')
-  Stats.findbyId(req.session.user._id)
+   //console.log(req.session.user)
+  Stats.findById(req.session.user.stats._id)
     .populate('progress')
     .exec(function(err,stats){
       if(err){
         console.log(err)
       }
       else{
+        console.log(stats);
         res.json({stats: stats.progress})
       }
   })
+
+    //res.json({stats:req.session.user.stats.progress})
+
 });
 
 

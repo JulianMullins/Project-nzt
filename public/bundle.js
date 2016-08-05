@@ -3314,12 +3314,28 @@ var React = require('react');
 
 var FacebookLogin = React.createClass({
 	displayName: 'FacebookLogin',
+	getInitialState: function getInitialState() {
+		if (this.props.params.error) {
+			return {
+				error: this.props.params.error,
+				toRender: React.createElement(
+					'div',
+					null,
+					this.props.params.error
+				)
+			};
+		} else {
+			return { toRender: null };
+		}
+	},
 	componentDidMount: function componentDidMount() {
 		console.log("fb login");
-		if (this.props.location.pathname.includes('gameOver')) {
-			this.props.history.go(2);
-		} else {
-			this.props.history.push('/home');
+		if (!this.state.error) {
+			if (this.props.location.pathname.includes('gameOver')) {
+				this.props.history.push('/gameOver');
+			} else {
+				this.props.history.push('/home');
+			}
 		}
 	},
 	render: function render() {
@@ -3415,8 +3431,7 @@ var GameOverOverlay = React.createClass({
       score = parseFloat(this.state.fullScore);
       var n = parseInt(this.state.nLevel);
       var modeM = parseInt(this.state.modeMultiplier);
-      var totalScore = parseInt(score * n * modeM);
-      this.setState({ countUp: this.countUp(totalScore) });
+      this.setState({ countUp: this.countUp(score) });
     }.bind(this));
   },
 
@@ -3805,6 +3820,7 @@ ReactDOM.render(React.createElement(
     React.createElement(_reactRouter.Route, { path: 'home', component: Home }),
     React.createElement(_reactRouter.Route, { path: 'login/facebook/success', component: FacebookLogin }),
     React.createElement(_reactRouter.Route, { path: 'gameOver/login/facebook/success', component: FacebookLogin }),
+    React.createElement(_reactRouter.Route, { path: 'gameOver/login/facebook(/:error)', component: FacebookLogin }),
     React.createElement(_reactRouter.Route, { path: 'gameOver/login(/:error)', component: Login }),
     React.createElement(_reactRouter.Route, { path: 'gameOver/register(/:error)', component: Register }),
     React.createElement(_reactRouter.Route, { path: 'login(/:error)', component: Login }),
@@ -4360,7 +4376,8 @@ var LoginOverlay = React.createClass({
       if (response.data.success) {
 
         if (this.props.location.pathname.includes('gameOver/login')) {
-          this.props.history.goBack();
+          console.log("gameOver login");
+          this.props.history.push('/gameOver');
         } else {
           this.props.history.push('/home');
         }
@@ -4498,6 +4515,8 @@ var Logout = React.createClass({
 		}).then(function (response) {
 			if (response.data.success) {
 				this.props.history.push('/login');
+			} else {
+				this.props.history.push('/login/logoutFailure');
 			}
 		}.bind(this));
 		// this.props.history.push('/home');
@@ -4717,14 +4736,7 @@ var RegisterOverlay = React.createClass({
       error: this.props.params.error
     };
   },
-  componentDidMount: function componentDidMount() {
-    if (this.props.location.pathname == '/gameOver/register') {
-
-      this.setState({
-        gameEnded: true
-      });
-    }
-  },
+  componentDidMount: function componentDidMount() {},
 
   // click(e){
   //   e.preventDefault();
@@ -4768,10 +4780,10 @@ var RegisterOverlay = React.createClass({
         }).then(function (response) {
           console.log(response);
           if (response.data.success) {
-            if (!this.state.gameEnded) {
-              this.props.history.push('/home');
+            if (this.props.location.pathname.includes('/gameOver')) {
+              this.props.history.push('/gameOver');
             } else {
-              this.props.history.goBack();
+              this.props.history.push('/home');
             }
           } else {
             this.props.history.push('/login/error');
@@ -4982,6 +4994,7 @@ var MyComponent = React.createClass({
   componentDidMount: function componentDidMount() {
     axios.get('/getStats', { withCredentials: true }).then(function (responseJson) {
       stats = responseJson.data.stats;
+      console.log(stats);
       this.state.data = [];
       console.log(stats, 'stats');
       if (stats[0]) {

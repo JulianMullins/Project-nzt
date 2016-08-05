@@ -110,7 +110,7 @@ passport.use(new LocalStrategy({
       }
 
       console.log(user)
-
+      user.currentGame = [];
 
       //check hashed passwords
       bcrypt.compare(password,user.password,function(err,response){
@@ -130,8 +130,9 @@ passport.use(new LocalStrategy({
             
             Stats.findById(req.session.user.stats,function(err,sessionStats){
               console.log(sessionStats)
+              user.currentGame = req.session.user.currentGame;
               user.stats.combineStats(sessionStats);
-              user.combineMaxNCurrentGame(req.session.user.maxN,req.session.user.currentGame);
+              user.combineMaxN(req.session.user.maxN);
               console.log("about to combine leaderboards")
               combineLeaderboards(user.stats.leaderboard,sessionStats.leaderboard,
                 req.session.user._id,req.session.user.username,
@@ -426,13 +427,13 @@ app.use(function(req, res, next) {
 if (app.get('env') === 'development') {
   app.use(function(err, req, res, next) {
     res.status(err.status || 500);
-    // res.render('error', {
-    //   message: err.message,
-    //   error: {}
-    // });
+    res.render('error', {
+      message: err.message,
+      error: {}
+    });
     console.log(err);
-    console.log('/#'+req.url+'/'+encodeURIComponent(err))
-    res.redirect('/#'+req.url+'/'+encodeURIComponent(err))
+    // console.log('/#'+req.url+'/'+encodeURIComponent(err))
+    // res.redirect('/#'+req.url+'/'+encodeURIComponent(err))
   });
 }
 

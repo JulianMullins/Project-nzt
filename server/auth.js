@@ -235,7 +235,9 @@ module.exports = function(passport) {
   router.get('/logout', function(req, res,next) {
     console.log("logging out ", req.session.user)
     if(req.session.user){
-      req.session.user.currentGame=[];
+      // var user = req.session.user;
+      // user.currentGame=[];
+      // user.save();
 
       req.logout();
       req.session.destroy(function(err){

@@ -18,6 +18,9 @@ var Logout = React.createClass({
 	    	if(response.data.success){
 	    		this.props.history.push('/login')
 	    	}
+	    	else{
+	    		this.props.history.push('/login/logoutFailure')
+	    	}
 	    }.bind(this))
 	    // this.props.history.push('/home');
 	},
