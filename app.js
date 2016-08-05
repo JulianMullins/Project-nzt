@@ -309,7 +309,8 @@ passport.use(new FacebookStrategy({
               silent: 1,
               advanced: 1
             },
-            currentGame:[]
+            currentGame:[],
+            showTutorial:false
           })
 
           //removed userId

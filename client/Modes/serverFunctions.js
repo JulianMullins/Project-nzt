@@ -50,7 +50,7 @@ var endGameFunction = function(fullScore, reactionTimes, gameId, accuracy, callb
         // }
         // this.props.history.push('/gameOver');
         console.log("gameOver response: "+response.data.success)
-        return callback(response.data.success)
+        return callback(response.data)
       }.bind(this))
     }
   }.bind(this))

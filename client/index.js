@@ -13,6 +13,7 @@ var Login = require('./loginOverlay');
 var FacebookLogin = require('./facebookLogin');
 var Logout = require('./logout');
 var Register = require('./registerOverlay');
+var ErrorPage = require('./errorPage');
 
 var GameOver = require('./gameOver');
 var Leaderboard = require('./leaderboard');
@@ -94,6 +95,7 @@ ReactDOM.render((
       <Route path="login(/:error)" component={Login}/>
       <Route path="logout" component={Logout}/>
       <Route path="register(/:error)" component={Register}/>
+      <Route path="error/:error" component={ErrorPage}/>
       
       <Route path="gameOver" component={GameOver}/>
       <Route path="leaderboard" component={Leaderboard}/>

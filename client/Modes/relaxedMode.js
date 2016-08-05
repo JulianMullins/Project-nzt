@@ -203,9 +203,12 @@ var RelaxedMode = React.createClass({
         var accuracy = matchHit / matchCount;
         console.log(accuracy, 'accuracy')
 
-        endGameFunction(fullScore, reactionTimes, this.state.gameId, accuracy, function(success) {
-          if (success) {
+        endGameFunction(fullScore, reactionTimes, this.state.gameId, accuracy, function(data) {
+          if (data.success) {
             this.props.history.push('/gameOver')
+          }
+          else{
+            this.props.history.push('/error/'+encodeURIComponent(data.message))
           }
         }.bind(this))
 

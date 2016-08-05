@@ -22,7 +22,8 @@ var userSchema = mongoose.Schema({
 	currentGame:[{
 		type: mongoose.Schema.Types.ObjectId,
 		ref: 'Game'
-	}]
+	}],
+	showTutorial:Boolean
 })
 
 userSchema.methods.combineMaxN = function(maxN2){
