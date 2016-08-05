@@ -93,7 +93,9 @@ var AdvancedMode = React.createClass({
   startGame: function() {
     this.setState({overlay: false});
     audios[0].play();
-    setInterval(function() {audios[0].play()}, 1);
+    setInterval(function() {
+      audios[0].play()
+    }, 2000);
     this.playGame();
     this.enableKeys();
   },
