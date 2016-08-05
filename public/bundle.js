@@ -197,6 +197,9 @@ var reactionEnd = null;
 var iterations;
 var fullScore = 0;
 
+var nextSound;
+var soundInterval;
+
 var AdvancedMode = React.createClass({
   displayName: 'AdvancedMode',
 
@@ -239,6 +242,7 @@ var AdvancedMode = React.createClass({
   },
   componentWillUnmount: function componentWillUnmount() {
     clearInterval(iterations);
+    clearInterval(soundInterval);
   },
   enableKeys: function enableKeys() {
     window.onkeyup = function (e) {
@@ -255,9 +259,11 @@ var AdvancedMode = React.createClass({
   },
   startGame: function startGame() {
     this.setState({ overlay: false });
-    audios[0].play();
+    var aud = new Audio('./audio/empty.mp3');
+    aud.play();
     setInterval(function () {
-      audios[0].play();
+      aud.src = './audio/' + (nextSound + 1) + '.wav';
+      aud.play();
     }, 2000);
     this.playGame();
     this.enableKeys();
@@ -454,6 +460,7 @@ var AdvancedMode = React.createClass({
 
       if (timeKeeper === 0) {
         clearInterval(iterations);
+        clearInterval(soundInterval);
         setTimeout(function () {
           gameScore = this.state.score;
           console.log(gameScore, 'game score');
@@ -767,6 +774,7 @@ var ClassicMode = React.createClass({
     this.setState({ overlay: false });
     for (var i = 0; i < 9; i++) {
       audios[i].volume = 0;
+      console.log(audios[i], audios[i].volume);
       audios[i].play();
       audios[i].volume = 1;
     }

@@ -90,6 +90,7 @@ var ClassicMode = React.createClass({
     this.setState({overlay: false});
     for (var i = 0; i < 9; i++) {
       audios[i].volume = 0;
+      console.log(audios[i], audios[i].volume);
       audios[i].play();
       audios[i].volume = 1;
     }
