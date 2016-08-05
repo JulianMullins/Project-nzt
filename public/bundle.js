@@ -524,7 +524,8 @@ var AdvancedMode = React.createClass({
             score: this.state.score
           });
         }
-
+      reactionEnd = null;
+      reactionStart = new Date();
       this.setState({ colorPressed: noStyle, soundPressed: noStyle, positionPressed: noStyle });
       setTimeout(function () {
         this.setState({ alert: ' ', alertType: ' ' });
@@ -532,6 +533,7 @@ var AdvancedMode = React.createClass({
       //NOT GOING TO ACTUALLY LIGHT UP COLORS UNTIL ALL IF STATEMENTS HAVE ITERATED
       //case 1: position match
       if (timeTilPositionMatch === 0) {
+        console.log('position match');
         matchCount += 1;
         this.setState({ positionMatch: true, miss: true });
         //reset position portion
@@ -544,6 +546,7 @@ var AdvancedMode = React.createClass({
       }
       //case 2: color match
       if (timeTilColorMatch === 0) {
+        console.log('color match');
         matchCount += 1;
         this.setState({ colorMatch: true, miss: true });
         //reset position portion
@@ -556,6 +559,7 @@ var AdvancedMode = React.createClass({
       }
       //case 3: sound match
       if (timeTilSoundMatch === 0) {
+        console.log('sound match');
         matchCount += 1;
         this.setState({ soundMatch: true, miss: true });
         //reset position portion
@@ -605,6 +609,7 @@ var AdvancedMode = React.createClass({
       }
 
       reactionStart = Date.now();
+      reactionEnd = null;
       this.state.style[nextPosition] = newStyle[nextColor];
       audios[nextSound].play();
       this.setState({ style: this.state.style });
@@ -630,11 +635,11 @@ var AdvancedMode = React.createClass({
           var accuracy = matchHit / matchCount;
           console.log(accuracy, 'accuracy');
 
-          endGameFunction(fullScore, reactionTimes, this.state.gameId, this.state.userId, function (success) {
-            if (success) {
-              this.props.history.push('/gameOver');
-            }
-          }.bind(this));
+          // endGameFunction(fullScore, reactionTimes, this.state.gameId, this.state.userId, function(success) {
+          //   if (success) {
+          //     this.props.history.push('/gameOver')
+          //   }
+          // }.bind(this))
         }.bind(this), 2000);
         ////////////////////////////////////////////////////////////////////////////////////
       }
