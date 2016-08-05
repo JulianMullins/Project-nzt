@@ -1456,9 +1456,10 @@ var SilentStartOverlay = React.createClass({
           'You are on n-level ',
           this.state.nLevel,
           ', therefore a match occurs when a position/color stimulus from ',
-          this.state.nLevel,
+          this.state.nLevel + " ",
+          ' ',
           this.state.moves,
-          'back matches the current position/color.'
+          ' back matches the current position/color.'
         ),
         React.createElement(
           _reactRouter.Link,
@@ -1550,9 +1551,10 @@ var ClassicStartOverlay = React.createClass({
           'You are on n-level ',
           this.state.nLevel,
           ', therefore a match occurs when a position/sound stimulus from ',
-          this.state.nLevel,
+          this.state.nLevel + " ",
+          ' ',
           this.state.moves,
-          'back matches the current position/sound.'
+          ' back matches the current position/sound.'
         ),
         React.createElement(
           _reactRouter.Link,
@@ -1638,9 +1640,10 @@ var RelaxedStartOverlay = React.createClass({
           'You are on n-level ',
           this.state.nLevel,
           ', therefore a match occurs when a position stimulus from ',
-          this.state.nLevel,
+          this.state.nLevel + " ",
+          ' ',
           this.state.moves,
-          'back matches the current position.'
+          ' back matches the current position.'
         ),
         React.createElement(
           _reactRouter.Link,
@@ -1745,9 +1748,10 @@ var AdvancedStartOverlay = React.createClass({
           'You are on n-level ',
           this.state.nLevel,
           ', therefore a match occurs when a position/sound/color stimulus from ',
-          this.state.nLevel,
+          this.state.nLevel + " ",
+          ' ',
           this.state.moves,
-          'back matches the current position/sound/color.'
+          ' back matches the current position/sound/color.'
         ),
         React.createElement(
           _reactRouter.Link,
