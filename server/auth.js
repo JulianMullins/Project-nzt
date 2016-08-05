@@ -57,7 +57,7 @@ module.exports = function(passport) {
       //user already exists
       else if(!err && userWithSameName){
         console.log(userWithSameName, "register failed")
-        res.json({success:false, message:'user already exists'})
+        res.json({success:false, message:'username already exists'})
         return;
       }
 
@@ -176,7 +176,8 @@ module.exports = function(passport) {
 
   // POST Login page
   router.post('/login', passport.authenticate('local',{failureRedirect:'/login/failure'}), function(req,res,next){
-      
+    console.log(req.session.user); 
+    req.session.user = req.user;
     Stats.findById(req.session.user.stats)
       .populate('leaderboard progress')
       .exec(function(err,stats){
@@ -205,23 +206,38 @@ module.exports = function(passport) {
     });
 
   router.get('/login/facebook/callback',
-    passport.authenticate('facebook',{failureRedirect: '/#/login'} ),
-    function(req, res) {
+    passport.authenticate('facebook',
+      {failureRedirect: '/#/login/error',
+      successRedirect:'/#/login/facebook/success'} ))
+    // ,
+    // function(req, res) {
+    //   console.log(req,req.path,req.location);
+    //   req.session.user = req.user;
+    //   req.session.fullUser = true;
 
-      req.session.user = req.user;
-      req.session.fullUser = true;
+    //   console.log("success",req.session.user)
 
-      console.log("success",req.session.user)
+    //   res.json({success:true});
+    // });
 
-      res.json({success:true});
+  router.get('gameOver/login/facebook',
+    passport.authenticate('facebook', { scope:['email','user_friends']}), function(req,res,next){
+      console.log("getting /login/facebook")
     });
+
+  router.get('gameOver/login/facebook/callback',
+    passport.authenticate('facebook',
+      {failureRedirect: '/#/gameOver/login/error',
+      successRedirect:'/#/gameOver/login/facebook/success'} ))
 
 
   // reset user currentgame and logout (or err if !req.user)
   router.get('/logout', function(req, res,next) {
     console.log("logging out ", req.session.user)
     if(req.session.user){
-      req.session.user.currentGame=[];
+      // var user = req.session.user;
+      // user.currentGame=[];
+      // user.save();
 
       req.logout();
       req.session.destroy(function(err){

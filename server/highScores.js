@@ -1,5 +1,6 @@
 var HighScore = require('../models/HighScore');
 var Leaderboard = require('../models/Leaderboard');
+var OverallLeaderboard = require('../models/OverallLeaderboard');
 var User = require('../models/User');
 var leaderboardSize = require('./serverData').leaderboardSize;
 var serverLeaderboardId = require('./serverData').serverLeaderboard;
@@ -44,7 +45,7 @@ router.get('/myHighScores', function(req, res, next) {
 });
 
 router.get('/allHighScores', function(req, res, next) {
-  Leaderboard.findById(serverLeaderboardId)
+  OverallLeaderboard.findById(serverLeaderboardId)
     .populate('scores')
     .exec(function(err, leaderboard) {
       if (err) {

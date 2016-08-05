@@ -42,6 +42,7 @@ componentDidMount: function(){
 axios.get('/getStats', {withCredentials: true})
 .then(function(responseJson){
     stats=responseJson.data.stats;
+    console.log(stats)
     this.state.data=[];
     console.log(stats,'stats')
     if(stats[0]){

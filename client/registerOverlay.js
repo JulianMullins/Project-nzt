@@ -16,13 +16,7 @@ var RegisterOverlay = React.createClass({
     }
   },
   componentDidMount(){
-    if(this.props.location.pathname =='/gameOver/register'){
-
-      this.setState({
-        gameEnded:true
-      })
-
-    }
+    
 
   },
   // click(e){
@@ -69,11 +63,11 @@ var RegisterOverlay = React.createClass({
         }).then(function(response){
           console.log(response)
           if(response.data.success){
-            if(!this.state.gameEnded){
-              this.props.history.push('/home')
+            if(this.props.location.pathname.includes('/gameOver')){
+              this.props.history.push('/gameOver')
             }
             else{
-              this.props.history.goBack();
+              this.props.history.push('/home')
             }
           }
           else{

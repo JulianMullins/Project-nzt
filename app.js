@@ -103,12 +103,14 @@ passport.use(new LocalStrategy({
         console.error(err);
         return done(err);
       }
-      console.log(user)
       
       if (!user) {
         //console.log(user);
         return done('user does not exist', false, { message: 'Incorrect username.' });
       }
+
+      console.log(user)
+      user.currentGame = [];
 
       //check hashed passwords
       bcrypt.compare(password,user.password,function(err,response){
@@ -128,8 +130,9 @@ passport.use(new LocalStrategy({
             
             Stats.findById(req.session.user.stats,function(err,sessionStats){
               console.log(sessionStats)
+              user.currentGame = req.session.user.currentGame;
               user.stats.combineStats(sessionStats);
-              user.combineMaxNCurrentGame(req.session.user.maxN,req.session.user.currentGame);
+              user.combineMaxN(req.session.user.maxN);
               console.log("about to combine leaderboards")
               combineLeaderboards(user.stats.leaderboard,sessionStats.leaderboard,
                 req.session.user._id,req.session.user.username,
@@ -148,6 +151,7 @@ passport.use(new LocalStrategy({
           
           //tempUser doesn't exist, just log in
           else{
+            console.log("no req.session.user")
             return done(null,user);
           }
         }
@@ -280,6 +284,8 @@ passport.use(new FacebookStrategy({
           User.remove({_id:req.session.user._id},function(err,reqUser){
             if(!err){
               newUser.save(function(err,user){
+                req.session.user = user;
+                req.session.fullUser = true;
                 return done(null,user);
               })
             }
@@ -319,6 +325,8 @@ passport.use(new FacebookStrategy({
               return done(err);
             }
             else{
+              req.session.user = user;
+              req.session.fullUser = true;
               return done(null,user);
             }
           })
@@ -331,75 +339,35 @@ passport.use(new FacebookStrategy({
         if(req.session.user){
           console.log("req.session.user and user", user, user.stats)
           user.currentGame = req.session.user.currentGame;
-          
+          if(!user.facebookId){
+            console.log("no facebook id")
+            user.facebookId = profile.id;
+            user.name = profile._json.first_name + ' '+profile._json.last_name;
+          }
           Stats.findById(req.session.user.stats,function(err,sessionStats){
-              user.stats.combineStats(sessionStats);
-              sessionStats.remove(function(err,sessionStats){
-                if(!err){
-                  user.combineMaxN(req.session.user.maxN);
+            user.stats.combineStats(sessionStats);
+            sessionStats.remove(function(err,sessionStats){
+              if(!err){
+                user.combineMaxN(req.session.user.maxN);
+                User.remove({_id:req.session.user._id},function(err){
                   
-
-                  User.remove({_id:req.session.user._id},function(err){
-                    
-
-
-
-                    user.save(function(err,user){
-                      if(!user.facebookId){
-                        console.log("no facebook id")
-                        user.facebookId = profile.id
-                        //console.log("facebook id added")
-                        user.save(function(err){
-                          if(err){
-                            done(err)
-                          }
-                          else{
-                            req.session.user = user;
-                            return done(null, user);
-                          }
-                        })
-                      }
-                      // auth has has succeeded
-                      else{
-                        //console.log("success")
-                        console.log("returning done user")
-                        return done(null, user);
-                      }
-                    });
-
-
-
+                  user.save(function(err){
+                    if(err){
+                      done(err)
+                    }
+                    else{
+                      req.session.user = user;
+                      req.session.fullUser = true;
+                      return done(null, user);
+                    }
                   })
-                  
-                }
-              })
+                })
+                
+              }
+            })
               
-            });
+          });
 
-
-          
-          // user.save(function(err,user){
-          //   if(!user.facebookId){
-          //     console.log("no facebook id")
-          //     user.facebookId = profile.id
-          //     //console.log("facebook id added")
-          //     user.save(function(err){
-          //       if(err){
-          //         done(err)
-          //       }
-          //       else{
-          //         req.session.user = user;
-          //         return done(null, user);
-          //       }
-          //     })
-          //   }
-          //   // auth has has succeeded
-          //   else{
-          //     //console.log("success")
-          //     console.log("returning done user")
-          //     return done(null, user);
-          //   }
-          // });
         }
         else{
           if(!user.facebookId){
@@ -412,6 +380,7 @@ passport.use(new FacebookStrategy({
               }
               else{
                 req.session.user = user;
+                req.session.fullUser = true;
                 return done(null, user);
               }
             })
@@ -420,6 +389,8 @@ passport.use(new FacebookStrategy({
           else{
             //console.log("success")
             console.log("returning done user")
+            req.session.user = user;
+            req.session.fullUser = true;
             return done(null, user);
           }
         }
@@ -456,13 +427,13 @@ app.use(function(req, res, next) {
 if (app.get('env') === 'development') {
   app.use(function(err, req, res, next) {
     res.status(err.status || 500);
-    // res.render('error', {
-    //   message: err.message,
-    //   error: {}
-    // });
+    res.render('error', {
+      message: err.message,
+      error: {}
+    });
     console.log(err);
-    console.log('/#'+req.url+'/'+encodeURIComponent(err))
-    res.redirect('/#'+req.url+'/'+encodeURIComponent(err))
+    // console.log('/#'+req.url+'/'+encodeURIComponent(err))
+    // res.redirect('/#'+req.url+'/'+encodeURIComponent(err))
   });
 }
 

@@ -16,7 +16,8 @@ var LoginOverlay = React.createClass({
       password: '', 
       gameEnded: false, 
       games: null,
-      error: this.props.params.error
+      error: this.props.params.error,
+      fbURL: this.props.location.pathname+'/facebook'
     }
 
 
@@ -38,10 +39,16 @@ var LoginOverlay = React.createClass({
       username: this.state.username,
       password: this.state.password
     }).then(function(response) {
-      console.log(response)
+      console.log("response: "+response)
       if (response.data.success) {
-        console.log("success")
-        this.props.history.goBack();
+        
+        if(this.props.location.pathname.includes('gameOver/login')){
+          console.log("gameOver login");
+          this.props.history.push('/gameOver');
+        }
+        else{
+          this.props.history.push('/home')
+        }
       }
       else{
         this.props.history.push('/login/error')
@@ -67,7 +74,7 @@ var LoginOverlay = React.createClass({
                 <Link to="/home">
                   <button className="form-btn dx" onClick={this.login}>Login</button>
                 </Link>
-                <a className="fb" href="/login/facebook">Login with Facebook</a>
+                <a className="fb" href={this.state.fbURL}>Login with Facebook</a>
               </div>
 
             </form>

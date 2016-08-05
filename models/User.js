@@ -25,7 +25,7 @@ var userSchema = mongoose.Schema({
 	}]
 })
 
-userSchema.methods.combineMaxNCurrentGame = function(maxN2,currentGame2){
+userSchema.methods.combineMaxN = function(maxN2){
 	for(var mode in this.maxN){
 		if(this.maxN[mode]<maxN2[mode]){
 			this.maxN[mode] = maxN2[mode];
