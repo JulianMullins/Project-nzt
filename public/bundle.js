@@ -943,6 +943,20 @@ var ClassicMode = React.createClass({
   },
   startGame: function startGame() {
     this.setState({ overlay: false });
+    for (var i = 0; i < 9; i++) {
+      audios[i].volume = 0.0;
+    }
+    setTimeout(function () {
+      for (var i = 0; i < 9; i++) {
+        console.log(audios[i], audios[i].volume);
+        audios[i].play();
+      }
+    }, 300);
+    setTimeout(function () {
+      for (var i = 0; i < 9; i++) {
+        audios[i].volume = 1.0;
+      }
+    }, 1500);
     setTimeout(function () {
       soundInterval = setInterval(function () {
         audios[nextSound].play();
@@ -2477,7 +2491,7 @@ var SilentMode = React.createClass({
     var colorQueue = [];
     var timeTilPositionMatch = parseInt(Math.random() * 5 + this.state.N);
     var timeTilColorMatch = parseInt(Math.random() * 5 + this.state.N);
-    var timeKeeper = 44;
+    var timeKeeper = 9;
 
     iterations = setInterval(function () {
       timeKeeper--;
@@ -4238,10 +4252,10 @@ var LoginOverlay = React.createClass({
 
   getInitialState: function getInitialState() {
     console.log(this);
-    // var error = null;
-    // if(this.props.params.error){
-    //   error = decodeURIComponent(this.props.params.error)
-    // }
+    var error = null;
+    if (this.props.params.error) {
+      error = decodeURIComponent(this.props.params.error);
+    }
     return {
       username: '',
       password: '',
@@ -4277,7 +4291,7 @@ var LoginOverlay = React.createClass({
           this.props.history.push('/home');
         }
       } else {
-        this.props.history.push('/login/error');
+        this.props.history.push('/login/' + encodeURI(response.data.message));
       }
     }.bind(this));
   },
@@ -4626,30 +4640,52 @@ var NewUserOverlay = React.createClass({
 				'div',
 				{ className: 'newUserOverlay' },
 				React.createElement(
-					'h1',
-					null,
-					'First Time Here?'
-				),
-				React.createElement(
-					'p',
-					null,
-					'How about checking out the ',
+					'div',
+					{ className: 'newUserTop' },
 					React.createElement(
-						_reactRouter.Link,
-						{ to: '/tutorial' },
-						'tutorial page?'
+						'h1',
+						null,
+						'First Time Here?'
 					)
 				),
 				React.createElement(
-					'p',
-					null,
-					'Or, if you want to just jump right in, we recommend you start playing in ',
+					'div',
+					{ className: 'newUserMid' },
+					React.createElement(
+						'p',
+						null,
+						'How about checking out the ',
+						React.createElement(
+							_reactRouter.Link,
+							{ to: '/tutorial' },
+							'tutorial page?'
+						)
+					),
+					React.createElement(
+						'p',
+						null,
+						'If you want to just jump right in, we recommend you start playing in ',
+						React.createElement(
+							_reactRouter.Link,
+							{ to: 'levels/relaxed' },
+							'relaxed mode'
+						),
+						' first to get the hang of things.'
+					)
+				),
+				React.createElement(
+					'div',
+					{ className: 'newUserBottom' },
+					React.createElement(
+						_reactRouter.Link,
+						{ to: '/tutorial' },
+						'Tutorial'
+					),
 					React.createElement(
 						_reactRouter.Link,
 						{ to: 'levels/relaxed' },
-						'relaxed mode'
-					),
-					' to get the hang of things.'
+						'Relaxed Mode'
+					)
 				)
 			)
 		);
@@ -4673,6 +4709,10 @@ var axios = require('axios');
 var RegisterOverlay = React.createClass({
   displayName: 'RegisterOverlay',
   getInitialState: function getInitialState() {
+    var error = null;
+    if (this.props.params.error) {
+      error = decodeURIComponent(this.props.params.error);
+    }
     return {
       username: '',
       email: '',
@@ -4680,7 +4720,7 @@ var RegisterOverlay = React.createClass({
       passwordConfirm: '',
       name: '',
       gameEnded: false,
-      error: this.props.params.error
+      error: error
     };
   },
   componentDidMount: function componentDidMount() {},
@@ -4733,11 +4773,11 @@ var RegisterOverlay = React.createClass({
               this.props.history.push('/home');
             }
           } else {
-            this.props.history.push('/login/error');
+            this.props.history.push('/login/' + encodeURIComponent(response.data.message));
           }
         }.bind(this));
       } else {
-        this.setState({ error: response.data.message || 'error' });
+        this.setState({ error: response.data.message });
       }
     }.bind(this));
   },
