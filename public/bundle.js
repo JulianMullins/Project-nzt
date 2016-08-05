@@ -3326,22 +3326,17 @@ module.exports = Contact;
 },{"react":371,"react-dom":177,"react-router":221}],11:[function(require,module,exports){
 'use strict';
 
-var _reactRouter = require('react-router');
-
 var React = require('react');
-var ReactDOM = require('react-dom');
-var axios = require('axios');
-
 
 var FacebookLogin = React.createClass({
 	displayName: 'FacebookLogin',
 	componentDidMount: function componentDidMount() {
 		console.log("fb login");
-		axios.get('/login/facebook').then(function (response) {
-			if (response.data.success) {
-				this.props.history.push('/home');
-			}
-		}.bind(this));
+		if (this.props.location.pathname.includes('gameOver')) {
+			this.props.history.go(2);
+		} else {
+			this.props.history.push('/home');
+		}
 	},
 	render: function render() {
 		return null;
@@ -3350,7 +3345,7 @@ var FacebookLogin = React.createClass({
 
 module.exports = FacebookLogin;
 
-},{"axios":23,"react":371,"react-dom":177,"react-router":221}],12:[function(require,module,exports){
+},{"react":371}],12:[function(require,module,exports){
 (function (process){
 'use strict';
 
@@ -3824,7 +3819,8 @@ ReactDOM.render(React.createElement(
     { path: '/', component: App },
     React.createElement(_reactRouter.IndexRedirect, { to: '/home' }),
     React.createElement(_reactRouter.Route, { path: 'home', component: Home }),
-    React.createElement(_reactRouter.Route, { path: 'login/facebook', component: FacebookLogin }),
+    React.createElement(_reactRouter.Route, { path: 'login/facebook/success', component: FacebookLogin }),
+    React.createElement(_reactRouter.Route, { path: 'gameOver/login/facebook/success', component: FacebookLogin }),
     React.createElement(_reactRouter.Route, { path: 'gameOver/login(/:error)', component: Login }),
     React.createElement(_reactRouter.Route, { path: 'gameOver/register(/:error)', component: Register }),
     React.createElement(_reactRouter.Route, { path: 'login(/:error)', component: Login }),
@@ -4356,7 +4352,8 @@ var LoginOverlay = React.createClass({
       password: '',
       gameEnded: false,
       games: null,
-      error: this.props.params.error
+      error: this.props.params.error,
+      fbURL: this.props.location.pathname + '/facebook'
     };
   },
   componentDidMount: function componentDidMount() {},
@@ -4375,10 +4372,14 @@ var LoginOverlay = React.createClass({
       username: this.state.username,
       password: this.state.password
     }).then(function (response) {
-      console.log(response);
+      console.log("response: " + response);
       if (response.data.success) {
-        console.log("success");
-        this.props.history.goBack();
+
+        if (this.props.location.pathname.includes('gameOver/login')) {
+          this.props.history.goBack();
+        } else {
+          this.props.history.push('/home');
+        }
       } else {
         this.props.history.push('/login/error');
       }
@@ -4426,7 +4427,7 @@ var LoginOverlay = React.createClass({
               ),
               React.createElement(
                 'a',
-                { className: 'fb', href: '/login/facebook' },
+                { className: 'fb', href: this.state.fbURL },
                 'Login with Facebook'
               )
             )

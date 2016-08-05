@@ -1,17 +1,14 @@
 var React = require('react');
-var ReactDOM = require('react-dom');
-var axios = require('axios');
-import { Link } from 'react-router';
 
 var FacebookLogin = React.createClass({
 	componentDidMount(){
 		console.log("fb login")
-		axios.get('/login/facebook')
-		.then(function(response) {
-	      if (response.data.success) {
-	        this.props.history.push('/home');
-	      }
-	    }.bind(this))
+		if(this.props.location.pathname.includes('gameOver')){
+			this.props.history.go(2)
+		}
+		else{
+			this.props.history.push('/home')
+		}
 	},
 	render(){return null;}
 })

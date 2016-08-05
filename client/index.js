@@ -86,7 +86,8 @@ ReactDOM.render((
       <IndexRedirect to='/home'/>
       <Route path="home" component={Home} />
 
-      <Route path="login/facebook" component={FacebookLogin}/>
+      <Route path="login/facebook/success" component={FacebookLogin}/>
+      <Route path="gameOver/login/facebook/success" component={FacebookLogin}/>
       <Route path="gameOver/login(/:error)" component={Login}/>
       <Route path="gameOver/register(/:error)" component={Register}/>
       <Route path="login(/:error)" component={Login}/>
