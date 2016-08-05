@@ -3,41 +3,31 @@ var router = express.Router();
 
 var User = require('../models/User');
 var Leaderboard = require('../models/Leaderboard');
+var OverallLeaderboard = require('../models/OverallLeaderboard');
 var HighScore = require('../models/HighScore');
 var Game = require('../models/Game');
 var Stats = require('../models/Stats');
 
 var serverData = require('./serverData');
-//console.log(serverData);
+
 var serverLeaderboard = require('./serverData').serverLeaderboard;
 var leaderboardSize = require('./serverData').leaderboardSize;
 var modeMultiplier = require('./serverData').modeMultiplier;
 
-// var tempGame = {}; //RUTH I ADDED THIS BECAUSE I KEPT GETTING ERRORS WHEN TESTING OTHER STUFF
-// tempGame.score = 0; // AND THIS
+
 
 //functions for save game
 
-//populate leaderboard, essentially
-var setLeaderboard = function(id, callback) {
-  Leaderboard.findById(id, function(err, leaderboard) {
-    if (err) {
-      callback(err);
-    } else {
-      callback(false, leaderboard);
-    }
-  })
-}
 
 //check overall leaderboards, and update accordingly
 var checkOverall = function(newHighScore, callback) {
   console.log('checking overall');
   var isHighScore = false;
-  Leaderboard.findById(serverLeaderboard)
+  OverallLeaderboard.findById(serverLeaderboard)
     .populate('scores')
     .exec(function(err, leaderboard) {
 
-      // console.log("OVERALL LEADERBOARD: ", leaderboard);
+      console.log("OVERALL LEADERBOARD: ", leaderboard);
       // console.log(leaderboard.scores.length < leaderboardSize);
       // console.log(leaderboard.scores.length);
       // console.log(leaderboardSize)
@@ -49,7 +39,7 @@ var checkOverall = function(newHighScore, callback) {
       var overallHighScores = leaderboard.scores;
       overallHighScores.sort(sortScores);
       //console.log(overallHighScores)
-      console.log(newHighScore.score, overallHighScores[overallHighScores.length-1].score);
+      //console.log(newHighScore.score, overallHighScores[overallHighScores.length-1].score);
 
       if (overallHighScores.length < leaderboardSize) {
         console.log("leaderboard undersize")
@@ -72,7 +62,8 @@ var checkOverall = function(newHighScore, callback) {
             console.log(err);
           }
         });
-      } else if (newHighScore.score > overallHighScores[leaderboard.scores.length - 1].score) {
+      } 
+      else if (newHighScore.score > overallHighScores[leaderboard.scores.length - 1].score) {
         console.log("leaderboard full, but highscore")
         overallHighScores.pop();
         overallHighScores.push(newHighScore);
@@ -177,37 +168,37 @@ var checkLeaderboards = function(req,res,user,tempGame,newHighScore){
   
   checkOverall(newHighScore, function(isOverallHighScore) {
 
-    if(user.temp){
-      if (isOverallHighScore) {
+    // if(user.temp){
+    //   if (isOverallHighScore) {
 
-        tempGame.isHighScore = true;
-        tempGame.save(function(err, game) {
-          console.log("isHighScore")
-          //console.log(req.session.user.stats)
-          //console.log(user.stats)
-          //console.log(user)
-          //console.log(req.session.user);
-          console.log(tempGame,game);
+    //     tempGame.isHighScore = true;
+    //     tempGame.save(function(err, game) {
+    //       console.log("isHighScore")
+    //       //console.log(req.session.user.stats)
+    //       //console.log(user.stats)
+    //       //console.log(user)
+    //       //console.log(req.session.user);
+    //       console.log(tempGame,game);
 
 
-          res.json({
-            success: true
-          })
-        });
+    //       res.json({
+    //         success: true
+    //       })
+    //     });
 
-      } 
-      else {
-        console.log("about to res.json success")
-        user.save(function(err, user) {
-          if (!err) {
-            res.json({
-              success: true
-            })
-          }
-        })
-      }
-    }
-    else{
+    //   } 
+    //   else {
+    //     console.log("about to res.json success")
+    //     user.save(function(err, user) {
+    //       if (!err) {
+    //         res.json({
+    //           success: true
+    //         })
+    //       }
+    //     })
+    //   }
+    // }
+    // else{
       checkMine(newHighScore,user.stats,function(isMyHighScore){
         isMyHighScore = isMyHighScore;
 
@@ -218,8 +209,8 @@ var checkLeaderboards = function(req,res,user,tempGame,newHighScore){
             console.log("isHighScore")
             console.log("about to res.json success")
             console.log(req.session.user.stats);
-            console.log(req.session.user);
-            console.log(tempGame,game);
+            //console.log(req.session.user);
+            //console.log(tempGame,game);
 
             res.json({
               success: true
@@ -235,7 +226,7 @@ var checkLeaderboards = function(req,res,user,tempGame,newHighScore){
         }
 
       })
-    }
+    //}
   })
 
 }

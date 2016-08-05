@@ -35,8 +35,8 @@ leaderboardSchema.methods.mergeScoresArrays=function(scores1,scores2,username){
 	   scores1index < scores1.length && scores2index < scores2.length;){
 		// moose: If array 1 and 2 index checks are in the for loop declaration
 		// this can be moved outside for loop too.
-		if(scores1[i].score<scores2[scores2index].score){
-		  newScores.push(scores1[i]);
+		if(scores1[scores1index].score<scores2[scores2index].score){
+		  newScores.push(scores1[scores1index]);
 		  scores1index++;
 		}
 		else{

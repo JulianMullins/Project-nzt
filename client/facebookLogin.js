@@ -1,17 +1,28 @@
 var React = require('react');
-var ReactDOM = require('react-dom');
-var axios = require('axios');
-import { Link } from 'react-router';
 
 var FacebookLogin = React.createClass({
+	getInitialState(){
+		if(this.props.params.error){
+			return{ 
+				error:this.props.params.error,
+				toRender: <div>{this.props.params.error}</div>
+			}
+		}
+		else{
+			return{toRender:null}
+		}
+	},
 	componentDidMount(){
 		console.log("fb login")
-		axios.get('/login/facebook')
-		.then(function(response) {
-	      if (response.data.success) {
-	        this.props.history.push('/home');
-	      }
-	    }.bind(this))
+		if(!this.state.error){
+			if(this.props.location.pathname.includes('gameOver')){
+				this.props.history.push('/gameOver');
+			}
+			else{
+				this.props.history.push('/home')
+			}
+		}
+		
 	},
 	render(){return null;}
 })

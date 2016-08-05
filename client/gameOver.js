@@ -77,8 +77,7 @@ var GameOverOverlay = React.createClass({
       score = parseFloat(this.state.fullScore);
       var n = parseInt(this.state.nLevel);
       var modeM = parseInt(this.state.modeMultiplier);
-      var totalScore = parseInt(score * n * modeM);
-      this.setState({countUp: this.countUp(totalScore)})
+      this.setState({countUp: this.countUp(score)})
     }.bind(this))
   },
 
