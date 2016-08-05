@@ -108,7 +108,6 @@
 }
 .timerContainer {
   display: flex;
-  width: 100%;
   justify-content: flex-end;
   width: 50%;
 }
@@ -271,29 +270,24 @@
     color: transparent;
   }
 }
-
 .scoreUpdatePos {
   color: #01B6A7;
 }
-
 .scoreUpdateNeg {
   color: #F13542;
 }
-
 .scoreUpdate {
   font-weight: bold !important;
   -webkit-animation-name: scoreUpdateIn;
   -webkit-animation-duration: 2s;
   animation-name: scoreUpdateIn;
-  animation-duration: 2s;  
+  animation-duration: 2s;
 }
-
 @keyframes scoreUpdateIn {
   0% {
     transform: scale3d(0, 0, 1);
     opacity: 1;
   }
-
   25% {
     transform: scale3d(1, 1, 1);
     opacity: 1;
@@ -303,13 +297,11 @@
     opacity: 0;
   }
 }
-
 @-webkit-keyframes scoreUpdateIn {
   0% {
     transform: scale3d(0, 0, 1);
     opacity: 1;
   }
-
   25% {
     transform: scale3d(1, 1, 1);
     opacity: 1;
@@ -319,7 +311,6 @@
     opacity: 0;
   }
 }
-
 @media all and (max-width: 768px) {
   .fullGameView {
     align-items: flex-start;
@@ -336,7 +327,8 @@
     width: 100vw;
     margin-top: 5vh;
     background-color: transparent;
-    justify-content: space-around;;
+    justify-content: space-around;
+    ;
   }
   .gameFullHeader {
     height: 15vh;
@@ -369,5 +361,11 @@
     width: 90%;
     height: 90%;
     margin: 0 auto;
+  }
+  .gameScore {
+    width: 70%;
+  }
+  .timerContainer {
+    width: 30%;
   }
 }

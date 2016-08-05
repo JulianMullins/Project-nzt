@@ -8,6 +8,7 @@ var url = process.env.url;
 
 var Home = require('./Mainmenu');
 var NavBar = require('./navBar');
+var NewUserOverlay = require('./newUserOverlay');
 
 var Login = require('./loginOverlay');
 var FacebookLogin = require('./facebookLogin');
@@ -85,6 +86,7 @@ ReactDOM.render((
 
       <IndexRedirect to='/home'/>
       <Route path="home" component={Home} />
+      <Route path="/newUser" component={NewUserOverlay} />
 
       <Route path="login/facebook/success" component={FacebookLogin}/>
       <Route path="gameOver/login/facebook/success" component={FacebookLogin}/>
