@@ -579,7 +579,7 @@ var pushStyle = {
 
 var standardStyle = {
   backgroundColor: "transparent",
-  border: "3px solid #F13542"  
+  border: "3px solid #F13542"
 }
 
 var newStyle = {
