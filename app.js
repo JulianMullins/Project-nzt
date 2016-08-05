@@ -298,7 +298,7 @@ passport.use(new FacebookStrategy({
           var u = new User({
             facebookId:profile.id,
             email:email,
-            name:username,
+            name:name,
             temp:false,
             username:username,
             stats: null,
@@ -426,14 +426,13 @@ app.use(function(req, res, next) {
 // will print stacktrace
 if (app.get('env') === 'development') {
   app.use(function(err, req, res, next) {
-    res.status(err.status || 500);
-    res.render('error', {
-      message: err.message,
-      error: {}
-    });
-    console.log(err);
-    // console.log('/#'+req.url+'/'+encodeURIComponent(err))
-    // res.redirect('/#'+req.url+'/'+encodeURIComponent(err))
+    // res.status(err.status || 500);
+
+    res.json({
+      success:false,
+      message:err
+    })
+
   });
 }
 

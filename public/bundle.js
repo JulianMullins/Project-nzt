@@ -4191,10 +4191,10 @@ var LoginOverlay = React.createClass({
 
   getInitialState: function getInitialState() {
     console.log(this);
-    // var error = null;
-    // if(this.props.params.error){
-    //   error = decodeURIComponent(this.props.params.error)
-    // }
+    var error = null;
+    if (this.props.params.error) {
+      error = decodeURIComponent(this.props.params.error);
+    }
     return {
       username: '',
       password: '',
@@ -4230,7 +4230,7 @@ var LoginOverlay = React.createClass({
           this.props.history.push('/home');
         }
       } else {
-        this.props.history.push('/login/error');
+        this.props.history.push('/login/' + encodeURI(response.data.message));
       }
     }.bind(this));
   },
@@ -4575,6 +4575,10 @@ var axios = require('axios');
 var RegisterOverlay = React.createClass({
   displayName: 'RegisterOverlay',
   getInitialState: function getInitialState() {
+    var error = null;
+    if (this.props.params.error) {
+      error = decodeURIComponent(this.props.params.error);
+    }
     return {
       username: '',
       email: '',
@@ -4582,7 +4586,7 @@ var RegisterOverlay = React.createClass({
       passwordConfirm: '',
       name: '',
       gameEnded: false,
-      error: this.props.params.error
+      error: error
     };
   },
   componentDidMount: function componentDidMount() {},
@@ -4636,11 +4640,11 @@ var RegisterOverlay = React.createClass({
               this.props.history.push('/home');
             }
           } else {
-            this.props.history.push('/login/error');
+            this.props.history.push('/login/' + encodeURIComponent(response.data.message));
           }
         }.bind(this));
       } else {
-        this.setState({ error: response.data.message || 'error' });
+        this.setState({ error: response.data.message });
       }
     }.bind(this));
   },

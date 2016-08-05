@@ -7,10 +7,10 @@ import {Link} from 'react-router';
 var LoginOverlay = React.createClass({
   getInitialState: function() {
     console.log(this)
-    // var error = null;
-    // if(this.props.params.error){
-    //   error = decodeURIComponent(this.props.params.error)
-    // }
+    var error = null;
+    if(this.props.params.error){
+      error = decodeURIComponent(this.props.params.error)
+    }
     return {
       username: '', 
       password: '', 
@@ -51,7 +51,7 @@ var LoginOverlay = React.createClass({
         }
       }
       else{
-        this.props.history.push('/login/error')
+        this.props.history.push('/login/'+encodeURI(response.data.message));
       }
     }.bind(this))
   },
