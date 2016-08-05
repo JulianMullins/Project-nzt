@@ -524,9 +524,7 @@ if (this.state.alertType === 'full') {
         </div>
       )
       scoreUpdate = (
-        <h2 style={{
-          color: 'green'
-        }}>+{parseInt(currentScore)}</h2>
+        <h2 className="scoreUpdate scoreUpdatePos">+{parseInt(currentScore)}</h2>
       )
     } else if (this.state.alertType === 'none') {
       scoreAlert = (
@@ -536,9 +534,7 @@ if (this.state.alertType === 'full') {
       )
       if (currentScore !== 0) {
         scoreUpdate = (
-          <h2 style={{
-            color: 'red'
-          }}>-{parseInt(currentScore)}</h2>
+          <h2 className="scoreUpdate scoreUpdateNeg">-{parseInt(currentScore)}</h2>
         )
       }
     } 
