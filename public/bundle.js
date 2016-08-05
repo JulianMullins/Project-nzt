@@ -197,6 +197,9 @@ var reactionEnd = null;
 var iterations;
 var fullScore = 0;
 
+var nextSound;
+var soundInterval;
+
 var AdvancedMode = React.createClass({
   displayName: 'AdvancedMode',
 
@@ -239,6 +242,7 @@ var AdvancedMode = React.createClass({
   },
   componentWillUnmount: function componentWillUnmount() {
     clearInterval(iterations);
+    clearInterval(soundInterval);
   },
   enableKeys: function enableKeys() {
     window.onkeyup = function (e) {
@@ -255,9 +259,11 @@ var AdvancedMode = React.createClass({
   },
   startGame: function startGame() {
     this.setState({ overlay: false });
-    audios[0].play();
+    var aud = new Audio('./audio/empty.mp3');
+    aud.play();
     setInterval(function () {
-      audios[0].play();
+      aud.src = './audio/' + (nextSound + 1) + '.wav';
+      aud.play();
     }, 2000);
     this.playGame();
     this.enableKeys();
@@ -454,6 +460,7 @@ var AdvancedMode = React.createClass({
 
       if (timeKeeper === 0) {
         clearInterval(iterations);
+        clearInterval(soundInterval);
         setTimeout(function () {
           gameScore = this.state.score;
           console.log(gameScore, 'game score');
@@ -4448,52 +4455,30 @@ var NewUserOverlay = React.createClass({
 				'div',
 				{ className: 'newUserOverlay' },
 				React.createElement(
-					'div',
-					{ className: 'newUserTop' },
-					React.createElement(
-						'h1',
-						null,
-						'First Time Here?'
-					)
+					'h1',
+					null,
+					'First Time Here?'
 				),
 				React.createElement(
-					'div',
-					{ className: 'newUserMid' },
-					React.createElement(
-						'p',
-						null,
-						'How about checking out the ',
-						React.createElement(
-							_reactRouter.Link,
-							{ to: '/tutorial' },
-							'tutorial page?'
-						)
-					),
-					React.createElement(
-						'p',
-						null,
-						'If you want to just jump right in, we recommend you start playing in ',
-						React.createElement(
-							_reactRouter.Link,
-							{ to: 'levels/relaxed' },
-							'relaxed mode'
-						),
-						' first to get the hang of things.'
-					)
-				),
-				React.createElement(
-					'div',
-					{ className: 'newUserBottom' },
+					'p',
+					null,
+					'How about checking out the ',
 					React.createElement(
 						_reactRouter.Link,
 						{ to: '/tutorial' },
-						'Tutorial'
-					),
+						'tutorial page?'
+					)
+				),
+				React.createElement(
+					'p',
+					null,
+					'Or, if you want to just jump right in, we recommend you start playing in ',
 					React.createElement(
 						_reactRouter.Link,
 						{ to: 'levels/relaxed' },
-						'Relaxed Mode'
-					)
+						'relaxed mode'
+					),
+					' to get the hang of things.'
 				)
 			)
 		);
