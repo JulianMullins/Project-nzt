@@ -630,9 +630,7 @@ var AdvancedMode = React.createClass({
       );
       scoreUpdate = React.createElement(
         'h2',
-        { style: {
-            color: 'green'
-          } },
+        { className: 'scoreUpdate scoreUpdatePos' },
         '+',
         parseInt(currentScore)
       );
@@ -645,9 +643,7 @@ var AdvancedMode = React.createClass({
       if (this.state.score > 0) {
         scoreUpdate = React.createElement(
           'h2',
-          { style: {
-              color: 'red'
-            } },
+          { className: 'scoreUpdate scoreUpdateNeg' },
           '-',
           currentScore
         );
@@ -1310,9 +1306,7 @@ var ClassicMode = React.createClass({
       );
       scoreUpdate = React.createElement(
         'h2',
-        { style: {
-            color: 'green'
-          } },
+        { className: 'scoreUpdate scoreUpdatePos' },
         '+',
         parseInt(currentScore)
       );
@@ -1325,9 +1319,7 @@ var ClassicMode = React.createClass({
       if (currentScore !== 0) {
         scoreUpdate = React.createElement(
           'h2',
-          { style: {
-              color: 'red'
-            } },
+          { className: 'scoreUpdate scoreUpdateNeg' },
           '-',
           parseInt(currentScore)
         );
@@ -2191,9 +2183,7 @@ var RelaxedMode = React.createClass({
       );
       scoreUpdate = React.createElement(
         'h2',
-        { style: {
-            color: '#01B6A7'
-          } },
+        { className: 'scoreUpdate scoreUpdatePos' },
         '+',
         parseInt(currentScore)
       );
@@ -2206,9 +2196,7 @@ var RelaxedMode = React.createClass({
       if (currentScore !== 0) {
         scoreUpdate = React.createElement(
           'h2',
-          { style: {
-              color: '#F13542'
-            } },
+          { className: 'scoreUpdate scoreUpdateNeg' },
           '-',
           currentScore
         );
@@ -2892,9 +2880,7 @@ var SilentMode = React.createClass({
       );
       scoreUpdate = React.createElement(
         'h2',
-        { style: {
-            color: 'green'
-          } },
+        { className: 'scoreUpdate scoreUpdatePos' },
         '+',
         parseInt(currentScore)
       );
@@ -2907,9 +2893,7 @@ var SilentMode = React.createClass({
       if (currentScore !== 0) {
         scoreUpdate = React.createElement(
           'h2',
-          { style: {
-              color: 'red'
-            } },
+          { className: 'scoreUpdate scoreUpdateNeg' },
           '-',
           parseInt(currentScore)
         );
