@@ -195,6 +195,7 @@ var reactionTimes = [];
 var gameScore;
 var reactionEnd = null;
 var iterations;
+var currentScore;
 var fullScore = 0;
 
 var AdvancedMode = React.createClass({
@@ -208,14 +209,16 @@ var AdvancedMode = React.createClass({
       soundMatch: false,
       score: 0,
       alert: " ",
+      alertType: ' ',
       overlay: true,
       initialTimer: 3,
       N: parseInt(this.props.params.n),
       colorPressed: noStyle,
       soundPressed: noStyle,
       positionPressed: noStyle,
-      //color, sound, popsistion
-      correct: [false, false, false],
+      colorHit: false,
+      soundHit: false,
+      positionHit: false,
       mode: 'advanced',
       tempUser: true,
       gameId: null
@@ -255,6 +258,9 @@ var AdvancedMode = React.createClass({
   },
   startGame: function startGame() {
     this.setState({ overlay: false });
+    var empty = new Audio('./audio/empty.mp3');
+    console.log(empty);
+    empty.play();
     this.playGame();
     this.enableKeys();
   },
@@ -269,83 +275,35 @@ var AdvancedMode = React.createClass({
     //console.log(timekeeper)
     iterations = setInterval(function () {
       timeKeeper--;
-      if (!this.state.correct[0] && !this.state.correct[1] && !this.state.correct[2]) {
-        if (!this.state.colorMatch && !this.state.positionMatch && !this.state.soundMatch) {
-          //console.log('no matches')
-          this.setState({
-            soundPressed: noStyle,
-            colorPressed: noStyle,
-            positionPressed: noStyle,
-            colorMatch: false,
-            soundMatch: false,
-            positionMatch: false,
-            correct: [false, false, false]
-          });
-          reactionEnd = null;
-        } else {
-          matchCount += 1;
-          this.setState({
-            soundPressed: noStyle,
-            colorPressed: noStyle,
-            positionPressed: noStyle,
-            colorMatch: false,
-            soundMatch: false,
-            positionMatch: false,
-            correct: [false, false, false],
-            alert: "Missed a match"
-          });
-          reactionEnd = null;
-          if (this.state.score - 5 >= 0) {
-            currentScore = 5;
-            this.setState({
-              score: this.state.score - 5
-            });
-          } else {
-            currentScore = this.state.score;
-            this.setState({ score: 0 });
-          }
+      ///triple match:
+      if (this.state.colorMatch && this.state.soundMatch && this.state.positionMatch) {
+        var count = 0;
+        currentScore = 0;
+        //got color match correct
+        if (reactionEnd) {
+          reactionTimes.push(reactionEnd - reactionStart);
         }
-      } else if (this.state.correct[0] === this.state.colorMatch && this.state.correct[1] === this.state.soundMatch && this.state.correct[2] === this.state.positionMatch) {
-        reactionTimes.push(reactionEnd - reactionStart);
-        currentScore = ((2000 - reactionTimes[reactionTimes.length - 1]) / 100).toFixed(2);
-        fullScore += parseFloat(currentScore);
-        reactionEnd = null;
-        matchHit += 1;
-        matchCount += 1;
-        this.setState({
-          soundPressed: noStyle,
-          colorPressed: noStyle,
-          positionPressed: noStyle,
-          colorMatch: false,
-          soundMatch: false,
-          positionMatch: false,
-          correct: [false, false, false],
-          alert: "Good job!",
-          score: this.state.score + parseInt(currentScore)
-        });
-      } else {
-        //console.log('incorrect')
-        matchHit -= 1;
-        this.setState({
-          soundPressed: noStyle,
-          colorPressed: noStyle,
-          positionPressed: noStyle,
-          colorMatch: false,
-          soundMatch: false,
-          positionMatch: false,
-          correct: [false, false, false],
-          alert: 'Not a match'
-        });
-        if (this.state.score - 5 >= 0) {
-          currentScore = 5;
-          this.setState({
-            score: this.state.score - 5
-          });
-        } else {
-          currentScore = this.state.score;
-          this.setState({ score: 0 });
+        if (this.state.colorHit) {
+          count += 1;
+          currentScore = ((2000 - reactionTimes[reactionTimes.length - 1]) / 100).toFixed(2) + 1;
+          fullScore += currentScore;
+          this.state.score += currentScore;
         }
       }
+
+      this.setState({
+        soundPressed: noStyle,
+        colorPressed: noStyle,
+        positionPressed: noStyle,
+        colorMatch: false,
+        soundMatch: false,
+        positionMatch: false,
+        soundHit: false,
+        colorHit: false,
+        positionHit: false,
+        alert: ' ',
+        alertType: ' '
+      });
 
       this.setState({ colorPressed: noStyle, soundPressed: noStyle, positionPressed: noStyle });
       setTimeout(function () {
@@ -354,7 +312,7 @@ var AdvancedMode = React.createClass({
       //NOT GOING TO ACTUALLY LIGHT UP COLORS UNTIL ALL IF STATEMENTS HAVE ITERATED
       //case 1: position match
       if (timeTilPositionMatch === 0) {
-        //console.log('position match')
+        matchCount += 1;
         this.setState({ positionMatch: true, miss: true });
         //reset position portion
         timeTilPositionMatch = parseInt(Math.random() * 5 + 2);
@@ -366,7 +324,7 @@ var AdvancedMode = React.createClass({
       }
       //case 2: color match
       if (timeTilColorMatch === 0) {
-        //console.log('color match')
+        matchCount += 1;
         this.setState({ colorMatch: true, miss: true });
         //reset position portion
         timeTilColorMatch = parseInt(Math.random() * 5 + 2);
@@ -378,7 +336,7 @@ var AdvancedMode = React.createClass({
       }
       //case 3: sound match
       if (timeTilSoundMatch === 0) {
-        // console.log('sound match')
+        matchCount += 1;
         this.setState({ soundMatch: true, miss: true });
         //reset position portion
         timeTilSoundMatch = parseInt(Math.random() * 5 + 2);
@@ -441,13 +399,7 @@ var AdvancedMode = React.createClass({
         pMatch = false;
       }.bind(this), 800);
 
-      ////////////////////////////////////////////////////////////////////////////////////
-      ///////////////////////////////////////////////////////////////////////////////////
-      ///////////////////////////////////////////////////////////////////////////////////
-      ////////////////////////////////////////////////////////////////////////////////////////
-      ////////////////////////////////////////////////////////////////////////////////////
       //RUTH THIS IS WHERE THE GAME ENDS///////////////////////////////////////////
-
       if (timeKeeper === 0) {
         clearInterval(iterations);
         setTimeout(function () {
@@ -455,7 +407,8 @@ var AdvancedMode = React.createClass({
           console.log(gameScore, 'game score');
           console.log(reactionTimes, 'reaction times');
           console.log(this.state);
-          console.log(matchHit / matchCount, 'accuracy');
+          var accuracy = matchHit / matchCount;
+          console.log(accuracy, 'accuracy');
 
           endGameFunction(fullScore, reactionTimes, this.state.gameId, this.state.userId, function (success) {
             if (success) {
@@ -464,10 +417,6 @@ var AdvancedMode = React.createClass({
           }.bind(this));
         }.bind(this), 2000);
         ////////////////////////////////////////////////////////////////////////////////////
-        ///////////////////////////////////////////////////////////////////////////////////
-        ///////////////////////////////////////////////////////////////////////////////////
-        ////////////////////////////////////////////////////////////////////////////////////////
-        ////////////////////////////////////////////////
       }
     }.bind(this), 2000);
   },
@@ -541,7 +490,7 @@ var AdvancedMode = React.createClass({
       { className: 'fullGameView' },
       React.createElement(
         'div',
-        { className: 'gameContainer' },
+        { className: 'gameContainer\r ' },
         overlay,
         React.createElement(
           'div',
@@ -3344,7 +3293,7 @@ var GameOverOverlay = React.createClass({
           { className: 'classic' },
           'You need ',
           this.state.scoreToPass * this.state.nLevel * this.state.modeMultiplier,
-          'points to unlock level ',
+          ' points to unlock level ',
           this.state.nLevel + 1
         ),
         gameOverCongrats: React.createElement(
@@ -3373,13 +3322,13 @@ var GameOverOverlay = React.createClass({
             React.createElement(
               _reactRouter.Link,
               { to: '/gameOver/login' },
-              'Login'
+              'Login '
             ),
             'or',
             React.createElement(
               _reactRouter.Link,
               { to: '/gameOver/register' },
-              'sign up'
+              ' Sign Up '
             ),
             'to save your progress, view statistics and compete with friends!'
           )
@@ -3394,13 +3343,13 @@ var GameOverOverlay = React.createClass({
             React.createElement(
               _reactRouter.Link,
               { to: '/gameOver/login' },
-              'Login'
+              'Login '
             ),
             'or',
             React.createElement(
               _reactRouter.Link,
               { to: '/gameOver/register' },
-              'sign up'
+              ' Sign Up '
             ),
             'to save your progress, view statistics and compete with friends!'
           )
@@ -3462,8 +3411,6 @@ var GameOverOverlay = React.createClass({
 
   countUp: function countUp(count) {
     var div_by = 100;
-    console.log(count, 'count');
-    console.log(!this.state.fullScore);
     //count=parseInt(count)
     var speed = parseFloat(count / div_by);
     //console.log('ini speed', speed);
