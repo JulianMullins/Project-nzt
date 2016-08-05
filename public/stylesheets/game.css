@@ -325,12 +325,17 @@
     align-items: flex-start;
     height: 100vh;
     width: 100vw;
-    background-color: rgb(255, 255, 255);
+    background: url("../images/pattern.svg") no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
   }
   .gameContainer {
     height: 90vh;
     width: 100vw;
     margin-top: 5vh;
+    background-color: transparent;
     justify-content: space-around;;
   }
   .gameFullHeader {
