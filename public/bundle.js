@@ -1891,7 +1891,13 @@ var RelaxedMode = React.createClass({
         return;
       }
       console.log(obj);
-      this.setState({ tempUser: obj.tempUser, gameId: obj.gameId, modeMultiplier: obj.modeMultiplier, penalty: obj.penalty, positivePoints: obj.positivePoints });
+      this.setState({
+        tempUser: obj.tempUser,
+        gameId: obj.gameId,
+        modeMultiplier: obj.modeMultiplier,
+        penalty: obj.penalty,
+        positivePoints: obj.positivePoints
+      });
     }.bind(this));
     console.log("component mounted");
   },
@@ -2765,9 +2771,7 @@ var SilentMode = React.createClass({
       );
       scoreUpdate = React.createElement(
         'h2',
-        { style: {
-            color: 'green'
-          } },
+        { className: 'silent scoreUpdate' },
         '+',
         parseInt(currentScore)
       );
@@ -4104,8 +4108,17 @@ var LoginOverlay = React.createClass({
 
   getInitialState: function getInitialState() {
     console.log(this);
-
-    return { username: '', password: '', gameEnded: false, games: null, error: this.props.params.error };
+    // var error = null;
+    // if(this.props.params.error){
+    //   error = decodeURIComponent(this.props.params.error)
+    // }
+    return {
+      username: '',
+      password: '',
+      gameEnded: false,
+      games: null,
+      error: this.props.params.error
+    };
   },
   componentDidMount: function componentDidMount() {},
   update: function update(e) {
@@ -4120,19 +4133,15 @@ var LoginOverlay = React.createClass({
 
     //ajax post
     axios.post('/login', {
-      withCredentials: true,
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      },
-
       username: this.state.username,
       password: this.state.password
-
     }).then(function (response) {
       console.log(response);
       if (response.data.success) {
+        console.log("success");
         this.props.history.goBack();
+      } else {
+        this.props.history.push('/login/error');
       }
     }.bind(this));
   },
