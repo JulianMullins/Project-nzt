@@ -29,9 +29,8 @@ var SilentStartOverlay = React.createClass({
             </div>
           </MediaQuery>
 
-          <i className="classic">You are on n-level {this.state.nLevel}, therefore a match occurs when a position/color stimulus from {this.state.nLevel}
-            {this.state.moves}
-            back matches the current position/color.</i>
+          <i className="classic">You are on n-level {this.state.nLevel}, therefore a match occurs when a 
+          position/color stimulus from {this.state.nLevel + " "} {this.state.moves} back matches the current position/color.</i>
           <Link to="/tutorial">
             <h3 className="silent tutorialBtn tutorialBtnSilent">Full Tutorial</h3>
           </Link>
@@ -74,9 +73,8 @@ var ClassicStartOverlay = React.createClass({
             </div>
           </MediaQuery>
 
-          <i className="classic">You are on n-level {this.state.nLevel}, therefore a match occurs when a position/sound stimulus from {this.state.nLevel}
-            {this.state.moves}
-            back matches the current position/sound.</i>
+          <i className="classic">You are on n-level {this.state.nLevel}, therefore a match occurs when a 
+          position/sound stimulus from {this.state.nLevel + " "} {this.state.moves} back matches the current position/sound.</i>
           <Link to="/tutorial">
             <h3 className="classic tutorialBtn tutorialBtnClassic">Full Tutorial</h3>
           </Link>
@@ -116,9 +114,8 @@ var RelaxedStartOverlay = React.createClass({
             </div>
           </MediaQuery>
 
-          <i>You are on n-level {this.state.nLevel}, therefore a match occurs when a position stimulus from {this.state.nLevel}
-            {this.state.moves}
-            back matches the current position.</i>
+          <i>You are on n-level {this.state.nLevel}, therefore a match occurs when a position stimulus 
+          from {this.state.nLevel + " "} {this.state.moves} back matches the current position.</i>
           <Link to="/tutorial">
             <h3 className="relaxed tutorialBtn tutorialBtnRelaxed">Full Tutorial</h3>
           </Link>
@@ -164,9 +161,8 @@ var AdvancedStartOverlay = React.createClass({
             </div>
           </MediaQuery>
 
-          <i className="classic">You are on n-level {this.state.nLevel}, therefore a match occurs when a position/sound/color stimulus from {this.state.nLevel}
-            {this.state.moves}
-            back matches the current position/sound/color.</i>
+          <i className="classic">You are on n-level {this.state.nLevel}, therefore a match occurs when a 
+          position/sound/color stimulus from {this.state.nLevel + " "} {this.state.moves} back matches the current position/sound/color.</i>
           <Link to="/tutorial">
             <h3 className="advanced tutorialBtn tutorialBtnAdvanced">Full Tutorial</h3>
           </Link>

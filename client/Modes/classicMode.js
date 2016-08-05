@@ -649,11 +649,13 @@ var pushStyle = {
 }
 
 var standardStyle = {
-  backgroundColor: "#BFBFBF"
+  backgroundColor: "transparent",
+  border: "3px solid #F13542"  
 }
 
 var newStyle = {
-  backgroundColor: "#F13542"
+  backgroundColor: "#F13542",
+  border: "3px solid #F13542"
 }
 
 var audios = [];
