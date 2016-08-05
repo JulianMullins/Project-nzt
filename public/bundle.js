@@ -4448,30 +4448,52 @@ var NewUserOverlay = React.createClass({
 				'div',
 				{ className: 'newUserOverlay' },
 				React.createElement(
-					'h1',
-					null,
-					'First Time Here?'
-				),
-				React.createElement(
-					'p',
-					null,
-					'How about checking out the ',
+					'div',
+					{ className: 'newUserTop' },
 					React.createElement(
-						_reactRouter.Link,
-						{ to: '/tutorial' },
-						'tutorial page?'
+						'h1',
+						null,
+						'First Time Here?'
 					)
 				),
 				React.createElement(
-					'p',
-					null,
-					'Or, if you want to just jump right in, we recommend you start playing in ',
+					'div',
+					{ className: 'newUserMid' },
+					React.createElement(
+						'p',
+						null,
+						'How about checking out the ',
+						React.createElement(
+							_reactRouter.Link,
+							{ to: '/tutorial' },
+							'tutorial page?'
+						)
+					),
+					React.createElement(
+						'p',
+						null,
+						'If you want to just jump right in, we recommend you start playing in ',
+						React.createElement(
+							_reactRouter.Link,
+							{ to: 'levels/relaxed' },
+							'relaxed mode'
+						),
+						' first to get the hang of things.'
+					)
+				),
+				React.createElement(
+					'div',
+					{ className: 'newUserBottom' },
+					React.createElement(
+						_reactRouter.Link,
+						{ to: '/tutorial' },
+						'Tutorial'
+					),
 					React.createElement(
 						_reactRouter.Link,
 						{ to: 'levels/relaxed' },
-						'relaxed mode'
-					),
-					' to get the hang of things.'
+						'Relaxed Mode'
+					)
 				)
 			)
 		);
