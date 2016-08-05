@@ -169,13 +169,13 @@ module.exports = function(passport) {
     
  }
 
-  router.get('/login/failure',function(req,res,next){
-    res.status(401).json({success:false})
-    //res.json({success:false,error:"login failure"})
-  })
+  // router.get('/login/failure',function(req,res,next){
+  //   res.status(401).json({success:false})
+  //   //res.json({success:false,error:"login failure"})
+  // })
 
   // POST Login page
-  router.post('/login', passport.authenticate('local',{failureRedirect:'/login/failure'}), function(req,res,next){
+  router.post('/login', passport.authenticate('local'), function(req,res,next){
     console.log(req.session.user); 
     req.session.user = req.user;
     Stats.findById(req.session.user.stats)
@@ -207,7 +207,7 @@ module.exports = function(passport) {
 
   router.get('/login/facebook/callback',
     passport.authenticate('facebook',
-      {failureRedirect: '/#/login/error',
+      {failureRedirect: '/#/login/facebookError',
       successRedirect:'/#/login/facebook/success'} ))
     // ,
     // function(req, res) {
@@ -227,7 +227,7 @@ module.exports = function(passport) {
 
   router.get('gameOver/login/facebook/callback',
     passport.authenticate('facebook',
-      {failureRedirect: '/#/gameOver/login/error',
+      {failureRedirect: '/#/gameOver/login/facebookError',
       successRedirect:'/#/gameOver/login/facebook/success'} ))
 
 

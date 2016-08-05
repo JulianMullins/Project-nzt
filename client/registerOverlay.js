@@ -5,6 +5,10 @@ import { Link } from 'react-router';
 
 var RegisterOverlay = React.createClass({
   getInitialState(){
+    var error = null;
+    if(this.props.params.error){
+      error = decodeURIComponent(this.props.params.error);
+    }
     return{
       username:'',
       email:'',
@@ -12,7 +16,7 @@ var RegisterOverlay = React.createClass({
       passwordConfirm:'',
       name:'',
       gameEnded:false,
-      error:this.props.params.error
+      error:error
     }
   },
   componentDidMount(){
@@ -71,14 +75,14 @@ var RegisterOverlay = React.createClass({
             }
           }
           else{
-            this.props.history.push('/login/error')
+            this.props.history.push('/login/'+encodeURIComponent(response.data.message))
           }
         }.bind(this))
 
 
       }
       else{
-        this.setState({error:response.data.message || 'error'})
+        this.setState({error:response.data.message})
       }
     }.bind(this));
 
