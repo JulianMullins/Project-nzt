@@ -638,30 +638,37 @@ var pushStyle = {
 };
 
 var standardStyle = {
-  backgroundColor: "#BFBFBF"
+  backgroundColor: "transparent",
+  border: "3px solid #F1BA03"
 };
 
 var newStyle = [{
-  backgroundColor: '#00cc33' //green
+  backgroundColor: '#00cc33', //green
+  border: "3px solid #00cc33"
 }, {
-  backgroundColor: '#000000' //black
+  backgroundColor: '#000000', //black
+  border: "3px solid #000000"
 }, {
   backgroundColor: '#33ccff', //light blue
-  border: "5px solid #333366" //dark blue border
+  border: "3px solid #33ccff"
 }, {
   backgroundColor: '#ffffff', //white
-  border: "5px solid black" //black border
+  border: "3px solid black" //black border
 }, {
-  backgroundColor: '#ffff00' //yellow
+  backgroundColor: '#ffff00', //yellow
+  border: "3px solid #ffff00"
 }, {
-  backgroundColor: '#ff6699' //light pink
+  backgroundColor: '#ff6699', //light pink
+  border: "3px solid #ff6699"
 }, {
-  backgroundColor: '#9933cc' //purple
+  backgroundColor: '#9933cc', //purple
+  border: "3px solid #9933cc"
 }, {
-  backgroundColor: "#cc9966", //light brown
-  border: "5px solid #663300" //dark brown border
+  backgroundColor: "#bfbfbf", //grey
+  border: "3px solid #bfbfbf"
 }, {
-  backgroundColor: '#cc3333' //red
+  backgroundColor: '#cc3333', //red
+  border: "3px solid #cc3333"
 }];
 
 var audios = [];
@@ -1357,11 +1364,13 @@ var pushStyle = {
 };
 
 var standardStyle = {
-  backgroundColor: "#BFBFBF"
+  backgroundColor: "transparent",
+  border: "3px solid #F13542"
 };
 
 var newStyle = {
-  backgroundColor: "#F13542"
+  backgroundColor: "#F13542",
+  border: "3px solid #F13542"
 };
 
 var audios = [];
@@ -2182,7 +2191,8 @@ var pushStyle = {
 };
 
 var standardStyle = {
-  backgroundColor: "#BFBFBF"
+  backgroundColor: "transparent",
+  border: "3px solid #01B6A7"
 };
 
 var newStyle = {
@@ -2802,9 +2812,7 @@ var SilentMode = React.createClass({
       if (currentScore !== 0) {
         scoreUpdate = React.createElement(
           'h2',
-          { style: {
-              color: 'yellow'
-            } },
+          { className: 'scoreUpdate scoreUpdatePos' },
           '-',
           parseInt(currentScore)
         );
@@ -2818,9 +2826,7 @@ var SilentMode = React.createClass({
       if (currentScore !== 0) {
         scoreUpdate = React.createElement(
           'h2',
-          { style: {
-              color: 'red'
-            } },
+          { className: 'scoreUpdate scoreUpdateNeg' },
           '-',
           parseInt(currentScore)
         );
@@ -2931,30 +2937,37 @@ var pushStyle = {
 };
 
 var standardStyle = {
-  backgroundColor: "#BFBFBF"
+  backgroundColor: "transparent",
+  border: "3px solid #7CD9D2"
 };
 
 var newStyle = [{
-  backgroundColor: '#00cc33' //green
+  backgroundColor: '#00cc33', //green
+  border: "3px solid #00cc33"
 }, {
-  backgroundColor: '#000000' //black
+  backgroundColor: '#000000', //black
+  border: "3px solid #000000"
 }, {
   backgroundColor: '#33ccff', //light blue
-  border: "5px solid #333366" //dark blue border
+  border: "3px solid #33ccff"
 }, {
   backgroundColor: '#ffffff', //white
-  border: "5px solid black" //black border
+  border: "3px solid black" //black border
 }, {
-  backgroundColor: '#ffff00' //yellow
+  backgroundColor: '#ffff00', //yellow
+  border: "3px solid #ffff00"
 }, {
-  backgroundColor: '#ff6699' //light pink
+  backgroundColor: '#ff6699', //light pink
+  border: "3px solid #ff6699"
 }, {
-  backgroundColor: '#9933cc' //purple
+  backgroundColor: '#9933cc', //purple
+  border: "3px solid #9933cc"
 }, {
-  backgroundColor: "#cc9966", //light brown
-  border: "5px solid #663300" //dark brown border
+  backgroundColor: "#bfbfbf", //grey
+  border: "3px solid #bfbfbf"
 }, {
-  backgroundColor: '#cc3333' //red
+  backgroundColor: '#cc3333', //red
+  border: "3px solid #cc3333"
 }];
 
 module.exports = SilentMode;
