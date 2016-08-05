@@ -7,8 +7,18 @@ import {Link} from 'react-router';
 var LoginOverlay = React.createClass({
   getInitialState: function() {
     console.log(this)
+    // var error = null;
+    // if(this.props.params.error){
+    //   error = decodeURIComponent(this.props.params.error)
+    // }
+    return {
+      username: '', 
+      password: '', 
+      gameEnded: false, 
+      games: null,
+      error: this.props.params.error
+    }
 
-    return {username: '', password: '', gameEnded: false, games: null, error: this.props.params.error}
 
   },
   componentDidMount() {},
@@ -25,19 +35,16 @@ var LoginOverlay = React.createClass({
 
     //ajax post
     axios.post('/login', {
-      withCredentials: true,
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      },
-
       username: this.state.username,
       password: this.state.password
-
     }).then(function(response) {
       console.log(response)
       if (response.data.success) {
+        console.log("success")
         this.props.history.goBack();
+      }
+      else{
+        this.props.history.push('/login/error')
       }
     }.bind(this))
   },

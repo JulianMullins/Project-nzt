@@ -1,15 +1,24 @@
 var mongoose = require('mongoose')
-
+var autoref = require('mongoose-autorefs');
 
 var leaderboardSchema = mongoose.Schema({
 	user:String,
 	scores: [{
 		type: mongoose.Schema.Types.ObjectId,
 		ref: 'HighScore'
-	}]
+	}],
+	leaderboardBelongsToStats:{
+		type:mongoose.Schema.Types.ObjectId,
+		ref:'Stats'
+	}
 })
 
-leaderboardSchema.methods.mergeScoresArrays=function(scores1,scores2){
+leaderboardSchema.plugin(autoref,[
+	'scores.scoreBoard',
+	'leaderboardBelongsToStats.leaderboard'
+])
+
+leaderboardSchema.methods.mergeScoresArrays=function(scores1,scores2,username){
 	var newScores=[];
 	var scores2index = 0;
 	if(scores2.length==0){
@@ -43,6 +52,14 @@ leaderboardSchema.methods.mergeScoresArrays=function(scores1,scores2){
 		newScores = newScores.concat(scores1.slice(scores1index))
 	}
 	//console.log(newScores);
+
+	newScores.forEach(function(eachScore){
+		if(eachScore.username!==username){
+			eachScore.username = username;
+			eachScore.save();
+		}
+	})
+
 	return newScores;
 }
 

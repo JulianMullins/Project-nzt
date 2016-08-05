@@ -1,5 +1,5 @@
 var mongoose = require('mongoose')
-
+var autoref = require('mongoose-autorefs');
 
 var userSchema = mongoose.Schema({
 
@@ -25,15 +25,20 @@ var userSchema = mongoose.Schema({
 	}]
 })
 
-userSchema.methods.combineMaxN = function(maxN2){
+userSchema.methods.combineMaxNCurrentGame = function(maxN2,currentGame2){
 	for(var mode in this.maxN){
 		if(this.maxN[mode]<maxN2[mode]){
 			this.maxN[mode] = maxN2[mode];
 		}
 	}
+	console.log("maxN combined")
 	this.save();
 }
 
+userSchema.plugin(autoref,[
+	'stats.statsUser',
+	'currentGame.gameUser'
+])
 
 
 module.exports = mongoose.model('User',userSchema)

@@ -39,7 +39,7 @@ var MyComponent = React.createClass({
                     }
     },
 componentDidMount: function(){
-axios.get('/taco', {withCredentials: true})
+axios.get('/getStats', {withCredentials: true})
 .then(function(responseJson){
     stats=responseJson.data.stats;
     this.state.data=[];

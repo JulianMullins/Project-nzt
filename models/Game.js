@@ -1,8 +1,9 @@
-var mongoose = require('mongoose')
+var mongoose = require('mongoose');
+var autoref = require('mongoose-autorefs');
 
 
 var gameSchema = mongoose.Schema({
-	user:{
+	gameUser:{
 		type: mongoose.Schema.Types.ObjectId,
 		ref: 'User'
 	},
@@ -24,6 +25,9 @@ var gameSchema = mongoose.Schema({
 	}
 })
 
-
+gameSchema.plugin(autoref,[
+	'gameUser.currentGame',
+	'finalScore.fromGameId'
+])
 
 module.exports = mongoose.model('Game',gameSchema)
