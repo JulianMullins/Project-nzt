@@ -2070,9 +2070,7 @@ var RelaxedMode = React.createClass({
       );
       scoreUpdate = React.createElement(
         'h2',
-        { style: {
-            color: '#01B6A7'
-          } },
+        { className: 'relaxed scoreUpdate' },
         '+',
         parseInt(currentScore)
       );

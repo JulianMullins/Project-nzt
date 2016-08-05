@@ -516,9 +516,7 @@ var SilentMode = React.createClass({
         </div>
       )
       scoreUpdate = (
-        <h2 style={{
-          color: 'green'
-        }}>+{parseInt(currentScore)}</h2>
+        <h2 className="silent scoreUpdate">+{parseInt(currentScore)}</h2>
       )
     } else if (this.state.alertType === 'none') {
       scoreAlert = (

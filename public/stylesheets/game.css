@@ -186,6 +186,24 @@
   animation-duration: 5s;
 }
 
+.scoreUpdate {
+  -webkit-animation-name: scoreUpdateIn;
+  -webkit-animation-duration: 5s;
+  animation-name: scoreUpdateIn;
+  animation-duration: 5s;  
+}
+
+@keyframes scoreUpdateIn {
+  from {
+    transform: scale3d(0, 0, 1)
+    opacity: 1
+  }
+  to {
+    transform: scale3d(1, 1, 1)
+    opacity: 1    
+  }
+}
+
 /* negative alert fade in and out */
 
 @keyframes negativeFadeIn {

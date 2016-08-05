@@ -147,6 +147,10 @@ button.form-btn.dx a, button.form-btn.dx2 a {
 /*register page*/
 
 .register {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
   height: 100%;
   width: 100%;
   background-color: #7cd9d2;
