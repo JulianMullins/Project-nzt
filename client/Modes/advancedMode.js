@@ -113,37 +113,89 @@ var AdvancedMode = React.createClass({
     ///triple match:
     if(this.state.colorMatch && this.state.soundMatch && this.state.positionMatch){
       var count=0;
-      currentScore=0; 
       //got color match correct
       if(reactionEnd){
         reactionTimes.push(reactionEnd-reactionStart);
       }
+      //points for color match
       if(this.state.colorHit){
         count+=1;
         currentScore = ((2000 - reactionTimes[reactionTimes.length - 1]) / 100).toFixed(2)+1;
         fullScore+=currentScore;
-        this.state.score+=currentScore;
+        this.state.score+=parseInt(currentScore);
       }
-    }
+      //points for position match
+      if(this.state.positionHit){
+        count+=1
+        currentScore = ((2000 - reactionTimes[reactionTimes.length - 1]) / 100).toFixed(2)+1;
+        fullScore+=currentScore;
+        this.state.score+=parseInt(currentScore);
+      }
+      //points for sound match
+       if(this.state.soundHit){
+        count+=1
+        currentScore = ((2000 - reactionTimes[reactionTimes.length - 1]) / 100).toFixed(2)+1;
+        fullScore+=currentScore;
+        this.state.score+=parseInt(currentScore);
+      }
+      currentScore=currentScore*count; //to adjust for full point addition in visual
 
-        this.setState({
-          soundPressed: noStyle,
-          colorPressed: noStyle,
-          positionPressed: noStyle,
+      //no matches hit of count is still 0
+      if(count===0){
+        console.log('full miss')
+        //set alerts
+        currentScore-=5;
+        if(this.state.score+currentScore>=0){
+          fullScore+=currentScore;
+          this.state.score+=currentScore;
+        }
+        else{
+          currentScore-=this.state.score;
+          this.state.score=0;
+          fullScore+=currentScore;
+        }
+      }
+
+      ///reset the states at the end
+      this.setState({
           colorMatch: false,
           soundMatch: false,
           positionMatch: false,
           soundHit: false,
           colorHit: false,
           positionHit: false,
-          alert: ' ',
-          alertType: ' '
+          score: this.state.score
         })
+    }
+    //start with individual cases for color match
+    else{
+      if(this.state.soundMatch){
+        if(this.state.colorMatch){
+          if(this.state.soundHit && this.state.colorHit){
+            currentScore = ((2000 - reactionTimes[reactionTimes.length - 1]) *2 / 100).toFixed(2)+1;
+            fullScore+=currentScore;
+          }
+          else if(this.state.soundHit || this.state.colorHit){
+            currentScore = ((2000 - reactionTimes[reactionTimes.length - 1]) / 100).toFixed(2)+1;
+            fullScore+=currentScore;
+          }
+        }
+        if(this.state.positionMatch){
+          if(this.state.soundHit && this.state.positionHit){
+            currentScore = ((2000 - reactionTimes[reactionTimes.length - 1]) *2 / 100).toFixed(2)+1;
+            fullScore+=currentScore;
+          }
+        }
+      }
+    }
+
+
+        
 
 
       this.setState({colorPressed: noStyle, soundPressed: noStyle, positionPressed: noStyle});
       setTimeout(function() {
-        this.setState({alert: ' '});
+        this.setState({alert: ' ', alertType: ' '});
       }.bind(this), 800);
       //NOT GOING TO ACTUALLY LIGHT UP COLORS UNTIL ALL IF STATEMENTS HAVE ITERATED
       //case 1: position match
