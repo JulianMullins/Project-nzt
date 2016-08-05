@@ -159,7 +159,7 @@ h3 {
 @media all and (max-width: 768px) {
   .heading {
     justify-content: center;
-    padding-top: 75px;
+    padding-top: 7vh;
   }
   .heading> img {
     width: 70vw;
