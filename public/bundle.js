@@ -773,11 +773,19 @@ var ClassicMode = React.createClass({
   startGame: function startGame() {
     this.setState({ overlay: false });
     for (var i = 0; i < 9; i++) {
-      audios[i].volume = 0;
-      console.log(audios[i], audios[i].volume);
-      audios[i].play();
-      audios[i].volume = 1;
+      audios[i].volume = 0.0;
     }
+    setTimeout(function () {
+      for (var i = 0; i < 9; i++) {
+        console.log(audios[i], audios[i].volume);
+        audios[i].play();
+      }
+    }, 300);
+    setTimeout(function () {
+      for (var i = 0; i < 9; i++) {
+        audios[i].volume = 1.0;
+      }
+    }, 1500);
     setTimeout(function () {
       soundInterval = setInterval(function () {
         audios[nextSound].play();
@@ -2312,7 +2320,7 @@ var SilentMode = React.createClass({
     var colorQueue = [];
     var timeTilPositionMatch = parseInt(Math.random() * 5 + this.state.N);
     var timeTilColorMatch = parseInt(Math.random() * 5 + this.state.N);
-    var timeKeeper = 44;
+    var timeKeeper = 9;
 
     iterations = setInterval(function () {
       timeKeeper--;
