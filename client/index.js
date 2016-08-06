@@ -6,13 +6,13 @@ import { IndexRoute, IndexRedirect } from 'react-router';
 var axios = require('axios');
 var url = process.env.url;
 
-var Home = require('./Mainmenu');
+var Home = require('./home');
 var NavBar = require('./navBar');
 
-var Login = require('./loginOverlay');
+var Login = require('./login');
 var FacebookLogin = require('./facebookLogin');
 var Logout = require('./logout');
-var Register = require('./registerOverlay');
+var Register = require('./register');
 var ErrorPage = require('./errorPage');
 
 var GameOver = require('./gameOver');
