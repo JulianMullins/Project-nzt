@@ -4907,7 +4907,8 @@ var NewUserOverlay = React.createClass({
 	render: function render() {
 		return React.createElement(
 			'div',
-			{ className: 'overlay' },
+			{ className: 'overlaySmall' },
+			React.createElement('span', { className: 'fa fa-times fa-3x closeButton' }),
 			React.createElement(
 				'div',
 				{ className: 'newUserOverlay' },
@@ -4918,45 +4919,43 @@ var NewUserOverlay = React.createClass({
 						'h1',
 						null,
 						'First Time Here?'
-					)
-				),
-				React.createElement(
-					'div',
-					{ className: 'newUserMid' },
-					React.createElement(
-						'p',
-						null,
-						'How about checking out the ',
-						React.createElement(
-							_reactRouter.Link,
-							{ to: '/tutorial' },
-							'tutorial page?'
-						)
 					),
 					React.createElement(
-						'p',
+						'i',
 						null,
-						'If you want to just jump right in, we recommend you start playing in ',
-						React.createElement(
-							_reactRouter.Link,
-							{ to: 'levels/relaxed' },
-							'relaxed mode'
-						),
-						' first to get the hang of things.'
+						'Cortex is a modern take on dual n-back, a scientifically supported game designed to exercise working memory and increase fluid-intelligence (IQ). '
 					)
 				),
 				React.createElement(
 					'div',
 					{ className: 'newUserBottom' },
 					React.createElement(
-						_reactRouter.Link,
-						{ to: '/tutorial' },
-						'Tutorial'
+						'div',
+						{ className: 'newUserLeft' },
+						React.createElement(
+							'p',
+							null,
+							'Before you start playing, how about visiting the tutorial page to get started?'
+						),
+						React.createElement(
+							_reactRouter.Link,
+							{ to: '/tutorial' },
+							'Tutorial'
+						)
 					),
 					React.createElement(
-						_reactRouter.Link,
-						{ to: 'levels/relaxed' },
-						'Relaxed Mode'
+						'div',
+						{ className: 'newUserRight' },
+						React.createElement(
+							'p',
+							null,
+							'If you want to just jump right in, we recommend playing in relaxed mode first.'
+						),
+						React.createElement(
+							_reactRouter.Link,
+							{ to: 'levels/relaxed' },
+							'Relaxed Mode'
+						)
 					)
 				)
 			)
@@ -4966,7 +4965,22 @@ var NewUserOverlay = React.createClass({
 
 module.exports = NewUserOverlay;
 
+<<<<<<< HEAD
+// 	<div className="newUserMid">
+// 		<p>How about checking out the <Link to="/tutorial">tutorial page?</Link></p>
+// 		<p>If you want to just jump right in, we recommend you 
+// 		start playing in <Link to="levels/relaxed">relaxed mode</Link> first to get the hang of things.</p>
+// 	</div>
+// 	<div className="newUserBottom">
+// 		<Link to="/tutorial">Tutorial</Link>
+// 		<Link to="levels/relaxed">Relaxed Mode</Link>
+// 	</div>								
+// </div>
+
+},{"axios":22,"react":362,"react-router":157}],18:[function(require,module,exports){
+=======
 },{"axios":25,"react":373,"react-router":223}],21:[function(require,module,exports){
+>>>>>>> origin/master
 'use strict';
 
 var _reactRouter = require('react-router');
