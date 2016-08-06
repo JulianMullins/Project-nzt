@@ -1,0 +1,87 @@
+.newUserOverlay {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	height: 100vh;
+	width: 90vw;
+}
+
+.newUserOverlay h1 {
+	color: #c6c6c6;
+	text-align: center;
+}
+
+.newUserOverlay p {
+	color: #c6c6c6;
+	text-align: center;
+	font-size: 24px;
+	width: 75vw;
+	margin-bottom: 15px;
+}
+
+.newUserOverlay a {
+	text-decoration: none;
+	color: #01B6A7;
+	transition-duration: .5s;
+}
+
+.newUserOverlay a:hover {
+	text-decoration: none;
+	color: #c6c6c6;
+	transition-duration: .5s;
+}
+
+.newUserTop {
+	display: flex;
+	height: 40vh;
+	justify-content: center;
+	align-items: center;
+}
+
+.newUserMid {
+	display: flex;
+	flex-direction: column;
+	height: 40vh;
+	justify-content: center;
+	align-items: center;
+}
+
+.newUserBottom {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+	width: 75vw;
+	height: 20vh;
+}
+
+.newUserBottom a {
+	font-size: 24px;
+	text-align: center;
+	margin: 0 2.5%;
+	width: 40%;
+	padding: 10px 5px;
+	color: white;
+	border: 2px solid #01B6A7;
+	margin: 0 auto;
+}
+
+.newUserBottom a:hover {
+	color: white;
+	background-color: #01B6A7;
+}
+
+@media (max-width: 768px) {
+	.newUserOverlay h1 {
+		font-size: 36px;
+	}
+
+	.newUserOverlay p {
+		font-size: 20px;
+	}
+
+	.newUserBottom a {
+		font-size: 20px;
+	}
+}
