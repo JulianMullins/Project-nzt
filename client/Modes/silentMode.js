@@ -91,7 +91,7 @@ var SilentMode = React.createClass({
     var colorQueue = [];
     var timeTilPositionMatch = parseInt((Math.random() * 5) + this.state.N);
     var timeTilColorMatch = parseInt((Math.random() * 5) + this.state.N);
-    var timeKeeper = 9;
+    var timeKeeper = 44;
 
     iterations = setInterval(function() {
       timeKeeper--;
@@ -449,11 +449,11 @@ var SilentMode = React.createClass({
         clearInterval(iterations);
         setTimeout(function() {
           console.log(matchHit / matchCount, 'accuracy')
-          endGameFunction(fullScore, reactionTimes, this.state.gameId, this.state.userId, function(success) {
-            if (success) {
-              this.props.history.push('/gameOver')
-            }
-          }.bind(this))
+          // endGameFunction(fullScore, reactionTimes, this.state.gameId, this.state.userId, function(success) {
+          //   if (success) {
+          //     this.props.history.push('/gameOver')
+          //   }
+          // }.bind(this))
 
         }.bind(this), 2000);
       }
