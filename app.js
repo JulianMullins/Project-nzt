@@ -20,7 +20,7 @@ var highScores = require('./server/highScores');
 var serverData = require('./server/serverData');
 var gameOverUpdate = require('./server/gameOverUpdate');
 var gameFunctions = require('./server/gameFunctions');
-var statsFunctions = require('./server/taylorsDataFile');
+var statsFunctions = require('./server/statsFunctions');
 
 
 
@@ -309,7 +309,8 @@ passport.use(new FacebookStrategy({
               silent: 1,
               advanced: 1
             },
-            currentGame:[]
+            currentGame:[],
+            showTutorial:false
           })
 
           //removed userId

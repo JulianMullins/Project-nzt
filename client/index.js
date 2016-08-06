@@ -6,14 +6,16 @@ import { IndexRoute, IndexRedirect } from 'react-router';
 var axios = require('axios');
 var url = process.env.url;
 
-var Home = require('./Mainmenu');
+var Home = require('./home');
 var NavBar = require('./navBar');
 var NewUserOverlay = require('./newUserOverlay');
 
-var Login = require('./loginOverlay');
+var Login = require('./login');
 var FacebookLogin = require('./facebookLogin');
 var Logout = require('./logout');
-var Register = require('./registerOverlay');
+var Register = require('./register');
+
+var ErrorPage = require('./errorPage');
 
 var GameOver = require('./gameOver');
 var Leaderboard = require('./leaderboard');
@@ -96,6 +98,7 @@ ReactDOM.render((
       <Route path="login(/:error)" component={Login}/>
       <Route path="logout" component={Logout}/>
       <Route path="register(/:error)" component={Register}/>
+      <Route path="error/:error" component={ErrorPage}/>
       
       <Route path="gameOver" component={GameOver}/>
       <Route path="leaderboard" component={Leaderboard}/>

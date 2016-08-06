@@ -47,13 +47,16 @@ var RelaxedMode = React.createClass({
       N: parseInt(this.props.params.n),
       posPressed: false,
       posStyle: noStyle,
-      // modeMultiplier: modeMultiplier[this.props.mode],
       tempUser: true,
       gameId: null,
       mode: 'relaxed',
-      modeMultiplier: 1,
+      modeMultiplier: modeMultiplier[this.props.mode],
       penalty: 0,
-      positivePoints: 0
+      positivePoints: 0,
+      fullScore:0,
+      matchCount:0,
+      matchHit:0,
+      reactionTimes:[]
     }
   },
   componentDidMount: function() {
@@ -112,7 +115,8 @@ var RelaxedMode = React.createClass({
           score: this.state.score + parseInt(currentScore),
           posStle: noStyle
         });
-      } else if (!this.state.keepScore && this.state.posPressed) {
+      } 
+      else if (!this.state.keepScore && this.state.posPressed) {
         this.setState({alert: 'Not a match'});
         if ((this.state.score - 5) >= 0) {
           matchHit -= 1;
@@ -121,11 +125,13 @@ var RelaxedMode = React.createClass({
             score: this.state.score - 5,
             posStyle: noStyle
           });
-        } else {
+        } 
+        else {
           currentScore = this.state.score
           this.setState({score: 0});
         }
-      } else if (this.state.keepScore && this.state.posMatch) {
+      } 
+      else if (this.state.keepScore && this.state.posMatch) {
         this.setState({alert: "Missed a match"});
         if ((this.state.score - 5) >= 0) {
           matchCount += 1;
@@ -134,7 +140,8 @@ var RelaxedMode = React.createClass({
             score: this.state.score - 5,
             posStyle: noStyle
           });
-        } else {
+        } 
+        else {
           currentScore = this.state.score;
           this.setState({score: 0});
         }
@@ -203,9 +210,12 @@ var RelaxedMode = React.createClass({
         var accuracy = matchHit / matchCount;
         console.log(accuracy, 'accuracy')
 
-        endGameFunction(fullScore, reactionTimes, this.state.gameId, accuracy, function(success) {
-          if (success) {
+        endGameFunction(fullScore, reactionTimes, this.state.gameId, accuracy, function(data) {
+          if (data.success) {
             this.props.history.push('/gameOver')
+          }
+          else{
+            this.props.history.push('/error/'+encodeURIComponent(data.message))
           }
         }.bind(this))
 

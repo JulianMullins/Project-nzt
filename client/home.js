@@ -9,8 +9,8 @@ var RelaxedLevels = Levels.RelaxedLevels;
 
 import {Link} from 'react-router'
 
-var LoginOverlay = require('./loginOverlay');
-var RegisterOverlay = require('./registerOverlay');
+var LoginOverlay = require('./login');
+var RegisterOverlay = require('./register');
 
 var Mainmenu = React.createClass({
 

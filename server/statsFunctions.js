@@ -8,9 +8,7 @@ var Highscores=require('../models/HighScore')
 var tempGame = null;
 
 router.get('/getStats',function(req, res, next){
-   //return res.json({stats: req.user.stats})
-   //console.log(req.user, 'taylor')
-   //console.log(req.session.user)
+
   Stats.findById(req.session.user.stats._id)
     .populate('progress')
     .exec(function(err,stats){

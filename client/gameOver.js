@@ -9,7 +9,7 @@ var modeM = 0;
 axios.defaults.baseURL = process.env.url;
 
 import {Link} from 'react-router'
-var loginOverlay = require('./loginOverlay');
+var loginOverlay = require('./login');
 
 var getUser = function() {
   return axios.get('/getUser');
