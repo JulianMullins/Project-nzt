@@ -1,6 +1,7 @@
 {
   "scripts": {
     "start": "node ./bin/www",
+    "postinstall": "browserify client/index.js -o ./public/bundle.js -t [ babelify --presets [ es2015 react ] ]",
     "test": "concurrent -k \"nodemon ./bin/www\" \"npm run watch\"",
     "watch": "watchify client/index.js -o ./public/bundle.js -t [ babelify --presets [ es2015 react ] ]"
   },
