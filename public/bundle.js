@@ -4965,7 +4965,6 @@ var NewUserOverlay = React.createClass({
 
 module.exports = NewUserOverlay;
 
-<<<<<<< HEAD
 // 	<div className="newUserMid">
 // 		<p>How about checking out the <Link to="/tutorial">tutorial page?</Link></p>
 // 		<p>If you want to just jump right in, we recommend you 
@@ -4977,10 +4976,7 @@ module.exports = NewUserOverlay;
 // 	</div>								
 // </div>
 
-},{"axios":22,"react":362,"react-router":157}],18:[function(require,module,exports){
-=======
 },{"axios":25,"react":373,"react-router":223}],21:[function(require,module,exports){
->>>>>>> origin/master
 'use strict';
 
 var _reactRouter = require('react-router');
