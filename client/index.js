@@ -14,6 +14,7 @@ var Login = require('./login');
 var FacebookLogin = require('./facebookLogin');
 var Logout = require('./logout');
 var Register = require('./register');
+
 var ErrorPage = require('./errorPage');
 
 var GameOver = require('./gameOver');
