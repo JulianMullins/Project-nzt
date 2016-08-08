@@ -4811,23 +4811,21 @@ var _reactRouter = require('react-router');
 var React = require('react');
 var axios = require('axios');
 
-
 var NewUserOverlay = React.createClass({
 	displayName: 'NewUserOverlay',
 	stopShowOverlay: function stopShowOverlay() {
-		axios.post('./stopShowOverlay', {
+		axios.post('/stopShowOverlay', {
 			stop: true
 		});
 	},
 
-
-	getInitialState: function getInitialState() {
-		return {};
-	},
 	componentDidMount: function componentDidMount() {
-		return {
-			open: true
-		};
+		axios.post('/stopShowOverlay', {
+			withCredentials: true,
+			data: { stop: true }
+		}).then(function (response) {
+			console.log("stop show overlay posted " + response.data.success, response.data.error);
+		});
 	},
 	render: function render() {
 		console.log("showing tutorial");
