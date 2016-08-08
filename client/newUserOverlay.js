@@ -3,6 +3,12 @@ var axios = require('axios');
 import {Link} from 'react-router';
 
 var NewUserOverlay = React.createClass({
+	stopShowOverlay(){
+		axios.post('./stopShowOverlay',{
+			stop:true
+		})
+	},
+
 	getInitialState: function() {
 		return {
 
@@ -14,6 +20,7 @@ var NewUserOverlay = React.createClass({
 		}
 	},
 	render: function() {
+		console.log("showing tutorial")
 		return (
 			<div className="overlaySmall">
 				<span className="fa fa-times fa-3x closeButton"></span>						
@@ -34,7 +41,8 @@ var NewUserOverlay = React.createClass({
 							 playing in relaxed mode first.</p>
 							<Link to="levels/relaxed">Relaxed Mode</Link>
 						</div>	
-					</div>							
+					</div>
+					<a className="closeButton" onClick={this.stopShowOverlay}>Click here to never show this again</a>							
 				</div>
 			</div>	
 		)

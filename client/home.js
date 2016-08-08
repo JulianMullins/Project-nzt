@@ -9,8 +9,7 @@ var RelaxedLevels = Levels.RelaxedLevels;
 
 import {Link} from 'react-router'
 
-var LoginOverlay = require('./login');
-var RegisterOverlay = require('./register');
+var NewUserOverlay = require('./newUserOverlay');
 
 var Mainmenu = React.createClass({
 
@@ -19,16 +18,34 @@ var Mainmenu = React.createClass({
     return {
       name:null,
       hasUsername:false,
-      userWelcome:<div></div>
+      userWelcome:<div></div>,
+      showTutorial:false
     }
+  },
+  componentDidMount: function(){
+    axios.get('/homeUserInfo')
+      .then(function(response){
+        this.setState({
+          hasUsername:response.data.hasUsername,
+          name:response.data.name,
+          showTutorial:response.data.showTutorial
+        })
+      }.bind(this)).then(function() {
+        if(this.state.hasUsername){
+          this.setState({
+            userWelcome: <h3 className="advanced userWelcome">Welcome: {this.state.name}</h3>
+          })
+      }
+    }.bind(this))
   },
   componentWillReceiveProps: function(nextProps) {
     if (nextProps.location.pathname === "/home") {
-      axios.get('/getUser')
+      axios.get('/homeUserInfo')
         .then(function(response){
           this.setState({
-            hasUsername:response.data.isUser,
+            hasUsername:response.data.hasUsername,
             name:response.data.name,
+            showTutorial:response.data.showTutorial
           })
         }.bind(this)).then(function() {
           if(this.state.hasUsername){
@@ -38,21 +55,6 @@ var Mainmenu = React.createClass({
         }
       }.bind(this))
     }
-  },
-  componentDidMount: function(){
-    axios.get('/getUser')
-      .then(function(response){
-        this.setState({
-          hasUsername:response.data.isUser,
-          name:response.data.name,
-        })
-      }.bind(this)).then(function() {
-        if(this.state.hasUsername){
-          this.setState({
-            userWelcome: <h3 className="advanced userWelcome">Welcome: {this.state.name}</h3>
-          })
-      }
-    }.bind(this))
   },
   classic() {
     this.props.history.push('/levels/classic')
@@ -72,6 +74,10 @@ var Mainmenu = React.createClass({
     //   : '';
     return (
       <div>
+        {this.state.showTutorial
+          ?<NewUserOverlay/>
+          :<div></div>
+        }
         <div className="heading">
           <img src="../images/CortexLogo4.svg"/>
           <div className="userHeading">

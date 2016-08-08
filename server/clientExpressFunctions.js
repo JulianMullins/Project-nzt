@@ -15,12 +15,39 @@ var Stats = require('../models/Stats')
 var tempGame = null;
 
 
-
+//reset session on app load if !fullUser
 router.get('/getUserOnLoad',function(req,res,next){
   if(req.session.user && req.session.user.temp){
     req.session.destroy();
   }
   res.json({success:true})
+})
+
+
+//get User info for home page
+router.get('/homeUserInfo',function(req,res,next){
+  if(req.session.user){
+    console.log("show show tutorial: "+req.session.user.showTutorial)
+    res.json({
+      name:req.session.user.name,
+      hasUsername: !req.session.user.temp,
+      showTutorial: req.session.user.showTutorial
+    })
+  }
+  else{
+    res.json({
+      name:null,
+      hasUsername:false,
+      showTutorial:false
+    })
+  }
+})
+
+
+//change user setting to not show overlay
+router.post('./stopShowOverlay',function(req,res,next){
+  req.session.user.showTutorial = false;
+  req.session.user.save();
 })
 
 
@@ -37,19 +64,6 @@ router.get('/isUser',function(req,res,next){
   
 });
 
-
-//check if logged in ---- not in use
-router.get('/isLoggedIn',function(req,res,next){
-  var isloggedin = false;
-  if(req.session.user && !req.session.user.temp){
-    isloggedin = true;
-  }
-  console.log("logged in: "+isloggedin)
-  res.json({
-    'loggedIn': isloggedin
-    // 'username': req.session.user.username
-  })
-});
 
 //get max N (default 1) for level display
 router.get('/getMaxN',function(req,res,next){

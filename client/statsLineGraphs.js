@@ -1,11 +1,18 @@
 var React = require('react');
 var ReactDOM = require('react-dom');
-var d3=require('d3'); //some documentation hass this in examples, so keep to be safe
+//var d3=require('d3'); //some documentation hass this in examples, so keep to be safe
+console.timeStamp("start load lineChart")
 var LineChart = require('react-d3-basic').LineChart;
+
+console.timeStamp("start load AreaChart")
+
 var AreaChart = require('react-d3-basic').AreaChart;
+
+console.timeStamp("start load underscore")
 var _=require('underscore');
 var axios=require('axios');
 import { Link } from 'react-router'
+
 
 //global variables for changing state below
 var stats=[];
