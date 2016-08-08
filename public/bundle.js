@@ -1,6 +1,3 @@
-<<<<<<< HEAD
-console.error("Error: Cannot find module './serverFunctions' from 'C:\\Users\\Student\\Documents\\GitHub\\Project-nzt\\client\\Modes'");
-=======
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
 'use strict';
 
@@ -120,6 +117,7 @@ var AdvancedMode = React.createClass({
       ///triple match:
       if (this.state.colorMatch && this.state.soundMatch && this.state.positionMatch) {
         var count = 0;
+        currentScore = 0;
         //got color match correct
         if (reactionEnd) {
           reactionTimes.push(reactionEnd - reactionStart);
@@ -127,45 +125,58 @@ var AdvancedMode = React.createClass({
         //points for color match
         if (this.state.colorHit) {
           count += 1;
-          currentScore = ((2000 - reactionTimes[reactionTimes.length - 1]) / 100).toFixed(2) + 1;
-          fullScore += parseFloat(currentScore);
-          console.log(fullScore);
-          this.state.score += parseInt(currentScore);
+          currentScore += ((2000 - reactionTimes[reactionTimes.length - 1]) / 100).toFixed(2) + 1;
         }
         //points for position match
         if (this.state.positionHit) {
           count += 1;
-          currentScore = ((2000 - reactionTimes[reactionTimes.length - 1]) / 100).toFixed(2) + 1;
-          fullScore += parseFloat(currentScore);
-          console.log(fullScore);
-          this.state.score += parseInt(currentScore);
+          currentScore += ((2000 - reactionTimes[reactionTimes.length - 1]) / 100).toFixed(2) + 1;
         }
         //points for sound match
         if (this.state.soundHit) {
           count += 1;
-          currentScore = ((2000 - reactionTimes[reactionTimes.length - 1]) / 100).toFixed(2) + 1;
-          fullScore += parseFloat(currentScore);
-          console.log(fullScore);
-          this.state.score += parseInt(currentScore);
+          currentScore += ((2000 - reactionTimes[reactionTimes.length - 1]) / 100).toFixed(2) + 1;
         }
-        currentScore = currentScore * count; //to adjust for full point addition in visual
 
+        this.state.score += parseInt(currentScore);
+        if (count === 3) {
+          this.setState({
+            alertType: 'full',
+            alert: 'Triple Match!'
+          });
+        }
+
+        if (count === 2) {
+          this.setState({
+            alertType: 'half',
+            alert: 'Partial Match!'
+          });
+        }
+
+        if (count === 1) {
+          this.setState({
+            alertType: 'half',
+            alert: 'Partial Match!'
+          });
+        }
         //no matches hit of count is still 0
         if (count === 0) {
-          console.log('full miss');
           //set alerts
           currentScore -= 5;
-          if (this.state.score + currentScore >= 0) {
-            fullScore += parseFloat(currentScore);
-            console.log(fullScore);
-            this.state.score += currentScore;
-          } else {
-            currentScore -= this.state.score;
-            this.state.score = 0;
-            fullScore += parseFloat(currentScore);
-            console.log(fullScore);
-          }
+          this.setState({
+            alertType: 'none',
+            alert: 'Missed a Match!'
+          });
         }
+
+        if (this.state.score + currentScore < 0) {
+          currentScore = this.state.score;
+          this.state.score = 0;
+          fullScore = 0;
+        } else {
+          this.state.score += parseInt(currentScore);
+        }
+        fullScore += parseFloat(currentScore);
 
         ///reset the states at the end
         this.setState({
@@ -183,92 +194,136 @@ var AdvancedMode = React.createClass({
       }
       //all other match combinations below
       else {
+          if (reactionEnd) {
+            reactionTimes.push(reactionEnd - reactionStart);
+          }
           currentScore = 0;
           //all sound match possibilites
           if (this.state.soundMatch) {
             if (this.state.colorMatch) {
               //not a match
               if (this.state.positionHit) {
-                console.log('not a match');
                 currentScore -= 5;
-                fullScore += parseFloat(currentScore);
-                console.log(fullScore);
+
+                this.setState({
+                  alertType: 'half',
+                  alert: 'Not A Match!'
+                });
               }
               //double match
               if (this.state.soundHit && this.state.colorHit) {
-                console.log('double match');
-                currentScore = ((2000 - reactionTimes[reactionTimes.length - 1]) * 2 / 100).toFixed(2) + 1;
-                fullScore += parseFloat(currentScore);
-                console.log(fullScore);
+                currentScore += ((2000 - reactionTimes[reactionTimes.length - 1]) * 2 / 100).toFixed(2) + 1;
+                this.setState({
+                  alertType: 'full',
+                  alert: 'Double Match!'
+                });
               }
               //1/2 match
               else if (this.state.soundHit || this.state.colorHit) {
-                  console.log('single match');
-                  currentScore = ((2000 - reactionTimes[reactionTimes.length - 1]) / 100).toFixed(2) + 1;
-                  fullScore += parseFloat(currentScore);
-                  console.log(fullScore);
+                  currentScore += ((2000 - reactionTimes[reactionTimes.length - 1]) / 100).toFixed(2) + 1;
+                  this.setState({
+                    alertType: 'half',
+                    alert: 'Half Match!'
+                  });
                 }
                 //missed both
                 else {
-                    console.log('missed both sound and color');
                     currentScore -= 5;
-                    fullScore += parseFloat(currentScore);
-                    console.log(fullScore);
+                    this.setState({
+                      alertType: 'none',
+                      alert: 'Missed A Match!'
+                    });
+                    if (this.state.score + currentScore >= 0) {
+                      this.state.score += currentScore;
+                    } else {
+                      currentScore -= this.state.score;
+                      this.state.score = 0;
+                    }
                   }
             } else if (this.state.positionMatch) {
               //color hit but no match
               if (this.state.colorHit) {
-                console.log('not a match');
                 currentScore -= 5;
-                fullScore += parseFloat(currentScore);
-                console.log(fullScore);
+                this.setState({
+                  alertType: 'none',
+                  alert: 'Not a Match!'
+                });
               }
               //double match
               if (this.state.soundHit && this.state.positionHit) {
-                console.log('double match');
-                currentScore = ((2000 - reactionTimes[reactionTimes.length - 1]) * 2 / 100).toFixed(2) + 1;
-                fullScore += parseFloat(currentScore);
-                console.log(fullScore);
+                currentScore += ((2000 - reactionTimes[reactionTimes.length - 1]) * 2 / 100).toFixed(2) + 1;
+                this.setState({
+                  alertType: 'full',
+                  alert: 'Double Match!'
+                });
               }
               //1/2 match
               else if (this.state.soundHit || this.state.positionHit) {
-                  console.log('half match');
-                  currentScore = ((2000 - reactionTimes[reactionTimes.length - 1]) / 100).toFixed(2) + 1;
-                  fullScore += parseFloat(currentScore);
-                  console.log(fullScore);
+                  currentScore += ((2000 - reactionTimes[reactionTimes.length - 1]) / 100).toFixed(2) + 1;
+                  this.setState({
+                    alertType: 'half',
+                    alert: 'Half Match!'
+                  });
                 }
                 //missed both
                 else {
-                    console.log('missed both sound and color');
                     currentScore -= 5;
-                    fullScore += parseFloat(currentScore);
-                    console.log(fullScore);
+                    this.setState({
+                      alertType: 'none',
+                      alert: 'Missed a Match!'
+                    });
+                    if (this.state.score + currentScore >= 0) {
+                      this.state.score += currentScore;
+                    } else {
+                      currentScore -= this.state.score;
+                      this.state.score = 0;
+                    }
                   }
             }
             //only sound match, so hit, miss, or wrong match
             else {
                 //hit
                 if (this.state.soundHit) {
-                  console.log('single match');
-                  currentScore = ((2000 - reactionTimes[reactionTimes.length - 1]) / 100).toFixed(2) + 1;
-                  fullScore += parseFloat(currentScore);
-                  console.log(fullScore);
+                  currentScore += ((2000 - reactionTimes[reactionTimes.length - 1]) / 100).toFixed(2) + 1;
+                  this.setState({
+                    alertType: 'full',
+                    alert: 'Single Match!'
+                  });
                 }
                 //miss
                 else if (!this.state.soundHit) {
-                    console.log('missed match');
                     currentScore -= 5;
-                    fullScore += parseFloat(currentScore);
-                    console.log(fullScore);
+                    this.setState({
+                      alertType: 'none',
+                      alert: 'Missed a Match!'
+                    });
                   }
                   //wrong match
                   else if (this.state.colorHit || this.state.positionHit) {
-                      console.log('wrong match');
                       currentScore -= 5;
-                      fullScore += parseFloat(currentScore);
-                      console.log(fullScore);
+                      this.setState({
+                        alertType: 'none',
+                        alert: 'Not a Match!'
+                      });
+                      if (this.state.score + currentScore >= 0) {
+                        this.state.score += currentScore;
+                      } else {
+                        currentScore -= this.state.score;
+                        this.state.score = 0;
+                      }
                     }
               }
+            this.setState({
+              colorMatch: false,
+              soundMatch: false,
+              positionMatch: false,
+              soundHit: false,
+              colorHit: false,
+              positionHit: false,
+              positionPressed: noStyle,
+              colorPressed: noStyle,
+              soundPressed: noStyle
+            });
           }
           /////all color match possibilities
           if (this.state.colorMatch) {
@@ -276,82 +331,141 @@ var AdvancedMode = React.createClass({
             if (this.state.positionMatch) {
               //wrong match
               if (this.state.soundHit) {
-                console.log('not a match');
                 currentScore -= 5;
-                fullScore += parseFloat(currentScore);
-                console.log(fullScore);
+                this.setState({
+                  alertType: 'none',
+                  alert: 'Not a Match!'
+                });
+                if (this.state.score + currentScore >= 0) {
+                  this.state.score += currentScore;
+                } else {
+                  currentScore -= this.state.score;
+                  this.state.score = 0;
+                }
               }
               //double match
               if (this.state.positionHit && this.state.colorHit) {
-                console.log('double match');
-                currentScore = ((2000 - reactionTimes[reactionTimes.length - 1]) * 2 / 100).toFixed(2) + 1;
-                fullScore += parseFloat(currentScore);
-                console.log(fullScore);
+                currentScore += ((2000 - reactionTimes[reactionTimes.length - 1]) * 2 / 100).toFixed(2) + 1;
+                this.setState({
+                  alertType: 'full',
+                  alert: 'Double Match!'
+                });
               }
               //1/2 match
               else if (this.state.positionHit || this.state.colorHit) {
-                  console.log('single match');
-                  currentScore = ((2000 - reactionTimes[reactionTimes.length - 1]) / 100).toFixed(2) + 1;
-                  fullScore += parseFloat(currentScore);
-                  console.log(fullScore);
+                  currentScore += ((2000 - reactionTimes[reactionTimes.length - 1]) / 100).toFixed(2) + 1;
+                  this.setState({
+                    alertType: 'half',
+                    alert: 'Half Match!'
+                  });
                 }
                 //missed both
                 else {
-                    console.log('missed both sound and color');
                     currentScore -= 5;
-                    fullScore += parseFloat(currentScore);
-                    console.log(fullScore);
+                    this.setState({
+                      alertType: 'none',
+                      alert: 'Missed a Match!'
+                    });
+                    if (this.state.score + currentScore >= 0) {
+                      this.state.score += currentScore;
+                    } else {
+                      currentScore -= this.state.score;
+                      this.state.score = 0;
+                    }
                   }
             }
             //  only color match, so hit, miss, or wrong match
             else {
                 //hit
                 if (this.state.colorHit) {
-                  console.log('single match');
-                  currentScore = ((2000 - reactionTimes[reactionTimes.length - 1]) / 100).toFixed(2) + 1;
-                  fullScore += parseFloat(currentScore);
-                  console.log(fullScore);
+                  this.setState({
+                    alertType: 'full',
+                    alert: 'Single Match!'
+                  });
+                  currentScore += ((2000 - reactionTimes[reactionTimes.length - 1]) / 100).toFixed(2) + 1;
                 }
                 //miss
                 else if (!this.state.colorHit) {
-                    console.log('missed match');
                     currentScore -= 5;
-                    fullScore += parseFloat(currentScore);
-                    console.log(fullScore);
+                    this.setState({
+                      alertType: 'none',
+                      alert: 'Missed a Match!'
+                    });
+                    if (this.state.score + currentScore >= 0) {
+                      this.state.score += currentScore;
+                    } else {
+                      currentScore -= this.state.score;
+                      this.state.score = 0;
+                    }
                   }
                   ///wrong match
                   else if (this.state.soundHit || this.state.positionHit) {
-                      console.log('wrong match');
                       currentScore -= 5;
-                      fullScore += parseFloat(currentScore);
-                      console.log(fullScore);
+                      this.setState({
+                        alertType: 'none',
+                        alert: 'Not a Match!'
+                      });
+                      if (this.state.score + currentScore >= 0) {
+                        this.state.score += currentScore;
+                      } else {
+                        currentScore -= this.state.score;
+                        this.state.score = 0;
+                      }
                     }
               }
+            this.setState({
+              colorMatch: false,
+              soundMatch: false,
+              positionMatch: false,
+              soundHit: false,
+              colorHit: false,
+              positionHit: false,
+              positionPressed: noStyle,
+              colorPressed: noStyle,
+              soundPressed: noStyle
+            });
           }
           //position match cases, only single case because color/sound options addressed above
           if (this.state.positionMatch) {
             //hit
             if (this.state.positionHit) {
-              console.log('single match');
-              currentScore = ((2000 - reactionTimes[reactionTimes.length - 1]) / 100).toFixed(2) + 1;
-              fullScore += parseFloat(currentScore);
-              console.log(fullScore);
+              this.setState({
+                alertType: 'full',
+                alert: 'Single Match!'
+              });
+              currentScore += ((2000 - reactionTimes[reactionTimes.length - 1]) / 100).toFixed(2) + 1;
             }
             //miss
             else if (!this.state.positionHit) {
-                console.log('missed match');
                 currentScore -= 5;
-                fullScore += parseFloat(currentScore);
-                console.log(fullScore);
+                this.setState({
+                  alertType: 'none',
+                  alert: 'Missed a Match!'
+                });
               }
               ///wrong match
               else if (this.state.soundHit || this.state.colorHit) {
-                  console.log('wrong match');
                   currentScore -= 5;
-                  fullScore += parseFloat(currentScore);
-                  console.log(fullScore);
+                  this.setState({
+                    alertType: 'half',
+                    alert: 'Not a Match!'
+                  });
+                  if (this.state.score + currentScore >= 0) {
+                    this.state.score += currentScore;
+                  } else {
+                    currentScore -= this.state.score;
+                    this.state.score = 0;
+                  }
                 }
           }
+          if (this.state.score + currentScore < 0) {
+            currentScore = this.state.score;
+            this.state.score = 0;
+            fullScore = 0;
+          } else {
+            this.state.score += parseInt(currentScore);
+          }
+          fullScore += parseFloat(currentScore);
           //reset states
           this.setState({
             colorMatch: false,
@@ -478,11 +592,11 @@ var AdvancedMode = React.createClass({
           var accuracy = matchHit / matchCount;
           console.log(accuracy, 'accuracy');
 
-          // endGameFunction(fullScore, reactionTimes, this.state.gameId, this.state.userId, function(success) {
-          //   if (success) {
-          //     this.props.history.push('/gameOver')
-          //   }
-          // }.bind(this))
+          endGameFunction(fullScore, reactionTimes, this.state.gameId, this.state.userId, function (success) {
+            if (success) {
+              this.props.history.push('/gameOver');
+            }
+          }.bind(this));
         }.bind(this), 2000);
         ////////////////////////////////////////////////////////////////////////////////////
       }
@@ -514,7 +628,7 @@ var AdvancedMode = React.createClass({
 
     var scoreAlert;
     var scoreUpdate;
-    if (this.state.alert === "Good job!") {
+    if (this.state.alertType === 'full') {
       scoreAlert = React.createElement(
         'div',
         { className: 'scoreAlertPositive' },
@@ -526,24 +640,61 @@ var AdvancedMode = React.createClass({
         '+',
         parseInt(currentScore)
       );
-    } else if (this.state.alert === "Not a match" || this.state.alert === "Missed a match") {
+    } else if (this.state.alertType === 'half') {
+      scoreAlert = React.createElement(
+        'div',
+        { className: 'scoreAlertHalf' },
+        this.state.alert
+      );
+      if (currentScore > 0) {
+        scoreUpdate = React.createElement(
+          'h2',
+          { style: {
+              color: 'yellow'
+            } },
+          '+',
+          parseInt(currentScore)
+        );
+      }
+      if (currentScore < 0) {
+        scoreUpdate = React.createElement(
+          'h2',
+          { style: {
+              color: 'yellow'
+            } },
+          parseInt(currentScore)
+        );
+      }
+    } else if (this.state.alertType === 'none') {
       scoreAlert = React.createElement(
         'div',
         { className: 'scoreAlertNegative' },
         this.state.alert
       );
-      if (this.state.score > 0) {
+      if (currentScore > 0) {
         scoreUpdate = React.createElement(
           'h2',
-          { className: 'scoreUpdate scoreUpdateNeg' },
-          '-',
-          currentScore
+          { style: {
+              color: 'yellow'
+            } },
+          '+',
+          parseInt(currentScore)
+        );
+      } else if (parseInt(currentScore) < 0) {
+        scoreUpdate = React.createElement(
+          'h2',
+          { style: {
+              color: 'yellow'
+            } },
+          parseInt(currentScore)
         );
       }
-    } else {
-      scoreAlert = React.createElement('div', null);
-      scoreUpdate = React.createElement('h2', null);
     }
+    //}
+    else {
+        scoreAlert = React.createElement('div', null);
+        scoreUpdate = React.createElement('h2', null);
+      }
 
     var gameTimer = this.state.overlay ? "" : React.createElement(GameTimer, { timeStyle: {
         'color': "#F1BA03"
@@ -77598,4 +77749,3 @@ ReactDOM.render(React.createElement(
 
 }).call(this,require('_process'))
 },{"./Modes/advancedMode":1,"./Modes/classicMode":2,"./Modes/relaxedMode":5,"./Modes/silentMode":7,"./contact":8,"./errorPage":9,"./facebookLogin":10,"./gameOver":11,"./home":12,"./leaderboard":13,"./levels":14,"./login":15,"./logout":16,"./navBar":17,"./newUserOverlay":18,"./register":19,"./science":20,"./statsLineGraphs":21,"./tutorial":22,"_process":45,"axios":23,"react":363,"react-dom":125,"react-router":158}]},{},[381]);
->>>>>>> refs/remotes/origin/master
