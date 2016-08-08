@@ -3801,6 +3801,7 @@ var Mainmenu = React.createClass({
   },
   componentDidMount: function componentDidMount() {
     axios.get('/homeUserInfo').then(function (response) {
+      console.log(response.data);
       this.setState({
         hasUsername: response.data.hasUsername,
         name: response.data.name,
@@ -3822,6 +3823,7 @@ var Mainmenu = React.createClass({
   componentWillReceiveProps: function componentWillReceiveProps(nextProps) {
     if (nextProps.location.pathname === "/home") {
       axios.get('/homeUserInfo').then(function (response) {
+        console.log(response.data);
         this.setState({
           hasUsername: response.data.hasUsername,
           name: response.data.name,

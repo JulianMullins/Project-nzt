@@ -27,7 +27,7 @@ router.get('/getUserOnLoad',function(req,res,next){
 //get User info for home page
 router.get('/homeUserInfo',function(req,res,next){
   if(req.session.user){
-    console.log("show show tutorial: "+req.session.user.showTutorial)
+    console.log("show tutorial: "+req.session.user.showTutorial)
     res.json({
       name:req.session.user.name,
       hasUsername: !req.session.user.temp,
@@ -45,9 +45,22 @@ router.get('/homeUserInfo',function(req,res,next){
 
 
 //change user setting to not show overlay
-router.post('./stopShowOverlay',function(req,res,next){
-  req.session.user.showTutorial = false;
-  req.session.user.save();
+router.post('/stopShowOverlay',function(req,res,next){
+  console.log('/stopShowOverlay begun')  
+  // req.session.user.showTutorial = false;
+  // req.session.user.save();
+  // console.log(req.session.user)
+  var user = req.session.user;
+  user.showTutorial = false;
+  user.save(function(err,user){
+    if(err){
+      res.json({success:false,error:err})
+    }
+    else{
+      req.session.user = user;
+      res.json({success:true,error:null})
+    }
+  });
 })
 
 
