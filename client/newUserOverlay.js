@@ -1,23 +1,20 @@
 var React = require('react');
 var axios = require('axios');
+
 import {Link} from 'react-router';
 
 var NewUserOverlay = React.createClass({
 	stopShowOverlay(){
-		axios.post('./stopShowOverlay',{
+		axios.post('/stopShowOverlay',{
 			stop:true
 		})
 	},
-
-	getInitialState: function() {
-		return {
-
-		}
-	},
 	componentDidMount: function() {
-		return {
-			open: true
-		}
+		axios.post('/stopShowOverlay',{
+			withCredentials:true,
+			data:{stop:true}
+		})
+		.then(function(response){console.log("stop show overlay posted "+response.data.success,response.data.error)});
 	},
 	render: function() {
 		console.log("showing tutorial")
