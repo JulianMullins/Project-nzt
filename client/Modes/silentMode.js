@@ -63,7 +63,8 @@ var SilentMode = React.createClass({
         gameId: obj.gameId,
         modeMultiplier: obj.modeMultiplier,
         penalty: obj.penalty,
-        positivePoints: obj.positivePoints
+        positivePoints: obj.positivePoints,
+        userId: obj.userId
       })
     }.bind(this));
   },
@@ -161,7 +162,7 @@ var SilentMode = React.createClass({
       }
 
       ///color match cases
-      else if(this.state.colorMatch){
+      if(this.state.colorMatch){
         //color match
         if(this.state.colorPressed){
           matchHit+=1
@@ -191,7 +192,7 @@ var SilentMode = React.createClass({
           }
         }
         //incorrect match
-        if(this.state.posPressed){
+        if(this.state.positionPressed){
           matchHit-=1;
           this.setState({
             alert: 'Not a match!',
@@ -252,7 +253,7 @@ var SilentMode = React.createClass({
       }
 
       ///position match cases
-      else if(this.state.positionMatch){
+      if(this.state.positionMatch){
         //got position match
         if(this.state.positionPressed){
           matchHit+=1;
@@ -350,7 +351,7 @@ var SilentMode = React.createClass({
         })
       }
       //hit match when none
-      else if(this.state.colorPressed || this.state.positionPressed){
+      if(this.state.colorPressed || this.state.positionPressed){
         matchHit-=1;
         this.setState({
             alert: 'Not a match!',
