@@ -46,7 +46,6 @@ var SilentMode = React.createClass({
       colorPressed: false,
       colorStyle: noStyle,
       posStyle: noStyle,
-      keepScore: false,
       tempUser: true,
       gameId: null,
       mode: this.props.location.pathname.split('/')[2],
@@ -98,34 +97,22 @@ var SilentMode = React.createClass({
 
       //all double match cases
       if (this.state.positionMatch && this.state.colorMatch) {
-        //only hit position
-        if (this.state.positionPressed && !this.state.colorPressed) {
+        //only hit one
+        if ((this.state.positionPressed && !this.state.colorPressed) || (this.state.colorPressed && !this.state.positionPressed)) {
           matchHit += 1;
           reactionTimes.push(reactionEnd - reactionStart);
           currentScore = ((2000 - reactionTimes[reactionTimes.length - 1]) / 100).toFixed(2) + 1;
           fullScore += parseFloat(currentScore);
           this.state.score += Math.floor(currentScore);
           this.setState({alert: 'Half match', alertType: 'halfPos'})
-        }
-        //only hit color
-        if (this.state.colorPressed && !this.state.positionPressed) {
-          matchHit += 1;
-          reactionTimes.push(reactionEnd - reactionStart);
-          currentScore = ((2000 - reactionTimes[reactionTimes.length - 1]) / 100).toFixed(2) + 1;
-          fullScore += parseFloat(currentScore);
-          this.state.score += Math.floor(currentScore);
-          this.setState({alert: 'Half match', alertType: 'halfPos'})
-        }
-        if (this.state.colorPressed && this.state.positionPressed) {
+        } else if (this.state.colorPressed && this.state.positionPressed) {
           matchHit += 2;
           reactionTimes.push(reactionEnd - reactionStart);
           currentScore = ((2000 - reactionTimes[reactionTimes.length - 1]) * 2 / 100).toFixed(2) + 1;
           fullScore += parseFloat(currentScore);
           this.state.score += Math.floor(currentScore);
           this.setState({alert: 'Double Match!', alertType: 'full'})
-        }
-        //complete miss= only way to lose points in this case
-        if (!this.state.colorPressed && !this.state.positionPressed) {
+        } else if (!this.state.colorPressed && !this.state.positionPressed) {
           this.setState({alert: 'Missed two matches', alertType: 'none'})
           if (this.state.score >= 5) {
             currentScore = 5;
@@ -313,14 +300,15 @@ var SilentMode = React.createClass({
         })
       }
 
+      // Remove alert
       setTimeout(function() {
         this.setState({alert: ' ', alertType: ' '});
       }.bind(this), 800);
 
       //case 1: position match
-      if (timeTilPositionMatch === 0) {
+      if (timeTilPositionMatch == 0) {
         matchCount += 1;
-        this.setState({positionMatch: true, keepScore: true})
+        this.setState({positionMatch: true})
         //reset position portion
         timeTilPositionMatch = parseInt((Math.random() * 5) + 2);
         //set up new position queue
@@ -330,9 +318,9 @@ var SilentMode = React.createClass({
         var pMatch = true;
       }
       //case 2: color match
-      if (timeTilColorMatch === 0) {
+      if (timeTilColorMatch == 0) {
         matchCount += 1;
-        this.setState({colorMatch: true, keepScore: true})
+        this.setState({colorMatch: true})
         //reset position portion
         timeTilColorMatch = parseInt((Math.random() * 5) + 2);
         //set up new position queue
@@ -341,7 +329,8 @@ var SilentMode = React.createClass({
         colorQueue.splice(0, 1);
         var cMatch = true;
       }
-      // // pick a non-matching next number while interval is not 0
+
+      // pick a non-matching next number while interval is not 0
       //position:
       if (!pMatch) {
         var nextPosition = parseInt(Math.random() * 9);
@@ -403,11 +392,7 @@ var SilentMode = React.createClass({
         reactionEnd = Date.now();
       }
     }
-    this.setState({
-      //positionMatch: !this.state.positionMatch,
-      positionPressed: true,
-      posStyle: pushStyle
-    });
+    this.setState({positionPressed: true, posStyle: pushStyle});
   },
   colorMatch: function() {
     if (this.state.colorPressed) {
@@ -419,27 +404,12 @@ var SilentMode = React.createClass({
         reactionEnd = Date.now();
       }
     }
-    this.setState({
-      //colorMatch: !this.state.colorMatch,
-      colorPressed: true,
-      colorStyle: pushStyle
-    });
+    this.setState({colorPressed: true, colorStyle: pushStyle});
   },
   render: function() {
     var overlay = this.state.overlay
       ? (<SilentStartOverlay nLevel={this.state.N} click={this.startGame}/>)
       : '';
-
-    var posButtonStyle = this.state.positionPressed
-      ? {
-        backgroundColor: 'black'
-      }
-      : {};
-    var colorButtonStyle = this.state.colorPressed
-      ? {
-        backgroundColor: 'black'
-      }
-      : {};
 
     var scoreAlert;
     var scoreUpdate;
@@ -472,7 +442,7 @@ var SilentMode = React.createClass({
       if (currentScore !== 0) {
         scoreUpdate = (
           <h2 style={{
-            color: 'yellow'
+            color: 'orange'
           }}>+{parseInt(currentScore)}</h2>
         )
       }

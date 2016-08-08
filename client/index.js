@@ -29,10 +29,7 @@ var ClassicGame = require('./Modes/classicMode');
 var SilentGame = require('./Modes/silentMode');
 var AdvancedGame = require('./Modes/advancedMode');
 
-var ClassicLevels = require('./levels').ClassicLevels;
-var RelaxedLevels = require('./levels').RelaxedLevels;
-var SilentLevels = require('./levels').SilentLevels;
-var AdvancedLevels = require('./levels').AdvancedLevels;
+var LevelOverlay = require('./levels').LevelOverlay;
 
 var App = React.createClass({
   getInitialState: function() {
@@ -86,10 +83,10 @@ ReactDOM.render((
 
       <Route path="tutorial" component={Tutorial}/>
 
-      <Route path="levels/classic(/:error)" component={ClassicLevels}/>
-      <Route path="levels/relaxed(/:error)" component={RelaxedLevels}/>
-      <Route path="levels/silent(/:error)" component={SilentLevels}/>
-      <Route path="levels/advanced(/:error)" component={AdvancedLevels}/>
+      <Route path="levels/classic(/:error)" component={LevelOverlay}/>
+      <Route path="levels/relaxed(/:error)" component={LevelOverlay}/>
+      <Route path="levels/silent(/:error)" component={LevelOverlay}/>
+      <Route path="levels/advanced(/:error)" component={LevelOverlay}/>
       <Route path="game/classic/:n" component={ClassicGame}/>
       <Route path="game/relaxed/:n" component={RelaxedGame}/>
       <Route path="game/silent/:n" component={SilentGame}/>

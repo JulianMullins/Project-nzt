@@ -2344,7 +2344,6 @@ var SilentMode = React.createClass({
       colorPressed: false,
       colorStyle: noStyle,
       posStyle: noStyle,
-      keepScore: false,
       tempUser: true,
       gameId: null,
       mode: this.props.location.pathname.split('/')[2],
@@ -2396,34 +2395,22 @@ var SilentMode = React.createClass({
 
       //all double match cases
       if (this.state.positionMatch && this.state.colorMatch) {
-        //only hit position
-        if (this.state.positionPressed && !this.state.colorPressed) {
+        //only hit one
+        if (this.state.positionPressed && !this.state.colorPressed || this.state.colorPressed && !this.state.positionPressed) {
           matchHit += 1;
           reactionTimes.push(reactionEnd - reactionStart);
           currentScore = ((2000 - reactionTimes[reactionTimes.length - 1]) / 100).toFixed(2) + 1;
           fullScore += parseFloat(currentScore);
           this.state.score += Math.floor(currentScore);
           this.setState({ alert: 'Half match', alertType: 'halfPos' });
-        }
-        //only hit color
-        if (this.state.colorPressed && !this.state.positionPressed) {
-          matchHit += 1;
-          reactionTimes.push(reactionEnd - reactionStart);
-          currentScore = ((2000 - reactionTimes[reactionTimes.length - 1]) / 100).toFixed(2) + 1;
-          fullScore += parseFloat(currentScore);
-          this.state.score += Math.floor(currentScore);
-          this.setState({ alert: 'Half match', alertType: 'halfPos' });
-        }
-        if (this.state.colorPressed && this.state.positionPressed) {
+        } else if (this.state.colorPressed && this.state.positionPressed) {
           matchHit += 2;
           reactionTimes.push(reactionEnd - reactionStart);
           currentScore = ((2000 - reactionTimes[reactionTimes.length - 1]) * 2 / 100).toFixed(2) + 1;
           fullScore += parseFloat(currentScore);
           this.state.score += Math.floor(currentScore);
           this.setState({ alert: 'Double Match!', alertType: 'full' });
-        }
-        //complete miss= only way to lose points in this case
-        if (!this.state.colorPressed && !this.state.positionPressed) {
+        } else if (!this.state.colorPressed && !this.state.positionPressed) {
           this.setState({ alert: 'Missed two matches', alertType: 'none' });
           if (this.state.score >= 5) {
             currentScore = 5;
@@ -2611,14 +2598,15 @@ var SilentMode = React.createClass({
         });
       }
 
+      // Remove alert
       setTimeout(function () {
         this.setState({ alert: ' ', alertType: ' ' });
       }.bind(this), 800);
 
       //case 1: position match
-      if (timeTilPositionMatch === 0) {
+      if (timeTilPositionMatch == 0) {
         matchCount += 1;
-        this.setState({ positionMatch: true, keepScore: true });
+        this.setState({ positionMatch: true });
         //reset position portion
         timeTilPositionMatch = parseInt(Math.random() * 5 + 2);
         //set up new position queue
@@ -2628,9 +2616,9 @@ var SilentMode = React.createClass({
         var pMatch = true;
       }
       //case 2: color match
-      if (timeTilColorMatch === 0) {
+      if (timeTilColorMatch == 0) {
         matchCount += 1;
-        this.setState({ colorMatch: true, keepScore: true });
+        this.setState({ colorMatch: true });
         //reset position portion
         timeTilColorMatch = parseInt(Math.random() * 5 + 2);
         //set up new position queue
@@ -2639,7 +2627,8 @@ var SilentMode = React.createClass({
         colorQueue.splice(0, 1);
         var cMatch = true;
       }
-      // // pick a non-matching next number while interval is not 0
+
+      // pick a non-matching next number while interval is not 0
       //position:
       if (!pMatch) {
         var nextPosition = parseInt(Math.random() * 9);
@@ -2700,11 +2689,7 @@ var SilentMode = React.createClass({
         reactionEnd = Date.now();
       }
     }
-    this.setState({
-      //positionMatch: !this.state.positionMatch,
-      positionPressed: true,
-      posStyle: pushStyle
-    });
+    this.setState({ positionPressed: true, posStyle: pushStyle });
   },
   colorMatch: function colorMatch() {
     if (this.state.colorPressed) {
@@ -2716,21 +2701,10 @@ var SilentMode = React.createClass({
         reactionEnd = Date.now();
       }
     }
-    this.setState({
-      //colorMatch: !this.state.colorMatch,
-      colorPressed: true,
-      colorStyle: pushStyle
-    });
+    this.setState({ colorPressed: true, colorStyle: pushStyle });
   },
   render: function render() {
     var overlay = this.state.overlay ? React.createElement(SilentStartOverlay, { nLevel: this.state.N, click: this.startGame }) : '';
-
-    var posButtonStyle = this.state.positionPressed ? {
-      backgroundColor: 'black'
-    } : {};
-    var colorButtonStyle = this.state.colorPressed ? {
-      backgroundColor: 'black'
-    } : {};
 
     var scoreAlert;
     var scoreUpdate;
@@ -2770,7 +2744,7 @@ var SilentMode = React.createClass({
         scoreUpdate = React.createElement(
           'h2',
           { style: {
-              color: 'yellow'
+              color: 'orange'
             } },
           '+',
           parseInt(currentScore)
@@ -3819,10 +3793,7 @@ var ClassicGame = require('./Modes/classicMode');
 var SilentGame = require('./Modes/silentMode');
 var AdvancedGame = require('./Modes/advancedMode');
 
-var ClassicLevels = require('./levels').ClassicLevels;
-var RelaxedLevels = require('./levels').RelaxedLevels;
-var SilentLevels = require('./levels').SilentLevels;
-var AdvancedLevels = require('./levels').AdvancedLevels;
+var LevelOverlay = require('./levels').LevelOverlay;
 
 var App = React.createClass({
   displayName: 'App',
@@ -3878,10 +3849,10 @@ ReactDOM.render(React.createElement(
     React.createElement(_reactRouter.Route, { path: 'contact', component: Contact }),
     React.createElement(_reactRouter.Route, { path: 'science', component: Science }),
     React.createElement(_reactRouter.Route, { path: 'tutorial', component: Tutorial }),
-    React.createElement(_reactRouter.Route, { path: 'levels/classic(/:error)', component: ClassicLevels }),
-    React.createElement(_reactRouter.Route, { path: 'levels/relaxed(/:error)', component: RelaxedLevels }),
-    React.createElement(_reactRouter.Route, { path: 'levels/silent(/:error)', component: SilentLevels }),
-    React.createElement(_reactRouter.Route, { path: 'levels/advanced(/:error)', component: AdvancedLevels }),
+    React.createElement(_reactRouter.Route, { path: 'levels/classic(/:error)', component: LevelOverlay }),
+    React.createElement(_reactRouter.Route, { path: 'levels/relaxed(/:error)', component: LevelOverlay }),
+    React.createElement(_reactRouter.Route, { path: 'levels/silent(/:error)', component: LevelOverlay }),
+    React.createElement(_reactRouter.Route, { path: 'levels/advanced(/:error)', component: LevelOverlay }),
     React.createElement(_reactRouter.Route, { path: 'game/classic/:n', component: ClassicGame }),
     React.createElement(_reactRouter.Route, { path: 'game/relaxed/:n', component: RelaxedGame }),
     React.createElement(_reactRouter.Route, { path: 'game/silent/:n', component: SilentGame }),
@@ -4026,7 +3997,6 @@ var getSquareArr = function getSquareArr(square, mode) {
   var arr = [];
   for (var i = 1; i < maxSquares + 1; i++) {
     var link = "/game/" + mode + "/" + i;
-    //console.log(link)
     var sqClass = "levelSquare " + squareClass;
     if (i <= square) {
       var colorStyle = {
@@ -4081,6 +4051,10 @@ var getSquareArr = function getSquareArr(square, mode) {
   return arr;
 };
 
+var capFirstLetter = function capFirstLetter(string) {
+  return string.charAt(0).toUpperCase() + string.slice(1);
+};
+
 var getMaxN = function getMaxN(mode, cb) {
   console.log("getting max n");
   axios.get('/getMaxN', { withCredentials: true }).then(function (response) {
@@ -4089,143 +4063,14 @@ var getMaxN = function getMaxN(mode, cb) {
   });
 };
 
-var ClassicLevels = React.createClass({
-  displayName: 'ClassicLevels',
+var LevelOverlay = React.createClass({
+  displayName: 'LevelOverlay',
 
   getInitialState: function getInitialState() {
-    console.log(this.props);
-    return { maxN: 1, mode: 'classic', error: this.props.params.error };
-  },
-  componentDidMount: function componentDidMount() {
-    this.setMaxN();
-  },
-
-  setMaxN: function setMaxN() {
-    getMaxN(this.state.mode, function (maxN) {
-      this.setState({
-        maxN: maxN[this.state.mode]
-      });
-    }.bind(this));
-    console.log("maxN is " + this.state.maxN);
-  },
-  render: function render() {
-
-    var square = this.state.maxN;
-    var squareArr = getSquareArr(square, this.state.mode);
-
-    return React.createElement(
-      'div',
-      { className: 'levelBox' },
-      React.createElement(
-        'h1',
-        { id: 'classic', className: 'classic' },
-        'Classic'
-      ),
-      this.state.error ? React.createElement(
-        'div',
-        null,
-        'Unauthorized!'
-      ) : '',
-      React.createElement(
-        'div',
-        { className: 'grid' },
-        squareArr.map(function (square) {
-          return square;
-        })
-      ),
-      React.createElement(
-        'div',
-        { className: 'levelsFooter' },
-        React.createElement(
-          'h3',
-          { className: 'classic' },
-          'Highest: Level ',
-          this.state.maxN
-        ),
-        React.createElement(
-          _reactRouter.Link,
-          { to: '/home' },
-          React.createElement(
-            'h3',
-            { className: 'classicButton returnBtn' },
-            '← Go Back'
-          )
-        )
-      )
-    );
-  }
-});
-
-var RelaxedLevels = React.createClass({
-  displayName: 'RelaxedLevels',
-
-  getInitialState: function getInitialState() {
-    console.log(this.props);
-    return { maxN: 1, mode: 'relaxed', error: this.props.params.error };
-  },
-  componentDidMount: function componentDidMount() {
-    this.setMaxN();
-  },
-
-  setMaxN: function setMaxN() {
-    getMaxN(this.state.mode, function (maxN) {
-      this.setState({
-        maxN: maxN[this.state.mode]
-      });
-    }.bind(this));
-  },
-  render: function render() {
-    var square = this.state.maxN;
-    var squareArr = getSquareArr(square, this.state.mode);
-
-    return React.createElement(
-      'div',
-      { className: 'levelBox' },
-      React.createElement(
-        'h1',
-        { id: 'relaxed', className: 'relaxed' },
-        'Relaxed'
-      ),
-      this.state.error ? React.createElement(
-        'div',
-        null,
-        'Unauthorized!'
-      ) : '',
-      React.createElement(
-        'div',
-        { className: 'grid' },
-        squareArr.map(function (square) {
-          return square;
-        })
-      ),
-      React.createElement(
-        'div',
-        { className: 'levelsFooter' },
-        React.createElement(
-          'h3',
-          { className: 'relaxed' },
-          'Highest: Level ',
-          this.state.maxN
-        ),
-        React.createElement(
-          _reactRouter.Link,
-          { to: '/home' },
-          React.createElement(
-            'h3',
-            { className: 'relaxedButton returnBtn' },
-            '← Go Back'
-          )
-        )
-      )
-    );
-  }
-});
-
-var SilentLevels = React.createClass({
-  displayName: 'SilentLevels',
-
-  getInitialState: function getInitialState() {
-    return { maxN: 1, mode: 'silent', error: this.props.params.error };
+    return {
+      maxN: 1, mode: this.props.location.pathname.split('/')[2],
+      error: this.props.params.error
+    };
   },
   setMaxN: function setMaxN() {
     getMaxN(this.state.mode, function (maxN) {
@@ -4247,8 +4092,8 @@ var SilentLevels = React.createClass({
       { className: 'levelBox' },
       React.createElement(
         'h1',
-        { id: 'silent', className: 'silent' },
-        'Silent'
+        { id: this.state.mode, className: this.state.mode },
+        capFirstLetter(this.state.mode)
       ),
       this.state.error ? React.createElement(
         'div',
@@ -4267,7 +4112,7 @@ var SilentLevels = React.createClass({
         { className: 'levelsFooter' },
         React.createElement(
           'h3',
-          { className: 'silent' },
+          { className: this.state.mode },
           'Highest: Level ',
           this.state.maxN
         ),
@@ -4276,71 +4121,7 @@ var SilentLevels = React.createClass({
           { to: '/home' },
           React.createElement(
             'h3',
-            { className: 'silentButton returnBtn' },
-            '← Go Back'
-          )
-        )
-      )
-    );
-  }
-});
-
-var AdvancedLevels = React.createClass({
-  displayName: 'AdvancedLevels',
-
-  getInitialState: function getInitialState() {
-    return { maxN: 1, mode: 'advanced', error: this.props.params.error };
-  },
-  setMaxN: function setMaxN() {
-    getMaxN(this.state.mode, function (maxN) {
-      this.setState({
-        maxN: maxN[this.state.mode]
-      });
-    }.bind(this));
-  },
-  componentDidMount: function componentDidMount() {
-    this.setMaxN();
-  },
-
-  render: function render() {
-    var square = this.state.maxN;
-    var squareArr = getSquareArr(square, this.state.mode);
-
-    return React.createElement(
-      'div',
-      { className: 'levelBox' },
-      React.createElement(
-        'h1',
-        { id: 'advanced', className: 'advanced' },
-        'Advanced'
-      ),
-      this.state.error ? React.createElement(
-        'div',
-        null,
-        'Unauthorized!'
-      ) : '',
-      React.createElement(
-        'div',
-        { className: 'grid' },
-        squareArr.map(function (square) {
-          return square;
-        })
-      ),
-      React.createElement(
-        'div',
-        { className: 'levelsFooter' },
-        React.createElement(
-          'h3',
-          { className: 'advanced' },
-          'Highest: Level ',
-          this.state.maxN
-        ),
-        React.createElement(
-          _reactRouter.Link,
-          { to: '/home' },
-          React.createElement(
-            'h3',
-            { className: 'advancedButton returnBtn' },
+            { className: this.state.mode + "Button returnBtn" },
             '← Go Back'
           )
         )
@@ -4350,10 +4131,7 @@ var AdvancedLevels = React.createClass({
 });
 
 module.exports = {
-  ClassicLevels: ClassicLevels,
-  RelaxedLevels: RelaxedLevels,
-  SilentLevels: SilentLevels,
-  AdvancedLevels: AdvancedLevels
+  LevelOverlay: LevelOverlay
 };
 
 }).call(this,require('_process'))
