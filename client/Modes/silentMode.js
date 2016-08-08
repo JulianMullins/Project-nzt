@@ -161,7 +161,7 @@ var SilentMode = React.createClass({
       }
 
       ///color match cases
-      if(this.state.colorMatch){
+      else if(this.state.colorMatch){
         //color match
         if(this.state.colorPressed){
           matchHit+=1
@@ -252,7 +252,7 @@ var SilentMode = React.createClass({
       }
 
       ///position match cases
-      if(this.state.positionMatch){
+      else if(this.state.positionMatch){
         //got position match
         if(this.state.positionPressed){
           matchHit+=1;
@@ -350,7 +350,7 @@ var SilentMode = React.createClass({
         })
       }
       //hit match when none
-      if(this.state.colorPressed || this.state.positionPressed){
+      else if(this.state.colorPressed || this.state.positionPressed){
         matchHit-=1;
         this.setState({
             alert: 'Not a match!',
