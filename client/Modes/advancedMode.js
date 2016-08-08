@@ -181,7 +181,6 @@ var AdvancedMode = React.createClass({
       this.state.score+=parseInt(currentScore);
     }
     fullScore+=parseFloat(currentScore);
-    console.log(fullScore,'full')
 
       ///reset the states at the end
       this.setState({
@@ -208,7 +207,6 @@ var AdvancedMode = React.createClass({
           if(this.state.colorMatch){
           //not a match
           if(this.state.positionHit){
-            console.log('not a match')
             currentScore-=5;
             
             this.setState({
@@ -218,7 +216,6 @@ var AdvancedMode = React.createClass({
           }
           //double match
           if(this.state.soundHit && this.state.colorHit){
-            console.log('double match')
             currentScore += ((2000 - reactionTimes[reactionTimes.length - 1]) *2 / 100).toFixed(2)+1;
             this.setState({
             alertType: 'full', 
@@ -227,7 +224,6 @@ var AdvancedMode = React.createClass({
           }
           //1/2 match
           else if(this.state.soundHit || this.state.colorHit){
-            console.log('single match')
             currentScore += ((2000 - reactionTimes[reactionTimes.length - 1]) / 100).toFixed(2)+1;
             this.setState({
             alertType: 'half', 
@@ -236,7 +232,6 @@ var AdvancedMode = React.createClass({
           }
           //missed both
           else{
-            console.log('missed both sound and color')
             currentScore-=5;
             this.setState({
             alertType: 'none', 
@@ -254,7 +249,6 @@ var AdvancedMode = React.createClass({
       else if(this.state.positionMatch){
           //color hit but no match
           if(this.state.colorHit){
-            console.log('not a match')
             currentScore-=5;
             this.setState({
             alertType: 'none', 
@@ -263,7 +257,6 @@ var AdvancedMode = React.createClass({
           }
           //double match
           if(this.state.soundHit && this.state.positionHit){
-            console.log('double match')
             currentScore += ((2000 - reactionTimes[reactionTimes.length - 1]) *2 / 100).toFixed(2)+1;
             this.setState({
             alertType: 'full', 
@@ -272,7 +265,6 @@ var AdvancedMode = React.createClass({
           }
           //1/2 match
           else if(this.state.soundHit || this.state.positionHit){
-            console.log('half match')
             currentScore += ((2000 - reactionTimes[reactionTimes.length - 1]) / 100).toFixed(2)+1;
             this.setState({
             alertType: 'half', 
@@ -281,7 +273,6 @@ var AdvancedMode = React.createClass({
           }
           //missed both
           else{
-            console.log('missed both sound and color')
             currentScore-=5;
             this.setState({
             alertType: 'none', 
@@ -300,7 +291,6 @@ var AdvancedMode = React.createClass({
         else{
           //hit
           if(this.state.soundHit){
-            console.log('single match')
             currentScore += ((2000 - reactionTimes[reactionTimes.length - 1]) / 100).toFixed(2)+1;
             this.setState({
             alertType: 'full', 
@@ -309,7 +299,6 @@ var AdvancedMode = React.createClass({
           }
           //miss
           else if(!this.state.soundHit){
-            console.log('missed match')
             currentScore-=5;
             this.setState({
             alertType: 'none', 
@@ -318,7 +307,6 @@ var AdvancedMode = React.createClass({
           }
           //wrong match
           else if(this.state.colorHit || this.state.positionHit){
-            console.log('wrong match')
             currentScore-=5;
             this.setState({
             alertType: 'none', 
@@ -351,7 +339,6 @@ var AdvancedMode = React.createClass({
      if(this.state.positionMatch){
           //wrong match
           if(this.state.soundHit){
-            console.log('not a match')
             currentScore-=5;
             this.setState({
             alertType: 'none', 
@@ -367,7 +354,6 @@ var AdvancedMode = React.createClass({
         }
           //double match
           if(this.state.positionHit && this.state.colorHit){
-            console.log('double match')
             currentScore += ((2000 - reactionTimes[reactionTimes.length - 1]) *2 / 100).toFixed(2)+1;
             this.setState({
             alertType: 'full', 
@@ -376,7 +362,6 @@ var AdvancedMode = React.createClass({
           }
           //1/2 match
           else if(this.state.positionHit || this.state.colorHit){
-            console.log('single match')
             currentScore += ((2000 - reactionTimes[reactionTimes.length - 1]) / 100).toFixed(2)+1;
             this.setState({
             alertType: 'half', 
@@ -385,7 +370,6 @@ var AdvancedMode = React.createClass({
           }
           //missed both
           else{
-            console.log('missed both sound and color')
             currentScore-=5;
             this.setState({
             alertType: 'none', 
@@ -404,7 +388,6 @@ var AdvancedMode = React.createClass({
       else{
           //hit
           if(this.state.colorHit){
-            console.log('single match')
             this.setState({
             alertType: 'full', 
             alert: 'Single Match!'
@@ -413,7 +396,6 @@ var AdvancedMode = React.createClass({
           }
           //miss
           else if(!this.state.colorHit){
-            console.log('missed match')
             currentScore-=5;
             this.setState({
             alertType: 'none', 
@@ -429,7 +411,6 @@ var AdvancedMode = React.createClass({
         }
           ///wrong match
           else if(this.state.soundHit || this.state.positionHit){
-            console.log('wrong match')
             currentScore-=5;
             this.setState({
             alertType: 'none', 
@@ -460,7 +441,6 @@ var AdvancedMode = React.createClass({
       if(this.state.positionMatch){
         //hit
         if(this.state.positionHit){
-          console.log('single match')
           this.setState({
             alertType: 'full', 
             alert: 'Single Match!'
@@ -469,7 +449,6 @@ var AdvancedMode = React.createClass({
         }
           //miss
           else if(!this.state.positionHit){
-            console.log('missed match')
             currentScore-=5;
             this.setState({
             alertType: 'none', 
@@ -478,7 +457,6 @@ var AdvancedMode = React.createClass({
         }
           ///wrong match
           else if(this.state.soundHit || this.state.colorHit){
-            console.log('wrong match')
             currentScore-=5;
             this.setState({
             alertType: 'half', 
@@ -502,7 +480,6 @@ var AdvancedMode = React.createClass({
         this.state.score+=parseInt(currentScore);
       }
       fullScore+=parseFloat(currentScore);
-      console.log(fullScore,'full')
       //reset states
       this.setState({
         colorMatch: false,
@@ -604,7 +581,7 @@ var AdvancedMode = React.createClass({
       reactionStart = Date.now()
       reactionEnd=null;
       this.state.style[nextPosition] = newStyle[nextColor];
-      //audios[nextSound].play();
+      audios[nextSound].play();
       this.setState({style: this.state.style});
       setTimeout(function() {
         this.state.style[nextPosition] = standardStyle;
@@ -629,11 +606,11 @@ var AdvancedMode = React.createClass({
           var accuracy=matchHit / matchCount;
           console.log(accuracy, 'accuracy')
 
-          // endGameFunction(fullScore, reactionTimes, this.state.gameId, this.state.userId, function(success) {
-          //   if (success) {
-          //     this.props.history.push('/gameOver')
-          //   }
-          // }.bind(this))
+          endGameFunction(fullScore, reactionTimes, this.state.gameId, this.state.userId, function(success) {
+            if (success) {
+              this.props.history.push('/gameOver')
+            }
+          }.bind(this))
 
         }.bind(this), 2000);
         ////////////////////////////////////////////////////////////////////////////////////
