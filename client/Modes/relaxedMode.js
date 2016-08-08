@@ -44,7 +44,7 @@ var RelaxedMode = React.createClass({
       overlay: true,
       initialTimer: 3,
       N: parseInt(this.props.params.n),
-      posPressed: false,
+      alreadyPressed: false,
       posStyle: noStyle,
       tempUser: true,
       gameId: null,
@@ -55,7 +55,7 @@ var RelaxedMode = React.createClass({
       matchCount:0,
       matchHit:0,
       reactionTimes:[],
-      currentScore:0,
+      currentScore:null,
       scoreAlert:'',
       scoreUpdate:''
     }
@@ -112,9 +112,14 @@ var RelaxedMode = React.createClass({
       alert: "Good job",
       posStyle: noStyle,
       scoreAlert: 'scoreAlertPositive',
-      scoreUpdate: 'scoreUpdate scoreUpdatePos'
+      scoreUpdate: 'scoreUpdate scoreUpdatePos',
+      currentScore: "+"+parseInt(this.state.currentScore)
     });
     console.log("currentScore: "+this.state.currentScore, "fullScore: "+this.state.fullScore)
+    setTimeout(function() {
+        console.log('been 800ms')
+        this.setState({alert: ' ',currentScore:null});
+      }.bind(this), 800);
   },
   incorrect(alert){
     if ((this.state.fullScore - this.state.penalty) >= 0) {
@@ -129,12 +134,22 @@ var RelaxedMode = React.createClass({
     }
     this.setState({
       matchHit: this.state.matchHit-1,
+      matchCount: this.state.matchCount+1,
       fullScore:this.state.fullScore + this.state.currentScore,
       posStyle: noStyle,
       alert:alert,
       scoreAlert: 'scoreAlertNegative',
-      scoreUpdate: 'scoreUpdate scoreUpdateNeg'
+      scoreUpdate: 'scoreUpdate scoreUpdateNeg',
+      currentScore: parseInt(this.state.currentScore)
     });
+    setTimeout(function() {
+        console.log('been 800ms')
+        this.setState({
+          alert: ' ',
+          currentScore:null,
+          scoreAlert:''
+        });
+      }.bind(this), 800);
   },
   position: function() {
     var posQueue = [];
@@ -144,19 +159,20 @@ var RelaxedMode = React.createClass({
     iterations = setInterval(function() {
       timeKeeper--;
 
-      if (this.state.keepScore && !this.state.posMatch) {
-        this.goodJob();
-      }
-      else if (!this.state.keepScore && this.state.posPressed) {
-        this.incorrect('Not a match');
-      }
-      else if (this.state.keepScore && this.state.posMatch) {
+      // if (this.state.keepScore && !this.state.posMatch) {
+      //   //this.goodJob();
+      // }
+      // else if (!this.state.keepScore && this.state.alreadyPressed) {
+      //   //this.incorrect('Not a match');
+      // }
+      if (this.state.keepScore && this.state.posMatch) {
         this.incorrect('Missed a match');
       }
 
-      this.setState({pressed: false, keepScore: false, posMatch: false, posPressed: false, posStyle: noStyle});
+      this.setState({pressed: false, keepScore: false, posMatch: false, alreadyPressed: false, posStyle: noStyle});
       setTimeout(function() {
-        this.setState({alert: ' '});
+        // console.log('been 800ms')
+        // this.setState({alert: ' ',currentScore:null});
       }.bind(this), 800);
       //start reaction time counter with flash
       reactionStart = Date.now()
@@ -235,18 +251,21 @@ var RelaxedMode = React.createClass({
     }.bind(this), 2000);
   },
   posMatch: function() {
-    if (this.state.posPressed) {
+    if (this.state.alreadyPressed) {
       return;
     }
     if (this.state.posMatch) {
       //if correct button pressed, use current time to find reaction time
       var reactionStop = Date.now()
       this.setState({reactionTimes: this.state.reactionTimes.concat([reactionStop - reactionStart])});
-
+      this.goodJob();
+    }
+    else if(!this.state.posMatch){
+      this.incorrect('Not a match');
     }
     this.setState({
-      posPressed: true,
-      posMatch: !this.state.posMatch,
+      alreadyPressed: true,
+      posMatch: false,
       posStyle: pushStyle
     })
   },
@@ -255,36 +274,36 @@ var RelaxedMode = React.createClass({
       ? (<RelaxedStartOverlay nLevel={this.state.N} click={this.startGame}/>)
       : '';
 
-    var scoreAlert;
-    var scoreUpdate;
-    if (this.state.alert === "Good job") {
-      scoreAlert = (
-        <div className="scoreAlertPositive">
-          {this.state.alert}
-        </div>
-      )
-      scoreUpdate = (
-        <h2 className="scoreUpdate scoreUpdatePos">+{parseInt(this.state.currentScore)}</h2>
-      )
-    } else if (this.state.alert === "Not a match" || this.state.alert === "Missed a match") {
-      scoreAlert = (
-        <div className="scoreAlertNegative">
-          {this.state.alert}
-        </div>
-      )
-      if (this.state.currentScore !== 0) {
-        scoreUpdate = (
-          <h2 className="scoreUpdate scoreUpdateNeg">-{this.state.currentScore}</h2>
-        )
-      }
-    } else {
-      scoreAlert = (
-        <div></div>
-      )
-      scoreUpdate = (
-        <h2></h2>
-      )
-    }
+    // var scoreAlert;
+    // var scoreUpdate;
+    // if (this.state.alert === "Good job") {
+    //   scoreAlert = (
+    //     <div className="scoreAlertPositive">
+    //       {this.state.alert}
+    //     </div>
+    //   )
+    //   scoreUpdate = (
+    //     <h2 className="scoreUpdate scoreUpdatePos">+{parseInt(this.state.currentScore)}</h2>
+    //   )
+    // } else if (this.state.alert === "Not a match" || this.state.alert === "Missed a match") {
+    //   scoreAlert = (
+    //     <div className="scoreAlertNegative">
+    //       {this.state.alert}
+    //     </div>
+    //   )
+    //   if (this.state.currentScore !== 0) {
+    //     scoreUpdate = (
+    //       <h2 className="scoreUpdate scoreUpdateNeg">-{this.state.currentScore}</h2>
+    //     )
+    //   }
+    // } else {
+    //   scoreAlert = (
+    //     <div></div>
+    //   )
+    //   scoreUpdate = (
+    //     <h2></h2>
+    //   )
+    // }
 
     var gameTimer = this.state.overlay
       ? ""
