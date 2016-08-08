@@ -333,6 +333,17 @@ var AdvancedMode = React.createClass({
           }
         }
       }
+      this.setState({
+        colorMatch: false,
+        soundMatch: false,
+        positionMatch: false,
+        soundHit: false,
+        colorHit: false,
+        positionHit: false,
+        positionPressed: noStyle,
+        colorPressed: noStyle,
+        soundPressed: noStyle
+        }) 
     }
     /////all color match possibilities
     if(this.state.colorMatch){
@@ -433,6 +444,17 @@ var AdvancedMode = React.createClass({
           }
         }
       }
+      this.setState({
+        colorMatch: false,
+        soundMatch: false,
+        positionMatch: false,
+        soundHit: false,
+        colorHit: false,
+        positionHit: false,
+        positionPressed: noStyle,
+        colorPressed: noStyle,
+        soundPressed: noStyle
+        }) 
     }
       //position match cases, only single case because color/sound options addressed above
       if(this.state.positionMatch){
@@ -655,17 +677,6 @@ render: function() {
       scoreUpdate = (
         <h2 className="scoreUpdate scoreUpdatePos">+{parseInt(currentScore)}</h2>
       )
-    } else if (this.state.alertType === 'none') {
-      scoreAlert = (
-        <div className="scoreAlertNegative">
-          {this.state.alert}
-        </div>
-      )
-      if (currentScore !== 0) {
-        scoreUpdate = (
-          <h2 className="scoreUpdate scoreUpdateNeg">-{parseInt(currentScore)}</h2>
-        )
-      }
     }
   else if (this.state.alertType === 'half') {
       scoreAlert = (
