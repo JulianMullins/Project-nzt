@@ -2453,7 +2453,8 @@ var SilentMode = React.createClass({
         gameId: obj.gameId,
         modeMultiplier: obj.modeMultiplier,
         penalty: obj.penalty,
-        positivePoints: obj.positivePoints
+        positivePoints: obj.positivePoints,
+        userId: obj.userId
       });
     }.bind(this));
   },
