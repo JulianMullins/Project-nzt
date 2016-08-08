@@ -58,7 +58,7 @@ router.post('/startGame/:mode/:nLevel',function(req,res,next){
                   authorized:true,
                   gameId: game._id,
                   tempUser: false,
-                  modeMultiplier: modeMultiplier,
+                  modeMultiplier: modeMultiplier[tempGame.mode],
                   penalty: penalty,
                   positivePoints: positivePoints
                 })
