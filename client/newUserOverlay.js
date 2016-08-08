@@ -8,6 +8,17 @@ var NewUserOverlay = React.createClass({
 			stop:true
 		})
 	},
+
+	getInitialState: function() {
+		return {
+
+		}
+	},
+	componentDidMount: function() {
+		return {
+			open: true
+		}
+	},
 	render: function() {
 		console.log("showing tutorial")
 		return (
