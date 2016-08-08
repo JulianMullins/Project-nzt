@@ -32,15 +32,15 @@ var AdvancedMode = React.createClass({
   getInitialState: function() {
     return {
       style: [
-        standardStyle,
-        standardStyle,
-        standardStyle,
-        standardStyle,
-        standardStyle,
-        standardStyle,
-        standardStyle,
-        standardStyle,
-        standardStyle
+      standardStyle,
+      standardStyle,
+      standardStyle,
+      standardStyle,
+      standardStyle,
+      standardStyle,
+      standardStyle,
+      standardStyle,
+      standardStyle
       ],
       colorMatch: false,
       positionMatch: false,
@@ -120,6 +120,7 @@ var AdvancedMode = React.createClass({
     ///triple match:
     if(this.state.colorMatch && this.state.soundMatch && this.state.positionMatch){
       var count=0;
+      currentScore=0;
       //got color match correct
       if(reactionEnd){
         reactionTimes.push(reactionEnd-reactionStart);
@@ -127,253 +128,378 @@ var AdvancedMode = React.createClass({
       //points for color match
       if(this.state.colorHit){
         count+=1;
-        currentScore = ((2000 - reactionTimes[reactionTimes.length - 1]) / 100).toFixed(2)+1;
-        fullScore+=parseFloat(currentScore);
-        console.log(fullScore)
-        this.state.score+=parseInt(currentScore);
+        currentScore += ((2000 - reactionTimes[reactionTimes.length - 1]) / 100).toFixed(2)+1;
       }
       //points for position match
       if(this.state.positionHit){
         count+=1
-        currentScore = ((2000 - reactionTimes[reactionTimes.length - 1]) / 100).toFixed(2)+1;
-        fullScore+=parseFloat(currentScore);
-        console.log(fullScore)
-        this.state.score+=parseInt(currentScore);
+        currentScore += ((2000 - reactionTimes[reactionTimes.length - 1]) / 100).toFixed(2)+1;
       }
       //points for sound match
-       if(this.state.soundHit){
+      if(this.state.soundHit){
         count+=1
-        currentScore = ((2000 - reactionTimes[reactionTimes.length - 1]) / 100).toFixed(2)+1;
-        fullScore+=parseFloat(currentScore);
-        console.log(fullScore)
-        this.state.score+=parseInt(currentScore);
+        currentScore += ((2000 - reactionTimes[reactionTimes.length - 1]) / 100).toFixed(2)+1;
       }
-      currentScore=currentScore*count; //to adjust for full point addition in visual
 
+      this.state.score+=parseInt(currentScore);
+      if(count===3){
+        this.setState({
+          alertType: 'full', 
+          alert: 'Triple Match!'
+        })
+      }
+
+      if(count===2){
+        this.setState({
+          alertType: 'half', 
+          alert: 'Partial Match!'
+        })
+      }
+
+      if(count===1){
+        this.setState({
+          alertType: 'half', 
+          alert: 'Partial Match!'
+        })
+      }
       //no matches hit of count is still 0
       if(count===0){
-        console.log('full miss')
         //set alerts
         currentScore-=5;
-        if(this.state.score+currentScore>=0){
-          fullScore+=parseFloat(currentScore);
-          console.log(fullScore)
-          this.state.score+=currentScore;
-        }
-        else{
-          currentScore-=this.state.score;
-          this.state.score=0;
-          fullScore+=parseFloat(currentScore);
-          console.log(fullScore)
-        }
-      }
+        this.setState({
+          alertType: 'none', 
+          alert: 'Missed a Match!'
+        })
+    }
+
+    if(this.state.score+currentScore<0){
+      currentScore=this.state.score;
+      this.state.score=0;
+      fullScore=0;
+    }
+    else{
+      this.state.score+=parseInt(currentScore);
+    }
+    fullScore+=parseFloat(currentScore);
 
       ///reset the states at the end
       this.setState({
-          colorMatch: false,
-          soundMatch: false,
-          positionMatch: false,
-          soundHit: false,
-          colorHit: false,
-          positionHit: false,
-          positionPressed: noStyle,
-          colorPressed: noStyle,
-          soundPressed: noStyle,
-          score: this.state.score
-        })
+        colorMatch: false,
+        soundMatch: false,
+        positionMatch: false,
+        soundHit: false,
+        colorHit: false,
+        positionHit: false,
+        positionPressed: noStyle,
+        colorPressed: noStyle,
+        soundPressed: noStyle,
+        score: this.state.score
+      })
     }
     //all other match combinations below
-   else{
-      currentScore=0;
+    else{
+     if(reactionEnd){
+      reactionTimes.push(reactionEnd-reactionStart);
+    }
+    currentScore=0;
         //all sound match possibilites
-      if(this.state.soundMatch){
-        if(this.state.colorMatch){
+        if(this.state.soundMatch){
+          if(this.state.colorMatch){
           //not a match
           if(this.state.positionHit){
-            console.log('not a match')
             currentScore-=5;
-            fullScore+=parseFloat(currentScore);
-            console.log(fullScore)
+            
+            this.setState({
+            alertType: 'half', 
+            alert: 'Not A Match!'
+            })
           }
           //double match
           if(this.state.soundHit && this.state.colorHit){
-            console.log('double match')
-            currentScore = ((2000 - reactionTimes[reactionTimes.length - 1]) *2 / 100).toFixed(2)+1;
-            fullScore+=parseFloat(currentScore);
-            console.log(fullScore)
+            currentScore += ((2000 - reactionTimes[reactionTimes.length - 1]) *2 / 100).toFixed(2)+1;
+            this.setState({
+            alertType: 'full', 
+            alert: 'Double Match!'
+            })
           }
           //1/2 match
           else if(this.state.soundHit || this.state.colorHit){
-            console.log('single match')
-            currentScore = ((2000 - reactionTimes[reactionTimes.length - 1]) / 100).toFixed(2)+1;
-            fullScore+=parseFloat(currentScore);
-            console.log(fullScore)
+            currentScore += ((2000 - reactionTimes[reactionTimes.length - 1]) / 100).toFixed(2)+1;
+            this.setState({
+            alertType: 'half', 
+            alert: 'Half Match!'
+            })
           }
           //missed both
           else{
-            console.log('missed both sound and color')
             currentScore-=5;
-            fullScore+=parseFloat(currentScore);
-            console.log(fullScore)
+            this.setState({
+            alertType: 'none', 
+            alert: 'Missed A Match!'
+            })
+            if(this.state.score+currentScore>=0){
+             this.state.score+=currentScore;
+           }
+           else{
+            currentScore-=this.state.score;
+            this.state.score=0;
           }
         }
-       else if(this.state.positionMatch){
+      }
+      else if(this.state.positionMatch){
           //color hit but no match
           if(this.state.colorHit){
-            console.log('not a match')
             currentScore-=5;
-            fullScore+=parseFloat(currentScore);
-            console.log(fullScore)
+            this.setState({
+            alertType: 'none', 
+            alert: 'Not a Match!'
+            })
           }
           //double match
           if(this.state.soundHit && this.state.positionHit){
-            console.log('double match')
-            currentScore = ((2000 - reactionTimes[reactionTimes.length - 1]) *2 / 100).toFixed(2)+1;
-            fullScore+=parseFloat(currentScore);
-            console.log(fullScore)
+            currentScore += ((2000 - reactionTimes[reactionTimes.length - 1]) *2 / 100).toFixed(2)+1;
+            this.setState({
+            alertType: 'full', 
+            alert: 'Double Match!'
+            })
           }
           //1/2 match
           else if(this.state.soundHit || this.state.positionHit){
-            console.log('half match')
-            currentScore = ((2000 - reactionTimes[reactionTimes.length - 1]) / 100).toFixed(2)+1;
-            fullScore+=parseFloat(currentScore);
-            console.log(fullScore)
+            currentScore += ((2000 - reactionTimes[reactionTimes.length - 1]) / 100).toFixed(2)+1;
+            this.setState({
+            alertType: 'half', 
+            alert: 'Half Match!'
+            })
           }
           //missed both
           else{
-            console.log('missed both sound and color')
             currentScore-=5;
-            fullScore+=parseFloat(currentScore);
-            console.log(fullScore)
+            this.setState({
+            alertType: 'none', 
+            alert: 'Missed a Match!'
+            })
+            if(this.state.score+currentScore>=0){
+             this.state.score+=currentScore;
+           }
+           else{
+            currentScore-=this.state.score;
+            this.state.score=0;
           }
-       }
+        }
+      }
         //only sound match, so hit, miss, or wrong match
         else{
           //hit
           if(this.state.soundHit){
-            console.log('single match')
-            currentScore = ((2000 - reactionTimes[reactionTimes.length - 1]) / 100).toFixed(2)+1;
-            fullScore+=parseFloat(currentScore);
-            console.log(fullScore)
+            currentScore += ((2000 - reactionTimes[reactionTimes.length - 1]) / 100).toFixed(2)+1;
+            this.setState({
+            alertType: 'full', 
+            alert: 'Single Match!'
+            })
           }
           //miss
           else if(!this.state.soundHit){
-            console.log('missed match')
             currentScore-=5;
-            fullScore+=parseFloat(currentScore);
-            console.log(fullScore)
+            this.setState({
+            alertType: 'none', 
+            alert: 'Missed a Match!'
+            })
           }
           //wrong match
           else if(this.state.colorHit || this.state.positionHit){
-            console.log('wrong match')
             currentScore-=5;
-            fullScore+=parseFloat(currentScore);
-            console.log(fullScore)
+            this.setState({
+            alertType: 'none', 
+            alert: 'Not a Match!'
+            })
+            if(this.state.score+currentScore>=0){
+             this.state.score+=currentScore;
+           }
+           else{
+            currentScore-=this.state.score;
+            this.state.score=0;
           }
         }
-     }
+      }
+      this.setState({
+        colorMatch: false,
+        soundMatch: false,
+        positionMatch: false,
+        soundHit: false,
+        colorHit: false,
+        positionHit: false,
+        positionPressed: noStyle,
+        colorPressed: noStyle,
+        soundPressed: noStyle
+        }) 
+    }
     /////all color match possibilities
     if(this.state.colorMatch){
      // skip sound match combos since covered above, all position match options
-        if(this.state.positionMatch){
+     if(this.state.positionMatch){
           //wrong match
           if(this.state.soundHit){
-            console.log('not a match')
             currentScore-=5;
-            fullScore+=parseFloat(currentScore);
-            console.log(fullScore)
+            this.setState({
+            alertType: 'none', 
+            alert: 'Not a Match!'
+            })
+            if(this.state.score+currentScore>=0){
+             this.state.score+=currentScore;
+           }
+           else{
+            currentScore-=this.state.score;
+            this.state.score=0;
           }
+        }
           //double match
           if(this.state.positionHit && this.state.colorHit){
-            console.log('double match')
-            currentScore = ((2000 - reactionTimes[reactionTimes.length - 1]) *2 / 100).toFixed(2)+1;
-            fullScore+=parseFloat(currentScore);
-            console.log(fullScore)
+            currentScore += ((2000 - reactionTimes[reactionTimes.length - 1]) *2 / 100).toFixed(2)+1;
+            this.setState({
+            alertType: 'full', 
+            alert: 'Double Match!'
+            })
           }
           //1/2 match
           else if(this.state.positionHit || this.state.colorHit){
-            console.log('single match')
-            currentScore = ((2000 - reactionTimes[reactionTimes.length - 1]) / 100).toFixed(2)+1;
-            fullScore+=parseFloat(currentScore);
-            console.log(fullScore)
+            currentScore += ((2000 - reactionTimes[reactionTimes.length - 1]) / 100).toFixed(2)+1;
+            this.setState({
+            alertType: 'half', 
+            alert: 'Half Match!'
+            })
           }
           //missed both
           else{
-            console.log('missed both sound and color')
             currentScore-=5;
-            fullScore+=parseFloat(currentScore);
-            console.log(fullScore)
+            this.setState({
+            alertType: 'none', 
+            alert: 'Missed a Match!'
+            })
+            if(this.state.score+currentScore>=0){
+             this.state.score+=currentScore;
+           }
+           else{
+            currentScore-=this.state.score;
+            this.state.score=0;
           }
         }
+      }
       //  only color match, so hit, miss, or wrong match
-        else{
+      else{
           //hit
           if(this.state.colorHit){
-            console.log('single match')
-            currentScore = ((2000 - reactionTimes[reactionTimes.length - 1]) / 100).toFixed(2)+1;
-            fullScore+=parseFloat(currentScore);
-            console.log(fullScore)
+            this.setState({
+            alertType: 'full', 
+            alert: 'Single Match!'
+            })
+            currentScore += ((2000 - reactionTimes[reactionTimes.length - 1]) / 100).toFixed(2)+1;
           }
           //miss
           else if(!this.state.colorHit){
-            console.log('missed match')
             currentScore-=5;
-            fullScore+=parseFloat(currentScore);
-            console.log(fullScore)
-          }
-          ///wrong match
-          else if(this.state.soundHit || this.state.positionHit){
-            console.log('wrong match')
-            currentScore-=5;
-            fullScore+=parseFloat(currentScore);
-            console.log(fullScore)
+            this.setState({
+            alertType: 'none', 
+            alert: 'Missed a Match!'
+            })
+            if(this.state.score+currentScore>=0){
+             this.state.score+=currentScore;
+           }
+           else{
+            currentScore-=this.state.score;
+            this.state.score=0;
           }
         }
-     }
+          ///wrong match
+          else if(this.state.soundHit || this.state.positionHit){
+            currentScore-=5;
+            this.setState({
+            alertType: 'none', 
+            alert: 'Not a Match!'
+            })
+            if(this.state.score+currentScore>=0){
+             this.state.score+=currentScore;
+           }
+           else{
+            currentScore-=this.state.score;
+            this.state.score=0;
+          }
+        }
+      }
+      this.setState({
+        colorMatch: false,
+        soundMatch: false,
+        positionMatch: false,
+        soundHit: false,
+        colorHit: false,
+        positionHit: false,
+        positionPressed: noStyle,
+        colorPressed: noStyle,
+        soundPressed: noStyle
+        }) 
+    }
       //position match cases, only single case because color/sound options addressed above
       if(this.state.positionMatch){
         //hit
-          if(this.state.positionHit){
-            console.log('single match')
-            currentScore = ((2000 - reactionTimes[reactionTimes.length - 1]) / 100).toFixed(2)+1;
-            fullScore+=parseFloat(currentScore);
-            console.log(fullScore)
-          }
+        if(this.state.positionHit){
+          this.setState({
+            alertType: 'full', 
+            alert: 'Single Match!'
+            })
+          currentScore += ((2000 - reactionTimes[reactionTimes.length - 1]) / 100).toFixed(2)+1;
+        }
           //miss
           else if(!this.state.positionHit){
-            console.log('missed match')
             currentScore-=5;
-            fullScore+=parseFloat(currentScore);
-            console.log(fullScore)
-          }
+            this.setState({
+            alertType: 'none', 
+            alert: 'Missed a Match!'
+            })
+        }
           ///wrong match
           else if(this.state.soundHit || this.state.colorHit){
-            console.log('wrong match')
             currentScore-=5;
-            fullScore+=parseFloat(currentScore);
-            console.log(fullScore)
+            this.setState({
+            alertType: 'half', 
+            alert: 'Not a Match!'
+            })
+            if(this.state.score+currentScore>=0){
+             this.state.score+=currentScore;
+           }
+           else{
+            currentScore-=this.state.score;
+            this.state.score=0;
           }
+        }
       }
+      if(this.state.score+currentScore<0){
+        currentScore=this.state.score;
+            this.state.score=0;
+            fullScore=0;
+      }
+      else{
+        this.state.score+=parseInt(currentScore);
+      }
+      fullScore+=parseFloat(currentScore);
       //reset states
       this.setState({
-          colorMatch: false,
-          soundMatch: false,
-          positionMatch: false,
-          soundHit: false,
-          colorHit: false,
-          positionHit: false,
-          positionPressed: noStyle,
-          colorPressed: noStyle,
-          soundPressed: noStyle,
-          score: this.state.score
-        }) 
-   }
-      reactionEnd=null;
-      reactionStart=new Date();
-      this.setState({colorPressed: noStyle, soundPressed: noStyle, positionPressed: noStyle});
-      setTimeout(function() {
-        this.setState({alert: ' ', alertType: ' '});
-      }.bind(this), 800);
+        colorMatch: false,
+        soundMatch: false,
+        positionMatch: false,
+        soundHit: false,
+        colorHit: false,
+        positionHit: false,
+        positionPressed: noStyle,
+        colorPressed: noStyle,
+        soundPressed: noStyle,
+        score: this.state.score
+      }) 
+    }
+    reactionEnd=null;
+    reactionStart=new Date();
+    this.setState({colorPressed: noStyle, soundPressed: noStyle, positionPressed: noStyle});
+    setTimeout(function() {
+      this.setState({alert: ' ', alertType: ' '});
+    }.bind(this), 800);
       //NOT GOING TO ACTUALLY LIGHT UP COLORS UNTIL ALL IF STATEMENTS HAVE ITERATED
       //case 1: position match
       if (timeTilPositionMatch === 0) {
@@ -480,46 +606,46 @@ var AdvancedMode = React.createClass({
           var accuracy=matchHit / matchCount;
           console.log(accuracy, 'accuracy')
 
-          // endGameFunction(fullScore, reactionTimes, this.state.gameId, this.state.userId, function(success) {
-          //   if (success) {
-          //     this.props.history.push('/gameOver')
-          //   }
-          // }.bind(this))
+          endGameFunction(fullScore, reactionTimes, this.state.gameId, this.state.userId, function(success) {
+            if (success) {
+              this.props.history.push('/gameOver')
+            }
+          }.bind(this))
 
         }.bind(this), 2000);
         ////////////////////////////////////////////////////////////////////////////////////
       }
     }.bind(this), 2000);
-  },
-  colorMatch: function() {
-    if (!reactionEnd) {
-      reactionEnd = Date.now();
-    }
-    this.state.colorHit = true;
-    this.setState({colorPressed: pushStyle, correct: this.state.colorHit});
-  },
-  positionMatch: function() {
-    if (!reactionEnd) {
-      reactionEnd = Date.now();
-    }
-    this.state.positionHit = true;
-    this.setState({positionPressed: pushStyle, correct: this.state.positionHit});
-  },
-  soundMatch: function() {
-    if (!reactionEnd) {
-      reactionEnd = Date.now();
-    }
-    this.state.soundHit = true;
-    this.setState({soundPressed: pushStyle, correct: this.state.soundHit});
-  },
-  render: function() {
-    var overlay = this.state.overlay
-      ? (<AdvancedStartOverlay nLevel={this.state.N} click={this.startGame}/>)
-      : '';
+},
+colorMatch: function() {
+  if (!reactionEnd) {
+    reactionEnd = Date.now();
+  }
+  this.state.colorHit = true;
+  this.setState({colorPressed: pushStyle, correct: this.state.colorHit});
+},
+positionMatch: function() {
+  if (!reactionEnd) {
+    reactionEnd = Date.now();
+  }
+  this.state.positionHit = true;
+  this.setState({positionPressed: pushStyle, correct: this.state.positionHit});
+},
+soundMatch: function() {
+  if (!reactionEnd) {
+    reactionEnd = Date.now();
+  }
+  this.state.soundHit = true;
+  this.setState({soundPressed: pushStyle, correct: this.state.soundHit});
+},
+render: function() {
+  var overlay = this.state.overlay
+  ? (<AdvancedStartOverlay nLevel={this.state.N} click={this.startGame}/>)
+  : '';
 
-    var scoreAlert;
-    var scoreUpdate;
-    if (this.state.alert === "Good job!") {
+  var scoreAlert;
+  var scoreUpdate;
+   if (this.state.alertType === 'full') {
       scoreAlert = (
         <div className="scoreAlertPositive">
           {this.state.alert}
@@ -528,18 +654,51 @@ var AdvancedMode = React.createClass({
       scoreUpdate = (
         <h2 className="scoreUpdate scoreUpdatePos">+{parseInt(currentScore)}</h2>
       )
-    } else if (this.state.alert === "Not a match" || this.state.alert === "Missed a match") {
+    }
+  else if (this.state.alertType === 'half') {
+      scoreAlert = (
+        <div className="scoreAlertHalf">
+          {this.state.alert}
+        </div>
+      )
+      if (currentScore > 0) {
+        scoreUpdate = (
+          <h2 style={{
+            color: 'yellow'
+          }}>+{parseInt(currentScore)}</h2>
+        )
+      }
+      if (currentScore < 0) {
+        scoreUpdate = (
+          <h2 style={{
+            color: 'yellow'
+          }}>{parseInt(currentScore)}</h2>
+        )
+      }
+    }
+  else if (this.state.alertType === 'none') {
       scoreAlert = (
         <div className="scoreAlertNegative">
           {this.state.alert}
         </div>
       )
-      if (this.state.score > 0) {
+      if (currentScore > 0) {
         scoreUpdate = (
-          <h2 className="scoreUpdate scoreUpdateNeg">-{currentScore}</h2>
+          <h2 style={{
+            color: 'yellow'
+          }}>+{parseInt(currentScore)}</h2>
         )
       }
-    } else {
+      else if (parseInt(currentScore) < 0) {
+        scoreUpdate = (
+          <h2 style={{
+            color: 'yellow'
+          }}>{parseInt(currentScore)}</h2>
+        )
+      }
+    }
+    //}
+    else {
       scoreAlert = (
         <div></div>
       )
@@ -548,58 +707,58 @@ var AdvancedMode = React.createClass({
       )
     }
 
-    var gameTimer = this.state.overlay
-      ? ""
-      : (
-        <GameTimer timeStyle={{
-          'color': "#F1BA03"
-        }}></GameTimer>
-      );
-
-    return (
-      <div className="fullGameView">
-        <div className="gameContainer
-        ">
-          {overlay}
-          <div className="gameFullHeader">
-            <span className="gameTitle">
-              <h1 className="advanced modeTitle">Advanced</h1>
-              <h1 className="advanced nTitle">(N={this.state.N})</h1>
-            </span>
-            <div className="gameHeading">
-              <div className="gameScore advanced">
-                <h2>Score: {this.state.score}</h2>
-                {scoreUpdate}
-              </div>
-              {gameTimer}
-            </div>
-          </div>
-          <div className="gameBoard">
-            <div className="gameSquare" style={this.state.style[0]}></div>
-            <div className="gameSquare" style={this.state.style[1]}></div>
-            <div className="gameSquare" style={this.state.style[2]}></div>
-            <div className="gameSquare" style={this.state.style[3]}></div>
-            <div className="gameSquare" style={this.state.style[4]}></div>
-            <div className="gameSquare" style={this.state.style[5]}></div>
-            <div className="gameSquare" style={this.state.style[6]}></div>
-            <div className="gameSquare" style={this.state.style[7]}></div>
-            <div className="gameSquare" style={this.state.style[8]}></div>
-          </div>
-          <div className="gameFullFooter">
-            <div className="scoreAlert">
-              {scoreAlert}
-            </div>
-            <div className="gameButtonsContainer" onKeyPress={this.handleKeyPres}>
-              <a onClick={this.soundMatch} style={this.state.soundPressed} className='advancedButton'>SOUND</a>
-              <a onClick={this.positionMatch} style={this.state.positionPressed} className='advancedButton'>POSITION</a>
-              <a onClick={this.colorMatch} style={this.state.colorPressed} className='advancedButton'>COLOR</a>
-            </div>
-          </div>
-        </div>
-        <Link to="/home"><img className="whiteLogo" src="./images/CortexLogo3.png"/></Link>
-      </div>
+  var gameTimer = this.state.overlay
+  ? ""
+  : (
+    <GameTimer timeStyle={{
+      'color': "#F1BA03"
+    }}></GameTimer>
     );
-  }
+
+  return (
+    <div className="fullGameView">
+    <div className="gameContainer
+    ">
+    {overlay}
+    <div className="gameFullHeader">
+    <span className="gameTitle">
+    <h1 className="advanced modeTitle">Advanced</h1>
+    <h1 className="advanced nTitle">(N={this.state.N})</h1>
+    </span>
+    <div className="gameHeading">
+    <div className="gameScore advanced">
+    <h2>Score: {this.state.score}</h2>
+    {scoreUpdate}
+    </div>
+    {gameTimer}
+    </div>
+    </div>
+    <div className="gameBoard">
+    <div className="gameSquare" style={this.state.style[0]}></div>
+    <div className="gameSquare" style={this.state.style[1]}></div>
+    <div className="gameSquare" style={this.state.style[2]}></div>
+    <div className="gameSquare" style={this.state.style[3]}></div>
+    <div className="gameSquare" style={this.state.style[4]}></div>
+    <div className="gameSquare" style={this.state.style[5]}></div>
+    <div className="gameSquare" style={this.state.style[6]}></div>
+    <div className="gameSquare" style={this.state.style[7]}></div>
+    <div className="gameSquare" style={this.state.style[8]}></div>
+    </div>
+    <div className="gameFullFooter">
+    <div className="scoreAlert">
+    {scoreAlert}
+    </div>
+    <div className="gameButtonsContainer" onKeyPress={this.handleKeyPres}>
+    <a onClick={this.soundMatch} style={this.state.soundPressed} className='advancedButton'>SOUND</a>
+    <a onClick={this.positionMatch} style={this.state.positionPressed} className='advancedButton'>POSITION</a>
+    <a onClick={this.colorMatch} style={this.state.colorPressed} className='advancedButton'>COLOR</a>
+    </div>
+    </div>
+    </div>
+    <Link to="/home"><img className="whiteLogo" src="./images/CortexLogo3.png"/></Link>
+    </div>
+    );
+}
 });
 
 var noStyle = {}
@@ -615,7 +774,7 @@ var standardStyle = {
 }
 
 var newStyle = [
-  {
+{
     backgroundColor: '#00cc33', //green
     border: "3px solid #00cc33"
   }, {
@@ -643,11 +802,11 @@ var newStyle = [
     backgroundColor: '#cc3333', //red
     border: "3px solid #cc3333"
   }
-]
+  ]
 
-var audios = [];
-for (var i = 1; i <= 9; i++) {
-  audios.push(new Audio('./audio/' + i + '.wav '));
-}
+  var audios = [];
+  for (var i = 1; i <= 9; i++) {
+    audios.push(new Audio('./audio/' + i + '.wav '));
+  }
 
-module.exports = AdvancedMode
+  module.exports = AdvancedMode

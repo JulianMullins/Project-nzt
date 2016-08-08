@@ -20,7 +20,7 @@ var highScores = require('./server/highScores');
 var serverData = require('./server/serverData');
 var gameOverUpdate = require('./server/gameOverUpdate');
 var gameFunctions = require('./server/gameFunctions');
-var statsFunctions = require('./server/taylorsDataFile');
+var statsFunctions = require('./server/statsFunctions');
 
 
 
@@ -309,7 +309,8 @@ passport.use(new FacebookStrategy({
               silent: 1,
               advanced: 1
             },
-            currentGame:[]
+            currentGame:[],
+            showTutorial:false
           })
 
           //removed userId
@@ -439,16 +440,15 @@ if (app.get('env') === 'development') {
 // production error handler
 // no stacktraces leaked to user
 app.use(function(err, req, res, next) {
-  res.status(err.status || 500);
+  //res.status(err.status || 500);
   // res.render('error', {
   //   message: err.message,
   //   error: {}
   // });
-  return res.json({
-    success:false,
-    error:'ERROR IN APP.USE',
-    message:err.message
-  })
+  res.json({
+      success:false,
+      message:err
+    })
 });
 
 

@@ -107,6 +107,9 @@ module.exports = function(passport) {
                     u.stats = req.session.user.stats;
                     u.maxN = req.session.user.maxN;
                   }
+                  else{
+                    u.showTutorial = true;
+                  }
                   saveUserRemoveAnonymous(req,res,u);
                   
                 }
