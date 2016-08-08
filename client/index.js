@@ -2,7 +2,7 @@ var React = require('react');
 var ReactDOM = require('react-dom');
 
 import {Router, Route, hashHistory, Link} from 'react-router';
-import { IndexRoute, IndexRedirect } from 'react-router';
+import {IndexRoute, IndexRedirect} from 'react-router';
 var axios = require('axios');
 var url = process.env.url;
 
@@ -24,12 +24,6 @@ var Science = require('./science');
 var Stats = require('./statsLineGraphs')
 var Tutorial = require('./tutorial');
 
-
-//Stats
-//Science
-//Contact
-//Settings
-
 var RelaxedGame = require('./Modes/relaxedMode');
 var ClassicGame = require('./Modes/classicMode');
 var SilentGame = require('./Modes/silentMode');
@@ -40,25 +34,15 @@ var RelaxedLevels = require('./levels').RelaxedLevels;
 var SilentLevels = require('./levels').SilentLevels;
 var AdvancedLevels = require('./levels').AdvancedLevels;
 
-
 var App = React.createClass({
-  getInitialState(){
-
-    return{
-      isUser:false,
-      isloggedin:false
-    }
+  getInitialState: function() {
+    return {isUser: false, isloggedin: false}
   },
-  componentDidMount() {
-    
+  componentDidMount: function() {
     console.log("app mounted")
-
     axios.get('/getUserOnLoad')
-      // .then(function(response){
-      // }.bind(this))
-
   },
-  updateState(){
+  updateState: function() {
     // axios.get('/isUser')
     //   .then(function(response){
     //     this.setState({
@@ -67,28 +51,22 @@ var App = React.createClass({
     //     })
     //   }.bind(this))
   },
-  render() {
-            //<NavBar loginFunction={this.updateState} isUser={this.state.isUser} isloggedin={this.state.isloggedin} />
-
+  render: function() {
     return (
       <div>
-
-        <NavBar />
-        {this.props.children}
-
+        <NavBar/> {this.props.children}
       </div>
     )
   }
 });
-
 
 ReactDOM.render((
   <Router history={hashHistory}>
     <Route path="/" component={App}>
 
       <IndexRedirect to='/home'/>
-      <Route path="home" component={Home} />
-      <Route path="/newUser" component={NewUserOverlay} />
+      <Route path="home" component={Home}/>
+      <Route path="/newUser" component={NewUserOverlay}/>
 
       <Route path="login/facebook/success" component={FacebookLogin}/>
       <Route path="gameOver/login/facebook/success" component={FacebookLogin}/>
@@ -99,7 +77,7 @@ ReactDOM.render((
       <Route path="logout" component={Logout}/>
       <Route path="register(/:error)" component={Register}/>
       <Route path="error/:error" component={ErrorPage}/>
-      
+
       <Route path="gameOver" component={GameOver}/>
       <Route path="leaderboard" component={Leaderboard}/>
       <Route path="stats" component={Stats}/>
@@ -122,5 +100,3 @@ ReactDOM.render((
 ), document.getElementById('root'), function() {
   console.log("rendered")
 });
-
-// ReactDOM.render(<GameOver/>, document.getElementById('root'));
