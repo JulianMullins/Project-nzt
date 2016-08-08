@@ -1999,7 +1999,6 @@ var RelaxedMode = React.createClass({
       tempUser: true,
       gameId: null,
       mode: 'relaxed',
-      modeMultiplier: modeMultiplier[this.props.mode],
       penalty: 0,
       positivePoints: 0,
       fullScore: 0,
@@ -2454,8 +2453,7 @@ var SilentMode = React.createClass({
         gameId: obj.gameId,
         modeMultiplier: obj.modeMultiplier,
         penalty: obj.penalty,
-        positivePoints: obj.positivePoints,
-        userId: obj.userId
+        positivePoints: obj.positivePoints
       });
     }.bind(this));
   },

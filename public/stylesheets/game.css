@@ -9,7 +9,6 @@
 .gameContainer {
   height: 90vh;
   width: 640px;
-  /*  min-width: 640px;*/
   display: flex;
   flex-direction: column;
   justify-content: space-around;
@@ -146,6 +145,8 @@
   font-size: 64px;
   width: 50%;
 }
+
+/* score alerts */
 .scoreAlert {
   width: 95%;
   height: 40%;
@@ -163,9 +164,9 @@
   padding: 5px;
   text-align: center;
   -webkit-animation-name: negativeFadeOut;
-  -webkit-animation-duration: 5s;
+  -webkit-animation-duration: 3s;
   animation-name: negativeFadeOut;
-  animation-duration: 5s;
+  animation-duration: 3s;
 }
 .scoreAlertPositive {
   display: flex;
@@ -180,23 +181,31 @@
   padding: 5px;
   text-align: center;
   -webkit-animation-name: positiveFadeOut;
-  -webkit-animation-duration: 5s;
+  -webkit-animation-duration: 3s;
   animation-name: positiveFadeOut;
-  animation-duration: 5s;
+  animation-duration: 3s;
 }
 
-/* negative alert fade in and out */
-
-@keyframes negativeFadeIn {
-  from {
-    background-color: transparent;
-    color: transparent;
-  }
-  to {
-    background-color: rgba(255, 51, 51, 0.8);
-    color: white;
-  }
+.scoreAlertHalf {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background-color: transparent;
+  color: transparent;
+  font-size: 28px;
+  margin: 10px auto;
+  height: 80%;
+  width: 50%;
+  padding: 5px;
+  text-align: center;
+  -webkit-animation-name: halfFadeOut;
+  -webkit-animation-duration: 3s;
+  animation-name: halfFadeOut;
+  animation-duration: 3s;  
 }
+
+/* negative alert fade */
+
 @keyframes negativeFadeOut {
   from {
     background-color: rgba(255, 51, 51, 0.8);
@@ -205,16 +214,6 @@
   to {
     background-color: transparent;
     color: transparent;
-  }
-}
-@-webkit-keyframes negativeFadeIn {
-  from {
-    background-color: transparent;
-    color: transparent;
-  }
-  to {
-    background-color: rgba(255, 51, 51, 0.8);
-    color: white;
   }
 }
 @-webkit-keyframes negativeFadeOut {
@@ -228,18 +227,7 @@
   }
 }
 
-/* positive alert fade in and out */
-
-@keyframes positiveFadeIn {
-  from {
-    background-color: transparent;
-    color: transparent;
-  }
-  to {
-    background-color: rgba(0, 204, 153, 0.8);
-    color: white
-  }
-}
+/* positive alert fade */
 @keyframes positiveFadeOut {
   from {
     background-color: rgba(0, 204, 153, 0.8);
@@ -248,16 +236,6 @@
   to {
     background-color: transparent;
     color: transparent;
-  }
-}
-@-webkit-keyframes positiveFadeIn {
-  from {
-    background-color: transparent;
-    color: transparent;
-  }
-  to {
-    background-color: rgba(0, 204, 153, 0.8);
-    color: white
   }
 }
 @-webkit-keyframes positiveFadeOut {
@@ -270,6 +248,30 @@
     color: transparent;
   }
 }
+
+/* half score alert fade */
+@keyframes halfFadeOut {
+  from {
+    background-color: rgba(255, 255, 0, 0.8);
+    color: rgba(0, 0, 0, 0.8);
+  }
+  to {
+    background-color: transparent;
+    color: transparent;
+  }
+}
+
+@-webkit-keyframes halfFadeOut {
+  from {
+    background-color: rgba(255, 255, 0, 0.8);
+    color: rgba(0, 0, 0, 0.8);
+  }
+  to {
+    background-color: transparent;
+    color: transparent;
+  }
+}
+
 .scoreUpdatePos {
   color: #01B6A7;
 }
@@ -283,6 +285,7 @@
   animation-name: scoreUpdateIn;
   animation-duration: 2s;
 }
+
 @keyframes scoreUpdateIn {
   0% {
     transform: scale3d(0, 0, 1);
@@ -361,6 +364,11 @@
     width: 90%;
     height: 90%;
     margin: 0 auto;
+  }
+  .scoreAlertHalf {
+    width: 90%;
+    height: 90%;
+    margin: 0 auto;    
   }
   .gameScore {
     width: 70%;

@@ -50,7 +50,6 @@ var RelaxedMode = React.createClass({
       tempUser: true,
       gameId: null,
       mode: 'relaxed',
-      modeMultiplier: modeMultiplier[this.props.mode],
       penalty: 0,
       positivePoints: 0,
       fullScore:0,
