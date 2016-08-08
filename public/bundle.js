@@ -2146,8 +2146,8 @@ var RelaxedMode = React.createClass({
 
       // Game end
 
-      if (timeKeeper === 0) {
-        // if (timeKeeper === 36) {
+      // if (timeKeeper === 0) {
+      if (timeKeeper === 36) {
         //give gameScore variable the final score
         clearInterval(iterations);
         console.log(fullScore);
@@ -3461,7 +3461,8 @@ var GameOverOverlay = React.createClass({
         passedLevel: gameData.data.passedLevel,
         isHighScore: gameData.data.game.isHighScore,
         modeMultiplier: gameData.data.modeMultiplier,
-        start: 0
+        start: 0,
+        accuracy: gameData.data.accuracy
       });
     }.bind(this))).then(function () {
       this.unlockLevel();
