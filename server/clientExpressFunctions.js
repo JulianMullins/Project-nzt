@@ -174,7 +174,8 @@ router.get('/getGame',function(req,res,next){
         game:game,
         success:true,
         scoreToPass: scoreToPass,
-        passedLevel: passedLevel
+        passedLevel: passedLevel,
+        accuracy: game.accuracy
       })
     }
   })
