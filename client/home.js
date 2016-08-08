@@ -74,9 +74,9 @@ var Mainmenu = React.createClass({
     //   : '';
     return (
       <div>
-        {this.state.showTutorial
-          ?<NewUserOverlay/>
-          :<div></div>
+      {this.state.showTutorial
+        ?<NewUserOverlay/>
+        :<div></div>
         }
         <div className="heading">
           <img src="../images/CortexLogo4.svg"/>
