@@ -68,7 +68,8 @@ var GameOverOverlay = React.createClass({
         passedLevel: gameData.data.passedLevel,
         isHighScore: gameData.data.game.isHighScore,
         modeMultiplier: gameData.data.modeMultiplier,
-        start: 0
+        start: 0,
+        accuracy: gameData.data.accuracy
       })
     }.bind(this))).then(function() {
       this.unlockLevel();
