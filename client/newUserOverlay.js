@@ -3,6 +3,16 @@ var axios = require('axios');
 import {Link} from 'react-router';
 
 var NewUserOverlay = React.createClass({
+	getInitialState: function() {
+		return {
+
+		}
+	},
+	componentDidMount: function() {
+		return {
+			open: true
+		}
+	},
 	render: function() {
 		return (
 			<div className="overlaySmall">

@@ -4632,6 +4632,14 @@ var axios = require('axios');
 var NewUserOverlay = React.createClass({
 	displayName: 'NewUserOverlay',
 
+	getInitialState: function getInitialState() {
+		return {};
+	},
+	componentDidMount: function componentDidMount() {
+		return {
+			open: true
+		};
+	},
 	render: function render() {
 		return React.createElement(
 			'div',
