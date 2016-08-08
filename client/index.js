@@ -21,15 +21,12 @@ var GameOver = require('./gameOver');
 var Leaderboard = require('./leaderboard');
 var Contact = require('./contact');
 var Science = require('./science');
-var Stats = require('./statsLineGraphs')
 var Tutorial = require('./tutorial');
 
+console.timeStamp("stats start");
+var Stats = require('./statsLineGraphs');
 
-//Stats
-//Science
-//Contact
-//Settings
-
+console.timeStamp("games start");
 var RelaxedGame = require('./Modes/relaxedMode');
 var ClassicGame = require('./Modes/classicMode');
 var SilentGame = require('./Modes/silentMode');
@@ -102,10 +99,10 @@ ReactDOM.render((
       
       <Route path="gameOver" component={GameOver}/>
       <Route path="leaderboard" component={Leaderboard}/>
-      <Route path="stats" component={Stats}/>
+      
       <Route path="contact" component={Contact}/>
       <Route path="science" component={Science}/>
-
+      <Route path="stats" component={Stats}/>
       <Route path="tutorial" component={Tutorial}/>
 
       <Route path="levels/classic(/:error)" component={ClassicLevels}/>
@@ -122,5 +119,7 @@ ReactDOM.render((
 ), document.getElementById('root'), function() {
   console.log("rendered")
 });
+
+//<Route path="stats" component={Stats}/>
 
 // ReactDOM.render(<GameOver/>, document.getElementById('root'));
