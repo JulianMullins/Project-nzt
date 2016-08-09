@@ -52,11 +52,11 @@ body {
   align-items: center;
 }
 h1 {
-  font-size: calc(16px + 10vw);
+  font-size: calc(16px+ 10vw);
   font-weight: 700;
 }
 h2 {
-  font-size: calc(16px + 1.5vw);
+  font-size: calc(16px+ 1.5vw);
   font-weight: 500;
 }
 h3 {

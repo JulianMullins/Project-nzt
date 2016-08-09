@@ -12,31 +12,29 @@ router.get('/myHighScores', function(req, res, next) {
     .populate('stats')
     .exec(function(err, user) {
       if (err) {
-        return;
+        console.log(err);
       } else {
-        console.log(user);
         Leaderboard.findById(user.stats.leaderboard)
           .populate('scores')
           .exec(function(err, leaderboard) {
             if (err) {
               console.log(err);
             } else {
-              console.log(leaderboard)
               var result = [];
               if (leaderboard.scores.length == 0) {
                 res.json(result);
               } else {
+                var i = 1;
                 leaderboard.scores.map(function(score) {
                   result.push({
+                    rank: i,
                     mode: score.mode,
-                    username: user.username,
                     level: score.nLevel,
                     score: parseInt(score.score)
                   });
-                  if (result.length == leaderboard.scores.length) {
-                    res.json(result);
-                  }
+                  i++;
                 });
+                res.json(result);
               }
             }
           });
@@ -50,26 +48,24 @@ router.get('/allHighScores', function(req, res, next) {
     .exec(function(err, leaderboard) {
       if (err) {
         console.log('err', err);
-        return;
       } else {
-        //console.log(leaderboard.scores);
         var result = [];
-        
-        var i = 1;
-        leaderboard.scores.map(function(score) {
-          var temp = {
-            rank: i,
-            mode: score.mode,
-            score: parseInt(score.score),
-            level: score.nLevel,
-            username: score.username
-          };
-          result.push(temp);
-              if (result.length == leaderboard.scores.length) {
-                res.json(result);
-              }
-          i++;
-        });
+        if (leaderboard.scores.length == 0) {
+          res.json(result);
+        } else {
+          var i = 1;
+          leaderboard.scores.map(function(score) {
+            result.push({
+              rank: i,
+              mode: score.mode,
+              score: parseInt(score.score),
+              level: score.nLevel,
+              username: score.userName
+            });
+            i++;
+          });
+          res.json(result);
+        }
       }
     });
 });
