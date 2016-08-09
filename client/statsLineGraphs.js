@@ -3,6 +3,7 @@ var ReactDOM = require('react-dom');
 //var d3=require('d3'); //some documentation hass this in examples, so keep to be safe
 console.timeStamp("start load lineChart")
 var LineChart = require('react-d3-basic').LineChart;
+var MediaQuery = require('react-responsive');
 
 console.timeStamp("start load AreaChart")
 
@@ -37,7 +38,7 @@ var MyComponent = React.createClass({
   getInitialState: function(){
     return{
       data: [{"score": 0, "index": 0, avgR:0, maxR:0, minR:0}],
-      chartSeries1: [{field: 'score', name: 'Score', color: '#F13542',
+      chartSeries1: [{field: 'score', name: 'Score', color: '#01B6A7',
             style: {"strokeWidth": 2, "fillOpacity": .2}}],
       chartSeries2: [{field: 'maxR', name: 'Max Reaction Time'},
                       {field: 'avgR', name: 'Average Reaction Time'},
@@ -152,23 +153,77 @@ axios.get('/homeUserInfo')
             <h2>( {this.state.fullName} )</h2>
           </div>
 
-          <div className="chartsContainer">
-            <LineChart
-            className='StatsScoreGraph'
-            data={this.state.data}
-            margins={margins}
-            chartSeries={this.state.chartSeries1}
-            width={1100}
-            height={500}
-            title={'Score History'}
-            x={x}
-            xScale={xScale}
-            yAxisClassName= {'lineY'}
-            xAxisClassName= {'lineX'}
-            yLabel={'Scores'}
-            //x axis includes first and last day of play (for time range)
-            xLabel={'Gameplay from '+dayA+', '+ monthA + ' '+ dateA+ ', ' +yearA + ' to ' +dayB+', '+ monthB + ' '+ dateB+ ', ' +yearB} />
-          </div> {/* chartsContainer */}
+          <MediaQuery maxWidth='768px'>
+            <div className="chartsContainer">
+              <LineChart
+              className='StatsScoreGraph'
+              data={this.state.data}
+              margins={margins}
+              chartSeries={this.state.chartSeries1}
+              width={window.innerWidth}
+              height={500}
+              title={'Score History'}
+              x={x}
+              xScale={xScale}
+              yAxisClassName= {'lineY'}
+              xAxisClassName= {'lineX'}
+              yLabel={'Scores'}
+              //x axis includes first and last day of play (for time range)
+              xLabel={'Gameplay from '+dayA+', '+ monthA + ' '+ dateA+ ', ' +yearA + ' to ' +dayB+', '+ monthB + ' '+ dateB+ ', ' +yearB} />
+
+              <AreaChart
+              width={window.innerWidth}
+              height={500}
+              title='TITLE'
+              data= {this.state.data}
+              className='StatsReactionGraph'
+              margins={margins}
+              chartSeries= {this.state.chartSeries2}
+              yAxisClassName= {'areaY'}
+              xAxisClassName= {'areaX'}
+              x= {x}
+              xScale={xScale}
+              yLabel={'Reaction Times (ms)'}
+              //x axis includes first and last day of play (for time range)
+              xLabel={'Gameplay from '+dayA+', '+ monthA + ' '+ dateA+ ', ' +yearA + ' to ' +dayB+', '+ monthB + ' '+ dateB+ ', ' +yearB} /> 
+            </div> {/* chartsContainer */}
+          </MediaQuery>
+
+          <MediaQuery minWidth="768px">
+            <div className="chartsContainer">
+              <LineChart
+              className='StatsScoreGraph'
+              data={this.state.data}
+              margins={margins}
+              chartSeries={this.state.chartSeries1}
+              width={window.innerWidth/2}
+              height={500}
+              title={'Score History'}
+              x={x}
+              xScale={xScale}
+              yAxisClassName= {'lineY'}
+              xAxisClassName= {'lineX'}
+              yLabel={'Scores'}
+              //x axis includes first and last day of play (for time range)
+              xLabel={'Gameplay from '+dayA+', '+ monthA + ' '+ dateA+ ', ' +yearA + ' to ' +dayB+', '+ monthB + ' '+ dateB+ ', ' +yearB} />
+
+              <AreaChart
+              width={window.innerWidth/2}
+              height={500}
+              title='TITLE'
+              data= {this.state.data}
+              className='StatsReactionGraph'
+              margins={margins}
+              chartSeries= {this.state.chartSeries2}
+              yAxisClassName= {'areaY'}
+              xAxisClassName= {'areaX'}
+              x= {x}
+              xScale={xScale}
+              yLabel={'Reaction Times (ms)'}
+              //x axis includes first and last day of play (for time range)
+              xLabel={'Gameplay from '+dayA+', '+ monthA + ' '+ dateA+ ', ' +yearA + ' to ' +dayB+', '+ monthB + ' '+ dateB+ ', ' +yearB} /> 
+            </div> {/* chartsContainer */}
+          </MediaQuery>
 
           <div className="statsDetailsContainer">
             <table>
@@ -197,6 +252,7 @@ axios.get('/homeUserInfo')
                 <h2>leaderboard</h2>
               </span>
             </Link>
+
           </div>
         </div>)
     }
@@ -205,19 +261,3 @@ axios.get('/homeUserInfo')
 });
 
 module.exports = MyComponent
-
-          // <AreaChart
-          // width={1100}
-          // height={500}
-          // title='TITLE'
-          // data= {this.state.data}
-          // className='StatsReactionGraph'
-          // margins={margins}
-          // chartSeries= {this.state.chartSeries2}
-          // yAxisClassName= {'areaY'}
-          // xAxisClassName= {'areaX'}
-          // x= {x}
-          // xScale={xScale}
-          // yLabel={'Reaction Times (ms)'}
-          // //x axis includes first and last day of play (for time range)
-          // xLabel={'Gameplay from '+dayA+', '+ monthA + ' '+ dateA+ ', ' +yearA + ' to ' +dayB+', '+ monthB + ' '+ dateB+ ', ' +yearB} /> 
