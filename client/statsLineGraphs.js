@@ -15,10 +15,28 @@ import { Link } from 'react-router'
 
 
 //global variables for changing state below
-var stats=[];
+var stats = [];
+var dates = [];
+
+var xScale = 'time'
+var yLabel = 'age'
+//these are just variables to parse and add the first and last game dates to the x axes
+var dayA = ' '
+var monthA = ' '
+var dateA = ' '
+var yearA = ' '
+var dayB = ' '
+var monthB = ' '
+var dateB = ' '
+var yearB = ' '
 
 //setting margins as global
-var margins = {left: 100, right: 100, top: 10, bottom: 60};
+var margins = {
+  left: 100,
+  right: 100,
+  top: 10,
+  bottom: 60
+}
 
 var MyComponent = React.createClass({
   getInitialState: function(){
@@ -128,20 +146,19 @@ axios.get('/homeUserInfo')
       }.bind(this))
 },
   render: function() {
+    // console.log(stats,'stats')
     var x = function(d) {
-      return d.dateAchieved.getTime();
+      return d.dateAchieved;
     }
     var title = "Stack Area Chart"
-    if(!this.state.stats || this.state.stats.length<1){
-      console.log("option 1")
-      return(
+    if (!stats[0]) {
+      return (
         <div className="statsAlertContainer">
           <div className='statsAlert'>{this.state.alert}</div>
           <Link to='/home'><span className='fa fa-home fa-5x relaxed' aria-hidden='true'/></Link>
         </div>
       )
-    }
-    else {
+    } else {
       return (
         <div className="statsPageContainer">
           <div className="statsHeader">
