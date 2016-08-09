@@ -160,7 +160,7 @@ var ClassicMode = React.createClass({
     }
     this.setState({
       reactionTimes: this.state.reactionTimes.concat([this.state.reactionEnd-this.state.reactionStart]),
-      matchHit: this.state.matchHit - 1,
+      //matchHit: this.state.matchHit - 1,
       matchCount: this.state.matchCount + 1,
       fullScore: this.state.fullScore + this.state.currentScore,
       currentScore: parseInt(this.state.currentScore),

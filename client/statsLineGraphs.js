@@ -1,14 +1,13 @@
 var React = require('react');
 var ReactDOM = require('react-dom');
-//var d3=require('d3'); //some documentation hass this in examples, so keep to be safe
-console.timeStamp("start load lineChart")
-// var LineChart = require('react-d3-basic').LineChart;
+//var d3=require('d3'); //some documentation has this in examples, so keep to be safe
+console.timeStamp("start load lineChart AreaChart")
 
-// console.timeStamp("start load AreaChart")
+var LineChart = require('react-d3-basic').LineChart;
 
-// var AreaChart = require('react-d3-basic').AreaChart;
+var AreaChart = require('react-d3-basic').AreaChart;
 
-import {AreaChart , LineChart} from 'react-easy-chart'
+// import {AreaChart , LineChart} from 'react-easy-chart'
 
 var axios=require('axios');
 import { Link } from 'react-router'
@@ -41,233 +40,233 @@ var MyComponent = React.createClass({
                       {field: 'minR', name: 'Min Reaction Time'}],
 
 
-      alert: "Play some games to view your progress!",
-      stats:null
+//       alert: "Play some games to view your progress!",
+//       stats:null
+//     }
+//   },
+//   componentDidMount: function(){
+//     axios.get('/getStats', {withCredentials: true})
+//     .then(function(response){
+//       console.log(stats, response.data.stats)
+//       stats = response.data.stats
+//       if(response.data.stats.length>0){
+//         this.setState({
+//           data:[],
+//           stats:response.data.stats
+//         });
+//       }
+//       else{
+//         this.setState({stats:null, data:null});
+//       }
+//
+//       console.log(this.state.stats,'stats',this.state.data, 'data')
+//
+//       this.state.stats.forEach(function(item, index){
+//         console.log("forEACHHHHHHHHHHHHHHHHHHHHhh")
+//         if(!item.reactionTimes[0]){
+//           return;
+//         }
+//         console.log(item)
+//         var obj = {};
+//         //standard date format
+//         obj.dateAchieved=new Date(item.dateAchieved)
+//         //indexing array (temporary)
+//         obj.index=index;
+//         //max reaction time
+//         obj.maxR=Math.max(...item.reactionTimes);
+//         //min reaction time
+//         obj.minR=Math.min(...item.reactionTimes)
+//         //average reaction time
+//         obj.avgR=(item.reactionTimes.reduce(function(a,b){
+//           return a+b
+//         })/(item.reactionTimes.length)).toFixed(2)
+//         console.log("obj", obj)
+//         var arr = this.state.data;
+//         console.log(arr)
+//         arr.push(obj);
+//         console.log(arr);
+//         this.setState({data:arr})
+//         console.log(arr,this.state.data)
+//
+//         console.log(this.state.stats,'stats')
+//         console.log(this.state.data,'data')
+//       }.bind(this))
+//
+//     console.log(this.state.data)
+//      //pull first and last data objects and parse for axes
+//
+//     }.bind(this))
+//     .then(function(){
+//       //this.setState({data:arr})
+//       console.log("then")
+//       if(this.state.stats.length>0){
+//         this.setState({
+//           data: this.state.data,
+//           alert: ' ',
+//           dayA: this.state.data[0].dateAchieved.toDateString(),
+//           // monthA:this.state.data[0].dateAchieved.getMonth(),
+//           // dateA:this.state.data[0].dateAchieved.getDate(),
+//           // yearA:this.state.data[0].dateAchieved.getFullYear(),
+//           dayB : this.state.data[this.state.data.length-1].dateAchieved.toDateString()
+//           // monthB:this.state.data[this.state.data.length-1].dateAchieved.getMonth(),
+//           // dateB:this.state.data[this.state.data.length-1].dateAchieved.getDate(),
+//           // yearB:this.state.data[this.state.data.length-1].dateAchieved.getFullYear()
+//
+//         })
+//       }
+//
+//     }.bind(this))
+//   },
+//   render: function() {
+//     console.log(this.state)
+// // =======
+      alert: "Play some games to view your progress!"
+                    }
+    },
+componentDidMount: function(){
+axios.get('/getStats', {withCredentials: true})
+.then(function(responseJson){
+    stats=responseJson.data.stats;
+    console.log(stats)
+    this.state.data=[];
+    console.log(stats,'stats')
+    if(stats[0]){
+      _.map(stats, function(item, index){
+      if(item.score===0 || !item.reactionTimes[0]){
+        return
+       }
+      this.state.data.push(item)
+      //standard date format
+      this.state.data[this.state.data.length-1].dateAchieved=new Date(item.dateAchieved)
+      //indexing array (temporary)
+      this.state.data[this.state.data.length-1].index=index;
+      //max reaction time
+      this.state.data[this.state.data.length-1].maxR=Math.max(...item.reactionTimes);
+      //min reaction time
+      this.state.data[this.state.data.length-1].minR=Math.min(...item.reactionTimes)
+      //average reaction time
+      this.state.data[this.state.data.length-1].avgR=(item.reactionTimes.reduce(function(a,b){
+        return a+b
+      })/(item.reactionTimes.length)).toFixed(2)
+    }.bind(this))
     }
-  },
-  componentDidMount: function(){
-    axios.get('/getStats', {withCredentials: true})
-    .then(function(response){
-      console.log(stats, response.data.stats)
-      stats = response.data.stats
-      if(response.data.stats.length>0){
-        this.setState({
-          data:[],
-          stats:response.data.stats
-        });
-      }
-      else{
-        this.setState({stats:null, data:null});
-      }
 
-      console.log(this.state.stats,'stats',this.state.data, 'data')
 
-      this.state.stats.forEach(function(item, index){
-        console.log("forEACHHHHHHHHHHHHHHHHHHHHhh")
-        if(!item.reactionTimes[0]){
-          return;
+   //pull first and last data objects and parse for axes
+   if(stats[0]){
+    dayA = this.state.data[0].dateAchieved.toString().split(' ')[0]
+   monthA=this.state.data[0].dateAchieved.toString().split(' ')[1]
+   dateA=this.state.data[0].dateAchieved.toString().split(' ')[2]
+   yearA=this.state.data[0].dateAchieved.toString().split(' ')[3]
+   dayB = this.state.data[this.state.data.length-1].dateAchieved.toString().split(' ')[0]
+   monthB=this.state.data[this.state.data.length-1].dateAchieved.toString().split(' ')[1]
+   dateB=this.state.data[this.state.data.length-1].dateAchieved.toString().split(' ')[2]
+   yearB=this.state.data[this.state.data.length-1].dateAchieved.toString().split(' ')[3]
+   }
+
+  }.bind(this))
+  .then(function(){
+    if(stats[0]){
+      this.setState({
+      data: this.state.data,
+      alert: ' '
+    })
+    }
+  }.bind(this))
+
+//get highest n-level
+axios.get('/getMaxN')
+      .then(function(response){
+        var maxN = 0;
+        for(var key in response.data.maxN) {
+          if(response.data.maxN[key] > maxN) {
+            maxN = response.data.maxN[key];
+          }
         }
-        console.log(item)
-        var obj = {};
-        //standard date format
-        obj.dateAchieved=new Date(item.dateAchieved)
-        //indexing array (temporary)
-        obj.index=index;
-        //max reaction time
-        obj.maxR=Math.max(...item.reactionTimes);
-        //min reaction time
-        obj.minR=Math.min(...item.reactionTimes)
-        //average reaction time
-        obj.avgR=(item.reactionTimes.reduce(function(a,b){
-          return a+b
-        })/(item.reactionTimes.length)).toFixed(2)
-        console.log("obj", obj)
-        var arr = this.state.data;
-        console.log(arr)
-        arr.push(obj);
-        console.log(arr);
-        this.setState({data:arr})
-        console.log(arr,this.state.data)
-
-        console.log(this.state.stats,'stats')
-        console.log(this.state.data,'data')
+        this.setState({
+          maxN: maxN,
+        })
       }.bind(this))
 
-    console.log(this.state.data)
-     //pull first and last data objects and parse for axes
-
-    }.bind(this))
-    .then(function(){
-      //this.setState({data:arr})
-      console.log("then")
-      if(this.state.stats.length>0){
-        this.setState({
-          data: this.state.data,
-          alert: ' ',
-          dayA: this.state.data[0].dateAchieved.toDateString(),
-          // monthA:this.state.data[0].dateAchieved.getMonth(),
-          // dateA:this.state.data[0].dateAchieved.getDate(),
-          // yearA:this.state.data[0].dateAchieved.getFullYear(),
-          dayB : this.state.data[this.state.data.length-1].dateAchieved.toDateString()
-          // monthB:this.state.data[this.state.data.length-1].dateAchieved.getMonth(),
-          // dateB:this.state.data[this.state.data.length-1].dateAchieved.getDate(),
-          // yearB:this.state.data[this.state.data.length-1].dateAchieved.getFullYear()
-
-        })
+//get highest score
+axios.get('/myHighScores').then(function(response) {
+      var highScore = 0;
+      for (var i=0; i<response.data.length; i++) {
+        if(response.data[i].score > highScore) {
+          highScore = response.data[i].score;
+        }
       }
+      this.setState({highScore: highScore});
+    }.bind(this));
 
-    }.bind(this))
-  },
+//get user full name
+axios.get('/homeUserInfo')
+      .then(function(response){
+        console.log(response.data)
+        this.setState({
+          fullName:response.data.name,
+        })
+      }.bind(this))
+},
   render: function() {
-    console.log(this.state)
-// =======
-//       alert: "Play some games to view your progress!"
-//                     }
-//     },
-// componentDidMount: function(){
-// axios.get('/getStats', {withCredentials: true})
-// .then(function(responseJson){
-//     stats=responseJson.data.stats;
-//     console.log(stats)
-//     this.state.data=[];
-//     console.log(stats,'stats')
-//     if(stats[0]){
-//       _.map(stats, function(item, index){
-//       if(item.score===0 || !item.reactionTimes[0]){
-//         return
-//        }
-//       this.state.data.push(item)
-//       //standard date format
-//       this.state.data[this.state.data.length-1].dateAchieved=new Date(item.dateAchieved)
-//       //indexing array (temporary)
-//       this.state.data[this.state.data.length-1].index=index;
-//       //max reaction time
-//       this.state.data[this.state.data.length-1].maxR=Math.max(...item.reactionTimes);
-//       //min reaction time
-//       this.state.data[this.state.data.length-1].minR=Math.min(...item.reactionTimes)
-//       //average reaction time
-//       this.state.data[this.state.data.length-1].avgR=(item.reactionTimes.reduce(function(a,b){
-//         return a+b
-//       })/(item.reactionTimes.length)).toFixed(2)
-//     }.bind(this))
-//     }
-//
-//
-//    //pull first and last data objects and parse for axes
-//    if(stats[0]){
-//     dayA = this.state.data[0].dateAchieved.toString().split(' ')[0]
-//    monthA=this.state.data[0].dateAchieved.toString().split(' ')[1]
-//    dateA=this.state.data[0].dateAchieved.toString().split(' ')[2]
-//    yearA=this.state.data[0].dateAchieved.toString().split(' ')[3]
-//    dayB = this.state.data[this.state.data.length-1].dateAchieved.toString().split(' ')[0]
-//    monthB=this.state.data[this.state.data.length-1].dateAchieved.toString().split(' ')[1]
-//    dateB=this.state.data[this.state.data.length-1].dateAchieved.toString().split(' ')[2]
-//    yearB=this.state.data[this.state.data.length-1].dateAchieved.toString().split(' ')[3]
-//    }
-//
-//   }.bind(this))
-//   .then(function(){
-//     if(stats[0]){
-//       this.setState({
-//       data: this.state.data,
-//       alert: ' '
-//     })
-//     }
-//   }.bind(this))
-//
-// //get highest n-level
-// axios.get('/getMaxN')
-//       .then(function(response){
-//         var maxN = 0;
-//         for(var key in response.data.maxN) {
-//           if(response.data.maxN[key] > maxN) {
-//             maxN = response.data.maxN[key];
-//           }
-//         }
-//         this.setState({
-//           maxN: maxN,
-//         })
-//       }.bind(this))
-//
-// //get highest score
-// axios.get('/myHighScores').then(function(response) {
-//       var highScore = 0;
-//       for (var i=0; i<response.data.length; i++) {
-//         if(response.data[i].score > highScore) {
-//           highScore = response.data[i].score;
-//         }
-//       }
-//       this.setState({highScore: highScore});
-//     }.bind(this));
-//
-// //get user full name
-// axios.get('/homeUserInfo')
-//       .then(function(response){
-//         console.log(response.data)
-//         this.setState({
-//           fullName:response.data.name,
-//         })
-//       }.bind(this))
-// },
-//   render: function() {
-//     // console.log(stats,'stats')
+    // console.log(stats,'stats')
 // >>>>>>> 8cae7f49a4ccee5987bd862e7110c69cb574cfaf
-    var x = function(d) {
-      console.log(d)
-      return d.dateAchieved.getTime();
-    }
-    var title = "Stack Area Chart"
-    if(!this.state.stats || this.state.stats.length<1){
-      console.log("option 1")
-      return(
-        <div className="statsAlertContainer">
-          <div className='statsAlert'>{this.state.alert}</div>
-          <Link to='/home'><span className='fa fa-home fa-5x relaxed' aria-hidden='true'/></Link>
-        </div>
-      )
-    }
-    else{
-<<<<<<< HEAD
-      console.log("option 2")
-      console.log(this.state.dayA)
-      return (<div>
-       <LineChart
-        className='StatsScoreGraph'
-        data={this.state.data}
-        margins={margins}
-        chartSeries={this.state.chartSeries1}
-        width={1100}
-        height={500}
-        title={'Score History'}
-        x={x}
-        xScale={this.state.xScale}
-        yAxisClassName= {'lineY'}
-        xAxisClassName= {'lineX'}
-        yLabel={'Scores'}
-        //x axis includes first and last day of play (for time range)
-        //xLabel={'Gameplay from '+this.state.dayA+', '+ this.state.monthA + ' '+ this.state.dateA+ ', ' +this.state.yearA + ' to ' +this.state.dayB+', '+ this.state.monthB + ' '+ this.state.dateB+ ', ' +this.state.yearB}
-        xLabel={'Gameplay from '+this.state.dayA+' to '+this.state.dayB}
-      />
-      <AreaChart
-        width={1100}
-        height={500}
-        title='TITLE'
-        data= {this.state.data}
-        className='StatsReactionGraph'
-        margins={margins}
-        chartSeries= {this.state.chartSeries2}
-        yAxisClassName= {'areaY'}
-        xAxisClassName= {'areaX'}
-        x= {x}
-        xScale={this.state.xScale}
-        yLabel={'Reaction Times (ms)'}
-        //x axis includes first and last day of play (for time range)
-        //xLabel={'Gameplay from '+this.state.dayA+', '+ this.state.monthA + ' '+ this.state.dateA+ ', ' +this.state.yearA + ' to ' +this.state.dayB+', '+ this.state.monthB + ' '+ this.state.dateB+ ', ' +this.state.yearB}
-        xLabel={'Gameplay from '+this.state.dayA+' to '+this.state.dayB}
-      />
-     </div>)
+    // var x = function(d) {
+    //   console.log(d)
+    //   return d.dateAchieved.getTime();
+    // }
+    // var title = "Stack Area Chart"
+    // if(!this.state.stats || this.state.stats.length<1){
+    //   console.log("option 1")
+    //   return(
+    //     <div className="statsAlertContainer">
+    //       <div className='statsAlert'>{this.state.alert}</div>
+    //       <Link to='/home'><span className='fa fa-home fa-5x relaxed' aria-hidden='true'/></Link>
+    //     </div>
+    //   )
+    // }
+    // else{
+    //
+    //   console.log("option 2")
+    //   console.log(this.state.dayA)
+    //   return (<div>
+    //    <LineChart
+    //     className='StatsScoreGraph'
+    //     data={this.state.data}
+    //     margins={margins}
+    //     chartSeries={this.state.chartSeries1}
+    //     width={1100}
+    //     height={500}
+    //     title={'Score History'}
+    //     x={x}
+    //     xScale={this.state.xScale}
+    //     yAxisClassName= {'lineY'}
+    //     xAxisClassName= {'lineX'}
+    //     yLabel={'Scores'}
+    //     //x axis includes first and last day of play (for time range)
+    //     //xLabel={'Gameplay from '+this.state.dayA+', '+ this.state.monthA + ' '+ this.state.dateA+ ', ' +this.state.yearA + ' to ' +this.state.dayB+', '+ this.state.monthB + ' '+ this.state.dateB+ ', ' +this.state.yearB}
+    //     xLabel={'Gameplay from '+this.state.dayA+' to '+this.state.dayB}
+    //   />
+    //   <AreaChart
+    //     width={1100}
+    //     height={500}
+    //     title='TITLE'
+    //     data= {this.state.data}
+    //     className='StatsReactionGraph'
+    //     margins={margins}
+    //     chartSeries= {this.state.chartSeries2}
+    //     yAxisClassName= {'areaY'}
+    //     xAxisClassName= {'areaX'}
+    //     x= {x}
+    //     xScale={this.state.xScale}
+    //     yLabel={'Reaction Times (ms)'}
+    //     //x axis includes first and last day of play (for time range)
+    //     //xLabel={'Gameplay from '+this.state.dayA+', '+ this.state.monthA + ' '+ this.state.dateA+ ', ' +this.state.yearA + ' to ' +this.state.dayB+', '+ this.state.monthB + ' '+ this.state.dateB+ ', ' +this.state.yearB}
+    //     xLabel={'Gameplay from '+this.state.dayA+' to '+this.state.dayB}
+    //   />
+    //  </div>)
 
-=======
+//=======
       return (
         <div className="statsPageContainer">
           <div className="statsHeader">
@@ -322,10 +321,10 @@ var MyComponent = React.createClass({
             </Link>
           </div>
         </div>)
->>>>>>> 8cae7f49a4ccee5987bd862e7110c69cb574cfaf
+//>>>>>>> 8cae7f49a4ccee5987bd862e7110c69cb574cfaf
     }
 
-  }
+  
 });
 
 module.exports = MyComponent
