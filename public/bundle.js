@@ -2489,7 +2489,8 @@ var SilentMode = React.createClass({
         gameId: obj.gameId,
         modeMultiplier: obj.modeMultiplier,
         penalty: obj.penalty,
-        positivePoints: obj.positivePoints
+        positivePoints: obj.positivePoints,
+        userId: obj.userId
       });
     }.bind(this));
   },
@@ -2615,7 +2616,7 @@ var SilentMode = React.createClass({
           }
         }
         //incorrect match
-        if (this.state.posPressed) {
+        if (this.state.positionPressed) {
           matchHit -= 1;
           this.setState({
             alert: 'Not a match!',
