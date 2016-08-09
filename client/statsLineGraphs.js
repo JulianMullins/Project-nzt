@@ -1,35 +1,23 @@
 var React = require('react');
 var ReactDOM = require('react-dom');
+
 //var d3=require('d3'); //some documentation hass this in examples, so keep to be safe
 console.timeStamp("start load lineChart")
 var LineChart = require('react-d3-basic').LineChart;
 var MediaQuery = require('react-responsive');
 
-console.timeStamp("start load AreaChart")
+var LineChart = require('react-d3-basic').LineChart;
 
 var AreaChart = require('react-d3-basic').AreaChart;
 
-console.timeStamp("start load underscore")
-var _=require('underscore');
+// import {AreaChart , LineChart} from 'react-easy-chart'
+
 var axios=require('axios');
 import { Link } from 'react-router'
 
 
 //global variables for changing state below
 var stats=[];
-var dates=[];
-
-var xScale='time'
-var yLabel='age'
-//these are just variables to parse and add the first and last game dates to the x axes
-var dayA =' '
-var monthA =' '
-var dateA =' '
-var yearA =' '
-var dayB =' '
-var monthB =' '
-var dateB =' '
-var yearB =' '
 
 //setting margins as global
 var margins = {left: 100, right: 100, top: 10, bottom: 60}
@@ -37,6 +25,16 @@ var margins = {left: 100, right: 100, top: 10, bottom: 60}
 var MyComponent = React.createClass({
   getInitialState: function(){
     return{
+      xScale:'time',
+      yLabel:'age?',
+      dayA:'',
+      monthA:'',
+      dateA:'',
+      yearA:'',
+      dayB:'',
+      monthB:'',
+      dateB:'',
+      yearB:'',
       data: [{"score": 0, "index": 0, avgR:0, maxR:0, minR:0}],
       chartSeries1: [{field: 'score', name: 'Score', color: '#01B6A7',
             style: {"strokeWidth": 2, "fillOpacity": .2}}],
@@ -70,11 +68,11 @@ axios.get('/getStats', {withCredentials: true})
       //average reaction time
       this.state.data[this.state.data.length-1].avgR=(item.reactionTimes.reduce(function(a,b){
         return a+b
-      })/(item.reactionTimes.length)).toFixed(2) 
+      })/(item.reactionTimes.length)).toFixed(2)
     }.bind(this))
     }
-   
-  
+
+
    //pull first and last data objects and parse for axes
    if(stats[0]){
     dayA = this.state.data[0].dateAchieved.toString().split(' ')[0]
@@ -86,7 +84,7 @@ axios.get('/getStats', {withCredentials: true})
    dateB=this.state.data[this.state.data.length-1].dateAchieved.toString().split(' ')[2]
    yearB=this.state.data[this.state.data.length-1].dateAchieved.toString().split(' ')[3]
    }
-   
+
   }.bind(this))
   .then(function(){
     if(stats[0]){
@@ -94,7 +92,7 @@ axios.get('/getStats', {withCredentials: true})
       data: this.state.data,
       alert: ' '
     })
-    }  
+    }
   }.bind(this))
 
 //get highest n-level
@@ -132,12 +130,14 @@ axios.get('/homeUserInfo')
       }.bind(this))
 },
   render: function() {
-    // console.log(stats,'stats')
+    console.log(stats,'stats')
     var x = function(d) {
-      return d.dateAchieved;
+      console.log(d)
+      return d.dateAchieved.getTime();
     }
     var title = "Stack Area Chart"
-    if(!stats[0]){
+    if(!this.state.stats || this.state.stats.length<1){
+      console.log("option 1")
       return(
         <div className="statsAlertContainer">
           <div className='statsAlert'>{this.state.alert}</div>
@@ -256,8 +256,6 @@ axios.get('/homeUserInfo')
           </div>
         </div>)
     }
-   
-  }
 });
 
 module.exports = MyComponent

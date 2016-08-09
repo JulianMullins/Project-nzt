@@ -371,11 +371,14 @@ passport.use(new FacebookStrategy({
 
         }
         else{
+          user.currentGame = [];
           if(!user.facebookId){
             console.log("no facebook id")
             user.facebookId = profile.id
             //console.log("facebook id added")
-            user.save(function(err){
+            
+          }
+          user.save(function(err){
               if(err){
                 done(err)
               }
@@ -384,16 +387,15 @@ passport.use(new FacebookStrategy({
                 req.session.fullUser = true;
                 return done(null, user);
               }
-            })
-          }
+          })
           // auth has has succeeded
-          else{
-            //console.log("success")
-            console.log("returning done user")
-            req.session.user = user;
-            req.session.fullUser = true;
-            return done(null, user);
-          }
+          // else{
+          //   //console.log("success")
+          //   console.log("returning done user")
+          //   req.session.user = user;
+          //   req.session.fullUser = true;
+          //   return done(null, user);
+          // }
         }
       }
       

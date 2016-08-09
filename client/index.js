@@ -24,7 +24,7 @@ var Science = require('./science');
 var Tutorial = require('./tutorial');
 
 console.timeStamp("stats start");
-var Stats = require('./statsLineGraphs');
+//var Stats = require('./statsLineGraphs');
 console.timeStamp("games start");
 
 var RelaxedGame = require('./Modes/relaxedMode');
@@ -83,7 +83,6 @@ ReactDOM.render((
 
       <Route path="contact" component={Contact}/>
       <Route path="science" component={Science}/>
-      <Route path="stats" component={Stats}/>
       <Route path="tutorial" component={Tutorial}/>
 
       <Route path="levels/classic(/:error)" component={LevelOverlay}/>

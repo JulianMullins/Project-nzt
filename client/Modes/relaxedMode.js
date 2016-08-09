@@ -10,7 +10,7 @@ var startGameFunction = require('./serverFunctions').startGameFunction;
 
 //COLLECTION OF GLOBAL VARIABLES TO MAKE EVERYONES LIFE EASIER
 //create global variable for reaction counter
-var reactionStart;
+//var reactionStart;
 //global variable for keeping reaction times
 //note: all reaction times for correct hits stored as array for stats (max,min,avg)
 // var reactionTimes = [];
@@ -98,26 +98,27 @@ var RelaxedMode = React.createClass({
     this.position();
     this.enableKeys();
   },
-  goodJob() {
+  match() {
     this.setState({
-      currentScore: (((2000 - this.state.reactionTimes[this.state.reactionTimes.length - 1]) / 1000) * this.state.positivePoints).toFixed(2)
+      currentScore: (((2000 - (this.state.reactionStop-this.state.reactionStart)) / 1000) * this.state.positivePoints).toFixed(2)
     });
     this.setState({
+      reactionTimes: this.state.reactionTimes.concat([this.state.reactionStop-this.state.reactionStart]),
       fullScore: this.state.fullScore + parseFloat(this.state.currentScore),
       matchCount: this.state.matchCount + 1,
       matchHit: this.state.matchHit + 1,
       score: parseInt(this.state.fullScore),
-      alert: "Good job",
+      //alert: "Good job",
       posStyle: noStyle,
-      scoreAlert: 'scoreAlertPositive',
+      //scoreAlert: 'scoreAlertPositive',
       scoreUpdate: 'scoreUpdate scoreUpdatePos',
       currentScore: "+" + parseInt(this.state.currentScore)
     });
-    console.log("currentScore: " + this.state.currentScore, "fullScore: " + this.state.fullScore)
-    setTimeout(function() {
-      console.log('been 800ms')
-      this.setState({alert: ' ', currentScore: null});
-    }.bind(this), 800);
+    // console.log("currentScore: " + this.state.currentScore, "fullScore: " + this.state.fullScore)
+    // setTimeout(function() {
+    //   console.log('been 800ms')
+    //   this.setState({alert: ' ', currentScore: null});
+    // }.bind(this), 800);
   },
   incorrect(alert) {
     if ((this.state.fullScore - this.state.penalty) >= 0) {
@@ -130,19 +131,20 @@ var RelaxedMode = React.createClass({
       })
     }
     this.setState({
-      matchHit: this.state.matchHit - 1,
+      //matchHit: this.state.matchHit - 1,
       matchCount: this.state.matchCount + 1,
       fullScore: this.state.fullScore + this.state.currentScore,
       posStyle: noStyle,
-      alert: alert,
-      scoreAlert: 'scoreAlertNegative',
+      //alert: alert,
+      //scoreAlert: 'scoreAlertNegative',
       scoreUpdate: 'scoreUpdate scoreUpdateNeg',
-      currentScore: parseInt(this.state.currentScore)
+      currentScore: parseInt(this.state.currentScore),
+
     });
-    setTimeout(function() {
-      console.log('been 800ms')
-      this.setState({alert: ' ', currentScore: null, scoreAlert: ''});
-    }.bind(this), 800);
+    // setTimeout(function() {
+    //   console.log('been 800ms')
+    //   this.setState({alert: ' ', currentScore: null, scoreAlert: ''});
+    // }.bind(this), 800);
   },
   position: function() {
     var posQueue = [];
@@ -152,23 +154,36 @@ var RelaxedMode = React.createClass({
     iterations = setInterval(function() {
       timeKeeper--;
 
-      // if (this.state.keepScore && !this.state.posMatch) {
-      //   //this.goodJob();
-      // }
-      // else if (!this.state.keepScore && this.state.alreadyPressed) {
-      //   //this.incorrect('Not a match');
-      // }
-      if (this.state.keepScore && this.state.posMatch) {
-        this.incorrect('Missed a match');
+
+      if(!this.state.alreadyPressed && this.state.posMatch){
+        this.incorrect();
+        this.setState({
+          positionButton:'youFailed'
+        })
       }
 
-      this.setState({pressed: false, keepScore: false, posMatch: false, alreadyPressed: false, posStyle: noStyle});
+      // if (this.state.keepScore && this.state.posMatch) {
+      //   this.incorrect('Missed a match');
+      // }
+
+      this.setState({
+        pressed: false,
+        keepScore: false,
+        posMatch: false,
+        alreadyPressed: false,
+        posStyle: noStyle});
+
       setTimeout(function() {
+        this.setState({
+          scoreUpdate:'',
+          positionButton:'',
+          currentScore:null
+        })
         // console.log('been 800ms')
         // this.setState({alert: ' ',currentScore:null});
       }.bind(this), 800);
       //start reaction time counter with flash
-      reactionStart = Date.now()
+      this.setState({reactionStart : Date.now()})
 
       if (timeTilPosMatch > 0) {
         // pick a non-matching next number while interval is not 0
@@ -219,7 +234,8 @@ var RelaxedMode = React.createClass({
       // Game end
 
       if (timeKeeper === 0) {
-        // if (timeKeeper === 36) {
+
+
         //give gameScore variable the final score
         clearInterval(iterations);
         console.log(this.state.fullScore)
@@ -247,13 +263,16 @@ var RelaxedMode = React.createClass({
     }
     if (this.state.posMatch) {
       //if correct button pressed, use current time to find reaction time
-      var reactionStop = Date.now()
       this.setState({
-        reactionTimes: this.state.reactionTimes.concat([reactionStop - reactionStart])
-      });
-      this.goodJob();
+        reactionStop:Date.now(),
+        positionButton:'goodJob'
+      })
+      this.match();
     } else if (!this.state.posMatch) {
-      this.incorrect('Not a match');
+      this.setState({
+        positionButton:'youFailed'
+      })
+      this.incorrect();
     }
     this.setState({alreadyPressed: true, posMatch: false, posStyle: pushStyle})
   },
@@ -261,37 +280,6 @@ var RelaxedMode = React.createClass({
     var overlay = this.state.overlay
       ? (<StartOverlay nLevel={this.state.N} mode={this.state.mode} click={this.startGame}/>)
       : '';
-
-    // var scoreAlert;
-    // var scoreUpdate;
-    // if (this.state.alert === "Good job") {
-    //   scoreAlert = (
-    //     <div className="scoreAlertPositive">
-    //       {this.state.alert}
-    //     </div>
-    //   )
-    //   scoreUpdate = (
-    //     <h2 className="scoreUpdate scoreUpdatePos">+{parseInt(this.state.currentScore)}</h2>
-    //   )
-    // } else if (this.state.alert === "Not a match" || this.state.alert === "Missed a match") {
-    //   scoreAlert = (
-    //     <div className="scoreAlertNegative">
-    //       {this.state.alert}
-    //     </div>
-    //   )
-    //   if (this.state.currentScore !== 0) {
-    //     scoreUpdate = (
-    //       <h2 className="scoreUpdate scoreUpdateNeg">-{this.state.currentScore}</h2>
-    //     )
-    //   }
-    // } else {
-    //   scoreAlert = (
-    //     <div></div>
-    //   )
-    //   scoreUpdate = (
-    //     <h2></h2>
-    //   )
-    // }
 
     var gameTimer = this.state.overlay
       ? ""
@@ -330,14 +318,11 @@ var RelaxedMode = React.createClass({
             <div className="gameSquare" style={this.state.style[8]}></div>
           </div>
           <div className="gameFullFooter">
-            <div className="scoreAlert">
-              <div className={this.state.scoreAlert}>
-                {this.state.alert}
-              </div>
 
-            </div>
             <div className="gameButtonsContainer">
-              <a onClick={this.posMatch} style={this.state.posStyle} className='relaxedButton'>POSITION</a>
+              <button id="positionButton" className={this.state.positionButton}>
+                <a onClick={this.positionMatch} style={this.state.posStyle} className="relaxedButton">POSITION</a>
+              </button>
             </div>
           </div>
         </div>
