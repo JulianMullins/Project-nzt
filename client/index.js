@@ -80,6 +80,7 @@ ReactDOM.render((
 
       <Route path="gameOver" component={GameOver}/>
       <Route path="leaderboard" component={Leaderboard}/>
+      <Route path="stats" component={Stats} />
 
       <Route path="contact" component={Contact}/>
       <Route path="science" component={Science}/>
