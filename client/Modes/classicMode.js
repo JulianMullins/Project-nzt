@@ -352,7 +352,9 @@ var ClassicMode = React.createClass({
     }.bind(this), 2000)
   },
   positionMatch: function() {
-
+    if (this.state.positionPressed) {
+      return;
+    }
     if(this.state.positionMatch){
       this.setState({
         reactionEnd: Date.now(),
@@ -370,7 +372,9 @@ var ClassicMode = React.createClass({
     this.setState({positionPressed: true, posStyle: pushStyle});
   },
   soundMatch: function() {
-
+    if (this.state.soundPressed) {
+      return;
+    }
     if(this.state.soundMatch){
       this.setState({
         reactionEnd: Date.now(),
