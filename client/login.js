@@ -12,15 +12,13 @@ var LoginOverlay = React.createClass({
       error = decodeURIComponent(this.props.params.error)
     }
     return {
-      username: '', 
-      password: '', 
-      gameEnded: false, 
+      username: '',
+      password: '',
+      gameEnded: false,
       games: null,
       error: this.props.params.error,
       fbURL: this.props.location.pathname+'/facebook'
     }
-
-
   },
   componentDidMount() {},
   update(e) {
@@ -29,11 +27,8 @@ var LoginOverlay = React.createClass({
     })
   },
   login: function(e) {
-    //e.preventDefault();
-
     console.log("logging in")
     console.log(this.props)
-
     //ajax post
     axios.post('/login', {
       username: this.state.username,
@@ -41,7 +36,7 @@ var LoginOverlay = React.createClass({
     }).then(function(response) {
       console.log("response: "+response)
       if (response.data.success) {
-        
+
         if(this.props.location.pathname.includes('gameOver/login')){
           console.log("gameOver login");
           this.props.history.push('/gameOver');
@@ -55,7 +50,6 @@ var LoginOverlay = React.createClass({
       }
     }.bind(this))
   },
-
   render: function() {
     return (
       <div className="screen">
