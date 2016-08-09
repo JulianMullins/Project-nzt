@@ -321,7 +321,7 @@ var RelaxedMode = React.createClass({
 
             <div className="gameButtonsContainer">
               <button id="positionButton" className={this.state.positionButton}>
-                <a onClick={this.positionMatch} style={this.state.posStyle} className="classicButton">POSITION</a>
+                <a onClick={this.positionMatch} style={this.state.posStyle} className="relaxedButton">POSITION</a>
               </button>
             </div>
           </div>

@@ -45,8 +45,6 @@ var ClassicMode = React.createClass({
       positionMatch: false,
       soundMatch: false,
       score: 0,
-      alert: " ",
-      alertType: ' ',
       overlay: true,
       N: parseInt(this.props.params.n),
       positionPressed: false,
@@ -242,7 +240,7 @@ var ClassicMode = React.createClass({
         soundPressed: false,
         posStyle: noStyle,
         soundStyle: noStyle,
-        score: this.state.score
+        //score: this.state.score
       })
 
       setTimeout(function() {
