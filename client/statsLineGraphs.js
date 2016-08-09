@@ -2,14 +2,12 @@ var React = require('react');
 var ReactDOM = require('react-dom');
 
 //var d3=require('d3'); //some documentation hass this in examples, so keep to be safe
-console.timeStamp("start load lineChart")
+console.timeStamp("start load lineChart");
 var LineChart = require('react-d3-basic').LineChart;
-var MediaQuery = require('react-responsive');
-
-var LineChart = require('react-d3-basic').LineChart;
-
 var AreaChart = require('react-d3-basic').AreaChart;
 
+var MediaQuery = require('react-responsive');
+var _ = require('underscore');
 // import {AreaChart , LineChart} from 'react-easy-chart'
 
 var axios=require('axios');
@@ -17,14 +15,32 @@ import { Link } from 'react-router'
 
 
 //global variables for changing state below
-var stats=[];
+var stats = [];
+var dates = [];
+
+var xScale = 'time'
+var yLabel = 'age'
+//these are just variables to parse and add the first and last game dates to the x axes
+var dayA = ' '
+var monthA = ' '
+var dateA = ' '
+var yearA = ' '
+var dayB = ' '
+var monthB = ' '
+var dateB = ' '
+var yearB = ' '
 
 //setting margins as global
-var margins = {left: 100, right: 100, top: 10, bottom: 60}
+var margins = {
+  left: 100,
+  right: 100,
+  top: 10,
+  bottom: 60
+}
 
 var MyComponent = React.createClass({
   getInitialState: function(){
-    return{
+    return {
       xScale:'time',
       yLabel:'age?',
       dayA:'',
@@ -42,8 +58,8 @@ var MyComponent = React.createClass({
                       {field: 'avgR', name: 'Average Reaction Time'},
                       {field: 'minR', name: 'Min Reaction Time'}],
       alert: "Play some games to view your progress!"
-                    }
-    },
+    }
+  },
 componentDidMount: function(){
 axios.get('/getStats', {withCredentials: true})
 .then(function(responseJson){
@@ -75,14 +91,14 @@ axios.get('/getStats', {withCredentials: true})
 
    //pull first and last data objects and parse for axes
    if(stats[0]){
-    dayA = this.state.data[0].dateAchieved.toString().split(' ')[0]
-   monthA=this.state.data[0].dateAchieved.toString().split(' ')[1]
-   dateA=this.state.data[0].dateAchieved.toString().split(' ')[2]
-   yearA=this.state.data[0].dateAchieved.toString().split(' ')[3]
-   dayB = this.state.data[this.state.data.length-1].dateAchieved.toString().split(' ')[0]
-   monthB=this.state.data[this.state.data.length-1].dateAchieved.toString().split(' ')[1]
-   dateB=this.state.data[this.state.data.length-1].dateAchieved.toString().split(' ')[2]
-   yearB=this.state.data[this.state.data.length-1].dateAchieved.toString().split(' ')[3]
+    dayA = this.state.data[0].dateAchieved.toString().split(' ')[0];
+    monthA=this.state.data[0].dateAchieved.toString().split(' ')[1];
+    dateA=this.state.data[0].dateAchieved.toString().split(' ')[2];
+    yearA=this.state.data[0].dateAchieved.toString().split(' ')[3];
+    dayB = this.state.data[this.state.data.length-1].dateAchieved.toString().split(' ')[0];
+    monthB=this.state.data[this.state.data.length-1].dateAchieved.toString().split(' ')[1];
+    dateB=this.state.data[this.state.data.length-1].dateAchieved.toString().split(' ')[2];
+    yearB=this.state.data[this.state.data.length-1].dateAchieved.toString().split(' ')[3];
    }
 
   }.bind(this))
@@ -130,22 +146,19 @@ axios.get('/homeUserInfo')
       }.bind(this))
 },
   render: function() {
-    console.log(stats,'stats')
+    // console.log(stats,'stats')
     var x = function(d) {
-      console.log(d)
-      return d.dateAchieved.getTime();
+      return d.dateAchieved;
     }
     var title = "Stack Area Chart"
-    if(!this.state.stats || this.state.stats.length<1){
-      console.log("option 1")
-      return(
+    if (!stats[0]) {
+      return (
         <div className="statsAlertContainer">
           <div className='statsAlert'>{this.state.alert}</div>
           <Link to='/home'><span className='fa fa-home fa-5x relaxed' aria-hidden='true'/></Link>
         </div>
       )
-    }
-    else{
+    } else {
       return (
         <div className="statsPageContainer">
           <div className="statsHeader">
@@ -252,10 +265,11 @@ axios.get('/homeUserInfo')
                 <h2>leaderboard</h2>
               </span>
             </Link>
-
           </div>
-        </div>)
+        </div>
+      );
     }
+  }
 });
 
 module.exports = MyComponent
