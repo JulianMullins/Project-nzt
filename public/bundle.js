@@ -4641,7 +4641,7 @@ var MyComponent = React.createClass({
   getInitialState: function getInitialState() {
     return {
       data: [{ "score": 0, "index": 0, avgR: 0, maxR: 0, minR: 0 }],
-      chartSeries1: [{ field: 'score', name: 'Score', color: '#ff7f0e',
+      chartSeries1: [{ field: 'score', name: 'Score', color: '#F13542',
         style: { "strokeWidth": 2, "fillOpacity": .2 } }],
       chartSeries2: [{ field: 'maxR', name: 'Max Reaction Time' }, { field: 'avgR', name: 'Average Reaction Time' }, { field: 'minR', name: 'Min Reaction Time' }],
       alert: "Play some games to view your progress!"
@@ -4693,9 +4693,41 @@ var MyComponent = React.createClass({
         });
       }
     }.bind(this));
+
+    //get highest n-level
+    axios.get('/getMaxN').then(function (response) {
+      var maxN = 0;
+      for (var key in response.data.maxN) {
+        if (response.data.maxN[key] > maxN) {
+          maxN = response.data.maxN[key];
+        }
+      }
+      this.setState({
+        maxN: maxN
+      });
+    }.bind(this));
+
+    //get highest score
+    axios.get('/myHighScores').then(function (response) {
+      var highScore = 0;
+      for (var i = 0; i < response.data.length; i++) {
+        if (response.data[i].score > highScore) {
+          highScore = response.data[i].score;
+        }
+      }
+      this.setState({ highScore: highScore });
+    }.bind(this));
+
+    //get user full name
+    axios.get('/homeUserInfo').then(function (response) {
+      console.log(response.data);
+      this.setState({
+        fullName: response.data.name
+      });
+    }.bind(this));
   },
   render: function render() {
-    console.log(stats, 'stats');
+    // console.log(stats,'stats')
     var x = function x(d) {
       return d.dateAchieved;
     };
@@ -4718,45 +4750,133 @@ var MyComponent = React.createClass({
     } else {
       return React.createElement(
         'div',
-        null,
-        React.createElement(LineChart, {
-          className: 'StatsScoreGraph',
-          data: this.state.data,
-          margins: margins,
-          chartSeries: this.state.chartSeries1,
-          width: 1100,
-          height: 500,
-          title: 'Score History',
-          x: x,
-          xScale: xScale,
-          yAxisClassName: 'lineY',
-          xAxisClassName: 'lineX',
-          yLabel: 'Scores'
-          //x axis includes first and last day of play (for time range)
-          , xLabel: 'Gameplay from ' + dayA + ', ' + monthA + ' ' + dateA + ', ' + yearA + ' to ' + dayB + ', ' + monthB + ' ' + dateB + ', ' + yearB
-        }),
-        React.createElement(AreaChart, {
-          width: 1100,
-          height: 500,
-          title: 'TITLE',
-          data: this.state.data,
-          className: 'StatsReactionGraph',
-          margins: margins,
-          chartSeries: this.state.chartSeries2,
-          yAxisClassName: 'areaY',
-          xAxisClassName: 'areaX',
-          x: x,
-          xScale: xScale,
-          yLabel: 'Reaction Times (ms)'
-          //x axis includes first and last day of play (for time range)
-          , xLabel: 'Gameplay from ' + dayA + ', ' + monthA + ' ' + dateA + ', ' + yearA + ' to ' + dayB + ', ' + monthB + ' ' + dateB + ', ' + yearB
-        })
+        { className: 'statsPageContainer' },
+        React.createElement(
+          'div',
+          { className: 'statsHeader' },
+          React.createElement(
+            'h1',
+            null,
+            'User Statistics'
+          ),
+          React.createElement(
+            'h2',
+            null,
+            '( ',
+            this.state.fullName,
+            ' )'
+          )
+        ),
+        React.createElement(
+          'div',
+          { className: 'chartsContainer' },
+          React.createElement(LineChart, {
+            className: 'StatsScoreGraph',
+            data: this.state.data,
+            margins: margins,
+            chartSeries: this.state.chartSeries1,
+            width: 1100,
+            height: 500,
+            title: 'Score History',
+            x: x,
+            xScale: xScale,
+            yAxisClassName: 'lineY',
+            xAxisClassName: 'lineX',
+            yLabel: 'Scores'
+            //x axis includes first and last day of play (for time range)
+            , xLabel: 'Gameplay from ' + dayA + ', ' + monthA + ' ' + dateA + ', ' + yearA + ' to ' + dayB + ', ' + monthB + ' ' + dateB + ', ' + yearB })
+        ),
+        ' ',
+        React.createElement(
+          'div',
+          { className: 'statsDetailsContainer' },
+          React.createElement(
+            'table',
+            null,
+            React.createElement(
+              'tbody',
+              null,
+              React.createElement(
+                'tr',
+                null,
+                React.createElement(
+                  'td',
+                  null,
+                  'Games Played:'
+                ),
+                React.createElement(
+                  'td',
+                  { className: 'statsTableData' },
+                  this.state.data.length
+                )
+              ),
+              React.createElement(
+                'tr',
+                null,
+                React.createElement(
+                  'td',
+                  null,
+                  'Highest N-Level:'
+                ),
+                React.createElement(
+                  'td',
+                  { className: 'statsTableData' },
+                  this.state.maxN
+                )
+              ),
+              React.createElement(
+                'tr',
+                null,
+                React.createElement(
+                  'td',
+                  null,
+                  'Highest Score:'
+                ),
+                React.createElement(
+                  'td',
+                  { className: 'statsTableData' },
+                  this.state.highScore
+                )
+              )
+            )
+          ),
+          React.createElement(
+            _reactRouter.Link,
+            { className: 'leaderLink', to: '/leaderboard' },
+            React.createElement(
+              'span',
+              { className: 'lbChart' },
+              React.createElement('span', { className: 'fa fa-signal fa-5x' }),
+              React.createElement(
+                'h2',
+                null,
+                'leaderboard'
+              )
+            )
+          )
+        )
       );
     }
   }
 });
 
 module.exports = MyComponent;
+
+// <AreaChart
+// width={1100}
+// height={500}
+// title='TITLE'
+// data= {this.state.data}
+// className='StatsReactionGraph'
+// margins={margins}
+// chartSeries= {this.state.chartSeries2}
+// yAxisClassName= {'areaY'}
+// xAxisClassName= {'areaX'}
+// x= {x}
+// xScale={xScale}
+// yLabel={'Reaction Times (ms)'}
+// //x axis includes first and last day of play (for time range)
+// xLabel={'Gameplay from '+dayA+', '+ monthA + ' '+ dateA+ ', ' +yearA + ' to ' +dayB+', '+ monthB + ' '+ dateB+ ', ' +yearB} />
 
 },{"axios":23,"react":362,"react-d3-basic":59,"react-dom":124,"react-router":157,"underscore":379}],22:[function(require,module,exports){
 'use strict';

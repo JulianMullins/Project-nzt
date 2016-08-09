@@ -1,3 +1,23 @@
+.statsPageContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  width: 100vw;
+}
+
+.statsHeader {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.statsPageContainer h1 {
+  font-size: 48px;
+}
+
 .react-d3-core__legend {
   background-color: rgba(255, 255, 255, 0) !important;
   text-align: center !important;
@@ -29,4 +49,32 @@ text {
   font-size: 50px;
   text-align: center;
 }
+
+.statsDetailsContainer {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-end;
+  justify-content: space-around;
+}
+
+.statsDetailsContainer table {
+  width: 50%;
+  max-width: 960px;
+  font-size: 24px;
+  margin-left: 15px;
+}
+
+.statsTableData {
+  font-weight: bold;
+}
+
+.statsDetailsContainer .leaderLink {
+  text-decoration: none;
+  color: #01B6A7;
+}
+
+.statsDetailsContainer h2 {
+  font-size: 24px;
+}
+
 @media all and (max-width: 768px) {}
