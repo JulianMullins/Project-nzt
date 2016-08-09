@@ -150,19 +150,10 @@ var SilentMode = React.createClass({
             this.state.score=0;
           }
         }
-        this.setState({
-          positionMatch: false,
-          colorMatch: false,
-          positionPressed: false,
-          colorPressed: false,
-          posStyle: noStyle,
-          colorStyle: noStyle,
-          score: this.state.score
-        })
       }
 
       ///color match cases
-      if(this.state.colorMatch){
+      else if(this.state.colorMatch){
         //color match
         if(this.state.colorPressed){
           matchHit+=1
@@ -241,19 +232,10 @@ var SilentMode = React.createClass({
             this.state.score=0;
           }
         }
-        this.setState({
-          positionMatch: false,
-          colorMatch: false,
-          positionPressed: false,
-          colorPressed: false,
-          posStyle: noStyle,
-          colorStyle: noStyle,
-          score: this.state.score
-        })
       }
 
       ///position match cases
-      if(this.state.positionMatch){
+      else if(this.state.positionMatch){
         //got position match
         if(this.state.positionPressed){
           matchHit+=1;
@@ -340,18 +322,9 @@ var SilentMode = React.createClass({
           })
           }
         }
-        this.setState({
-          positionMatch: false,
-          colorMatch: false,
-          positionPressed: false,
-          colorPressed: false,
-          posStyle: noStyle,
-          colorStyle: noStyle,
-          score: this.state.score
-        })
       }
       //hit match when none
-      if(this.state.colorPressed || this.state.positionPressed){
+      else if(this.state.colorPressed || this.state.positionPressed){
         matchHit-=1;
         this.setState({
             alert: 'Not a match!',
@@ -367,7 +340,8 @@ var SilentMode = React.createClass({
             fullScore-=parseFloat(currentScore);
             this.state.score=0;
           }
-          this.setState({
+      }
+       this.setState({
           positionMatch: false,
           colorMatch: false,
           positionPressed: false,
@@ -376,7 +350,6 @@ var SilentMode = React.createClass({
           colorStyle: noStyle,
           score: this.state.score
         })
-      }
 
       setTimeout(function() {
         this.setState({alert: ' ', alertType: ' '});
