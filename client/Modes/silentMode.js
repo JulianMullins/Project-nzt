@@ -483,11 +483,13 @@ var SilentMode = React.createClass({
         cMatch = false;
         pMatch = false;
       }.bind(this), 800);
-      //RUTH THIS IS WHERE THE GAME ENDS////////////////
+
+
+////////RUTH THIS IS WHERE THE GAME ENDS////////////////
       if (timeKeeper === 0) {
         clearInterval(iterations);
         setTimeout(function() {
-          endGameFunction(fullScore, reactionTimes, this.state.gameId, this.state.userId, function(success) {
+          endGameFunction(this.state.fullScore, this.state.reactionTimes, this.state.gameId, this.state.userId, function(success) {
             if (success) {
               this.props.history.push('/gameOver')
             }
@@ -495,6 +497,9 @@ var SilentMode = React.createClass({
 
         }.bind(this), 2000);
       }
+
+///////////////////////////////////////////////////
+
     }.bind(this), 2000);
   },
   positionMatch: function() {
