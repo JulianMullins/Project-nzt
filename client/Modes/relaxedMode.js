@@ -1,7 +1,6 @@
 var React = require('react');
 var GameTimer = require('./gameTimer');
-var RelaxedStartOverlay = require('./gameStartOverlay').RelaxedStartOverlay;
-
+var StartOverlay = require('./gameStartOverlay');
 var axios = require('axios');
 axios.defaults.baseURL = process.env.url;
 import {Link} from 'react-router'
@@ -53,10 +52,10 @@ var RelaxedMode = React.createClass({
       modeMultiplier: modeMultiplier[this.props.mode],
       penalty: 0,
       positivePoints: 0,
-      fullScore:0,
-      matchCount:0,
-      matchHit:0,
-      reactionTimes:[]
+      fullScore: 0,
+      matchCount: 0,
+      matchHit: 0,
+      reactionTimes: []
     }
   },
   componentDidMount: function() {
@@ -67,13 +66,7 @@ var RelaxedMode = React.createClass({
         return;
       }
       console.log(obj)
-      this.setState({
-        tempUser: obj.tempUser, 
-        gameId: obj.gameId, 
-        modeMultiplier: obj.modeMultiplier, 
-        penalty: obj.penalty, 
-        positivePoints: obj.positivePoints
-      })
+      this.setState({tempUser: obj.tempUser, gameId: obj.gameId, modeMultiplier: obj.modeMultiplier, penalty: obj.penalty, positivePoints: obj.positivePoints})
     }.bind(this));
     console.log("component mounted")
   },
@@ -115,8 +108,7 @@ var RelaxedMode = React.createClass({
           score: this.state.score + parseInt(currentScore),
           posStle: noStyle
         });
-      } 
-      else if (!this.state.keepScore && this.state.posPressed) {
+      } else if (!this.state.keepScore && this.state.posPressed) {
         this.setState({alert: 'Not a match'});
         if ((this.state.score - 5) >= 0) {
           matchHit -= 1;
@@ -125,13 +117,11 @@ var RelaxedMode = React.createClass({
             score: this.state.score - 5,
             posStyle: noStyle
           });
-        } 
-        else {
+        } else {
           currentScore = this.state.score
           this.setState({score: 0});
         }
-      } 
-      else if (this.state.keepScore && this.state.posMatch) {
+      } else if (this.state.keepScore && this.state.posMatch) {
         this.setState({alert: "Missed a match"});
         if ((this.state.score - 5) >= 0) {
           matchCount += 1;
@@ -140,8 +130,7 @@ var RelaxedMode = React.createClass({
             score: this.state.score - 5,
             posStyle: noStyle
           });
-        } 
-        else {
+        } else {
           currentScore = this.state.score;
           this.setState({score: 0});
         }
@@ -203,7 +192,7 @@ var RelaxedMode = React.createClass({
       // Game end
 
       if (timeKeeper === 0) {
-      // if (timeKeeper === 36) {
+        // if (timeKeeper === 36) {
         //give gameScore variable the final score
         clearInterval(iterations);
         console.log(fullScore)
@@ -213,9 +202,8 @@ var RelaxedMode = React.createClass({
         endGameFunction(fullScore, reactionTimes, this.state.gameId, accuracy, function(data) {
           if (data.success) {
             this.props.history.push('/gameOver')
-          }
-          else{
-            this.props.history.push('/error/'+encodeURIComponent(data.message))
+          } else {
+            this.props.history.push('/error/' + encodeURIComponent(data.message))
           }
         }.bind(this))
 
@@ -243,7 +231,7 @@ var RelaxedMode = React.createClass({
   },
   render: function() {
     var overlay = this.state.overlay
-      ? (<RelaxedStartOverlay nLevel={this.state.N} click={this.startGame}/>)
+      ? (<StartOverlay nLevel={this.state.N} mode={this.state.mode} click={this.startGame}/>)
       : '';
 
     var scoreAlert;

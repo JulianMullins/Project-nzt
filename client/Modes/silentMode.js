@@ -1,6 +1,6 @@
 var React = require('react');
 var GameTimer = require('./gameTimer');
-var SilentStartOverlay = require('./gameStartOverlay').SilentStartOverlay;
+var StartOverlay = require('./gameStartOverlay');
 var axios = require('axios');
 import {Link} from 'react-router'
 
@@ -408,7 +408,7 @@ var SilentMode = React.createClass({
   },
   render: function() {
     var overlay = this.state.overlay
-      ? (<SilentStartOverlay nLevel={this.state.N} click={this.startGame}/>)
+      ? (<StartOverlay nLevel={this.state.N} mode={this.state.mode} click={this.startGame}/>)
       : '';
 
     var scoreAlert;

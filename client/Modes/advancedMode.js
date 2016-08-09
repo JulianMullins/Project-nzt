@@ -1,9 +1,9 @@
 var React = require('react');
 var GameTimer = require('./gameTimer');
+var StartOverlay = require('./gameStartOverlay');
 var axios = require('axios');
 import {Link} from 'react-router'
 
-var AdvancedStartOverlay = require('./gameStartOverlay').AdvancedStartOverlay;
 var fullScore = 0;
 var currentScore;
 var matchCount = 0; //total matches in game
@@ -181,7 +181,7 @@ var AdvancedMode = React.createClass({
           colorPressed: noStyle,
           soundPressed: noStyle,
           score: this.state.score
-        }//all other match combinations below
+        } //all other match combinations below
         )
       } else {
         if (reactionEnd) {
@@ -200,11 +200,11 @@ var AdvancedMode = React.createClass({
             //double match
             if (this.state.soundHit && this.state.colorHit) {
               currentScore += ((2000 - reactionTimes[reactionTimes.length - 1]) * 2 / 100).toFixed(2) + 1;
-              this.setState({alertType: 'full', alert: 'Double Match!'}//1/2 match
+              this.setState({alertType: 'full', alert: 'Double Match!'} //1/2 match
               )
             } else if (this.state.soundHit || this.state.colorHit) {
               currentScore += ((2000 - reactionTimes[reactionTimes.length - 1]) / 100).toFixed(2) + 1;
-              this.setState({alertType: 'half', alert: 'Half Match!'}//missed both
+              this.setState({alertType: 'half', alert: 'Half Match!'} //missed both
               )
             } else {
               currentScore -= 5;
@@ -225,11 +225,11 @@ var AdvancedMode = React.createClass({
             //double match
             if (this.state.soundHit && this.state.positionHit) {
               currentScore += ((2000 - reactionTimes[reactionTimes.length - 1]) * 2 / 100).toFixed(2) + 1;
-              this.setState({alertType: 'full', alert: 'Double Match!'}//1/2 match
+              this.setState({alertType: 'full', alert: 'Double Match!'} //1/2 match
               )
             } else if (this.state.soundHit || this.state.positionHit) {
               currentScore += ((2000 - reactionTimes[reactionTimes.length - 1]) / 100).toFixed(2) + 1;
-              this.setState({alertType: 'half', alert: 'Half Match!'}//missed both
+              this.setState({alertType: 'half', alert: 'Half Match!'} //missed both
               )
             } else {
               currentScore -= 5;
@@ -246,11 +246,11 @@ var AdvancedMode = React.createClass({
             //hit
             if (this.state.soundHit) {
               currentScore += ((2000 - reactionTimes[reactionTimes.length - 1]) / 100).toFixed(2) + 1;
-              this.setState({alertType: 'full', alert: 'Single Match!'}//miss
+              this.setState({alertType: 'full', alert: 'Single Match!'} //miss
               )
             } else if (!this.state.soundHit) {
               currentScore -= 5;
-              this.setState({alertType: 'none', alert: 'Missed a Match!'}//wrong match
+              this.setState({alertType: 'none', alert: 'Missed a Match!'} //wrong match
               )
             } else if (this.state.colorHit || this.state.positionHit) {
               currentScore -= 5;
@@ -293,11 +293,11 @@ var AdvancedMode = React.createClass({
             //double match
             if (this.state.positionHit && this.state.colorHit) {
               currentScore += ((2000 - reactionTimes[reactionTimes.length - 1]) * 2 / 100).toFixed(2) + 1;
-              this.setState({alertType: 'full', alert: 'Double Match!'}//1/2 match
+              this.setState({alertType: 'full', alert: 'Double Match!'} //1/2 match
               )
             } else if (this.state.positionHit || this.state.colorHit) {
               currentScore += ((2000 - reactionTimes[reactionTimes.length - 1]) / 100).toFixed(2) + 1;
-              this.setState({alertType: 'half', alert: 'Half Match!'}//missed both
+              this.setState({alertType: 'half', alert: 'Half Match!'} //missed both
               )
             } else {
               currentScore -= 5;
@@ -314,7 +314,7 @@ var AdvancedMode = React.createClass({
             //hit
             if (this.state.colorHit) {
               this.setState({alertType: 'full', alert: 'Single Match!'})
-              currentScore += ((2000 - reactionTimes[reactionTimes.length - 1]) / 100).toFixed(2) +//miss
+              currentScore += ((2000 - reactionTimes[reactionTimes.length - 1]) / 100).toFixed(2) + //miss
               1;
             } else if (!this.state.colorHit) {
               currentScore -= 5;
@@ -323,7 +323,7 @@ var AdvancedMode = React.createClass({
                 this.state.score += currentScore;
               } else {
                 currentScore -= this.state.score;
-                this.state.score = 0///wrong match;
+                this.state.score = 0 ///wrong match;
               }
             } else if (this.state.soundHit || this.state.positionHit) {
               currentScore -= 5;
@@ -353,11 +353,11 @@ var AdvancedMode = React.createClass({
           //hit
           if (this.state.positionHit) {
             this.setState({alertType: 'full', alert: 'Single Match!'})
-            currentScore += ((2000 - reactionTimes[reactionTimes.length - 1]) / 100).toFixed(2) +//miss
+            currentScore += ((2000 - reactionTimes[reactionTimes.length - 1]) / 100).toFixed(2) + //miss
             1;
           } else if (!this.state.positionHit) {
             currentScore -= 5;
-            this.setState({alertType: 'none', alert: 'Missed a Match!'}///wrong match
+            this.setState({alertType: 'none', alert: 'Missed a Match!'} ///wrong match
             )
           } else if (this.state.soundHit || this.state.colorHit) {
             currentScore -= 5;
@@ -538,7 +538,7 @@ var AdvancedMode = React.createClass({
   },
   render: function() {
     var overlay = this.state.overlay
-      ? (<AdvancedStartOverlay nLevel={this.state.N} click={this.startGame}/>)
+      ? (<StartOverlay nLevel={this.state.N} mode={this.state.mode} click={this.startGame}/>)
       : '';
 
     var scoreAlert;
@@ -589,7 +589,7 @@ var AdvancedMode = React.createClass({
           <h2 style={{
             color: 'yellow'
           }}>{parseInt(currentScore)}</h2>
-        )//}
+        ) //}
       }
     } else {
       scoreAlert = (

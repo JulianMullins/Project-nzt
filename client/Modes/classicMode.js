@@ -1,6 +1,6 @@
 var React = require('react');
 var GameTimer = require('./gameTimer');
-var ClassicStartOverlay = require('./gameStartOverlay').ClassicStartOverlay;
+var StartOverlay = require('./gameStartOverlay');
 var axios = require('axios');
 import {Link} from 'react-router'
 
@@ -459,7 +459,7 @@ var ClassicMode = React.createClass({
   },
   render: function() {
     var overlay = this.state.overlay
-      ? (<ClassicStartOverlay nLevel={this.state.N} click={this.startGame}/>)
+      ? (<StartOverlay nLevel={this.state.N} mode={this.state.mode} click={this.startGame}/>)
       : '';
 
     var scoreAlert;
