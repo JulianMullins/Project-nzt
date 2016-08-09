@@ -7,7 +7,6 @@ var Tutorial = React.createClass({
   getInitialState: function() {
     return {currentIndex: 0}
   },
-
   componentDidMount: function() {
     var self = this;
     $(document).ready(function() {
@@ -16,7 +15,6 @@ var Tutorial = React.createClass({
           ? e.keyCode
           : e.which;
         $('.key.k' + key).addClass('active');
-        console.log(key);
       });
 
       $(window).keyup(function(e) {
@@ -76,19 +74,28 @@ var Tutorial = React.createClass({
           }, 2000000);
         }
 
+        // Button Events
         $('.next_btn').on('click', function() {
-          if (self.state.currentIndex < ($slides.length - 1)) {
-            move(self.state.currentIndex + 1);
-          } else {
-            move(0);
-          }
+          move(self.state.currentIndex + 1);
         });
-        $('.previous_btn').css('display', 'none');
         $('.previous_btn').on('click', function() {
-          if (self.state.currentIndex !== 0) {
+          move(self.state.currentIndex - 1);
+        });
+
+        // Mobile Swipe Events
+        var dragX = 0;
+        var offsetX = 0;
+        $('.tutorial').on('touchstart', function(e) {
+          dragX = e.originalEvent.touches[0].pageX;
+        }).on('touchmove', function(e) {
+          offsetX = e.originalEvent.touches[0].pageX;
+        }).on('touchend', function(e) {
+          console.log(dragX, offsetX);
+          dragX = dragX - offsetX
+          if (dragX < -30) {
             move(self.state.currentIndex - 1);
-          } else {
-            move(3);
+          } else if (dragX > 30) {
+            move(self.state.currentIndex + 1);
           }
         });
 
@@ -115,7 +122,6 @@ var Tutorial = React.createClass({
       $('.previous_btn').css('display', 'block');
     }
 
-    console.log(window.matchMedia('(max-width: 768px)').matches);
     if (this.state.currentIndex == 3 && window.matchMedia('(max-width: 768px)').matches) {
       $('.next_btn').css('display', 'none');
     } else if (this.state.currentIndex == 4) {
@@ -128,13 +134,12 @@ var Tutorial = React.createClass({
         <div className="slider">
           <div className="slide_viewer">
             <div className="slide_group">
-
               <div className="slide">
                 <div className="rulemode2">
                   <div className="rules2">
                     <h2>Welcome to Cortex!</h2>
                     <p>Cortex is a game designed to exercise your working memory and increase fluid-intelligence (directly tied to IQ). This method of increasing IQ is
-                      <Link to="/science" className="tutorialLink">
+                      <Link to="/sciencse" className="tutorialLink">
                         scientifically supported and backed by numerous research studies</Link>. While the game can be tricky to grasp at first and increases in difficulty rather quickly, we have tried to make this game as fun and as easy to learn as possible. We hope that you’ll enjoy simply playing the game and that the cognitive benefits will follow along as you progress.</p>
                     <h3>Let&#39;s get started!
                     </h3>
