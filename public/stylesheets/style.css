@@ -158,9 +158,14 @@ h3 {
 }
 @media all and (max-width: 768px) {
   .heading {
-    justify-content: center;
     padding-top: 75px;
   }
+
+  .userWelcome {
+    font-size: 20px;
+    font-weight: 400;
+  }
+
   .heading> img {
     width: 70vw;
     min-width: 0;
