@@ -242,12 +242,12 @@ axios.get('/homeUserInfo')
             <table>
               <tbody>
                 <tr>
-                  <td>Games Played:
+                  <td style={{'width': '60%'}}>Games Played:
                   </td>
                   <td className="statsTableData">{this.state.data.length}</td>
                 </tr>
                 <tr>
-                  <td>Highest N-Level:
+                  <td>N-Level Reached:
                   </td>
                   <td className="statsTableData">{this.state.maxN}</td>
                 </tr>
