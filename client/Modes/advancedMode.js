@@ -91,12 +91,25 @@ var AdvancedMode = React.createClass({
   },
   startGame: function() {
     this.setState({overlay: false});
-    var aud = new Audio('./audio/empty.mp3');
-    aud.play();
-    setInterval(function() {
-      aud.src = './audio/' + (nextSound + 1) + '.wav';
-      aud.play();
-    }, 2000);
+    for (var i = 0; i < 9; i++) {
+      audios[i].volume = 0.0;
+    }
+    setTimeout(function() {
+      for (var i = 0; i < 9; i++) {
+        console.log(audios[i], audios[i].volume);
+        audios[i].play();
+      }
+    }, 300);
+    setTimeout(function() {
+      for (var i = 0; i < 9; i++) {
+        audios[i].volume = 1.0;
+      }
+    }, 1500);
+    setTimeout(function() {
+      soundInterval = setInterval(function() {
+        audios[nextSound].play();
+      }.bind(this), 2000);
+    }.bind(this), 40);
     this.playGame();
     this.enableKeys();
   },
@@ -753,16 +766,16 @@ var AdvancedMode = React.createClass({
           </div>
           <div className="gameFullFooter">
 
-            <div className="gameButtonsContainer" onKeyPress={this.handleKeyPres}>
-              <button id="soundButton" className={this.state.soundButton}>
+            <div className="gameButtonsContainer advancedBtnContainer" onKeyPress={this.handleKeyPres}>
+              <div id="soundButton" className={this.state.soundButton}>
                 <a onClick={this.soundMatch} style={this.state.soundStyle} className="advancedButton">SOUND</a>
-              </button>
-              <button id="positionButton" className={this.state.positionButton}>
+              </div>
+              <div id="positionButton" className={this.state.positionButton}>
                 <a onClick={this.positionMatch} style={this.state.posStyle} className="advancedButton">POSITION</a>
-              </button>
-              <button id="colorButton" className={this.state.colorButton}>
+              </div>
+              <div id="colorButton" className={this.state.colorButton}>
                 <a onClick={this.colorMatch} style={this.state.colorStyle} className="advancedButton">COLOR</a>
-              </button>
+              </div>
             </div>
           </div>
         </div>
