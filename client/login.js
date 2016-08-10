@@ -71,7 +71,7 @@ var LoginOverlay = React.createClass({
               <input type="password" placeholder="Password" name="password" id="password" value={this.state.password} onChange={this.update}></input>
               <div className="buttongroup">
 
-                <Link to="/home">
+                <Link to="/home" onClick={this.login}>
                   <button className="form-btn dx" onClick={this.login}>Login</button>
                 </Link>
                 <a className="fb" href={this.state.fbURL}>Login with Facebook</a>
@@ -96,7 +96,7 @@ var LoginOverlay = React.createClass({
                 </Link>
               </div>
             </form>
-            <Link to="/home"><img className="whiteLogo" src="./images/CortexIconWhite.png"/></Link>
+            <Link to="/home"><img className="whiteLogo" src="../images/CortexIconWhite.png"/></Link>
           </div>
         </div>
       </div>

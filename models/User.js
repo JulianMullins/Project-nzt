@@ -3,10 +3,49 @@ var autoref = require('mongoose-autorefs');
 
 var userSchema = mongoose.Schema({
 
-	username:String,
+	username:{
+		type:String,
+		validate:{
+			validator:function(val){
+				if(val.length<6){
+					return false;
+				}
+				else{
+					return true;
+				}
+			},
+			message: 'Username must be at least 6 characters long'
+		}
+	},
 	name:String,
-	email:String,
-	password: String,
+	email:{
+		type: String,
+		validate:{
+			validator: function(val){
+				if(!val.includes('@') || !val.includes('.') || val.includes('+')){
+					return false;
+				}
+				else{
+					return true;
+				}
+			},
+			message: 'Invalid email address'
+		}
+	},
+	password: {
+		type: String,
+		validate:{
+			validator: function(val){
+				if(val.length<6){
+					return false;
+				}
+				else{
+					return true;
+				}
+			},
+			message: 'Password must be at least 6 characters long'
+		}
+	},
 	facebookId: String,
 	maxN:{
 		classic:Number,
@@ -23,7 +62,10 @@ var userSchema = mongoose.Schema({
 		type: mongoose.Schema.Types.ObjectId,
 		ref: 'Game'
 	}],
-	showTutorial:Boolean
+	showTutorial:{
+		type: Boolean,
+		default: true
+	}
 })
 
 userSchema.methods.combineMaxN = function(maxN2){
