@@ -22,7 +22,24 @@ var Mainmenu = React.createClass({
       showTutorial:false
     }
   },
-  componentDidMount: function(){
+  // componentDidMount: function(){
+  //   axios.get('/homeUserInfo')
+  //     .then(function(response){
+  //       console.log(response.data)
+  //       this.setState({
+  //         hasUsername:response.data.hasUsername,
+  //         name:response.data.name,
+  //         showTutorial:response.data.showTutorial
+  //       })
+  //     }.bind(this)).then(function() {
+  //       if(this.state.hasUsername){
+  //         this.setState({
+  //           userWelcome: <h3 className="advanced userWelcome">Welcome: {this.state.name}</h3>
+  //         })
+  //     }
+  //   }.bind(this))
+  // },
+  componentWillMount: function(){
     axios.get('/homeUserInfo')
       .then(function(response){
         console.log(response.data)

@@ -273,10 +273,11 @@ module.exports = function(passport) {
         
       // });
     }
+
     else{
       res.status(400).json({success:false})
     }
-    
+    req.session.user = null;
   });
 
   return router;

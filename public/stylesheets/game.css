@@ -146,6 +146,26 @@
   width: 50%;
 }
 
+
+
+
+/*Hack*/
+.goodJob{
+  background-color: green;
+  margin:8px;
+}
+
+.youFailed{
+  background-color:red;
+  margin:8px;
+}
+
+
+
+
+
+
+
 /* score alerts */
 .scoreAlert {
   width: 95%;
@@ -201,7 +221,7 @@
   -webkit-animation-name: halfFadeOut;
   -webkit-animation-duration: 3s;
   animation-name: halfFadeOut;
-  animation-duration: 3s;  
+  animation-duration: 3s;
 }
 
 /* negative alert fade */
@@ -278,6 +298,11 @@
 .scoreUpdateNeg {
   color: #F13542;
 }
+
+.scoreUpdateHalf{
+  color: yellow;
+}
+
 .scoreUpdate {
   font-weight: bold !important;
   -webkit-animation-name: scoreUpdateIn;
@@ -368,7 +393,7 @@
   .scoreAlertHalf {
     width: 90%;
     height: 90%;
-    margin: 0 auto;    
+    margin: 0 auto;
   }
   .gameScore {
     width: 70%;
