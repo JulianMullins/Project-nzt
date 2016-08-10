@@ -1,5 +1,6 @@
 var React = require('react');
 var ReactDOM = require('react-dom');
+var MediaQuery = require('react-responsive');
 
 import {Router, Route, hashHistory, Link} from 'react-router';
 import {IndexRoute, IndexRedirect} from 'react-router';
@@ -54,6 +55,12 @@ var App = React.createClass({
   render: function() {
     return (
       <div>
+        <MediaQuery orientation='landscape'>
+          <div className="landscapeOverlay">
+            <img src="./images/rotate.png"></img>
+            <h1>Please rotate your screen to play</h1>
+          </div>
+        </MediaQuery>
         <NavBar/> {this.props.children}
       </div>
     )
