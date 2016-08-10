@@ -753,16 +753,16 @@ var AdvancedMode = React.createClass({
           </div>
           <div className="gameFullFooter">
 
-            <div className="gameButtonsContainer" onKeyPress={this.handleKeyPres}>
-              <button id="soundButton" className={this.state.soundButton}>
+            <div className="gameButtonsContainer advancedBtnContainer" onKeyPress={this.handleKeyPres}>
+              <div id="soundButton" className={this.state.soundButton}>
                 <a onClick={this.soundMatch} style={this.state.soundStyle} className="advancedButton">SOUND</a>
-              </button>
-              <button id="positionButton" className={this.state.positionButton}>
+              </div>
+              <div id="positionButton" className={this.state.positionButton}>
                 <a onClick={this.positionMatch} style={this.state.posStyle} className="advancedButton">POSITION</a>
-              </button>
-              <button id="colorButton" className={this.state.colorButton}>
+              </div>
+              <div id="colorButton" className={this.state.colorButton}>
                 <a onClick={this.colorMatch} style={this.state.colorStyle} className="advancedButton">COLOR</a>
-              </button>
+              </div>
             </div>
           </div>
         </div>
