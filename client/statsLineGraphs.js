@@ -1,14 +1,16 @@
 var React = require('react');
 var ReactDOM = require('react-dom');
 
-//var d3=require('d3'); //some documentation hass this in examples, so keep to be safe
-console.timeStamp("start load lineChart");
-var LineChart = require('react-d3-basic').LineChart;
-var AreaChart = require('react-d3-basic').AreaChart;
+console.timeStamp("start load require");
 
+var Charts = require('react-d3-basic');
+console.timeStamp("start load lineChart");
+var LineChart = Charts.LineChart;
+console.timeStamp("start load areachart")
+var AreaChart = Charts.AreaChart;
+console.timeStamp("done load AreaChart")
 var MediaQuery = require('react-responsive');
 var _ = require('underscore');
-// import {AreaChart , LineChart} from 'react-easy-chart'
 
 var axios=require('axios');
 import { Link } from 'react-router'

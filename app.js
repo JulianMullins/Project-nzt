@@ -11,7 +11,6 @@ var FacebookStrategy = require('passport-facebook');
 var MongoStore = require('connect-mongo')(session);
 var mongoose = require('mongoose');
 var bcrypt = require('bcryptjs');
-var back = require('express-back');
 
 var routes = require('./server/index');
 var auth = require('./server/auth');
