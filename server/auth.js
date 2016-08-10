@@ -2,7 +2,6 @@ var express = require('express');
 var router = express.Router();
 var bcrypt = require('bcryptjs');
 var axios = require('axios');
-var back = require('express-back');
 
 var User = require('../models/User');
 var Stats = require('../models/Stats');
