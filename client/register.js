@@ -73,9 +73,7 @@ var RegisterOverlay = React.createClass({
 
       }
       else{
-        console.log(response.data.message.join('\n'))
-
-        this.setState({error:response.data.message.join('\n')})
+        this.setState({error:response.data.message.join(' • ')})
       }
     }.bind(this));
   },
@@ -85,8 +83,10 @@ var RegisterOverlay = React.createClass({
         <div className="register" id="login">
           <h1>Welcome</h1>
           <div className="pa">Create an account to get started.</div>
+            <div className="errorDiv">
+              {this.state.error}
+            </div>
           <form>
-            {this.state.error}
             <br />
             <input type="text" placeholder="Name" name="name" id="name" value={this.state.name} onChange={this.update}></input>
             <br></br>
