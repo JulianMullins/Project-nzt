@@ -192,3 +192,22 @@ h3 {
     font-size: 1.2em;
   }
 }
+@media (orientation: landscape) {
+  #root {
+    overflow: hidden;
+  }
+}
+.landscapeOverlay {
+  position: absolute;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  background: url("../images/pattern.svg");
+  background-size: cover;
+  z-index: 1000;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
