@@ -8,7 +8,7 @@ var LoginOverlay = React.createClass({
   getInitialState: function() {
     console.log(this)
     var error = null;
-    if(this.props.params.error){
+    if (this.props.params.error) {
       error = decodeURIComponent(this.props.params.error)
     }
     return {
@@ -17,7 +17,7 @@ var LoginOverlay = React.createClass({
       gameEnded: false,
       games: null,
       error: this.props.params.error,
-      fbURL: this.props.location.pathname+'/facebook'
+      fbURL: this.props.location.pathname + '/facebook'
     }
   },
   componentDidMount() {},
@@ -34,19 +34,17 @@ var LoginOverlay = React.createClass({
       username: this.state.username,
       password: this.state.password
     }).then(function(response) {
-      console.log("response: "+response)
+      console.log("response: " + response)
       if (response.data.success) {
 
-        if(this.props.location.pathname.includes('gameOver/login')){
+        if (this.props.location.pathname.includes('gameOver/login')) {
           console.log("gameOver login");
           this.props.history.push('/gameOver');
-        }
-        else{
+        } else {
           this.props.history.push('/home')
         }
-      }
-      else{
-        this.props.history.push('/login/'+encodeURI(response.data.message));
+      } else {
+        this.props.history.push('/login/' + encodeURI(response.data.message));
       }
     }.bind(this))
   },
@@ -59,7 +57,8 @@ var LoginOverlay = React.createClass({
             <h1>Hey you!</h1>
             <div className="pa">Login here.</div>
             <form>
-              {this.state.error}
+              <p className="error">{this.state.error}</p>
+              <br></br>
               <input type="text" placeholder="Name or Email" name="username" id="username" value={this.state.username} onChange={this.update}></input>
               <br></br>
               <input type="password" placeholder="Password" name="password" id="password" value={this.state.password} onChange={this.update}></input>

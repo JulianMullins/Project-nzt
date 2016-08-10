@@ -50,6 +50,11 @@
   text-align: center;
   margin: 1em 1em 0;
 }
+.error {
+  background-color: #f13542;
+  width: 30%;
+  margin: 0 auto;
+}
 form {
   text-align: center;
   width: 50vw;
