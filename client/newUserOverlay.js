@@ -5,7 +5,7 @@ import {Link} from 'react-router';
 
 var NewUserOverlay = React.createClass({
   stopShowOverlay() {
-    axios.post('/stopShowOverlay')
+    axios.post('/api/stopShowOverlay')
       .then(function(response){
         if(response.data.success){
           this.props.click();

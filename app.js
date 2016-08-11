@@ -227,7 +227,6 @@ var combineLeaderboards = function(leaderboard1, leaderboard2, userId, username,
     })
 }
 
-
 // Facebook callback
 passport.use(new FacebookStrategy({
     clientID: process.env.FACEBOOK_clientID,
@@ -264,8 +263,6 @@ passport.use(new FacebookStrategy({
         // var username = profile._json.first_name[0]+profile._json.last_name;
         // username.toLowerCase();
 
-
-
         if (err) {
           console.error(err);
           return done(err);
@@ -285,9 +282,7 @@ passport.use(new FacebookStrategy({
               username += (users.length + 1)
             }
           }).exec(function(err, users) {
-
             if (req.session.user && !req.session.fullUser) {
-
               var newUser = new User({
                 name: name,
                 email: email,
@@ -298,7 +293,6 @@ passport.use(new FacebookStrategy({
                 temp: false,
                 currentGame: req.session.user.currentGame
               })
-
               User.remove({
                 _id: req.session.user._id
               }, function(err, reqUser) {
@@ -310,10 +304,7 @@ passport.use(new FacebookStrategy({
                   })
                 }
               })
-
-
             } else {
-
               var u = new User({
                 facebookId: profile.id,
                 email: email,
@@ -384,7 +375,6 @@ passport.use(new FacebookStrategy({
                       }
                     })
                   })
-
                 }
               })
 
@@ -396,7 +386,6 @@ passport.use(new FacebookStrategy({
               console.log("no facebook id")
               user.facebookId = profile.id
                 //console.log("facebook id added")
-
             }
             user.save(function(err) {
                 if (err) {
@@ -420,15 +409,14 @@ passport.use(new FacebookStrategy({
       });
   }));
 
-app.use('/', auth(passport));
-app.use('/', clientExpressFunctions);
+app.use('/api/', auth(passport));
+app.use('/api/', clientExpressFunctions);
+app.use('/api/', highScores);
+app.use('/api/', gameOverUpdate);
+app.use('/api/', statsFunctions);
+app.use('/api/', gameFunctions);
+
 app.use('/', routes);
-app.use('/', highScores);
-
-app.use('/', gameOverUpdate);
-app.use('/', gameFunctions);
-app.use('/', statsFunctions);
-
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -466,12 +454,5 @@ app.use(function(err, req, res, next) {
     message: err
   })
 });
-
-
-
-// var port = process.env.PORT || 3000;
-// server.listen(port, function() {
-//   console.log('Started, listening on port ', port);
-// });
 
 module.exports = app

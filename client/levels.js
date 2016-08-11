@@ -79,7 +79,7 @@ var capFirstLetter = function(string) {
 
 var getMaxN = function(mode, cb) {
   console.log("getting max n")
-  axios.get('/getMaxN', {withCredentials: true}).then(function(response) {
+  axios.get('/api/getMaxN', {withCredentials: true}).then(function(response) {
     console.log(response.data.maxN)
     return cb(response.data.maxN)
   })
