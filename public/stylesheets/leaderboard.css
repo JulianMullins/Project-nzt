@@ -11,11 +11,20 @@ table {
   width: 100vw;
 }
 .boardSide {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   height: 100vh;
   width: 100vw;
   color: #01b6a7;
   padding-top: 10vh;
 }
+
+.boardSide .gameOverPrompt {
+  font-size: 28px;
+  text-align: center;
+}
+
 .lbHeader {
   color: #01b6a7;
   font-size: 60px;
