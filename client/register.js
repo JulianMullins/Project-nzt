@@ -32,7 +32,7 @@ var RegisterOverlay = React.createClass({
     e.preventDefault();
     //ajax post
     console.log(this)
-    axios.post('/register', {
+    axios.post('/api/register', {
       // headers: {
       //   'Accept': 'application/json',
       //   'Content-Type': 'application/json'
@@ -52,7 +52,7 @@ var RegisterOverlay = React.createClass({
         //this.props.history.push('/login')
 
 
-        axios.post('/login', {
+        axios.post('/api/login', {
           username: this.state.email,
           password: this.state.password
         }).then(function(response){

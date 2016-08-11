@@ -13,12 +13,12 @@ var Leaderboard = React.createClass({
     this.getMyScores();
   },
   getAllScores: function() {
-    axios.get('/allHighScores').then(function(response) {
+    axios.get('/api/allHighScores').then(function(response) {
       this.setState({allScores: response.data});
     }.bind(this));
   },
   getMyScores: function() {
-    axios.get('/myHighScores').then(function(response) {
+    axios.get('/api/myHighScores').then(function(response) {
       this.setState({myScores: response.data});
     }.bind(this));
   },
