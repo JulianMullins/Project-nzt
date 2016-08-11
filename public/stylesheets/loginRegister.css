@@ -181,6 +181,13 @@ input {
   background-color: transparent;
   width: 50%;
 }
+
+.errorDiv {
+  color: #F13542;
+  width: 80%;
+  text-align: center;
+}
+
 ::-webkit-input-placeholder {
   color: white;
   font-weight: 100;

@@ -50,17 +50,36 @@ router.post('/stopShowOverlay',function(req,res,next){
   // req.session.user.showTutorial = false;
   // req.session.user.save();
   // console.log(req.session.user)
-  var user = req.session.user;
-  user.showTutorial = false;
-  user.save(function(err,user){
+  // var user = req.session.user;
+  // user.showTutorial = false;
+  // user.save(function(err,user){
+  //   if(err){
+  //     res.json({success:false,error:err})
+  //   }
+  //   else{
+  //     req.session.user = user;
+  //     res.json({success:true,error:null})
+  //   }
+  // });
+
+  User.findById(req.session.user._id,function(err,user){
     if(err){
-      res.json({success:false,error:err})
+      res.json({success:false})
     }
     else{
-      req.session.user = user;
-      res.json({success:true,error:null})
+      user.showTutorial=false;
+      user.save(function(err,user){
+        if(err){
+          res.json({success:false,error:err})
+        }
+        else{
+          req.session.user = user;
+          res.json({success:true,error:null})
+        }
+      })
     }
-  });
+  })
+
 })
 
 

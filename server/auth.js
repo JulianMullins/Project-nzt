@@ -20,29 +20,38 @@ module.exports = function(passport) {
 
     //check if input all there
     console.log(userData)
+    var errors=[];
     if(userData.password !== userData.passwordConfirm){
-      return false;
+      errors.push("Passwords don't match");
     }
-    else if(!userData.password){
-      return false;
+    if(!userData.password){
+      errors.push('Password is required');
     }
-    else if(!userData.username){
-      return false;
+    if(!userData.username){
+      errors.push("Username is required");
     }
-    else if(!userData.email){
-      return false;
+    if(!userData.email){
+      errors.push("Email is required");
     }
-    else{
-      return true;
+    if(userData.username.length<6){
+      errors.push("Username must be at least 6 characters long");
     }
+    if(!userData.email.includes('@') || !userData.email.includes('.') || userData.email.includes('+')){
+      errors.push("Invalid email");
+    }
+    if(userData.password.length<6){
+      errors.push("Password must be at least 6 characters long");
+    }
+    return errors;
   };
 
   router.post('/register', function(req, res,next) {
     
     //didn't fill out form right
-    if (!validateReq(req.body)) {
+    var validationErrors = validateReq(req.body) 
+    if (validationErrors.length!==0) {
       console.log("validation failed")
-        res.json({success:false, message:'invalid fields'});
+        res.json({success:false, message:validationErrors});
         return;
     }
 
@@ -56,7 +65,7 @@ module.exports = function(passport) {
       //user already exists
       else if(!err && userWithSameName){
         console.log(userWithSameName, "register failed")
-        res.json({success:false, message:'username already exists'})
+        res.json({success:false, message:'Username already exists'})
         return;
       }
 
@@ -142,6 +151,7 @@ module.exports = function(passport) {
   });
 
  var saveUserRemoveAnonymous = function(req,res,user){
+  user.validateSync();
   if(req.session.user){
     User.remove({_id:req.session.user._id},function(err,reqUser){
       if(!err){
@@ -244,7 +254,7 @@ module.exports = function(passport) {
       req.logout();
       req.session.destroy(function(err){
         if(err){
-          res.json({success:false})
+          res.json({success:false,message:'err in destroy'})
         }
         else{
           res.json({success:true});
@@ -274,9 +284,8 @@ module.exports = function(passport) {
     }
 
     else{
-      res.status(400).json({success:false})
+      res.status(400).json({success:false,message:"not logged in"})
     }
-    req.session.user = null;
   });
 
   return router;
