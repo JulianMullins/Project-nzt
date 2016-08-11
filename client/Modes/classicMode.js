@@ -162,6 +162,16 @@ var ClassicMode = React.createClass({
       scoreUpdate: 'scoreUpdate scoreUpdateNeg'
     });
   },
+  setButton: function(button, _class) {
+    var obj = {};
+    obj[button] = _class;
+    this.setState(obj, function() {
+      setTimeout(function() {
+        obj[button] = '';
+        this.setState(obj);
+      }.bind(this), 200);
+    }.bind(this))
+  },
   positionAndSound: function() {
     var positionQueue = [];
     var soundQueue = [];
@@ -177,13 +187,14 @@ var ClassicMode = React.createClass({
 
         if (!this.state.soundPressed && !this.state.positionPressed) {
           this.incorrect(2);
-          this.setState({positionButton: 'youFailed', soundButton: 'youFailed'})
+          this.setButton('soundButton', 'youFailed')
+          this.setButton('positionButton', 'youFailed')
         } else if (!this.state.soundPressed) {
           this.incorrect();
-          this.setState({soundButton: 'youFailed'})
+          this.setButton('soundButton', 'youFailed')
         } else if (!this.state.positionPressed) {
           this.incorrect();
-          this.setState({positionButton: 'youFailed'}) ///sound match cases
+          this.setButton('positionButton', 'youFailed') ///sound match cases
         }
 
       } else if (this.state.soundMatch) {
@@ -191,7 +202,7 @@ var ClassicMode = React.createClass({
         //missed sound match
         if (!this.state.soundPressed) {
           this.incorrect();
-          this.setState({soundButton: 'youFailed'}) ///position match cases
+          this.setButton('soundButton', 'youFailed') ///position match cases
         }
 
       } else if (this.state.positionMatch) {
@@ -200,7 +211,7 @@ var ClassicMode = React.createClass({
         if (!this.state.positionPressed) {
           //this.missedSingle('Missed a position match!','none');
           this.incorrect();
-          this.setState({positionButton: 'youFailed'})
+          this.setButton('positionButton', 'youFailed')
         }
 
       }
@@ -217,17 +228,7 @@ var ClassicMode = React.createClass({
         //score: this.state.score
       })
       setTimeout(function() {
-        this.setState({positionButton: '', soundButton: ''});
-      }.bind(this), 100);
-      setTimeout(function() {
-        this.setState({
-          alert: ' ',
-          alertType: ' ',
-          currentScore: null,
-          scoreUpdate: '',
-          positionButton: '',
-          soundButton: ''
-        });
+        this.setState({alert: ' ', alertType: ' ', currentScore: null, scoreUpdate: ''});
       }.bind(this), 800);
 
       if (timeTilPositionMatch === 0) {
@@ -330,10 +331,11 @@ var ClassicMode = React.createClass({
       return;
     }
     if (this.state.positionMatch) {
-      this.setState({reactionEnd: Date.now(), positionButton: 'goodJob'})
+      this.setState({reactionEnd: Date.now()})
+      this.setButton('positionButton', 'goodJob');
       this.match();
     } else {
-      this.setState({positionButton: 'youFailed'})
+      this.setButton('positionButton', 'youFailed');
       this.incorrect();
     }
 
@@ -344,10 +346,11 @@ var ClassicMode = React.createClass({
       return;
     }
     if (this.state.soundMatch) {
-      this.setState({reactionEnd: Date.now(), soundButton: 'goodJob'})
+      this.setState({reactionEnd: Date.now()})
+      this.setButton('soundButton', 'goodJob');
       this.match();
     } else {
-      this.setState({soundButton: 'youFailed'})
+      this.setButton('soundButton', 'youFailed');
       this.incorrect();
     }
     this.setState({soundPressed: true, soundStyle: pushStyle});

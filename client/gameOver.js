@@ -12,11 +12,11 @@ import {Link} from 'react-router'
 var loginOverlay = require('./login');
 
 var getUser = function() {
-  return axios.get('/getUser');
+  return axios.get('/api/getUser');
 }
 
 var getGame = function() {
-  return axios.get('/getGame');
+  return axios.get('/api/getGame');
 }
 
 var GameOverOverlay = React.createClass({
@@ -48,7 +48,7 @@ var GameOverOverlay = React.createClass({
     //this.setState({firstRender: false})
   },
   setScore() {
-    axios.get('/getScore').then(function(response) {
+    axios.get('/api/getScore').then(function(response) {
       this.setState({
         baseScore: Math.floor(response.data.baseScore),
         fullScore: Math.floor(response.data.fullScore)
@@ -147,7 +147,7 @@ var GameOverOverlay = React.createClass({
   },
   anonLeaderboard() {
     //save anon score
-    axios.post('/postAnonScore', {
+    axios.post('/api/postAnonScore', {
       withCredentials: true,
       data: {
         anonUserName: this.state.anonUserName

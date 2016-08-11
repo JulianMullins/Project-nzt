@@ -30,7 +30,7 @@ var LoginOverlay = React.createClass({
     console.log("logging in")
     console.log(this.props)
     //ajax post
-    axios.post('/login', {
+    axios.post('/api/login', {
       username: this.state.username,
       password: this.state.password
     }).then(function(response) {

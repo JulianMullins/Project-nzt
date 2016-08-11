@@ -6,23 +6,41 @@ import {Link} from 'react-router';
 
 var Leaderboard = React.createClass({
   getInitialState: function() {
-    return {allScores: [], myScores: [], global: true}
+    return {allScores: [], myScores: [], global: true, hasScores: false}
   },
   componentDidMount: function() {
     this.getAllScores();
     this.getMyScores();
   },
   getAllScores: function() {
-    axios.get('/allHighScores').then(function(response) {
+    axios.get('/api/allHighScores').then(function(response) {
       this.setState({allScores: response.data});
     }.bind(this));
   },
   getMyScores: function() {
-    axios.get('/myHighScores').then(function(response) {
+    axios.get('/api/myHighScores').then(function(response) {
       this.setState({myScores: response.data});
+      if(response.data[0]) {
+        this.setState({
+          hasScores: true
+        })
+      }
+      else {
+        this.setState({
+          hasScores: false
+        })
+      }
     }.bind(this));
   },
   render: function() {
+
+    var loggedIn = !this.state.hasScores && !this.state.global
+    ? (<div className="gameOverPrompt">
+          <p><Link to="/gameOver/login">Login </Link>or<Link to="/gameOver/register"> Sign Up </Link>
+          to save your progress, view statistics and compete with friends!</p>
+        </div>)
+    : <div></div>;
+
     return (
       <div className="leaderboardPage">
         <div className="boardSide">
@@ -49,6 +67,7 @@ var Leaderboard = React.createClass({
               direction: 'asc'
             }} filterable={['username']}/>
           </section>
+          {loggedIn}
         </div>
         <Link to="/home"><img className="whiteLogo" src="./images/CortexLogo3.png"/></Link>
       </div>

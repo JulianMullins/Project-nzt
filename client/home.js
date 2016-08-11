@@ -21,7 +21,7 @@ var Mainmenu = React.createClass({
     }
   },
   // componentDidMount: function(){
-  //   axios.get('/homeUserInfo')
+  //   axios.get('/api/homeUserInfo')
   //     .then(function(response){
   //       console.log(response.data)
   //       this.setState({
@@ -38,7 +38,7 @@ var Mainmenu = React.createClass({
   //   }.bind(this))
   // },
   componentWillMount: function() {
-    axios.get('/homeUserInfo').then(function(response) {
+    axios.get('/api/homeUserInfo').then(function(response) {
       console.log(response.data)
       this.setState({hasUsername: response.data.hasUsername, name: response.data.name, showTutorial: response.data.showTutorial})
     }.bind(this)).then(function() {
@@ -51,7 +51,7 @@ var Mainmenu = React.createClass({
   },
   componentWillReceiveProps: function(nextProps) {
     if (nextProps.location.pathname === "/home") {
-      axios.get('/homeUserInfo').then(function(response) {
+      axios.get('/api/homeUserInfo').then(function(response) {
         console.log(response.data)
         this.setState({hasUsername: response.data.hasUsername, name: response.data.name, showTutorial: response.data.showTutorial})
       }.bind(this)).then(function() {
