@@ -23,6 +23,14 @@ var Leaderboard = React.createClass({
     }.bind(this));
   },
   render: function() {
+    var loggedIn = this.state.myScores && !this.state.global
+    ? (<div className="gameOverPrompt">
+          <p><Link to="/gameOver/login">Login </Link>or<Link to="/gameOver/register"> Sign Up </Link>
+          to save your progress, view statistics and compete with friends!</p>
+        </div>)
+    : <div></div>;
+
+
     return (
       <div className="leaderboardPage">
         <div className="boardSide">
@@ -49,6 +57,7 @@ var Leaderboard = React.createClass({
               direction: 'asc'
             }} filterable={['username']}/>
           </section>
+          {loggedIn}
         </div>
         <Link to="/home"><img className="whiteLogo" src="./images/CortexLogo3.png"/></Link>
       </div>

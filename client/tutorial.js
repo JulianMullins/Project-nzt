@@ -138,7 +138,7 @@ var Tutorial = React.createClass({
                 <div className="rulemode2">
                   <div className="rules2">
                     <h2>Welcome to Cortex!</h2>
-                    <p>Cortex is a game designed to exercise your working memory and increase your fluid-intelligence (the aspect of intelligence that IQ tests measure). This method of increasing IQ is <Link to="/sciencse" className="tutorialLink">scientifically supported and backed by numerous research studies</Link>. 
+                    <p>Cortex is a game designed to exercise your working memory and increase your fluid-intelligence (the aspect of intelligence that IQ tests measure). This method of increasing IQ is <Link to="/science" className="tutorialLink">scientifically supported and backed by numerous research studies</Link>. 
                     Although the game is naturally challenging, we have designed it to be as easy to learn as possible. We hope that you’ll enjoy playing the game and that the cognitive benefits will simply follow along as you progress further.</p>
                     <h3>Let&#39;s get started!
                     </h3>
@@ -152,7 +152,7 @@ var Tutorial = React.createClass({
                   <div className="rules2">
                     <h2>Dual n-back</h2>
                     <p>Cortex is based on the <i>dual n-back</i> genre of brain training games. Traditionally the game requires players to keep track of two changing elements: position and sound (the 'dual' in dual n-back). 
-                    However, in this version of the game, we have also incorporated changing colors and have divided up the modes accordingly. For example, in relaxed mode you only have to keep track of changing position 
+                    However, in this version of the game, we have also incorporated changing colors and have divided up the four game modes accordingly. For example, in relaxed mode you only have to keep track of changing position 
                     but in advanced mode you have to keep track of changing position, color and sound.</p>
                   </div>
                 </div>
@@ -163,7 +163,7 @@ var Tutorial = React.createClass({
                 <div className="rulemode2">
                   <div className="rules2">
                     <h2>The n-back part</h2>
-                    <p>The n in n-back refers to the number of positions back that you have to keep track of. The example below demonstrates gameplay at n=2, therefore if the current position matches the position it was at two steps back then you would indicate a match by pressing the position key. (The previous slide showed an example of position and color matches at n=1).</p>
+                    <p>The n in n-back refers to the number of positions back that you have to keep track of. The example below demonstrates gameplay at n=2, therefore if the current position matches the position it was at <b>two steps back</b> then you would indicate a match by pressing the position key. (The previous slide showed an example of position and color matches at n=1).</p>
                   </div>
                 </div>
                 <img src="./images/nback.gif" alt="Gameplay Pattern"></img>
