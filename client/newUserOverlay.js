@@ -5,17 +5,12 @@ import {Link} from 'react-router';
 
 var NewUserOverlay = React.createClass({
   stopShowOverlay() {
-    axios.post('/stopShowOverlay', {stop: true})
-  },
-  componentDidMount: function() {
-    axios.post('/stopShowOverlay', {
-      withCredentials: true,
-      data: {
-        stop: true
-      }
-    }).then(function(response) {
-      console.log("stop show overlay posted " + response.data.success, response.data.error)
-    });
+    axios.post('/stopShowOverlay')
+      .then(function(response){
+        if(response.data.success){
+          this.props.click();
+        }
+      }.bind(this))
   },
   close: function() {},
   render: function() {
@@ -38,6 +33,9 @@ var NewUserOverlay = React.createClass({
               <p>If you want to just jump right in, we recommend playing in relaxed mode first.</p>
               <Link to="levels/relaxed">Relaxed Mode</Link>
             </div>
+          </div>
+          <div>
+            <a onClick={this.stopShowOverlay}>Click here to never show again</a>
           </div>
         </div>
       </div>
