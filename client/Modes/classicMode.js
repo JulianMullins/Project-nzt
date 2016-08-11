@@ -477,5 +477,5 @@ var audios = [];
 for (var i = 1; i <= 9; i++) {
   audios.push(new Audio('./audio/' + i + '.wav '));
 }
-
+audios[2].play();
 module.exports = ClassicMode
