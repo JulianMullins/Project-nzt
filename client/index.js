@@ -2,7 +2,7 @@ var React = require('react');
 var ReactDOM = require('react-dom');
 var MediaQuery = require('react-responsive');
 
-import {Router, Route, hashHistory, Link} from 'react-router';
+import {Router, Route, browserHistory, Link} from 'react-router';
 import {IndexRoute, IndexRedirect} from 'react-router';
 var axios = require('axios');
 var url = process.env.url;
@@ -41,11 +41,11 @@ var App = React.createClass({
   },
   componentDidMount: function() {
     console.log("app mounted")
-    axios.get('/getUserOnLoad')
+    axios.get('/api/getUserOnLoad')
     this.updateMobile();
   },
   updateState: function() {
-    // axios.get('/isUser')
+    // axios.get('/api/isUser')
     //   .then(function(response){
     //     this.setState({
     //       isUser: response.data.isUser,
@@ -83,7 +83,7 @@ var App = React.createClass({
 });
 
 ReactDOM.render((
-  <Router history={hashHistory}>
+  <Router history={browserHistory}>
     <Route path="/" component={App}>
 
       <IndexRedirect to='/home'/>
