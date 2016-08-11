@@ -89,6 +89,11 @@ var MyComponent = React.createClass({
   },
   componentDidMount: function() {
     axios.get('/getStats', {withCredentials: true}).then(function(responseJson) {
+      console.log("stats: ", responseJson);
+      if(responseJson.data.success === false) {
+        return
+      }
+      
       stats = responseJson.data.stats;
       console.log(stats)
       this.state.data = [];
