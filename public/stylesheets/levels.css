@@ -6,6 +6,8 @@
   text-align: center;
 }
 .levelBox {
+  display: flex;
+  flex-direction: column;
   text-align: center;
   perspective: 5000px;
   perspective-origin: 60%;
@@ -147,5 +149,11 @@
   }
   .levelsFooter a h3 {
     font-size: 1.5em;
+  }
+}
+
+@media all and (max-height: 768px) {
+  .levelBox h1 {
+    font-size: 4em !important;
   }
 }
