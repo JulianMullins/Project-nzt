@@ -82,16 +82,17 @@
   width: auto;
 }
 .silentButton {
-  background-color: #7CD9D2;
-}
-.silentButton:active {
-  background-color: #52BDB5;
-}
-.relaxedButton {
   background-color: #01B6A7;
 }
-.relaxedButton:active {
+.silentButton:active {
   background-color: #008C82;
+}
+.relaxedButton {
+  background-color: #7CD9D2;
+
+}
+.relaxedButton:active {
+  background-color: #52BDB5;
 }
 .classicButton {
   background-color: #F13542;
