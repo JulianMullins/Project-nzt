@@ -711,3 +711,4 @@ var newStyle = [
 ]
 
 module.exports = SilentMode
+>>>>>>> refs/remotes/origin/master
