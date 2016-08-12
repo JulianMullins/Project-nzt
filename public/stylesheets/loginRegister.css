@@ -158,6 +158,12 @@ button.form-btn.dx a, button.form-btn.dx2 a {
   color: white;
 }
 
+@media (max-height: 768px) {
+  .loginContent h1, .register-log h1 {
+    font-size: 8vw;
+  }
+}
+
 /*register page*/
 
 .register {
