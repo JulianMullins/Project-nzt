@@ -88,7 +88,8 @@ var getMaxN = function(mode, cb) {
 var LevelOverlay = React.createClass({
   getInitialState: function() {
     return {
-      maxN: 1, mode: this.props.location.pathname.split('/')[2],
+      maxN: 1, 
+      mode: this.props.location.pathname.split('/')[2],
       error: this.props.params.error
     }
   },

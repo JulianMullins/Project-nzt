@@ -84,7 +84,7 @@ passport.use(new LocalStrategy({
     passReqToCallback: true
   },
   function(req, username, password, done) {
-    console.log("PASSPORT INITIALIZED ", req.user)
+    console.log("PASSPORT INITIALIZED ", req.user,req.body,username,password)
 
     //check if already logged in
     if (req.user && req.session.fullUser) {
@@ -92,8 +92,12 @@ passport.use(new LocalStrategy({
       return done(null, req.user);
     }
 
-    //login tempuser
-    //don't need to now since data's in session, not user
+
+    //check if all data is there
+    if(!username || !password || username.length<4 || password.length<4){
+      return done("Please enter proper credentials");
+    }
+
 
     //log in real users
     console.log("PASSPORT DATA: ", username, password, req.body)
@@ -126,7 +130,7 @@ passport.use(new LocalStrategy({
         //check hashed passwords
         bcrypt.compare(password, user.password, function(err, response) {
           if (err) {
-            return done(err)
+            return done('problem comparing hashed passwords',err)
           } else if (!response) {
             return done('incorrect password', false, {
               message: "Incorrect password"
@@ -432,7 +436,7 @@ app.use(function(req, res, next) {
 if (app.get('env') === 'development') {
   app.use(function(err, req, res, next) {
     // res.status(err.status || 500);
-
+    console.log(err);
     res.json({
       success: false,
       message: err

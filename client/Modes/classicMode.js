@@ -70,6 +70,7 @@ var ClassicMode = React.createClass({
       scoreUpdate: ''
     }
   },
+
   componentDidMount: function() {
     startGameFunction(this.state.mode, this.state.N, function(err, obj) {
       if (err) {
@@ -88,10 +89,12 @@ var ClassicMode = React.createClass({
     }.bind(this));
     console.log("component mounted")
   },
+
   componentWillUnmount: function() {
     clearInterval(iterations);
     clearInterval(soundInterval);
   },
+
   enableKeys: function() {
     window.onkeyup = function(e) {
       if (e.keyCode == 37) {
@@ -102,6 +105,7 @@ var ClassicMode = React.createClass({
       }
     }.bind(this)
   },
+
   startGame: function() {
     this.setState({overlay: false});
     for (var i = 0; i < 9; i++) {
@@ -125,6 +129,7 @@ var ClassicMode = React.createClass({
     this.positionAndSound();
     this.enableKeys();
   },
+
   match: function() {
     this.setState({
       currentScore: (((2000 - (this.state.reactionEnd - this.state.reactionStart)) / 1000) * this.state.positivePoints).toFixed(2)
@@ -140,6 +145,7 @@ var ClassicMode = React.createClass({
     });
     console.log("currentScore: " + this.state.currentScore, "fullScore: " + this.state.fullScore)
   },
+
   incorrect: function(number) {
     if (!number) {
       number = 1
@@ -162,6 +168,7 @@ var ClassicMode = React.createClass({
       scoreUpdate: 'scoreUpdate scoreUpdateNeg'
     });
   },
+
   setButton: function(button, _class) {
     var obj = {};
     obj[button] = _class;
@@ -172,6 +179,7 @@ var ClassicMode = React.createClass({
       }.bind(this), 200);
     }.bind(this))
   },
+
   positionAndSound: function() {
     var positionQueue = [];
     var soundQueue = [];
@@ -438,6 +446,6 @@ var newStyle = {
 
 var audios = [];
 for (var i = 1; i <= 9; i++) {
-  audios.push(new Audio('./audio/' + i + '.wav '));
+  audios.push(new Audio('/audio/' + i + '.wav '));
 }
 module.exports = ClassicMode

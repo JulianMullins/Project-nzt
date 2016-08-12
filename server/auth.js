@@ -45,6 +45,8 @@ module.exports = function(passport) {
     return errors;
   };
 
+
+
   router.post('/register', function(req, res,next) {
     
     //didn't fill out form right
@@ -79,7 +81,9 @@ module.exports = function(passport) {
               var password = hash;
               
               //check if user has a facebook user account already
-              User.findOne({email:req.body.email},function(err,user){
+              User.findOne({email:req.body.email})
+                .populate('stats')
+                .exec(function(err,user){
                 if(err){
                   return next(err);
                 }
@@ -112,7 +116,7 @@ module.exports = function(passport) {
 
                   if(req.session.user){
                     u.currentGame=req.session.user.currentGame;
-                    u.stats = req.session.user.stats;
+                    u.stats = req.session.user.stats._id;
                     u.maxN = req.session.user.maxN;
                   }
                   else{
@@ -181,13 +185,13 @@ module.exports = function(passport) {
     
  }
 
-  // router.get('/login/failure',function(req,res,next){
-  //   res.status(401).json({success:false})
-  //   //res.json({success:false,error:"login failure"})
-  // })
+  router.get('/login/failure',function(req,res,next){
+    res.status(401).json({success:false})
+    //res.json({success:false,error:"login failure"})
+  })
 
-  // POST Login page
-  router.post('/login', passport.authenticate('local'), function(req,res,next){
+  //POST Login page
+  router.post('/login', passport.authenticate('local',{failureRedirect:'/#/login/error'}), function(req,res,next){
     console.log(req.session.user); 
     req.session.user = req.user;
     Stats.findById(req.session.user.stats)
@@ -209,6 +213,10 @@ module.exports = function(passport) {
     res.json({success:true});
 
 	});
+
+  // router.post('/login',passport.authenticate('local',{failureRedirect:'/#/login/error'}),function(req,res,next){
+  //   res.json({success:true})
+  // })
 
   
   // facebook

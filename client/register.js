@@ -73,7 +73,12 @@ var RegisterOverlay = React.createClass({
 
       }
       else{
-        this.setState({error:response.data.message.join(' • ')})
+        console.log("failed register")
+        var errors = response.data.message;
+        if(typeof(errors)!=='string'){
+          errors=response.data.message.join(' • ')
+        }
+        this.setState({error:errors})
       }
     }.bind(this));
   },

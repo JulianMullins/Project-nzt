@@ -96,7 +96,7 @@ input, button {
   color: #3b5998;
   background-color: white;
 }
-button.form-btn {
+.form-btn {
   width: 50vw;
   height: 60px;
   bottom: 0;
@@ -104,6 +104,7 @@ button.form-btn {
   font-size: calc(12px + .5vw);
   text-transform: uppercase;
   margin: 2vw;
+
 }
 button.form-btn.sx {
   left: 0;
@@ -111,12 +112,12 @@ button.form-btn.sx {
   color: #fff;
   transition: all 0.3s linear;
 }
-button.form-btn.dx:hover {
+.form-btn.dx:hover {
   background-color: rgba(255, 125, 0, 0.65);
   cursor: pointer;
   color: #fff;
 }
-button.form-btn.dx {
+.form-btn.dx {
   right: 0;
   background-color: #f1ba03;
   color: #fff;
