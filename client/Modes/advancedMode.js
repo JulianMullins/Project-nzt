@@ -779,7 +779,7 @@ var AdvancedMode = React.createClass({
             </div>
           </div>
         </div>
-        <Link to="/home"><img className="whiteLogo" src="./images/CortexLogo3.png"/></Link>
+        <Link to="/home"><img className="whiteLogo" src="../../images/CortexLogo3.png"/></Link>
       </div>
     );
   }

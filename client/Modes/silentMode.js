@@ -600,6 +600,7 @@ var SilentMode = React.createClass({
       if (timeKeeper === 0) {
         clearInterval(iterations);
         setTimeout(function() {
+          console.log("reaction times: ", this.state.reactionTimes);
           endGameFunction(this.state.fullScore, this.state.reactionTimes, this.state.gameId, this.state.userId, function(success) {
             if (success) {
               this.props.history.push('/gameOver')
@@ -772,7 +773,7 @@ var SilentMode = React.createClass({
             </div>
           </div>
         </div>
-        <Link to="/home"><img className="gameHomeBtn whiteLogo" src="./images/CortexLogo3.png"/></Link>
+        <Link to="/home"><img className="gameHomeBtn whiteLogo" src="../../images/CortexLogo3.png"/></Link>
       </div>
     );
   }
