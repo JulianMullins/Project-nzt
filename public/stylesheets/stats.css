@@ -20,7 +20,7 @@
   flex-direction: row;
   align-items: center;
   justify-content: center;
-  height: 50vh;
+  height: 60vh;
 }
 
 .statsPageContainer h1 {
@@ -68,7 +68,7 @@ text {
   flex-direction: row;
   align-items: center;
   justify-content: space-around;
-  height: 30vh;
+  height: 20vh;
   width: 100%;
 }
 
@@ -108,7 +108,7 @@ path.domain {
 }
 
 .react-d3-core__label.label {
-  display: none;
+  font-size: 18px;
 }
 
 @media all and (max-width: 768px) {
