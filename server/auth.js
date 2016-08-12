@@ -191,7 +191,7 @@ module.exports = function(passport) {
   })
 
   //POST Login page
-  router.post('/login', passport.authenticate('local',{failureRedirect:'/#/login/error'}), function(req,res,next){
+  router.post('/login', passport.authenticate('local',{failureRedirect:'/login/error'}), function(req,res,next){
     console.log(req.session.user); 
     req.session.user = req.user;
     Stats.findById(req.session.user.stats)
@@ -227,8 +227,8 @@ module.exports = function(passport) {
 
   router.get('/login/facebook/callback',
     passport.authenticate('facebook',
-      {failureRedirect: '/#/login/facebook/error',
-      successRedirect:'/#/login/facebook/success'} ))
+      {failureRedirect: '/login/facebook/error',
+      successRedirect:'/login/facebook/success'} ))
     // ,
     // function(req, res) {
     //   console.log(req,req.path,req.location);
@@ -247,8 +247,8 @@ module.exports = function(passport) {
 
   router.get('gameOver/login/facebook/callback',
     passport.authenticate('facebook',
-      {failureRedirect: '/#/gameOver/login/facebookError',
-      successRedirect:'/#/gameOver/login/facebook/success'} ))
+      {failureRedirect: '/gameOver/login/facebookError',
+      successRedirect:'/gameOver/login/facebook/success'} ))
 
 
   // reset user currentgame and logout (or err if !req.user)
