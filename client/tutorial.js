@@ -138,9 +138,8 @@ var Tutorial = React.createClass({
                 <div className="rulemode2">
                   <div className="rules2">
                     <h2>Welcome to Cortex!</h2>
-                    <p>Cortex is a game designed to exercise your working memory and increase fluid-intelligence (directly tied to IQ). This method of increasing IQ is
-                      <Link to="/sciencse" className="tutorialLink">
-                        scientifically supported and backed by numerous research studies</Link>. While the game can be tricky to grasp at first and increases in difficulty rather quickly, we have tried to make this game as fun and as easy to learn as possible. We hope that you’ll enjoy simply playing the game and that the cognitive benefits will follow along as you progress.</p>
+                    <p>Cortex is a game designed to exercise your working memory and increase your fluid-intelligence (the aspect of intelligence that IQ tests measure). This method of increasing IQ is <Link to="/science" className="tutorialLink">scientifically supported and backed by numerous research studies</Link>. 
+                    Although the game is naturally challenging, we have designed it to be as easy to learn as possible. We hope that you’ll enjoy playing the game and that the cognitive benefits will simply follow along as you progress further.</p>
                     <h3>Let&#39;s get started!
                     </h3>
                     <img src="./images/brain.png" alt="brain"></img>
@@ -152,7 +151,9 @@ var Tutorial = React.createClass({
                 <div className="rulemode2">
                   <div className="rules2">
                     <h2>Dual n-back</h2>
-                    <p>Cortex is based on the n-back genre of brain training games which requires players to keep track of various changes happening on-screen. Traditionally the game requires players to keep track of two things: position and sound (the 'dual' in dual n-back). In this game, we have incorporated changing colors as well, and divided up the modes based on the number of things you have to keep track of (mono, dual and triple n-back).</p>
+                    <p>Cortex is based on the <i>dual n-back</i> genre of brain training games. Traditionally the game requires players to keep track of two changing elements: position and sound (the 'dual' in dual n-back). 
+                    However, in this version of the game, we have also incorporated changing colors and have divided up the four game modes accordingly. For example, in relaxed mode you only have to keep track of changing position 
+                    but in advanced mode you have to keep track of changing position, color and sound.</p>
                   </div>
                 </div>
                 <img src="./images/colorPosition.gif" alt="Color & Position"></img>
@@ -162,7 +163,7 @@ var Tutorial = React.createClass({
                 <div className="rulemode2">
                   <div className="rules2">
                     <h2>The n-back part</h2>
-                    <p>The n in n-back refers to the number of positions back that you have to keep track of. The example below demonstrates gameplay at n=2. Therefore, if the current position matches the position it was at two steps back then you would indicate a match by pressing the position key. (The previous slide showed an example of position and color matches at n=1).</p>
+                    <p>The n in n-back refers to the number of positions back that you have to keep track of. The example below demonstrates gameplay at n=2, therefore if the current position matches the position it was at <b>two steps back</b> then you would indicate a match by pressing the position key. (The previous slide showed an example of position and color matches at n=1).</p>
                   </div>
                 </div>
                 <img src="./images/nback.gif" alt="Gameplay Pattern"></img>

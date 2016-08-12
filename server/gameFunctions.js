@@ -203,7 +203,7 @@ router.post('/gameEnd',function(req,res,next){
           })
 
           // post to gameOver
-          // axios.post('/gameOver',{
+          // axios.post('/api/gameOver',{
           //   userId: req.body.userId
           // })
 

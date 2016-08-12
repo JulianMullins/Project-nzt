@@ -90,7 +90,7 @@ var RelaxedMode = React.createClass({
   },
   startGame: function() {
 
-    axios.get('/isUser').then(function(response) {
+    axios.get('/api/isUser').then(function(response) {
       console.log(response.data)
     })
 

@@ -31,7 +31,7 @@ var NavBar = React.createClass({
 	    // 	this.setState({loggedIn:isUser})
 	    // }.bind(this))
 
-		axios.get('/isUser')
+		axios.get('/api/isUser')
 	      .then(function(response){
 	        this.setState({
 	          isUser: response.data.isUser,

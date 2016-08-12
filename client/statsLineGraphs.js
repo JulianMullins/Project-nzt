@@ -88,7 +88,12 @@ var MyComponent = React.createClass({
     }
   },
   componentDidMount: function() {
-    axios.get('/getStats', {withCredentials: true}).then(function(responseJson) {
+    axios.get('/api/getStats', {withCredentials: true}).then(function(responseJson) {
+      console.log("stats: ", responseJson);
+      if(responseJson.data.success === false) {
+        return
+      }
+      
       stats = responseJson.data.stats;
       console.log(stats)
       this.state.data = [];
@@ -133,7 +138,7 @@ var MyComponent = React.createClass({
     }.bind(this))
 
     //get highest n-level
-    axios.get('/getMaxN').then(function(response) {
+    axios.get('/api/getMaxN').then(function(response) {
       var maxN = 0;
       for (var key in response.data.maxN) {
         if (response.data.maxN[key] > maxN) {
@@ -144,7 +149,7 @@ var MyComponent = React.createClass({
     }.bind(this))
 
     //get highest score
-    axios.get('/myHighScores').then(function(response) {
+    axios.get('/api/myHighScores').then(function(response) {
       var highScore = 0;
       for (var i = 0; i < response.data.length; i++) {
         if (response.data[i].score > highScore) {
@@ -155,7 +160,7 @@ var MyComponent = React.createClass({
     }.bind(this));
 
     //get user full name
-    axios.get('/homeUserInfo').then(function(response) {
+    axios.get('/api/homeUserInfo').then(function(response) {
       console.log(response.data)
       this.setState({fullName: response.data.name})
     }.bind(this))

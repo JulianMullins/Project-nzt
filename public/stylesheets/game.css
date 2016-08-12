@@ -58,7 +58,6 @@
   width: 100%;
   height: 100%;
 }
-
 .gameButtonsContainer div {
   display: flex;
   justify-content: center;
@@ -66,7 +65,6 @@
   height: 80%;
   width: 40%;
 }
-
 .gameButtonsContainer a {
   display: flex;
   flex-direction: column;
@@ -80,11 +78,9 @@
   cursor: default;
   padding: 2vh;
 }
-
 .advancedBtnContainer a {
   width: auto;
 }
-
 .silentButton {
   background-color: #7CD9D2;
 }
@@ -153,26 +149,25 @@
   font-size: 64px;
   width: 70%;
 }
-
 .gameScore h2 {
   width: 50%;
 }
 
 /*button alerts*/
-.goodJob{
+
+.goodJob {
   background-color: green;
   -webkit-animation-name: positiveFadeOut;
-  -webkit-animation-duration: 2s;
+  -webkit-animation-duration: .2s;
   animation-name: positiveFadeOut;
-  animation-duration: 2s;
+  animation-duration: .2s;
 }
-
-.youFailed{
-  background-color:red;
+.youFailed {
+  background-color: red;
   -webkit-animation-name: negativeFadeOut;
-  -webkit-animation-duration: 2s;
+  -webkit-animation-duration: .2s;
   animation-name: negativeFadeOut;
-  animation-duration: 2s;
+  animation-duration: .2s;
 }
 
 /* negative alert fade */
@@ -199,6 +194,7 @@
 }
 
 /* positive alert fade */
+
 @keyframes positiveFadeOut {
   from {
     background-color: rgba(0, 204, 153, 0.8);
@@ -221,17 +217,16 @@
 }
 
 /* score alert updates */
+
 .scoreUpdatePos {
   color: #01B6A7;
 }
 .scoreUpdateNeg {
   color: #F13542;
 }
-
-.scoreUpdateHalf{
+.scoreUpdateHalf {
   color: yellow;
 }
-
 .scoreUpdate {
   font-weight: bold !important;
   -webkit-animation-name: scoreUpdateIn;
@@ -239,7 +234,6 @@
   animation-name: scoreUpdateIn;
   animation-duration: 2s;
 }
-
 @keyframes scoreUpdateIn {
   0% {
     transform: scale3d(0, 0, 1);
@@ -310,11 +304,9 @@
     margin: 0;
     font-size: 2vh;
   }
-
   .gameScore h2 {
     width: auto;
   }
-
   .gameScore {
     width: 70%;
   }

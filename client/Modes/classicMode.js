@@ -58,18 +58,19 @@ var ClassicMode = React.createClass({
       modeMultiplier: 1,
       penalty: 0,
       positivePoints: 0,
-      fullScore:0,
-      currentScore:null,
-      matchCount:0,
-      matchHit:0,
-      reactionTimes:[],
-      reactionStart:null,
-      reactionEnd:null,
-      gameScore:0,
-      scoreAlert:'',
-      scoreUpdate:''
+      fullScore: 0,
+      currentScore: null,
+      matchCount: 0,
+      matchHit: 0,
+      reactionTimes: [],
+      reactionStart: null,
+      reactionEnd: null,
+      gameScore: 0,
+      scoreAlert: '',
+      scoreUpdate: ''
     }
   },
+
   componentDidMount: function() {
     startGameFunction(this.state.mode, this.state.N, function(err, obj) {
       if (err) {
@@ -88,10 +89,12 @@ var ClassicMode = React.createClass({
     }.bind(this));
     console.log("component mounted")
   },
+
   componentWillUnmount: function() {
     clearInterval(iterations);
     clearInterval(soundInterval);
   },
+
   enableKeys: function() {
     window.onkeyup = function(e) {
       if (e.keyCode == 37) {
@@ -102,6 +105,7 @@ var ClassicMode = React.createClass({
       }
     }.bind(this)
   },
+
   startGame: function() {
     this.setState({overlay: false});
     for (var i = 0; i < 9; i++) {
@@ -109,7 +113,6 @@ var ClassicMode = React.createClass({
     }
     setTimeout(function() {
       for (var i = 0; i < 9; i++) {
-        console.log(audios[i], audios[i].volume);
         audios[i].play();
       }
     }, 300);
@@ -127,13 +130,13 @@ var ClassicMode = React.createClass({
     this.enableKeys();
   },
 
-  match(){
+  match: function() {
     this.setState({
-      currentScore: (((2000 - (this.state.reactionEnd-this.state.reactionStart)) / 1000) * this.state.positivePoints).toFixed(2)
+      currentScore: (((2000 - (this.state.reactionEnd - this.state.reactionStart)) / 1000) * this.state.positivePoints).toFixed(2)
     });
     console.log(this.state.currentScore)
     this.setState({
-      reactionTimes: this.state.reactionTimes.concat([this.state.reactionEnd-this.state.reactionStart]),
+      reactionTimes: this.state.reactionTimes.concat([this.state.reactionEnd - this.state.reactionStart]),
       fullScore: this.state.fullScore + parseFloat(this.state.currentScore),
       matchCount: this.state.matchCount + 1,
       matchHit: this.state.matchHit + 1,
@@ -143,13 +146,13 @@ var ClassicMode = React.createClass({
     console.log("currentScore: " + this.state.currentScore, "fullScore: " + this.state.fullScore)
   },
 
-  incorrect(number){
-    if(!number){
-      number=1
+  incorrect: function(number) {
+    if (!number) {
+      number = 1
     }
-    if ((this.state.fullScore - number*this.state.penalty) >= 0) {
+    if ((this.state.fullScore - number * this.state.penalty) >= 0) {
       this.setState({
-        currentScore: -number*this.state.penalty
+        currentScore: -this.state.penalty
       })
     } else {
       this.setState({
@@ -157,7 +160,7 @@ var ClassicMode = React.createClass({
       })
     }
     this.setState({
-      reactionTimes: this.state.reactionTimes.concat([this.state.reactionEnd-this.state.reactionStart]),
+      reactionTimes: this.state.reactionTimes.concat([this.state.reactionEnd - this.state.reactionStart]),
       //matchHit: this.state.matchHit - 1,
       matchCount: this.state.matchCount + 1,
       fullScore: this.state.fullScore + this.state.currentScore,
@@ -166,7 +169,16 @@ var ClassicMode = React.createClass({
     });
   },
 
-
+  setButton: function(button, _class) {
+    var obj = {};
+    obj[button] = _class;
+    this.setState(obj, function() {
+      setTimeout(function() {
+        obj[button] = '';
+        this.setState(obj);
+      }.bind(this), 200);
+    }.bind(this))
+  },
 
   positionAndSound: function() {
     var positionQueue = [];
@@ -183,57 +195,38 @@ var ClassicMode = React.createClass({
 
         if (!this.state.soundPressed && !this.state.positionPressed) {
           this.incorrect(2);
-          this.setState({
-            positionButton: 'youFailed',
-            soundButton: 'youFailed'
-          })
-        }
-        else if(!this.state.soundPressed){
+          this.setButton('soundButton', 'youFailed')
+          this.setButton('positionButton', 'youFailed')
+        } else if (!this.state.soundPressed) {
           this.incorrect();
-          this.setState({
-            soundButton: 'youFailed'
-          })
-        }
-        else if(!this.state.positionPressed){
+          this.setButton('soundButton', 'youFailed')
+        } else if (!this.state.positionPressed) {
           this.incorrect();
-          this.setState({
-            positionButton:'youFailed'
-          })
+          this.setButton('positionButton', 'youFailed') ///sound match cases
         }
 
-      }
-
-      ///sound match cases
-      else if (this.state.soundMatch) {
+      } else if (this.state.soundMatch) {
 
         //missed sound match
         if (!this.state.soundPressed) {
           this.incorrect();
-          this.setState({
-            soundButton: 'youFailed'
-          })
+          this.setButton('soundButton', 'youFailed') ///position match cases
         }
 
-      }
-
-      ///position match cases
-      else if (this.state.positionMatch) {
+      } else if (this.state.positionMatch) {
 
         //missed position match
         if (!this.state.positionPressed) {
           //this.missedSingle('Missed a position match!','none');
           this.incorrect();
-          this.setState({
-            positionButton:'youFailed'
-          })
+          this.setButton('positionButton', 'youFailed')
         }
 
       }
 
-
       this.setState({
-        reactionStart:new Date(),
-        reactionEnd:null,
+        reactionStart: new Date(),
+        reactionEnd: null,
         positionMatch: false,
         soundMatch: false,
         positionPressed: false,
@@ -242,16 +235,8 @@ var ClassicMode = React.createClass({
         soundStyle: noStyle,
         //score: this.state.score
       })
-
       setTimeout(function() {
-        this.setState({
-          alert: ' ',
-          alertType: ' ',
-          currentScore:null,
-          scoreUpdate:'',
-          positionButton:'',
-          soundButton:''
-        });
+        this.setState({alert: ' ', alertType: ' ', currentScore: null, scoreUpdate: ''});
       }.bind(this), 800);
 
       if (timeTilPositionMatch === 0) {
@@ -307,9 +292,7 @@ var ClassicMode = React.createClass({
       }
       //reactionStart = Date.now()
 
-      this.setState({
-        reactionStart: Date.now()
-      })
+      this.setState({reactionStart: Date.now()})
 
       // audios[nextSound].play();
       this.state.style[nextPosition] = newStyle;
@@ -355,17 +338,12 @@ var ClassicMode = React.createClass({
     if (this.state.positionPressed) {
       return;
     }
-    if(this.state.positionMatch){
-      this.setState({
-        reactionEnd: Date.now(),
-        positionButton: 'goodJob'
-      })
+    if (this.state.positionMatch) {
+      this.setState({reactionEnd: Date.now()})
+      this.setButton('positionButton', 'goodJob');
       this.match();
-    }
-    else{
-      this.setState({
-        positionButton: 'youFailed'
-      })
+    } else {
+      this.setButton('positionButton', 'youFailed');
       this.incorrect();
     }
 
@@ -375,20 +353,14 @@ var ClassicMode = React.createClass({
     if (this.state.soundPressed) {
       return;
     }
-    if(this.state.soundMatch){
-      this.setState({
-        reactionEnd: Date.now(),
-        soundButton: 'goodJob'
-      })
+    if (this.state.soundMatch) {
+      this.setState({reactionEnd: Date.now()})
+      this.setButton('soundButton', 'goodJob');
       this.match();
-    }
-    else{
-      this.setState({
-        soundButton: 'youFailed'
-      })
+    } else {
+      this.setButton('soundButton', 'youFailed');
       this.incorrect();
     }
-
     this.setState({soundPressed: true, soundStyle: pushStyle});
   },
 
@@ -397,7 +369,6 @@ var ClassicMode = React.createClass({
     var overlay = this.state.overlay
       ? (<StartOverlay nLevel={this.state.N} mode={this.state.mode} click={this.startGame}/>)
       : '';
-
 
     var gameTimer = this.state.overlay
       ? ""
@@ -475,7 +446,6 @@ var newStyle = {
 
 var audios = [];
 for (var i = 1; i <= 9; i++) {
-  audios.push(new Audio('./audio/' + i + '.wav '));
+  audios.push(new Audio('/audio/' + i + '.wav '));
 }
-
 module.exports = ClassicMode
