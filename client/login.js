@@ -45,7 +45,7 @@ var LoginOverlay = React.createClass({
       username: this.state.username,
       password: this.state.password
     }).then(function(response) {
-      console.log("response: " + response.data.success)
+      console.log("response: " + response.data.success, response)
       if (response.data.success) {
 
         if (this.state.isGameOver) {
@@ -76,7 +76,7 @@ var LoginOverlay = React.createClass({
               <input type="password" placeholder="Password" name="password" id="password" value={this.state.password} onChange={this.update}></input>
               <div className="buttongroup">
 
-               
+
                 <a className="form-btn dx" onClick={this.login} type="button">Login</a>
                 <a className="fb" href={this.state.fbURL}>Login with Facebook</a>
               </div>
