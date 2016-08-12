@@ -285,7 +285,7 @@ var RelaxedMode = React.createClass({
       ? ""
       : (
         <GameTimer timeStyle={{
-          'color': "#01B6A7"
+          'color': "#7CD9D2"
         }}></GameTimer>
       );
 
@@ -342,11 +342,12 @@ var pushStyle = {
 
 var standardStyle = {
   backgroundColor: "transparent",
-  border: "3px solid #01B6A7"
+  border: "3px solid #7CD9D2"
 }
 
 var newStyle = {
-  backgroundColor: "#01B6A7"
+  backgroundColor: "#7CD9D2",
+  border: "3px solid #7CD9D2"
 }
 
 module.exports = RelaxedMode
