@@ -356,7 +356,6 @@ var SilentMode = React.createClass({
           this.incorrect();
           this.setState({positionButton: 'youFailed'}) ///color match cases
         }
-
       } else if (this.state.colorMatch) {
         //missed color match
         if (!this.state.colorPressed) {
@@ -379,7 +378,6 @@ var SilentMode = React.createClass({
         posStyle: noStyle,
         colorStyle: noStyle
       })
-
       // Remove alert
       setTimeout(function() {
         this.setState({

@@ -184,12 +184,13 @@ module.exports = function(passport) {
  
 
   router.get('/login/failure',function(req,res,next){
-    res.status(401).json({success:false})
+    res.json({success:false})
     //res.json({success:false,error:"login failure"})
   })
 
   //POST Login page
   router.post('/login', passport.authenticate('local',{failureRedirect:'/login/error'}), function(req,res,next){
+
     console.log(req.session.user); 
     req.session.user = req.user;
     Stats.findById(req.session.user.stats)
@@ -218,7 +219,7 @@ module.exports = function(passport) {
 
   
   // facebook
-  router.get('/auth/login/facebook',
+  router.get('/login/facebook',
     passport.authenticate('facebook', { scope:['email','user_friends']}), function(req,res,next){
       console.log("getting /login/facebook")
     });
@@ -238,7 +239,7 @@ module.exports = function(passport) {
     //   res.json({success:true});
     // });
 
-  router.get('/gameOver/auth/login/facebook',
+  router.get('/gameOver/login/facebook',
     passport.authenticate('facebook', { scope:['email','user_friends']}), function(req,res,next){
       console.log("getting /login/facebook")
     });
@@ -255,13 +256,19 @@ module.exports = function(passport) {
     if(req.session.user){
 
       req.logout();
-      req.session.destroy(function(err){
-        if(err){
-          res.json({success:false,message:'err in destroy'})
-        }
-        else{
-          res.json({success:true});
-        }
+      console.log("logged out "+req.user)
+      req.session.regenerate(function(){
+      //   function(err){
+      //   if(err){
+      //     res.json({success:false,message:'err in destroy'})
+      //   }
+      //   else{
+      //     console.log("session destroyed "+req.session)
+      //     res.json({success:true});
+      //   }
+      // }
+        console.log("regenerated")
+        res.json({success:true})
       });
     }
 
