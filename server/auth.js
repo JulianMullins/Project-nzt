@@ -45,6 +45,8 @@ module.exports = function(passport) {
     return errors;
   };
 
+
+
   router.post('/register', function(req, res,next) {
     
     //didn't fill out form right
@@ -79,7 +81,9 @@ module.exports = function(passport) {
               var password = hash;
               
               //check if user has a facebook user account already
-              User.findOne({email:req.body.email},function(err,user){
+              User.findOne({email:req.body.email})
+                .populate('stats')
+                .exec(function(err,user){
                 if(err){
                   return next(err);
                 }
@@ -112,7 +116,7 @@ module.exports = function(passport) {
 
                   if(req.session.user){
                     u.currentGame=req.session.user.currentGame;
-                    u.stats = req.session.user.stats;
+                    u.stats = req.session.user.stats._id;
                     u.maxN = req.session.user.maxN;
                   }
                   else{

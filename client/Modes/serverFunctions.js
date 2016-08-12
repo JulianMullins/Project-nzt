@@ -3,8 +3,9 @@ var axios = require('axios');
 
 var startGameFunction = function(mode, N, callback) {
   console.log("startGameFunction")
-  axios.post('/api/startGame/' + mode + '/' + N).then(function(response) {
-    if (!response.data.authorized) {
+  axios.post('/api/startGame/' + mode + '/' + N)
+  .then(function(response) {
+    if (N!==1 && !response.data.authorized) {
       console.log("unauthorized")
       return callback(true)
     }

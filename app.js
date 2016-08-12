@@ -130,7 +130,7 @@ passport.use(new LocalStrategy({
         //check hashed passwords
         bcrypt.compare(password, user.password, function(err, response) {
           if (err) {
-            return done(err)
+            return done('problem comparing hashed passwords',err)
           } else if (!response) {
             return done('incorrect password', false, {
               message: "Incorrect password"
