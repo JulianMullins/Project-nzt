@@ -16,7 +16,7 @@ var Contact = React.createClass({
             <div className="aboutProfile">
               <div className="profileInfo">
                 <h2>Julian Mullins</h2>
-                <p>Front-End</p>
+                <p><i>Product Manager / Front-End</i></p>
               </div>
               <img src="images/profiles/julian.jpg"/>
               <span className="socialMedia">
@@ -29,7 +29,7 @@ var Contact = React.createClass({
             <div className="aboutProfile">
               <div className="profileInfo">
                 <h2>Adam He</h2>
-                <p>Front-End</p>
+                <p><i>Front-End</i></p>
               </div>
               <img src="images/profiles/adam.jpg"/>
               <span className="socialMedia">
@@ -42,7 +42,7 @@ var Contact = React.createClass({
             <div className="aboutProfile">
               <div className="profileInfo">
                 <h2>Ruth Bagley</h2>
-                <p>Back-End</p>
+                <p><i>Back-End</i></p>
               </div>
               <img src="images/profiles/ruth.jpg"/>
               <span className="socialMedia">
@@ -55,7 +55,7 @@ var Contact = React.createClass({
             <div className="aboutProfile">
               <div className="profileInfo">
                 <h2>Taylor Concannon</h2>
-                <p>Back-End</p>
+                <p><i>Back-End</i></p>
               </div>
               <img src="images/profiles/taylor.jpg"/>
               <span className="socialMedia">
@@ -68,7 +68,7 @@ var Contact = React.createClass({
             <div className="aboutProfile">
               <div className="profileInfo">
                 <h2>Virginia Van Keuren</h2>
-                <p>Design</p>
+                <p><i>Designer</i></p>
               </div>
               <img src="images/profiles/virginia.jpg"/>
               <span className="socialMedia">
