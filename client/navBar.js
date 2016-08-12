@@ -6,7 +6,7 @@ var axios = require('axios');
 
 var updateLoggedIn = function(callback){
     axios({
-      url: '/isUser',
+      url: 'api/isUser',
       withCredentials: true
     }).then(function(response){
       callback(response.data.isUser,response.data.isloggedin);
@@ -19,7 +19,7 @@ var NavBar = React.createClass({
 		//console.log(this)
 		return {
 			open: false,
-			isloggedin:false,
+			isloggedIn:false,
 			isUser:false
 			// isloggedIn: this.props.isloggedin,
 			// loginFunction: this.props.loginFunction,
@@ -35,8 +35,9 @@ var NavBar = React.createClass({
 	      .then(function(response){
 	        this.setState({
 	          isUser: response.data.isUser,
-	          isloggedin: response.data.isloggedin
+	          isloggedIn: response.data.isloggedin
 	        })
+	        console.log(this.state);
 	      }.bind(this))
 
 	    //console.log(this.state)
@@ -46,13 +47,20 @@ var NavBar = React.createClass({
 		var loggedIn = updateLoggedIn(function(isUser,isloggedin){
 	    	this.setState({
 	    		isloggedIn:isloggedin, 
-	    		isUser:isUser})
+	    		isUser:isUser
+	    	})
 	    }.bind(this))
 		this.setState({
 			open: !this.state.open
 		});
 	},
 	close: function(e) {
+		var loggedIn = updateLoggedIn(function(isUser,isloggedin){
+	    	this.setState({
+	    		isloggedIn:isloggedin, 
+	    		isUser:isUser
+	    	})
+	    }.bind(this))
 		this.setState({
 			open: false
 		});
@@ -64,9 +72,9 @@ var NavBar = React.createClass({
 			open:false
 		})
 		
-		var loggedIn = updateLoggedIn(function(isUser,isloggedin){
-	    	this.setState({isloggedIn:isloggedin, isUser:isUser})
-	    }.bind(this))
+		// var loggedIn = updateLoggedIn(function(isUser,isloggedin){
+	 //    	this.setState({isloggedIn:isloggedin, isUser:isUser})
+	 //    }.bind(this))
 
 		// axios({
 	 //      url: '/isUser',
@@ -97,7 +105,7 @@ var NavBar = React.createClass({
 					<a className="bt-menu-trigger" onClick={this.click}><span>Menu</span></a>
 					<ul style={this.state.open ? {pointerEvents: 'auto'} : {pointerEvents: 'none'}}>
 						<li><Link to="/home" onClick={this.close}>Home</Link></li>
-						<li><Link to={logInOutLink} onClick={this.closeLogInOut}>{logInOrOut}</Link></li>
+						<li><Link to={logInOutLink} onClick={this.close}>{logInOrOut}</Link></li>
 						<li><Link to="/leaderboard" onClick={this.close}>Leaderboard</Link></li>
 						<li><Link to="/stats" onClick={this.close}>Stats</Link></li>
 						<li><Link to="/tutorial" onClick={this.close}>Tutorial</Link></li>

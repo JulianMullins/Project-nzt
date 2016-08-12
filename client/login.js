@@ -8,16 +8,27 @@ var LoginOverlay = React.createClass({
   getInitialState: function() {
     console.log(this)
     var error = null;
+    var isGameOver = false;
+    var fbUrl = this.props.location.pathname;
+    if(this.props.location.pathname.includes('gameOver')){
+      isGameOver = true;
+      fbUrl = '/api/gameOver/auth/login'
+    }
     if (this.props.params.error) {
       error = decodeURIComponent(this.props.params.error)
+      if(!isGameOver){
+        fbUrl='/api/auth/login'
+      }
     }
+    console.log(this.props)
     return {
       username: '',
       password: '',
       gameEnded: false,
       games: null,
       error: this.props.params.error,
-      fbURL: this.props.location.pathname + '/facebook'
+      fbURL: fbUrl + '/facebook',
+      isGameOver:isGameOver
     }
   },
   componentDidMount() {},
@@ -37,7 +48,7 @@ var LoginOverlay = React.createClass({
       console.log("response: " + response.data)
       if (response.data.success) {
 
-        if (this.props.location.pathname.includes('gameOver/login')) {
+        if (this.state.isGameOver) {
           console.log("gameOver login");
           this.props.history.push('/gameOver');
         } else {
@@ -49,6 +60,7 @@ var LoginOverlay = React.createClass({
     }.bind(this))
   },
   render: function() {
+    console.log(this.state.fbUrl)
     return (
       <div className="screen">
         <div className="login" id="login">
