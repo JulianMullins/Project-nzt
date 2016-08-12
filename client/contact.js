@@ -16,7 +16,7 @@ var Contact = React.createClass({
             <div className="aboutProfile">
               <div className="profileInfo">
                 <h2>Julian Mullins</h2>
-                <p>Front-End</p>
+                <p>Product Manager / Front-End</p>
               </div>
               <img src="images/profiles/julian.jpg"/>
               <span className="socialMedia">
