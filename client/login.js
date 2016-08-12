@@ -49,6 +49,7 @@ var LoginOverlay = React.createClass({
     }.bind(this))
   },
   render: function() {
+    console.log(this.state.fbUrl)
     return (
       <div className="screen">
         <div className="login" id="login">
