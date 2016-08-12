@@ -227,7 +227,7 @@ module.exports = function(passport) {
 
   router.get('/login/facebook/callback',
     passport.authenticate('facebook',
-      {failureRedirect: '/#/login/facebookError',
+      {failureRedirect: '/#/login/facebook/error',
       successRedirect:'/#/login/facebook/success'} ))
     // ,
     // function(req, res) {
