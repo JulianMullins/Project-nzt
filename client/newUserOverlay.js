@@ -14,7 +14,6 @@ var NewUserOverlay = React.createClass({
   },
   close: function() {},
   render: function() {
-    console.log("showing tutorial")
     return (
       <div className="overlaySmall">
         <span className="fa fa-times fa-3x closeButton" onClick={this.props.click}></span>

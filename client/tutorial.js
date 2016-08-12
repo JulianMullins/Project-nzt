@@ -90,7 +90,7 @@ var Tutorial = React.createClass({
         }).on('touchmove', function(e) {
           offsetX = e.originalEvent.touches[0].pageX;
         }).on('touchend', function(e) {
-          console.log(dragX, offsetX);
+          //console.log(dragX, offsetX);
           dragX = dragX - offsetX
           if (dragX < -30) {
             move(self.state.currentIndex - 1);

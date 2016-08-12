@@ -5,17 +5,17 @@ import { Link } from 'react-router';
 
 var Logout = React.createClass({
 	getInitialState(){
-		console.log("doing logout")
+		//console.log("doing logout")
 		return{
 			goHome:false
 		}
 	},
 	componentDidMount(){
-		console.log("gonna logout")
+		//console.log("gonna logout")
 		axios.post('/api/logout',{
 	      withCredentials: true
 	    }).then(function(response){
-	    	console.log(response.data)
+	    	//console.log(response.data)
 	    	if(response.data.success){
 	    		this.props.history.push('/login')
 	    	}
