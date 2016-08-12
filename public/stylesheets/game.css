@@ -157,14 +157,12 @@
 /*button alerts*/
 
 .goodJob {
-  background-color: green;
   -webkit-animation-name: positiveFadeOut;
   -webkit-animation-duration: .2s;
   animation-name: positiveFadeOut;
   animation-duration: .2s;
 }
 .youFailed {
-  background-color: red;
   -webkit-animation-name: negativeFadeOut;
   -webkit-animation-duration: .2s;
   animation-name: negativeFadeOut;

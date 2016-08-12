@@ -4,14 +4,12 @@ var StartOverlay = require('./gameStartOverlay');
 var axios = require('axios');
 import {Link} from 'react-router'
 
-
 var endGameFunction = require('./serverFunctions').endGameFunction;
 var startGameFunction = require('./serverFunctions').startGameFunction;
 
 //COLLECTION OF GLOBAL VARIABLES TO MAKE EVERYONES LIFE EASIER
 
 var iterations;
-
 
 var nextSound;
 var soundInterval;
@@ -47,13 +45,13 @@ var AdvancedMode = React.createClass({
       mode: 'advanced',
       tempUser: true,
       gameId: null,
-      fullScore:0,
-      currentScore:null,
-      matchCount:0,
-      matchHit:0,
-      reactionStart:null,
-      reactionTimes:[],
-      reactionEnd:null
+      fullScore: 0,
+      currentScore: null,
+      matchCount: 0,
+      matchHit: 0,
+      reactionStart: null,
+      reactionTimes: [],
+      reactionEnd: null
     }
   },
   componentDidMount: function() {
@@ -114,13 +112,13 @@ var AdvancedMode = React.createClass({
     this.enableKeys();
   },
 
-  match(){
+  match() {
     this.setState({
-      currentScore: (((2000 - (this.state.reactionEnd-this.state.reactionStart)) / 1000) * this.state.positivePoints).toFixed(2)
+      currentScore: (((2000 - (this.state.reactionEnd - this.state.reactionStart)) / 1000) * this.state.positivePoints).toFixed(2)
     });
     this.setState({
-      reactionTimes: this.state.reactionTimes.concat([this.state.reactionEnd-this.state.reactionStart]),
-      fullScore: this.state.fullScore+parseFloat(this.state.currentScore),
+      reactionTimes: this.state.reactionTimes.concat([this.state.reactionEnd - this.state.reactionStart]),
+      fullScore: this.state.fullScore + parseFloat(this.state.currentScore),
       matchCount: this.state.matchCount + 1,
       matchHit: this.state.matchHit + 1,
       currentScore: "+" + parseInt(this.state.currentScore),
@@ -129,13 +127,13 @@ var AdvancedMode = React.createClass({
     console.log("currentScore: " + this.state.currentScore, "fullScore: " + this.state.fullScore)
   },
 
-  incorrect(number){
-    if(!number){
-      number=1
+  incorrect(number) {
+    if (!number) {
+      number = 1
     }
-    if ((this.state.fullScore - number*this.state.penalty) >= 0) {
+    if ((this.state.fullScore - number * this.state.penalty) >= 0) {
       this.setState({
-        currentScore: -number*this.state.penalty
+        currentScore: -this.state.penalty
       })
     } else {
       this.setState({
@@ -143,13 +141,24 @@ var AdvancedMode = React.createClass({
       })
     }
     this.setState({
-      reactionTimes: this.state.reactionTimes.concat([this.state.reactionEnd-this.state.reactionStart]),
+      reactionTimes: this.state.reactionTimes.concat([this.state.reactionEnd - this.state.reactionStart]),
       //matchHit: this.state.matchHit - 1,
       matchCount: this.state.matchCount + 1,
       fullScore: this.state.fullScore + this.state.currentScore,
       currentScore: parseInt(this.state.currentScore),
       scoreUpdate: 'scoreUpdate scoreUpdateNeg'
     });
+  },
+
+  setButton: function(button, _class) {
+    var obj = {};
+    obj[button] = _class;
+    this.setState(obj, function() {
+      setTimeout(function() {
+        obj[button] = '';
+        this.setState(obj);
+      }.bind(this), 200);
+    }.bind(this))
   },
 
   playGame: function() {
@@ -165,20 +174,18 @@ var AdvancedMode = React.createClass({
       timeKeeper--;
 
       var tally = 0;
-      if(this.state.colorMatch && !this.state.colorPressed){
+      if (this.state.colorMatch && !this.state.colorPressed) {
         tally++;
       }
-      if(this.state.positionMatch && !this.state.positionPressed){
+      if (this.state.positionMatch && !this.state.positionPressed) {
         tally++;
       }
-      if(this.state.soundMatch && !this.state.soundPressed){
+      if (this.state.soundMatch && !this.state.soundPressed) {
         tally++;
       }
-      if(tally>0){
+      if (tally > 0) {
         this.incorrect(tally);
       }
-
-
 
       // ///triple match:
       // if (this.state.colorMatch && this.state.soundMatch && this.state.positionMatch) {
@@ -471,15 +478,7 @@ var AdvancedMode = React.createClass({
       // reactionStart = new Date();
       // this.setState({colorPressed: noStyle, soundPressed: noStyle, positionPressed: noStyle});
       setTimeout(function() {
-        this.setState({
-          alert: ' ',
-          alertType: ' ',
-          currentScore: null,
-          scoreUpdate:'',
-          positionButton:'',
-          soundButton:'',
-          colorButton:''
-        });
+        this.setState({alert: ' ', alertType: ' ', currentScore: null, scoreUpdate: ''});
       }.bind(this), 800);
       //NOT GOING TO ACTUALLY LIGHT UP COLORS UNTIL ALL IF STATEMENTS HAVE ITERATED
       //case 1: position match
@@ -563,11 +562,7 @@ var AdvancedMode = React.createClass({
       // reactionEnd = null;
       this.state.style[nextPosition] = newStyle[nextColor];
       audios[nextSound].play();
-      this.setState({
-        style: this.state.style,
-        reactionStart: Date.now(),
-        reactionEnd: null
-      });
+      this.setState({style: this.state.style, reactionStart: Date.now(), reactionEnd: null});
       setTimeout(function() {
         this.state.style[nextPosition] = standardStyle;
         this.setState({style: this.state.style});
@@ -579,7 +574,7 @@ var AdvancedMode = React.createClass({
         pMatch = false;
       }.bind(this), 800);
 
-///RUTH THIS IS WHERE THE GAME ENDS///////////////////////////////////////////
+      ///RUTH THIS IS WHERE THE GAME ENDS///////////////////////////////////////////
       if (timeKeeper === 0) {
         clearInterval(iterations);
         clearInterval(soundInterval);
@@ -598,7 +593,7 @@ var AdvancedMode = React.createClass({
           }.bind(this))
 
         }.bind(this), 2000);
-////////////////////////////////////////////////////////////////////////////////////
+        ////////////////////////////////////////////////////////////////////////////////////
       }
     }.bind(this), 2000);
   },
@@ -606,17 +601,12 @@ var AdvancedMode = React.createClass({
     if (this.state.colorPressed) {
       return;
     }
-    if(this.state.colorMatch){
-      this.setState({
-        reactionEnd: Date.now(),
-        colorButton: 'goodJob'
-      })
+    if (this.state.colorMatch) {
+      this.setState({reactionEnd: Date.now()});
+      this.setButton('colorButton', 'goodJob');
       this.match();
-    }
-    else{
-      this.setState({
-        colorButton: 'youFailed'
-      })
+    } else {
+      this.setButton('colorButton', 'youFailed');
       this.incorrect();
     }
     this.setState({colorPressed: true, colorStyle: pushStyle});
@@ -625,39 +615,26 @@ var AdvancedMode = React.createClass({
     if (this.state.positionPressed) {
       return;
     }
-    if(this.state.positionMatch){
-      this.setState({
-        reactionEnd: Date.now(),
-        positionButton: 'goodJob'
-      })
+    if (this.state.positionMatch) {
+      this.setState({reactionEnd: Date.now()});
+      this.setButton('positionButton', 'goodJob');
       this.match();
-    }
-    else{
-      this.setState({
-        positionButton: 'youFailed'
-      })
+    } else {
+      this.setButton('positionButton', 'youFailed');
       this.incorrect();
     }
-    this.setState({
-      positionPressed: true,
-      posStyle: pushStyle
-    });
+    this.setState({positionPressed: true, posStyle: pushStyle});
   },
   soundMatch: function() {
     if (this.state.soundPressed) {
       return;
     }
-    if(this.state.soundMatch){
-      this.setState({
-        reactionEnd: Date.now(),
-        soundButton: 'goodJob'
-      })
+    if (this.state.soundMatch) {
+      this.setState({reactionEnd: Date.now()});
+      this.setButton('soundButton', 'goodJob');
       this.match();
-    }
-    else{
-      this.setState({
-        soundButton: 'youFailed'
-      })
+    } else {
+      this.setState('soundButton', 'youFailed');
       this.incorrect();
     }
     this.setState({soundPressed: true, soundStyle: pushStyle});
@@ -830,7 +807,7 @@ var newStyle = [
 
 var audios = [];
 for (var i = 1; i <= 9; i++) {
-  audios.push(new Audio('./audio/' + i + '.wav '));
+  audios.push(new Audio('/audio/' + i + '.wav '));
 }
 
 module.exports = AdvancedMode

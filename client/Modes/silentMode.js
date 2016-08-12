@@ -129,6 +129,17 @@ var SilentMode = React.createClass({
     });
   },
 
+  setButton: function(button, _class) {
+    var obj = {};
+    obj[button] = _class;
+    this.setState(obj, function() {
+      setTimeout(function() {
+        obj[button] = '';
+        this.setState(obj);
+      }.bind(this), 200);
+    }.bind(this))
+  },
+
   positionAndColor: function() {
     var positionQueue = [];
     var colorQueue = [];
@@ -348,26 +359,27 @@ var SilentMode = React.createClass({
 
         if (!this.state.colorPressed && !this.state.positionPressed) {
           this.incorrect(2);
-          this.setState({positionButton: 'youFailed', colorButton: 'youFailed'})
+          this.setButton('positionButton', 'youFailed');
+          this.setButton('colorButton', 'youFailed');
         } else if (!this.state.colorPressed) {
           this.incorrect();
-          this.setState({colorButton: 'youFailed'})
+          this.setButton('colorButton', 'youFailed')
         } else if (!this.state.positionPressed) {
           this.incorrect();
-          this.setState({positionButton: 'youFailed'}) ///color match cases
+          this.setButton('positionButton', 'youFailed') ///color match cases
         }
       } else if (this.state.colorMatch) {
         //missed color match
         if (!this.state.colorPressed) {
           this.incorrect();
-          this.setState({colorButton: 'youFailed'}) ///position match cases
+          this.setButton('colorButton', 'youFailed'); ///position match cases
         }
       } else if (this.state.positionMatch) {
         //missed position match
         if (!this.state.positionPressed) {
           //this.missedSingle('Missed a position match!','none');
           this.incorrect();
-          this.setState({positionButton: 'youFailed'})
+          this.setButton('positionButton', 'youFailed');
         }
       }
       this.setState({
@@ -477,10 +489,11 @@ var SilentMode = React.createClass({
       return;
     }
     if (this.state.positionMatch) {
-      this.setState({reactionEnd: Date.now(), positionButton: 'goodJob'})
+      this.setState({reactionEnd: Date.now()})
+      this.setButton('positionButton', 'goodJob');
       this.match();
     } else {
-      this.setState({positionButton: 'youFailed'})
+      this.setButton('positionButton', 'youFailed');
       this.incorrect();
     }
     this.setState({positionPressed: true, posStyle: pushStyle});
@@ -490,10 +503,11 @@ var SilentMode = React.createClass({
       return;
     }
     if (this.state.colorMatch) {
-      this.setState({reactionEnd: Date.now(), colorButton: 'goodJob'})
+      this.setState({reactionEnd: Date.now()})
+      this.setButton('colorButton', 'goodJob');
       this.match();
     } else {
-      this.setState({colorButton: 'youFailed'})
+      this.setButton('colorButton', 'youFailed');
       this.incorrect();
     }
     this.setState({colorPressed: true, colorStyle: pushStyle});

@@ -65,7 +65,7 @@ var saveUserRemoveAnonymous = function(req,res,user){
       }
     });
   }
-    
+
  }
 
 
@@ -75,9 +75,9 @@ module.exports = function(passport) {
 
 
   router.post('/register', function(req, res,next) {
-    
+
     //didn't fill out form right
-    var validationErrors = validateReq(req.body) 
+    var validationErrors = validateReq(req.body)
     if (validationErrors.length!==0) {
       console.log("validation failed")
         res.json({success:false, message:validationErrors});
@@ -104,9 +104,9 @@ module.exports = function(passport) {
         //encrypt password
         bcrypt.genSalt(10, function(err, salt) {
           bcrypt.hash(req.body.password, salt, function(err, hash) {
-              // Store hash in your password DB. 
+              // Store hash in your password DB.
               var password = hash;
-              
+
               //check if user has a facebook user account already
               User.findOne({email:req.body.email})
                 .populate('stats')
@@ -150,11 +150,11 @@ module.exports = function(passport) {
                     u.showTutorial = true;
                   }
                   saveUserRemoveAnonymous(req,res,u);
-                  
+
                 }
 
                 //update user account (have facebook account already)
-                else{ 
+                else{
                   if(!user.password){
                     user.password = password;
                     user.save();
@@ -167,7 +167,7 @@ module.exports = function(passport) {
                     user.combineMaxN(req.session.user.maxN);
                   }
                   console.log(user);
-                  
+
                   saveUserRemoveAnonymous(req,res,user);
 
                 }
@@ -181,7 +181,7 @@ module.exports = function(passport) {
 
   });
 
- 
+
 
   router.get('/login/failure',function(req,res,next){
     res.json({success:false})
@@ -189,9 +189,9 @@ module.exports = function(passport) {
   })
 
   //POST Login page
-  router.post('/login', passport.authenticate('local',{failureRedirect:'/login/error'}), function(req,res,next){
+  router.post('/login', passport.authenticate('local',{failureRedirect:'login/error'}), function(req,res,next){
 
-    console.log(req.session.user); 
+    console.log(req.session.user);
     req.session.user = req.user;
     Stats.findById(req.session.user.stats)
       .populate('leaderboard progress')
@@ -217,7 +217,7 @@ module.exports = function(passport) {
   //   res.json({success:true})
   // })
 
-  
+
   // facebook
   router.get('/login/facebook',
     passport.authenticate('facebook', { scope:['email','user_friends']}), function(req,res,next){

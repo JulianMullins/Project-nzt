@@ -100,10 +100,10 @@ var RelaxedMode = React.createClass({
   },
   match() {
     this.setState({
-      currentScore: (((2000 - (this.state.reactionStop-this.state.reactionStart)) / 1000) * this.state.positivePoints).toFixed(2)
+      currentScore: (((2000 - (this.state.reactionStop - this.state.reactionStart)) / 1000) * this.state.positivePoints).toFixed(2)
     });
     this.setState({
-      reactionTimes: this.state.reactionTimes.concat([this.state.reactionStop-this.state.reactionStart]),
+      reactionTimes: this.state.reactionTimes.concat([this.state.reactionStop - this.state.reactionStart]),
       fullScore: this.state.fullScore + parseFloat(this.state.currentScore),
       matchCount: this.state.matchCount + 1,
       matchHit: this.state.matchHit + 1,
@@ -138,13 +138,22 @@ var RelaxedMode = React.createClass({
       //alert: alert,
       //scoreAlert: 'scoreAlertNegative',
       scoreUpdate: 'scoreUpdate scoreUpdateNeg',
-      currentScore: parseInt(this.state.currentScore),
-
+      currentScore: parseInt(this.state.currentScore)
     });
     // setTimeout(function() {
     //   console.log('been 800ms')
     //   this.setState({alert: ' ', currentScore: null, scoreAlert: ''});
     // }.bind(this), 800);
+  },
+  setButton: function(button, _class) {
+    var obj = {};
+    obj[button] = _class;
+    this.setState(obj, function() {
+      setTimeout(function() {
+        obj[button] = '';
+        this.setState(obj);
+      }.bind(this), 200);
+    }.bind(this))
   },
   position: function() {
     var posQueue = [];
@@ -154,36 +163,24 @@ var RelaxedMode = React.createClass({
     iterations = setInterval(function() {
       timeKeeper--;
 
-
-      if(!this.state.alreadyPressed && this.state.posMatch){
+      if (!this.state.alreadyPressed && this.state.posMatch) {
         this.incorrect();
-        this.setState({
-          positionButton:'youFailed'
-        })
+        this.setButton('positionButton', 'youFailed');
       }
 
       // if (this.state.keepScore && this.state.posMatch) {
       //   this.incorrect('Missed a match');
       // }
 
-      this.setState({
-        pressed: false,
-        keepScore: false,
-        posMatch: false,
-        alreadyPressed: false,
-        posStyle: noStyle});
+      this.setState({pressed: false, keepScore: false, posMatch: false, alreadyPressed: false, posStyle: noStyle});
 
       setTimeout(function() {
-        this.setState({
-          scoreUpdate:'',
-          positionButton:'',
-          currentScore:null
-        })
+        this.setState({scoreUpdate: '', positionButton: '', currentScore: null})
         // console.log('been 800ms')
         // this.setState({alert: ' ',currentScore:null});
       }.bind(this), 800);
       //start reaction time counter with flash
-      this.setState({reactionStart : Date.now()})
+      this.setState({reactionStart: Date.now()})
 
       if (timeTilPosMatch > 0) {
         // pick a non-matching next number while interval is not 0
@@ -235,7 +232,6 @@ var RelaxedMode = React.createClass({
 
       if (timeKeeper === 0) {
 
-
         //give gameScore variable the final score
         clearInterval(iterations);
         console.log(this.state.fullScore)
@@ -249,11 +245,9 @@ var RelaxedMode = React.createClass({
             this.props.history.push('/error/' + encodeURIComponent(data.message))
           }
         }.bind(this))
-
         //////////////////////////////////////
         //////////////////////////////////////
         //////////////////////////////////////
-
       }
     }.bind(this), 2000);
   },
@@ -263,15 +257,11 @@ var RelaxedMode = React.createClass({
     }
     if (this.state.posMatch) {
       //if correct button pressed, use current time to find reaction time
-      this.setState({
-        reactionStop:Date.now(),
-        positionButton:'goodJob'
-      })
+      this.setState({reactionStop: Date.now()});
+      this.setButton('positionButton', 'goodJob');
       this.match();
     } else if (!this.state.posMatch) {
-      this.setState({
-        positionButton:'youFailed'
-      })
+      this.setButton('positionButton', 'youFailed');
       this.incorrect();
     }
     this.setState({alreadyPressed: true, posMatch: false, posStyle: pushStyle})
