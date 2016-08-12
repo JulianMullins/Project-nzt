@@ -25,6 +25,7 @@ var statsFunctions = require('./server/statsFunctions');
 
 var User = require('./models/User');
 var Stats = require('./models/Stats');
+var HighScore = require('./models/HighScore');
 var Leaderboard = require('./models/Leaderboard');
 
 
@@ -79,6 +80,33 @@ passport.deserializeUser(function(id, done) {
 });
 
 
+// HighScore.find().exec(function(err,highScores){
+//   highScores.forEach(function(score){
+//     var toSave = false;
+//     console.log('new score')
+//     // score.reactionTimes.forEach(function(reactionTime){
+//     //   if(reactionTime<0){
+//     //     console.log(reactionTime)
+//     //     reactionTime = -reactionTime;
+//     //     toSave = true;
+//     //     console.log('success ',reactionTime)
+//     //   }
+//     // })
+//     for(var i=0;i<score.reactionTimes.length;i++){
+//       if(score.reactionTimes[i]<0){
+//         score.reactionTimes.splice(i,1);
+//         toSave = true;
+//       }
+//     }
+//     if(toSave){
+//           console.log(score.reactionTimes)
+
+//       score.save(function(err,score){console.log("score saved: "+score.reactionTimes)})
+//     }
+//   })
+// })
+
+
 // passport strategy
 passport.use(new LocalStrategy({
     passReqToCallback: true
@@ -95,6 +123,7 @@ passport.use(new LocalStrategy({
 
     //check if all data is there
     if(!username || !password || username.length<4 || password.length<4){
+      console.log("Please enter proper credentials")
       return done("Please enter proper credentials");
     }
 
@@ -236,7 +265,7 @@ passport.use(new FacebookStrategy({
     clientID: process.env.FACEBOOK_clientID,
     clientSecret: process.env.FACEBOOK_clientSecret,
     //callbackURL: process.env.url+"/login/facebook/callback",
-    callbackURL: process.env.url + "/login/facebook/callback",
+    callbackURL: process.env.url + "/api/login/facebook/callback",
     profileFields: ['id', 'email', 'name'],
     passReqToCallback: true
   },
@@ -421,7 +450,7 @@ app.use('/api/', statsFunctions);
 app.use('/api/', gameFunctions);
 
 app.use('/', routes);
-
+console.log("app.use 404 is next")
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   var err = new Error('Not Found');
@@ -431,12 +460,14 @@ app.use(function(req, res, next) {
 
 // error handlers
 
+
+console.log("app error is next")
 // development error handler
 // will print stacktrace
 if (app.get('env') === 'development') {
   app.use(function(err, req, res, next) {
     // res.status(err.status || 500);
-    console.log(err);
+    console.log(err,req);
     res.json({
       success: false,
       message: err
