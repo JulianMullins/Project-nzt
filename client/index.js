@@ -88,7 +88,7 @@ ReactDOM.render((
 
       <IndexRedirect to='/home'/>
       <Route path="home" component={Home}/>
-      <Route path="/newUser" component={NewUserOverlay}/>
+      <Route path="newUser" component={NewUserOverlay}/>
 
       <Route path="login/facebook/success" component={FacebookLogin}/>
       <Route path="login/facebook(/:error)" component={FacebookLogin}/>

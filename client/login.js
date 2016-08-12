@@ -45,7 +45,7 @@ var LoginOverlay = React.createClass({
       username: this.state.username,
       password: this.state.password
     }).then(function(response) {
-      console.log("response: " + response.data)
+      console.log("response: " + response.data.success)
       if (response.data.success) {
 
         if (this.state.isGameOver) {
