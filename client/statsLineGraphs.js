@@ -136,6 +136,7 @@ var MyComponent = React.createClass({
         this.setState({data: this.state.data, alert: ' '})
       }
     }.bind(this))
+    console.log(this.state.data)
 
     //get highest n-level
     axios.get('/api/getMaxN').then(function(response) {
