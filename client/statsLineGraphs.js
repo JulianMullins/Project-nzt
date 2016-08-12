@@ -201,10 +201,10 @@ var MyComponent = React.createClass({
           <MediaQuery minWidth="768px">
             <div className="chartsContainer">
               <LineChart className='StatsScoreGraph' data={this.state.data} margins={margins} chartSeries={this.state.chartSeries1} width={window.innerWidth / 2} height={500} title={'Score History'} x={x} xScale={xScale} yAxisClassName={'lineY'} xAxisClassName={'lineX'} yLabel={'Scores'} //x axis includes first and last day of play (for time range)
-                xLabel={'Gameplay from ' + dayA + ', ' + monthA + ' ' + dateA + ', ' + yearA + ' to ' + dayB + ', ' + monthB + ' ' + dateB + ', ' + yearB}/>
+                xLabel={'From ' + monthA + ' ' + dateA + ', ' + yearA + ' to ' + monthB + ' ' + dateB + ', ' + yearB}/>
 
               <AreaChart width={window.innerWidth / 2} height={500} title='TITLE' data={this.state.data} className='StatsReactionGraph' margins={margins} chartSeries={this.state.chartSeries2} yAxisClassName={'areaY'} xAxisClassName={'areaX'} x={x} xScale={xScale} yLabel={'Reaction Times (ms)'} //x axis includes first and last day of play (for time range)
-                xLabel={'Gameplay from ' + dayA + ', ' + monthA + ' ' + dateA + ', ' + yearA + ' to ' + dayB + ', ' + monthB + ' ' + dateB + ', ' + yearB}/>
+                xLabel={'From ' + monthA + ' ' + dateA + ', ' + yearA + ' to ' + monthB + ' ' + dateB + ', ' + yearB}/>
             </div>
             {/* chartsContainer */}
           </MediaQuery>
