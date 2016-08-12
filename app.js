@@ -236,7 +236,7 @@ passport.use(new FacebookStrategy({
     clientID: process.env.FACEBOOK_clientID,
     clientSecret: process.env.FACEBOOK_clientSecret,
     //callbackURL: process.env.url+"/login/facebook/callback",
-    callbackURL: process.env.url + "/login/facebook/callback",
+    callbackURL: process.env.url + "/api/login/facebook/callback",
     profileFields: ['id', 'email', 'name'],
     passReqToCallback: true
   },

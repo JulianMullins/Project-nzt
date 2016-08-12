@@ -91,11 +91,11 @@ ReactDOM.render((
       <Route path="/newUser" component={NewUserOverlay}/>
 
       <Route path="login/facebook/success" component={FacebookLogin}/>
+      <Route path="login/facebook(/:error)" component={FacebookLogin}/>
       <Route path="gameOver/login/facebook/success" component={FacebookLogin}/>
       <Route path="gameOver/login/facebook(/:error)" component={FacebookLogin}/>
       <Route path="gameOver/login(/:error)" component={Login}/>
       <Route path="gameOver/register(/:error)" component={Register}/>
-      <Route path="login/facebook(/:error)" component={FacebookLogin}/>
       <Route path="login(/:error)" component={Login}/>
       <Route path="logout" component={Logout}/>
       <Route path="register(/:error)" component={Register}/>

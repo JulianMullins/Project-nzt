@@ -218,7 +218,7 @@ module.exports = function(passport) {
 
   
   // facebook
-  router.get('/auth/login/facebook',
+  router.get('/login/facebook',
     passport.authenticate('facebook', { scope:['email','user_friends']}), function(req,res,next){
       console.log("getting /login/facebook")
     });
@@ -238,7 +238,7 @@ module.exports = function(passport) {
     //   res.json({success:true});
     // });
 
-  router.get('/gameOver/auth/login/facebook',
+  router.get('/gameOver/login/facebook',
     passport.authenticate('facebook', { scope:['email','user_friends']}), function(req,res,next){
       console.log("getting /login/facebook")
     });
@@ -255,13 +255,19 @@ module.exports = function(passport) {
     if(req.session.user){
 
       req.logout();
-      req.session.destroy(function(err){
-        if(err){
-          res.json({success:false,message:'err in destroy'})
-        }
-        else{
-          res.json({success:true});
-        }
+      console.log("logged out "+req.user)
+      req.session.regenerate(function(){
+      //   function(err){
+      //   if(err){
+      //     res.json({success:false,message:'err in destroy'})
+      //   }
+      //   else{
+      //     console.log("session destroyed "+req.session)
+      //     res.json({success:true});
+      //   }
+      // }
+        console.log("regenerated")
+        res.json({success:true})
       });
     }
 
