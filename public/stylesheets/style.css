@@ -199,6 +199,12 @@ h3 {
   }
 }
 
+@media all and (max-height: 580px) {
+  .whiteLogo {
+    display: none;
+  }
+}
+
 @media (orientation: landscape) {
   #root {
     overflow: hidden;
