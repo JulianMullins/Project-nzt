@@ -150,24 +150,20 @@
   width: 70%;
 }
 .gameScore h2 {
-  width: 70%;
-}
-
-.gameScore h2:last-child {
-  width: 30%;
+  width: 50%;
 }
 
 /*button alerts*/
 
 .goodJob {
-  background-color: #01B6A7;
+  background-color: green;
   -webkit-animation-name: positiveFadeOut;
   -webkit-animation-duration: .2s;
   animation-name: positiveFadeOut;
   animation-duration: .2s;
 }
 .youFailed {
-  background-color: #F13542;
+  background-color: red;
   -webkit-animation-name: negativeFadeOut;
   -webkit-animation-duration: .2s;
   animation-name: negativeFadeOut;
