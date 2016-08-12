@@ -379,7 +379,7 @@ var SilentMode = React.createClass({
       ? ""
       : (
         <GameTimer timeStyle={{
-          'color': "#7CD9D2"
+          'color': "#01B6A7"
         }}></GameTimer>
       );
 
@@ -433,12 +433,12 @@ var SilentMode = React.createClass({
 
 var noStyle = {}
 var pushStyle = {
-  backgroundColor: '#319B93'
+  backgroundColor: '#01B6A7'
 }
 
 var standardStyle = {
   backgroundColor: "transparent",
-  border: "3px solid #7CD9D2"
+  border: "3px solid #01B6A7"
 }
 
 var newStyle = [
