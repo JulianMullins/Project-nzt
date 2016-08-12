@@ -365,12 +365,31 @@ var SilentMode = React.createClass({
             positionButton:'youFailed'
           })
         }
+<<<<<<< HEAD
+      }
+
+      ///color match cases
+      else if(this.state.colorMatch){
+        //color match
+        if(this.state.colorPressed){
+          matchHit+=1
+          this.setState({
+            alert: 'Match!',
+            alertType: 'full'
+          })
+          reactionTimes.push(reactionEnd-reactionStart);
+          currentScore = ((2000 - reactionTimes[reactionTimes.length - 1]) / 100).toFixed(2)+1
+          fullScore+=parseFloat(currentScore);
+          this.state.score+=Math.floor(currentScore);
+        }
+=======
 
       }
 
       ///color match cases
       else if (this.state.colorMatch) {
 
+>>>>>>> origin/master
         //missed color match
         if (!this.state.colorPressed) {
           this.incorrect();
@@ -378,12 +397,81 @@ var SilentMode = React.createClass({
             colorButton: 'youFailed'
           })
         }
+<<<<<<< HEAD
+        //incorrect match
+        if(this.state.positionPressed){
+          matchHit-=1;
+          this.setState({
+            alert: 'Not a match!',
+            alertType: 'none'
+          })
+          //if have double when single match
+          if(currentScore){
+            //delete 5 from preassigned score
+            currentScore-=5;
+            this.setState({
+            alert: 'Not a double match!',
+            alertType: 'halfPos'
+          })
+            //if overall negative score
+            if(currentScore<0){
+               this.setState({
+            alert: 'Not a double match!',
+            alertType: 'halfNeg'
+          })
+              //if remaining score is positive or 0 just deduct points
+              if (this.state.score+currentScore>=0){
+                fullScore+=parseFloat(currentScore);
+                this.state.score+=Math.floor(currentScore);
+              }
+              //otherwise take off whatever will get user to 0
+              else{
+                currentScore=this.state.score;
+                fullScore+=parseFloat(currentScore);
+                this.state.score=0;
+              }
+            }
+            else{
+              fullScore-=parseFloat(currentScore);
+            }
+          }
+          //if no preexisting score see if all 5 points can be removed
+          else if(this.state.score>=5){
+            currentScore=5;
+            fullScore-=parseFloat(currentScore);
+            this.state.score=this.state.score-5
+          }
+          //otherwise take whatever is left
+          else{
+            currentScore=this.state.score;
+            fullScore-=parseFloat(currentScore);
+            this.state.score=0;
+          }
+        }
+      }
+
+      ///position match cases
+      else if(this.state.positionMatch){
+        //got position match
+        if(this.state.positionPressed){
+          matchHit+=1;
+          this.setState({
+            alert: 'Match!',
+            alertType: 'full'
+          })
+          reactionTimes.push(reactionEnd-reactionStart);
+          currentScore = ((2000 - reactionTimes[reactionTimes.length - 1]) / 100).toFixed(2)+1;
+          fullScore+=parseFloat(currentScore);
+          this.state.score+=Math.floor(currentScore);
+        }
+=======
 
       }
 
       ///position match cases
       else if (this.state.positionMatch) {
 
+>>>>>>> origin/master
         //missed position match
         if (!this.state.positionPressed) {
           //this.missedSingle('Missed a position match!','none');
@@ -392,10 +480,33 @@ var SilentMode = React.createClass({
             positionButton:'youFailed'
           })
         }
+<<<<<<< HEAD
+      }
+      //hit match when none
+      else if(this.state.colorPressed || this.state.positionPressed){
+        matchHit-=1;
+        this.setState({
+            alert: 'Not a match!',
+            alertType: 'none'
+          })
+        if(this.state.score>=5){
+            currentScore=5;
+            fullScore-=parseFloat(currentScore);
+            this.state.score=this.state.score-5
+          }
+          else{
+            currentScore=this.state.score;
+            fullScore-=parseFloat(currentScore);
+            this.state.score=0;
+          }
+      }
+       this.setState({
+=======
 
       }
 
       this.setState({
+>>>>>>> origin/master
           positionMatch: false,
           colorMatch: false,
           positionPressed: false,
@@ -489,6 +600,7 @@ var SilentMode = React.createClass({
       if (timeKeeper === 0) {
         clearInterval(iterations);
         setTimeout(function() {
+          console.log("reaction times: ", this.state.reactionTimes);
           endGameFunction(this.state.fullScore, this.state.reactionTimes, this.state.gameId, this.state.userId, function(success) {
             if (success) {
               this.props.history.push('/gameOver')
@@ -661,7 +773,7 @@ var SilentMode = React.createClass({
             </div>
           </div>
         </div>
-        <Link to="/home"><img className="gameHomeBtn whiteLogo" src="./images/CortexLogo3.png"/></Link>
+        <Link to="/home"><img className="gameHomeBtn whiteLogo" src="../../images/CortexLogo3.png"/></Link>
       </div>
     );
   }
