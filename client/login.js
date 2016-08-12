@@ -9,16 +9,16 @@ var LoginOverlay = React.createClass({
     console.log(this)
     var error = null;
     var isGameOver = false;
-    var fbUrl = this.props.location.pathname;
+    var fbUrl = null;
     if(this.props.location.pathname.includes('gameOver')){
       isGameOver = true;
       fbUrl = '/api/gameOver/auth/login'
     }
+    else{
+      fbUrl='/api/auth/login'
+    }
     if (this.props.params.error) {
       error = decodeURIComponent(this.props.params.error)
-      if(!isGameOver){
-        fbUrl='/api/auth/login'
-      }
     }
     console.log(this.props)
     return {
