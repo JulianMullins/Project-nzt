@@ -2,48 +2,85 @@ var express = require('express');
 var router = express.Router();
 var bcrypt = require('bcryptjs');
 var axios = require('axios');
-var back = require('express-back');
 
 var User = require('../models/User');
 var Stats = require('../models/Stats');
 var Leaderboard = require('../models/Leaderboard')
 
 
-module.exports = function(passport) {
-
-  // // GET registration page
-  // router.get('/register', function(req, res) {
-  //   res.render('register');
-  // });
-
-
-  var validateReq = function(userData) {
+var validateReq = function(userData) {
 
     //check if input all there
     console.log(userData)
+    var errors=[];
     if(userData.password !== userData.passwordConfirm){
-      return false;
+      errors.push("Passwords don't match");
     }
-    else if(!userData.password){
-      return false;
+    if(!userData.password){
+      errors.push('Password is required');
     }
-    else if(!userData.username){
-      return false;
+    if(!userData.username){
+      errors.push("Username is required");
     }
-    else if(!userData.email){
-      return false;
+    if(!userData.email){
+      errors.push("Email is required");
     }
-    else{
-      return true;
+    if(userData.username.length<6){
+      errors.push("Username must be at least 6 characters long");
     }
+    if(!userData.email.includes('@') || !userData.email.includes('.') || userData.email.includes('+')){
+      errors.push("Invalid email");
+    }
+    if(userData.password.length<6){
+      errors.push("Password must be at least 6 characters long");
+    }
+    return errors;
   };
+
+var saveUserRemoveAnonymous = function(req,res,user){
+  user.validateSync();
+  if(req.session.user){
+    User.remove({_id:req.session.user._id},function(err,reqUser){
+      if(!err){
+        user.save(function(err,u){
+          if(err){
+            next(err);
+          }
+          else{
+            console.log("success register")
+            res.json({success:true,username:u.email,password:req.body.password})
+          }
+        });
+      }
+    })
+  }
+  else{
+    user.save(function(err,u){
+      if(err){
+        next(err);
+      }
+      else{
+        console.log("success register")
+        res.json({success:true,username:u.email,password:req.body.password})
+      }
+    });
+  }
+    
+ }
+
+
+
+module.exports = function(passport) {
+
+
 
   router.post('/register', function(req, res,next) {
     
     //didn't fill out form right
-    if (!validateReq(req.body)) {
+    var validationErrors = validateReq(req.body) 
+    if (validationErrors.length!==0) {
       console.log("validation failed")
-        res.json({success:false, message:'invalid fields'});
+        res.json({success:false, message:validationErrors});
         return;
     }
 
@@ -57,7 +94,7 @@ module.exports = function(passport) {
       //user already exists
       else if(!err && userWithSameName){
         console.log(userWithSameName, "register failed")
-        res.json({success:false, message:'username already exists'})
+        res.json({success:false, message:'Username already exists'})
         return;
       }
 
@@ -71,7 +108,9 @@ module.exports = function(passport) {
               var password = hash;
               
               //check if user has a facebook user account already
-              User.findOne({email:req.body.email},function(err,user){
+              User.findOne({email:req.body.email})
+                .populate('stats')
+                .exec(function(err,user){
                 if(err){
                   return next(err);
                 }
@@ -104,7 +143,7 @@ module.exports = function(passport) {
 
                   if(req.session.user){
                     u.currentGame=req.session.user.currentGame;
-                    u.stats = req.session.user.stats;
+                    u.stats = req.session.user.stats._id;
                     u.maxN = req.session.user.maxN;
                   }
                   else{
@@ -142,43 +181,15 @@ module.exports = function(passport) {
 
   });
 
- var saveUserRemoveAnonymous = function(req,res,user){
-  if(req.session.user){
-    User.remove({_id:req.session.user._id},function(err,reqUser){
-      if(!err){
-        user.save(function(err,u){
-          if(err){
-            next(err);
-          }
-          else{
-            console.log("success register")
-            res.json({success:true,username:u.email,password:req.body.password})
-          }
-        });
-      }
-    })
-  }
-  else{
-    user.save(function(err,u){
-      if(err){
-        next(err);
-      }
-      else{
-        console.log("success register")
-        res.json({success:true,username:u.email,password:req.body.password})
-      }
-    });
-  }
-    
- }
+ 
 
-  // router.get('/login/failure',function(req,res,next){
-  //   res.status(401).json({success:false})
-  //   //res.json({success:false,error:"login failure"})
-  // })
+  router.get('/login/failure',function(req,res,next){
+    res.status(401).json({success:false})
+    //res.json({success:false,error:"login failure"})
+  })
 
-  // POST Login page
-  router.post('/login', passport.authenticate('local'), function(req,res,next){
+  //POST Login page
+  router.post('/login', passport.authenticate('local',{failureRedirect:'/login/error'}), function(req,res,next){
     console.log(req.session.user); 
     req.session.user = req.user;
     Stats.findById(req.session.user.stats)
@@ -201,17 +212,21 @@ module.exports = function(passport) {
 
 	});
 
+  // router.post('/login',passport.authenticate('local',{failureRedirect:'/#/login/error'}),function(req,res,next){
+  //   res.json({success:true})
+  // })
+
   
   // facebook
-  router.get('/login/facebook',
+  router.get('/auth/login/facebook',
     passport.authenticate('facebook', { scope:['email','user_friends']}), function(req,res,next){
       console.log("getting /login/facebook")
     });
 
   router.get('/login/facebook/callback',
     passport.authenticate('facebook',
-      {failureRedirect: '/#/login/facebookError',
-      successRedirect:'/#/login/facebook/success'} ))
+      {failureRedirect: '/login/facebook/error',
+      successRedirect:'/login/facebook/success'} ))
     // ,
     // function(req, res) {
     //   console.log(req,req.path,req.location);
@@ -223,60 +238,36 @@ module.exports = function(passport) {
     //   res.json({success:true});
     // });
 
-  router.get('gameOver/login/facebook',
+  router.get('/gameOver/auth/login/facebook',
     passport.authenticate('facebook', { scope:['email','user_friends']}), function(req,res,next){
       console.log("getting /login/facebook")
     });
 
-  router.get('gameOver/login/facebook/callback',
+  router.get('/gameOver/login/facebook/callback',
     passport.authenticate('facebook',
-      {failureRedirect: '/#/gameOver/login/facebookError',
-      successRedirect:'/#/gameOver/login/facebook/success'} ))
+      {failureRedirect: '/gameOver/login/facebook/error',
+      successRedirect:'/gameOver/login/facebook/success'} ))
 
 
   // reset user currentgame and logout (or err if !req.user)
-  router.get('/logout', function(req, res,next) {
+  router.post('/logout', function(req, res,next) {
     console.log("logging out ", req.session.user)
     if(req.session.user){
-      // var user = req.session.user;
-      // user.currentGame=[];
-      // user.save();
 
       req.logout();
       req.session.destroy(function(err){
         if(err){
-          res.json({success:false})
+          res.json({success:false,message:'err in destroy'})
         }
         else{
           res.json({success:true});
         }
       });
-
-
-      // console.log("before save", req.session.user);
-      // req.session.user.save(function(err,user){
-      //   if(err){
-      //     console.log(err);
-      //   }
-      //   else{
-      //     console.log("after save", user);
-      //     req.logout();
-      //     req.session.destroy(function(err){
-      //       if(err){
-      //         res.json({success:false})
-      //       }
-      //       else{
-      //         res.json({success:true});
-      //       }
-      //     });
-      //   }
-        
-      // });
     }
+
     else{
-      res.status(400).json({success:false})
+      res.status(400).json({success:false,message:"not logged in"})
     }
-    
   });
 
   return router;

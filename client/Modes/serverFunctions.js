@@ -3,8 +3,9 @@ var axios = require('axios');
 
 var startGameFunction = function(mode, N, callback) {
   console.log("startGameFunction")
-  axios.post('/startGame/' + mode + '/' + N).then(function(response) {
-    if (!response.data.authorized) {
+  axios.post('/api/startGame/' + mode + '/' + N)
+  .then(function(response) {
+    if (N!==1 && !response.data.authorized) {
       console.log("unauthorized")
       return callback(true)
     }
@@ -19,7 +20,7 @@ var startGameFunction = function(mode, N, callback) {
     console.log(this.state)
     console.log("game posted")
 
-    axios.get('/isUser')
+    axios.get('/api/isUser')
     .then(function(response) {
       console.log("isuser data: " + response.data)
     })
@@ -28,7 +29,7 @@ var startGameFunction = function(mode, N, callback) {
 }
 
 var endGameFunction = function(fullScore, reactionTimes, gameId, accuracy, callback) {
-  axios.post('/gameEnd', {
+  axios.post('/api/gameEnd', {
     gameId: gameId,
     score: fullScore,
     reactionTimes: reactionTimes,
@@ -40,7 +41,7 @@ var endGameFunction = function(fullScore, reactionTimes, gameId, accuracy, callb
       //   this.props.history.push('/gameOver');
       // }
 
-      axios.post('/gameOver', {
+      axios.post('/api/gameOver', {
         passedLevel: response.data.passedLevel,
         gameId: response.data.gameId,
         accuracy: response.data.accuracy

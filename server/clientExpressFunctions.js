@@ -17,7 +17,9 @@ var tempGame = null;
 
 //reset session on app load if !fullUser
 router.get('/getUserOnLoad',function(req,res,next){
+
   if(req.session.user && req.session.user.temp){
+    console.log(req.session.user.temp)
     req.session.destroy();
   }
   res.json({success:true})
@@ -47,20 +49,25 @@ router.get('/homeUserInfo',function(req,res,next){
 //change user setting to not show overlay
 router.post('/stopShowOverlay',function(req,res,next){
   console.log('/stopShowOverlay begun')  
-  // req.session.user.showTutorial = false;
-  // req.session.user.save();
-  // console.log(req.session.user)
-  var user = req.session.user;
-  user.showTutorial = false;
-  user.save(function(err,user){
+
+  User.findById(req.session.user._id,function(err,user){
     if(err){
-      res.json({success:false,error:err})
+      res.json({success:false})
     }
     else{
-      req.session.user = user;
-      res.json({success:true,error:null})
+      user.showTutorial=false;
+      user.save(function(err,user){
+        if(err){
+          res.json({success:false,error:err})
+        }
+        else{
+          req.session.user = user;
+          res.json({success:true,error:null})
+        }
+      })
     }
-  });
+  })
+
 })
 
 
@@ -69,6 +76,7 @@ router.post('/stopShowOverlay',function(req,res,next){
     //(sort of in client/index.js, but commented out)
 router.get('/isUser',function(req,res,next){
   if(req.session.user){
+    console.log(req.session.user)
     res.json({isloggedin:true,isUser:!req.session.user.temp})
   }
   else{

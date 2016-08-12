@@ -136,7 +136,7 @@ router.post('/startGame/:mode/:nLevel',function(req,res,next){
               authorized:true,
               gameId: game._id,
               tempUser: user.temp,
-              modeMultiplier: modeMultiplier,
+              modeMultiplier: modeMultiplier[tempGame.mode],
               penalty: penalty,
               positivePoints: positivePoints,
               userId: user._id,
@@ -203,7 +203,7 @@ router.post('/gameEnd',function(req,res,next){
           })
 
           // post to gameOver
-          // axios.post('/gameOver',{
+          // axios.post('/api/gameOver',{
           //   userId: req.body.userId
           // })
 

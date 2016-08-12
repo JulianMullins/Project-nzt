@@ -52,7 +52,7 @@ body {
   align-items: center;
 }
 h1 {
-  font-size: calc(16px + 10vw);
+  font-size: 12vw;
   font-weight: 700;
 }
 h2 {
@@ -158,9 +158,14 @@ h3 {
 }
 @media all and (max-width: 768px) {
   .heading {
-    justify-content: center;
     padding-top: 75px;
   }
+
+  .userWelcome {
+    font-size: 20px;
+    font-weight: 400;
+  }
+
   .heading> img {
     width: 70vw;
     min-width: 0;
@@ -186,4 +191,30 @@ h3 {
   .menu-panel> h3 {
     font-size: 1.2em;
   }
+}
+
+@media all and (max-height: 768px) {
+  .heading> img {
+    height: 20vh;
+  }
+}
+
+@media (orientation: landscape) {
+  #root {
+    overflow: hidden;
+  }
+}
+.landscapeOverlay {
+  position: absolute;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  background: url("../images/pattern.svg");
+  background-size: cover;
+  z-index: 1000;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }

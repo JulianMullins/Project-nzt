@@ -23,7 +23,6 @@ var getSquareArr = function(square, mode) {
   var arr = [];
   for (var i = 1; i < maxSquares + 1; i++) {
     var link = "/game/" + mode + "/" + i;
-    //console.log(link)
     var sqClass = "levelSquare " + squareClass;
     if (i <= square) {
       var colorStyle = {
@@ -74,102 +73,25 @@ var getSquareArr = function(square, mode) {
   return arr;
 };
 
+var capFirstLetter = function(string) {
+  return string.charAt(0).toUpperCase() + string.slice(1);
+}
+
 var getMaxN = function(mode, cb) {
   console.log("getting max n")
-  axios.get('/getMaxN', {withCredentials: true}).then(function(response) {
+  axios.get('/api/getMaxN', {withCredentials: true}).then(function(response) {
     console.log(response.data.maxN)
     return cb(response.data.maxN)
   })
 };
 
-var ClassicLevels = React.createClass({
+var LevelOverlay = React.createClass({
   getInitialState: function() {
-    console.log(this.props)
-    return {maxN: 1, mode: 'classic', error: this.props.params.error}
-  },
-  componentDidMount() {
-    this.setMaxN();
-  },
-  setMaxN: function() {
-    getMaxN(this.state.mode, function(maxN) {
-      this.setState({
-        maxN: maxN[this.state.mode]
-      })
-    }.bind(this))
-    console.log("maxN is " + this.state.maxN)
-
-  },
-  render: function() {
-
-    var square = this.state.maxN;
-    var squareArr = getSquareArr(square, this.state.mode)
-
-    return (
-      <div className="levelBox">
-        <h1 id="classic" className="classic">Classic</h1>
-        {this.state.error
-          ? <div>Unauthorized!</div>
-          : ''}
-        <div className="grid">
-          {squareArr.map(function(square) {
-            return square;
-          })}
-        </div>
-        <div className="levelsFooter">
-          <h3 className="classic">Highest: Level {this.state.maxN}</h3>
-          <Link to="/home">
-            <h3 className="classicButton returnBtn">&larr; Go Back</h3>
-          </Link>
-        </div>
-      </div>
-    );
-  }
-});
-
-var RelaxedLevels = React.createClass({
-  getInitialState: function() {
-    console.log(this.props)
-    return {maxN: 1, mode: 'relaxed', error: this.props.params.error}
-  },
-  componentDidMount() {
-    this.setMaxN();
-  },
-  setMaxN: function() {
-    getMaxN(this.state.mode, function(maxN) {
-      this.setState({
-        maxN: maxN[this.state.mode]
-      })
-    }.bind(this))
-  },
-  render: function() {
-    var square = this.state.maxN;
-    var squareArr = getSquareArr(square, this.state.mode)
-
-    return (
-      <div className="levelBox">
-        <h1 id="relaxed" className="relaxed">Relaxed</h1>
-        {this.state.error
-          ? <div>Unauthorized!</div>
-          : ''}
-        <div className="grid">
-          {squareArr.map(function(square) {
-            return square;
-          })}
-        </div>
-        <div className="levelsFooter">
-          <h3 className="relaxed">Highest: Level {this.state.maxN}</h3>
-          <Link to="/home">
-            <h3 className="relaxedButton returnBtn">&larr; Go Back</h3>
-          </Link>
-        </div>
-      </div>
-    );
-  }
-});
-
-var SilentLevels = React.createClass({
-  getInitialState: function() {
-    return {maxN: 1, mode: 'silent', error: this.props.params.error}
+    return {
+      maxN: 1, 
+      mode: this.props.location.pathname.split('/')[2],
+      error: this.props.params.error
+    }
   },
   setMaxN: function() {
     getMaxN(this.state.mode, function(maxN) {
@@ -187,7 +109,7 @@ var SilentLevels = React.createClass({
 
     return (
       <div className="levelBox">
-        <h1 id="silent" className="silent">Silent</h1>
+        <h1 id={this.state.mode} className={this.state.mode}>{capFirstLetter(this.state.mode)}</h1>
         {this.state.error
           ? <div>Unauthorized!</div>
           : ''}
@@ -197,59 +119,16 @@ var SilentLevels = React.createClass({
           })}
         </div>
         <div className="levelsFooter">
-          <h3 className="silent">Highest: Level {this.state.maxN}</h3>
+          <h3 className={this.state.mode}>Highest: Level {this.state.maxN}</h3>
           <Link to="/home">
-            <h3 className="silentButton returnBtn">&larr; Go Back</h3>
+            <h3 className={this.state.mode + "Button returnBtn"}>&larr; Go Back</h3>
           </Link>
         </div>
       </div>
     );
   }
-});
-
-var AdvancedLevels = React.createClass({
-  getInitialState: function() {
-    return {maxN: 1, mode: 'advanced', error: this.props.params.error}
-  },
-  setMaxN: function() {
-    getMaxN(this.state.mode, function(maxN) {
-      this.setState({
-        maxN: maxN[this.state.mode]
-      })
-    }.bind(this))
-  },
-  componentDidMount() {
-    this.setMaxN();
-  },
-  render: function() {
-    var square = this.state.maxN;
-    var squareArr = getSquareArr(square, this.state.mode)
-
-    return (
-      <div className="levelBox">
-        <h1 id="advanced" className="advanced">Advanced</h1>
-        {this.state.error
-          ? <div>Unauthorized!</div>
-          : ''}
-        <div className="grid">
-          {squareArr.map(function(square) {
-            return square;
-          })}
-        </div>
-        <div className="levelsFooter">
-          <h3 className="advanced">Highest: Level {this.state.maxN}</h3>
-          <Link to="/home">
-            <h3 className="advancedButton returnBtn">&larr; Go Back</h3>
-          </Link>
-        </div>
-      </div>
-    );
-  }
-});
+})
 
 module.exports = {
-  ClassicLevels: ClassicLevels,
-  RelaxedLevels: RelaxedLevels,
-  SilentLevels: SilentLevels,
-  AdvancedLevels: AdvancedLevels
+  LevelOverlay: LevelOverlay
 }

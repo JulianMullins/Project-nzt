@@ -8,19 +8,28 @@ var LoginOverlay = React.createClass({
   getInitialState: function() {
     console.log(this)
     var error = null;
-    if(this.props.params.error){
-      error = decodeURIComponent(this.props.params.error)
+    var isGameOver = false;
+    var fbUrl = this.props.location.pathname;
+    if(this.props.location.pathname.includes('gameOver')){
+      isGameOver = true;
+      fbUrl = '/api/gameOver/auth/login'
     }
+    if (this.props.params.error) {
+      error = decodeURIComponent(this.props.params.error)
+      if(!isGameOver){
+        fbUrl='/api/auth/login'
+      }
+    }
+    console.log(this.props)
     return {
-      username: '', 
-      password: '', 
-      gameEnded: false, 
+      username: '',
+      password: '',
+      gameEnded: false,
       games: null,
       error: this.props.params.error,
-      fbURL: this.props.location.pathname+'/facebook'
+      fbURL: fbUrl + '/facebook',
+      isGameOver:isGameOver
     }
-
-
   },
   componentDidMount() {},
   update(e) {
@@ -29,34 +38,29 @@ var LoginOverlay = React.createClass({
     })
   },
   login: function(e) {
-    //e.preventDefault();
-
     console.log("logging in")
     console.log(this.props)
-
     //ajax post
-    axios.post('/login', {
+    axios.post('/api/login', {
       username: this.state.username,
       password: this.state.password
     }).then(function(response) {
-      console.log("response: "+response)
+      console.log("response: " + response.data)
       if (response.data.success) {
-        
-        if(this.props.location.pathname.includes('gameOver/login')){
+
+        if (this.state.isGameOver) {
           console.log("gameOver login");
           this.props.history.push('/gameOver');
-        }
-        else{
+        } else {
           this.props.history.push('/home')
         }
-      }
-      else{
-        this.props.history.push('/login/'+encodeURI(response.data.message));
+      } else {
+        this.setState({error:response.data.message});
       }
     }.bind(this))
   },
-
   render: function() {
+    console.log(this.state.fbUrl)
     return (
       <div className="screen">
         <div className="login" id="login">
@@ -65,15 +69,15 @@ var LoginOverlay = React.createClass({
             <h1>Hey you!</h1>
             <div className="pa">Login here.</div>
             <form>
-              {this.state.error}
+              <p className="error">{this.state.error}</p>
+              <br></br>
               <input type="text" placeholder="Name or Email" name="username" id="username" value={this.state.username} onChange={this.update}></input>
               <br></br>
               <input type="password" placeholder="Password" name="password" id="password" value={this.state.password} onChange={this.update}></input>
               <div className="buttongroup">
 
-                <Link to="/home">
-                  <button className="form-btn dx" onClick={this.login}>Login</button>
-                </Link>
+               
+                <a className="form-btn dx" onClick={this.login} type="button">Login</a>
                 <a className="fb" href={this.state.fbURL}>Login with Facebook</a>
               </div>
 
@@ -96,7 +100,7 @@ var LoginOverlay = React.createClass({
                 </Link>
               </div>
             </form>
-            <Link to="/home"><img className="whiteLogo" src="./images/CortexIconWhite.png"/></Link>
+            <Link to="/home"><img className="whiteLogo" src="../images/CortexIconWhite.png"/></Link>
           </div>
         </div>
       </div>

@@ -10,9 +10,9 @@ var Stats = require('../models/Stats');
 
 var serverData = require('./serverData');
 
-var serverLeaderboard = require('./serverData').serverLeaderboard;
-var leaderboardSize = require('./serverData').leaderboardSize;
-var modeMultiplier = require('./serverData').modeMultiplier;
+var serverLeaderboard = serverData.serverLeaderboard;
+var leaderboardSize = serverData.leaderboardSize;
+var modeMultiplier = serverData.modeMultiplier;
 
 
 
@@ -23,6 +23,7 @@ var modeMultiplier = require('./serverData').modeMultiplier;
 var checkOverall = function(newHighScore, callback) {
   console.log('checking overall');
   var isHighScore = false;
+  console.log("serverLeaderboard: ", serverLeaderboard)
   OverallLeaderboard.findById(serverLeaderboard)
     .populate('scores')
     .exec(function(err, leaderboard) {
@@ -105,10 +106,13 @@ var checkMine = function(newHighScore, stats, callback) {
       console.log(" MY LEADERBOARD: ", leaderboard)
       var myHighScores = leaderboard.scores;
 
+      console.log(myHighScores)
+
       if (myHighScores.length < leaderboardSize) {
         console.log("my leaderboard undersize")
         myHighScores.push(newHighScore);
         myHighScores.sort(sortScores);
+        console.log(myHighScores)
         //console.log("myHighScores: ", myHighScores);
         console.log("newHighScore: ", newHighScore)
         for (var score in myHighScores) {
@@ -125,6 +129,7 @@ var checkMine = function(newHighScore, stats, callback) {
           console.log("leaderboard: " + leaderboard)
           if (leaderboard && !err) {
             console.log("leaderboard saved")
+            console.log(myHighScores)
             return callback(isHighScore);
           }
         });
@@ -145,6 +150,7 @@ var checkMine = function(newHighScore, stats, callback) {
         console.log("leaderboard about to save")
         leaderboard.save(function(err, leaderboard) {
           if (leaderboard && !err) {
+            console.log(myHighScores)
             return callback(isHighScore);
           }
         });

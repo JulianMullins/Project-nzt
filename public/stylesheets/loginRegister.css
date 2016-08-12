@@ -50,6 +50,11 @@
   text-align: center;
   margin: 1em 1em 0;
 }
+.error {
+  background-color: #f13542;
+  width: 30%;
+  margin: 0 auto;
+}
 form {
   text-align: center;
   width: 50vw;
@@ -91,7 +96,10 @@ input, button {
   color: #3b5998;
   background-color: white;
 }
-button.form-btn {
+.form-btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   width: 50vw;
   height: 60px;
   bottom: 0;
@@ -99,19 +107,25 @@ button.form-btn {
   font-size: calc(12px + .5vw);
   text-transform: uppercase;
   margin: 2vw;
+
 }
+
+.buttongroup a {
+  text-decoration: none;
+}
+
 button.form-btn.sx {
   left: 0;
   background-color: rgba(255, 125, 0, 0.35);
   color: #fff;
   transition: all 0.3s linear;
 }
-button.form-btn.dx:hover {
+.form-btn.dx:hover {
   background-color: rgba(255, 125, 0, 0.65);
   cursor: pointer;
   color: #fff;
 }
-button.form-btn.dx {
+.form-btn.dx {
   right: 0;
   background-color: #f1ba03;
   color: #fff;
@@ -144,6 +158,12 @@ button.form-btn.dx a, button.form-btn.dx2 a {
   color: white;
 }
 
+@media (max-height: 768px) {
+  .loginContent h1, .register-log h1 {
+    font-size: 8vw;
+  }
+}
+
 /*register page*/
 
 .register {
@@ -157,6 +177,7 @@ button.form-btn.dx a, button.form-btn.dx2 a {
   color: white;
   text-decoration: none;
   transition-duration: .8s;
+  overflow-y: auto;
 }
 .loginContent, .registerContent {
   width: 100%;
@@ -176,6 +197,13 @@ input {
   background-color: transparent;
   width: 50%;
 }
+
+.errorDiv {
+  color: #F13542;
+  width: 80%;
+  text-align: center;
+}
+
 ::-webkit-input-placeholder {
   color: white;
   font-weight: 100;

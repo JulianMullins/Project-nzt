@@ -23,15 +23,6 @@ var RegisterOverlay = React.createClass({
     
 
   },
-  // click(e){
-  //   e.preventDefault();
-  //   if(this.state.gameEnded){
-  //     this.gameEnded();
-  //   }
-  //   else{
-  //     this.register()
-  //   }
-  // },
   update(e) {
     this.setState({
       [e.target.name]: e.target.value
@@ -41,7 +32,7 @@ var RegisterOverlay = React.createClass({
     e.preventDefault();
     //ajax post
     console.log(this)
-    axios.post('/register', {
+    axios.post('/api/register', {
       // headers: {
       //   'Accept': 'application/json',
       //   'Content-Type': 'application/json'
@@ -61,7 +52,7 @@ var RegisterOverlay = React.createClass({
         //this.props.history.push('/login')
 
 
-        axios.post('/login', {
+        axios.post('/api/login', {
           username: this.state.email,
           password: this.state.password
         }).then(function(response){
@@ -82,11 +73,14 @@ var RegisterOverlay = React.createClass({
 
       }
       else{
-        this.setState({error:response.data.message})
+        console.log("failed register")
+        var errors = response.data.message;
+        if(typeof(errors)!=='string'){
+          errors=response.data.message.join(' • ')
+        }
+        this.setState({error:errors})
       }
     }.bind(this));
-
-
   },
   render: function() {
     return (
@@ -94,8 +88,11 @@ var RegisterOverlay = React.createClass({
         <div className="register" id="login">
           <h1>Welcome</h1>
           <div className="pa">Create an account to get started.</div>
+            <div className="errorDiv">
+              {this.state.error}
+            </div>
           <form>
-            {this.state.error}
+            <br />
             <input type="text" placeholder="Name" name="name" id="name" value={this.state.name} onChange={this.update}></input>
             <br></br>
             <input type="text" placeholder="Username" name="username" id="username" value={this.state.username} onChange={this.update}></input>
@@ -106,8 +103,8 @@ var RegisterOverlay = React.createClass({
             <br></br>
             <input type="password" placeholder="Confirm password" name="passwordConfirm" id="passwordConfirm" value={this.state.passwordConfirm} onChange={this.update}></input>
             <div className="buttongroup">
-              <button className="form-btn dx" onClick={this.register}><Link to="/">Register</Link></button>
-              <button className="form-btn dx2"><Link to="/login">Back to Login</Link></button>
+              <button className="form-btn dx" onClick={this.register}>Register</button>
+              <Link to="/login"><button className="form-btn dx2">Back to Login</button></Link>
             </div>
           </form>
         </div>

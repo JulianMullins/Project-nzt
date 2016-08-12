@@ -53,42 +53,45 @@
 }
 .gameButtonsContainer {
   display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+}
+.gameButtonsContainer div {
+  display: flex;
   justify-content: center;
   align-items: center;
-  width: 60vh;
-  height: 40%;
-  margin-bottom: 1vh;
+  height: 80%;
+  width: 40%;
 }
 .gameButtonsContainer a {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  margin: 0 25px;
-  height: 80%;
+  height: 60%;
   width: 20vh;
   text-align: center;
   color: rgba(255, 255, 255, .85);
   font-size: 3vh;
   font-weight: bold;
   cursor: default;
-  border: 2px solid rgba(0, 0, 0, .15);
-  transition-duration: .3s;
+  padding: 2vh;
+}
+.advancedBtnContainer a {
+  width: auto;
 }
 .silentButton {
   background-color: #7CD9D2;
-  transition-duration: .3s;
 }
 .silentButton:active {
   background-color: #52BDB5;
-  transition-duration: .3s;
 }
 .relaxedButton {
   background-color: #01B6A7;
-  transition-duration: .3s;
 }
 .relaxedButton:active {
   background-color: #008C82;
-  transition-duration: .3s;
 }
 .classicButton {
   background-color: #F13542;
@@ -97,6 +100,7 @@
   background-color: #D80D1B;
 }
 .advancedButton {
+  width: auto;
   background-color: #F1BA03;
 }
 .advancedButton:active {
@@ -108,7 +112,7 @@
 .timerContainer {
   display: flex;
   justify-content: flex-end;
-  width: 50%;
+  width: 30%;
 }
 .gameTitle {
   display: flex;
@@ -143,65 +147,31 @@
   flex-direction: row;
   justify-content: space-between;
   font-size: 64px;
-  width: 50%;
+  width: 70%;
+}
+.gameScore h2 {
+  width: 70%;
 }
 
-/* score alerts */
-.scoreAlert {
-  width: 95%;
-  height: 40%;
+.gameScore h2:last-child {
+  width: 30%;
 }
-.scoreAlertNegative {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  background-color: transparent;
-  color: transparent;
-  font-size: 28px;
-  margin: 10px auto;
-  height: 80%;
-  width: 50%;
-  padding: 5px;
-  text-align: center;
-  -webkit-animation-name: negativeFadeOut;
-  -webkit-animation-duration: 3s;
-  animation-name: negativeFadeOut;
-  animation-duration: 3s;
-}
-.scoreAlertPositive {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  background-color: transparent;
-  color: transparent;
-  font-size: 28px;
-  margin: 10px auto;
-  height: 80%;
-  width: 50%;
-  padding: 5px;
-  text-align: center;
+
+/*button alerts*/
+
+.goodJob {
+  background-color: #01B6A7;
   -webkit-animation-name: positiveFadeOut;
-  -webkit-animation-duration: 3s;
+  -webkit-animation-duration: .2s;
   animation-name: positiveFadeOut;
-  animation-duration: 3s;
+  animation-duration: .2s;
 }
-
-.scoreAlertHalf {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  background-color: transparent;
-  color: transparent;
-  font-size: 28px;
-  margin: 10px auto;
-  height: 80%;
-  width: 50%;
-  padding: 5px;
-  text-align: center;
-  -webkit-animation-name: halfFadeOut;
-  -webkit-animation-duration: 3s;
-  animation-name: halfFadeOut;
-  animation-duration: 3s;  
+.youFailed {
+  background-color: #F13542;
+  -webkit-animation-name: negativeFadeOut;
+  -webkit-animation-duration: .2s;
+  animation-name: negativeFadeOut;
+  animation-duration: .2s;
 }
 
 /* negative alert fade */
@@ -228,6 +198,7 @@
 }
 
 /* positive alert fade */
+
 @keyframes positiveFadeOut {
   from {
     background-color: rgba(0, 204, 153, 0.8);
@@ -249,34 +220,16 @@
   }
 }
 
-/* half score alert fade */
-@keyframes halfFadeOut {
-  from {
-    background-color: rgba(255, 255, 0, 0.8);
-    color: rgba(0, 0, 0, 0.8);
-  }
-  to {
-    background-color: transparent;
-    color: transparent;
-  }
-}
-
-@-webkit-keyframes halfFadeOut {
-  from {
-    background-color: rgba(255, 255, 0, 0.8);
-    color: rgba(0, 0, 0, 0.8);
-  }
-  to {
-    background-color: transparent;
-    color: transparent;
-  }
-}
+/* score alert updates */
 
 .scoreUpdatePos {
   color: #01B6A7;
 }
 .scoreUpdateNeg {
   color: #F13542;
+}
+.scoreUpdateHalf {
+  color: yellow;
 }
 .scoreUpdate {
   font-weight: bold !important;
@@ -285,7 +238,6 @@
   animation-name: scoreUpdateIn;
   animation-duration: 2s;
 }
-
 @keyframes scoreUpdateIn {
   0% {
     transform: scale3d(0, 0, 1);
@@ -346,29 +298,18 @@
   }
   .gameButtonsContainer {
     width: 100vw;
-    height: 50%;
+    height: 100%;
     margin-bottom: 0;
     justify-content: space-around;
   }
   .gameButtonsContainer a {
-    height: 90%;
+    height: 60%;
     width: 30vw;
     margin: 0;
+    font-size: 2vh;
   }
-  .scoreAlertPositive {
-    width: 90%;
-    height: 90%;
-    margin: 0 auto;
-  }
-  .scoreAlertNegative {
-    width: 90%;
-    height: 90%;
-    margin: 0 auto;
-  }
-  .scoreAlertHalf {
-    width: 90%;
-    height: 90%;
-    margin: 0 auto;    
+  .gameScore h2 {
+    width: auto;
   }
   .gameScore {
     width: 70%;

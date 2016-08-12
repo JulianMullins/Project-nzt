@@ -16,44 +16,49 @@ var Mainmenu = React.createClass({
   //initial functions
   getInitialState: function() {
     return {
-      name:null,
-      hasUsername:false,
-      userWelcome:<div></div>,
-      showTutorial:false
+      name: null, hasUsername: false, userWelcome: <div></div>,
+      showTutorial: false
     }
   },
-  componentDidMount: function(){
-    axios.get('/homeUserInfo')
-      .then(function(response){
-        console.log(response.data)
+  // componentDidMount: function(){
+  //   axios.get('/api/homeUserInfo')
+  //     .then(function(response){
+  //       console.log(response.data)
+  //       this.setState({
+  //         hasUsername:response.data.hasUsername,
+  //         name:response.data.name,
+  //         showTutorial:response.data.showTutorial
+  //       })
+  //     }.bind(this)).then(function() {
+  //       if(this.state.hasUsername){
+  //         this.setState({
+  //           userWelcome: <h3 className="advanced userWelcome">Welcome: {this.state.name}</h3>
+  //         })
+  //     }
+  //   }.bind(this))
+  // },
+  componentWillMount: function() {
+    axios.get('/api/homeUserInfo').then(function(response) {
+      console.log(response.data)
+      this.setState({hasUsername: response.data.hasUsername, name: response.data.name, showTutorial: response.data.showTutorial})
+    }.bind(this)).then(function() {
+      if (this.state.hasUsername) {
         this.setState({
-          hasUsername:response.data.hasUsername,
-          name:response.data.name,
-          showTutorial:response.data.showTutorial
+          userWelcome: <h3 className="advanced userWelcome">Welcome: {this.state.name}</h3>
         })
-      }.bind(this)).then(function() {
-        if(this.state.hasUsername){
-          this.setState({
-            userWelcome: <h3 className="advanced userWelcome">Welcome: {this.state.name}</h3>
-          })
       }
     }.bind(this))
   },
   componentWillReceiveProps: function(nextProps) {
     if (nextProps.location.pathname === "/home") {
-      axios.get('/homeUserInfo')
-        .then(function(response){
-          console.log(response.data)
+      axios.get('/api/homeUserInfo').then(function(response) {
+        console.log(response.data)
+        this.setState({hasUsername: response.data.hasUsername, name: response.data.name, showTutorial: response.data.showTutorial})
+      }.bind(this)).then(function() {
+        if (this.state.hasUsername) {
           this.setState({
-            hasUsername:response.data.hasUsername,
-            name:response.data.name,
-            showTutorial:response.data.showTutorial
+            userWelcome: <h3 className="advanced userWelcome">Welcome {this.state.name}!</h3>
           })
-        }.bind(this)).then(function() {
-          if(this.state.hasUsername){
-            this.setState({
-              userWelcome: <h3 className="advanced userWelcome">Welcome {this.state.name}!</h3>
-            })
         }
       }.bind(this))
     }
@@ -70,16 +75,19 @@ var Mainmenu = React.createClass({
   advanced() {
     this.props.history.push('/levels/advanced')
   },
+  closeTutorial: function() {
+    this.setState({showTutorial: false})
+  },
   render: function() {
     // var username = this.state.hasUsername
     //   ?   (<h3 className="advanced userWelcome">Welcome: {this.state.name}</h3>)
     //   : '';
     return (
       <div>
-      {this.state.showTutorial
-        ?<NewUserOverlay/>
-        :<div></div>
-        }
+        {this.state.showTutorial
+          ? <NewUserOverlay click={this.closeTutorial}/>
+          : <div></div>
+}
         <div className="heading">
           <img src="../images/CortexLogo4.svg"/>
           <div className="userHeading">
