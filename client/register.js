@@ -31,24 +31,15 @@ var RegisterOverlay = React.createClass({
   register: function(e) {
     e.preventDefault();
     //ajax post
-    console.log(this)
     axios.post('/api/register', {
-      // headers: {
-      //   'Accept': 'application/json',
-      //   'Content-Type': 'application/json'
-      // },
-      // withCredentials:true,
-      // data: {
         username: this.state.username,
         name:this.state.name,
         email: this.state.email,
         password: this.state.password,
         passwordConfirm: this.state.passwordConfirm
-      // }
     }).then(function(response){
-      console.log(response)
       if(response.data.success){
-        console.log("registration successful")
+        //console.log("registration successful")
         //this.props.history.push('/login')
 
 
@@ -56,7 +47,6 @@ var RegisterOverlay = React.createClass({
           username: this.state.email,
           password: this.state.password
         }).then(function(response){
-          console.log(response)
           if(response.data.success){
             if(this.props.location.pathname.includes('/gameOver')){
               this.props.history.push('/gameOver')
@@ -73,7 +63,7 @@ var RegisterOverlay = React.createClass({
 
       }
       else{
-        console.log("failed register")
+        //console.log("failed register")
         var errors = response.data.message;
         if(typeof(errors)!=='string'){
           errors=response.data.message.join(' • ')

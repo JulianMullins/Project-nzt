@@ -6,7 +6,6 @@ import {Link} from 'react-router';
 
 var LoginOverlay = React.createClass({
   getInitialState: function() {
-    console.log(this)
     var error = null;
     var isGameOver = false;
     var fbUrl = null;
@@ -20,7 +19,6 @@ var LoginOverlay = React.createClass({
     if (this.props.params.error) {
       error = decodeURIComponent(this.props.params.error)
     }
-    console.log(this.props)
     return {
       username: '',
       password: '',
@@ -38,18 +36,15 @@ var LoginOverlay = React.createClass({
     })
   },
   login: function(e) {
-    console.log("logging in")
-    console.log(this.props)
     //ajax post
     axios.post('/api/login', {
       username: this.state.username,
       password: this.state.password
     }).then(function(response) {
-      console.log("response: " + response.data.success, response)
       if (response.data.success) {
 
         if (this.state.isGameOver) {
-          console.log("gameOver login");
+          //console.log("gameOver login");
           this.props.history.push('/gameOver');
         } else {
           this.props.history.push('/home')
@@ -60,7 +55,6 @@ var LoginOverlay = React.createClass({
     }.bind(this))
   },
   render: function() {
-    console.log(this.state.fbUrl)
     return (
       <div className="screen">
         <div className="login" id="login">

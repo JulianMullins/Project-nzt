@@ -89,15 +89,12 @@ var MyComponent = React.createClass({
   },
   componentDidMount: function() {
     axios.get('/api/getStats', {withCredentials: true}).then(function(responseJson) {
-      console.log("stats: ", responseJson);
       if(responseJson.data.success === false) {
         return
       }
       
       stats = responseJson.data.stats;
-      console.log(stats)
       this.state.data = [];
-      console.log(stats, 'stats')
       if (stats[0]) {
         _.map(stats, function(item, index) {
           if (item.score === 0 || !item.reactionTimes[0]) {
@@ -136,7 +133,6 @@ var MyComponent = React.createClass({
         this.setState({data: this.state.data, alert: ' '})
       }
     }.bind(this))
-    console.log(this.state.data)
 
     //get highest n-level
     axios.get('/api/getMaxN').then(function(response) {
@@ -162,12 +158,10 @@ var MyComponent = React.createClass({
 
     //get user full name
     axios.get('/api/homeUserInfo').then(function(response) {
-      console.log(response.data)
       this.setState({fullName: response.data.name})
     }.bind(this))
   },
   render: function() {
-    // console.log(stats,'stats')
     var x = function(d) {
       return d.dateAchieved;
     }

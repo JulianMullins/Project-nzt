@@ -68,7 +68,6 @@ var AdvancedMode = React.createClass({
         userId: obj.userId
       })
     }.bind(this));
-    console.log("component mounted")
   },
   componentWillUnmount: function() {
     clearInterval(iterations);
@@ -94,7 +93,7 @@ var AdvancedMode = React.createClass({
     }
     setTimeout(function() {
       for (var i = 0; i < 9; i++) {
-        console.log(audios[i], audios[i].volume);
+        //console.log(audios[i], audios[i].volume);
         audios[i].play();
       }
     }, 300);
@@ -124,7 +123,7 @@ var AdvancedMode = React.createClass({
       currentScore: "+" + parseInt(this.state.currentScore),
       scoreUpdate: 'scoreUpdate scoreUpdatePos'
     })
-    console.log("currentScore: " + this.state.currentScore, "fullScore: " + this.state.fullScore)
+    //console.log("currentScore: " + this.state.currentScore, "fullScore: " + this.state.fullScore)
   },
 
   incorrect(number) {
@@ -187,282 +186,6 @@ var AdvancedMode = React.createClass({
         this.incorrect(tally);
       }
 
-      // ///triple match:
-      // if (this.state.colorMatch && this.state.soundMatch && this.state.positionMatch) {
-      //   var count = 0;
-      //   currentScore = 0;
-      //   //got color match correct
-      //   if (reactionEnd) {
-      //     reactionTimes.push(reactionEnd - reactionStart);
-      //   }
-      //   //points for color match
-      //   if (this.state.colorHit) {
-      //     count += 1;
-      //     currentScore += ((2000 - reactionTimes[reactionTimes.length - 1]) / 100).toFixed(2) + 1;
-      //   }
-      //   //points for position match
-      //   if (this.state.positionHit) {
-      //     count += 1
-      //     currentScore += ((2000 - reactionTimes[reactionTimes.length - 1]) / 100).toFixed(2) + 1;
-      //   }
-      //   //points for sound match
-      //   if (this.state.soundHit) {
-      //     count += 1
-      //     currentScore += ((2000 - reactionTimes[reactionTimes.length - 1]) / 100).toFixed(2) + 1;
-      //   }
-
-      //   this.state.score += parseInt(currentScore);
-      //   if (count === 3) {
-      //     this.setState({alertType: 'full', alert: 'Triple Match!'})
-      //   }
-
-      //   if (count === 2) {
-      //     this.setState({alertType: 'half', alert: 'Partial Match!'})
-      //   }
-
-      //   if (count === 1) {
-      //     this.setState({alertType: 'half', alert: 'Partial Match!'})
-      //   }
-      //   //no matches hit of count is still 0
-      //   if (count === 0) {
-      //     //set alerts
-      //     currentScore -= 5;
-      //     this.setState({alertType: 'none', alert: 'Missed a Match!'})
-      //   }
-
-      //   if (this.state.score + currentScore < 0) {
-      //     currentScore = this.state.score;
-      //     this.state.score = 0;
-      //     fullScore = 0;
-      //   } else {
-      //     this.state.score += parseInt(currentScore);
-      //   }
-      //   fullScore += parseFloat(currentScore);
-
-      //   ///reset the states at the end
-      //   this.setState({
-      //     colorMatch: false,
-      //     soundMatch: false,
-      //     positionMatch: false,
-      //     soundHit: false,
-      //     colorHit: false,
-      //     positionHit: false,
-      //     positionPressed: noStyle,
-      //     colorPressed: noStyle,
-      //     soundPressed: noStyle,
-      //     score: this.state.score
-      //   } //all other match combinations below
-      //   )
-      // } else {
-      //   if (reactionEnd) {
-      //     reactionTimes.push(reactionEnd - reactionStart);
-      //   }
-      //   currentScore = 0;
-      //   //all sound match possibilites
-      //   if (this.state.soundMatch) {
-      //     if (this.state.colorMatch) {
-      //       //not a match
-      //       if (this.state.positionHit) {
-      //         currentScore -= 5;
-
-      //         this.setState({alertType: 'half', alert: 'Not A Match!'})
-      //       }
-      //       //double match
-      //       if (this.state.soundHit && this.state.colorHit) {
-      //         currentScore += ((2000 - reactionTimes[reactionTimes.length - 1]) * 2 / 100).toFixed(2) + 1;
-      //         this.setState({alertType: 'full', alert: 'Double Match!'} //1/2 match
-      //         )
-      //       } else if (this.state.soundHit || this.state.colorHit) {
-      //         currentScore += ((2000 - reactionTimes[reactionTimes.length - 1]) / 100).toFixed(2) + 1;
-      //         this.setState({alertType: 'half', alert: 'Half Match!'} //missed both
-      //         )
-      //       } else {
-      //         currentScore -= 5;
-      //         this.setState({alertType: 'none', alert: 'Missed A Match!'})
-      //         if (this.state.score + currentScore >= 0) {
-      //           this.state.score += currentScore;
-      //         } else {
-      //           currentScore -= this.state.score;
-      //           this.state.score = 0;
-      //         }
-      //       }
-      //     } else if (this.state.positionMatch) {
-      //       //color hit but no match
-      //       if (this.state.colorHit) {
-      //         currentScore -= 5;
-      //         this.setState({alertType: 'none', alert: 'Not a Match!'})
-      //       }
-      //       //double match
-      //       if (this.state.soundHit && this.state.positionHit) {
-      //         currentScore += ((2000 - reactionTimes[reactionTimes.length - 1]) * 2 / 100).toFixed(2) + 1;
-      //         this.setState({alertType: 'full', alert: 'Double Match!'} //1/2 match
-      //         )
-      //       } else if (this.state.soundHit || this.state.positionHit) {
-      //         currentScore += ((2000 - reactionTimes[reactionTimes.length - 1]) / 100).toFixed(2) + 1;
-      //         this.setState({alertType: 'half', alert: 'Half Match!'} //missed both
-      //         )
-      //       } else {
-      //         currentScore -= 5;
-      //         this.setState({alertType: 'none', alert: 'Missed a Match!'})
-      //         if (this.state.score + currentScore >= 0) {
-      //           this.state.score += currentScore;
-      //         } else {
-      //           currentScore -= this.state.score;
-      //           this.state.score = 0;
-      //           //only sound match, so hit, miss, or wrong match
-      //         }
-      //       }
-      //     } else {
-      //       //hit
-      //       if (this.state.soundHit) {
-      //         currentScore += ((2000 - reactionTimes[reactionTimes.length - 1]) / 100).toFixed(2) + 1;
-      //         this.setState({alertType: 'full', alert: 'Single Match!'} //miss
-      //         )
-      //       } else if (!this.state.soundHit) {
-      //         currentScore -= 5;
-      //         this.setState({alertType: 'none', alert: 'Missed a Match!'} //wrong match
-      //         )
-      //       } else if (this.state.colorHit || this.state.positionHit) {
-      //         currentScore -= 5;
-      //         this.setState({alertType: 'none', alert: 'Not a Match!'})
-      //         if (this.state.score + currentScore >= 0) {
-      //           this.state.score += currentScore;
-      //         } else {
-      //           currentScore -= this.state.score;
-      //           this.state.score = 0;
-      //         }
-      //       }
-      //     }
-      //     this.setState({
-      //       colorMatch: false,
-      //       soundMatch: false,
-      //       positionMatch: false,
-      //       soundHit: false,
-      //       colorHit: false,
-      //       positionHit: false,
-      //       positionPressed: noStyle,
-      //       colorPressed: noStyle,
-      //       soundPressed: noStyle
-      //     })
-      //   }
-      //   /////all color match possibilities
-      //   if (this.state.colorMatch) {
-      //     // skip sound match combos since covered above, all position match options
-      //     if (this.state.positionMatch) {
-      //       //wrong match
-      //       if (this.state.soundHit) {
-      //         currentScore -= 5;
-      //         this.setState({alertType: 'none', alert: 'Not a Match!'})
-      //         if (this.state.score + currentScore >= 0) {
-      //           this.state.score += currentScore;
-      //         } else {
-      //           currentScore -= this.state.score;
-      //           this.state.score = 0;
-      //         }
-      //       }
-      //       //double match
-      //       if (this.state.positionHit && this.state.colorHit) {
-      //         currentScore += ((2000 - reactionTimes[reactionTimes.length - 1]) * 2 / 100).toFixed(2) + 1;
-      //         this.setState({alertType: 'full', alert: 'Double Match!'} //1/2 match
-      //         )
-      //       } else if (this.state.positionHit || this.state.colorHit) {
-      //         currentScore += ((2000 - reactionTimes[reactionTimes.length - 1]) / 100).toFixed(2) + 1;
-      //         this.setState({alertType: 'half', alert: 'Half Match!'} //missed both
-      //         )
-      //       } else {
-      //         currentScore -= 5;
-      //         this.setState({alertType: 'none', alert: 'Missed a Match!'})
-      //         if (this.state.score + currentScore >= 0) {
-      //           this.state.score += currentScore;
-      //         } else {
-      //           currentScore -= this.state.score;
-      //           this.state.score = 0;
-      //           //  only color match, so hit, miss, or wrong match
-      //         }
-      //       }
-      //     } else {
-      //       //hit
-      //       if (this.state.colorHit) {
-      //         this.setState({alertType: 'full', alert: 'Single Match!'})
-      //         currentScore += ((2000 - reactionTimes[reactionTimes.length - 1]) / 100).toFixed(2) + //miss
-      //         1;
-      //       } else if (!this.state.colorHit) {
-      //         currentScore -= 5;
-      //         this.setState({alertType: 'none', alert: 'Missed a Match!'})
-      //         if (this.state.score + currentScore >= 0) {
-      //           this.state.score += currentScore;
-      //         } else {
-      //           currentScore -= this.state.score;
-      //           this.state.score = 0 ///wrong match;
-      //         }
-      //       } else if (this.state.soundHit || this.state.positionHit) {
-      //         currentScore -= 5;
-      //         this.setState({alertType: 'none', alert: 'Not a Match!'})
-      //         if (this.state.score + currentScore >= 0) {
-      //           this.state.score += currentScore;
-      //         } else {
-      //           currentScore -= this.state.score;
-      //           this.state.score = 0;
-      //         }
-      //       }
-      //     }
-      //     this.setState({
-      //       colorMatch: false,
-      //       soundMatch: false,
-      //       positionMatch: false,
-      //       soundHit: false,
-      //       colorHit: false,
-      //       positionHit: false,
-      //       positionPressed: noStyle,
-      //       colorPressed: noStyle,
-      //       soundPressed: noStyle
-      //     })
-      //   }
-      //   //position match cases, only single case because color/sound options addressed above
-      //   if (this.state.positionMatch) {
-      //     //hit
-      //     if (this.state.positionHit) {
-      //       this.setState({alertType: 'full', alert: 'Single Match!'})
-      //       currentScore += ((2000 - reactionTimes[reactionTimes.length - 1]) / 100).toFixed(2) + //miss
-      //       1;
-      //     } else if (!this.state.positionHit) {
-      //       currentScore -= 5;
-      //       this.setState({alertType: 'none', alert: 'Missed a Match!'} ///wrong match
-      //       )
-      //     } else if (this.state.soundHit || this.state.colorHit) {
-      //       currentScore -= 5;
-      //       this.setState({alertType: 'half', alert: 'Not a Match!'})
-      //       if (this.state.score + currentScore >= 0) {
-      //         this.state.score += currentScore;
-      //       } else {
-      //         currentScore -= this.state.score;
-      //         this.state.score = 0;
-      //       }
-      //     }
-      //   }
-      //   if (this.state.score + currentScore < 0) {
-      //     currentScore = this.state.score;
-      //     this.state.score = 0;
-      //     fullScore = 0;
-      //   } else {
-      //     this.state.score += parseInt(currentScore);
-      //   }
-      //   fullScore += parseFloat(currentScore);
-      //   //reset states
-      //   this.setState({
-      //     colorMatch: false,
-      //     soundMatch: false,
-      //     positionMatch: false,
-      //     soundHit: false,
-      //     colorHit: false,
-      //     positionHit: false,
-      //     positionPressed: noStyle,
-      //     colorPressed: noStyle,
-      //     soundPressed: noStyle,
-      //     score: this.state.score
-      //   })
-      // }
-
       this.setState({
         colorMatch: false,
         soundMatch: false,
@@ -483,7 +206,7 @@ var AdvancedMode = React.createClass({
       //NOT GOING TO ACTUALLY LIGHT UP COLORS UNTIL ALL IF STATEMENTS HAVE ITERATED
       //case 1: position match
       if (timeTilPositionMatch === 0) {
-        console.log('position match')
+        //console.log('position match')
         //matchCount += 1;
         this.setState({positionMatch: true, miss: true})
         //reset position portion
@@ -496,7 +219,7 @@ var AdvancedMode = React.createClass({
       }
       //case 2: color match
       if (timeTilColorMatch === 0) {
-        console.log('color match')
+        //console.log('color match')
         //matchCount += 1;
         this.setState({colorMatch: true, miss: true})
         //reset position portion
@@ -509,7 +232,7 @@ var AdvancedMode = React.createClass({
       }
       //case 3: sound match
       if (timeTilSoundMatch === 0) {
-        console.log('sound match')
+        //console.log('sound match')
         //matchCount += 1;
         this.setState({soundMatch: true, miss: true})
         //reset position portion
@@ -580,11 +303,11 @@ var AdvancedMode = React.createClass({
         clearInterval(soundInterval);
         setTimeout(function() {
           gameScore = this.state.score;
-          console.log(gameScore, 'game score')
-          console.log(reactionTimes, 'reaction times')
-          console.log(this.state)
+          // console.log(gameScore, 'game score')
+          // console.log(reactionTimes, 'reaction times')
+          // console.log(this.state)
           var accuracy = matchHit / matchCount;
-          console.log(accuracy, 'accuracy')
+          // console.log(accuracy, 'accuracy')
 
           endGameFunction(this.state.fullScore, this.state.reactionTimes, this.state.gameId, this.state.userId, function(success) {
             if (success) {

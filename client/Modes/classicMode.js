@@ -77,7 +77,6 @@ var ClassicMode = React.createClass({
         this.props.history.push('/levels/' + this.state.mode + '/unauthorized');
         return;
       }
-      console.log(obj)
       this.setState({
         tempUser: obj.tempUser,
         gameId: obj.gameId,
@@ -85,9 +84,7 @@ var ClassicMode = React.createClass({
         penalty: obj.penalty * obj.modeMultiplier,
         positivePoints: obj.positivePoints * obj.modeMultiplier
       })
-      console.log(this.state.penalty, this.state.positivePoints)
     }.bind(this));
-    console.log("component mounted")
   },
 
   componentWillUnmount: function() {
@@ -134,7 +131,6 @@ var ClassicMode = React.createClass({
     this.setState({
       currentScore: (((2000 - (this.state.reactionEnd - this.state.reactionStart)) / 1000) * this.state.positivePoints).toFixed(2)
     });
-    console.log(this.state.currentScore)
     this.setState({
       reactionTimes: this.state.reactionTimes.concat([this.state.reactionEnd - this.state.reactionStart]),
       fullScore: this.state.fullScore + parseFloat(this.state.currentScore),
@@ -143,7 +139,6 @@ var ClassicMode = React.createClass({
       currentScore: "+" + parseInt(this.state.currentScore),
       scoreUpdate: 'scoreUpdate scoreUpdatePos'
     });
-    console.log("currentScore: " + this.state.currentScore, "fullScore: " + this.state.fullScore)
   },
 
   incorrect: function(number) {
@@ -315,9 +310,9 @@ var ClassicMode = React.createClass({
           //////////////////////////////////////
           //////////////////////////////////////
 
-          console.log(this.state.reactionTimes, 'reaction times')
+          // console.log(this.state.reactionTimes, 'reaction times')
           var accuracy = this.state.matchHit / this.state.matchCount;
-          console.log(accuracy, 'accuracy')
+          // console.log(accuracy, 'accuracy')
 
           endGameFunction(this.state.fullScore, this.state.reactionTimes, this.state.gameId, accuracy, function(success) {
             if (success) {
@@ -365,7 +360,6 @@ var ClassicMode = React.createClass({
   },
 
   render: function() {
-    console.log(this.state.currentScore)
     var overlay = this.state.overlay
       ? (<StartOverlay nLevel={this.state.N} mode={this.state.mode} click={this.startGame}/>)
       : '';
