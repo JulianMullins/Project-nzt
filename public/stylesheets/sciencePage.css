@@ -24,7 +24,7 @@
 
 .scienceTop p {
   font-weight: 100;
-  font-size: calc(12px + .5vw);
+  font-size: 20px;
   font-family: "Proxima-Nova", sans-serif;
   line-height: 1.5;
   color: white;
@@ -35,6 +35,18 @@
 .scienceTop img {
   max-height: 25vw;
   float: right;
+}
+
+.scienceTop a {
+  text-decoration: none;
+  color: #F1BA03;
+  opacity: 0.9;
+  transition-duration: .8s;
+}
+
+.scienceTop a:hover {
+  color: white;
+  transition-duration: .8s;
 }
 
 .scienceTop h1 {
