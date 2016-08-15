@@ -47,10 +47,10 @@ var ClassicMode = React.createClass({
       score: 0,
       overlay: true,
       N: parseInt(this.props.params.n),
-      positionPressed: false,
-      soundPressed: false,
-      posStyle: noStyle,
-      soundStyle: noStyle,
+      positionPressed: true,
+      soundPressed: true,
+      posStyle: pushStyle,
+      soundStyle: pushStyle,
       keepScore: false,
       tempUser: true,
       gameId: null,
@@ -130,38 +130,46 @@ var ClassicMode = React.createClass({
   match: function() {
     this.setState({
       currentScore: (((2000 - (this.state.reactionEnd - this.state.reactionStart)) / 1000) * this.state.positivePoints).toFixed(2)
-    });
-    this.setState({
-      reactionTimes: this.state.reactionTimes.concat([this.state.reactionEnd - this.state.reactionStart]),
-      fullScore: this.state.fullScore + parseFloat(this.state.currentScore),
-      matchCount: this.state.matchCount + 1,
-      matchHit: this.state.matchHit + 1,
-      currentScore: "+" + parseInt(this.state.currentScore),
-      scoreUpdate: 'scoreUpdate scoreUpdatePos'
-    });
+    }, function() {
+      this.setState({
+        reactionTimes: this.state.reactionTimes.concat([this.state.reactionEnd - this.state.reactionStart]),
+        fullScore: this.state.fullScore + parseFloat(this.state.currentScore),
+        matchCount: this.state.matchCount + 1,
+        matchHit: this.state.matchHit + 1,
+        currentScore: "+" + parseInt(this.state.currentScore),
+        scoreUpdate: 'scoreUpdate scoreUpdatePos'
+      }, function() {
+        $('.gameScore').append('<h2 class="' + this.state.scoreUpdate + '">' + this.state.currentScore + '</h2>')
+        setTimeout(function() {
+          $('.gameScore h2:nth-child(2)').remove();
+        }, 800)
+      }.bind(this));
+    }.bind(this));
   },
 
   incorrect: function(number) {
     if (!number) {
       number = 1
     }
+    var updateScore = 0;
     if ((this.state.fullScore - number * this.state.penalty) >= 0) {
-      this.setState({
-        currentScore: -this.state.penalty
-      })
+      updateScore = -this.state.penalty;
     } else {
-      this.setState({
-        currentScore: -this.state.fullScore
-      })
+      updateScore = -this.state.fullScore;
     }
     this.setState({
       reactionTimes: this.state.reactionTimes.concat([this.state.reactionEnd - this.state.reactionStart]),
       //matchHit: this.state.matchHit - 1,
       matchCount: this.state.matchCount + 1,
-      fullScore: this.state.fullScore + this.state.currentScore,
-      currentScore: parseInt(this.state.currentScore),
+      fullScore: this.state.fullScore + updateScore,
+      currentScore: parseInt(updateScore),
       scoreUpdate: 'scoreUpdate scoreUpdateNeg'
-    });
+    }, function() {
+      $('.gameScore').append('<h2 class="' + this.state.scoreUpdate + '">' + this.state.currentScore + '</h2>')
+      setTimeout(function() {
+        $('.gameScore h2:nth-child(2)').remove();
+      }, 800)
+    }.bind(this));
   },
 
   setButton: function(button, _class) {
@@ -307,13 +315,8 @@ var ClassicMode = React.createClass({
         setTimeout(function() {
 
           //////////////////////////////////////
-          //////////////////////////////////////
-          //////////////////////////////////////
 
-          // console.log(this.state.reactionTimes, 'reaction times')
           var accuracy = this.state.matchHit / this.state.matchCount;
-          // console.log(accuracy, 'accuracy')
-
           endGameFunction(this.state.fullScore, this.state.reactionTimes, this.state.gameId, accuracy, function(success) {
             if (success) {
               this.props.history.push('/gameOver')
@@ -321,12 +324,9 @@ var ClassicMode = React.createClass({
           }.bind(this))
 
           //////////////////////////////////////
-          //////////////////////////////////////
-          //////////////////////////////////////
 
         }.bind(this), 2000)
       }
-
     }.bind(this), 2000)
   },
   positionMatch: function() {
@@ -334,14 +334,14 @@ var ClassicMode = React.createClass({
       return;
     }
     if (this.state.positionMatch) {
-      this.setState({reactionEnd: Date.now()})
+      this.setState({
+        reactionEnd: Date.now()
+      }, this.match)
       this.setButton('positionButton', 'goodJob');
-      this.match();
     } else {
       this.setButton('positionButton', 'youFailed');
       this.incorrect();
     }
-
     this.setState({positionPressed: true, posStyle: pushStyle});
   },
   soundMatch: function() {
@@ -349,9 +349,10 @@ var ClassicMode = React.createClass({
       return;
     }
     if (this.state.soundMatch) {
-      this.setState({reactionEnd: Date.now()})
+      this.setState({
+        reactionEnd: Date.now()
+      }, this.match)
       this.setButton('soundButton', 'goodJob');
-      this.match();
     } else {
       this.setButton('soundButton', 'youFailed');
       this.incorrect();
@@ -384,9 +385,6 @@ var ClassicMode = React.createClass({
             <div className="gameHeading">
               <div className="gameScore classic">
                 <h2>Score: {parseInt(this.state.fullScore)}</h2>
-                <h2 className={this.state.scoreUpdate}>
-                  {this.state.currentScore}
-                </h2>
               </div>
               {gameTimer}
             </div>

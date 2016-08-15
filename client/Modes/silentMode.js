@@ -114,7 +114,7 @@ var SilentMode = React.createClass({
     if (!number) {
       number = 1
     }
-    var updateScore = 0
+    var updateScore = 0;
     if ((this.state.fullScore - number * this.state.penalty) >= 0) {
       updateScore = -this.state.penalty
     } else {
