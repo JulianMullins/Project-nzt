@@ -36,12 +36,7 @@ var Leaderboard = React.createClass({
     var loggedIn = !this.state.hasScores && !this.state.global
       ? (
         <div className="gameOverPrompt">
-          <p>
-            <Link to="/gameOver/login">Login
-            </Link>or<Link to="/gameOver/register">
-              Sign Up
-            </Link>
-            to save your progress, view statistics and compete with friends!</p>
+          <p><Link to="/gameOver/login">Login</Link> or <Link to="/gameOver/register">Sign Up</Link> to save your progress, view statistics and compete with friends!</p>
         </div>
       )
       : <div></div>;
