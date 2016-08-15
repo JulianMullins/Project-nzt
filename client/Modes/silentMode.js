@@ -41,10 +41,10 @@ var SilentMode = React.createClass({
       alert: " ",
       overlay: true,
       N: parseInt(this.props.params.n),
-      positionPressed: false,
-      colorPressed: false,
-      colorStyle: noStyle,
-      posStyle: noStyle,
+      positionPressed: true,
+      colorPressed: true,
+      colorStyle: pushStyle,
+      posStyle: pushStyle,
       tempUser: true,
       gameId: null,
       mode: this.props.location.pathname.split('/')[2],
@@ -70,7 +70,9 @@ var SilentMode = React.createClass({
         penalty: obj.penalty * obj.modeMultiplier,
         positivePoints: obj.positivePoints * obj.modeMultiplier
       })
-    }.bind(this));
+    }.bind(this), function() {
+      console.log(this.state.positivePoints)
+    });
   },
   componentWillUnmount: function() {
     clearInterval(iterations);
@@ -93,36 +95,34 @@ var SilentMode = React.createClass({
   match() {
     this.setState({
       currentScore: (((2000 - (this.state.reactionEnd - this.state.reactionStart)) / 1000) * this.state.positivePoints).toFixed(2)
-    });
-    this.setState({
-      reactionTimes: this.state.reactionTimes.concat([this.state.reactionEnd - this.state.reactionStart]),
-      fullScore: this.state.fullScore + parseFloat(this.state.currentScore),
-      matchCount: this.state.matchCount + 1,
-      matchHit: this.state.matchHit + 1,
-      currentScore: "+" + parseInt(this.state.currentScore),
-      scoreUpdate: 'scoreUpdate scoreUpdatePos'
-    })
+    }, function() {
+      this.setState({
+        reactionTimes: this.state.reactionTimes.concat([this.state.reactionEnd - this.state.reactionStart]),
+        fullScore: this.state.fullScore + parseFloat(this.state.currentScore),
+        matchCount: this.state.matchCount + 1,
+        matchHit: this.state.matchHit + 1,
+        currentScore: "+" + parseInt(this.state.currentScore),
+        scoreUpdate: 'scoreUpdate scoreUpdatePos'
+      });
+    }.bind(this));
   },
 
   incorrect(number) {
     if (!number) {
       number = 1
     }
+    var updateScore = 0
     if ((this.state.fullScore - number * this.state.penalty) >= 0) {
-      this.setState({
-        currentScore: -this.state.penalty
-      })
+      updateScore = -this.state.penalty
     } else {
-      this.setState({
-        currentScore: -this.state.fullScore
-      })
+      updateScore = -this.state.fullScore
     }
     this.setState({
       reactionTimes: this.state.reactionTimes.concat([this.state.reactionEnd - this.state.reactionStart]),
       //matchHit: this.state.matchHit - 1,
       matchCount: this.state.matchCount + 1,
-      fullScore: this.state.fullScore + this.state.currentScore,
-      currentScore: parseInt(this.state.currentScore),
+      fullScore: this.state.fullScore + updateScore,
+      currentScore: parseInt(updateScore),
       scoreUpdate: 'scoreUpdate scoreUpdateNeg'
     });
   },
@@ -309,72 +309,6 @@ var SilentMode = React.createClass({
       ? (<StartOverlay nLevel={this.state.N} mode={this.state.mode} click={this.startGame}/>)
       : '';
 
-    // var scoreAlert;
-    // var scoreUpdate;
-    // if (this.state.alertType === 'full') {
-    //   scoreAlert = (
-    //     <div className="scoreAlertPositive">
-    //       {this.state.alert}
-    //     </div>
-    //   )
-    //   scoreUpdate = (
-    //     <h2 className="scoreUpdate scoreUpdatePos">+{parseInt(currentScore)}</h2>
-    //   )
-    // } else if (this.state.alertType === 'none') {
-    //   scoreAlert = (
-    //     <div className="scoreAlertNegative">
-    //       {this.state.alert}
-    //     </div>
-    //   )
-    //   if (currentScore !== 0) {
-    //     scoreUpdate = (
-    //       <h2 className="scoreUpdate scoreUpdateNeg">-{parseInt(currentScore)}</h2>
-    //     )
-    //   }
-    // } else if (this.state.alertType === 'halfPos') {
-    //   scoreAlert = (
-    //     <div className="scoreAlertHalf">
-    //       {this.state.alert}
-    //     </div>
-    //   )
-    //   if (currentScore !== 0) {
-    //     scoreUpdate = (
-    //       <h2 style={{
-    //         color: 'orange'
-    //       }}>+{parseInt(currentScore)}</h2>
-    //     )
-    //   }
-    // } else if (this.state.alertType === 'halfNeg') {
-    //   scoreAlert = (
-    //     <div className="scoreAlertHalf">
-    //       {this.state.alert}
-    //     </div>
-    //   )
-    //   if (currentScore !== 0) {
-    //     scoreUpdate = (
-    //       <h2 className="scoreUpdate scoreUpdatePos">-{parseInt(currentScore)}</h2>
-    //     )
-    //   }
-    // } else if (this.state.alertType === 'none') {
-    //   scoreAlert = (
-    //     <div className="scoreAlertNegative">
-    //       {this.state.alert}
-    //     </div>
-    //   )
-    //   if (currentScore !== 0) {
-    //     scoreUpdate = (
-    //       <h2 className="scoreUpdate scoreUpdateNeg">-{parseInt(currentScore)}</h2>
-    //     )
-    //   }
-    // } else {
-    //   scoreAlert = (
-    //     <div></div>
-    //   )
-    //   scoreUpdate = (
-    //     <h2></h2>
-    //   )
-    // }
-
     var gameTimer = this.state.overlay
       ? ""
       : (
@@ -395,6 +329,9 @@ var SilentMode = React.createClass({
             <div className="gameHeading">
               <div className="gameScore silent">
                 <h2>Score: {parseInt(this.state.fullScore)}</h2>
+                <h2 className={this.state.scoreUpdate}>
+                  {this.state.currentScore}
+                </h2>
                 <h2 className={this.state.scoreUpdate}>
                   {this.state.currentScore}
                 </h2>
@@ -433,7 +370,7 @@ var SilentMode = React.createClass({
 
 var noStyle = {}
 var pushStyle = {
-  backgroundColor: '#01B6A7'
+  backgroundColor: '#008C82'
 }
 
 var standardStyle = {

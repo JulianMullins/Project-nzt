@@ -144,13 +144,14 @@
   font-size: 64px;
 }
 .gameScore {
+  position: relative;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   font-size: 64px;
   width: 70%;
 }
-.gameScore h2 {
+.gameScore h2:first-child {
   width: 50%;
 }
 
@@ -227,6 +228,9 @@
   color: yellow;
 }
 .scoreUpdate {
+  position: absolute;
+  width: 50%;
+  right: 0;
   font-weight: bold !important;
   -webkit-animation-name: scoreUpdateIn;
   -webkit-animation-duration: 2s;
