@@ -52,7 +52,6 @@ var Mainmenu = React.createClass({
         })
       }
     }.bind(this))
-    console.log(this.context);
   },
   componentWillReceiveProps: function(nextProps) {
     if (nextProps.location.pathname === "/home") {
