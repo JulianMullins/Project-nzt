@@ -57,8 +57,8 @@ var GameOverOverlay = React.createClass({
   },
   getData() {
     axios.all([getUser(), getGame()]).then(axios.spread(function(userData, gameData) {
-      console.log("gameData: ", gameData);
-      console.log("userData: ", userData);
+      //console.log("gameData: ", gameData);
+      //console.log("userData: ", userData);
       this.setState({
         //username:userData.data.username,
         isAnon: userData.data.isAnon,
@@ -109,7 +109,6 @@ var GameOverOverlay = React.createClass({
         gameOverCongrats: <h1>Nice try!</h1>
       })
     }
-    console.log("state: ", this.state);
   },
   anonHighScore() {
     //if anon get high score, prompt to login
@@ -176,9 +175,7 @@ var GameOverOverlay = React.createClass({
   },
   countUp: function(count) {
     var div_by = 100;
-    //count=parseInt(count)
     var speed = parseFloat(count / div_by);
-    //console.log('ini speed', speed);
     var display = $('.count');
     var run_count = 1;
     var int_speed = 18;

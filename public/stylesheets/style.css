@@ -6,27 +6,26 @@ b {
 }
 
 /*Our Colors*/
-
-.classic {
-  color: #F13542;
-}
 .relaxed {
-  color: #01B6A7;
+  color: #7CD9D2;
 }
 .silent {
-  color: #7CD9D2;
+  color: #01B6A7;
+}
+.classic {
+  color: #F13542;
 }
 .advanced {
   color: #F1BA03;
 }
-.classicBackground {
-  background-color: #F13542;
-}
 .relaxedBackground {
-  background-color: #01B6A7;
+  background-color: #7CD9D2;
 }
 .silentBackground {
-  background-color: #7CD9D2;
+  background-color: #01B6A7;
+}
+.classicBackground {
+  background-color: #F13542;
 }
 .advancedBackground {
   background-color: #F1BA03;
@@ -129,14 +128,6 @@ h3 {
   font-weight: 100;
   color: rgba(255, 255, 255, .8);
   text-align: center;
-}
-.fireworks {
-  position: absolute;
-  top: 0;
-  left: 0;
-  height: 30vh;
-  justify-content: center;
-  align-items: center;
 }
 .whiteLogo {
   width: 15vw;

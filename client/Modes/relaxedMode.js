@@ -23,7 +23,6 @@ var iterations;
 
 var RelaxedMode = React.createClass({
   getInitialState: function() {
-    console.log("getting initial state")
     return {
       style: [
         standardStyle,
@@ -66,7 +65,6 @@ var RelaxedMode = React.createClass({
         this.props.history.push('/levels/' + this.state.mode + '/unauthorized');
         return;
       }
-      console.log(obj)
       this.setState({
         tempUser: obj.tempUser,
         gameId: obj.gameId,
@@ -74,9 +72,7 @@ var RelaxedMode = React.createClass({
         penalty: obj.penalty * obj.modeMultiplier,
         positivePoints: obj.positivePoints * obj.modeMultiplier
       })
-      console.log("positivePoints: " + this.state.positivePoints)
     }.bind(this));
-    console.log("component mounted")
   },
   componentWillUnmount: function() {
     clearInterval(iterations);
@@ -90,9 +86,9 @@ var RelaxedMode = React.createClass({
   },
   startGame: function() {
 
-    axios.get('/api/isUser').then(function(response) {
-      console.log(response.data)
-    })
+    // axios.get('/api/isUser').then(function(response) {
+    //   //console.log(response.data)
+    // })
 
     this.setState({overlay: false});
     this.position();
@@ -234,9 +230,9 @@ var RelaxedMode = React.createClass({
 
         //give gameScore variable the final score
         clearInterval(iterations);
-        console.log(this.state.fullScore)
+        //console.log(this.state.fullScore)
         var accuracy = this.state.matchHit / this.state.matchCount;
-        console.log(accuracy, 'accuracy')
+        //console.log(accuracy, 'accuracy')
 
         endGameFunction(this.state.fullScore, this.state.reactionTimes, this.state.gameId, accuracy, function(data) {
           if (data.success) {
@@ -275,7 +271,7 @@ var RelaxedMode = React.createClass({
       ? ""
       : (
         <GameTimer timeStyle={{
-          'color': "#01B6A7"
+          'color': "#7CD9D2"
         }}></GameTimer>
       );
 
@@ -332,11 +328,12 @@ var pushStyle = {
 
 var standardStyle = {
   backgroundColor: "transparent",
-  border: "3px solid #01B6A7"
+  border: "3px solid #7CD9D2"
 }
 
 var newStyle = {
-  backgroundColor: "#01B6A7"
+  backgroundColor: "#7CD9D2",
+  border: "3px solid #7CD9D2"
 }
 
 module.exports = RelaxedMode

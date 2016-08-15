@@ -37,7 +37,7 @@ var NavBar = React.createClass({
 	          isUser: response.data.isUser,
 	          isloggedIn: response.data.isloggedin
 	        })
-	        console.log(this.state);
+	        //console.log(this.state);
 	      }.bind(this))
 
 	    //console.log(this.state)
@@ -64,7 +64,7 @@ var NavBar = React.createClass({
 		this.setState({
 			open: false
 		});
-		console.log("navbar state changed--close")
+		//console.log("navbar state changed--close")
 
 	},
 	closeLogInOut(e){

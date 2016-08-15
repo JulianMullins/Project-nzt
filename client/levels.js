@@ -35,11 +35,11 @@ var getSquareArr = function(square, mode) {
         opacity: .8 - (0.2 / square) * i
       };
       if (mode === 'relaxed') {
-        colorStyle.backgroundColor = '#01B6A7';
-        opacityStyle.backgroundColor = '#01B6A7';
-      } else if (mode === 'silent') {
         colorStyle.backgroundColor = '#7CD9D2';
         opacityStyle.backgroundColor = '#7CD9D2';
+      } else if (mode === 'silent') {
+        colorStyle.backgroundColor = '#01B6A7';
+        opacityStyle.backgroundColor = '#01B6A7';
       } else if (mode === 'advanced') {
         colorStyle.backgroundColor = '#F1BA03';
         opacityStyle.backgroundColor = '#F1BA03';
@@ -53,9 +53,9 @@ var getSquareArr = function(square, mode) {
         cursor: 'default'
       };
       if (mode == 'relaxed') {
-        colorStyle.border = '2px solid #01B6A7';
-      } else if (mode == 'silent') {
         colorStyle.border = '2px solid #7CD9D2';
+      } else if (mode == 'silent') {
+        colorStyle.border = '2px solid #01B6A7';
       } else if (mode == 'advanced') {
         colorStyle.border = '2px solid #F1BA03';
       }
@@ -78,9 +78,9 @@ var capFirstLetter = function(string) {
 }
 
 var getMaxN = function(mode, cb) {
-  console.log("getting max n")
+  //console.log("getting max n")
   axios.get('/api/getMaxN', {withCredentials: true}).then(function(response) {
-    console.log(response.data.maxN)
+    //console.log(response.data.maxN)
     return cb(response.data.maxN)
   })
 };

@@ -40,7 +40,7 @@ var App = React.createClass({
     return {isUser: false, isloggedin: false, isMobile: false}
   },
   componentDidMount: function() {
-    console.log("app mounted")
+    //console.log("app mounted")
     axios.get('/api/getUserOnLoad')
     this.updateMobile();
   },
@@ -121,7 +121,7 @@ ReactDOM.render((
     </Route>
   </Router>
 ), document.getElementById('root'), function() {
-  console.log("rendered")
+  //console.log("rendered")
 });
 
 //<Route path="stats" component={Stats}/>

@@ -39,7 +39,7 @@ var Mainmenu = React.createClass({
   // },
   componentWillMount: function() {
     axios.get('/api/homeUserInfo').then(function(response) {
-      console.log(response.data)
+      //console.log(response.data)
       this.setState({hasUsername: response.data.hasUsername, name: response.data.name, showTutorial: response.data.showTutorial})
     }.bind(this)).then(function() {
       if (this.state.hasUsername) {
@@ -52,7 +52,7 @@ var Mainmenu = React.createClass({
   componentWillReceiveProps: function(nextProps) {
     if (nextProps.location.pathname === "/home") {
       axios.get('/api/homeUserInfo').then(function(response) {
-        console.log(response.data)
+        //console.log(response.data)
         this.setState({hasUsername: response.data.hasUsername, name: response.data.name, showTutorial: response.data.showTutorial})
       }.bind(this)).then(function() {
         if (this.state.hasUsername) {
@@ -95,10 +95,6 @@ var Mainmenu = React.createClass({
           </div>
         </div>
         <div className="menu">
-          <a className="menu-panel classicBackground" onClick={this.classic}>
-            <h2>Classic</h2>
-            <h3>position, sound</h3>
-          </a>
           <a className="menu-panel relaxedBackground" onClick={this.relaxed}>
             <h2>Relaxed</h2>
             <h3>position only</h3>
@@ -106,6 +102,10 @@ var Mainmenu = React.createClass({
           <a className="menu-panel silentBackground" onClick={this.silent}>
             <h2>Silent</h2>
             <h3>position, color</h3>
+          </a>
+          <a className="menu-panel classicBackground" onClick={this.classic}>
+            <h2>Classic</h2>
+            <h3>position, sound</h3>
           </a>
           <a className="menu-panel advancedBackground" onClick={this.advanced}>
             <h2>Advanced</h2>
