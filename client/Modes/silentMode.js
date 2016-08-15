@@ -93,6 +93,7 @@ var SilentMode = React.createClass({
   },
 
   match() {
+    console.log(this.state.reactionEnd, this.state.reactionStart);
     this.setState({
       currentScore: (((2000 - (this.state.reactionEnd - this.state.reactionStart)) / 1000) * this.state.positivePoints).toFixed(2)
     }, function() {
@@ -181,7 +182,8 @@ var SilentMode = React.createClass({
         positionPressed: false,
         colorPressed: false,
         posStyle: noStyle,
-        colorStyle: noStyle
+        colorStyle: noStyle,
+        scoreUpdate: ''
       })
       // Remove alert
       setTimeout(function() {
@@ -281,9 +283,10 @@ var SilentMode = React.createClass({
       return;
     }
     if (this.state.positionMatch) {
-      this.setState({reactionEnd: Date.now()})
+      this.setState({
+        reactionEnd: Date.now()
+      }, this.match);
       this.setButton('positionButton', 'goodJob');
-      this.match();
     } else {
       this.setButton('positionButton', 'youFailed');
       this.incorrect();
@@ -295,9 +298,10 @@ var SilentMode = React.createClass({
       return;
     }
     if (this.state.colorMatch) {
-      this.setState({reactionEnd: Date.now()})
+      this.setState({
+        reactionEnd: Date.now()
+      }, this.match);
       this.setButton('colorButton', 'goodJob');
-      this.match();
     } else {
       this.setButton('colorButton', 'youFailed');
       this.incorrect();
@@ -317,6 +321,18 @@ var SilentMode = React.createClass({
         }}></GameTimer>
       );
 
+    var scoreUpdates = []
+    if (this.state.scoreUpdate) {
+      scoreUpdates.push(
+        <h2 className={this.state.scoreUpdate}>
+          {this.state.currentScore}
+        </h2>
+      )
+      setTimeout(function() {
+        scoreUpdates.splice(0, 1);
+      }, 2000);
+    }
+
     return (
       <div className="fullGameView">
         <div className="gameContainer">
@@ -329,12 +345,9 @@ var SilentMode = React.createClass({
             <div className="gameHeading">
               <div className="gameScore silent">
                 <h2>Score: {parseInt(this.state.fullScore)}</h2>
-                <h2 className={this.state.scoreUpdate}>
-                  {this.state.currentScore}
-                </h2>
-                <h2 className={this.state.scoreUpdate}>
-                  {this.state.currentScore}
-                </h2>
+                {scoreUpdates.map(function(scoreUpdate) {
+                  return scoreUpdate;
+                })}
               </div>
               {gameTimer}
             </div>
