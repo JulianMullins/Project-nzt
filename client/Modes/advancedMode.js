@@ -7,10 +7,7 @@ import {Link} from 'react-router'
 var endGameFunction = require('./serverFunctions').endGameFunction;
 var startGameFunction = require('./serverFunctions').startGameFunction;
 
-//COLLECTION OF GLOBAL VARIABLES TO MAKE EVERYONES LIFE EASIER
-
 var iterations;
-
 var nextSound;
 var soundInterval;
 

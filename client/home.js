@@ -13,6 +13,10 @@ var NewUserOverlay = require('./newUserOverlay');
 
 var Mainmenu = React.createClass({
 
+  contextTypes: {
+    router: React.PropTypes.object.isRequired
+  },
+
   //initial functions
   getInitialState: function() {
     return {
@@ -48,6 +52,7 @@ var Mainmenu = React.createClass({
         })
       }
     }.bind(this))
+    console.log(this.context);
   },
   componentWillReceiveProps: function(nextProps) {
     if (nextProps.location.pathname === "/home") {
@@ -64,16 +69,16 @@ var Mainmenu = React.createClass({
     }
   },
   classic() {
-    this.props.history.push('/levels/classic')
+    this.context.router.push('/levels/classic')
   },
   relaxed() {
-    this.props.history.push('/levels/relaxed')
+    this.context.router.push('/levels/relaxed')
   },
   silent() {
-    this.props.history.push('/levels/silent')
+    this.context.router.push('/levels/silent')
   },
   advanced() {
-    this.props.history.push('/levels/advanced')
+    this.context.router.push('/levels/advanced')
   },
   closeTutorial: function() {
     this.setState({showTutorial: false})
@@ -86,8 +91,7 @@ var Mainmenu = React.createClass({
       <div>
         {this.state.showTutorial
           ? <NewUserOverlay click={this.closeTutorial}/>
-          : <div></div>
-}
+          : <div></div>}
         <div className="heading">
           <img src="../images/CortexLogo4.svg"/>
           <div className="userHeading">
@@ -96,8 +100,7 @@ var Mainmenu = React.createClass({
         </div>
         <div className="menu">
           <a className="menu-panel relaxedBackground" onClick={this.relaxed}>
-            <div className="startHerePanel">
-            </div>
+            <div className="startHerePanel"></div>
             <div className="startHereText">
               <p>FIRST TIME?</p>
               <p>(start here)</p>

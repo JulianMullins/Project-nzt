@@ -4,27 +4,10 @@ var StartOverlay = require('./gameStartOverlay');
 var axios = require('axios');
 import {Link} from 'react-router'
 
-// var fullScore = 0;
-// var currentScore;
-// var matchCount = 0; //total matches in game
-// var matchHit = 0; ///ones user gets
-
 var endGameFunction = require('./serverFunctions').endGameFunction;
 var startGameFunction = require('./serverFunctions').startGameFunction;
 
-//COLLECTION OF GLOBAL VARIABLES TO MAKE EVERYONES LIFE EASIER
-//create global variable for reaction counter
-//var reactionStart;
-//global variable for keeping reaction times
-//note: all reactin times for correct hits stored as array for stats (max,min,avg)
-//var reactionTimes = [];
-//global variable for game score (saved once time runs out)
-//var gameScore;
-
-//var reactionEnd = null;
 var iterations;
-//var fullScore = 0;
-
 var nextSound;
 var soundInterval;
 
