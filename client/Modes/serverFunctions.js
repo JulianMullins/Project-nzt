@@ -2,9 +2,8 @@ var React = require('react');
 var axios = require('axios');
 
 var startGameFunction = function(mode, N, callback) {
-  axios.post('/api/startGame/' + mode + '/' + N)
-  .then(function(response) {
-    if (N!==1 && !response.data.authorized) {
+  axios.post('/api/startGame/' + mode + '/' + N).then(function(response) {
+    if (N !== 1 && !response.data.authorized) {
       //console.log("unauthorized")
       return callback(true)
     }
@@ -34,22 +33,12 @@ var endGameFunction = function(fullScore, reactionTimes, gameId, accuracy, callb
     reactionTimes: reactionTimes,
     accuracy: accuracy
   }).then(function(response) {
-    if(response.data.success){
-      //console.log('end game posted')
-      // if(response.data.success){
-      //   this.props.history.push('/gameOver');
-      // }
-
+    if (response.data.success) {
       axios.post('/api/gameOver', {
         passedLevel: response.data.passedLevel,
         gameId: response.data.gameId,
         accuracy: response.data.accuracy
       }).then(function(response) {
-        // if(response.data.success){
-        //   this.props.history.push('/gameOver');
-        // }
-        // this.props.history.push('/gameOver');
-        //console.log("gameOver response: "+response.data.success)
         return callback(response.data)
       }.bind(this))
     }

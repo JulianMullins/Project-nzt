@@ -20,6 +20,9 @@ var getGame = function() {
 }
 
 var GameOverOverlay = React.createClass({
+  contextTypes: {
+    router: React.PropTypes.object.isRequired
+  },
   getInitialState: function() {
     return {
       //username:null,
@@ -104,7 +107,7 @@ var GameOverOverlay = React.createClass({
       })
     } else {
       this.setState({
-        gameOverInform: <h2 className="classic">You need {this.state.scoreToPass * this.state.nLevel * this.state.modeMultiplier} points 
+        gameOverInform: <h2 className="classic">You need {this.state.scoreToPass * this.state.nLevel * this.state.modeMultiplier} points
         to unlock level {this.state.nLevel + 1}</h2>,
         gameOverCongrats: <h1>Nice try!</h1>
       })
@@ -167,11 +170,11 @@ var GameOverOverlay = React.createClass({
   },
   nextLevelLink(e) {
     //go to next level (if earned)
-    this.props.history.push('/game/' + this.state.mode + '/' + (this.state.nLevel + 1))
+    this.context.router.push('/game/' + this.state.mode + '/' + (this.state.nLevel + 1))
   },
   repeatLevel(e) {
     //go to next level (if earned)
-    this.props.history.push('/game/' + this.state.mode + '/' + (this.state.nLevel))
+    this.context.router.push('/game/' + this.state.mode + '/' + (this.state.nLevel))
   },
   countUp: function(count) {
     var div_by = 100;

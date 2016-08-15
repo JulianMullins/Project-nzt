@@ -23,6 +23,9 @@ var iterations;
 // var matchHit = 0; ///ones user gets
 
 var SilentMode = React.createClass({
+  contextTypes: {
+    router: React.PropTypes.object.isRequired
+  },
   getInitialState: function() {
     return {
       style: [
@@ -61,7 +64,7 @@ var SilentMode = React.createClass({
   componentDidMount: function() {
     startGameFunction(this.state.mode, this.state.N, function(err, obj) {
       if (err) {
-        this.props.history.push('/levels/' + this.state.mode);
+        this.context.router.push('/levels/' + this.state.mode);
       }
       this.setState({
         tempUser: obj.tempUser,
@@ -114,7 +117,7 @@ var SilentMode = React.createClass({
     if (!number) {
       number = 1
     }
-    var updateScore = 0
+    var updateScore = 0;
     if ((this.state.fullScore - number * this.state.penalty) >= 0) {
       updateScore = -this.state.penalty
     } else {
@@ -274,7 +277,7 @@ var SilentMode = React.createClass({
         setTimeout(function() {
           endGameFunction(this.state.fullScore, this.state.reactionTimes, this.state.gameId, this.state.userId, function(success) {
             if (success) {
-              this.props.history.push('/gameOver')
+              this.context.router.push('/gameOver')
             }
           }.bind(this))
 

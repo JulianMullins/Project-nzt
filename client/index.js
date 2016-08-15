@@ -120,8 +120,4 @@ ReactDOM.render((
 
     </Route>
   </Router>
-), document.getElementById('root'), function() {
-  //console.log("rendered")
-});
-
-//<Route path="stats" component={Stats}/>
+), document.getElementById('root'));
