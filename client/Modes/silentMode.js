@@ -70,9 +70,7 @@ var SilentMode = React.createClass({
         penalty: obj.penalty * obj.modeMultiplier,
         positivePoints: obj.positivePoints * obj.modeMultiplier
       })
-    }.bind(this), function() {
-      console.log(this.state.positivePoints)
-    });
+    }.bind(this));
   },
   componentWillUnmount: function() {
     clearInterval(iterations);
@@ -93,7 +91,6 @@ var SilentMode = React.createClass({
   },
 
   match() {
-    console.log(this.state.reactionEnd, this.state.reactionStart);
     this.setState({
       currentScore: (((2000 - (this.state.reactionEnd - this.state.reactionStart)) / 1000) * this.state.positivePoints).toFixed(2)
     }, function() {
@@ -104,7 +101,12 @@ var SilentMode = React.createClass({
         matchHit: this.state.matchHit + 1,
         currentScore: "+" + parseInt(this.state.currentScore),
         scoreUpdate: 'scoreUpdate scoreUpdatePos'
-      });
+      }, function() {
+        $('.gameScore').append('<h2 class="' + this.state.scoreUpdate + '">' + this.state.currentScore + '</h2>')
+        setTimeout(function() {
+          $('.gameScore h2:nth-child(2)').remove();
+        }, 800)
+      }.bind(this));
     }.bind(this));
   },
 
@@ -125,7 +127,12 @@ var SilentMode = React.createClass({
       fullScore: this.state.fullScore + updateScore,
       currentScore: parseInt(updateScore),
       scoreUpdate: 'scoreUpdate scoreUpdateNeg'
-    });
+    }, function() {
+      $('.gameScore').append('<h2 class="' + this.state.scoreUpdate + '">' + this.state.currentScore + '</h2>')
+      setTimeout(function() {
+        $('.gameScore h2:nth-child(2)').remove();
+      }, 800)
+    }.bind(this));
   },
 
   setButton: function(button, _class) {
@@ -321,18 +328,6 @@ var SilentMode = React.createClass({
         }}></GameTimer>
       );
 
-    var scoreUpdates = []
-    if (this.state.scoreUpdate) {
-      scoreUpdates.push(
-        <h2 className={this.state.scoreUpdate}>
-          {this.state.currentScore}
-        </h2>
-      )
-      setTimeout(function() {
-        scoreUpdates.splice(0, 1);
-      }, 2000);
-    }
-
     return (
       <div className="fullGameView">
         <div className="gameContainer">
@@ -345,9 +340,6 @@ var SilentMode = React.createClass({
             <div className="gameHeading">
               <div className="gameScore silent">
                 <h2>Score: {parseInt(this.state.fullScore)}</h2>
-                {scoreUpdates.map(function(scoreUpdate) {
-                  return scoreUpdate;
-                })}
               </div>
               {gameTimer}
             </div>
