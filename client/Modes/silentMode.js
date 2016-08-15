@@ -136,7 +136,7 @@ var SilentMode = React.createClass({
       setTimeout(function() {
         obj[button] = '';
         this.setState(obj);
-      }.bind(this), 200);
+      }.bind(this), 500);
     }.bind(this))
   },
 

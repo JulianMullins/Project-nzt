@@ -157,15 +157,15 @@
 
 .goodJob {
   -webkit-animation-name: positiveFadeOut;
-  -webkit-animation-duration: .2s;
+  -webkit-animation-duration: 1s;
   animation-name: positiveFadeOut;
-  animation-duration: .2s;
+  animation-duration: 1s;
 }
 .youFailed {
   -webkit-animation-name: negativeFadeOut;
-  -webkit-animation-duration: .2s;
+  -webkit-animation-duration: 1s;
   animation-name: negativeFadeOut;
-  animation-duration: .2s;
+  animation-duration: 1s;
 }
 
 /* negative alert fade */
