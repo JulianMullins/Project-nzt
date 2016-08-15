@@ -14,18 +14,18 @@ var Science = React.createClass({
 						should remember 1 step back to see if the next stimulus matches the previous,
 						n=2 means keeping track of matching stimuli two steps back, and so on. The
 						"dual" in dual n-back refers to the different types of stimulus that the user
-						must keep track of, for example position (a visual input) and sound (an
+						must keep track of, for example, position (a visual input) and sound (an
 						auditory input). Combining the two would therefore require a user to keep
 						track of both changing positions and sounds at different levels of pattern history.
 						In cognitive studies, these tests have been shown to improve working memory
 						and fluid intelligence (i.e. reasoning and problem-solving skills). In other
-						words, <b>playing these games can improve one&#39;s IQ!</b> In a study presented in the
+						words, <b>playing these games can improve one&#39;s IQ!</b> In <a target="_blank" href="http://www.pnas.org/content/105/19/6829.full">a study</a> presented in the
 						Proceedings of the National Academy of Sciences of the United States of
 						America, fluid intelligence increased significantly after just 19 days of
 						n-back training, regardless of one&#39;s prior level of intelligence.
 						</p>
 						<p>
-						What does Cortex do? Most current implementations of dual
+						<b>What does Cortex do?</b> Most current implementations of dual
 						n-back training are poorly designed and tedious to play. Our mission is to
 						<b> make cognitive training less of a chore through an interactive and gamified
 						experience</b>. Users are able to choose their desired level of challenge through

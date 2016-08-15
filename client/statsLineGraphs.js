@@ -170,7 +170,7 @@ var MyComponent = React.createClass({
       return (
         <div className="statsAlertContainer">
           <div className='statsAlert'>{this.state.alert}</div>
-          <Link to='/home'><span className='fa fa-home fa-5x relaxed' aria-hidden='true'/></Link>
+          <Link to='/home'><span className='fa fa-home fa-5x silent' aria-hidden='true'/></Link>
         </div>
       )
     } else {

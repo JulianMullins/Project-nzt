@@ -152,7 +152,7 @@ var Tutorial = React.createClass({
                   <div className="rules2">
                     <h2>Dual n-back</h2>
                     <p>Cortex is based on the <i>dual n-back</i> genre of brain training games. Traditionally the game requires players to keep track of two changing elements: position and sound (the 'dual' in dual n-back). 
-                    However, in this version of the game, we have also incorporated changing colors and have divided up the four game modes accordingly. For example, in relaxed mode you only have to keep track of changing position 
+                    However, in this version of the game, we have also incorporated changing colors and have divided up these elements into four unique game modes. For example, in relaxed mode you only have to keep track of changing position 
                     but in advanced mode you have to keep track of changing position, color and sound.</p>
                   </div>
                 </div>
@@ -163,7 +163,8 @@ var Tutorial = React.createClass({
                 <div className="rulemode2">
                   <div className="rules2">
                     <h2>The n-back part</h2>
-                    <p>The n in n-back refers to the number of positions back that you have to keep track of. The example below demonstrates gameplay at n=2, therefore if the current position matches the position it was at <b>two steps back</b> then you would indicate a match by pressing the position key. (The previous slide showed an example of position and color matches at n=1).</p>
+                    <p>The n in n-back refers to the number of positions back that you have to remember. The example below demonstrates gameplay at n=2, therefore if the current position matches the position it was at <b>two steps back</b> then you would indicate a match by pressing the position key. </p>
+                    <p><i>The previous slide showed an example of position and color matches at n=1).</i></p>
                   </div>
                 </div>
                 <img src="./images/nback.gif" alt="Gameplay Pattern"></img>
@@ -172,7 +173,7 @@ var Tutorial = React.createClass({
                 <div className="slide">
                   <div className="key-wrapper">
                     <h2>Key Tips (keyboard only!)</h2>
-                    <p>Once a button is pressed, you cannot undo the action. For a double match, you need to press both keys</p>
+                    <p>Once a button is pressed, you cannot undo the action. For a double match, you need to press both keys.</p>
                     <div className="rulemode">
                       <div className="rules2">
                         <h3>RELAXED</h3>

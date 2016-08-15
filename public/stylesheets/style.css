@@ -129,7 +129,6 @@ h3 {
   color: rgba(255, 255, 255, .8);
   text-align: center;
 }
-
 .startHerePanel {
   position: absolute;
   top: 30vh;
@@ -140,7 +139,6 @@ h3 {
   border-width: 175px 175px 0 0;
   border-color: rgba(0,0,0,0.4) transparent transparent transparent;
 }
-
 .startHereText {
     position: absolute;
     top: 34%;
@@ -151,7 +149,6 @@ h3 {
     color: rgba(255,255,255,.95);
     font-size: 18px;
 }
-
 .whiteLogo {
   width: 15vw;
   max-width: 150px;
