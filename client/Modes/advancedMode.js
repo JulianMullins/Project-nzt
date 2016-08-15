@@ -367,65 +367,7 @@ var AdvancedMode = React.createClass({
       ? (<StartOverlay nLevel={this.state.N} mode={this.state.mode} click={this.startGame}/>)
       : '';
 
-    // var scoreAlert;
-    // var scoreUpdate;
-    // if (this.state.alertType === 'full') {
-    //   scoreAlert = (
-    //     <div className="scoreAlertPositive">
-    //       {this.state.alert}
-    //     </div>
-    //   )
-    //   scoreUpdate = (
-    //     <h2 className="scoreUpdate scoreUpdatePos">+{parseInt(currentScore)}</h2>
-    //   )
-    // } else if (this.state.alertType === 'half') {
-    //   scoreAlert = (
-    //     <div className="scoreAlertHalf">
-    //       {this.state.alert}
-    //     </div>
-    //   )
-    //   if (currentScore > 0) {
-    //     scoreUpdate = (
-    //       <h2 style={{
-    //         color: 'yellow'
-    //       }}>+{parseInt(currentScore)}</h2>
-    //     )
-    //   }
-    //   if (currentScore < 0) {
-    //     scoreUpdate = (
-    //       <h2 style={{
-    //         color: 'yellow'
-    //       }}>{parseInt(currentScore)}</h2>
-    //     )
-    //   }
-    // } else if (this.state.alertType === 'none') {
-    //   scoreAlert = (
-    //     <div className="scoreAlertNegative">
-    //       {this.state.alert}
-    //     </div>
-    //   )
-    //   if (currentScore > 0) {
-    //     scoreUpdate = (
-    //       <h2 style={{
-    //         color: 'yellow'
-    //       }}>+{parseInt(currentScore)}</h2>
-    //     )
-    //   } else if (parseInt(currentScore) < 0) {
-    //     scoreUpdate = (
-    //       <h2 style={{
-    //         color: 'yellow'
-    //       }}>{parseInt(currentScore)}</h2>
-    //     ) //}
-    //   }
-    // } else {
-    //   scoreAlert = (
-    //     <div></div>
-    //   )
-    //   scoreUpdate = (
-    //     <h2></h2>
-    //   )
-    // }
-
+   
     var gameTimer = this.state.overlay
       ? ""
       : (

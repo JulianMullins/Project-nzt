@@ -27,7 +27,7 @@ var User = require('./models/User');
 var Stats = require('./models/Stats');
 var HighScore = require('./models/HighScore');
 var Leaderboard = require('./models/Leaderboard');
-
+var OverallLeaderboard = require("./models/OverallLeaderboard");
 
 var app = express();
 var server = require('http').Server(app);
@@ -106,6 +106,14 @@ passport.deserializeUser(function(id, done) {
 //   })
 // })
 
+OverallLeaderboard.findOne().populate('scores').exec(function(err,leaderboard){
+  leaderboard.scores.forEach(function(score){
+    if(!score.userName){
+      console.log(score)
+    }
+  })
+})
+
 
 // passport strategy
 passport.use(new LocalStrategy({
@@ -148,7 +156,7 @@ passport.use(new LocalStrategy({
 
         if (!user) {
           //console.log(user);
-          return done('user does not exist', false, {
+          return done('User does not exist', false, {
             message: 'Incorrect username.'
           });
         }
@@ -159,9 +167,9 @@ passport.use(new LocalStrategy({
         //check hashed passwords
         bcrypt.compare(password, user.password, function(err, response) {
           if (err) {
-            return done('problem comparing hashed passwords',err)
+            return done('Problem comparing passwords',err)
           } else if (!response) {
-            return done('incorrect password', false, {
+            return done('Incorrect password', false, {
               message: "Incorrect password"
             });
           } else {
@@ -450,7 +458,6 @@ app.use('/api/', statsFunctions);
 app.use('/api/', gameFunctions);
 
 app.use('/', routes);
-console.log("app.use 404 is next")
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   var err = new Error('Not Found');
@@ -461,7 +468,6 @@ app.use(function(req, res, next) {
 // error handlers
 
 
-console.log("app error is next")
 // development error handler
 // will print stacktrace
 if (app.get('env') === 'development') {
