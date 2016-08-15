@@ -8,20 +8,12 @@ import {Link} from 'react-router'
 var endGameFunction = require('./serverFunctions').endGameFunction;
 var startGameFunction = require('./serverFunctions').startGameFunction;
 
-//COLLECTION OF GLOBAL VARIABLES TO MAKE EVERYONES LIFE EASIER
-//create global variable for reaction counter
-//var reactionStart;
-//global variable for keeping reaction times
-//note: all reaction times for correct hits stored as array for stats (max,min,avg)
-// var reactionTimes = [];
-// //global variable for game score (saved once time runs out)
 var iterations;
-// var fullScore = 0;
-// var currentScore;
-// var matchCount = 0; //total matches in game
-// var matchHit = 0; ///ones user gets
 
 var RelaxedMode = React.createClass({
+  contextTypes: {
+    router: React.PropTypes.object.isRequired
+  },
   getInitialState: function() {
     return {
       style: [
@@ -62,7 +54,7 @@ var RelaxedMode = React.createClass({
 
     startGameFunction(this.state.mode, this.state.N, function(err, obj) {
       if (err) {
-        this.props.history.push('/levels/' + this.state.mode + '/unauthorized');
+        this.context.router.push('/levels/' + this.state.mode + '/unauthorized');
         return;
       }
       this.setState({
@@ -223,9 +215,9 @@ var RelaxedMode = React.createClass({
 
         endGameFunction(this.state.fullScore, this.state.reactionTimes, this.state.gameId, accuracy, function(data) {
           if (data.success) {
-            this.props.history.push('/gameOver')
+            this.context.router.push('/gameOver')
           } else {
-            this.props.history.push('/error/' + encodeURIComponent(data.message))
+            this.context.router.push('/error/' + encodeURIComponent(data.message))
           }
         }.bind(this))
         //////////////////////////////////////
@@ -240,7 +232,9 @@ var RelaxedMode = React.createClass({
     }
     if (this.state.posMatch) {
       //if correct button pressed, use current time to find reaction time
-      this.setState({reactionStop: Date.now()}, this.match);
+      this.setState({
+        reactionStop: Date.now()
+      }, this.match);
       this.setButton('positionButton', 'goodJob');
     } else if (!this.state.posMatch) {
       this.setButton('positionButton', 'youFailed');

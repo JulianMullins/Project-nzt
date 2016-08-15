@@ -12,6 +12,9 @@ var nextSound;
 var soundInterval;
 
 var ClassicMode = React.createClass({
+  contextTypes: {
+    router: React.PropTypes.object.isRequired
+  },
   getInitialState: function() {
     return {
       style: [
@@ -57,7 +60,7 @@ var ClassicMode = React.createClass({
   componentDidMount: function() {
     startGameFunction(this.state.mode, this.state.N, function(err, obj) {
       if (err) {
-        this.props.history.push('/levels/' + this.state.mode + '/unauthorized');
+        this.context.router.push('/levels/' + this.state.mode + '/unauthorized');
         return;
       }
       this.setState({
@@ -302,7 +305,7 @@ var ClassicMode = React.createClass({
           var accuracy = this.state.matchHit / this.state.matchCount;
           endGameFunction(this.state.fullScore, this.state.reactionTimes, this.state.gameId, accuracy, function(success) {
             if (success) {
-              this.props.history.push('/gameOver')
+              this.context.router.push('/gameOver')
             }
           }.bind(this))
 

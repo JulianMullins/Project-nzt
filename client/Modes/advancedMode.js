@@ -12,6 +12,9 @@ var nextSound;
 var soundInterval;
 
 var AdvancedMode = React.createClass({
+  contextTypes: {
+    router: React.PropTypes.object.isRequired
+  },
   getInitialState: function() {
     return {
       style: [
@@ -54,7 +57,7 @@ var AdvancedMode = React.createClass({
   componentDidMount: function() {
     startGameFunction(this.state.mode, this.state.N, function(err, obj) {
       if (err) {
-        this.props.history.push('/levels/' + this.state.mode);
+        this.context.router.push('/levels/' + this.state.mode);
       }
       this.setState({
         tempUser: obj.tempUser,
@@ -313,7 +316,7 @@ var AdvancedMode = React.createClass({
 
           endGameFunction(this.state.fullScore, this.state.reactionTimes, this.state.gameId, this.state.userId, function(success) {
             if (success) {
-              this.props.history.push('/gameOver')
+              this.context.router.push('/gameOver')
             }
           }.bind(this))
 
