@@ -172,7 +172,7 @@ var Tutorial = React.createClass({
               <MediaQuery minWidth='768px'>
                 <div className="slide">
                   <div className="key-wrapper">
-                    <h2>Key Tips (keyboard only!)</h2>
+                    <h2>Key(board) tips</h2>
                     <p>Once a button is pressed, you cannot undo the action. For a double match, you need to press both keys.</p>
                     <div className="rulemode">
                       <div className="rules2">
