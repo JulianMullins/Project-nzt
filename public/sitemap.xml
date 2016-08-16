@@ -10,19 +10,25 @@
   <loc>http://www.cortexgame.com/</loc>
 </url>
 <url>
-  <loc>http://www.cortexgame.com/#/login</loc>
+  <loc>http://www.cortexgame.com/login</loc>
 </url>
 <url>
-  <loc>http://www.cortexgame.com/#/leaderboard</loc>
+  <loc>http://www.cortexgame.com/register</loc>
 </url>
 <url>
-  <loc>http://www.cortexgame.com/#/tutorial</loc>
+  <loc>http://www.cortexgame.com/leaderboard</loc>
 </url>
 <url>
-  <loc>http://www.cortexgame.com/#/science</loc>
+  <loc>http://www.cortexgame.com/stats</loc>
 </url>
 <url>
-  <loc>http://www.cortexgame.com/#/contact</loc>
+  <loc>http://www.cortexgame.com/tutorial</loc>
+</url>
+<url>
+  <loc>http://www.cortexgame.com/science</loc>
+</url>
+<url>
+  <loc>http://www.cortexgame.com/contact</loc>
 </url>
 
 </urlset>
