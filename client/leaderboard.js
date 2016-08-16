@@ -23,8 +23,8 @@ var Leaderboard = React.createClass({
         this.setState({hasScores: false})
         return;
       }
-      this.setState({myScores: response.data});
-      if (response.data[0]) {
+      this.setState({myScores: response.data.data});
+      if (response.data.data[0]) {
         this.setState({hasScores: true})
       } else {
         this.setState({hasScores: false})

@@ -20,18 +20,21 @@ router.get('/myHighScores', function(req, res, next) {
     .populate('stats')
     .exec(function(err, user) {
       if (err) {
-        console.log(err);
-      } else {
+        res.json({success:false})
+      } 
+      else {
         Leaderboard.findById(user.stats.leaderboard)
           .populate('scores')
           .exec(function(err, leaderboard) {
             if (err) {
-              console.log(err);
-            } else {
+              res.json({success:false})
+            } 
+            else {
               var result = [];
               if (leaderboard.scores.length == 0) {
-                res.json(result);
-              } else {
+                res.json({success:true,data:result});
+              } 
+              else {
                 var i = 1;
                 leaderboard.scores.sort(sortScores);
                 leaderboard.scores.map(function(score) {
@@ -43,7 +46,7 @@ router.get('/myHighScores', function(req, res, next) {
                   });
                   i++;
                 });
-                res.json(result);
+                res.json({success:true,data:result});
               }
             }
           });
