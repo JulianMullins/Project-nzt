@@ -150,10 +150,12 @@ var RelaxedMode = React.createClass({
       this.setState({pressed: false, keepScore: false, posMatch: false, alreadyPressed: false, posStyle: noStyle});
 
       setTimeout(function() {
-        this.setState({scoreUpdate: '', positionButton: '', currentScore: null})
-        // console.log('been 800ms')
-        // this.setState({alert: ' ',currentScore:null});
+        this.setState({
+          scoreUpdate: '', 
+          positionButton: '', 
+          currentScore: null})
       }.bind(this), 800);
+      
       //start reaction time counter with flash
       this.setState({reactionStart: Date.now()})
 
@@ -236,7 +238,8 @@ var RelaxedMode = React.createClass({
         reactionStop: Date.now()
       }, this.match);
       this.setButton('positionButton', 'goodJob');
-    } else if (!this.state.posMatch) {
+    } 
+    else if (!this.state.posMatch) {
       this.setButton('positionButton', 'youFailed');
       this.incorrect();
     }

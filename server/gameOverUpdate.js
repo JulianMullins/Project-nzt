@@ -7,6 +7,7 @@ var OverallLeaderboard = require('../models/OverallLeaderboard');
 var HighScore = require('../models/HighScore');
 var Game = require('../models/Game');
 var Stats = require('../models/Stats');
+var ErrorModel = require('../models/Error');
 
 var serverData = require('./serverData');
 
@@ -14,9 +15,45 @@ var serverLeaderboard = serverData.serverLeaderboard;
 var leaderboardSize = serverData.leaderboardSize;
 var modeMultiplier = serverData.modeMultiplier;
 
-
+var isLiveMode = true;
+if(process.env.url == 'http://localhost:3000'){
+  isLiveMode = false;
+}
 
 //functions for save game
+
+var validateScore = function(score,callback){
+  score.reactionTimes.filter(function(element){
+      if(element<0){
+        var newError = new ErrorModel({
+          type: 'reactionTimes',
+          message: 'negative reaction time',
+          isLiveMode: isLiveMode,
+          time: Date.now()
+        })
+        newError.save();
+      }
+      return element>=0;
+  })
+
+  if(!score.userName){
+    var newError = new ErrorModel({
+      type: 'score.userName',
+      message: 'no userName',
+      isLiveMode: isLiveMode,
+      time:Date.now()
+    })
+    newError.save();
+    if(score.tempUser){
+      score.userName = 'Anonymous';
+    }
+  }
+
+  score.save(function(err,score){
+    callback(err,score);
+  })
+
+}
 
 
 //check overall leaderboards, and update accordingly
@@ -169,42 +206,10 @@ var sortScores = function(a, b) {
 var checkLeaderboards = function(req,res,user,tempGame,newHighScore){
 
     //update personal and overall leaderboards
-  var isMyHighScore = null;
-
   
   checkOverall(newHighScore, function(isOverallHighScore) {
 
-    // if(user.temp){
-    //   if (isOverallHighScore) {
-
-    //     tempGame.isHighScore = true;
-    //     tempGame.save(function(err, game) {
-    //       console.log("isHighScore")
-    //       //console.log(req.session.user.stats)
-    //       //console.log(user.stats)
-    //       //console.log(user)
-    //       //console.log(req.session.user);
-    //       console.log(tempGame,game);
-
-
-    //       res.json({
-    //         success: true
-    //       })
-    //     });
-
-    //   } 
-    //   else {
-    //     console.log("about to res.json success")
-    //     user.save(function(err, user) {
-    //       if (!err) {
-    //         res.json({
-    //           success: true
-    //         })
-    //       }
-    //     })
-    //   }
-    // }
-    // else{
+    
       checkMine(newHighScore,user.stats,function(isMyHighScore){
         isMyHighScore = isMyHighScore;
 
@@ -313,7 +318,9 @@ router.post('/gameOver', function(req, res, next) {
               console.log('updated user stats', stats)
               console.log("updated user", user)
               user.save(function(err,user){
-                checkLeaderboards(req,res,user,tempGame,newHighScore);
+                validateScore(newHighScore,function(err,score){
+                  checkLeaderboards(req,res,user,tempGame,newHighScore);
+                });
               })
               
 

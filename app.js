@@ -83,36 +83,45 @@ passport.deserializeUser(function(id, done) {
 // HighScore.find().exec(function(err,highScores){
 //   highScores.forEach(function(score){
 //     var toSave = false;
-//     console.log('new score')
-//     // score.reactionTimes.forEach(function(reactionTime){
-//     //   if(reactionTime<0){
-//     //     console.log(reactionTime)
-//     //     reactionTime = -reactionTime;
-//     //     toSave = true;
-//     //     console.log('success ',reactionTime)
-//     //   }
-//     // })
 //     for(var i=0;i<score.reactionTimes.length;i++){
 //       if(score.reactionTimes[i]<0){
 //         score.reactionTimes.splice(i,1);
 //         toSave = true;
+//         i--;
 //       }
 //     }
 //     if(toSave){
-//           console.log(score.reactionTimes)
 
-//       score.save(function(err,score){console.log("score saved: "+score.reactionTimes)})
+//       if(!score.userName && score.tempUser){
+//         score.userName='Anonymous'
+//       }
+//           console.log(score.reactionTimes)
+//       score.save(function(err,score){
+//         if(err || !score){
+//           console.log("PANICKING: "+err,score)
+//         }
+//         else if(!score.reactionTimes){
+//           console.log("PANIC: "+ score)
+//         }
+//         else{
+//           console.log("score saved: "+score.reactionTimes)
+//         }
+//       })
 //     }
 //   })
 // })
 
-OverallLeaderboard.findOne().populate('scores').exec(function(err,leaderboard){
-  leaderboard.scores.forEach(function(score){
-    if(!score.userName){
-      console.log(score)
-    }
-  })
-})
+// HighScore.find({userName:null}).exec(function(err,scores){
+//   console.log(scores)
+// })
+
+// OverallLeaderboard.findOne().populate('scores').exec(function(err,leaderboard){
+//   leaderboard.scores.forEach(function(score){
+//     if(!score.userName){
+//       console.log(score)
+//     }
+//   })
+// })
 
 
 // passport strategy
