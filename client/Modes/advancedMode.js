@@ -141,7 +141,7 @@ var AdvancedMode = React.createClass({
       updateScore = -this.state.fullScore;
     }
     this.setState({
-      reactionTimes: this.state.reactionTimes.concat([this.state.reactionEnd - this.state.reactionStart]),
+      //reactionTimes: this.state.reactionTimes.concat([this.state.reactionEnd - this.state.reactionStart]),
       //matchHit: this.state.matchHit - 1,
       matchCount: this.state.matchCount + 1,
       fullScore: this.state.fullScore + updateScore,

@@ -109,10 +109,8 @@ ReactDOM.render((
       <Route path="stats" component={Stats}/>
       <Route path="tutorial" component={Tutorial}/>
 
-      <Route path="levels/classic(/:error)" component={LevelOverlay}/>
-      <Route path="levels/relaxed(/:error)" component={LevelOverlay}/>
-      <Route path="levels/silent(/:error)" component={LevelOverlay}/>
-      <Route path="levels/advanced(/:error)" component={LevelOverlay}/>
+      <Route path="levels/:mode(/:error)" component={LevelOverlay}/>
+
       <Route path="game/classic/:n" component={ClassicGame}/>
       <Route path="game/relaxed/:n" component={RelaxedGame}/>
       <Route path="game/silent/:n" component={SilentGame}/>

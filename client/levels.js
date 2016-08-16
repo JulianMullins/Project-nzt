@@ -89,7 +89,7 @@ var LevelOverlay = React.createClass({
   getInitialState: function() {
     return {
       maxN: 1, 
-      mode: this.props.location.pathname.split('/')[2],
+      mode: this.props.params.mode,
       error: this.props.params.error
     }
   },
