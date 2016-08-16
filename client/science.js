@@ -47,7 +47,7 @@ var Science = React.createClass({
 						<p>|</p>
 						<a href="http://www.pnas.org/content/105/19/6829.full" target="_blank">PNAS Study</a>
 						<p>|</p>
-						<a href="http://blogs.scientificamerican.com/guest-blog/you-can-increase-your-intelligence-5-ways-to-maximize-your-cognitive-potential/">SA Article</a>
+						<a target="_blank" href="http://blogs.scientificamerican.com/guest-blog/you-can-increase-your-intelligence-5-ways-to-maximize-your-cognitive-potential/">SA Article</a>
 					</div>
 				</div>
 				<Link to="/home"><img className="whiteLogo" src="./images/CortexIconWhite.png" /></Link>

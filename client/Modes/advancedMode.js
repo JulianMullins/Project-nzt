@@ -375,6 +375,7 @@ var AdvancedMode = React.createClass({
       ? (<StartOverlay nLevel={this.state.N} mode={this.state.mode} click={this.startGame}/>)
       : '';
 
+
     var gameTimer = this.state.overlay
       ? ""
       : (

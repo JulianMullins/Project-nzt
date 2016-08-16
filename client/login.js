@@ -88,11 +88,7 @@ var LoginOverlay = React.createClass({
               <br></br>and improve your IQ.</h3>
             <form>
               <div className="buttongroup">
-                <Link to="/register">
-                  <button className="form-btn dx registerBtn">
-                    Register
-                  </button>
-                </Link>
+                <Link className="form-btn dx registerBtn" to="/register">Register</Link>
               </div>
             </form>
             <Link to="/home"><img className="whiteLogo" src="../images/CortexIconWhite.png"/></Link>

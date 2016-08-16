@@ -93,8 +93,8 @@ input, button {
   margin: 2vw;
 }
 .fb:hover {
-  color: #3b5998;
-  background-color: white;
+  opacity: 0.75;
+  transition-duration: .2s;
 }
 .form-btn {
   display: flex;
@@ -121,9 +121,11 @@ button.form-btn.sx {
   transition: all 0.3s linear;
 }
 .form-btn.dx:hover {
-  background-color: rgba(255, 125, 0, 0.65);
+/*  background-color: rgba(255, 125, 0, 0.65);*/
   cursor: pointer;
   color: #fff;
+    opacity: 0.75;
+  transition-duration: .2s;
 }
 .form-btn.dx {
   right: 0;
@@ -161,6 +163,7 @@ button.form-btn.dx a, button.form-btn.dx2 a {
 .registerBtn {
   background-color: #F13542 !important;
   text-align: center !important;
+
 }
 
 @media (max-height: 768px) {
