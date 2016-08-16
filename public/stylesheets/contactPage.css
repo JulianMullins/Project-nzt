@@ -210,6 +210,7 @@
 
   .contactPage p {
     margin-bottom: 10px;
+    margin: 0 auto;
   }
 
   .contactLinks {
@@ -223,6 +224,7 @@
   .contactTopHeading {
     position: absolute;
     top: 0;
+    width: 100%;
   }
 
   .profiles {
@@ -237,11 +239,13 @@
     justify-content: center;
     align-items: center;
     width: 100%;
+    height: 125px;
     margin-bottom: 20px;
   }
 
   .profileInfo {
     width: 35%;
+    height: 50%;
     padding-right: 5%;
     text-align: left;
   }
@@ -256,6 +260,7 @@
     display: flex;
     justify-content: space-between;
     width: 30%;
+    height: 50%;
     text-align: left;
   }
 }
