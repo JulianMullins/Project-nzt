@@ -57,7 +57,11 @@ var Mainmenu = React.createClass({
     if (nextProps.location.pathname === "/home") {
       axios.get('/api/homeUserInfo').then(function(response) {
         //console.log(response.data)
-        this.setState({hasUsername: response.data.hasUsername, name: response.data.name, showTutorial: response.data.showTutorial})
+        this.setState({
+          hasUsername: response.data.hasUsername, 
+          name: response.data.name, 
+          showTutorial: response.data.showTutorial
+        })
       }.bind(this)).then(function() {
         if (this.state.hasUsername) {
           this.setState({

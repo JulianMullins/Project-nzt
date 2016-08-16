@@ -30,7 +30,7 @@ var NewUserOverlay = React.createClass({
             </div>
             <div className="newUserRight">
               <p>If you want to just jump right in, we recommend playing in relaxed mode first.</p>
-              <Link to="/levels/relaxed">Relaxed Mode</Link>
+              <Link to="/levels/relaxed" onClick={this.stopShowOverlay}>Relaxed Mode</Link>
             </div>
           </div>
           <div>
