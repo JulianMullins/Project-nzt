@@ -19,7 +19,7 @@
 .gameBoard {
   display: flex;
   width: 54vh;
-  height: 60vh;
+  height: 54vh; /* changed from 60vh due to sizing issues in safari*/
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
