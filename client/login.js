@@ -89,7 +89,7 @@ var LoginOverlay = React.createClass({
             <form>
               <div className="buttongroup">
                 <Link to="/register">
-                  <button className="form-btn dx">
+                  <button className="form-btn dx registerBtn">
                     Register
                   </button>
                 </Link>
