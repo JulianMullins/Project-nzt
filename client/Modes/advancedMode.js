@@ -477,7 +477,7 @@ var newStyle = [
 
 var audios = [];
 for (var i = 1; i <= 9; i++) {
-  audios.push(new Audio('/audio/' + i + '.wav '));
+  audios.push(new Audio('/audio/' + i + '.mp3 '));
 }
 
 module.exports = AdvancedMode

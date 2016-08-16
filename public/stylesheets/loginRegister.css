@@ -166,10 +166,6 @@ button.form-btn.dx a, button.form-btn.dx2 a {
 
 }
 
-.registerBtn:hover {
-  background-color: 
-}
-
 @media (max-height: 768px) {
   .loginContent h1, .register-log h1 {
     font-size: 8vw;
