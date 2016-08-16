@@ -20,6 +20,7 @@
   height: 80vh;
   transition-duration: .8s;
   padding-top: 6vh;
+  overflow-y: auto;
 }
 
 .scienceTop p {
@@ -29,7 +30,7 @@
   line-height: 1.5;
   color: white;
   padding-bottom: 25px;
-  width: 50vw;
+  width: 55vw;
 }
 
 .scienceTop img {
@@ -143,7 +144,7 @@
   }
 }
 
-@media (max-width: 960px) {
+@media (max-width: 1580px) {
   .scienceTop p {
     width: 80vw;
   }
