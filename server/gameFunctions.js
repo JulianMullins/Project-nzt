@@ -139,7 +139,6 @@ router.post('/startGame/:mode/:nLevel',function(req,res,next){
               modeMultiplier: modeMultiplier[tempGame.mode],
               penalty: penalty,
               positivePoints: positivePoints,
-              userId: user._id,
               isHighScore:null
             })
           });

@@ -1,6 +1,6 @@
 var React = require('react');
 var Reactable = require('reactable');
-var Table = Reactable.Table;
+var Reactable = Reactable.Table;
 var axios = require('axios');
 import {Link} from 'react-router';
 
@@ -58,14 +58,14 @@ var Leaderboard = React.createClass({
                 ? pressedStyle
                 : {}}>Personal</a>
             </div>
-            <Table columns={this.state.global
+            <Reactable columns={this.state.global
               ? columns
               : columns.slice(1)} data={this.state.global
               ? this.state.allScores
               : this.state.myScores} currentPage={0} itemsPerPage={10} pageButtonLimit={5} sortable={true} defaultSort={{
               column: 'rank',
               direction: 'asc'
-            }} filterable={['username']}/>
+            }} filterable={['username']} filtererPlaceholder='Search by username'/>
           </section>
           {loggedIn}
         </div>

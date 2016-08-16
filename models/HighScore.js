@@ -7,7 +7,10 @@ var highScoreSchema = mongoose.Schema({
 		ref: 'Stats'
 	},
 	tempUser:Boolean,
-	userName:String,
+	userName:{
+		type:String,
+		required: true
+	},
 	dateAchieved:Date,
 	score:Number,
 	nLevel:Number,

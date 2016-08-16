@@ -258,6 +258,8 @@ router.post('/gameOver', function(req, res, next) {
         var tempGame = user.currentGame[0];
         console.log(tempGame);
 
+
+
         //make score
         var newHighScore = new HighScore({
           scoreToStats:user.stats._id,
@@ -269,8 +271,16 @@ router.post('/gameOver', function(req, res, next) {
           fromGameId: tempGame._id,
           scoreBoard:user.stats.leaderboard,
           tempUser:user.temp,
-          username: user.username
+          userName: user.username
         })
+
+        if(!newHighScore.userName && user.name){
+          newHighScore.userName = user.name;
+        }
+        else if(!newHighScore.userName && user.temp){
+          newHighScore.userName = 'Anonymous';
+        }
+        
 
         //update maxN
         if (tempGame.nLevel > user.maxN[newHighScore.mode]) {
@@ -319,38 +329,6 @@ router.post('/gameOver', function(req, res, next) {
   })
 });
 
-
-//new function, for tempUser gameOver routes
-//(either save with tempname, or login/register and combine stats/data)
-router.post('/gameOver/finish', function(req, res) {
-
-  //req.body: gameId,userId,scoreId
-
-  //if don't want to login, use temp username
-  if (req.session.user && !req.session.user.temp) {
-
-
-//update temp user stats
-      
-
-
-
-  }
-
-  //for gameOver/login and gameOver/register routes
-  else {
-
-    //save score information with inputed username
-
-    HighScore.findById(req.body.scoreId, function(err, score) {
-      score.tempUserName = req.body.anonUserName;
-      score.save();
-    })
-
-  }
-
-
-})
 
 
 module.exports = router;
