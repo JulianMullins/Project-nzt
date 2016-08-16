@@ -101,7 +101,7 @@ var Mainmenu = React.createClass({
           <a className="menu-panel relaxedBackground" onClick={this.relaxed}>
             <div className="startHerePanel"></div>
             <div className="startHereText">
-              <p>FIRST TIME?</p>
+              <p>NEW?</p>
               <p>(start here)</p>
             </div>
             <h2>Relaxed</h2>
