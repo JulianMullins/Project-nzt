@@ -167,7 +167,16 @@
     display: none;
   }
   .aboutProfile img {
-    height: auto;
+    max-height: 150px;
+  }
+}
+
+@media (max-height: 580px) {
+  .aboutProfile img {
+    display: none;
+  }
+  .profileInfo {
+    height: 50%;
   }
 }
 
