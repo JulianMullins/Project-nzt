@@ -129,6 +129,26 @@ h3 {
   color: rgba(255, 255, 255, .8);
   text-align: center;
 }
+.startHerePanel {
+  position: absolute;
+  top: 30vh;
+  left: 0;
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 175px 175px 0 0;
+  border-color: rgba(0,0,0,0.4) transparent transparent transparent;
+}
+.startHereText {
+    position: absolute;
+    top: 34%;
+    left: 0.5%;
+    transform: rotate(-45deg);
+    text-align: center;
+    line-height: 1.5;
+    color: rgba(255,255,255,.95);
+    font-size: 18px;
+}
 .whiteLogo {
   width: 15vw;
   max-width: 150px;
@@ -188,11 +208,33 @@ h3 {
   .heading> img {
     height: 20vh;
   }
+  .startHerePanel {
+    border-width: 125px 125px 0 0;
+  }
+
+  .startHereText {
+      font-size: 14px;
+  }
 }
 
 @media all and (max-height: 580px) {
   .whiteLogo {
     display: none;
+  }
+  .startHerePanel {
+    display: none;
+  }
+  .startHereText {
+    display: none;
+  }
+}
+
+@media all and (max-width: 768px) {
+  .startHerePanel {
+  border-width: 125px 125px 0 0;
+  }
+  .startHereText {
+    font-size: 14px;
   }
 }
 

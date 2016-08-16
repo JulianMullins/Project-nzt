@@ -5,16 +5,18 @@ var axios = require('axios');
 import {Link} from 'react-router';
 
 var LoginOverlay = React.createClass({
+  contextTypes: {
+    router: React.PropTypes.object.isRequired
+  },
   getInitialState: function() {
     var error = null;
     var isGameOver = false;
     var fbUrl = null;
-    if(this.props.location.pathname.includes('gameOver')){
+    if (this.props.location.pathname.includes('gameOver')) {
       isGameOver = true;
       fbUrl = '/api/gameOver/login'
-    }
-    else{
-      fbUrl='/api/login'
+    } else {
+      fbUrl = '/api/login'
     }
     if (this.props.params.error) {
       error = decodeURIComponent(this.props.params.error)
@@ -26,7 +28,7 @@ var LoginOverlay = React.createClass({
       games: null,
       error: this.props.params.error,
       fbURL: fbUrl + '/facebook',
-      isGameOver:isGameOver
+      isGameOver: isGameOver
     }
   },
   componentDidMount() {},
@@ -45,12 +47,12 @@ var LoginOverlay = React.createClass({
 
         if (this.state.isGameOver) {
           //console.log("gameOver login");
-          this.props.history.push('/gameOver');
+          this.context.router.push('/gameOver');
         } else {
-          this.props.history.push('/home')
+          this.context.router.push('/home')
         }
       } else {
-        this.setState({error:response.data.message});
+        this.setState({error: response.data.message});
       }
     }.bind(this))
   },
@@ -69,7 +71,6 @@ var LoginOverlay = React.createClass({
               <br></br>
               <input type="password" placeholder="Password" name="password" id="password" value={this.state.password} onChange={this.update}></input>
               <div className="buttongroup">
-
 
                 <a className="form-btn dx" onClick={this.login} type="button">Login</a>
                 <a className="fb" href={this.state.fbURL}>Login with Facebook</a>

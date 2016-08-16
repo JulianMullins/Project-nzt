@@ -7,14 +7,14 @@ import {Link} from 'react-router'
 var endGameFunction = require('./serverFunctions').endGameFunction;
 var startGameFunction = require('./serverFunctions').startGameFunction;
 
-//COLLECTION OF GLOBAL VARIABLES TO MAKE EVERYONES LIFE EASIER
-
 var iterations;
-
 var nextSound;
 var soundInterval;
 
 var AdvancedMode = React.createClass({
+  contextTypes: {
+    router: React.PropTypes.object.isRequired
+  },
   getInitialState: function() {
     return {
       style: [
@@ -36,12 +36,12 @@ var AdvancedMode = React.createClass({
       overlay: true,
       initialTimer: 3,
       N: parseInt(this.props.params.n),
-      colorPressed: false,
-      soundPressed: false,
-      positionPressed: noStyle,
-      colorStyle: noStyle,
-      soundStyle: noStyle,
-      posStyle: noStyle,
+      colorPressed: true,
+      soundPressed: true,
+      positionPressed: true,
+      colorStyle: pushStyle,
+      soundStyle: pushStyle,
+      posStyle: pushStyle,
       mode: 'advanced',
       tempUser: true,
       gameId: null,
@@ -57,7 +57,7 @@ var AdvancedMode = React.createClass({
   componentDidMount: function() {
     startGameFunction(this.state.mode, this.state.N, function(err, obj) {
       if (err) {
-        this.props.history.push('/levels/' + this.state.mode);
+        this.context.router.push('/levels/' + this.state.mode);
       }
       this.setState({
         tempUser: obj.tempUser,
@@ -93,7 +93,6 @@ var AdvancedMode = React.createClass({
     }
     setTimeout(function() {
       for (var i = 0; i < 9; i++) {
-        //console.log(audios[i], audios[i].volume);
         audios[i].play();
       }
     }, 300);
@@ -114,39 +113,46 @@ var AdvancedMode = React.createClass({
   match() {
     this.setState({
       currentScore: (((2000 - (this.state.reactionEnd - this.state.reactionStart)) / 1000) * this.state.positivePoints).toFixed(2)
+    }, function() {
+      this.setState({
+        reactionTimes: this.state.reactionTimes.concat([this.state.reactionEnd - this.state.reactionStart]),
+        fullScore: this.state.fullScore + parseFloat(this.state.currentScore),
+        matchCount: this.state.matchCount + 1,
+        matchHit: this.state.matchHit + 1,
+        currentScore: "+" + parseInt(this.state.currentScore),
+        scoreUpdate: 'scoreUpdate scoreUpdatePos'
+      }, function() {
+        $('.gameScore').append('<h2 class="' + this.state.scoreUpdate + '">' + this.state.currentScore + '</h2>')
+        setTimeout(function() {
+          $('.gameScore h2:nth-child(2)').remove();
+        }, 800)
+      }.bind(this))
     });
-    this.setState({
-      reactionTimes: this.state.reactionTimes.concat([this.state.reactionEnd - this.state.reactionStart]),
-      fullScore: this.state.fullScore + parseFloat(this.state.currentScore),
-      matchCount: this.state.matchCount + 1,
-      matchHit: this.state.matchHit + 1,
-      currentScore: "+" + parseInt(this.state.currentScore),
-      scoreUpdate: 'scoreUpdate scoreUpdatePos'
-    })
-    //console.log("currentScore: " + this.state.currentScore, "fullScore: " + this.state.fullScore)
   },
 
   incorrect(number) {
     if (!number) {
       number = 1
     }
+    var updateScore = 0;
     if ((this.state.fullScore - number * this.state.penalty) >= 0) {
-      this.setState({
-        currentScore: -this.state.penalty
-      })
+      updateScore = -this.state.penalty;
     } else {
-      this.setState({
-        currentScore: -this.state.fullScore
-      })
+      updateScore = -this.state.fullScore;
     }
     this.setState({
       reactionTimes: this.state.reactionTimes.concat([this.state.reactionEnd - this.state.reactionStart]),
       //matchHit: this.state.matchHit - 1,
       matchCount: this.state.matchCount + 1,
-      fullScore: this.state.fullScore + this.state.currentScore,
-      currentScore: parseInt(this.state.currentScore),
+      fullScore: this.state.fullScore + updateScore,
+      currentScore: parseInt(updateScore),
       scoreUpdate: 'scoreUpdate scoreUpdateNeg'
-    });
+    }, function() {
+      $('.gameScore').append('<h2 class="' + this.state.scoreUpdate + '">' + this.state.currentScore + '</h2>')
+      setTimeout(function() {
+        $('.gameScore h2:nth-child(2)').remove();
+      }, 800)
+    }.bind(this));
   },
 
   setButton: function(button, _class) {
@@ -238,7 +244,7 @@ var AdvancedMode = React.createClass({
         //reset position portion
         timeTilSoundMatch = parseInt((Math.random() * 5) + 2);
         //set up new position queue
-        var nextSound = soundQueue[0];
+        nextSound = soundQueue[0];
         soundQueue.push(nextSound);
         soundQueue.splice(0, 1);
         var sMatch = true;
@@ -270,7 +276,7 @@ var AdvancedMode = React.createClass({
       }
       //sound:
       if (!sMatch) {
-        var nextSound = parseInt(Math.random() * 9);
+        nextSound = parseInt(Math.random() * 9);
         while (nextSound == soundQueue[0]) {
           nextSound = parseInt(Math.random() * 9);
         }
@@ -284,7 +290,6 @@ var AdvancedMode = React.createClass({
       // reactionStart = Date.now()
       // reactionEnd = null;
       this.state.style[nextPosition] = newStyle[nextColor];
-      audios[nextSound].play();
       this.setState({style: this.state.style, reactionStart: Date.now(), reactionEnd: null});
       setTimeout(function() {
         this.state.style[nextPosition] = standardStyle;
@@ -311,7 +316,7 @@ var AdvancedMode = React.createClass({
 
           endGameFunction(this.state.fullScore, this.state.reactionTimes, this.state.gameId, this.state.userId, function(success) {
             if (success) {
-              this.props.history.push('/gameOver')
+              this.context.router.push('/gameOver')
             }
           }.bind(this))
 
@@ -325,9 +330,10 @@ var AdvancedMode = React.createClass({
       return;
     }
     if (this.state.colorMatch) {
-      this.setState({reactionEnd: Date.now()});
+      this.setState({
+        reactionEnd: Date.now()
+      }, this.match);
       this.setButton('colorButton', 'goodJob');
-      this.match();
     } else {
       this.setButton('colorButton', 'youFailed');
       this.incorrect();
@@ -339,9 +345,10 @@ var AdvancedMode = React.createClass({
       return;
     }
     if (this.state.positionMatch) {
-      this.setState({reactionEnd: Date.now()});
+      this.setState({
+        reactionEnd: Date.now()
+      }, this.match);
       this.setButton('positionButton', 'goodJob');
-      this.match();
     } else {
       this.setButton('positionButton', 'youFailed');
       this.incorrect();
@@ -353,11 +360,12 @@ var AdvancedMode = React.createClass({
       return;
     }
     if (this.state.soundMatch) {
-      this.setState({reactionEnd: Date.now()});
+      this.setState({
+        reactionEnd: Date.now()
+      }, this.match);
       this.setButton('soundButton', 'goodJob');
-      this.match();
     } else {
-      this.setState('soundButton', 'youFailed');
+      this.setButton('soundButton', 'youFailed');
       this.incorrect();
     }
     this.setState({soundPressed: true, soundStyle: pushStyle});
@@ -367,7 +375,7 @@ var AdvancedMode = React.createClass({
       ? (<StartOverlay nLevel={this.state.N} mode={this.state.mode} click={this.startGame}/>)
       : '';
 
-   
+
     var gameTimer = this.state.overlay
       ? ""
       : (
@@ -388,9 +396,6 @@ var AdvancedMode = React.createClass({
             <div className="gameHeading">
               <div className="gameScore advanced">
                 <h2>Score: {parseInt(this.state.fullScore)}</h2>
-                <h2 className={this.state.scoreUpdate}>
-                  {this.state.currentScore}
-                </h2>
               </div>
               {gameTimer}
             </div>
