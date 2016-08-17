@@ -84,15 +84,25 @@ var MyComponent = React.createClass({
           name: 'Min Reaction Time'
         }
       ],
-      alert: "Play some games to view your progress!"
+      alert: "Play some games to view your progress!",
+      scoreGraph: true,
+      graphWidth: window.innerWidth,
+      graphHeight: window.innerHeight / 2
     }
   },
   componentDidMount: function() {
+    window.addEventListener('resize', function(e) {
+      this.setState({
+        graphWidth: window.innerWidth - 40,
+        graphHeight: window.innerHeight / 2
+      });
+    }.bind(this));
+
     axios.get('/api/getStats', {withCredentials: true}).then(function(responseJson) {
-      if(responseJson.data.success === false) {
+      if (responseJson.data.success === false) {
         return
       }
-      
+
       stats = responseJson.data.stats;
       this.state.data = [];
       if (stats[0]) {
@@ -161,6 +171,9 @@ var MyComponent = React.createClass({
       this.setState({fullName: response.data.name})
     }.bind(this))
   },
+  componentWillUnmount() {
+    window.removeEventListener('resize');
+  },
   render: function() {
     var x = function(d) {
       return d.dateAchieved;
@@ -181,32 +194,32 @@ var MyComponent = React.createClass({
             <h2>( {this.state.fullName}
               )</h2>
           </div>
-          <MediaQuery maxWidth='768px'>
-            <div className="chartsContainer">
-              <LineChart className='StatsScoreGraph' data={this.state.data} margins={margins} chartSeries={this.state.chartSeries1} width={window.innerWidth} height={500} title={'Score History'} x={x} xScale={xScale} yAxisClassName={'lineY'} xAxisClassName={'lineX'} yLabel={'Scores'} //x axis includes first and last day of play (for time range)
-                xLabel={'Gameplay from ' + dayA + ', ' + monthA + ' ' + dateA + ', ' + yearA + ' to ' + dayB + ', ' + monthB + ' ' + dateB + ', ' + yearB}/>
-
-              <AreaChart width={window.innerWidth} height={500} title='TITLE' data={this.state.data} className='StatsReactionGraph' margins={margins} chartSeries={this.state.chartSeries2} yAxisClassName={'areaY'} xAxisClassName={'areaX'} x={x} xScale={xScale} yLabel={'Reaction Times (ms)'} //x axis includes first and last day of play (for time range)
-                xLabel={'Gameplay from ' + dayA + ', ' + monthA + ' ' + dateA + ', ' + yearA + ' to ' + dayB + ', ' + monthB + ' ' + dateB + ', ' + yearB}/>
-            </div>
-            {/* chartsContainer */}
-          </MediaQuery>
-
-          <MediaQuery minWidth="768px">
-            <div className="chartsContainer">
-              <LineChart className='StatsScoreGraph' data={this.state.data} margins={margins} chartSeries={this.state.chartSeries1} width={window.innerWidth / 2} height={500} title={'Score History'} x={x} xScale={xScale} yAxisClassName={'lineY'} xAxisClassName={'lineX'} yLabel={'Scores'} //x axis includes first and last day of play (for time range)
-                xLabel={'From ' + monthA + ' ' + dateA + ', ' + yearA + ' to ' + monthB + ' ' + dateB + ', ' + yearB}/>
-
-              <AreaChart width={window.innerWidth / 2} height={500} title='TITLE' data={this.state.data} className='StatsReactionGraph' margins={margins} chartSeries={this.state.chartSeries2} yAxisClassName={'areaY'} xAxisClassName={'areaX'} x={x} xScale={xScale} yLabel={'Reaction Times (ms)'} //x axis includes first and last day of play (for time range)
-                xLabel={'From ' + monthA + ' ' + dateA + ', ' + yearA + ' to ' + monthB + ' ' + dateB + ', ' + yearB}/>
-            </div>
-            {/* chartsContainer */}
-          </MediaQuery>
+          <div className="statsButtonsContainer">
+            <a onClick={function() {
+              this.setState({scoreGraph: true});
+            }.bind(this)} style={this.state.scoreGraph
+              ? pressedStyle
+              : {}}>Score</a>
+            <a onClick={function() {
+              this.setState({scoreGraph: false});
+            }.bind(this)} style={!this.state.scoreGraph
+              ? pressedStyle
+              : {}}>Reaction Times</a>
+          </div>
+          <div className="chartsContainer">
+            {this.state.scoreGraph
+              ? <LineChart className='StatsScoreGraph' data={this.state.data} margins={margins} chartSeries={this.state.chartSeries1} width={this.state.graphWidth} height={this.state.graphHeight} title={'Score History'} x={x} xScale={xScale} yAxisClassName={'lineY'} xAxisClassName={'lineX'} yLabel={'Scores'} //x axis includes first and last day of play (for time range)
+  xLabel={'Gameplay from ' + dayA + ', ' + monthA + ' ' + dateA + ', ' + yearA + ' to ' + dayB + ', ' + monthB + ' ' + dateB + ', ' + yearB}/>
+              : <AreaChart width={this.state.graphWidth} height={this.state.graphHeight} title='TITLE' data={this.state.data} className='StatsReactionGraph' margins={margins} chartSeries={this.state.chartSeries2} yAxisClassName={'areaY'} xAxisClassName={'areaX'} x={x} xScale={xScale} yLabel={'Reaction Times (ms)'} //x axis includes first and last day of play (for time range)
+  xLabel={'Gameplay from ' + dayA + ', ' + monthA + ' ' + dateA + ', ' + yearA + ' to ' + dayB + ', ' + monthB + ' ' + dateB + ', ' + yearB}/>}
+          </div>
           <div className="statsDetailsContainer">
             <table>
               <tbody>
                 <tr>
-                  <td style={{'width': '60%'}}>Games Played:
+                  <td style={{
+                    'width': '60%'
+                  }}>Games Played:
                   </td>
                   <td className="statsTableData">{this.state.data.length}</td>
                 </tr>
@@ -235,5 +248,10 @@ var MyComponent = React.createClass({
     }
   }
 });
+
+var pressedStyle = {
+  backgroundColor: '#01b6a7',
+  color: 'white'
+}
 
 module.exports = MyComponent
