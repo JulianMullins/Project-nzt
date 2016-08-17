@@ -111,7 +111,7 @@ var LevelOverlay = React.createClass({
       <div className="levelBox">
         <h1 id={this.state.mode} className={this.state.mode}>{capFirstLetter(this.state.mode)}</h1>
         {this.state.error
-          ? <div>Unauthorized!</div>
+          ? <div className='classic'>Unauthorized!</div>
           : ''}
         <div className="grid">
           {squareArr.map(function(square) {

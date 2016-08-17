@@ -466,6 +466,7 @@ app.use('/api/', gameOverUpdate);
 app.use('/api/', statsFunctions);
 app.use('/api/', gameFunctions);
 
+
 app.use('/', routes);
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

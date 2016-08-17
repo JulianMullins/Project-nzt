@@ -57,7 +57,7 @@ var AdvancedMode = React.createClass({
   componentDidMount: function() {
     startGameFunction(this.state.mode, this.state.N, function(err, obj) {
       if (err) {
-        this.context.router.push('/levels/' + this.state.mode);
+        this.context.router.push('/levels/' + this.state.mode+'/unauthorized');
       }
       this.setState({
         tempUser: obj.tempUser,
