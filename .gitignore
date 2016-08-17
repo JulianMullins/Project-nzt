@@ -4,3 +4,6 @@ npm-debug.log
 public/bundle.js
 process.env
 client/Modes/modeFunctions.js
+
+!node_modules/passport-local/lib/strategy.js
+!node_modules/react/lib/ReactDOMUnknownPropertyDevtool.js
