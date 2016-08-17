@@ -51,8 +51,9 @@
   margin: 1em 1em 0;
 }
 .error {
+  text-align: center;
   background-color: #f13542;
-  width: 30%;
+  width: 50%;
   margin: 0 auto;
 }
 form {
@@ -204,12 +205,6 @@ input {
   margin-bottom: 25px;
   background-color: transparent;
   width: 50%;
-}
-
-.errorDiv {
-  color: #F13542;
-  width: 80%;
-  text-align: center;
 }
 
 ::-webkit-input-placeholder {

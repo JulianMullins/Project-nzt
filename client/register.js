@@ -70,7 +70,7 @@ var RegisterOverlay = React.createClass({
         <div className="register" id="login">
           <h1>Welcome</h1>
           <div className="pa">Create an account to get started.</div>
-          <div className="errorDiv">
+          <div className="error">
             {this.state.error}
           </div>
           <form>
