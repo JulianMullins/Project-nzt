@@ -9,111 +9,110 @@ var Tutorial = React.createClass({
   },
   componentDidMount: function() {
     var self = this;
-    $(document).ready(function() {
-      $(window).keydown(function(e) {
-        var key = (e.keyCode)
-          ? e.keyCode
-          : e.which;
-        $('.key.k' + key).addClass('active');
-      });
 
-      $(window).keyup(function(e) {
-        var key = (e.keyCode)
-          ? e.keyCode
-          : e.which;
-        $('.key.k' + key).removeClass('active');
-      });
+    $(window).keydown(function(e) {
+      var key = (e.keyCode)
+        ? e.keyCode
+        : e.which;
+      $('.key.k' + key).addClass('active');
+    });
 
-      $('.slider').each(function() {
-        var $this = $(this);
-        var $group = $this.find('.slide_group');
-        var $slides = $this.find('.slide');
-        var bulletArray = [];
-        var timeout;
+    $(window).keyup(function(e) {
+      var key = (e.keyCode)
+        ? e.keyCode
+        : e.which;
+      $('.key.k' + key).removeClass('active');
+    });
 
-        function move(newIndex) {
-          var animateLeft,
-            slideLeft;
+    $('.slider').each(function() {
+      var $this = $(this);
+      var $group = $this.find('.slide_group');
+      var $slides = $this.find('.slide');
+      var bulletArray = [];
+      var timeout;
 
-          advance();
-
-          if ($group.is(':animated') || self.state.currentIndex === newIndex) {
-            return;
-          }
-
-          bulletArray[self.state.currentIndex].removeClass('activer');
-          bulletArray[newIndex].addClass('activer');
-
-          if (newIndex > self.state.currentIndex) {
-            slideLeft = '100%';
-            animateLeft = '-100%';
-          } else {
-            slideLeft = '-100%';
-            animateLeft = '100%';
-          }
-
-          $slides.eq(newIndex).css({display: 'block', left: slideLeft});
-          $group.animate({
-            left: animateLeft
-          }, function() {
-            $slides.eq(self.state.currentIndex).css({display: 'none'});
-            $slides.eq(newIndex).css({left: 0});
-            $group.css({left: 0});
-            self.setState({currentIndex: newIndex});
-          });
-        }
-
-        function advance() {
-          clearTimeout(timeout);
-          timeout = setTimeout(function() {
-            if (self.state.currentIndex < ($slides.length - 1)) {
-              move(self.state.currentIndex + 1);
-            } else {
-              move(0);
-            }
-          }, 2000000);
-        }
-
-        // Button Events
-        $('.next_btn').on('click', function() {
-          move(self.state.currentIndex + 1);
-        });
-        $('.previous_btn').on('click', function() {
-          move(self.state.currentIndex - 1);
-        });
-
-        // Mobile Swipe Events
-        var dragX = 0;
-        var offsetX = 0;
-        $('.tutorial').on('touchstart', function(e) {
-          dragX = e.originalEvent.touches[0].pageX;
-        }).on('touchmove', function(e) {
-          offsetX = e.originalEvent.touches[0].pageX;
-        }).on('touchend', function(e) {
-          //console.log(dragX, offsetX);
-          dragX = dragX - offsetX
-          if (dragX < -30) {
-            move(self.state.currentIndex - 1);
-          } else if (dragX > 30) {
-            move(self.state.currentIndex + 1);
-          }
-        });
-
-        $.each($slides, function(index) {
-          var $button = $('<a className="slide_btn">&bull;</a>');
-
-          if (index === self.state.currentIndex) {
-            $button.addClass('activer');
-          }
-          $button.on('click', function() {
-            move(index);
-          }).appendTo('.slide_buttons');
-          bulletArray.push($button);
-        });
+      function move(newIndex) {
+        var animateLeft,
+          slideLeft;
 
         advance();
+
+        if ($group.is(':animated') || self.state.currentIndex === newIndex) {
+          return;
+        }
+
+        bulletArray[self.state.currentIndex].removeClass('activer');
+        bulletArray[newIndex].addClass('activer');
+
+        if (newIndex > self.state.currentIndex) {
+          slideLeft = '100%';
+          animateLeft = '-100%';
+        } else {
+          slideLeft = '-100%';
+          animateLeft = '100%';
+        }
+
+        $slides.eq(newIndex).css({display: 'block', left: slideLeft});
+        $group.animate({
+          left: animateLeft
+        }, function() {
+          $slides.eq(self.state.currentIndex).css({display: 'none'});
+          $slides.eq(newIndex).css({left: 0});
+          $group.css({left: 0});
+          self.setState({currentIndex: newIndex});
+        });
+      }
+
+      function advance() {
+        clearTimeout(timeout);
+        timeout = setTimeout(function() {
+          if (self.state.currentIndex < ($slides.length - 1)) {
+            move(self.state.currentIndex + 1);
+          } else {
+            move(0);
+          }
+        }, 2000000);
+      }
+
+      // Button Events
+      $('.next_btn').on('click', function() {
+        move(self.state.currentIndex + 1);
       });
-    })
+      $('.previous_btn').on('click', function() {
+        move(self.state.currentIndex - 1);
+      });
+
+      // Mobile Swipe Events
+      var dragX = 0;
+      var offsetX = 0;
+      $('.tutorial').on('touchstart', function(e) {
+        dragX = e.originalEvent.touches[0].pageX;
+      }).on('touchmove', function(e) {
+        offsetX = e.originalEvent.touches[0].pageX;
+      }).on('touchend', function(e) {
+        //console.log(dragX, offsetX);
+        dragX = dragX - offsetX
+        if (dragX < -30) {
+          move(self.state.currentIndex - 1);
+        } else if (dragX > 30) {
+          move(self.state.currentIndex + 1);
+        }
+      });
+
+      $.each($slides, function(index) {
+        var $button = $('<a className="slide_btn">&bull;</a>');
+
+        if (index === self.state.currentIndex) {
+          $button.addClass('activer');
+        }
+        $button.on('click', function() {
+          move(index);
+        }).appendTo('.slide_buttons');
+        bulletArray.push($button);
+      });
+
+      advance();
+    });
   },
   render: function() {
     if (this.state.currentIndex == 0) {
@@ -138,8 +137,8 @@ var Tutorial = React.createClass({
                 <div className="rulemode2">
                   <div className="rules2">
                     <h2>Welcome to Cortex!</h2>
-                    <p>Cortex is a game designed to exercise your working memory and increase your fluid-intelligence (the aspect of intelligence that IQ tests measure). This method of increasing IQ is <Link to="/science" className="tutorialLink">scientifically supported and backed by numerous research studies</Link>. 
-                    Although the game is naturally challenging, we have designed it to be as easy to learn as possible. We hope that you’ll enjoy playing the game and that the cognitive benefits will simply follow along as you progress further.</p>
+                    <p>Cortex is a game designed to exercise your working memory and increase your fluid-intelligence (the aspect of intelligence that IQ tests measure). This method of increasing IQ is
+                      <Link to="/science" className="tutorialLink">scientifically supported and backed by numerous research studies</Link>. Although the game is naturally challenging, we have designed it to be as easy to learn as possible. We hope that you’ll enjoy playing the game and that the cognitive benefits will simply follow along as you progress further.</p>
                     <h3>Let&#39;s get started!
                     </h3>
                     <img src="./images/brain.png" alt="brain"></img>
@@ -151,9 +150,9 @@ var Tutorial = React.createClass({
                 <div className="rulemode2">
                   <div className="rules2">
                     <h2>Dual n-back</h2>
-                    <p>Cortex is based on the <i>dual n-back</i> genre of brain training games. Traditionally the game requires players to keep track of two changing elements: position and sound (the 'dual' in dual n-back). 
-                    However, in this version of the game, we have also incorporated changing colors and have divided up these elements into four unique game modes. For example, in relaxed mode you only have to keep track of changing position 
-                    but in advanced mode you have to keep track of changing position, color and sound.</p>
+                    <p>Cortex is based on the
+                      <i>dual n-back</i>
+                      genre of brain training games. Traditionally the game requires players to keep track of two changing elements: position and sound (the 'dual' in dual n-back). However, in this version of the game, we have also incorporated changing colors and have divided up these elements into four unique game modes. For example, in relaxed mode you only have to keep track of changing position but in advanced mode you have to keep track of changing position, color and sound.</p>
                   </div>
                 </div>
                 <img src="./images/colorPosition.gif" alt="Color & Position"></img>
@@ -163,8 +162,13 @@ var Tutorial = React.createClass({
                 <div className="rulemode2">
                   <div className="rules2">
                     <h2>The n-back part</h2>
-                    <p>The n in n-back refers to the number of positions back that you have to remember. The example below demonstrates gameplay at n=2, therefore if the current position matches the position it was at <b>two steps back</b> then you would indicate a match by pressing the position key. </p>
-                    <p><i>The previous slide showed an example of position and color matches at n=1).</i></p>
+                    <p>The n in n-back refers to the number of positions back that you have to remember. The example below demonstrates gameplay at n=2, therefore if the current position matches the position it was at
+                      <b>two steps back</b>
+                      then you would indicate a match by pressing the position key.
+                    </p>
+                    <p>
+                      <i>The previous slide showed an example of position and color matches at n=1).</i>
+                    </p>
                   </div>
                 </div>
                 <img src="./images/nback.gif" alt="Gameplay Pattern"></img>

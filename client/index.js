@@ -39,7 +39,7 @@ var App = React.createClass({
   getInitialState: function() {
     return {isUser: false, isloggedin: false, isMobile: false}
   },
-  componentDidMount: function() {
+  componentWillMount: function() {
     //console.log("app mounted")
     axios.get('/api/getUserOnLoad')
     this.updateMobile();
