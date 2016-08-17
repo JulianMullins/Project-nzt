@@ -106,12 +106,12 @@ var StartOverlay = React.createClass({
           </div>
 
           <div className="overlayFooter">
-            <Link to={"/levels/" + this.props.mode}>
-              <h3 className={this.props.mode}>&larr; Go Back</h3>
-            </Link>
             <a onClick={this.props.click} className={"gameStartBtn " + this.props.mode + "StartBtn"}>
               Start Game
             </a>
+            <Link to={"/levels/" + this.props.mode}>
+              <h3 className={this.props.mode}>&larr; Go Back</h3>
+            </Link>
           </div>
 
         </div>
