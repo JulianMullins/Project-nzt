@@ -153,9 +153,11 @@ ul.row {
 @media all and (max-width: 768px) {
   .rulemode2 {
     margin-top: 12vw;
+    line-height: 1.3;
   }
   .rules2 {
     width: 75%;
+    margin-bottom: 1vh;
   }
   .rules2 h2, .rules2 h3 {
     text-align: center;
@@ -181,5 +183,8 @@ ul.row {
     left: 0;
     right: 0;
     bottom: 0;
+  }
+  .playBtn {
+    margin-top: 5vh !important;
   }
 }
