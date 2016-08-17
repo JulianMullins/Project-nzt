@@ -127,8 +127,8 @@
     font-size: 4em !important;
   }
   .grid {
-    width: 90vw;
-    height: 90vw;
+    width: 80vw;
+    height: 80vw;
     min-width: 0;
   }
   .levelSquare:hover {
