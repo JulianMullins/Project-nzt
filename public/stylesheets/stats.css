@@ -6,15 +6,13 @@
   height: 100vh;
   width: 100vw;
 }
-
 .statsHeader {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 20vh;
+  height: 17vh;
 }
-
 .chartsContainer {
   display: flex;
   flex-direction: row;
@@ -22,11 +20,9 @@
   justify-content: center;
   height: 60vh;
 }
-
 .statsPageContainer h1 {
   font-size: 48px;
 }
-
 .react-d3-core__legend {
   background-color: rgba(255, 255, 255, 0) !important;
   text-align: center !important;
@@ -60,7 +56,6 @@ text {
   font-size: 50px;
   text-align: center;
 }
-
 .statsDetailsContainer {
   background-color: #01B6A7;
   color: white;
@@ -71,7 +66,6 @@ text {
   height: 20vh;
   width: 100%;
 }
-
 .statsDetailsContainer table {
   width: 50%;
   max-width: 960px;
@@ -79,73 +73,67 @@ text {
   margin-left: 15px;
   line-height: 1.5;
 }
-
 .statsTableData {
   font-weight: bold;
 }
-
 .statsDetailsContainer .leaderLink {
   text-decoration: none;
   color: white;
 }
-
 .statsDetailsContainer h2 {
   font-size: 24px;
 }
-
 path.domain {
   opacity: 1 !important;
   stroke-width: 4 !important;
   stroke: #F13542 !important;
 }
-
 .tick line {
   display: none !important;
 }
-
 .react-d3-core__axis__xAxis.axis.x {
   display: none;
 }
-
 .react-d3-core__label.label {
   font-size: 18px;
 }
-
-@media all and (max-width: 768px) {
-
-.chartsContainer {
+.statsButtonsContainer {
   display: flex;
-  flex-direction: column;
-  align-items: center;
   justify-content: center;
-  position: absolute;
-  top: 20%;
-  left: 0;
-  width: 100%;
-  height: 140%;
-  padding-bottom: 20%;
+  margin-bottom: 10px;
 }
-
-.statsDetailsContainer {
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-  height: 20vh;
-  width: 100%;
-  position: fixed;
-  bottom: 0;
+.statsButtonsContainer a {
+  width: 150px;
+  height: 38px;
+  text-align: center;
+  padding: 5px 0;
+  margin: 0 30px;
+  border: 2px solid #01b6a7;
+  font-size: 20px;
 }
-
-.statsHeader {
-  position: absolute;
-  top: 0;
-  width: 100vw;
+.statsButtonsContainer a:hover {
+  cursor: pointer;
+  background-color: #01b6a7;
+  color: white;
 }
-
-.statsDetailsContainer .leaderLink {
-  display: none;
-}
-
+@media all and (max-width: 768px) {
+  .statsDetailsContainer {
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    height: 20vh;
+    width: 100%;
+    position: fixed;
+    bottom: 0;
+  }
+  .statsHeader {
+    position: absolute;
+    top: 0;
+    width: 100vw;
+  }
+  .statsDetailsContainer .leaderLink {
+    display: none;
+  }
   .statsDetailsContainer table {
     width: 60%;
     max-width: 960px;
@@ -153,9 +141,7 @@ path.domain {
     margin-left: 0;
     line-height: 1.5;
   }
-
   .statsDetailsContainer .statsTableData {
     text-align: right;
   }
-
 }
