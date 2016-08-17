@@ -30,9 +30,68 @@
   color: #c6c6c6;
 }
 
-.overlayContent i {
-  margin-top: 2.5vh;
-  text-align: center;
+.overlayHeader {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 20%;
+}
+
+.overlayKeysContainer {
+  display: flex;
+  align-items: center;
+  height: 30%;
+}
+
+.overlayKeysContainer .key-wrapper {
+  text-align: left;
+  width: 50%;
+}
+
+.overlayKeysContainer p {
+  text-align: left;
+  width: 50%;
+  font-size: 20px;
+}
+
+.nLevelAlert {
+  display: flex;
+  flex-direction: row;
+  border: 2px solid #c6c6c6;
+  height: 25%;
+}
+
+.nLevelNum {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 25%;
+  background-color: #c6c6c6;
+  color: rgba(0, 0, 0, 0.9);
+}
+
+.nLevelNum h1 {
+  font-size: 14vh;
+}
+
+.nLevelNum h3 {
+  font-size: 28px;
+  font-weight: 300;
+}
+
+.nLevelText {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  width: 75%;
+  padding: 10px;
+}
+
+.nLevelText p {
+  text-align: left;
   font-size: 20px;
   line-height: 1.5;
   color: #c6c6c6;
@@ -52,8 +111,15 @@
   line-height: 64px;
 }
 
+.overlayFooter {
+  display: flex;
+  justify-content: space-around;
+  align-items: flex-end;
+  width: 100%;
+  height: 15%;
+}
+
 .gameStartBtn {
-  margin: 5vh 0;
   padding: 10px 20px;
   font-size: 32px;
   cursor: pointer;
@@ -67,12 +133,16 @@
 }
 
 .tutorialBtn {
-  padding: 10px;
-  margin-top: 5vh;
+  font-weight: 500;
   transition-duration: .5s;
 }
 
-.tutorialBtnClassic {
+.tutorialBtn:hover {
+  color: #c6c6c6;
+  transition-duration: .5s;
+}
+
+/*.tutorialBtnClassic {
   border: 1px solid #F13542;
 }
 
@@ -110,7 +180,7 @@
   background-color: #F1BA03;
   color: white;
   transition-duration: .5s;
-}
+}*/
 
 .classicStartBtn {
   background-color: #F13542;

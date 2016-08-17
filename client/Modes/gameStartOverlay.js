@@ -18,57 +18,65 @@ var StartOverlay = React.createClass({
     if (this.props.mode == 'classic') {
       modeProperties = '(position & sound)';
       keys = (
-        <MediaQuery minWidth='768px'>
-          <p className="classic">Use the left and right arrow keys or press the corresponding buttons to select a match. If there is a position and sound match at the same time, select both options simultaneously.</p>
-          <div className="key-wrapper">
-            <ul className="row">
-              <li className="key keyClassic k37">←</li>
-              <li className="key k40 keyBlank"></li>
-              <li className="key keyClassic k39">→</li>
-            </ul>
+        <MediaQuery minWidth='960px'>
+          <div className="overlayKeysContainer">
+            <p className="classic">Use the left and right arrow keys or press the corresponding buttons to select a match. If there is a position and sound match at the same time, select both options simultaneously.</p>
+            <div className="key-wrapper">
+              <ul className="row">
+                <li className="key keyClassic k37">←</li>
+                <li className="key k40 keyBlank"></li>
+                <li className="key keyClassic k39">→</li>
+              </ul>
+            </div>
           </div>
         </MediaQuery>
       );
     } else if (this.props.mode == 'relaxed') {
       modeProperties = '(position)';
       keys = (
-        <MediaQuery minWidth='768px'>
-          <p>Use the up arrow key or press the corresponding button to select a position match.</p>
-          <div className="key-wrapper">
-            <ul className="row">
-              <li className="key k38 relaxed keyRelaxed">↑</li>
-            </ul>
+        <MediaQuery minWidth='960px'>
+          <div className="overlayKeysContainer">
+            <p>Use the up arrow key or press the corresponding button to select a position match.</p>
+            <div className="key-wrapper">
+              <ul className="row">
+                <li className="key k38 relaxed keyRelaxed">↑</li>
+              </ul>
+            </div>
           </div>
         </MediaQuery>
       );
     } else if (this.props.mode == 'silent') {
       modeProperties = '(position & color)';
       keys = (
-        <MediaQuery minWidth='768px'>
-          <p className="silent">Use the left and right arrow keys or press the corresponding buttons to select a match. If there is a position and color match at the same time, select both options simultaneously.</p>
-          <div className="key-wrapper">
-            <ul className="row">
-              <li className="key keySilent k37">←</li>
-              <li className="key keyBlank k40">↓</li>
-              <li className="key keySilent k39">→</li>
-            </ul>
+        <MediaQuery minWidth='960px'>
+          <div className="overlayKeysContainer">
+            <p className="silent">Use the left and right arrow keys or press the corresponding buttons to select a match. If there is a position and color match at the same time, select both options simultaneously.</p>
+            <div className="key-wrapper">
+              <ul className="row">
+                <li className="key keySilent k37">←</li>
+                <li className="key keyBlank k40">↓</li>
+                <li className="key keySilent k39">→</li>
+              </ul>
+            </div>
           </div>
         </MediaQuery>
       );
     } else {
       modeProperties = '(position, color & sound)';
       keys = (
-        <MediaQuery minWidth='768px'>
-          <p className="advanced">Use the left, right and up arrow keys or press the corresponding buttons to select a match. If there is a match of two (or all three) of the stimuli at the same time, select two or three options simultaneously.</p>
-          <div className="key-wrapper">
-            <ul className="row">
-              <li className="key keyAdvanced k38">↑</li>
-            </ul>
-            <ul className="row">
-              <li className="key keyAdvanced k37">←</li>
-              <li className="key k40 keyBlank">↓</li>
-              <li className="key keyAdvanced k39">→</li>
-            </ul>
+        <MediaQuery minWidth='960px'>
+          <div className="overlayKeysContainer">
+            <p className="advanced">Use the left, right and up arrow keys or press the corresponding buttons to select a match. If there is a match of two (or all three) of the stimuli at the same time, select two or three options simultaneously.</p>
+            <div className="key-wrapper">
+              <ul className="row">
+                <li className="key keyAdvanced k38">↑</li>
+              </ul>
+              <ul className="row">
+                <li className="key keyAdvanced k37">←</li>
+                <li className="key k40 keyBlank">↓</li>
+                <li className="key keyAdvanced k39">→</li>
+              </ul>
+            </div>
           </div>
         </MediaQuery>
       );
@@ -77,24 +85,35 @@ var StartOverlay = React.createClass({
     return (
       <div className="overlay">
         <div className="overlayContent">
-          <h2 className={this.props.mode}>{capFirstLetter(this.props.mode)}
-            Mode</h2>
-          <h3 className={this.props.mode}>{modeProperties}</h3>
+          <div className="overlayHeader">
+            <h2 className={this.props.mode}>{capFirstLetter(this.props.mode)} Mode</h2>
+            <h3 className={this.props.mode}>{modeProperties}</h3>
+          </div>
           {keys}
-          <i>You are on n-level {this.state.nLevel}, therefore a match occurs when a position/color stimulus from {this.state.nLevel + " "}
-            {!(this.state.nLevel - 1)
-              ? 'move'
-              : 'moves'}
-            back matches the current position/color.</i>
-          <Link to="/tutorial">
-            <h3 className={this.props.mode + " tutorialBtn tutorialBtn" + capFirstLetter(this.props.mode)}>Full Tutorial</h3>
-          </Link>
-          <a onClick={this.props.click} className={"gameStartBtn " + this.props.mode + "StartBtn"}>
-            Start Game
-          </a>
-          <Link to={"/levels/" + this.props.mode}>
-            <h3 className={this.props.mode}>&larr; Go Back</h3>
-          </Link>
+
+          <div className="nLevelAlert">
+            <div className="nLevelNum">
+              <h1>{this.state.nLevel}</h1>
+              <h3>N-LEVEL</h3>
+            </div>
+            <div className="nLevelText">
+              <p>You are on n-level {this.state.nLevel}, therefore a match occurs when a position/color stimulus from {this.state.nLevel + " "}
+                {!(this.state.nLevel - 1) ? 'move' : 'moves'} back matches the current position/color.</p>
+              <Link to="/tutorial">
+                <h3 className={this.props.mode + " tutorialBtn"}>Full Tutorial</h3>
+              </Link>
+            </div>
+          </div>
+
+          <div className="overlayFooter">
+            <Link to={"/levels/" + this.props.mode}>
+              <h3 className={this.props.mode}>&larr; Go Back</h3>
+            </Link>
+            <a onClick={this.props.click} className={"gameStartBtn " + this.props.mode + "StartBtn"}>
+              Start Game
+            </a>
+          </div>
+
         </div>
       </div>
     )
