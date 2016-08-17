@@ -4,6 +4,9 @@ var axios = require('axios');
 
 import {Link} from 'react-router';
 
+var greetings = ['Hello!', 'Welcome', 'Hey you!', 'Greetings!', 'Hi Friend!'];
+var welcomeMessage = <h1>{greetings[Math.floor(Math.random() * greetings.length)]}</h1>;
+
 var LoginOverlay = React.createClass({
   contextTypes: {
     router: React.PropTypes.object.isRequired
@@ -29,7 +32,6 @@ var LoginOverlay = React.createClass({
       error: this.props.params.error,
       fbURL: fbUrl + '/facebook',
       isGameOver: isGameOver,
-      greetings: ['Hello!', 'Welcome', 'Hey you!', 'Greetings!', 'Hi Friend!']
     }
   },
   componentDidMount() {},
@@ -58,7 +60,6 @@ var LoginOverlay = React.createClass({
     }.bind(this))
   },
   render: function() {
-    var welcomeMessage = <h1>{this.state.greetings[Math.floor(Math.random() * this.state.greetings.length)]}</h1>;
 
     return (
       <div className="screen">
