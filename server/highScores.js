@@ -20,21 +20,26 @@ router.get('/myHighScores', function(req, res, next) {
     .populate('stats')
     .exec(function(err, user) {
       if (err) {
-        res.json({success:false})
-      } 
-      else {
+        res.json({
+          success: false
+        })
+      } else {
         Leaderboard.findById(user.stats.leaderboard)
           .populate('scores')
           .exec(function(err, leaderboard) {
+            console.log(leaderboard);
             if (err) {
-              res.json({success:false})
-            } 
-            else {
+              res.json({
+                success: false
+              })
+            } else {
               var result = [];
               if (leaderboard.scores.length == 0) {
-                res.json({success:true,data:result});
-              } 
-              else {
+                res.json({
+                  success: true,
+                  data: result
+                });
+              } else {
                 var i = 1;
                 leaderboard.scores.sort(sortScores);
                 leaderboard.scores.map(function(score) {
@@ -46,7 +51,10 @@ router.get('/myHighScores', function(req, res, next) {
                   });
                   i++;
                 });
-                res.json({success:true,data:result});
+                res.json({
+                  success: true,
+                  data: result
+                });
               }
             }
           });
@@ -55,7 +63,7 @@ router.get('/myHighScores', function(req, res, next) {
 });
 
 router.get('/allHighScores', function(req, res, next) {
-  
+
   OverallLeaderboard.findById(serverLeaderboardId)
     .populate('scores')
     .exec(function(err, leaderboard) {
@@ -68,7 +76,7 @@ router.get('/allHighScores', function(req, res, next) {
         } else {
           var i = 1;
           leaderboard.scores.map(function(score) {
-            
+
             result.push({
               rank: i,
               mode: score.mode,
@@ -137,14 +145,14 @@ router.get('/allHighScores', function(req, res, next) {
 
   //           })
   //         }
-          
+
   //       }
   //     })
   //   }
   // })
 
 
-  
+
 });
 
 module.exports = router;
