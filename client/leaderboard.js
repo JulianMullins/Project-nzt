@@ -6,16 +6,29 @@ import {Link} from 'react-router';
 
 var Leaderboard = React.createClass({
   getInitialState: function() {
-    return {allScores: [], myScores: [], global: true, hasScores: false}
+    return {
+      allScores: [], 
+      friendScores:[],
+      myScores: [], 
+      global: true, 
+      hasScores: false
+    }
   },
   componentDidMount: function() {
     this.getAllScores();
+    this.getFriendsScores();
     this.getMyScores();
   },
   getAllScores: function() {
     axios.get('/api/allHighScores').then(function(response) {
-      this.setState({allScores: response.data});
+      this.setState({allScores: response.data.data});
     }.bind(this));
+  },
+  getFriendsScores(){
+    axios.get('/api/friendScores').then(function(response){
+      console.log("DONE WITH FRIENDS")
+      this.setState({friendsScores:response.data.data});
+    }.bind(this))
   },
   getMyScores: function() {
     axios.get('/api/myHighScores').then(function(response) {
@@ -65,7 +78,7 @@ var Leaderboard = React.createClass({
               : this.state.myScores} currentPage={0} itemsPerPage={10} pageButtonLimit={5} sortable={true} defaultSort={{
               column: 'rank',
               direction: 'asc'
-            }} filterable={['username']} filtererPlaceholder='Search by username'/>
+            }} filterable={['username']} filterPlaceholder='Search by username'/>
           </section>
           {loggedIn}
         </div>

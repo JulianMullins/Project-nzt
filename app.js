@@ -15,7 +15,7 @@ var bcrypt = require('bcryptjs');
 var routes = require('./server/index');
 var auth = require('./server/auth');
 var clientExpressFunctions = require('./server/clientExpressFunctions');
-var highScores = require('./server/highScores');
+var leaderboardFunctions = require('./server/leaderboardFunctions');
 var serverData = require('./server/serverData');
 var gameOverUpdate = require('./server/gameOverUpdate');
 var gameFunctions = require('./server/gameFunctions');
@@ -27,12 +27,22 @@ var User = require('./models/User');
 var Stats = require('./models/Stats');
 var HighScore = require('./models/HighScore');
 var Leaderboard = require('./models/Leaderboard');
-var OverallLeaderboard = require("./models/OverallLeaderboard");
+var OverallLeaderboard = require('./models/OverallLeaderboard');
+var FriendsLeaderboard = require('./models/FriendsLeaderboard');
 
 var app = express();
 var server = require('http').Server(app);
 var io = require('socket.io')(server);
 //end of react stuff
+
+//Facebook stuff
+var FB = require('facebook-node');
+
+var Facebook = require('facebook-node-sdk');
+var facebook = new Facebook({
+  appId: process.env.FACEBOOK_clientID,
+  secret: process.env.FACEBOOK_clientSecret
+});
 
 //axios
 var axios = require('axios');
@@ -78,6 +88,10 @@ passport.deserializeUser(function(id, done) {
     done(err, user);
   });
 });
+
+
+
+
 
 
 // HighScore.find().exec(function(err,highScores){
@@ -277,11 +291,77 @@ var combineLeaderboards = function(leaderboard1, leaderboard2, userId, username,
     })
 }
 
+
+var endFBPassportFunction = function(req,user,done){
+
+  updateFriendsLeaderboards(req,user);
+  req.session.user = user;
+  req.session.fullUser = true;
+  //req.session.fbAccessToken = FB.getAccessToken();
+  return done(null, user);
+
+}
+
+
+var updateFriendsLeaderboards = function(req,user){
+  facebook.api( '/'+user.facebookId+'/friends',
+      
+      function(err,data){
+        if(err){
+          console.log(err);
+        }
+        else{
+          console.log(data.data)
+          var friendIds = [];
+          for(var i=0;i<data.data.length;i++){
+            friendIds.push(data.data[i].id)
+          }
+          console.log(friendIds);
+          console.log(user)
+          User.findById(user._id)
+            .populate('friendsLeaderboard')
+            .exec(function(err,user){
+
+              if(user.friendsLeaderboard.friends.length===friendIds.length){
+                return;
+              }
+
+
+              user.friendsLeaderboard.friends=[user._id];
+
+              for(var i=0;i<friendIds.length;i++){
+                User.findOne({facebookId:friendIds[i]},function(err,friend){
+                  if(err || !friend){
+                    console.log('SOMETHING IS WRONG')
+                  }
+                  else{
+                    console.log(friend)
+                    user.friendsLeaderboard.friends.push(friend._id)
+                    user.friendsLeaderboard.save(function(err,fl){
+                      console.log(err,fl)
+                    })
+                  }
+                })
+              }
+
+              // console.log(user.friendsLeaderboard)
+
+              // user.friendsLeaderboard.save(function(err,user){
+              //   console.log('ALL DONE HERE', err,user)
+              // });
+
+            })
+        }
+      }
+    )
+}
+
+
+
 // Facebook callback
 passport.use(new FacebookStrategy({
     clientID: process.env.FACEBOOK_clientID,
     clientSecret: process.env.FACEBOOK_clientSecret,
-    //callbackURL: process.env.url+"/login/facebook/callback",
     callbackURL: process.env.url + "/api/login/facebook/callback",
     profileFields: ['id', 'email', 'name'],
     passReqToCallback: true
@@ -292,9 +372,7 @@ passport.use(new FacebookStrategy({
     if (req.user && req.user.facebookId && req.session.fullUser) {
       return done(null, req.user);
     }
-    // if(req.user && req.user.facebookId && !req.user.temp){
-    //  return done(null,req.user);
-    // }
+
     User.findOne({
         $or: [{
           facebookId: profile.id
@@ -304,14 +382,6 @@ passport.use(new FacebookStrategy({
       })
       .populate('stats')
       .exec(function(err, user) {
-        // if there's an error, finish trying to authenticate (auth failed)
-        //console.log(profile.emails[0].value)
-
-
-        // var email = profile._json.email;
-        // var name = profile._json.first_name + ' '+profile._json.last_name;
-        // var username = profile._json.first_name[0]+profile._json.last_name;
-        // username.toLowerCase();
 
         if (err) {
           console.error(err);
@@ -343,16 +413,22 @@ passport.use(new FacebookStrategy({
                 temp: false,
                 currentGame: req.session.user.currentGame
               })
+
+              var friendsLeaderboard = new FriendsLeaderboard({FLuser:newUser._id,friends:[newUser._id]});
+              friendsLeaderboard.save();
+
+              newUser.friendsLeaderboard = friendsLeaderboard._id;
+
               User.remove({
                 _id: req.session.user._id
               }, function(err, reqUser) {
                 if (!err) {
                   newUser.save(function(err, user) {
-                    req.session.user = user;
-                    req.session.fullUser = true;
-                    return done(null, user);
+                    
+                    return endFBPassportFunction(req,res,user,done);
+
                   })
-                }
+                }            
               })
             } else {
               var u = new User({
@@ -384,20 +460,36 @@ passport.use(new FacebookStrategy({
               userStats.save();
               leaderboard.leaderboardBelongsToStats = userStats._id;
               leaderboard.save();
+
+              var friendsLeaderboard = new FriendsLeaderboard({FLuser:newUser._id,friends:[newUser._id]});
+              friendsLeaderboard.save();
+
+              newUser.friendsLeaderboard = friendsLeaderboard._id;
+
               u.stats = userStats._id;
 
               u.save(function(err, user) {
                 if (err) {
                   return done(err);
                 } else {
-                  req.session.user = user;
-                  req.session.fullUser = true;
-                  return done(null, user);
+
+                  return endFBPassportFunction(req,res,user,done);
+
                 }
               })
             }
           })
         } else {
+
+
+          if(!user.friendsLeaderboard){
+            var friendsLeaderboard = new FriendsLeaderboard({FLuser:user._id,friends:[newUser._id]});
+            friendsLeaderboard.save();
+            user.friendsLeaderboard = friendsLeaderboard._id;
+            user.save();
+          }
+
+
           if (req.session.user) {
             console.log("req.session.user and user", user, user.stats)
             user.currentGame = req.session.user.currentGame;
@@ -419,9 +511,9 @@ passport.use(new FacebookStrategy({
                       if (err) {
                         done(err)
                       } else {
-                        req.session.user = user;
-                        req.session.fullUser = true;
-                        return done(null, user);
+                        
+                        return endFBPassportFunction(req,res,user,done);
+
                       }
                     })
                   })
@@ -441,9 +533,9 @@ passport.use(new FacebookStrategy({
                 if (err) {
                   done(err)
                 } else {
-                  req.session.user = user;
-                  req.session.fullUser = true;
-                  return done(null, user);
+                  
+                  return endFBPassportFunction(req,user,done);
+
                 }
               })
               // auth has has succeeded
@@ -459,9 +551,14 @@ passport.use(new FacebookStrategy({
       });
   }));
 
+
+
+
+
+
 app.use('/api/', auth(passport));
 app.use('/api/', clientExpressFunctions);
-app.use('/api/', highScores);
+app.use('/api/', leaderboardFunctions);
 app.use('/api/', gameOverUpdate);
 app.use('/api/', statsFunctions);
 app.use('/api/', gameFunctions);
@@ -483,7 +580,7 @@ app.use(function(req, res, next) {
 if (app.get('env') === 'development') {
   app.use(function(err, req, res, next) {
     // res.status(err.status || 500);
-    console.log(err,req);
+    console.log(err);
     res.json({
       success: false,
       message: err
