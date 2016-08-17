@@ -30,9 +30,68 @@
   color: #c6c6c6;
 }
 
-.overlayContent i {
-  margin-top: 2.5vh;
-  text-align: center;
+.overlayHeader {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 25%;
+}
+
+.overlayKeysContainer {
+  display: flex;
+  align-items: center;
+  height: 25%;
+}
+
+.overlayKeysContainer .key-wrapper {
+  text-align: left;
+  width: 50%;
+}
+
+.overlayKeysContainer p {
+  text-align: left;
+  width: 50%;
+  font-size: 20px;
+}
+
+.nLevelAlert {
+  display: flex;
+  flex-direction: row;
+  border: 2px solid #c6c6c6;
+  height: 25%;
+}
+
+.nLevelNum {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 25%;
+  background-color: #c6c6c6;
+  color: rgba(0, 0, 0, 0.9);
+}
+
+.nLevelNum h1 {
+  font-size: 14vh;
+}
+
+.nLevelNum h3 {
+  font-size: 28px;
+  font-weight: 300;
+}
+
+.nLevelText {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  width: 75%;
+  padding: 10px;
+}
+
+.nLevelText p {
+  text-align: left;
   font-size: 20px;
   line-height: 1.5;
   color: #c6c6c6;
@@ -52,8 +111,20 @@
   line-height: 64px;
 }
 
+.overlayFooter {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 25%;
+}
+
+.overlayFooter a {
+  margin-top: 15px;
+}
+
 .gameStartBtn {
-  margin: 5vh 0;
   padding: 10px 20px;
   font-size: 32px;
   cursor: pointer;
@@ -67,48 +138,12 @@
 }
 
 .tutorialBtn {
-  padding: 10px;
-  margin-top: 5vh;
+  font-weight: 500;
   transition-duration: .5s;
 }
 
-.tutorialBtnClassic {
-  border: 1px solid #F13542;
-}
-
-.tutorialBtnClassic:hover {
-  background-color: #F13542;
-  color: white;
-  transition-duration: .5s;
-}
-
-.tutorialBtnRelaxed {
-  border: 1px solid #7CD9D2;
-}
-
-.tutorialBtnRelaxed:hover {
-  background-color: #7CD9D2;
-  color: white;
-  transition-duration: .5s;
-}
-
-.tutorialBtnSilent {
-  border: 1px solid #01B6A7;
-}
-
-.tutorialBtnSilent:hover {
-  background-color: #01B6A7;
-  color: white;
-  transition-duration: .5s;
-}
-
-.tutorialBtnAdvanced {
-  border: 1px solid #F1BA03;
-}
-
-.tutorialBtnAdvanced:hover {
-  background-color: #F1BA03;
-  color: white;
+.tutorialBtn:hover {
+  color: #c6c6c6;
   transition-duration: .5s;
 }
 
@@ -189,9 +224,11 @@
   }
 
   .overlayContent {
-    width: 80vw;
-    height: 70vh;
-    justify-content: space-around;
+    width: 100vw;
+  }
+
+  .nLevelAlert {
+    width: 100%;
   }
 
   .overlayContent .key {
@@ -205,12 +242,21 @@
     line-height: 1;
   }
 
-  .overlayContent i {
+  .overlayContent p {
+    font-size: 16px;
     line-height: 1;
   }
 
   .overlayContent .key {
     line-height: 45px;
+  }
+
+  .overlayKeysContainer p {
+    width: 40%;
+  }
+
+  .overlayKeysContainer .key-wrapper {
+    width: 60%;
   }
 
   .tutorialBtn {
@@ -220,5 +266,12 @@
   .gameStartBtn {
     padding: 2px;
     margin: 10px;
+  }
+}
+
+@media all and (max-height: 480px) {
+  
+  .overlayKeysContainer {
+    display: none;
   }
 }
