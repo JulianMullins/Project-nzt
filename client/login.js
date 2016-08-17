@@ -28,7 +28,8 @@ var LoginOverlay = React.createClass({
       games: null,
       error: this.props.params.error,
       fbURL: fbUrl + '/facebook',
-      isGameOver: isGameOver
+      isGameOver: isGameOver,
+      greetings: ['Hello!', 'Welcome', 'Hey you!', 'Greetings!', 'Hi Friend!']
     }
   },
   componentDidMount() {},
@@ -57,12 +58,13 @@ var LoginOverlay = React.createClass({
     }.bind(this))
   },
   render: function() {
+    var welcomeMessage = <h1>{this.state.greetings[Math.floor(Math.random() * this.state.greetings.length)]}</h1>;
+
     return (
       <div className="screen">
         <div className="login" id="login">
-
           <div className="loginContent">
-            <h1>Hey you!</h1>
+            {welcomeMessage}
             <div className="pa">Login here.</div>
             <form>
               <p className="error">{this.state.error}</p>

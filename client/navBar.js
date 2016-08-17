@@ -106,11 +106,14 @@ var NavBar = React.createClass({
 					<ul style={this.state.open ? {pointerEvents: 'auto'} : {pointerEvents: 'none'}}>
 						<li><Link to="/home" onClick={this.close}>Home</Link></li>
 						<li><Link to={logInOutLink} onClick={this.close}>{logInOrOut}</Link></li>
+						<li><Link to="/tutorial" onClick={this.close}>Tutorial</Link></li>
 						<li><Link to="/leaderboard" onClick={this.close}>Leaderboard</Link></li>
 						<li><Link to="/stats" onClick={this.close}>Stats</Link></li>
-						<li><Link to="/tutorial" onClick={this.close}>Tutorial</Link></li>
 						<li><Link to="/science" onClick={this.close}>The Science</Link></li>
 						<li><Link to="/contact" onClick={this.close}>Contact</Link></li>
+					</ul>
+					<ul>
+						<li className="fbConnect"><Link to="/"><i className="fa fa-facebook"  aria-hidden="true"></i><span> CONNECT</span></Link></li>
 					</ul>
 					<div className='bt-overlay' onClick={this.click}/>
 				</nav>

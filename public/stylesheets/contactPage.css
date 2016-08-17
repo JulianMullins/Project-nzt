@@ -251,8 +251,7 @@
   }
 
   .aboutProfile img {
-    width: 30%;
-    max-width: 75px;
+    height: 75%;
     margin-right: 5%;
   }
 
