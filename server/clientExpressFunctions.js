@@ -17,12 +17,23 @@ var tempGame = null;
 
 //reset session on app load if !fullUser
 router.get('/getUserOnLoad',function(req,res,next){
-
   if(req.session.user && req.session.user.temp){
     console.log(req.session.user.temp)
     req.session.destroy();
   }
-  res.json({success:true})
+  else if(req.session.user && !req.session.user.temp){
+    User.findById(req.session.user._id,function(err,user){
+      user.currentGame = [];
+      user.save(function(err,user){
+        if(!err && user){
+          res.json({success:true})
+        }
+        else{
+          res.json({success:false})
+        }
+      })
+    })
+  }
 })
 
 
@@ -196,6 +207,9 @@ router.get('/getScore',function(req,res){
         baseScore:game.baseScore,
         fullScore:game.fullScore
       });
+    }
+    else{
+      res.json({error:true})
     }
   })
 })

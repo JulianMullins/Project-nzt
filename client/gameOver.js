@@ -19,6 +19,8 @@ var getGame = function() {
   return axios.get('/api/getGame');
 }
 
+
+
 var GameOverOverlay = React.createClass({
   contextTypes: {
     router: React.PropTypes.object.isRequired
@@ -43,19 +45,27 @@ var GameOverOverlay = React.createClass({
   },
   componentDidMount() {
 
-    this.setScore();
-    this.getData();
-    if (this.state.baseScore === 0) {
-      this.setState({fullScore: 0})
+    if(this.setScore()){
+      this.getData();
+      if (this.state.baseScore === 0) {
+        this.setState({fullScore: 0})
+      }
     }
     //this.setState({firstRender: false})
   },
   setScore() {
     axios.get('/api/getScore').then(function(response) {
-      this.setState({
-        baseScore: Math.floor(response.data.baseScore),
-        fullScore: Math.floor(response.data.fullScore)
-      })
+      if(response.data.error){
+        this.context.router.goBack();
+        return false;
+      }
+      else{
+        this.setState({
+          baseScore: parseInt(response.data.baseScore),
+          fullScore: parseInt(response.data.fullScore)
+        })
+        return true;
+      }
     }.bind(this))
   },
   getData() {
@@ -85,20 +95,6 @@ var GameOverOverlay = React.createClass({
     }.bind(this))
   },
 
-  gameOver: function() {
-    // axios.post({
-    //   url:'/gameOver',
-    //   headers:{
-    //     'Accept': 'application/json',
-    //     'Content-Type': 'application/json'
-    //   },
-    //   data: {
-    //     inputUsername:this.state.username,
-    //     alreadyLoggedIn:this.state.isAnon
-    //   }
-    // })
-
-  },
   unlockLevel() {
     if (this.state.passedLevel) {
       this.setState({
@@ -158,19 +154,37 @@ var GameOverOverlay = React.createClass({
 
   },
   nextLevelBtn() {
-    if (this.state.passedLevel) {
+    if (this.state.passedLevel && this.state.mode!=='advanced') {
+      this.setState({
+        nextOrReplay: <h2 className="levelButton" onClick={this.nextLevelLink}>next mode</h2>
+      })
+    } 
+    else if(this.state.passedLevel && this.state.mode==='advanced'){
       this.setState({
         nextOrReplay: <h2 className="levelButton" onClick={this.nextLevelLink}>next level</h2>
       })
-    } else {
+    }
+    else {
       this.setState({
-        nextOrReplay: <h2 className="levelButton" onClick={this.repeatLevel}>replay level</h2>
+        nextOrReplay: null
       })
     }
   },
   nextLevelLink(e) {
     //go to next level (if earned)
-    this.context.router.push('/game/' + this.state.mode + '/' + (this.state.nLevel + 1))
+    if(this.state.mode=='relaxed'){
+      this.context.router.push('/game/silent/' + (this.state.nLevel))
+    }
+    else if(this.state.mode=='silent'){
+      this.context.router.push('/game/classic/' + (this.state.nLevel))
+    }
+    else if(this.state.mode=='classic'){
+      this.context.router.push('/game/relaxed/'+(this.state.nLevel+1))
+    }
+    else{
+      this.context.router.push('/game/advanced/'+ (this.state.nLevel+1))
+    }
+
   },
   repeatLevel(e) {
     //go to next level (if earned)
@@ -238,6 +252,7 @@ var GameOverOverlay = React.createClass({
             <h2>home</h2>
           </Link>
           {this.state.nextOrReplay}
+          <h2 className="levelButton" onClick={this.repeatLevel}>replay level</h2>
           <div>
             <Link onClick={this.gameOver} className="leaderLink" to="/leaderboard">
               <span className="lbChart">
