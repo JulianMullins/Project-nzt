@@ -29,7 +29,7 @@ var LoginOverlay = React.createClass({
       password: '',
       gameEnded: false,
       games: null,
-      error: this.props.params.error,
+      error: error,
       fbURL: fbUrl + '/facebook',
       isGameOver: isGameOver,
     }
