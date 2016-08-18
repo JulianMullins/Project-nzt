@@ -16,7 +16,7 @@ router.get('/getStats',function(req, res, next){
         console.log(err)
       }
       else{
-        console.log(stats);
+        //console.log(stats);
         res.json({stats: stats.progress})
       }
   })

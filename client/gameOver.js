@@ -44,19 +44,23 @@ var GameOverOverlay = React.createClass({
     }
   },
   componentDidMount() {
-
-    if(this.setScore()){
-      this.getData();
-      if (this.state.baseScore === 0) {
+    this.setScore();
+    this.getData();
+    if (this.state.baseScore === 0) {
         this.setState({fullScore: 0})
       }
-    }
+    // if(this.setScore()){
+    //   console.log("WHEE")
+    //   this.getData();
+      
+    // }
     //this.setState({firstRender: false})
   },
   setScore() {
     axios.get('/api/getScore').then(function(response) {
       if(response.data.error){
         this.context.router.goBack();
+        console.log('false')
         return false;
       }
       else{
@@ -64,6 +68,7 @@ var GameOverOverlay = React.createClass({
           baseScore: parseInt(response.data.baseScore),
           fullScore: parseInt(response.data.fullScore)
         })
+        console.log('true')
         return true;
       }
     }.bind(this))

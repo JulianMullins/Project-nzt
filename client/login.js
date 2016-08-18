@@ -31,10 +31,18 @@ var LoginOverlay = React.createClass({
       games: null,
       error: error,
       fbURL: fbUrl + '/facebook',
-      isGameOver: isGameOver,
+      isGameOver: isGameOver
     }
   },
-  componentDidMount() {},
+  componentDidMount() {
+    axios.get('/api/isUser')
+      .then(function(response){
+        console.log(response)
+        if(response.data.isUser){
+          this.context.router.goBack();
+        }
+      }.bind(this))
+  },
   update(e) {
     this.setState({
       [e.target.name]: e.target.value

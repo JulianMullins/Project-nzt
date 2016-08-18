@@ -17,6 +17,33 @@ var sortScores = function(a, b) {
   return b.score - a.score
 };
 
+var processDate = function(date){
+  var seconds = Math.floor((new Date() - date) / 1000);
+
+    var interval = Math.floor(seconds / 31536000);
+
+    if (interval > 1) {
+        return interval + " years ago";
+    }
+    interval = Math.floor(seconds / 2592000);
+    if (interval > 1) {
+        return interval + " months ago";
+    }
+    interval = Math.floor(seconds / 86400);
+    if (interval > 1) {
+        return interval + " days ago";
+    }
+    interval = Math.floor(seconds / 3600);
+    if (interval > 1) {
+        return interval + " hours ago";
+    }
+    interval = Math.floor(seconds / 60);
+    if (interval > 1) {
+        return interval + " minutes ago";
+    }
+    return Math.floor(seconds) + " seconds ago";
+}
+
 var processScores = function(scores,res){
   var result = [];
   if (scores.length == 0) {
@@ -28,14 +55,12 @@ var processScores = function(scores,res){
     scores.sort(sortScores);
     scores = scores.filter(function(score,index){
       if(index>0 && score._id==scores[index-1]._id){
-        console.log('false')
         return false;
       }
       else{
         return true;
       }
     })
-    //console.log(scores)
     scores.map(function(score) {
       result.push({
         rank: i,
@@ -43,7 +68,7 @@ var processScores = function(scores,res){
         level: score.nLevel,
         score: parseInt(score.score),
         username: score.userName,
-        date:score.dateAchieved
+        date:processDate(score.dateAchieved)
       });
       i++;
     });
@@ -101,7 +126,7 @@ router.get('/friendScores',function(req,res,next){
     FriendsLeaderboard.findById(req.session.user.friendsLeaderboard)
     .populate('friends')
     .exec(function(err,myFriendsLeaderboard){
-      console.log(err,myFriendsLeaderboard)
+      //console.log(err,myFriendsLeaderboard)
       if(err){
         res.json({success:false});
       }
@@ -113,7 +138,7 @@ router.get('/friendScores',function(req,res,next){
       // }
       else{
         myFriendsLeaderboard.unique(function(myFriendsLeaderboard){
-          console.log(myFriendsLeaderboard)
+          //console.log(myFriendsLeaderboard)
           for(var i=0;i<myFriendsLeaderboard.friends.length;i++){
             User.findById(myFriendsLeaderboard.friends[i])
               .populate('stats')
