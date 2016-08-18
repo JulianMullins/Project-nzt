@@ -102,19 +102,67 @@ path.domain {
   justify-content: center;
   margin-bottom: 10px;
 }
-.statsButtonsContainer a {
-  width: 150px;
+.statsButtonsContainer select {
+  width: 170px;
   height: 38px;
-  text-align: center;
   padding: 5px 0;
   margin: 0 30px;
   border: 2px solid #01b6a7;
   font-size: 20px;
+  background-color: transparent;
 }
-.statsButtonsContainer a:hover {
+.statsButtonsContainer option:hover {
   cursor: pointer;
   background-color: #01b6a7;
   color: white;
+}
+.dropDown {
+  width: 170px;
+  height: 38px;
+  padding: 5px;
+  margin: 0 30px;
+  border: 2px solid #01b6a7;
+  font-size: 20px;
+  background-color: transparent;
+  position: relative;
+}
+.dropDown p {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+.dropDown p::after {
+  content: '▼';
+}
+.dropDown ul {
+  position: absolute;
+  top: 34px;
+  left: -2px;
+  width: 170px;
+  list-style: none;
+  padding: 0;
+  opacity: 0;
+  border: 2px solid #01b6a7;
+  background-color: white;
+  color: #01b6a7;
+}
+.dropDown ul li:hover {
+  background-color: #01b6a7;
+  color: white;
+}
+.dropDown li a {
+  width: 100%;
+  height: 100%;
+  display: block;
+  pointer-events: none;
+  padding: 2px 5px;
+}
+.dropDownExpand+ ul {
+  opacity: 1;
+}
+.dropDownExpand+ ul li a {
+  pointer-events: auto;
 }
 @media all and (max-width: 768px) {
   .statsDetailsContainer {
