@@ -55,14 +55,12 @@ var processScores = function(scores,res){
     scores.sort(sortScores);
     scores = scores.filter(function(score,index){
       if(index>0 && score._id==scores[index-1]._id){
-        console.log('false')
         return false;
       }
       else{
         return true;
       }
     })
-    //console.log(scores)
     scores.map(function(score) {
       result.push({
         rank: i,
@@ -128,7 +126,7 @@ router.get('/friendScores',function(req,res,next){
     FriendsLeaderboard.findById(req.session.user.friendsLeaderboard)
     .populate('friends')
     .exec(function(err,myFriendsLeaderboard){
-      console.log(err,myFriendsLeaderboard)
+      //console.log(err,myFriendsLeaderboard)
       if(err){
         res.json({success:false});
       }
@@ -140,7 +138,7 @@ router.get('/friendScores',function(req,res,next){
       // }
       else{
         myFriendsLeaderboard.unique(function(myFriendsLeaderboard){
-          console.log(myFriendsLeaderboard)
+          //console.log(myFriendsLeaderboard)
           for(var i=0;i<myFriendsLeaderboard.friends.length;i++){
             User.findById(myFriendsLeaderboard.friends[i])
               .populate('stats')

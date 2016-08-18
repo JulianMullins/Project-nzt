@@ -18,7 +18,7 @@ var tempGame = null;
 //reset session on app load if !fullUser
 router.get('/getUserOnLoad',function(req,res,next){
   if(req.session.user && req.session.user.temp){
-    console.log(req.session.user.temp)
+    //console.log(req.session.user.temp)
     req.session.destroy();
   }
   else if(req.session.user && !req.session.user.temp){
@@ -40,7 +40,7 @@ router.get('/getUserOnLoad',function(req,res,next){
 //get User info for home page
 router.get('/homeUserInfo',function(req,res,next){
   if(req.session.user){
-    console.log("show tutorial: "+req.session.user.showTutorial)
+    //console.log("show tutorial: "+req.session.user.showTutorial)
     res.json({
       name:req.session.user.name,
       hasUsername: !req.session.user.temp,
@@ -59,7 +59,7 @@ router.get('/homeUserInfo',function(req,res,next){
 
 //change user setting to not show overlay
 router.post('/stopShowOverlay',function(req,res,next){
-  console.log('/stopShowOverlay begun')  
+  //console.log('/stopShowOverlay begun')  
 
   User.findById(req.session.user._id,function(err,user){
     if(err){
@@ -87,7 +87,7 @@ router.post('/stopShowOverlay',function(req,res,next){
     //(sort of in client/index.js, but commented out)
 router.get('/isUser',function(req,res,next){
   if(req.session.user){
-    console.log("is user: ", !req.session.user.temp)
+    //console.log("is user: ", !req.session.user.temp)
     res.json({isloggedin:true, isUser:!req.session.user.temp})
   }
   else{
@@ -150,10 +150,10 @@ router.get('/getUser',function(req,res,next){
       games = req.session.user.currentGame
     }
     if(req.session.user){
-      console.log("here are stats from /getUser:")
+      //console.log("here are stats from /getUser:")
       Stats.findById(req.session.user.stats,function(err,stats){
-        console.log(stats);
-        console.log(req.session.user);
+        //console.log(stats);
+        //console.log(req.session.user);
       })
     }
     
@@ -179,7 +179,7 @@ router.get('/getGame',function(req,res,next){
       res.json({success:false})
     }
     else{
-      console.log("game: ", game);
+      //console.log("game: ", game);
       scoreToPass = allScoresToPass[game.mode][game.nLevel];
 
       if(game.fullScore >= scoreToPass) {

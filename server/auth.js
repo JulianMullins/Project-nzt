@@ -11,7 +11,7 @@ var Leaderboard = require('../models/Leaderboard')
 var validateReq = function(userData) {
 
     //check if input all there
-    console.log(userData)
+    //console.log(userData)
     var errors=[];
     if(userData.password !== userData.passwordConfirm){
       errors.push("Passwords don't match");
@@ -47,7 +47,7 @@ var saveUserRemoveAnonymous = function(req,res,user){
             next(err);
           }
           else{
-            console.log("success register")
+            //console.log("success register")
             res.json({success:true,username:u.email,password:req.body.password})
           }
         });
@@ -60,7 +60,7 @@ var saveUserRemoveAnonymous = function(req,res,user){
         next(err);
       }
       else{
-        console.log("success register")
+        //console.log("success register")
         res.json({success:true,username:u.email,password:req.body.password})
       }
     });
@@ -166,7 +166,7 @@ module.exports = function(passport) {
                     user.stats.combineStats(req.session.user.stats);
                     user.combineMaxN(req.session.user.maxN);
                   }
-                  console.log(user);
+                  //console.log(user);
 
                   saveUserRemoveAnonymous(req,res,user);
 
@@ -191,7 +191,7 @@ module.exports = function(passport) {
   //POST Login page
   router.post('/login', passport.authenticate('local',{failureRedirect:'login/error'}), function(req,res,next){
 
-    console.log(req.session.user);
+    //console.log(req.session.user);
     req.session.user = req.user;
     Stats.findById(req.session.user.stats)
       .populate('leaderboard progress')
@@ -207,8 +207,8 @@ module.exports = function(passport) {
 
     //req.session.user = req.user;
     req.session.fullUser = true;
-    console.log("login success")
-    console.log(req.session.user)
+    //console.log("login success")
+    //console.log(req.session.user)
     res.json({success:true});
 
 	});
@@ -241,7 +241,7 @@ module.exports = function(passport) {
 
   router.get('/gameOver/login/facebook',
     passport.authenticate('facebook', { scope:['email','user_friends']}), function(req,res,next){
-      console.log("getting /login/facebook")
+      //console.log("getting /login/facebook")
     });
 
   router.get('/gameOver/login/facebook/callback',
@@ -252,11 +252,11 @@ module.exports = function(passport) {
 
   // reset user currentgame and logout (or err if !req.user)
   router.post('/logout', function(req, res,next) {
-    console.log("logging out ", req.session.user)
+    //console.log("logging out ", req.session.user)
     if(req.session.user){
 
       req.logout();
-      console.log("logged out "+req.user)
+      //console.log("logged out "+req.user)
       req.session.regenerate(function(){
       //   function(err){
       //   if(err){
