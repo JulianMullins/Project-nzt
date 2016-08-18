@@ -71,7 +71,8 @@ var processScores = function(scores, res) {
     });
     res.json({
       success: true,
-      data: result
+      data: result,
+      username: res.req.session.user.username
     });
   }
 }
