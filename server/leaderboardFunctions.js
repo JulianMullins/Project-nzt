@@ -65,7 +65,8 @@ var processScores = function(scores, res) {
         level: score.nLevel,
         score: parseInt(score.score),
         username: score.userName,
-        date: processDate(score.dateAchieved)
+        date: processDate(score.dateAchieved),
+        name:score.FBname
       });
       i++;
     });

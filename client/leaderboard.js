@@ -124,7 +124,7 @@ var Leaderboard = React.createClass({
                 : {}}>Personal</a>
             </div>
             <Reactable columns={!this.state.scoreBoard[2]
-              ? columns.slice(0, 5)
+              ? (this.state.scoreBoard[0] ? columns.slice(0, 5) : columns.slice(0, 1).concat([{key:'name', label:'name'}]).concat(columns.slice(2, 5)))
               : columns.slice(0, 1).concat(columns.slice(2))} data={scores} currentPage={0} itemsPerPage={10} pageButtonLimit={5} sortable={true} defaultSort={{
               column: 'rank',
               direction: 'asc'

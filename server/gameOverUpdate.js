@@ -281,6 +281,10 @@ router.post('/gameOver', function(req, res, next) {
           userName: user.username
         })
 
+        if(req.session.user.facebookId){
+          newHighScore.FBname = req.session.user.name;
+        }
+
         if(!newHighScore.userName && user.name){
           newHighScore.userName = user.name;
         }

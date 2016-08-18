@@ -11,7 +11,7 @@ var highScoreSchema = mongoose.Schema({
     type: String,
     required: true
   },
-  name: String,
+  FBname: String,
   dateAchieved: Date,
   score: Number,
   nLevel: Number,
