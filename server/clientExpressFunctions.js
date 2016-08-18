@@ -87,13 +87,13 @@ router.post('/stopShowOverlay',function(req,res,next){
     //(sort of in client/index.js, but commented out)
 router.get('/isUser',function(req,res,next){
   if(req.session.user){
-    console.log(req.session.user)
-    res.json({isloggedin:true,isUser:!req.session.user.temp})
+    console.log("is user: ", !req.session.user.temp)
+    res.json({isloggedin:true, isUser:!req.session.user.temp})
   }
   else{
     res.json({isUser:false,isloggedin:false})
   }
-  
+  return;
 });
 
 

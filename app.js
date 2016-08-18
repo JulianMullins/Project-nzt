@@ -137,15 +137,15 @@ passport.deserializeUser(function(id, done) {
 //   })
 // })
 
-User.find({username:'Anonymous'}).exec(function(err,users){
-  users.forEach(function(user){
-    if(user.currentGame.length>3){
-      console.log("clearing games")
-      user.currentGame = [];
-      user.save();
-    }
-  })
-})
+// User.find({username:'Anonymous'}).exec(function(err,users){
+//   users.forEach(function(user){
+//     if(user.currentGame.length>3){
+//       console.log("clearing games")
+//       user.currentGame = [];
+//       user.save();
+//     }
+//   })
+// })
 
 
 // passport strategy

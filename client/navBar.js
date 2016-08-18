@@ -113,7 +113,7 @@ var NavBar = React.createClass({
 						<li><Link to="/contact" onClick={this.close}>Contact</Link></li>
 					</ul>
 					<ul>
-						<li className="fbConnect"><Link to="/"><i className="fa fa-facebook"  aria-hidden="true"></i><span> CONNECT</span></Link></li>
+						<li className="fbConnect"><a href='/api/login/facebook'><i className="fa fa-facebook"  aria-hidden="true"></i><span> CONNECT</span></a></li>
 					</ul>
 					<div className='bt-overlay' onClick={this.click}/>
 				</nav>
