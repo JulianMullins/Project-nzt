@@ -70,7 +70,7 @@ var Contact = React.createClass({
             <div className="aboutProfile">
               <div className="profileInfo">
                 <h2>Virginia Van Keuren</h2>
-                <p><i>Designer</i></p>
+                <p><i>Product Designer</i></p>
               </div>
               <img src="images/profiles/virginia.jpg"/>
               <span className="socialMedia">
