@@ -221,7 +221,7 @@
 
 }
 
-@media (max-width: 768px) {
+@media (max-width: 767px) {
   .contactPage {
     position: relative;
     height: 100%;
@@ -230,7 +230,15 @@
   }
 
   .contactTop {
+    height: 35%;
+  }
+
+  .contactTopHeading {
+    position: relative;
+    width: 100%;
     height: 20%;
+    margin-top: 25%;
+    margin-bottom: 10%;
   }
 
   .contactTopHeading p {
@@ -239,6 +247,7 @@
   }
 
   .contactMid {
+    position: relative;
     width: 100%;
     height: 65%;
     padding-bottom: 25%;
@@ -249,7 +258,6 @@
     position: relative;
     flex-direction: column;
     height: 80%;
-    width: 90%;
   }
 
   .aboutProfile {
@@ -298,20 +306,20 @@
     margin-bottom: 10px;
   }
 
-  .contactTopHeading {
-    position: relative;
-    width: 100%;
-    height: 20%;
-    margin-bottom: 10%;
-  }
-
   .contactBottom {
     position: fixed;
     bottom: 0;
+    left: 0;
     width: 100%;
     height: 15%;
   }
   .contactBottom a {
     width: auto;
+  }
+}
+
+@media (max-width: 768px) {
+  .profiles {
+    width: 90%;
   }
 }
