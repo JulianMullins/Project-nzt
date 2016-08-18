@@ -212,7 +212,7 @@
   visibility: hidden;
 }
 
-@media (max-width: 1024px) {
+@media (max-width: 1300px) {
   .overlayContent {
     width: 75vw;
   }
@@ -247,11 +247,6 @@
 
 @media all and (max-height: 768px) {
   .overlayContent p {
-    font-size: 20px;
-    line-height: 1;
-  }
-
-  .overlayContent p {
     font-size: 18px;
     line-height: 1;
   }
@@ -270,11 +265,6 @@
 
   .tutorialBtn {
     padding: 3px;
-  }
-
-  .gameStartBtn {
-    padding: 2px;
-    margin: 10px;
   }
 }
 
