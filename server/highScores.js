@@ -47,7 +47,8 @@ router.get('/myHighScores', function(req, res, next) {
                     rank: i,
                     mode: score.mode,
                     level: score.nLevel,
-                    score: parseInt(score.score)
+                    score: parseInt(score.score),
+                    date: score.dateAchieved.toDateString().slice(4)
                   });
                   i++;
                 });
