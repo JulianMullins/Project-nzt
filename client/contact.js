@@ -11,7 +11,9 @@ var Contact = React.createClass({
             <h1>About Us</h1>
             <p>We are a team of college students from the Horizons School of Technology who came together to create a fun and intuitive method for increasing intelligence. We hope you enjoy playing this game as much as we enjoyed making it!</p>
           </div>
+        </div>
 
+        <div className="contactMid">
           <div className="profiles">
             <div className="aboutProfile">
               <div className="profileInfo">
@@ -78,7 +80,7 @@ var Contact = React.createClass({
               </span>
             </div>
           </div>
-        </div>
+        </div> {/* contactMid */}
 
         <div className="contactBottom">
           <h1>Contact Us</h1>
