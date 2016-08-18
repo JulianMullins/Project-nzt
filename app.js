@@ -137,6 +137,16 @@ passport.deserializeUser(function(id, done) {
 //   })
 // })
 
+User.find({username:'Anonymous'}).exec(function(err,users){
+  users.forEach(function(user){
+    if(user.currentGame.length>3){
+      console.log("clearing games")
+      user.currentGame = [];
+      user.save();
+    }
+  })
+})
+
 
 // passport strategy
 passport.use(new LocalStrategy({
@@ -293,8 +303,8 @@ var combineLeaderboards = function(leaderboard1, leaderboard2, userId, username,
 
 
 var endFBPassportFunction = function(req,user,done){
-
-  updateFriendsLeaderboards(req,user);
+  console.log("UPDATE FL USER: ", user);
+  updateFriendsLeaderboards(req, user.facebookId,user.friendsLeaderboard,user._id);
   req.session.user = user;
   req.session.fullUser = true;
   //req.session.fbAccessToken = FB.getAccessToken();
@@ -303,31 +313,33 @@ var endFBPassportFunction = function(req,user,done){
 }
 
 
-var updateFriendsLeaderboards = function(req,user){
-  facebook.api( '/'+user.facebookId+'/friends',
+var updateFriendsLeaderboards = function(req,facebookId,friendsLeaderboardId,userId){
+  console.log("IN UPDATE FUNCTION: ",friendsLeaderboardId)
+  facebook.api( '/'+facebookId+'/friends',
       
       function(err,data){
         if(err){
           console.log(err);
         }
         else{
+
+          console.log(friendsLeaderboardId);
+
           console.log(data.data)
           var friendIds = [];
           for(var i=0;i<data.data.length;i++){
             friendIds.push(data.data[i].id)
           }
           console.log(friendIds);
-          console.log(user)
-          User.findById(user._id)
-            .populate('friendsLeaderboard')
-            .exec(function(err,user){
-
-              if(user.friendsLeaderboard.friends.length===friendIds.length){
+          FriendsLeaderboard.findById(friendsLeaderboardId)
+            .exec(function(err,friendsLeaderboard){
+              console.log(err,friendsLeaderboard);
+              if(friendsLeaderboard.friends.length===friendIds.length){
                 return;
               }
 
 
-              user.friendsLeaderboard.friends=[user._id];
+              friendsLeaderboard.friends=[userId];
 
               for(var i=0;i<friendIds.length;i++){
                 User.findOne({facebookId:friendIds[i]},function(err,friend){
@@ -336,9 +348,9 @@ var updateFriendsLeaderboards = function(req,user){
                   }
                   else{
                     console.log(friend)
-                    user.friendsLeaderboard.friends.push(friend._id)
-                    user.friendsLeaderboard.save(function(err,fl){
-                      console.log(err,fl)
+                    friendsLeaderboard.friends.push(friend._id)
+                    friendsLeaderboard.save(function(err,fl){
+                      console.log("SAVED FL",err,fl)
                     })
                   }
                 })
@@ -386,6 +398,8 @@ passport.use(new FacebookStrategy({
         if (err) {
           console.error(err);
           return done(err);
+
+      //create new user
         } else if (!user) {
 
           var email = profile._json.email;
@@ -425,7 +439,7 @@ passport.use(new FacebookStrategy({
                 if (!err) {
                   newUser.save(function(err, user) {
                     
-                    return endFBPassportFunction(req,res,user,done);
+                    return endFBPassportFunction(req,res,reqUser,done);
 
                   })
                 }            
@@ -479,14 +493,18 @@ passport.use(new FacebookStrategy({
               })
             }
           })
-        } else {
+        } 
 
+
+    //user already exists; update/login
+        else {
+          console.log("USER EXISTS",user,user.friendsLeaderboard)
 
           if(!user.friendsLeaderboard){
-            var friendsLeaderboard = new FriendsLeaderboard({FLuser:user._id,friends:[newUser._id]});
-            friendsLeaderboard.save();
+            console.log("NO FL")
+            var friendsLeaderboard = new FriendsLeaderboard({FLuser:user._id,friends:[user._id]});
+            friendsLeaderboard.save(function(err,fl){console.log("fl saved")});
             user.friendsLeaderboard = friendsLeaderboard._id;
-            user.save();
           }
 
 
@@ -507,11 +525,12 @@ passport.use(new FacebookStrategy({
                     _id: req.session.user._id
                   }, function(err) {
 
-                    user.save(function(err) {
+                    user.save(function(err,user) {
                       if (err) {
                         done(err)
                       } else {
                         
+                        console.log("AFTER SAVED", user)
                         return endFBPassportFunction(req,res,user,done);
 
                       }
@@ -529,11 +548,12 @@ passport.use(new FacebookStrategy({
               user.facebookId = profile.id
                 //console.log("facebook id added")
             }
-            user.save(function(err) {
+            user.save(function(err,user) {
                 if (err) {
                   done(err)
                 } else {
                   
+                  console.log("SAVED USER: ",user)
                   return endFBPassportFunction(req,user,done);
 
                 }

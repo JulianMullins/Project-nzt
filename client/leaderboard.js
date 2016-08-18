@@ -30,7 +30,6 @@ var Leaderboard = React.createClass({
   },
   getFriendsScores(){
     axios.get('/api/friendScores').then(function(response){
-      console.log("DONE WITH FRIENDS")
       this.setState({friendsScores:response.data.data});
     }.bind(this))
   },
@@ -62,7 +61,7 @@ var Leaderboard = React.createClass({
     if (this.state.scoreBoard[0]) {
       scores = this.state.allScores;
     } else if (this.state.scoreBoard[1]) {
-      scores = this.state.myScores;
+      scores = this.state.friendsScores;
     } else {
       scores = this.state.myScores;
     }

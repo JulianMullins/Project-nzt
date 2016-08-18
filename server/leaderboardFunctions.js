@@ -24,13 +24,26 @@ var processScores = function(scores,res){
   } 
   else {
     var i = 1;
+
     scores.sort(sortScores);
+    scores = scores.filter(function(score,index){
+      if(index>0 && score._id==scores[index-1]._id){
+        console.log('false')
+        return false;
+      }
+      else{
+        return true;
+      }
+    })
+    //console.log(scores)
     scores.map(function(score) {
       result.push({
         rank: i,
         mode: score.mode,
         level: score.nLevel,
-        score: parseInt(score.score)
+        score: parseInt(score.score),
+        username: score.userName,
+        date:score.dateAchieved
       });
       i++;
     });
@@ -91,32 +104,45 @@ router.get('/friendScores',function(req,res,next){
       console.log(err,myFriendsLeaderboard)
       if(err){
         res.json({success:false});
-        return;
       }
       else if(!myFriendsLeaderboard || !myFriendsLeaderboard.friends){
         res.json({success:true, friends:null})
-        return;
       }
       // else if(!myFriendsLeaderboard.friends){
       //   return;
       // }
-      for(var i=0;i<myFriendsLeaderboard.friends.length;i++){
-        User.findById(myFriendsLeaderboard.friends[i])
-          .populate('stats')
-          .exec(function(err,user){
-            myFriendsLeaderboard.scores = myFriendsLeaderboard.scores.concat(user.stats.progress)
-            myFriendsLeaderboard.save();
+      else{
+        myFriendsLeaderboard.unique(function(myFriendsLeaderboard){
+          console.log(myFriendsLeaderboard)
+          for(var i=0;i<myFriendsLeaderboard.friends.length;i++){
+            User.findById(myFriendsLeaderboard.friends[i])
+              .populate('stats')
+              .exec(function(err,user){
+                myFriendsLeaderboard.scores = myFriendsLeaderboard.scores.concat(user.stats.progress)
+                myFriendsLeaderboard.save();
+              })
+          }
+          myFriendsLeaderboard.save(function(err,mfl){
+            if(err||!mfl){
+              res.json({success:false})
+            }
+            else{
+              //console.log(mfl.scores)
+              
+              FriendsLeaderboard.findById(mfl._id)
+              .populate('scores')
+              .exec(function(err,mfl){
+                mfl.scores.sort(sortScores);
+                //console.log(mfl.scores)
+                processScores(mfl.scores,res)
+              })
+              
+              
+
+            }
           })
+        })
       }
-      myFriendsLeaderboard.save(function(err,mfl){
-        if(err||!mfl){
-          res.json({success:false})
-        }
-        else{
-          console.log(mfl.scores)
-          processScores(mfl.scores,res)
-        }
-      })
 
 
     })
