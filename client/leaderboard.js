@@ -7,6 +7,9 @@ import {Link} from 'react-router';
 var Leaderboard = React.createClass({
   getInitialState: function() {
     return {
+      allScores: [], 
+      friendScores:[],
+      myScores: [], 
       allScores: [],
       myScores: [],
       scoreBoard: [
@@ -17,12 +20,18 @@ var Leaderboard = React.createClass({
   },
   componentDidMount: function() {
     this.getAllScores();
+    this.getFriendsScores();
     this.getMyScores();
   },
   getAllScores: function() {
     axios.get('/api/allHighScores').then(function(response) {
-      this.setState({allScores: response.data});
+      this.setState({allScores: response.data.data});
     }.bind(this));
+  },
+  getFriendsScores(){
+    axios.get('/api/friendScores').then(function(response){
+      this.setState({friendsScores:response.data.data});
+    }.bind(this))
   },
   getMyScores: function() {
     axios.get('/api/myHighScores').then(function(response) {
@@ -52,7 +61,7 @@ var Leaderboard = React.createClass({
     if (this.state.scoreBoard[0]) {
       scores = this.state.allScores;
     } else if (this.state.scoreBoard[1]) {
-      scores = this.state.myScores;
+      scores = this.state.friendsScores;
     } else {
       scores = this.state.myScores;
     }
@@ -95,6 +104,7 @@ var Leaderboard = React.createClass({
               : ['username']} filterPlaceholder={this.state.scoreBoard[2]
               ? ''
               : 'Search by username'}/>
+
           </section>
           {loggedIn}
         </div>

@@ -23,7 +23,11 @@ var userSchema = mongoose.Schema({
 		type: mongoose.Schema.Types.ObjectId,
 		ref: 'Game'
 	}],
-	showTutorial:Boolean
+	showTutorial:Boolean,
+	friendsLeaderboard:{
+		type: mongoose.Schema.Types.ObjectId,
+		ref: 'FriendsLeaderboard'
+	}
 })
 
 userSchema.methods.combineMaxN = function(maxN2){
@@ -38,7 +42,8 @@ userSchema.methods.combineMaxN = function(maxN2){
 
 userSchema.plugin(autoref,[
 	'stats.statsUser',
-	'currentGame.gameUser'
+	'currentGame.gameUser',
+	'friendsLeaderboard.FLuser'
 ])
 
 
