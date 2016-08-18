@@ -91,12 +91,17 @@ var MyComponent = React.createClass({
     }
   },
   componentDidMount: function() {
-    window.addEventListener('resize', function(e) {
-      this.setState({
-        graphWidth: window.innerWidth - 40,
-        graphHeight: window.innerHeight / 2
-      });
-    }.bind(this));
+    $(document).ready(function() {
+      $('#root').on('click', function(e) {
+        if (e.target != $('.dropDown p')[0]) {
+          $($('.dropDown p')[0]).removeClass('dropDownExpand');
+        }
+        if (e.target != $('.dropDown p')[1]) {
+          $($('.dropDown p')[1]).removeClass('dropDownExpand');
+        }
+      })
+    })
+    window.addEventListener('resize', this.handleResize);
 
     axios.get('/api/getStats', {withCredentials: true}).then(function(responseJson) {
       if (responseJson.data.success === false) {
@@ -171,8 +176,14 @@ var MyComponent = React.createClass({
       this.setState({fullName: response.data.name})
     }.bind(this))
   },
-  componentWillUnmount() {
-    window.removeEventListener('resize');
+  componentWillUnmount: function() {
+    window.removeEventListener('resize', this.handleResize);
+  },
+  handleResize: function() {
+    this.setState({
+      graphWidth: window.innerWidth - 40,
+      graphHeight: window.innerHeight / 2
+    });
   },
   render: function() {
     var x = function(d) {
@@ -191,20 +202,54 @@ var MyComponent = React.createClass({
         <div className="statsPageContainer">
           <div className="statsHeader">
             <h1>User Statistics</h1>
-            <h2>( {this.state.fullName}
-              )</h2>
+            <h2>({this.state.fullName})</h2>
           </div>
           <div className="statsButtonsContainer">
-            <a onClick={function() {
-              this.setState({scoreGraph: true});
-            }.bind(this)} style={this.state.scoreGraph
-              ? pressedStyle
-              : {}}>Score</a>
-            <a onClick={function() {
-              this.setState({scoreGraph: false});
-            }.bind(this)} style={!this.state.scoreGraph
-              ? pressedStyle
-              : {}}>Reaction Times</a>
+            <div className="dropDown">
+              <p onClick={function(e) {
+                $(e.target).toggleClass('dropDownExpand');
+              }}>{this.state.scoreGraph
+                  ? 'Score'
+                  : 'Reaction Times'}</p>
+              <ul onClick={function(e) {
+                $(e.target.parentNode.parentNode.parentNode.children[0]).removeClass('dropDownExpand');
+              }}>
+                <li>
+                  <a onClick={function() {
+                    this.setState({scoreGraph: true});
+                  }.bind(this)}>Score</a>
+                </li>
+                <li>
+                  <a onClick={function() {
+                    this.setState({scoreGraph: false});
+                  }.bind(this)}>Reaction Times</a>
+                </li>
+              </ul>
+            </div>
+            <div className="dropDown">
+              <p onClick={function(e) {
+                $(e.target).toggleClass('dropDownExpand');
+              }}>Last Week</p>
+              <ul onClick={function(e) {
+                $(e.target.parentNode.parentNode.parentNode.children[0]).removeClass('dropDownExpand');
+              }}>
+                <li>
+                  <a onClick={function() {
+                    this.setState({scoreGraph: true});
+                  }.bind(this)}>Last Week</a>
+                </li>
+                <li>
+                  <a onClick={function() {
+                    this.setState({scoreGraph: false});
+                  }.bind(this)}>Last Month</a>
+                </li>
+                <li>
+                  <a onClick={function() {
+                    this.setState({scoreGraph: false});
+                  }.bind(this)}>Last Year</a>
+                </li>
+              </ul>
+            </div>
           </div>
           <div className="chartsContainer">
             {this.state.scoreGraph
