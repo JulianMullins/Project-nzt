@@ -166,12 +166,16 @@
 
 @media (max-height: 768px) {
   .contactTop {
-    height: 80vh;
+    height: 30%;
+  }
+
+  .contactMid {
+    height: 50%;
   }
 
   .contactBottom {
     flex-direction: row;
-    height: 20vh;
+    height: 20%;
   }
 
   .contactBottom p, .contactBottom h1 {
@@ -185,10 +189,18 @@
 @media (max-height: 580px) {
   .contactPage {
     position: relative;
-    height: 100%;
+    height: 100vh;
     overflow-y: auto;
-    padding-top: 150% !important;
   }
+
+  .contactTop {
+    height: 35%;
+  }
+
+  .contactMid {
+    height: 45%;
+  }
+
   .aboutProfile img {
     display: none;
   }
@@ -197,7 +209,7 @@
     width: 50%;
   }
   .socialMedia {
-    width: 50%;
+    height: 50%;
   }
 }
 
