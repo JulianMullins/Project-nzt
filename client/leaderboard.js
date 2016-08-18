@@ -45,8 +45,7 @@ var Leaderboard = React.createClass({
       }
     }.bind(this));
   },
-  render: function() {
-
+  render: function() {  
     var loggedIn = !this.state.hasScores && !this.state.scoreBoard[0]
       ? (
         <div className="gameOverPrompt">
@@ -141,7 +140,7 @@ var columns = [
     label: 'rank'
   }, {
     key: 'username',
-    label: 'user'
+    label: 'name'
   }, {
     key: 'score',
     label: 'score'
