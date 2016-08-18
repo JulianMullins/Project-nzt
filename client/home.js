@@ -48,7 +48,7 @@ var Mainmenu = React.createClass({
     }.bind(this)).then(function() {
       if (this.state.hasUsername) {
         this.setState({
-          userWelcome: <h3 className="advanced userWelcome">Welcome: {this.state.name}</h3>
+          userWelcome: <h3 className="advanced userWelcome">Welcome {this.state.name}</h3>
         })
       }
     }.bind(this))
@@ -65,7 +65,7 @@ var Mainmenu = React.createClass({
       }.bind(this)).then(function() {
         if (this.state.hasUsername) {
           this.setState({
-            userWelcome: <h3 className="advanced userWelcome">Welcome {this.state.name}!</h3>
+            userWelcome: <h3 className="advanced userWelcome">Welcome {this.state.name}</h3>
           })
         }
       }.bind(this))
