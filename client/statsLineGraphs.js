@@ -88,66 +88,50 @@ var MyComponent = React.createClass({
     })
     window.addEventListener('resize', this.handleResize);
 
-    axios.get('/api/getStats', {withCredentials: true}).then(function(responseJson) {
-      if (responseJson.data.success === false) {
+    axios.get('/api/getStats', {withCredentials: true}).then(function(response) {
+      if (response.data.success === false) {
         return
       }
 
-      stats = responseJson.data.stats;
-      this.state.data = [];
+      stats = response.data.stats;
+      var data = [];
       if (stats[0]) {
         _.map(stats, function(item, index) {
           if (item.score === 0 || !item.reactionTimes[0]) {
-            return
+            return;
           }
-          this.state.data.push(item)
-          //standard date format
-          this.state.data[this.state.data.length - 1].dateAchieved = new Date(item.dateAchieved)
-          //indexing array (temporary)
-          this.state.data[this.state.data.length - 1].index = index;
-          //max reaction time
-          this.state.data[this.state.data.length - 1].maxR = Math.max(...item.reactionTimes);
-          //min reaction time
-          this.state.data[this.state.data.length - 1].minR = Math.min(...item.reactionTimes)
-          //average reaction time
-          this.state.data[this.state.data.length - 1].avgR = (item.reactionTimes.reduce(function(a, b) {
-            return a + b
-          }) / (item.reactionTimes.length)).toFixed(2)
+
+          var newItem = {
+            dateAchieved: new Date(item.dateAchieved),
+            index: index,
+            score:item.score,
+            maxR:Math.max(...item.reactionTimes),
+            minR:Math.min(...item.reactionTimes),
+            avgR:(item.reactionTimes.reduce(function(a, b) {
+                  return a + b
+                }) / (item.reactionTimes.length)).toFixed(2)
+          }
+
+
+          data.push(newItem)
+          
         }.bind(this))
       }
 
-    }.bind(this)).then(function() {
-      if (stats[0]) {
-        this.setState({data: this.state.data, alert: ' '})
-      }
+
+
+      this.setState({
+        data:data,
+        maxN:response.data.maxN,
+        highScore:parseInt(response.data.highScore),
+        fullName:response.data.fullName,
+        alert: ''
+      })
+
     }.bind(this))
 
     //get highest n-level
-    axios.get('/api/getMaxN').then(function(response) {
-      var maxN = 0;
-      for (var key in response.data.maxN) {
-        if (response.data.maxN[key] > maxN) {
-          maxN = response.data.maxN[key];
-        }
-      }
-      this.setState({maxN: maxN})
-    }.bind(this))
-
-    //get highest score
-    axios.get('/api/myHighScores').then(function(response) {
-      var highScore = 0;
-      for (var i = 0; i < response.data.length; i++) {
-        if (response.data[i].score > highScore) {
-          highScore = response.data[i].score;
-        }
-      }
-      this.setState({highScore: highScore});
-    }.bind(this));
-
-    //get user full name
-    axios.get('/api/homeUserInfo').then(function(response) {
-      this.setState({fullName: response.data.name})
-    }.bind(this))
+    
   },
   componentWillUnmount: function() {
     window.removeEventListener('resize', this.handleResize);
