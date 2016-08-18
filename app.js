@@ -148,6 +148,27 @@ passport.deserializeUser(function(id, done) {
 // })
 
 
+
+// Stats.find().populate('statsUser progress').exec(function(err,stats){
+//   stats.forEach(function(stats){
+//     if(!stats.statsUser){
+//       console.log('PROBLEM HERE',stats)
+//       return;
+//     }
+//   //   console.log("found fb user")
+//   //   stats.progress.forEach(function(score){
+//   //     if(!score.FBname){
+//   //       console.log("adding name")
+//   //       score.FBname = stats.statsUser.name;
+//   //       score.save(function(err,score){console.log(score)});
+//   //     }
+//   //   })
+//   //   console.log("all done")
+//   })
+  
+// })
+
+
 // passport strategy
 passport.use(new LocalStrategy({
     passReqToCallback: true
