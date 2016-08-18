@@ -21,15 +21,6 @@ var dates = [];
 
 var xScale = 'time'
 var yLabel = 'age'
-//these are just variables to parse and add the first and last game dates to the x axes
-var dayA = ' '
-var monthA = ' '
-var dateA = ' '
-var yearA = ' '
-var dayB = ' '
-var monthB = ' '
-var dateB = ' '
-var yearB = ' '
 
 //setting margins as global
 var margins = {
@@ -44,14 +35,6 @@ var MyComponent = React.createClass({
     return {
       xScale: 'time',
       yLabel: 'age?',
-      dayA: '',
-      monthA: '',
-      dateA: '',
-      yearA: '',
-      dayB: '',
-      monthB: '',
-      dateB: '',
-      yearB: '',
       data: [
         {
           "score": 0,
@@ -87,10 +70,12 @@ var MyComponent = React.createClass({
       alert: "Play some games to view your progress!",
       scoreGraph: true,
       graphWidth: window.innerWidth,
-      graphHeight: window.innerHeight / 2
+      graphHeight: window.innerHeight / 2,
+      graphTime: [1, 0, 0]
     }
   },
   componentDidMount: function() {
+    // Close Dropdown by clicking anywhere on document
     $(document).ready(function() {
       $('#root').on('click', function(e) {
         if (e.target != $('.dropDown p')[0]) {
@@ -129,18 +114,6 @@ var MyComponent = React.createClass({
             return a + b
           }) / (item.reactionTimes.length)).toFixed(2)
         }.bind(this))
-      }
-
-      //pull first and last data objects and parse for axes
-      if (stats[0]) {
-        dayA = this.state.data[0].dateAchieved.toString().split(' ')[0];
-        monthA = this.state.data[0].dateAchieved.toString().split(' ')[1];
-        dateA = this.state.data[0].dateAchieved.toString().split(' ')[2];
-        yearA = this.state.data[0].dateAchieved.toString().split(' ')[3];
-        dayB = this.state.data[this.state.data.length - 1].dateAchieved.toString().split(' ')[0];
-        monthB = this.state.data[this.state.data.length - 1].dateAchieved.toString().split(' ')[1];
-        dateB = this.state.data[this.state.data.length - 1].dateAchieved.toString().split(' ')[2];
-        yearB = this.state.data[this.state.data.length - 1].dateAchieved.toString().split(' ')[3];
       }
 
     }.bind(this)).then(function() {
@@ -186,6 +159,33 @@ var MyComponent = React.createClass({
     });
   },
   render: function() {
+    console.log(this.state.data);
+
+    var data = [];
+    var cutoff = new Date();
+    if (this.state.graphTime[0]) {
+      cutoff.setDate(cutoff.getDate() - 7);
+      this.state.data.map(function(score) {
+        if (score.dateAchieved > cutoff) {
+          data.push(score);
+        }
+      });
+    } else if (this.state.graphTime[1]) {
+      cutoff.setDate(cutoff.getDate() - 30);
+      this.state.data.map(function(score) {
+        if (score.dateAchieved > cutoff) {
+          data.push(score);
+        }
+      });
+    } else {
+      cutoff.setDate(cutoff.getDate() - 365);
+      this.state.data.map(function(score) {
+        if (score.dateAchieved > cutoff) {
+          data.push(score);
+        }
+      });
+    }
+
     var x = function(d) {
       return d.dateAchieved;
     }
@@ -229,23 +229,33 @@ var MyComponent = React.createClass({
             <div className="dropDown">
               <p onClick={function(e) {
                 $(e.target).toggleClass('dropDownExpand');
-              }}>Last Week</p>
+              }}>{this.state.graphTime[0]
+                  ? 'Last Week'
+                  : (this.state.graphTime[1]
+                    ? 'Last Month'
+                    : 'Last Year')}</p>
               <ul onClick={function(e) {
                 $(e.target.parentNode.parentNode.parentNode.children[0]).removeClass('dropDownExpand');
               }}>
                 <li>
                   <a onClick={function() {
-                    this.setState({scoreGraph: true});
+                    this.setState({
+                      graphTime: [1, 0, 0]
+                    });
                   }.bind(this)}>Last Week</a>
                 </li>
                 <li>
                   <a onClick={function() {
-                    this.setState({scoreGraph: false});
+                    this.setState({
+                      graphTime: [0, 1, 0]
+                    });
                   }.bind(this)}>Last Month</a>
                 </li>
                 <li>
                   <a onClick={function() {
-                    this.setState({scoreGraph: false});
+                    this.setState({
+                      graphTime: [0, 0, 1]
+                    });
                   }.bind(this)}>Last Year</a>
                 </li>
               </ul>
@@ -253,10 +263,10 @@ var MyComponent = React.createClass({
           </div>
           <div className="chartsContainer">
             {this.state.scoreGraph
-              ? <LineChart className='StatsScoreGraph' data={this.state.data} margins={margins} chartSeries={this.state.chartSeries1} width={this.state.graphWidth} height={this.state.graphHeight} title={'Score History'} x={x} xScale={xScale} yAxisClassName={'lineY'} xAxisClassName={'lineX'} yLabel={'Scores'} //x axis includes first and last day of play (for time range)
-  xLabel={'Gameplay from ' + dayA + ', ' + monthA + ' ' + dateA + ', ' + yearA + ' to ' + dayB + ', ' + monthB + ' ' + dateB + ', ' + yearB}/>
-              : <AreaChart width={this.state.graphWidth} height={this.state.graphHeight} title='TITLE' data={this.state.data} className='StatsReactionGraph' margins={margins} chartSeries={this.state.chartSeries2} yAxisClassName={'areaY'} xAxisClassName={'areaX'} x={x} xScale={xScale} yLabel={'Reaction Times (ms)'} //x axis includes first and last day of play (for time range)
-  xLabel={'Gameplay from ' + dayA + ', ' + monthA + ' ' + dateA + ', ' + yearA + ' to ' + dayB + ', ' + monthB + ' ' + dateB + ', ' + yearB}/>}
+              ? <LineChart className='StatsScoreGraph' data={data} margins={margins} chartSeries={this.state.chartSeries1} width={this.state.graphWidth} height={this.state.graphHeight} title={'Score History'} x={x} xScale={xScale} yAxisClassName={'lineY'} xAxisClassName={'lineX'} yLabel={'Scores'} //x axis includes first and last day of play (for time range)
+  xLabel={'Gameplay from ' + cutoff.toDateString() + ' to ' + new Date().toDateString()}/>
+              : <AreaChart width={this.state.graphWidth} height={this.state.graphHeight} title='TITLE' data={data} className='StatsReactionGraph' margins={margins} chartSeries={this.state.chartSeries2} yAxisClassName={'areaY'} xAxisClassName={'areaX'} x={x} xScale={xScale} yLabel={'Reaction Times (ms)'} //x axis includes first and last day of play (for time range)
+  xLabel={'Gameplay from ' + cutoff.toDateString() + ' to ' + new Date().toDateString()}/>}
           </div>
           <div className="statsDetailsContainer">
             <table>

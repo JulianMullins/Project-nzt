@@ -7,10 +7,8 @@ import {Link} from 'react-router';
 var Leaderboard = React.createClass({
   getInitialState: function() {
     return {
-      allScores: [], 
-      friendScores:[],
-      myScores: [], 
       allScores: [],
+      friendsScores: [],
       myScores: [],
       scoreBoard: [
         1, 0, 0
@@ -28,9 +26,9 @@ var Leaderboard = React.createClass({
       this.setState({allScores: response.data.data});
     }.bind(this));
   },
-  getFriendsScores(){
-    axios.get('/api/friendScores').then(function(response){
-      this.setState({friendsScores:response.data.data});
+  getFriendsScores() {
+    axios.get('/api/friendScores').then(function(response) {
+      this.setState({friendsScores: response.data.data});
     }.bind(this))
   },
   getMyScores: function() {
@@ -47,12 +45,29 @@ var Leaderboard = React.createClass({
       }
     }.bind(this));
   },
-  render: function() {
-
+  render: function() {  
     var loggedIn = !this.state.hasScores && !this.state.scoreBoard[0]
       ? (
         <div className="gameOverPrompt">
-          <p><Link to="/gameOver/login">Login</Link> or <Link to="/gameOver/register">Sign Up</Link> to save your progress, view statistics and compete with friends!</p>
+          <p>
+            <Link to="/gameOver/login">Login</Link>
+            or
+            <Link to="/gameOver/register">Sign Up</Link>
+            to save your progress, view statistics and compete with friends!
+          </p>
+        </div>
+      )
+      : <div></div>;
+
+    var fbConnected = !this.state.friendsScores && this.state.scoreBoard[1] && this.state.hasScores
+      ? (
+        <div className="gameOverPrompt">
+          <p>
+            <Link to="/gameOver/login">Login</Link>
+            or
+            <Link to="/gameOver/register">Connect</Link>
+            with facebook to compete with friends!
+          </p>
         </div>
       )
       : <div></div>;
@@ -125,7 +140,7 @@ var columns = [
     label: 'rank'
   }, {
     key: 'username',
-    label: 'user'
+    label: 'name'
   }, {
     key: 'score',
     label: 'score'
