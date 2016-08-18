@@ -138,7 +138,7 @@ var Tutorial = React.createClass({
                   <div className="rules2">
                     <h2>Welcome to Cortex!</h2>
                     <p>Cortex is a game designed to exercise your working memory and increase your fluid-intelligence (the aspect of intelligence that IQ tests measure). This method of increasing IQ is
-                      <Link to="/science" className="tutorialLink">scientifically supported and backed by numerous research studies</Link>. Although the game is naturally challenging, we have designed it to be as easy to learn as possible. We hope that you’ll enjoy playing the game and that the cognitive benefits will simply follow along as you progress further.</p>
+                      <Link to="/science" className="tutorialLink"> scientifically supported and backed by numerous research studies</Link>. Although the game is naturally challenging, we have designed it to be as easy to learn as possible. We hope that you’ll enjoy playing the game and that the cognitive benefits will simply follow along as you progress further.</p>
                     <h3>Let&#39;s get started!
                     </h3>
                     <img src="./images/brain.png" alt="brain"></img>
