@@ -145,3 +145,19 @@ path.domain {
     text-align: right;
   }
 }
+
+@media all and (max-height: 580px) {
+  .statsHeader {
+    width: 75%;
+    flex-direction: row;
+    justify-content: space-around;
+  }
+
+  .statsDetailsContainer table {
+    line-height: 1;
+    font-size: 24px;
+  }
+  .statsDetailsContainer .leaderLink {
+    font-size: 10px;
+  }
+}
