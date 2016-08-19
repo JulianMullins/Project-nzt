@@ -13,7 +13,8 @@ var Leaderboard = React.createClass({
       scoreBoard: [
         1, 0, 0
       ],
-      hasScores: false
+      hasScores: false,
+      username: null
     }
   },
   componentDidMount: function() {
@@ -23,7 +24,7 @@ var Leaderboard = React.createClass({
   },
   getAllScores: function() {
     axios.get('/api/allHighScores').then(function(response) {
-      this.setState({allScores: response.data.data});
+      this.setState({allScores: response.data.data, username: response.data.username});
     }.bind(this));
   },
   getFriendsScores() {
@@ -45,7 +46,20 @@ var Leaderboard = React.createClass({
       }
     }.bind(this));
   },
-  render: function() {  
+  globalHighlightMyScores: function(username) {
+    $(document).ready(function() {
+      $('.reactable-data tr').map(function(tr) {
+        setTimeout(function() {
+          $($('.reactable-data tr')[tr]).css('backgroundColor', 'transparent');
+          if ($('.reactable-data tr')[tr].children[1].innerText == username) {
+            $($('.reactable-data tr')[tr]).css('backgroundColor', 'rgba(1, 182, 167, 0.1)');
+          }
+        }.bind(this));
+      }.bind(this), 1000);
+    }.bind(this))
+  },
+  render: function() {
+    this.globalHighlightMyScores(this.state.username)
     var loggedIn = !this.state.hasScores && !this.state.scoreBoard[0]
       ? (
         <div className="gameOverPrompt">
@@ -118,7 +132,9 @@ var Leaderboard = React.createClass({
               ? []
               : ['username']} filterPlaceholder={this.state.scoreBoard[2]
               ? ''
-              : 'Search by username'}/>
+              : 'Search by username'} onPageChange={function() {
+              this.globalHighlightMyScores(this.state.username);
+            }.bind(this)}/>
 
           </section>
           {loggedIn}
