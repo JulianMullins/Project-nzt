@@ -33,7 +33,7 @@ var NewUserOverlay = React.createClass({
               <Link to="/levels/relaxed" onClick={this.stopShowOverlay}>Relaxed Mode</Link>
             </div>
           </div>
-          <div>
+          <div className="stopShowOverlay">
             <a onClick={this.stopShowOverlay}>Click here to never show again</a>
           </div>
         </div>
