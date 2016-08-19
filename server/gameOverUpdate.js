@@ -325,7 +325,16 @@ router.post('/gameOver', function(req, res, next) {
               //console.log("updated user", user)
               user.save(function(err,user){
                 validateScore(newHighScore,function(err,score){
-                  checkLeaderboards(req,res,user,tempGame,newHighScore);
+                  if(err){
+                    res.json({success:false})
+                  }
+                  else if(score.score>0){
+                    checkLeaderboards(req,res,user,tempGame,newHighScore);
+                  }
+                  else{
+                    res.json({success:true})
+                  }
+
                 });
               })
               
