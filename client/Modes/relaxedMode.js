@@ -133,7 +133,7 @@ var RelaxedMode = React.createClass({
   position: function() {
     var posQueue = [];
     var timeTilPosMatch = parseInt((Math.random() * 5) + this.state.N);
-    var timeKeeper = 44;
+    var timeKeeper = 14;
 
     iterations = setInterval(function() {
       timeKeeper--;
@@ -207,7 +207,7 @@ var RelaxedMode = React.createClass({
 
       // Game end
 
-      if (timeKeeper === 36) {
+      if (timeKeeper === 0) {
 
         //give gameScore variable the final score
         clearInterval(iterations);

@@ -3,7 +3,7 @@ var interval;
 
 var GameTimer = React.createClass({
   getInitialState: function() {
-    return {seconds: 90}
+    return {seconds: 30}
   },
   componentDidMount: function() {
     interval = setInterval(this.timerSecs, 1000)
