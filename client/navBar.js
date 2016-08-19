@@ -20,10 +20,9 @@ var NavBar = React.createClass({
 		return {
 			open: false,
 			isloggedIn:false,
-			isUser:false
-			// isloggedIn: this.props.isloggedin,
-			// loginFunction: this.props.loginFunction,
-			// isUser: this.props.isUser
+			isUser:false,
+			isFBuser:false
+
 		}
 	},
 	componentDidMount: function(){
@@ -33,9 +32,11 @@ var NavBar = React.createClass({
 
 		axios.get('/api/isUser')
 	      .then(function(response){
+	      	console.log(response.data)
 	        this.setState({
 	          isUser: response.data.isUser,
-	          isloggedIn: response.data.isloggedin
+	          isloggedIn: response.data.isloggedin,
+	          isFBuser:response.data.isFBuser
 	        })
 	        //console.log(this.state);
 	      }.bind(this))
@@ -113,7 +114,10 @@ var NavBar = React.createClass({
 						<li><Link to="/contact" onClick={this.close}>Contact</Link></li>
 					</ul>
 					<ul>
-						<li className="fbConnect"><a href='/api/login/facebook'><i className="fa fa-facebook"  aria-hidden="true"></i><span> CONNECT</span></a></li>
+						{this.state.isFBuser
+							? ''
+							: <li className="fbConnect"><a href='/api/login/facebook'><i className="fa fa-facebook"  aria-hidden="true"></i><span> CONNECT</span></a></li>
+						}
 					</ul>
 					<div className='bt-overlay' onClick={this.click}/>
 				</nav>

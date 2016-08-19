@@ -22,16 +22,29 @@ router.get('/getUserOnLoad',function(req,res,next){
     req.session.destroy();
   }
   else if(req.session.user && !req.session.user.temp){
-    User.findById(req.session.user._id,function(err,user){
-      user.currentGame = [];
-      user.save(function(err,user){
-        if(!err && user){
-          res.json({success:true})
-        }
-        else{
-          res.json({success:false})
-        }
-      })
+    console.log("USER: ",req.session.user);
+    User.findById(req.session.user._id).exec(function(err,user){
+      if(err){
+        console.log(err)
+        res.json({success:false})
+      }
+      else if(!user){
+        console.log(user)
+        console.log(req.session.user)
+        console.log("NO USER")
+        res.json({success:false})
+      }
+      else{
+        user.currentGame = [];
+        user.save(function(err,user){
+          if(!err && user){
+            res.json({success:true})
+          }
+          else{
+            res.json({success:false})
+          }
+        })
+      }
     })
   }
 })
@@ -88,10 +101,18 @@ router.post('/stopShowOverlay',function(req,res,next){
 router.get('/isUser',function(req,res,next){
   if(req.session.user){
     //console.log("is user: ", !req.session.user.temp)
-    res.json({isloggedin:true, isUser:!req.session.user.temp})
+    res.json({
+      isloggedin:true, 
+      isUser:!req.session.user.temp, 
+      isFBuser:!!req.session.user.facebookId
+    })
   }
   else{
-    res.json({isUser:false,isloggedin:false})
+    res.json({
+      isUser:false,
+      isloggedin:false,
+      isFBuser:false
+    })
   }
   return;
 });
