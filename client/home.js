@@ -92,8 +92,9 @@ var Mainmenu = React.createClass({
     //   : '';
     return (
       <div>
-<NewUserOverlay click={this.closeTutorial}/>
-
+        {this.state.showTutorial
+          ? <NewUserOverlay click={this.closeTutorial}/>
+          : <div></div>}
         <div className="heading">
           <img src="../images/CortexLogo4.svg"/>
           <div className="userHeading">
