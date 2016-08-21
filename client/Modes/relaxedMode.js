@@ -133,7 +133,7 @@ var RelaxedMode = React.createClass({
   position: function() {
     var posQueue = [];
     var timeTilPosMatch = parseInt((Math.random() * 5) + this.state.N);
-    var timeKeeper = 14;
+    var timeKeeper = 44;
 
     iterations = setInterval(function() {
       timeKeeper--;
