@@ -13,10 +13,12 @@ var StartOverlay = React.createClass({
   },
   render: function() {
     var modeProperties;
+    var modeDescription;
     var keys;
 
     if (this.props.mode == 'classic') {
       modeProperties = '(position & sound)';
+      modeDescription = 'position/sound';
       keys = (
         <MediaQuery minWidth='960px'>
           <div className="overlayKeysContainer">
@@ -33,6 +35,7 @@ var StartOverlay = React.createClass({
       );
     } else if (this.props.mode == 'relaxed') {
       modeProperties = '(position)';
+      modeDescription = 'position';
       keys = (
         <MediaQuery minWidth='960px'>
           <div className="overlayKeysContainer">
@@ -47,6 +50,7 @@ var StartOverlay = React.createClass({
       );
     } else if (this.props.mode == 'silent') {
       modeProperties = '(position & color)';
+      modeDescription = 'position/color'
       keys = (
         <MediaQuery minWidth='960px'>
           <div className="overlayKeysContainer">
@@ -63,6 +67,7 @@ var StartOverlay = React.createClass({
       );
     } else {
       modeProperties = '(position, color & sound)';
+      modeDescription = 'position/color/sound';
       keys = (
         <MediaQuery minWidth='960px'>
           <div className="overlayKeysContainer">
@@ -97,8 +102,8 @@ var StartOverlay = React.createClass({
               <h3>N-LEVEL</h3>
             </div>
             <div className="nLevelText">
-              <p>You are on n-level {this.state.nLevel}, therefore a match occurs when a position/color stimulus from {this.state.nLevel + " "}
-                {!(this.state.nLevel - 1) ? 'move' : 'moves'} back matches the current position/color.</p>
+              <p>You are on n-level {this.state.nLevel}, therefore a match occurs when a {modeDescription} stimulus from {this.state.nLevel + " "}
+                {!(this.state.nLevel - 1) ? 'move' : 'moves'} back matches the current {modeDescription}.</p>
               <Link to="/tutorial">
                 <h3 className={this.props.mode + " tutorialBtn"}>Full Tutorial</h3>
               </Link>
