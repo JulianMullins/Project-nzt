@@ -70,11 +70,21 @@ var processScores = function(scores, res) {
       });
       i++;
     });
-    res.json({
-      success: true,
-      data: result,
-      username: res.req.session.user.username
-    });
+    if(res.req.session.user){
+      res.json({
+        success: true,
+        data: result,
+        username: res.req.session.user.username
+      });
+    }
+    else{
+      res.json({
+        success:true,
+        data:result,
+        username:null
+      })
+    }
+    
   }
 }
 

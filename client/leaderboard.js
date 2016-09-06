@@ -64,9 +64,9 @@ var Leaderboard = React.createClass({
       ? (
         <div className="gameOverPrompt">
           <p>
-            <Link to="/gameOver/login">Login</Link>
+            <Link to="/login">Login </Link>
             or
-            <Link to="/gameOver/register">Sign Up</Link>
+            <Link to="/register"> Sign Up </Link>
             to save your progress, view statistics and compete with friends!
           </p>
         </div>

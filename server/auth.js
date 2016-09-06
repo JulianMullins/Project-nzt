@@ -190,7 +190,7 @@ module.exports = function(passport) {
 
   //POST Login page
   router.post('/login', passport.authenticate('local',{failureRedirect:'login/error'}), function(req,res,next){
-
+    console.log(req.user)
     //console.log(req.session.user);
     req.session.user = req.user;
     Stats.findById(req.session.user.stats)

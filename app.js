@@ -147,20 +147,42 @@ passport.deserializeUser(function(id, done) {
 //   })
 // })
 
+HighScore.find().exec(function(err,scores){
+  scores.forEach(function(score){   
+    console.log("checking score")
+    if(score.score<=0){
+      score.remove(function(err){console.log("gone")})
+    }
+  })
+})
+
 
 
 // Stats.find().populate('statsUser progress').exec(function(err,stats){
 //   stats.forEach(function(stats){
-//     if(!stats.statsUser.facebookId){
-//       //console.log('PROBLEM HERE',stats)
-//       // Stats.remove({_id:stats._id},function(err){
-//       //   console.log("done")
-//       // })
-//       return;
-//     }
-//     console.log("found fb user")
+
+//     // if(!stats.statsUser.temp){
+//     //   stats.progress.forEach(function(score){
+//     //     if(score.userName == 'Anonymous'){
+//     //       score.userName = stats.statsUser.username;
+//     //       score.save(function(err,score){console.log("SAVED ",score)})
+//     //     }
+//     //   })
+//     // }
+
+//     // // if(!stats.statsUser){
+//     // //   console.log("ANGST ",stats)
+//     // // }
+//     // if(!stats.statsUser.facebookId){
+//     //   //console.log('PROBLEM HERE',stats)
+//     //   // Stats.remove({_id:stats._id},function(err){
+//     //   //   console.log("done")
+//     //   // })
+//     //   return;
+//     // }
+//     // console.log("found fb user",stats)
 //     stats.progress.forEach(function(score){
-//       if(!score.FBname){
+//       if(!score.FBname || score.FBname!==stats.statsUser.name){
 //         console.log("adding name")
 //         score.FBname = stats.statsUser.name;
 //         score.save(function(err,score){console.log(score)});
@@ -180,11 +202,10 @@ passport.use(new LocalStrategy({
     console.log("PASSPORT INITIALIZED ", req.user,req.body,username,password)
 
     //check if already logged in
-    if (req.user && req.session.fullUser) {
+    if (req.user && req.session.fullUser && req.session.user.facebookId) {
       console.log("already logged in")
       return done(null, req.user);
     }
-
 
     //check if all data is there
     if(!username || !password || username.length<4 || password.length<4){
@@ -463,7 +484,7 @@ passport.use(new FacebookStrategy({
                 if (!err) {
                   newUser.save(function(err, user) {
                     
-                    return endFBPassportFunction(req,res,reqUser,done);
+                    return endFBPassportFunction(req,reqUser,done);
 
                   })
                 }            
@@ -511,7 +532,7 @@ passport.use(new FacebookStrategy({
                   return done(err);
                 } else {
 
-                  return endFBPassportFunction(req,res,user,done);
+                  return endFBPassportFunction(req,user,done);
 
                 }
               })
@@ -555,7 +576,7 @@ passport.use(new FacebookStrategy({
                       } else {
                         
                         console.log("AFTER SAVED", user)
-                        return endFBPassportFunction(req,res,user,done);
+                        return endFBPassportFunction(req,user,done);
 
                       }
                     })

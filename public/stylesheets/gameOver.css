@@ -92,6 +92,7 @@
 
 .gameOverPrompt a {
   font-weight: bold;
+  text-decoration: none;
   color: #F1BA03;
   transition-duration: .5s;
 }
