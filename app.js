@@ -147,14 +147,14 @@ passport.deserializeUser(function(id, done) {
 //   })
 // })
 
-HighScore.find().exec(function(err,scores){
-  scores.forEach(function(score){   
-    console.log("checking score")
-    if(score.score<=0){
-      score.remove(function(err){console.log("gone")})
-    }
-  })
-})
+// HighScore.find().exec(function(err,scores){
+//   scores.forEach(function(score){   
+//     console.log("checking score")
+//     if(score.score<=0){
+//       score.remove(function(err){console.log("gone")})
+//     }
+//   })
+// })
 
 
 
