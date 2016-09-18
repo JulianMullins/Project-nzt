@@ -205,36 +205,30 @@ h3 {
 }
 
 @media all and (max-height: 768px) {
-  .heading> img {
-    height: 20vh;
-  }
-  .startHerePanel {
-    border-width: 125px 125px 0 0;
-  }
-
-  .startHereText {
-      font-size: 14px;
-  }
-}
-
-@media all and (max-height: 580px) {
   .whiteLogo {
     display: none;
   }
   .startHerePanel {
-    display: none;
+    height: 5vh;
+    width: 49vw;
+    background-color: rgba(0,0,0,0.4);
+    border: none;
+    left: 0.5%;
   }
   .startHereText {
-    display: none;
+    display: flex;
+    top: 31%;
+    left: 7.5%;
+    transform: none;
+  }
+  .startHereText p {
+    margin-right: 5px;
   }
 }
 
-@media all and (max-width: 768px) {
-  .startHerePanel {
-  border-width: 125px 125px 0 0;
-  }
+@media all and (max-width: 767px) {
   .startHereText {
-    font-size: 14px;
+    font-size: 16px;
   }
 }
 
