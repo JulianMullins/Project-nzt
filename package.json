@@ -45,9 +45,9 @@
   "devDependencies": {
     "concurrently": "^2.2.0",
     "eslint": "^3.0.1",
-    "watchify": "^3.7.0",
     "eslint-plugin-react": "^5.2.2",
-    "nodemon": "^1.9.2"
+    "nodemon": "^1.9.2",
+    "watchify": "^3.7.0"
   },
   "engines": {
     "node": ">=6.2.1"
