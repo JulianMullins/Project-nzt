@@ -32,7 +32,7 @@ var NavBar = React.createClass({
 
 		axios.get('/api/isUser')
 	      .then(function(response){
-	      	console.log(response.data)
+	      	// console.log(response.data);
 	        this.setState({
 	          isUser: response.data.isUser,
 	          isloggedIn: response.data.isloggedin,

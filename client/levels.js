@@ -37,6 +37,7 @@ var getSquareArr = function(square, mode) {
       if (mode === 'relaxed') {
         colorStyle.backgroundColor = '#7CD9D2';
         opacityStyle.backgroundColor = '#7CD9D2';
+        opacityStyle.color = "#7CD9D2";
       } else if (mode === 'silent') {
         colorStyle.backgroundColor = '#01B6A7';
         opacityStyle.backgroundColor = '#01B6A7';
@@ -49,15 +50,22 @@ var getSquareArr = function(square, mode) {
         border: '2px solid #F13542',
         opacity: 1 - (0.4 / maxSquares) * i,
         pointerEvents: 'none',
-        color: "rgba(0,0,0,0)",
+        backgroundColor: "rgba(241, 53, 66, 0.05)",
+        color: "#F13542",
         cursor: 'default'
       };
       if (mode == 'relaxed') {
         colorStyle.border = '2px solid #7CD9D2';
+        colorStyle.backgroundColor = "rgba(124, 217, 210, 0.05)";
+        colorStyle.color = "#7CD9D2"
       } else if (mode == 'silent') {
         colorStyle.border = '2px solid #01B6A7';
+        colorStyle.backgroundColor = "rgba(1, 182, 167, 0.05)";
+        colorStyle.color = "#01B6A7"
       } else if (mode == 'advanced') {
         colorStyle.border = '2px solid #F1BA03';
+        colorStyle.backgroundColor = "rgba(241, 186, 3, 0.05)";
+        colorStyle.color = "#F1BA03"
       }
     }
     arr.push(
@@ -119,7 +127,7 @@ var LevelOverlay = React.createClass({
           })}
         </div>
         <div className="levelsFooter">
-          <h3 className={this.state.mode}>Highest: Level {this.state.maxN}</h3>
+          <h3 className={this.state.mode}>Highest N-Level: {this.state.maxN}</h3>
           <Link to="/home">
             <h3 className={this.state.mode + "Button returnBtn"}>&larr; Go Back</h3>
           </Link>
