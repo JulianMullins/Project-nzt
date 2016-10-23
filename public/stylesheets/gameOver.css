@@ -141,10 +141,6 @@
 }
 
 @media (max-height: 768px) {
-  .gameOver h2 {
-    font-size: 28px;
-  }
-
   .gameOverHeader {
     justify-content: center;
     height: 20%;
@@ -155,8 +151,12 @@
     font-size: 36px;
   }
 
+  .gameOver h2 {
+    font-size: 24px;
+  }
+
   .scoreTable {
-    height: 30%;
+    height: 35%;
   }
 
   .scoreTable td {
@@ -164,7 +164,7 @@
   }
 
   .gameOverPrompt {
-    height: 20%;
+    height: 30%;
   }
 
   .gameOverPrompt p {
@@ -172,7 +172,7 @@
   }
 
   .gameOverActions {
-    height: 30%;
+    height: 15%;
     margin: 0;
   }
 
