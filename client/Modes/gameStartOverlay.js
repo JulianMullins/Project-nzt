@@ -15,6 +15,33 @@ var StartOverlay = React.createClass({
     var modeProperties;
     var modeDescription;
     var keys;
+    var modeLevelGif;
+
+    var footerBtnMobile = (
+      <MediaQuery maxWidth='767px'>
+        <div className="overlayFooter">
+          <Link to={"/levels/" + this.props.mode}>
+            <h3 className={this.props.mode}>&larr; Go Back</h3>
+          </Link>
+          <a onClick={this.props.click} className={"gameStartBtn " + this.props.mode + "StartBtn"}>
+            Start Game
+          </a>
+        </div>
+      </MediaQuery>
+    )
+
+    var footerBtnDesktop = (
+      <MediaQuery minWidth='768px'>
+        <div className="overlayFooter">
+          <a onClick={this.props.click} className={"gameStartBtn " + this.props.mode + "StartBtn"}>
+            Start Game
+          </a>
+          <Link to={"/levels/" + this.props.mode}>
+            <h3 className={this.props.mode}>&larr; Go Back</h3>
+          </Link>
+        </div>
+      </MediaQuery>
+    )
 
     if (this.props.mode == 'classic') {
       modeProperties = '(position & sound)';
@@ -33,6 +60,22 @@ var StartOverlay = React.createClass({
           </div>
         </MediaQuery>
       );
+
+      if(this.state.nLevel === 1) {
+        modeLevelGif = (
+          <img className="overlayGif" src="../../images/gameStartGifs/classic1.gif" alt="Gameplay Pattern"/>
+        )
+      }
+      else if(this.state.nLevel === 2) {
+        modeLevelGif = (
+          <img className="overlayGif" src="../../images/gameStartGifs/classic2.gif" alt="Gameplay Pattern"/>
+        )
+      }
+      else if(this.state.nLevel === 3) {
+        modeLevelGif = (
+          <img className="overlayGif" src="../../images/gameStartGifs/classic3.gif" alt="Gameplay Pattern"/>
+        )
+      }
     } else if (this.props.mode == 'relaxed') {
       modeProperties = '(position)';
       modeDescription = 'position';
@@ -48,6 +91,22 @@ var StartOverlay = React.createClass({
           </div>
         </MediaQuery>
       );
+
+      if(this.state.nLevel === 1) {
+        modeLevelGif = (
+          <img className="overlayGif" src="../../images/gameStartGifs/relaxed1.gif" alt="Gameplay Pattern"/>
+        )
+      }
+      else if(this.state.nLevel === 2) {
+        modeLevelGif = (
+          <img className="overlayGif" src="../../images/gameStartGifs/relaxed2.gif" alt="Gameplay Pattern"/>
+        )
+      }
+      else if(this.state.nLevel === 3) {
+        modeLevelGif = (
+          <img className="overlayGif" src="../../images/gameStartGifs/relaxed3.gif" alt="Gameplay Pattern"/>
+        )
+      }
     } else if (this.props.mode == 'silent') {
       modeProperties = '(position & color)';
       modeDescription = 'position/color'
@@ -65,6 +124,21 @@ var StartOverlay = React.createClass({
           </div>
         </MediaQuery>
       );
+      if(this.state.nLevel === 1) {
+        modeLevelGif = (
+          <img className="overlayGif" src="../../images/gameStartGifs/silent1.gif" alt="Gameplay Pattern"/>
+        )
+      }
+      else if(this.state.nLevel === 2) {
+        modeLevelGif = (
+          <img className="overlayGif" src="../../images/gameStartGifs/silent2.gif" alt="Gameplay Pattern"/>
+        )
+      }
+      else if(this.state.nLevel === 3) {
+        modeLevelGif = (
+          <img className="overlayGif" src="../../images/gameStartGifs/silent3.gif" alt="Gameplay Pattern"/>
+        )
+      }
     } else {
       modeProperties = '(position, color & sound)';
       modeDescription = 'position/color/sound';
@@ -85,6 +159,21 @@ var StartOverlay = React.createClass({
             </div>
         </MediaQuery>
       );
+      if(this.state.nLevel === 1) {
+        modeLevelGif = (
+          <img className="overlayGif" src="../../images/gameStartGifs/advanced1.gif" alt="Gameplay Pattern"/>
+        )
+      }
+      else if(this.state.nLevel === 2) {
+        modeLevelGif = (
+          <img className="overlayGif" src="../../images/gameStartGifs/advanced2.gif" alt="Gameplay Pattern"/>
+        )
+      }
+      else if(this.state.nLevel === 3) {
+        modeLevelGif = (
+          <img className="overlayGif" src="../../images/gameStartGifs/advanced3.gif" alt="Gameplay Pattern"/>
+        )
+      }
     }
 
     return (
@@ -95,7 +184,7 @@ var StartOverlay = React.createClass({
             <h3 className={this.props.mode}>{modeProperties}</h3>
           </div>
           <div className="overlayKeysContainer">
-            <img className="overlayGif" src="../../images/nback.gif" alt="Gameplay Pattern"/>
+            {modeLevelGif}
             {keys}
           </div>
 
@@ -113,14 +202,8 @@ var StartOverlay = React.createClass({
             </div>
           </div>
 
-          <div className="overlayFooter">
-            <a onClick={this.props.click} className={"gameStartBtn " + this.props.mode + "StartBtn"}>
-              Start Game
-            </a>
-            <Link to={"/levels/" + this.props.mode}>
-              <h3 className={this.props.mode}>&larr; Go Back</h3>
-            </Link>
-          </div>
+          {footerBtnMobile}
+          {footerBtnDesktop}
 
         </div>
       </div>
