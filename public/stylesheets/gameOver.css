@@ -88,6 +88,36 @@
   width: 90vw;
   height: 20vh;
   padding: 10px;
+  -webkit-animation-name: growIn;
+  -webkit-animation-duration: 1s;
+  animation-name: growIn;
+  animation-duration: 1s;
+}
+
+@keyframes growIn {
+  from {
+    height: 0vh;
+    opacity: 0;
+    padding: 0;
+  }
+  to {
+    width: 90vw;
+    opacity: 1;
+    padding: 10px;
+  }
+}
+
+@-webkit-keyframes growIn {
+  from {
+    height: 0vh;
+    opacity: 0;
+    padding: 0;
+  }
+  to {
+    width: 90vw;
+    opacity: 1;
+    padding: 10px;
+  }
 }
 
 .gameOverPrompt a {

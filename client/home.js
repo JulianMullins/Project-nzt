@@ -108,7 +108,7 @@ var Mainmenu = React.createClass({
             ? <div></div>
             : (<div><div className="startHerePanel"></div>
                <div className="startHereText">
-                 <p>NEW?</p>
+                 <p>New?</p>
                  <p>(start here)</p>
                </div></div>)}
 

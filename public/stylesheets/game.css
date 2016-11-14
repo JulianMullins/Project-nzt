@@ -78,6 +78,16 @@
   cursor: default;
   padding: 2vh;
 }
+
+.gameplayAlert {
+  display: flex;
+  flex-direction: column;
+}
+
+.gameplayAlert p {
+  text-align: center;
+}
+
 .advancedBtnContainer a {
   width: auto;
 }

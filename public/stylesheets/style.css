@@ -120,6 +120,9 @@ h3 {
   transition-duration: .8s;
   cursor: pointer;
 }
+.menu-panel:nth-child(1n+1) {
+  z-index: 2;
+}
 .menu-panel:hover {
   transition-duration: .8s;
   width: 40vw;
@@ -133,21 +136,22 @@ h3 {
   position: absolute;
   top: 30vh;
   left: 0;
-  width: 0;
-  height: 0;
-  border-style: solid;
-  border-width: 175px 175px 0 0;
-  border-color: rgba(0,0,0,0.4) transparent transparent transparent;
+  height: 5vh;
+  width: 100vw;
+  background-color: rgba(0,0,0,0.4);
+  border: none;
 }
 .startHereText {
     position: absolute;
-    top: 34%;
-    left: 0.5%;
-    transform: rotate(-45deg);
+    display: flex;
     text-align: center;
-    line-height: 1.5;
+    top: 31%;
+    left: 6%;
     color: rgba(255,255,255,.95);
     font-size: 18px;
+}
+.startHereText p {
+    margin-right: 5px;
 }
 .whiteLogo {
   width: 15vw;
@@ -162,6 +166,7 @@ h3 {
   transition-duration: 1s;
   width: 17vw;
 }
+
 @media (max-width: 960px) {
   .whiteLogo {
     display: none;
@@ -208,6 +213,12 @@ h3 {
   .whiteLogo {
     display: none;
   }
+}
+
+@media all and (max-width: 767px) {
+  .startHereText {
+    font-size: 16px;
+  }
   .startHerePanel {
     height: 5vh;
     width: 49vw;
@@ -217,18 +228,9 @@ h3 {
   }
   .startHereText {
     display: flex;
-    top: 31%;
+    top: 32%;
     left: 7.5%;
     transform: none;
-  }
-  .startHereText p {
-    margin-right: 5px;
-  }
-}
-
-@media all and (max-width: 767px) {
-  .startHereText {
-    font-size: 16px;
   }
 }
 
