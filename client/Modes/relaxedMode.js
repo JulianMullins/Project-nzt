@@ -291,6 +291,10 @@ var RelaxedMode = React.createClass({
               <div id="positionButton" className={this.state.positionButton}>
                 <a onClick={this.posMatch} style={this.state.posStyle} className="relaxedButton">POSITION</a>
               </div>
+              {/*<div className="gameplayAlert">
+                <p>↑</p>
+                <p>Click here if the square appears in the same place twice</p>
+              </div>*/}
             </div>
           </div>
         </div>
