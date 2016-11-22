@@ -49,13 +49,16 @@ var StartOverlay = React.createClass({
       keys = (
         <MediaQuery minWidth='768px'>
           <div className="keyInstructions">
-            <div className="key-wrapper">
-              <ul className="row">
-                <li className="keyGS keyClassic k37">←</li>
-                <li className="keyGS k40 keyBlank"></li>
-                <li className="keyGS keyClassic k39">→</li>
-              </ul>
-            </div>
+              <div className="key-wrapper">
+                <ul className="row">
+                  <li className="keyGS keyClassic k38">↑</li>
+                </ul>
+                <ul className="row">
+                  <li className="keyGS keyClassic k37">position</li>
+                  <li className="keyGS k40 keyClassic">↓</li>
+                  <li className="keyGS keyClassic k39">sound</li>
+                </ul>
+              </div>
             <p className="classic">Use the left and right arrow keys or press the corresponding buttons to select a match.</p>
           </div>
         </MediaQuery>
@@ -82,11 +85,16 @@ var StartOverlay = React.createClass({
       keys = (
         <MediaQuery minWidth='768px'>
           <div className="keyInstructions">
-            <div className="key-wrapper">
-              <ul className="row">
-                <li className="keyGS k38 relaxed keyRelaxed">↑</li>
-              </ul>
-            </div>
+              <div className="key-wrapper">
+                <ul className="row">
+                  <li className="keyGS keyRelaxed k38">position</li>
+                </ul>
+                <ul className="row">
+                  <li className="keyGS keyRelaxed k37">←</li>
+                  <li className="keyGS k40 keyRelaxed">↓</li>
+                  <li className="keyGS keyRelaxed k39">→</li>
+                </ul>
+              </div>
             <p className="relaxed">Use the up arrow key or press the corresponding button to select a position match.</p>
           </div>
         </MediaQuery>
@@ -113,13 +121,16 @@ var StartOverlay = React.createClass({
       keys = (
         <MediaQuery minWidth='768px'>
           <div className="keyInstructions">
-            <div className="key-wrapper">
-              <ul className="row">
-                <li className="keyGS keySilent k37">←</li>
-                <li className="keyGS keyBlank k40">↓</li>
-                <li className="keyGS keySilent k39">→</li>
-              </ul>
-            </div>
+              <div className="key-wrapper">
+                <ul className="row">
+                  <li className="keyGS keySilent k38">↑</li>
+                </ul>
+                <ul className="row">
+                  <li className="keyGS keySilent k37">position</li>
+                  <li className="keyGS k40 keySilent">↓</li>
+                  <li className="keyGS keySilent k39">color</li>
+                </ul>
+              </div>
             <p className="silent">Use the left and right arrow keys or press the corresponding buttons to select a match.</p>
           </div>
         </MediaQuery>
@@ -147,12 +158,12 @@ var StartOverlay = React.createClass({
             <div className="keyInstructions">
               <div className="key-wrapper">
                 <ul className="row">
-                  <li className="keyGS keyAdvanced k38">↑</li>
+                  <li className="keyGS keyAdvanced k38">position</li>
                 </ul>
                 <ul className="row">
-                  <li className="keyGS keyAdvanced k37">←</li>
-                  <li className="keyGS k40 keyBlank">↓</li>
-                  <li className="keyGS keyAdvanced k39">→</li>
+                  <li className="keyGS keyAdvanced k37">sound</li>
+                  <li className="keyGS k40 keyAdvanced">↓</li>
+                  <li className="keyGS keyAdvanced k39">color</li>
                 </ul>
               </div>
               <p className="advanced">Use the left, right and up arrow keys or press the corresponding buttons to select a match.</p>

@@ -200,12 +200,11 @@
 }
 
 .keyGS {
-  width: 75px;
+  width: 95px;
   min-width: 50px;
   height: auto;
   padding-left: 3px;
   padding-right: 3px;
-  font-size: 22px;
   border-radius: 5px;
   display: inline-block;
   line-height: 52px;
@@ -216,6 +215,7 @@
   -o-transition: .5s;
   -ms-transition: .5s;
   transition: .5s;
+  margin: 0 5px;
 }
 
 .keyClassic {

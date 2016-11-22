@@ -307,11 +307,11 @@ var AdvancedMode = React.createClass({
         clearInterval(iterations);
         clearInterval(soundInterval);
         setTimeout(function() {
-          gameScore = this.state.score;
+          // gameScore = this.state.score;
           // console.log(gameScore, 'game score')
           // console.log(reactionTimes, 'reaction times')
           // console.log(this.state)
-          var accuracy = matchHit / matchCount;
+          // var accuracy = matchHit / matchCount;
           // console.log(accuracy, 'accuracy')
 
           endGameFunction(this.state.fullScore, this.state.reactionTimes, this.state.gameId, this.state.userId, function(success) {
