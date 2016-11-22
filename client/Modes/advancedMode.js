@@ -43,6 +43,7 @@ var AdvancedMode = React.createClass({
       soundStyle: pushStyle,
       posStyle: pushStyle,
       mode: 'advanced',
+      penalty: 0,
       tempUser: true,
       gameId: null,
       fullScore: 0,

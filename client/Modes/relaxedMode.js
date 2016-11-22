@@ -61,8 +61,8 @@ var RelaxedMode = React.createClass({
         tempUser: obj.tempUser,
         gameId: obj.gameId,
         modeMultiplier: obj.modeMultiplier,
-        penalty: obj.penalty * obj.modeMultiplier,
-        positivePoints: obj.positivePoints * obj.modeMultiplier
+        penalty: obj.penalty,
+        positivePoints: obj.positivePoints
       })
     }.bind(this));
   },

@@ -50,7 +50,8 @@ var SilentMode = React.createClass({
       posStyle: pushStyle,
       tempUser: true,
       gameId: null,
-      mode: this.props.location.pathname.split('/')[2],
+      mode: 'silent', //this.props.location.pathname.split('/')[2]
+      penalty: 0,
       alertType: ' ',
       reactionTimes: [],
       reactionStart: null,
@@ -70,8 +71,8 @@ var SilentMode = React.createClass({
         tempUser: obj.tempUser,
         gameId: obj.gameId,
         modeMultiplier: obj.modeMultiplier,
-        penalty: obj.penalty * obj.modeMultiplier,
-        positivePoints: obj.positivePoints * obj.modeMultiplier
+        penalty: obj.penalty,
+        positivePoints: obj.positivePoints
       })
     }.bind(this));
   },
@@ -102,6 +103,7 @@ var SilentMode = React.createClass({
         fullScore: this.state.fullScore + parseFloat(this.state.currentScore),
         matchCount: this.state.matchCount + 1,
         matchHit: this.state.matchHit + 1,
+        score: parseInt(this.state.fullScore),
         currentScore: "+" + parseInt(this.state.currentScore),
         scoreUpdate: 'scoreUpdate scoreUpdatePos'
       }, function() {
@@ -119,9 +121,9 @@ var SilentMode = React.createClass({
     }
     var updateScore = 0;
     if ((this.state.fullScore - number * this.state.penalty) >= 0) {
-      updateScore = -this.state.penalty
+      updateScore = -this.state.penalty;
     } else {
-      updateScore = -this.state.fullScore
+      updateScore = -this.state.fullScore;
     }
     this.setState({
       //reactionTimes: this.state.reactionTimes.concat([this.state.reactionEnd - this.state.reactionStart]),
@@ -129,7 +131,7 @@ var SilentMode = React.createClass({
       matchCount: this.state.matchCount + 1,
       fullScore: this.state.fullScore + updateScore,
       currentScore: parseInt(updateScore),
-      scoreUpdate: 'scoreUpdate scoreUpdateNeg'
+      scoreUpdate: 'scoreUpdate scoreUpdateNeg',
     }, function() {
       $('.gameScore').append('<h2 class="' + this.state.scoreUpdate + '">' + this.state.currentScore + '</h2>')
       setTimeout(function() {
