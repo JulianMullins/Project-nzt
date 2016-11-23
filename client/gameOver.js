@@ -108,7 +108,7 @@ var GameOverOverlay = React.createClass({
       })
     } else {
       this.setState({
-        gameOverInform: <h2 className="classic">You need {this.state.scoreToPass * this.state.nLevel * this.state.modeMultiplier} points
+        gameOverInform: <h2 className="classic">You need {this.state.scoreToPass} points
         to unlock level {this.state.nLevel + 1}</h2>,
         gameOverCongrats: <h1>Nice try!</h1>
       })
@@ -244,7 +244,7 @@ var GameOverOverlay = React.createClass({
                 <td>total score:
                 </td>
                 <td className="count scoreValue">{!this.state.fullscore
-                    ? 0
+                    ? this.state.baseScore * this.state.nLevel * this.state.modeMultiplier
                     : this.countUp(this.state.fullScore)}</td>
               </tr>
             </tbody>
