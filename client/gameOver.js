@@ -19,6 +19,10 @@ var getGame = function() {
   return axios.get('/api/getGame');
 }
 
+var getMaxN = function() {
+  return axios.get('/api/getMaxN');
+}
+
 
 
 var GameOverOverlay = React.createClass({
@@ -33,6 +37,7 @@ var GameOverOverlay = React.createClass({
       fullScore: 0,
       mode: null,
       nLevel: 1,
+      maxN: null,
       gameOverMessage: <div></div>,
       gameOverInform: <h2></h2>,
       gameOverCongrats: <h1></h1>,
@@ -74,14 +79,16 @@ var GameOverOverlay = React.createClass({
     }.bind(this))
   },
   getData() {
-    axios.all([getUser(), getGame()]).then(axios.spread(function(userData, gameData) {
-      //console.log("gameData: ", gameData);
-      //console.log("userData: ", userData);
+    axios.all([getUser(), getGame(), getMaxN()]).then(axios.spread(function(userData, gameData, maxN) {
+      console.log("gameData: ", gameData);
+      console.log("userData: ", userData);
+      console.log('maxN: ', maxN);
       this.setState({
         //username:userData.data.username,
         isAnon: userData.data.isAnon,
         mode: gameData.data.game.mode,
         nLevel: gameData.data.game.nLevel,
+        maxN: maxN.data.maxN,
         scoreToPass: gameData.data.scoreToPass,
         passedLevel: gameData.data.passedLevel,
         isHighScore: gameData.data.game.isHighScore,
@@ -176,20 +183,33 @@ var GameOverOverlay = React.createClass({
     }
   },
   nextLevelLink(e) {
+
     //go to next level (if earned)
+    //if this.state.maxN."mode" > this.state.nLevel
     if(this.state.mode=='relaxed'){
-      this.context.router.push('/game/silent/' + (this.state.nLevel))
+      if(this.state.maxN.silent >= this.state.nLevel) {
+        this.context.router.push('/game/silent/' + (this.state.nLevel));
+      } else {
+        this.context.router.push('/game/silent/' + (this.state.maxN.silent))
+      }
     }
     else if(this.state.mode=='silent'){
-      this.context.router.push('/game/classic/' + (this.state.nLevel))
+      if(this.state.maxN.classic >= this.state.nLevel) {
+        this.context.router.push('/game/classic/' + (this.state.nLevel))
+      } else {
+        this.context.router.push('/game/classic/' + (this.state.maxN.classic))
+      }
     }
     else if(this.state.mode=='classic'){
-      this.context.router.push('/game/relaxed/'+(this.state.nLevel+1))
+      if(this.state.maxN.relaxed > this.state.nLevel) {
+        this.context.router.push('/game/relaxed/'+(this.state.nLevel+1))
+      } else {
+        this.context.router.push('/game/classic/' + (this.state.maxN.relaxed))
+      }
     }
     else{
       this.context.router.push('/game/advanced/'+ (this.state.nLevel+1))
     }
-
   },
   repeatLevel(e) {
     //go to next level (if earned)
