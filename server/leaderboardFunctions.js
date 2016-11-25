@@ -100,6 +100,8 @@ router.get('/myHighScores', function(req, res, next) {
         Leaderboard.findById(user.stats.leaderboard)
           .populate('scores')
           .exec(function(err, leaderboard) {
+                      console.log("leaderboard: ", leaderboard);
+                      console.log("leaderboard.scores: ", leaderboard.scores);
             if (err) {
               res.json({
                 success: false
