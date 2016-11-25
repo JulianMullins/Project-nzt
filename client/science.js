@@ -19,7 +19,7 @@ var Science = React.createClass({
 						track of both changing positions and sounds at different levels of pattern history.
 						In cognitive studies, these tests have been shown to improve working memory
 						and fluid intelligence (i.e. reasoning and problem-solving skills). In other
-						words, <b>playing these games can improve one&#39;s IQ!</b> In <a target="_blank" href="http://www.pnas.org/content/105/19/6829.full">a study</a> presented in the
+						words, <b>playing these games can improve one&#39;s IQ</b> In <a target="_blank" href="http://www.pnas.org/content/105/19/6829.full">a study</a> presented in the
 						Proceedings of the National Academy of Sciences of the United States of
 						America, fluid intelligence increased significantly after just 19 days of
 						n-back training, regardless of one&#39;s prior level of intelligence.

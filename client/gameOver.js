@@ -80,9 +80,9 @@ var GameOverOverlay = React.createClass({
   },
   getData() {
     axios.all([getUser(), getGame(), getMaxN()]).then(axios.spread(function(userData, gameData, maxN) {
-      console.log("gameData: ", gameData);
-      console.log("userData: ", userData);
-      console.log('maxN: ', maxN);
+      // console.log("gameData: ", gameData);
+      // console.log("userData: ", userData);
+      // console.log('maxN: ', maxN);
       this.setState({
         //username:userData.data.username,
         isAnon: userData.data.isAnon,
