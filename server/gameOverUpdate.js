@@ -210,7 +210,7 @@ var checkLeaderboards = function(req,res,user,tempGame,newHighScore){
     //update personal and overall leaderboards
   
   checkOverall(newHighScore, function(isOverallHighScore) {
-
+      console.log("checking overall")
     
       checkMine(newHighScore,user.stats,function(isMyHighScore){
         isMyHighScore = isMyHighScore;
@@ -329,6 +329,7 @@ router.post('/gameOver', function(req, res, next) {
                     res.json({success:false})
                   }
                   else if(score.score>0){
+                    console.log("checking leaderboards")
                     checkLeaderboards(req,res,user,tempGame,newHighScore);
                   }
                   else{

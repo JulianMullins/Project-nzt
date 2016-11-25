@@ -91,7 +91,10 @@ passport.deserializeUser(function(id, done) {
 
 
 
-
+// var newOL = new OverallLeaderboard();
+// newOL.save(function(err,ol){
+//   console.log(ol._id)
+// });
 
 
 // HighScore.find().exec(function(err,highScores){

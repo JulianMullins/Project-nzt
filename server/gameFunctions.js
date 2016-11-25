@@ -95,9 +95,9 @@ router.post('/startGame/:mode/:nLevel',function(req,res,next){
     //console.log("leaderboard created");
     var userStats = new Stats({statsUser:tempUser._id,leaderboard:leaderboard._id});
     //console.log("stats created")
-    userStats.save(function(err,stats){console.log("stats saved",err)});
+    userStats.save(function(err,stats){console.log("stats saved, err:",err)});
     leaderboard.leaderboardBelongsToStats = userStats._id;
-    leaderboard.save(function(err,leaderboard){console.log("leaderboard saved",err)});
+    leaderboard.save(function(err,leaderboard){console.log("leaderboard saved, err:",err)});
     tempUser.stats = userStats._id;
 
 

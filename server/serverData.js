@@ -5,7 +5,7 @@ var HighScore = require('../models/HighScore');
 //DATA KEPT IN A CENTRAL LOCATION FOR EASY ADJUSTMENT
 
 //modes: classic,relaxed,silent,advanced
-var serverLeaderboard = '5799071df2049724272d4876';
+var serverLeaderboard = '5838c1694718942811453b7a';
 
 var scoresToPass = {
   relaxed: {
