@@ -84,7 +84,7 @@ var LoginOverlay = React.createClass({
               <div className="buttongroup">
 
                 <a className="form-btn dx" onClick={this.login} type="button">Login</a>
-                <a className="fb" href={this.state.fbURL}>Login with Facebook</a>
+                {/*<a className="fb" href={this.state.fbURL}>Login with Facebook</a>*/}
               </div>
 
             </form>
