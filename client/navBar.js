@@ -114,10 +114,10 @@ var NavBar = React.createClass({
 						<li><Link to="/contact" onClick={this.close}>Contact</Link></li>
 					</ul>
 					<ul>
-						{/*this.state.isFBuser
+						{this.state.isFBuser
 							? ''
 							: <li className="fbConnect"><a href='/api/login/facebook'><i className="fa fa-facebook"  aria-hidden="true"></i><span> CONNECT</span></a></li>
-						*/}
+						}
 					</ul>
 					<div className='bt-overlay' onClick={this.click}/>
 				</nav>
