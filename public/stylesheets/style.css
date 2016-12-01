@@ -1,35 +1,46 @@
 div {
   display: block;
 }
+
 b {
   font-weight: 400;
 }
 
+
 /*Our Colors*/
+
 .relaxed {
   color: #7CD9D2;
 }
+
 .silent {
   color: #01B6A7;
 }
+
 .classic {
   color: #F13542;
 }
+
 .advanced {
   color: #F1BA03;
 }
+
 .relaxedBackground {
   background-color: #7CD9D2;
 }
+
 .silentBackground {
   background-color: #01B6A7;
 }
+
 .classicBackground {
   background-color: #F13542;
 }
+
 .advancedBackground {
   background-color: #F1BA03;
 }
+
 body {
   /*max-width: 790px;*/
   font-family: 'Proxima-Nova', sans-serif;
@@ -43,6 +54,7 @@ body {
   -o-background-size: cover;
   background-size: cover;
 }
+
 #root {
   display: flex;
   height: 100vh;
@@ -50,36 +62,44 @@ body {
   justify-content: center;
   align-items: center;
 }
+
 h1 {
   font-size: 12vw;
   font-weight: 700;
 }
+
 h2 {
   font-size: calc(16px + 1.5vw);
   font-weight: 500;
 }
+
 h3 {
   font-size: 1.3rem;
   font-weight: 100;
   margin-bottom: 5px;
 }
+
 #title {
   /* padding: 2rem 0;*/
 }
-.heading> img {
+
+.heading>img {
   width: 35vw;
   min-width: 600px;
 }
+
 .btn {
   text-decoration: none;
   font-size: 5rem;
   color: white;
   margin: 3rem auto;
 }
+
 .btn:hover {
   text-decoration: none;
   color: #EEEEEE;
 }
+
 .heading {
   display: flex;
   height: 30vh;
@@ -89,6 +109,7 @@ h3 {
   color: #01B6A7;
   flex-direction: column;
 }
+
 .userHeading {
   height: 5vh;
   width: 100vw;
@@ -96,19 +117,32 @@ h3 {
   align-items: flex-end;
   justify-content: flex-end;
 }
+
 .userWelcome {
   margin-right: 15px;
   margin-bottom: 0px;
   font-weight: 500;
   font-size: 24px;
 }
+
+.homeContainer {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 0px;
+}
+
 .menu {
   display: flex;
   justify-content: center;
   height: 70vh;
   width: 100vw;
 }
+
 .menu-panel {
+  position: relative;
   width: 25%;
   height: 100%;
   color: white;
@@ -120,39 +154,49 @@ h3 {
   transition-duration: .8s;
   cursor: pointer;
 }
+
 .menu-panel:nth-child(1n+1) {
   z-index: 2;
 }
+
 .menu-panel:hover {
   transition-duration: .8s;
   width: 40vw;
 }
-.menu-panel> h3 {
+
+.menu-panel>h3 {
   font-weight: 100;
   color: rgba(255, 255, 255, .8);
   text-align: center;
 }
+
 .startHerePanel {
   position: absolute;
-  top: 30vh;
+  top: 0;
   left: 0;
-  height: 5vh;
-  width: 100vw;
-  background-color: rgba(0,0,0,0.4);
+  height: 10%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  background-color: rgba(0, 0, 0, 0.4);
   border: none;
 }
+
 .startHereText {
-    position: absolute;
-    display: flex;
-    text-align: center;
-    top: 31%;
-    left: 6%;
-    color: rgba(255,255,255,.95);
-    font-size: 18px;
+  width: 80%;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  color: rgba(255, 255, 255, .95);
+  font-size: calc(16px + .5vw);
 }
+
 .startHereText p {
-    margin-right: 5px;
+  margin-right: 5px;
 }
+
 .whiteLogo {
   width: 15vw;
   max-width: 150px;
@@ -162,6 +206,7 @@ h3 {
   cursor: pointer;
   transition-duration: 1s;
 }
+
 .whiteLogo:hover {
   transition-duration: 1s;
   width: 17vw;
@@ -172,17 +217,16 @@ h3 {
     display: none;
   }
 }
+
 @media all and (max-width: 768px) {
   .heading {
     padding-top: 75px;
   }
-
   .userWelcome {
     font-size: 20px;
     font-weight: 400;
   }
-
-  .heading> img {
+  .heading>img {
     width: 70vw;
     min-width: 0;
   }
@@ -201,36 +245,20 @@ h3 {
     width: calc(50vw - 4px);
     transition-duration: 0s;
   }
-  .menu-panel> h2 {
+  .menu-panel>h2 {
     font-size: 2em;
   }
-  .menu-panel> h3 {
+  .menu-panel>h3 {
     font-size: 1.2em;
   }
 }
 
-@media all and (max-height: 768px) {
+@media all and (max-width: 767px) {
   .whiteLogo {
     display: none;
   }
-}
-
-@media all and (max-width: 767px) {
   .startHereText {
     font-size: 16px;
-  }
-  .startHerePanel {
-    height: 5vh;
-    width: 49vw;
-    background-color: rgba(0,0,0,0.4);
-    border: none;
-    left: 0.5%;
-  }
-  .startHereText {
-    display: flex;
-    top: 32%;
-    left: 7.5%;
-    transform: none;
   }
 }
 
@@ -239,6 +267,7 @@ h3 {
     overflow: hidden;
   }
 }
+
 .landscapeOverlay {
   position: absolute;
   top: 0;

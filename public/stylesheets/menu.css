@@ -6,9 +6,11 @@
   box-sizing: border-box;
   margin: 0;
 }
+
 .container {
   padding: 80px;
 }
+
 .bt-menu {
   position: fixed;
   top: 0;
@@ -24,6 +26,7 @@
   transition: border-width 0.3s, background-color 0.3s, height 0s 0.3s;
   z-index: 100;
 }
+
 .bt-menu.bt-menu-open {
   height: 100%;
   border-width: 0px 0px 50px 160px;
@@ -31,13 +34,16 @@
   -webkit-transition: border-width 0.3s, background-color 0.3s;
   transition: border-width 0.3s, background-color 0.3s;
 }
+
 .bt-overlay {
   position: absolute;
   width: 100%;
 }
+
 .bt-menu-open .bt-overlay {
   height: 100%;
 }
+
 .bt-menu-trigger {
   position: fixed;
   top: 10px;
@@ -47,6 +53,7 @@
   height: 50px;
   cursor: pointer;
 }
+
 .bt-menu-trigger span {
   position: absolute;
   top: 50%;
@@ -65,9 +72,11 @@
   -webkit-transition: background-color 0.3s;
   transition: background-color 0.3s;
 }
+
 .bt-menu-open .bt-menu-trigger span {
   background-color: transparent;
 }
+
 .bt-menu-trigger span:before, .bt-menu-trigger span:after {
   position: absolute;
   left: 0;
@@ -78,55 +87,67 @@
   -webkit-transition: -webkit-transform 0.3s;
   transition: transform 0.3s;
 }
+
 .bt-menu-trigger span:before {
   -webkit-transform: translateY(-250%);
   transform: translateY(-250%);
 }
+
 .bt-menu-trigger span:after {
   -webkit-transform: translateY(250%);
   transform: translateY(250%);
 }
+
 .bt-menu-open .bt-menu-trigger span:before {
   -webkit-transform: translateY(0) rotate(45deg);
   transform: translateY(0) rotate(45deg);
 }
+
 .bt-menu-open .bt-menu-trigger span:after {
   -webkit-transform: translateY(0) rotate(-45deg);
   transform: translateY(0) rotate(-45deg);
 }
+
 .bt-menu ul {
   position: fixed;
   margin: 0;
   padding: 0;
   list-style: none;
 }
+
 .bt-menu ul:first-of-type {
   top: 75px;
   left: 0;
 }
+
 .bt-menu ul:nth-of-type(2) {
   left: 0;
   bottom: 0;
 }
+
 .bt-menu ul li, .bt-menu ul li a {
   display: block;
 }
+
 .bt-menu ul:nth-of-type(2) li {
   float: left;
   font-size: 0px;
 }
+
 .bt-menu ul li {
   visibility: hidden;
   opacity: 0;
   -webkit-transition: -webkit-transform 0.3s, opacity 0.2s, visibility 0s 0.3s;
   transition: transform 0.3s, opacity 0.2s, visibility 0s 0.3s;
 }
+
 .bt-menu.bt-menu-open ul:first-of-type li, .bt-menu.bt-menu-open ul:nth-of-type(2) li {
   visibility: visible;
   opacity: 1;
   -webkit-transition: -webkit-transform 0.3s, opacity 0.3s 0.1s;
   transition: transform 0.3s, opacity 0.3s;
 }
+
 
 /* First menu */
 
@@ -137,10 +158,12 @@
   -webkit-transform: translate3d(-100%, 50%, 0);
   transform: translate3d(-100%, 50%, 0);
 }
+
 .bt-menu.bt-menu-open ul:first-of-type li {
   -webkit-transform: translate3d(0, 0, 0);
   transform: translate3d(0, 0, 0);
 }
+
 
 /* Second menu */
 
@@ -151,31 +174,38 @@
   -webkit-transform: scale(0);
   transform: scale(0);
 }
+
 .bt-menu.bt-menu-open ul:nth-of-type(2) li:first-child {
   -webkit-transition-delay: 0.1s;
   transition-delay: 0.1s;
 }
+
 .bt-menu.bt-menu-open ul:nth-of-type(2) li:nth-child(2) {
   -webkit-transition-delay: 0.2s;
   transition-delay: 0.2s;
 }
+
 .bt-menu.bt-menu-open ul:nth-of-type(2) li:nth-child(3) {
   -webkit-transition-delay: 0.3s;
   transition-delay: 0.3s;
 }
+
 .bt-menu.bt-menu-open ul:nth-of-type(2) li:nth-child(4) {
   -webkit-transition-delay: 0.4s;
   transition-delay: 0.4s;
 }
+
 .bt-menu.bt-menu-open ul:nth-of-type(2) li {
   -webkit-transform: scale(1);
   transform: scale(1);
 }
+
 .bt-menu ul li a {
   display: block;
   outline: none;
   text-decoration: none;
 }
+
 .bt-menu ul:first-of-type li a {
   padding: 0 20px;
   box-shadow: inset 0 1px rgba(0, 0, 0, 0.2);
@@ -186,9 +216,11 @@
   -webkit-transition: color 0.2s;
   transition: color 0.2s;
 }
+
 .bt-menu ul:first-of-type li:last-child a {
   box-shadow: inset 0 1px rgba(0, 0, 0, 0.2), inset 0 -1px rgba(0, 0, 0, 0.2);
 }
+
 .bt-menu ul:nth-of-type(2) li a {
   color: white;
   text-align: left;
@@ -196,12 +228,14 @@
   padding: 0 20px;
   font-size: 50px;
 }
+
 .bt-menu ul li a:before {
   color: #fff;
   font-size: 45px;
   -webkit-transition: color 0.2s;
   transition: color 0.2s;
 }
+
 .bt-menu ul:first-of-type li a:hover, .bt-menu ul:nth-of-type(2) li a:hover, .bt-menu ul:nth-of-type(2) li a:focus, .bt-menu ul:first-of-type li a:focus, .bt-menu ul li a:hover:before, .bt-menu ul li a:focus:before {
   color: #01B6A7;
   cursor: pointer;
@@ -219,7 +253,7 @@
 @media all and (max-width: 768px) {
   .bt-menu-trigger {
     width: 10vw;
-    height: 10vw;
+    height: 12vw;
   }
   .bt-menu ul:first-of-type {
     top: 75px;

@@ -57,11 +57,7 @@ var Mainmenu = React.createClass({
     if (nextProps.location.pathname === "/home") {
       axios.get('/api/homeUserInfo').then(function(response) {
         //console.log(response.data)
-        this.setState({
-          hasUsername: response.data.hasUsername, 
-          name: response.data.name, 
-          showTutorial: response.data.showTutorial
-        })
+        this.setState({hasUsername: response.data.hasUsername, name: response.data.name, showTutorial: response.data.showTutorial})
       }.bind(this)).then(function() {
         if (this.state.hasUsername) {
           this.setState({
@@ -91,7 +87,7 @@ var Mainmenu = React.createClass({
     //   ?   (<h3 className="advanced userWelcome">Welcome: {this.state.name}</h3>)
     //   : '';
     return (
-      <div>
+      <div className="homeContainer">
         {this.state.showTutorial
           ? <NewUserOverlay click={this.closeTutorial}/>
           : <div></div>}
@@ -103,14 +99,17 @@ var Mainmenu = React.createClass({
         </div>
         <div className="menu">
           <a className="menu-panel relaxedBackground" onClick={this.relaxed}>
-            
+
             {this.state.hasUsername
-            ? <div></div>
-            : (<div><div className="startHerePanel"></div>
-               <div className="startHereText">
-                 <p>New?</p>
-                 <p>(start here)</p>
-               </div></div>)}
+              ? <div></div>
+              : (
+                <div className="startHerePanel">
+                  <div className="startHereText">
+                    <p>New?</p>
+                    <p>(start here)</p>
+                  </div>
+                </div>
+              )}
 
             <h2>Relaxed</h2>
             <h3>position only</h3>
