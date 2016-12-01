@@ -97,7 +97,7 @@ var Leaderboard = React.createClass({
 
     return (
       <div className="leaderboardPage">
-        <div className="boardSide">
+        <div className="board">
           <h1 className="lbHeader">Leaderboards</h1>
           <section>
             <div className="leaderboardButtons">

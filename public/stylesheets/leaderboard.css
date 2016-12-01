@@ -4,16 +4,18 @@ table {
   width: 100%;
   table-layout: fixed;
 }
+
 .leaderboardPage {
   display: flex;
   flex-direction: row;
   height: 100vh;
   width: 100vw;
 }
-.boardSide {
+
+.board {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  justify-content: space-around;
   height: 100vh;
   width: 100vw;
   color: #01b6a7;
@@ -21,7 +23,7 @@ table {
   overflow-y: auto;
 }
 
-.boardSide .gameOverPrompt {
+.board .gameOverPrompt {
   font-size: 28px;
   text-align: center;
 }
@@ -31,24 +33,30 @@ table {
   font-size: 60px;
   text-align: center;
 }
+
 .reactable-filter-input {
   border-bottom: 1px solid #01b6a7;
   color: #01b6a7;
 }
+
 .reactable-filter-input::-webkit-input-placeholder {
   color: #01b6a7;
 }
+
 .reactable-filter-input:-moz-placeholder {
   color: #01b6a7;
   opacity: 1;
 }
+
 .reactable-filter-input::-moz-placeholder {
   color: #01b6a7;
   opacity: 1;
 }
+
 .reactable-filter-input:-ms-input-placeholder {
   color: #01b6a7;
 }
+
 th {
   padding: 20px 15px;
   text-align: left;
@@ -59,40 +67,49 @@ th {
   text-transform: uppercase;
   font-size: 1.2rem;
 }
+
 th:hover {
   cursor: pointer;
 }
+
 .reactable-data tr:hover {
   background-color: rgba(1, 182, 167, 0.1);
 }
+
 .reactable-header-sort-desc:after {
   content: '\25B2';
   padding-left: 5px;
 }
+
 .reactable-header-sort-asc:after {
   content: '\25BC';
   padding-left: 5px;
 }
+
 .reactable-data td {
   padding: 12px;
   text-align: left;
   vertical-align: middle;
   font-weight: 300;
   color: #01b6a7;
-  /*border-bottom: solid 1px #01b6a7;*/
+  overflow: hidden;
   font-size: 1rem;
   font-weight: 300;
 }
+
 section {
   margin: 30px;
 }
+
 .reactable-column-header {
   background-color: rgba(255, 255, 255, 0.2);
 }
+
 .reactable-pagination tr td {
   text-align: center;
   padding-top: 10px;
 }
+
 .reactable-page-button, .reactable-next-page, .reactable-previous-page {
   padding: 2px 6px;
   margin: 0 4px;
@@ -101,60 +118,90 @@ section {
   color: #01b6a7;
   width: 0;
 }
+
 .reactable-page-button:hover, .reactable-next-page:hover, .reactable-previous-page:hover {
   color: white;
   background-color: #01b6a7;
 }
+
 .reactable-page-button:target {
   background-color: #01b6a7;
   color: white;
 }
+
 .reactable-current-page {
   background-color: #01b6a7;
   color: white;
 }
+
 .leaderboardButtons {
   display: flex;
-  justify-content: center;
+  justify-content: space-around;
   margin-bottom: 10px;
 }
+
 .leaderboardButtons a {
   width: 120px;
   text-align: center;
   padding: 5px 0;
-  margin: 0 30px;
   border: 2px solid #01b6a7;
   font-size: 20px;
 }
+
 .leaderboardButtons a:hover {
   cursor: pointer;
   background-color: #01b6a7;
   color: white;
 }
+
 .leaderboardButtons a:active {
   background-color: #01b6a7;
   color: white;
 }
+
 .leaderboardButtons a:target {
   background-color: #01b6a7;
   color: white;
 }
+
 @media all and (max-width: 768px) {
-  .boardSide {
+  .board {
     padding-top: 50px;
   }
   .lbHeader {
     font-size: calc(10px + 12vw);
   }
-  .boardSide section {
-    margin: 10px 10px 0;
+  .board section {
+    margin: 10px 0 0;
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+  }
+  .leaderboardButtons a {
+    width: 30%;
   }
   .reactable-filter-input {
     margin-bottom: 10px;
   }
+  .reactable-filter-input::-webkit-input-placeholder {
+    font-size: calc(2px + 4vw);
+  }
+  .reactable-filter-input:-moz-placeholder {
+    font-size: calc(2px + 4vw);
+  }
+  .reactable-filter-input::-moz-placeholder {
+    font-size: calc(2px + 4vw);
+  }
+  .reactable-filter-input:-ms-input-placeholder {
+    font-size: calc(2px + 4vw);
+  }
+  table {
+    height: 70vh;
+  }
   th {
     text-align: center;
-    font-size: 1em;
+    font-size: calc(.5em + 1.7vw);
     padding: 5px 0;
   }
   .reactable-data tr td {
