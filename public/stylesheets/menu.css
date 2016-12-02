@@ -251,10 +251,10 @@
 }
 
 @media all and (max-width: 768px) {
-  .bt-menu-trigger {
+/*  .bt-menu-trigger {
     width: 10vw;
-    height: 12vw;
-  }
+    height: 10vw;
+  }*/
   .bt-menu ul:first-of-type {
     top: 75px;
     width: 160px;
