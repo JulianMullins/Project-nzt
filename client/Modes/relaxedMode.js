@@ -5,8 +5,9 @@ var axios = require('axios');
 axios.defaults.baseURL = process.env.url;
 import {Link} from 'react-router'
 
-var endGameFunction = require('./serverFunctions').endGameFunction;
-var startGameFunction = require('./serverFunctions').startGameFunction;
+// var endGameFunction = require('./serverFunctions').endGameFunction;
+// var startGameFunction = require('./serverFunctions').startGameFunction;
+var serverFunctions = require('./serverFunctions');
 
 var iterations;
 
@@ -52,7 +53,7 @@ var RelaxedMode = React.createClass({
   },
   componentDidMount: function() {
 
-    startGameFunction(this.state.mode, this.state.N, function(err, obj) {
+    serverFunctions.startGameFunction(this.state.mode, this.state.N, function(err, obj) {
       if (err) {
         this.context.router.push('/levels/' + this.state.mode + '/unauthorized');
         return;
@@ -215,7 +216,7 @@ var RelaxedMode = React.createClass({
         var accuracy = this.state.matchHit / this.state.matchCount;
         //console.log(accuracy, 'accuracy')
 
-        endGameFunction(this.state.fullScore, this.state.reactionTimes, this.state.gameId, accuracy, function(data) {
+        serverFunctions.endGameFunction(this.state.fullScore, this.state.reactionTimes, this.state.gameId, accuracy, function(data) {
           if (data.success) {
             this.context.router.push('/gameOver')
           } else {

@@ -18,7 +18,7 @@ var tempGame = null;
 //reset session on app load if !fullUser
 router.get('/getUserOnLoad',function(req,res,next){
   if(req.session.user && req.session.user.temp){
-    //console.log(req.session.user.temp)
+    console.log(req.session.user.temp)
     req.session.destroy();
   }
   else if(req.session.user && !req.session.user.temp){
@@ -100,7 +100,7 @@ router.post('/stopShowOverlay',function(req,res,next){
     //(sort of in client/index.js, but commented out)
 router.get('/isUser',function(req,res,next){
   if(req.session.user){
-    //console.log("is user: ", !req.session.user.temp)
+    console.log("is user: ", !req.session.user.temp)
     res.json({
       isloggedin:true, 
       isUser:!req.session.user.temp, 

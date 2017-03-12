@@ -22,8 +22,8 @@ var tempGame = null;
 
 //post start game
 router.post('/startGame/:mode/:nLevel',function(req,res,next){
-  //console.log("trying to post game");
-  //console.log(req.session.user);
+  console.log("trying to post game");
+  console.log(req.session.user);
   //if user, create game, save game, add to user.currentGame
   if(req.session.user){
     User.findById(req.session.user._id).exec(function(err,user){
@@ -53,7 +53,7 @@ router.post('/startGame/:mode/:nLevel',function(req,res,next){
                 res.json({success:false});
               }
               else{
-                //console.log(req.session.user, user, "game posted")
+                console.log(req.session.user, user, "game posted")
                 res.json({
                   authorized:true,
                   gameId: game._id,
@@ -92,22 +92,22 @@ router.post('/startGame/:mode/:nLevel',function(req,res,next){
     })
 
     var leaderboard = new Leaderboard({user:tempUser.username});
-    //console.log("leaderboard created");
+    console.log("leaderboard created");
     var userStats = new Stats({statsUser:tempUser._id,leaderboard:leaderboard._id});
-    //console.log("stats created")
+    console.log("stats created")
     userStats.save(function(err,stats){console.log("stats saved, err:",err)});
     leaderboard.leaderboardBelongsToStats = userStats._id;
     leaderboard.save(function(err,leaderboard){console.log("leaderboard saved, err:",err)});
     tempUser.stats = userStats._id;
 
 
-    //console.log("saving tempUser")
+    console.log("saving tempUser")
     tempUser.save(function(err,user){
       if(err){
         console.log(err);
         return;
       }
-      //console.log(user)
+      console.log(user)
 
       req.session.user = user;
       req.session.user.save();
@@ -115,7 +115,7 @@ router.post('/startGame/:mode/:nLevel',function(req,res,next){
 
 
       //create game
-      //console.log("creating game for " + user);
+      console.log("creating game for " + user);
       var tempGame = new Game({
         gameUser:user._id,
         mode:req.params.mode,
@@ -123,7 +123,7 @@ router.post('/startGame/:mode/:nLevel',function(req,res,next){
         nLevel:req.params.nLevel,
         tempUser:user.temp
       })
-      //console.log("tempGame saved");
+      console.log("tempGame saved");
       tempGame.save(function(err,game){
         if(err){
           console.log(err);
@@ -131,7 +131,7 @@ router.post('/startGame/:mode/:nLevel',function(req,res,next){
         else{
           user.currentGame.unshift(game._id);
           user.save(function(err,user){
-            //console.log(user, "game posted")
+            console.log(user, "game posted")
             res.json({
               authorized:true,
               gameId: game._id,

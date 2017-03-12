@@ -1,4 +1,5 @@
 var mongoose = require('mongoose');
+var User = require('./User')
 var autoref = require('mongoose-autorefs');
 
 
@@ -28,6 +29,17 @@ statsSchema.methods.combineStats=function(stats2){
 	this.progress = this.progress.concat(stats2.progress);
 	this.save();
 	console.log("stats combined");
+	User.findById(statsUser).exec(function(err,user){
+		stats.progress.forEach(function(score){
+			if(user.facebookId){
+				score.FBname = user.name;
+			}
+			score.userName = user.username;
+			score.tempUser = user.temp;
+			score.save();
+		})
+	})
+	
 		
 }
 

@@ -12,6 +12,7 @@ var MongoStore = require('connect-mongo')(session);
 var mongoose = require('mongoose');
 var bcrypt = require('bcryptjs');
 
+
 var routes = require('./server/index');
 var auth = require('./server/auth');
 var clientExpressFunctions = require('./server/clientExpressFunctions');
@@ -20,6 +21,7 @@ var serverData = require('./server/serverData');
 var gameOverUpdate = require('./server/gameOverUpdate');
 var gameFunctions = require('./server/gameFunctions');
 var statsFunctions = require('./server/statsFunctions');
+
 
 
 
@@ -132,13 +134,62 @@ passport.deserializeUser(function(id, done) {
 //   console.log(scores)
 // })
 
-// OverallLeaderboard.findOne().populate('scores').exec(function(err,leaderboard){
-//   leaderboard.scores.forEach(function(score){
-//     if(!score.userName){
-//       console.log(score)
-//     }
-//   })
-// })
+OverallLeaderboard.findOne().populate('scores')
+  .exec(function(err,leaderboard){
+  // leaderboard.scores.forEach(function(score){
+  //   if(score.userName == 'Anonymous'){
+  //     HighScore.findById(score._id).exec(function(err,highScore){
+  //       console.log(highScore)
+  //       if(highScore.userName!='Anonymous'){
+  //         console.log(score,highScore)
+  //       }
+  //     })
+  //   }
+  // })
+  // HighScore.find().exec(function(err,highscores){
+  //   highscores.forEach(function(highScore){
+  //     var found = false;
+  //     for(var i=0;i<leaderboard.scores.length;i++){
+  //       if(highScore._id.equals(leaderboard.scores[i]._id)){
+  //         console.log("FOUND ONE")
+  //         found=true;
+  //       }
+  //     }
+      
+  //     if(!found){
+  //       console.log(highScore)
+  //       leaderboard.scores.push(highScore)
+  //     }
+
+  //   })
+
+  // }).then(
+  // HighScore.find().exec(function(err,highscores){
+  //   highscores.forEach(function(highScore){
+  //     var found = false;
+  //     for(var i=0;i<leaderboard.scores.length;i++){
+  //       if(highScore._id.equals(leaderboard.scores[i]._id)){
+  //         console.log("FOUND ONE")
+  //         found=true;
+  //       }
+  //     }
+      
+  //     if(!found){
+  //       console.log(highScore)
+  //       leaderboard.scores.push(highScore)
+  //     }
+
+  //   })
+    
+  // })
+  // ).then(function(){
+  // console.log("ABOUT TO SAVE");
+  // leaderboard.save(function(err,ol){
+  //   console.log("err: "+err, "ol: "+err)
+  // })
+  // })
+  //console.log("done")
+})
 
 // User.find({username:'Anonymous'}).exec(function(err,users){
 //   users.forEach(function(user){
@@ -153,8 +204,13 @@ passport.deserializeUser(function(id, done) {
 // HighScore.find().exec(function(err,scores){
 //   scores.forEach(function(score){   
 //     console.log("checking score")
-//     if(score.score<=0){
-//       score.remove(function(err){console.log("gone")})
+//     // if(score.score<=0){
+//     //   score.remove(function(err){console.log("gone")})
+//     // }
+//     if(score.userName != 'Anonymous' && score.tempUser){
+//       console.log(score.userName, score.tempUser)
+//       score.tempUser = false;
+//       score.save();
 //     }
 //   })
 // })
@@ -194,6 +250,37 @@ passport.deserializeUser(function(id, done) {
 //     console.log("all done")
 //   })
   
+// })
+
+// HighScore.find().exec(function(err,scores){
+//   scores.forEach(function(score){
+//     if (score.tempUser && score.userName!='Anonymous'){
+//       //console.log(score);
+
+//       User.findOne({username: score.userName}).exec(function(err,user){
+//         if(err){
+//           console.log(err,user)
+//         }
+//         //console.log(user)
+//         if(!user){
+//           console.log("no user")
+//           HighScore.remove({_id:score._id},function(err){
+//             console.log("done")
+//           })
+//           //console.log(score)
+//         }
+//         else if(user.facebookId){
+//           score.FBname = user.name;
+//           score.tempUser = false;
+//           score.save(function(err,score){
+//            console.log("has FB: " +score)
+//           })
+//         }
+//       })
+
+//     }
+//   })
+//   console.log("ALL DONE")
 // })
 
 
@@ -449,7 +536,7 @@ passport.use(new FacebookStrategy({
 
       //create new user
         } else if (!user) {
-
+          console.log("no preexisting user")
           var email = profile._json.email;
           var name = profile._json.first_name + ' ' + profile._json.last_name;
           var username = profile._json.first_name[0] + profile._json.last_name;
@@ -460,10 +547,18 @@ passport.use(new FacebookStrategy({
               $regex: username
             }
           }, function(err, users) {
+            if(err){
+              console.log(err);
+              return done(err)
+            }
             if (users) {
               username += (users.length + 1)
             }
           }).exec(function(err, users) {
+            if(err){
+              console.log(err);
+              return done(err)
+            }
             if (req.session.user && !req.session.fullUser) {
               var newUser = new User({
                 name: name,

@@ -170,6 +170,12 @@ router.get('/friendScores', function(req, res, next) {
                   .exec(function(err, mfl) {
                     mfl.scores.sort(sortScores);
                     processScores(mfl.scores, res)
+                    
+                    // mfl.scores.filter(function(score){
+                    //   return score.tempUser
+                    // })
+
+
                   })
               }
             })

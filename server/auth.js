@@ -5,7 +5,9 @@ var axios = require('axios');
 
 var User = require('../models/User');
 var Stats = require('../models/Stats');
-var Leaderboard = require('../models/Leaderboard')
+var Leaderboard = require('../models/Leaderboard');
+var OL = require('../models/OverallLeaderboard');
+var OLID = require('./serverData').serverLeaderboard;
 
 
 var validateReq = function(userData) {
@@ -39,6 +41,7 @@ var validateReq = function(userData) {
 
 var saveUserRemoveAnonymous = function(req,res,user){
   user.validateSync();
+  console.log(req.session)
   if(req.session.user){
     User.remove({_id:req.session.user._id},function(err,reqUser){
       if(!err){
@@ -66,7 +69,15 @@ var saveUserRemoveAnonymous = function(req,res,user){
     });
   }
 
- }
+}
+
+// var updateOverall = function(req,res,userScores){
+//   OverallLeaderboard.findOne().exec(function(err,leaderboard){
+//     leaderboard.scores.forEach(function(score){
+
+//     })
+//   })
+// }
 
 
 
