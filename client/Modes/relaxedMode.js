@@ -151,10 +151,12 @@ var RelaxedMode = React.createClass({
       this.setState({pressed: false, keepScore: false, posMatch: false, alreadyPressed: false, posStyle: noStyle});
 
       setTimeout(function() {
-        this.setState({
-          scoreUpdate: '', 
-          positionButton: '', 
-          currentScore: null})
+        if(this.isMounted()){
+          this.setState({
+            scoreUpdate: '', 
+            positionButton: '', 
+            currentScore: null})
+        }
       }.bind(this), 800);
       
       //start reaction time counter with flash

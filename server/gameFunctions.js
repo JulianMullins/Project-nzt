@@ -171,6 +171,7 @@ router.post('/gameEnd',function(req,res,next){
       console.log("no game")
     }
     else{
+      console.log(req.body)
       game.baseScore = req.body.score;
       game.fullScore = req.body.score*modeMultiplier[game.mode]*game.nLevel;
       game.passedLevel = false;
@@ -185,14 +186,15 @@ router.post('/gameEnd',function(req,res,next){
       }
 
       game.reactionTimes=req.body.reactionTimes;
-      game.accuracy = req.body.accuracy;
+      game.accuracy=req.body.accuracy;
+      console.log("Game in gameEnd call: "+game)
       //console.log(game.passedLevel)
       game.save(function(err,game){
         if(err){
           res.json({success:false})
         }
         else{
-          //console.log("game ended successfully",game)
+          console.log("game ended successfully",game)
           res.json({
             success:true,
             score:game.baseScore,

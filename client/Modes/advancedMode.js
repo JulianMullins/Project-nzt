@@ -315,7 +315,8 @@ var AdvancedMode = React.createClass({
           // var accuracy = matchHit / matchCount;
           // console.log(accuracy, 'accuracy')
 
-          endGameFunction(this.state.fullScore, this.state.reactionTimes, this.state.gameId, this.state.userId, function(success) {
+          var accuracy = this.state.matchHit / this.state.matchCount;
+          endGameFunction(this.state.fullScore, this.state.reactionTimes, this.state.gameId, accuracy, function(success) {
             if (success) {
               this.context.router.push('/gameOver')
             }

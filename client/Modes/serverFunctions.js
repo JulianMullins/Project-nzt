@@ -27,13 +27,14 @@ var startGameFunction = function(mode, N, callback) {
 }
 
 var endGameFunction = function(fullScore, reactionTimes, gameId, accuracy, callback) {
-  axios.post('/api/gameEnd', {
+    axios.post('/api/gameEnd', {
     gameId: gameId,
     score: fullScore,
     reactionTimes: reactionTimes,
     accuracy: accuracy
   }).then(function(response) {
     if (response.data.success) {
+      console.log(response.data);
       axios.post('/api/gameOver', {
         passedLevel: response.data.passedLevel,
         gameId: response.data.gameId,

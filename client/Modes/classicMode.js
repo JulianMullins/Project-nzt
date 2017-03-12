@@ -295,12 +295,15 @@ var ClassicMode = React.createClass({
         pMatch = false;
       }.bind(this), 800);
 
-      if (timeKeeper === 0) {
-        clearInterval(iterations);
-        clearInterval(soundInterval);
-        setTimeout(function() {
 
-          //////////////////////////////////////
+
+///////////////////////////////////////////////////////
+
+        if (timeKeeper === 0) {
+          clearInterval(iterations);
+          clearInterval(soundInterval);
+          setTimeout(function() {
+
 
           var accuracy = this.state.matchHit / this.state.matchCount;
           endGameFunction(this.state.fullScore, this.state.reactionTimes, this.state.gameId, accuracy, function(success) {
@@ -309,7 +312,7 @@ var ClassicMode = React.createClass({
             }
           }.bind(this))
 
-          //////////////////////////////////////
+///////////////////////////////////////////////////////
 
         }.bind(this), 2000)
       }

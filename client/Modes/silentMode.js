@@ -4,8 +4,9 @@ var StartOverlay = require('./gameStartOverlay');
 var axios = require('axios');
 import {Link} from 'react-router'
 
-var endGameFunction = require('./serverFunctions').endGameFunction;
-var startGameFunction = require('./serverFunctions').startGameFunction;
+// var endGameFunction = require('./serverFunctions').endGameFunction;
+// var startGameFunction = require('./serverFunctions').startGameFunction;
+var serverFunctions = require('./serverFunctions');
 
 //COLLECTION OF GLOBAL VARIABLES TO MAKE EVERYONES LIFE EASIER
 //create global variable for reaction counter
@@ -63,7 +64,7 @@ var SilentMode = React.createClass({
     }
   },
   componentDidMount: function() {
-    startGameFunction(this.state.mode, this.state.N, function(err, obj) {
+    serverFunctions.startGameFunction(this.state.mode, this.state.N, function(err, obj) {
       if (err) {
         this.context.router.push('/levels/' + this.state.mode+'/unauthorized');
       }
@@ -74,6 +75,7 @@ var SilentMode = React.createClass({
         penalty: obj.penalty,
         positivePoints: obj.positivePoints
       })
+      console.log(this.positivePoints);
     }.bind(this));
   },
   componentWillUnmount: function() {
@@ -274,15 +276,16 @@ var SilentMode = React.createClass({
       }.bind(this), 800);
 
       ////////RUTH THIS IS WHERE THE GAME ENDS////////////////
+      
       if (timeKeeper === 0) {
         clearInterval(iterations);
         setTimeout(function() {
-          endGameFunction(this.state.fullScore, this.state.reactionTimes, this.state.gameId, this.state.userId, function(success) {
+          var accuracy = this.state.matchHit / this.state.matchCount;
+          serverFunctions.endGameFunction(this.state.fullScore, this.state.reactionTimes, this.state.gameId, accuracy, function(success) {
             if (success) {
               this.context.router.push('/gameOver')
             }
           }.bind(this))
-
         }.bind(this), 2000);
       }
 

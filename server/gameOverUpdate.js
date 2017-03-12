@@ -50,6 +50,7 @@ var validateScore = function(score,callback){
   }
 
   score.save(function(err,score){
+    console.log(score)
     callback(err,score);
   })
 
