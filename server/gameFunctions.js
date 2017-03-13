@@ -27,7 +27,7 @@ router.post('/startGame/:mode/:nLevel',function(req,res,next){
   //if user, create game, save game, add to user.currentGame
   if(req.session.user){
     User.findById(req.session.user._id).exec(function(err,user){
-      if(err){
+      if(err||!user){
         res.json({success:false});
       }
       else{

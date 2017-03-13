@@ -66,14 +66,16 @@ var checkOverall = function(newHighScore, callback) {
     .populate('scores')
     .exec(function(err, leaderboard) {
 
-      //console.log("OVERALL LEADERBOARD: ", leaderboard);
       // console.log(leaderboard.scores.length < leaderboardSize);
       // console.log(leaderboard.scores.length);
       // console.log(leaderboardSize)
       if(err||!leaderboard){
-        console.log(err)
+        console.log("PROBLEM")
         return;
       }
+
+      console.log("OVERALL LEADERBOARD found");
+
 
       var overallHighScores = leaderboard.scores;
       overallHighScores.sort(sortScores);
@@ -211,7 +213,7 @@ var checkLeaderboards = function(req,res,user,tempGame,newHighScore){
     //update personal and overall leaderboards
   
   checkOverall(newHighScore, function(isOverallHighScore) {
-      console.log("checking overall")
+      console.log("callback to checkOverall")
     
       checkMine(newHighScore,user.stats,function(isMyHighScore){
         isMyHighScore = isMyHighScore;
@@ -225,10 +227,15 @@ var checkLeaderboards = function(req,res,user,tempGame,newHighScore){
             // console.log(req.session.user.stats);
             //console.log(req.session.user);
             //console.log(tempGame,game);
-
-            res.json({
-              success: true
-            })
+            if(err){
+              console.log(err)
+            }
+            else{
+              res.json({
+                success: true
+              })
+            }
+            
           });
 
         } 
@@ -247,7 +254,8 @@ var checkLeaderboards = function(req,res,user,tempGame,newHighScore){
 
 //save game
 router.post('/gameOver', function(req, res, next) {
-
+  
+  console.log('posting gameOver')
 
   User.findById(req.session.user._id)
     .populate('currentGame stats')
@@ -264,7 +272,7 @@ router.post('/gameOver', function(req, res, next) {
       else if (user) {
 
         var tempGame = user.currentGame[0];
-        //console.log(tempGame);
+        console.log(tempGame);
 
 
 

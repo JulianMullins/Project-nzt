@@ -10,6 +10,55 @@ var OL = require('../models/OverallLeaderboard');
 var OLID = require('./serverData').serverLeaderboard;
 
 
+var combineStats = function(stats1,stats2){
+  Stats.findById(stats1)
+    .populate('progress')
+    .exec(function(err,stats1){
+
+      if(err || !stats1){
+        console.log("PROBLEM COMBINING STATS (finding stats1)")
+        return;
+      }
+
+      Stats.findById(stats2)
+        .populate('progress')
+        .exec(function(err,stats2){
+
+          if(err || !stats2){
+            console.log("PROBLEM COMBINING STATS (finding stats2)")
+            return;
+          }
+
+          stats1.totalPoints+=stats2.totalPoints;
+          stats1.progress = stats1.progress.concat(stats2.progress);
+          stats1.save(function(err,stats1){
+
+            User.findById(stats1.statsUser).exec(function(err,user){
+
+              stats1.progress.forEach(function(score){
+                if(user.facebookId){
+                  score.FBname = user.name;
+                }
+                score.userName = user.username;
+                score.tempUser = user.temp;
+                score.save();
+              })
+
+            })
+
+
+          })
+          
+
+
+
+        })
+
+
+    })
+
+}
+
 var validateReq = function(userData) {
 
     //check if input all there
@@ -81,7 +130,11 @@ var saveUserRemoveAnonymous = function(req,res,user){
 
 
 
-module.exports = function(passport) {
+module.exports = 
+
+  { combineStats: combineStats,
+    auth: 
+    function(passport) {
 
 
 
@@ -174,7 +227,7 @@ module.exports = function(passport) {
                   user.username = req.body.username;
                   if(req.session.user){
                     user.currentGame = req.session.user.currentGame;
-                    user.stats.combineStats(req.session.user.stats);
+                    combineStats(user.stats._id,req.session.user.stats._id);
                     user.combineMaxN(req.session.user.maxN);
                   }
                   //console.log(user);
@@ -289,4 +342,5 @@ module.exports = function(passport) {
   });
 
   return router;
+}
 }

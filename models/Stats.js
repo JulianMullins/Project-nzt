@@ -23,25 +23,25 @@ var statsSchema = mongoose.Schema({
 })
 
 
-statsSchema.methods.combineStats=function(stats2){
+// statsSchema.methods.combineStats=function(stats2){
 	
-	this.totalPoints+=stats2.totalPoints;
-	this.progress = this.progress.concat(stats2.progress);
-	this.save();
-	console.log("stats combined");
-	User.findById(statsUser).exec(function(err,user){
-		stats.progress.forEach(function(score){
-			if(user.facebookId){
-				score.FBname = user.name;
-			}
-			score.userName = user.username;
-			score.tempUser = user.temp;
-			score.save();
-		})
-	})
+// 	this.totalPoints+=stats2.totalPoints;
+// 	this.progress = this.progress.concat(stats2.progress);
+// 	this.save();
+// 	console.log("stats combined");
+// 	User.findById(this.statsUser).exec(function(err,user){
+// 		this.progress.forEach(function(score){
+// 			if(user.facebookId){
+// 				score.FBname = user.name;
+// 			}
+// 			score.userName = user.username;
+// 			score.tempUser = user.temp;
+// 			score.save();
+// 		})
+// 	}.bind(this));
 	
 		
-}
+// }
 
 statsSchema.plugin(autoref,[
 	'statsUser.stats',

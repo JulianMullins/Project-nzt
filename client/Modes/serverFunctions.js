@@ -7,7 +7,7 @@ var startGameFunction = function(mode, N, callback) {
       //console.log("unauthorized")
       return callback(true)
     }
-    //console.log("start game posted", response)
+    console.log("start game posted", response)
     return callback(null, {
       tempUser: response.data.tempUser,
       gameId: response.data.gameId,

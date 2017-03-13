@@ -14,15 +14,14 @@ var bcrypt = require('bcryptjs');
 
 
 var routes = require('./server/index');
-var auth = require('./server/auth');
+var combineStats = require('./server/auth').combineStats;
+var auth = require('./server/auth').auth;
 var clientExpressFunctions = require('./server/clientExpressFunctions');
 var leaderboardFunctions = require('./server/leaderboardFunctions');
 var serverData = require('./server/serverData');
 var gameOverUpdate = require('./server/gameOverUpdate');
 var gameFunctions = require('./server/gameFunctions');
 var statsFunctions = require('./server/statsFunctions');
-
-
 
 
 var User = require('./models/User');
@@ -134,8 +133,8 @@ passport.deserializeUser(function(id, done) {
 //   console.log(scores)
 // })
 
-OverallLeaderboard.findOne().populate('scores')
-  .exec(function(err,leaderboard){
+// OverallLeaderboard.findOne().populate('scores')
+//   .exec(function(err,leaderboard){
   // leaderboard.scores.forEach(function(score){
   //   if(score.userName == 'Anonymous'){
   //     HighScore.findById(score._id).exec(function(err,highScore){
@@ -189,7 +188,7 @@ OverallLeaderboard.findOne().populate('scores')
   // })
   // })
   //console.log("done")
-})
+//})
 
 // User.find({username:'Anonymous'}).exec(function(err,users){
 //   users.forEach(function(user){
@@ -216,6 +215,28 @@ OverallLeaderboard.findOne().populate('scores')
 // })
 
 
+
+// OverallLeaderboard.findById(serverData.serverLeaderboard)
+//   .exec(function(err,leaderboard){
+//     var scoreArray = [];
+//     HighScore.find().exec(function(err,scores){
+//       scores.forEach(function(score){
+//         scoreArray.push(score._id)
+//       })
+//     }).then(function(){
+
+//     leaderboard.scores = scoreArray;
+//     leaderboard.save(function(err,leaderboard){
+//       if(err){
+//         console.log(err)
+//       }
+//       else{
+//         console.log(leaderboard.scores)
+//       }
+//     })
+//   })
+
+// })
 
 // Stats.find().populate('statsUser progress').exec(function(err,stats){
 //   stats.forEach(function(stats){
@@ -351,7 +372,7 @@ passport.use(new LocalStrategy({
               Stats.findById(req.session.user.stats, function(err, sessionStats) {
                 console.log(sessionStats)
                 user.currentGame = req.session.user.currentGame;
-                user.stats.combineStats(sessionStats);
+                combineStats(user.stats._id,sessionStats._id);
                 user.combineMaxN(req.session.user.maxN);
                 console.log("about to combine leaderboards")
                 combineLeaderboards(user.stats.leaderboard, sessionStats.leaderboard,
@@ -554,7 +575,8 @@ passport.use(new FacebookStrategy({
             if (users) {
               username += (users.length + 1)
             }
-          }).exec(function(err, users) {
+          }).populate('stats')
+          .exec(function(err, users) {
             if(err){
               console.log(err);
               return done(err)
@@ -660,8 +682,13 @@ passport.use(new FacebookStrategy({
               user.name = profile._json.first_name + ' ' + profile._json.last_name;
             }
             Stats.findById(req.session.user.stats, function(err, sessionStats) {
-              user.stats.combineStats(sessionStats);
-              sessionStats.remove(function(err, sessionStats) {
+              if(err || !sessionStats){
+                console.log(err);
+                return
+              }
+              console.log(user,user.stats,sessionStats)
+              combineStats(user.stats._id,sessionStats._id);
+              Stats.remove({_id:sessionStats._id}, function(err, sessionStats) {
                 if (!err) {
                   user.combineMaxN(req.session.user.maxN);
                   User.remove({

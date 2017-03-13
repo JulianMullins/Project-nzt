@@ -277,7 +277,7 @@ var SilentMode = React.createClass({
 
       ////////RUTH THIS IS WHERE THE GAME ENDS////////////////
       
-      if (timeKeeper === 0) {
+      if (timeKeeper === 30) {
         clearInterval(iterations);
         setTimeout(function() {
           var accuracy = this.state.matchHit / this.state.matchCount;
