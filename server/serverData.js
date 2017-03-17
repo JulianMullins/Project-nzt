@@ -9,7 +9,7 @@ var serverLeaderboard = '5838c1694718942811453b7a';
 
 var scoresToPass = {
   relaxed: {
-    1: 110,
+    1: 10,
     2: 135,
     3: 120,
     4: 125,

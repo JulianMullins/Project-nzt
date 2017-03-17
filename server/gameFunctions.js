@@ -107,7 +107,11 @@ router.post('/startGame/:mode/:nLevel',function(req,res,next){
         console.log(err);
         return;
       }
-      console.log(user)
+      else if(!user){
+        console.log("no user")
+        return
+      }
+      console.log("tempuser saved: "+user)
 
       req.session.user = user;
       req.session.user.save();
@@ -123,15 +127,16 @@ router.post('/startGame/:mode/:nLevel',function(req,res,next){
         nLevel:req.params.nLevel,
         tempUser:user.temp
       })
-      console.log("tempGame saved");
+      console.log("tempGame made");
       tempGame.save(function(err,game){
         if(err){
           console.log(err);
         }
         else{
+          console.log("tempGame saved");
           user.currentGame.unshift(game._id);
           user.save(function(err,user){
-            console.log(user, "game posted")
+            console.log(user, "\ngame posted")
             res.json({
               authorized:true,
               gameId: game._id,

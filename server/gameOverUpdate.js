@@ -256,6 +256,7 @@ var checkLeaderboards = function(req,res,user,tempGame,newHighScore){
 router.post('/gameOver', function(req, res, next) {
   
   console.log('posting gameOver')
+  console.log("req.session.user: "+req.session.user)
 
   User.findById(req.session.user._id)
     .populate('currentGame stats')
@@ -272,7 +273,7 @@ router.post('/gameOver', function(req, res, next) {
       else if (user) {
 
         var tempGame = user.currentGame[0];
-        console.log(tempGame);
+        console.log("TempGame: "+tempGame);
 
 
 
@@ -312,7 +313,11 @@ router.post('/gameOver', function(req, res, next) {
         }
 
         user.save(function(err,user){
-          //console.log("user saved")
+          if(err){
+            console.log("Error saving user after making new score")
+          }
+          else if(!err){
+          console.log("user saved")
           req.session.user = user;
           //check how scores compare on personal level;
           newHighScore.save(function(err, newHighScore) {
@@ -332,21 +337,23 @@ router.post('/gameOver', function(req, res, next) {
               }
               //console.log('updated user stats', stats)
               //console.log("updated user", user)
-              user.save(function(err,user){
-                validateScore(newHighScore,function(err,score){
-                  if(err){
-                    res.json({success:false})
-                  }
-                  else if(score.score>0){
-                    console.log("checking leaderboards")
-                    checkLeaderboards(req,res,user,tempGame,newHighScore);
-                  }
-                  else{
-                    res.json({success:true})
-                  }
+              else{
+                user.save(function(err,user){
+                  validateScore(newHighScore,function(err,score){
+                    if(err){
+                      res.json({success:false})
+                    }
+                    else if(score.score>0){
+                      console.log("checking leaderboards")
+                      checkLeaderboards(req,res,user,tempGame,newHighScore);
+                    }
+                    else{
+                      res.json({success:true})
+                    }
 
-                });
-              })
+                  });
+                })
+              }
               
 
               //return if user highscore, overall high score, new nLevel
@@ -356,7 +363,8 @@ router.post('/gameOver', function(req, res, next) {
 
             //set game isHighScore, etc.
           })
-      })
+          }
+        })
     }
   })
 });
