@@ -210,7 +210,7 @@ var RelaxedMode = React.createClass({
 
       // Game end
 
-      if (timeKeeper === 30) {
+      if (timeKeeper === 0) {
 
         //give gameScore variable the final score
         clearInterval(iterations);
